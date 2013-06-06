@@ -1,0 +1,150 @@
+/* E */
+"DIRECTION_E" = "Ø";
+
+/* ENE */
+"DIRECTION_ENE" = "ØNØ";
+
+/* ESE */
+"DIRECTION_ESE" = "ØSØ";
+
+/* N */
+"DIRECTION_N" = "N";
+
+/* NE */
+"DIRECTION_NE" = "NØ";
+
+/* NNE */
+"DIRECTION_NNE" = "NNØ";
+
+/* NNW */
+"DIRECTION_NNW" = "NNV";
+
+/* NW */
+"DIRECTION_NW" = "NV";
+
+/* S */
+"DIRECTION_S" = "S";
+
+/* SE */
+"DIRECTION_SE" = "SØ";
+
+/* SSE */
+"DIRECTION_SSE" = "SSØ";
+
+/* SSW */
+"DIRECTION_SSW" = "SSV";
+
+/* SW */
+"DIRECTION_SW" = "SV";
+
+/* UKN */
+"DIRECTION_UKN" = "UKJ";
+
+/* W */
+"DIRECTION_W" = "V";
+
+/* WNW */
+"DIRECTION_WNW" = "VNV";
+
+/* WSW */
+"DIRECTION_WSW" = "VSV";
+
+/* No comment provided by engineer. */
+"Kilometers per hour" = "Kilometer i timen";
+
+/* No comment provided by engineer. */
+"km/h" = "km/t";
+
+/* No comment provided by engineer. */
+"Knots" = "Knop";
+
+/* No comment provided by engineer. */
+"kts" = "kts";
+
+/* Unable to retrieve information from station */
+"LABEL_LAST_UPDATED_FAILED" = "Oppdatering feilet";
+
+/* Temp max */
+"LABEL_TEMP_MAX" = "Temp maks";
+
+/* Temp min */
+"LABEL_TEMP_MIN" = "Temp min";
+
+/* Temp now */
+"LABEL_TEMP_NOW" = "Temp nå";
+
+/* Average */
+"LABEL_WIND_AVG" = "Gjennomsnitt";
+
+/* Beaufort */
+"LABEL_WIND_BEU" = "Beaufort";
+
+/* Wind direction */
+"LABEL_WIND_DIR" = "Vind retning";
+
+/* Wind gust */
+"LABEL_WIND_GUST" = "Vind gust";
+
+/* Wind speed */
+"LABEL_WIND_SPEED" = "Vind hastighet";
+
+/* No comment provided by engineer. */
+"m/s" = "m/s";
+
+/* No comment provided by engineer. */
+"Meters per second" = "Meter i sekundet";
+
+/* No comment provided by engineer. */
+"Miles per hour" = "Miles i timen";
+
+/* No comment provided by engineer. */
+"miles/h" = "miles/t";
+
+/* Version string in settings view */
+"%@ version %@" = "%1$@ versjon %2$@";
+
+/* No comment provided by engineer. */
+"Camera" = "Kamera";
+
+/* No comment provided by engineer. */
+"Choose unit" = "Velg enhet";
+
+/* No comment provided by engineer. */
+"Info" = "Info";
+
+/* No comment provided by engineer. */
+"Name" = "Navn";
+
+/* No comment provided by engineer. */
+"Place" = "Sted";
+
+/* No comment provided by engineer. */
+"Status" = "Status";
+
+/* Temp air */
+"Temp air" = "Luft temp";
+
+/* Gust: %0.1f Avg: %0.1f, Speed: %0.1f */
+"GRAPH_MARKER_POPUP" = "Gust: %0.1f, Gj.snt: %0.1f, Hastighet: %0.1f";
+
+/* Not updated */
+"LABEL_NOT_UPDATED" = "Ikke oppdatert";
+
+/* Værdata hentet med tillatelse fra\nhttp://vindsiden.no\n\n */
+"LABEL_PERMIT" = "Værdata hentet med tillatelse fra\nhttp://vindsiden.no\n\n";
+
+/* Updating */
+"LABEL_UPDATING" = "Oppdaterer";
+
+/* No comment provided by engineer. */
+"Not Visible" = "Ikke synlig";
+
+/* No comment provided by engineer. */
+"Stations" = "Stasjoner";
+
+/* No comment provided by engineer. */
+"Units" = "Enheter";
+
+/* No comment provided by engineer. */
+"Visible" = "Synlig";
+
