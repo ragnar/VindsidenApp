@@ -1,0 +1,48 @@
+
+/* Class = "IBUILabel"; text = "Label"; ObjectID = "2Y0-do-02J"; */
+"2Y0-do-02J.text" = "Label";
+
+/* Class = "IBUINavigationItem"; title = "Station Picker"; ObjectID = "4GR-cF-l56"; */
+"4GR-cF-l56.title" = "Station Picker";
+
+/* Class = "IBUILabel"; text = "Title"; ObjectID = "4qC-uK-OkE"; */
+"4qC-uK-OkE.text" = "Title";
+
+/* Class = "IBUINavigationItem"; title = "Settings"; ObjectID = "6Tn-38-GBf"; */
+"6Tn-38-GBf.title" = "Settings";
+
+/* Class = "IBUILabel"; text = "Title"; ObjectID = "8Zx-Nc-0Uj"; */
+"8Zx-Nc-0Uj.text" = "Title";
+
+/* Class = "IBUINavigationItem"; title = "Station"; ObjectID = "8kr-0C-mVT"; */
+"8kr-0C-mVT.title" = "Station";
+
+/* Class = "IBUIButton"; normalTitle = "Yr.no"; ObjectID = "CDk-cZ-t0i"; */
+"CDk-cZ-t0i.normalTitle" = "Yr.no";
+
+/* Class = "IBUILabel"; text = "Detail"; ObjectID = "LfC-8v-xhT"; */
+"LfC-8v-xhT.text" = "Detail";
+
+/* Class = "IBUILabel"; text = "Label"; ObjectID = "NUL-9N-0CU"; */
+"NUL-9N-0CU.text" = "Label";
+
+/* Class = "IBUIButton"; normalTitle = "Map"; ObjectID = "OAP-jQ-MLP"; */
+"OAP-jQ-MLP.normalTitle" = "Map";
+
+/* Class = "IBUINavigationItem"; title = "Units"; ObjectID = "bkq-qy-gaE"; */
+"bkq-qy-gaE.title" = "Units";
+
+/* Class = "IBUILabel"; text = "Detail"; ObjectID = "eKF-3N-nq2"; */
+"eKF-3N-nq2.text" = "Detail";
+
+/* Class = "IBUILabel"; text = "Verket"; ObjectID = "evI-Ny-d2E"; */
+"evI-Ny-d2E.text" = "Verket";
+
+/* Class = "IBUILabel"; text = "Title"; ObjectID = "jJ9-mm-uE4"; */
+"jJ9-mm-uE4.text" = "Title";
+
+/* Class = "IBUILabel"; text = "Title"; ObjectID = "ly3-dm-LY8"; */
+"ly3-dm-LY8.text" = "Title";
+
+/* Class = "IBUIButton"; normalTitle = "Camera"; ObjectID = "pVA-14-d0h"; */
+"pVA-14-d0h.normalTitle" = "Camera";
