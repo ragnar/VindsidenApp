@@ -15,11 +15,23 @@
 #import "CDPlot.h"
 #import "CDStation.h"
 
+@interface RHCAppDelegate ()
+
+@property (nonatomic, strong, readonly) NSDateFormatter *dateFormatter;
+
+@end
+
+
 @implementation RHCAppDelegate
+{
+    dispatch_queue_t _formatterQueue;
+}
+
 
 @synthesize managedObjectContext = _managedObjectContext;
 @synthesize managedObjectModel = _managedObjectModel;
 @synthesize persistentStoreCoordinator = _persistentStoreCoordinator;
+@synthesize dateFormatter = _dateFormatter;
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
@@ -27,6 +39,8 @@
     [[UIToolbar appearance] setTintColor:RGBCOLOR( 227.0, 60.0, 13.0)];
     [[UINavigationBar appearance] setTintColor:RGBCOLOR( 227.0, 60.0, 13.0)];
 
+    _formatterQueue = dispatch_queue_create("formatter queue", NULL);
+    
 //#ifndef DEBUG
     [TestFlight setOptions:@{@"disableInAppUpdates":@NO}];
     [TestFlight setDeviceIdentifier:[[UIDevice currentDevice] uniqueIdentifier]];
@@ -245,20 +259,28 @@
 #pragma mark - 
 
 
-- (NSDateFormatter *) dateFormatter
+- (NSDateFormatter *)dateFormatter
 {
-    static NSDateFormatter *_dateFormatter = nil;
-
     if ( nil != _dateFormatter ) {
         return _dateFormatter;
     }
 
     _dateFormatter = [[NSDateFormatter alloc] init];
     [_dateFormatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ssZZZ"];
-    NSLocale *noLocale = [[NSLocale alloc] initWithLocaleIdentifier:@"nb_NO"];
-    [_dateFormatter setLocale:noLocale];
 
     return _dateFormatter;
 }
+
+
+- (NSDate *)dateFromString:(NSString *)string
+{
+    NSDate __block *date = nil;
+    dispatch_sync(_formatterQueue, ^{
+        date = [[self dateFormatter] dateFromString:string];
+    });
+
+    return date;
+}
+
 
 @end

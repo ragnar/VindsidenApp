@@ -20,5 +20,6 @@
 - (void) cleanupPlots;
 
 - (NSDateFormatter *) dateFormatter;
+- (NSDate *)dateFromString:(NSString *)string;
 
 @end
