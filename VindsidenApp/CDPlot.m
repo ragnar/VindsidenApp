@@ -27,12 +27,12 @@
 + (CDPlot *) newOrExistingPlot:(NSDictionary *)dict forStation:(CDStation *)station inManagedObjectContext:(NSManagedObjectContext *)managedObjectContext
 {
     CDPlot *existing = nil;
-    NSString *dateString = [[dict objectForKey:@"plotTime"] stringByReplacingCharactersInRange:NSMakeRange(19, 6) withString:([[NSTimeZone localTimeZone] isDaylightSavingTime] ? @"+0200" : @"+0100")];
-
     RHCAppDelegate *_appDelegate = [[UIApplication sharedApplication] delegate];
-    NSFetchRequest *request = [[NSFetchRequest alloc] init];
-    request.entity = [NSEntityDescription entityForName:@"CDPlot" inManagedObjectContext:managedObjectContext];
-    request.predicate = [NSPredicate predicateWithFormat:@"station == %@ and plotTime == %@", station, [[_appDelegate dateFormatter] dateFromString:dateString]];
+    NSString *dateString = [[dict objectForKey:@"plotTime"] stringByReplacingCharactersInRange:NSMakeRange(19, 6) withString:([[NSTimeZone localTimeZone] isDaylightSavingTime] ? @"+0200" : @"+0100")];
+    NSDate *date = [_appDelegate dateFromString:dateString];
+    NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:@"CDPlot"];
+
+    request.predicate = [NSPredicate predicateWithFormat:@"station == %@ and plotTime == %@", station, date];
     request.fetchLimit = 1;
 
     NSArray *array = [managedObjectContext executeFetchRequest:request error:nil];
@@ -47,7 +47,7 @@
             if ( [v class] == [NSNull class] ) {
                 continue;
             } else if ( [key isEqualToString:@"plotTime"] ) {
-                existing.plotTime = [[_appDelegate dateFormatter] dateFromString:dateString];
+                existing.plotTime = date;
                 continue;
             } else if ( [key isEqualToString:@"windDir"]  ) {
                 CGFloat value = [[dict objectForKey:key] floatValue];
