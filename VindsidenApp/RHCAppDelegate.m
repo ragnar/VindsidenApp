@@ -41,12 +41,12 @@
 
     _formatterQueue = dispatch_queue_create("formatter queue", NULL);
     
-//#ifndef DEBUG
-    [TestFlight setOptions:@{@"disableInAppUpdates":@NO}];
-    [TestFlight setDeviceIdentifier:[[UIDevice currentDevice] uniqueIdentifier]];
-
-//#endif
-    [TestFlight takeOff:@"b97e9c55-3aae-4f18-bc27-6fac0e973438"];
+////#ifndef DEBUG
+//    [TestFlight setOptions:@{@"disableInAppUpdates":@NO}];
+//    [TestFlight setDeviceIdentifier:[[UIDevice currentDevice] uniqueIdentifier]];
+//
+////#endif
+//    [TestFlight takeOff:@"b97e9c55-3aae-4f18-bc27-6fac0e973438"];
 
     // Override point for customization after application launch.
     if ( [[NSUserDefaults standardUserDefaults] integerForKey:@"selectedUnit"] == 0 ) {
