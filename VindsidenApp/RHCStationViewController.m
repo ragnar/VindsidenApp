@@ -68,12 +68,7 @@
                                                                   }
                                                               } error:^(BOOL cancelled, NSError *error) {
                                                                   if ( NO == cancelled ) {
-                                                                      UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil
-                                                                                                                      message:error.userInfo[NSLocalizedDescriptionKey]
-                                                                                                                     delegate:nil
-                                                                                                            cancelButtonTitle:@"OK"
-                                                                                                            otherButtonTitles:nil];
-                                                                      [alert show];
+                                                                      [[RHCAlertManager defaultManager] showNetworkError:error];
                                                                   }
                                                               }
      ];
