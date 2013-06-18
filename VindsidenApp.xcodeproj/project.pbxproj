@@ -64,6 +64,7 @@
 		AD17EDF41734ED4500943C33 /* RHCUnitSelectorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD17EDF31734ED4500943C33 /* RHCUnitSelectorViewController.m */; };
 		AD17EDF71735541E00943C33 /* RHCNavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD17EDF61735541900943C33 /* RHCNavigationViewController.m */; };
 		AD17EDF91736492500943C33 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD17EDF81736492200943C33 /* AdSupport.framework */; };
+		AD4A378B1770F0EF003B8AF2 /* RHCAlertManager.m in Sources */ = {isa = PBXBuildFile; fileRef = AD4A378A1770F0EF003B8AF2 /* RHCAlertManager.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -168,6 +169,8 @@
 		AD17EDF51735541600943C33 /* RHCNavigationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RHCNavigationViewController.h; sourceTree = "<group>"; };
 		AD17EDF61735541900943C33 /* RHCNavigationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RHCNavigationViewController.m; sourceTree = "<group>"; };
 		AD17EDF81736492200943C33 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
+		AD4A37891770F0EF003B8AF2 /* RHCAlertManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RHCAlertManager.h; sourceTree = "<group>"; };
+		AD4A378A1770F0EF003B8AF2 /* RHCAlertManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RHCAlertManager.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -257,6 +260,8 @@
 				AD17ED4E1731012200943C33 /* Supporting Files */,
 				AD17EDF51735541600943C33 /* RHCNavigationViewController.h */,
 				AD17EDF61735541900943C33 /* RHCNavigationViewController.m */,
+				AD4A37891770F0EF003B8AF2 /* RHCAlertManager.h */,
+				AD4A378A1770F0EF003B8AF2 /* RHCAlertManager.m */,
 			);
 			path = VindsidenApp;
 			sourceTree = "<group>";
@@ -633,6 +638,7 @@
 				AD17EDF71735541E00943C33 /* RHCNavigationViewController.m in Sources */,
 				AD0B8EAF1754F3C800042B95 /* RHCStationViewController.m in Sources */,
 				AD0B8EB21754F7D700042B95 /* NSString+isNumeric.m in Sources */,
+				AD4A378B1770F0EF003B8AF2 /* RHCAlertManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
