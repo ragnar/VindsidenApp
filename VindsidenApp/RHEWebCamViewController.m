@@ -79,11 +79,11 @@
     _originalBarStyle = self.navigationController.navigationBar.barStyle;
     _originalTintColor = self.navigationController.navigationBar.tintColor;
 
-    [self setWantsFullScreenLayout:YES];
-    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleBlackTranslucent animated:animated];
-    [self.navigationController.navigationBar setTintColor:nil];
-    [self.navigationController.navigationBar setBarStyle:UIBarStyleBlackTranslucent];
-    [[self navigationController] setNavigationBarHidden:NO animated:animated];
+//    [self setWantsFullScreenLayout:YES];
+//    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleBlackTranslucent animated:animated];
+//    [self.navigationController.navigationBar setTintColor:nil];
+//    [self.navigationController.navigationBar setBarStyle:UIBarStyleBlackTranslucent];
+//    [[self navigationController] setNavigationBarHidden:NO animated:animated];
 
     [self initImageView];
     [self initZoom];
@@ -95,11 +95,11 @@
 {
     [super viewWillDisappear:animated];
 
-    if ( _switchNavBack ) {
-        [[UIApplication sharedApplication] setStatusBarStyle:_originalStatusBarStyle animated:animated];
-        [self.navigationController.navigationBar setBarStyle:_originalBarStyle];
-        [self.navigationController.navigationBar setTintColor:_originalTintColor];
-    }
+//    if ( _switchNavBack ) {
+//        [[UIApplication sharedApplication] setStatusBarStyle:_originalStatusBarStyle animated:animated];
+//        [self.navigationController.navigationBar setBarStyle:_originalBarStyle];
+//        [self.navigationController.navigationBar setTintColor:_originalTintColor];
+//    }
 }
 
 

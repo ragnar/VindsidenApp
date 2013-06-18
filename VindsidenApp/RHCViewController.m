@@ -42,7 +42,8 @@ static NSString *kCellID = @"stationCellID";
     // size up the toolbar and set its frame
     [toolbar sizeToFit];
     CGFloat toolbarHeight = CGRectGetHeight([toolbar frame]);
-    CGRect mainViewBounds = self.view.bounds;
+    //CGRect mainViewBounds = self.view.bounds;
+    CGRect mainViewBounds = [[UIApplication sharedApplication].delegate window].bounds;
     [toolbar setFrame:CGRectMake(CGRectGetMinX(mainViewBounds),
                                  CGRectGetMinY(mainViewBounds) + CGRectGetHeight(mainViewBounds) - (toolbarHeight * 1.0),
                                  CGRectGetWidth(mainViewBounds),
@@ -51,6 +52,7 @@ static NSString *kCellID = @"stationCellID";
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
     button.frame = CGRectMake( 0.0, 0.0, 33.0, 33.0);
     [button addTarget:self action:@selector(settings:) forControlEvents:UIControlEventTouchUpInside];
+    //[button setImage:[[UIImage imageNamed:@"icon_toolbar_settings21x21"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] forState:UIControlStateNormal];
     [button setImage:[UIImage imageNamed:@"icon_toolbar_settings21x21"] forState:UIControlStateNormal];
     UIBarButtonItem *bb = [[UIBarButtonItem alloc] initWithCustomView:button];
 
@@ -205,9 +207,9 @@ static NSString *kCellID = @"stationCellID";
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     if ( CGRectGetHeight(collectionView.bounds) > 460.0) {
-        return CGSizeMake( 320.0, 504.0);
+        return CGSizeMake( 320.0, 524.0);
     }
-    return CGSizeMake( 320.0, 416.0);
+    return CGSizeMake( 320.0, 436.0);
 }
 
 
