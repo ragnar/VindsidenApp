@@ -72,14 +72,14 @@
 
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
 {
-    if ( [url.host rangeOfString:@"station" options:NSCaseInsensitiveSearch].location == NSNotFound ) {
+    if ( url.host == nil || [url.host rangeOfString:@"station" options:NSCaseInsensitiveSearch].location == NSNotFound ) {
         return NO;
     }
 
     id ident = [url.pathComponents lastObject];
     CDStation *station = nil;
     if ( [ident isNumeric] ) {
-        station = [CDStation newOrExistingStation:ident inManagedObjectContext:[self managedObjectContext]];
+        station = [CDStation existingStation:ident inManagedObjectContext:[self managedObjectContext]];
     } else {
         station = [CDStation searchForStation:ident inManagedObjectContext:[self managedObjectContext]];
     }
