@@ -121,7 +121,7 @@
 }
 
 
-+ (CDStation *)newOrExistingStation:(NSNumber *)stationId inManagedObjectContext:(NSManagedObjectContext *)managedObjectContext
++ (CDStation *)existingStation:(NSNumber *)stationId inManagedObjectContext:(NSManagedObjectContext *)managedObjectContext;
 {
     CDStation *existing = nil;
     NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:@"CDStation"];
@@ -131,8 +131,18 @@
     NSArray *array = [managedObjectContext executeFetchRequest:request error:nil];
     if ( [array count] ) {
         existing = array[0];
-    } else {
-        existing = (CDStation *)[[NSManagedObject alloc] initWithEntity:request.entity insertIntoManagedObjectContext:managedObjectContext];
+    }
+    return existing;
+}
+
+
++ (CDStation *)newOrExistingStation:(NSNumber *)stationId inManagedObjectContext:(NSManagedObjectContext *)managedObjectContext
+{
+    CDStation *existing = [CDStation existingStation:stationId inManagedObjectContext:managedObjectContext];
+
+    if ( nil == existing ) {
+        NSEntityDescription *entity = [NSEntityDescription entityForName:@"CDStation" inManagedObjectContext:managedObjectContext];
+        existing = (CDStation *)[[NSManagedObject alloc] initWithEntity:entity insertIntoManagedObjectContext:managedObjectContext];
     }
 
     return existing;

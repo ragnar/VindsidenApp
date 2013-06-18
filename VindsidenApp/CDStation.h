@@ -34,6 +34,7 @@
 
 - (NSTimeInterval)fetchInterval;
 + (void)updateStations:(NSArray *)stations;
++ (CDStation *)existingStation:(NSNumber *)stationId inManagedObjectContext:(NSManagedObjectContext *)managedObjectContext;
 + (CDStation *)newOrExistingStation:(NSNumber *)stationId inManagedObjectContext:(NSManagedObjectContext *)managedObjectContext;
 + (CDStation *)searchForStation:(NSString *)search inManagedObjectContext:(NSManagedObjectContext *)managedObjectContext;
 + (NSInteger)maxOrderForStationsInManagedObjectContext:(NSManagedObjectContext *)managedObjectContext;
