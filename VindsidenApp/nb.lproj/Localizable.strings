@@ -148,3 +148,5 @@
 /* No comment provided by engineer. */
 "Visible" = "Synlig";
 
+/* Unable to fetch data at this point. */
+"NETWORK_ERROR_UNABLE_TO_LOAD" = "Klarer ikke hente data for øyeblikket";

@@ -63,7 +63,7 @@
 - (BOOL)application:(UIApplication *)application willFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     NSURL *url = launchOptions[UIApplicationLaunchOptionsURLKey];
-    if ( [url.host rangeOfString:@"station" options:NSCaseInsensitiveSearch].location == NSNotFound ) {
+    if ( url.host == nil || [url.host rangeOfString:@"station" options:NSCaseInsensitiveSearch].location == NSNotFound ) {
         return NO;
     }
     return YES;
@@ -72,14 +72,14 @@
 
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
 {
-    if ( [url.host rangeOfString:@"station" options:NSCaseInsensitiveSearch].location == NSNotFound ) {
+    if ( url.host == nil || [url.host rangeOfString:@"station" options:NSCaseInsensitiveSearch].location == NSNotFound ) {
         return NO;
     }
 
     id ident = [url.pathComponents lastObject];
     CDStation *station = nil;
     if ( [ident isNumeric] ) {
-        station = [CDStation newOrExistingStation:ident inManagedObjectContext:[self managedObjectContext]];
+        station = [CDStation existingStation:ident inManagedObjectContext:[self managedObjectContext]];
     } else {
         station = [CDStation searchForStation:ident inManagedObjectContext:[self managedObjectContext]];
     }
@@ -88,12 +88,14 @@
         return NO;
     }
 
-    UINavigationController *navCon = [self.window.rootViewController.storyboard instantiateViewControllerWithIdentifier:@"modalStationView"];
-    RHCStationViewController *controller = navCon.viewControllers[0];
+    if ( self.window.rootViewController.presentedViewController ) {
+        [self.window.rootViewController dismissViewControllerAnimated:NO completion:^{
+            [self openStationViewController:station];
+        }];
+    } else {
+        [self openStationViewController:station];
+    }
 
-    [self.window.rootViewController presentViewController:navCon animated:YES completion:^{
-        controller.currentStation = station;
-    }];
     return YES;
 }
 
@@ -257,6 +259,20 @@
 
 
 #pragma mark - 
+
+
+- (void)openStationViewController:(CDStation *)station
+{
+    UINavigationController *navCon = [self.window.rootViewController.storyboard instantiateViewControllerWithIdentifier:@"modalStationView"];
+    RHCStationViewController *controller = navCon.viewControllers[0];
+
+    [self.window.rootViewController presentViewController:navCon
+                                                 animated:YES
+                                               completion:^{
+                                                   controller.currentStation = station;
+                                               }
+     ];
+}
 
 
 - (NSDateFormatter *)dateFormatter
