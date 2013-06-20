@@ -19,6 +19,7 @@
     #import <MobileCoreServices/MobileCoreServices.h>
 
     #import <TestFlightSDK/TestFlight.h>
+    #import "RHCAlertManager.h"
 #endif
 
 
