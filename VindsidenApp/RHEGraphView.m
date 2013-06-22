@@ -289,7 +289,7 @@ const NSInteger kMinSpeedLines = 3;
 
     NSInteger i = 0;
     for ( CGFloat y = _maxY; y >= _minY; y=ceil(y-plotStep)) {
-        NSString *hs = [NSString stringWithFormat:@"%0.1f", i*(plotMaxValue/totSteps)];
+        NSString *hs = [[self numberFormatter] stringFromNumber:@(i*(plotMaxValue/totSteps))];
         CGSize size = [hs sizeWithFont:[UIFont systemFontOfSize:10.0]];
         [hs drawAtPoint:CGPointMake( _minX-size.width-5, y-(size.height/2) ) withFont:[UIFont systemFontOfSize:10.0]];
         i++;
@@ -571,5 +571,20 @@ const NSInteger kMinSpeedLines = 3;
     SpeedConvertion unit = [[NSUserDefaults standardUserDefaults] integerForKey:@"selectedUnit"];
     return ceil([[self.plots valueForKeyPath:@"@max.windMax"] speedConvertionTo:unit]+1);
 }
+
+
+- (NSNumberFormatter *)numberFormatter
+{
+    static NSNumberFormatter *_numberformatter = nil;
+    if ( _numberformatter ) {
+        return _numberformatter;
+    }
+
+    _numberformatter = [[NSNumberFormatter alloc] init];
+    _numberformatter.maximumFractionDigits = 1;
+
+    return _numberformatter;
+}
+
 
 @end

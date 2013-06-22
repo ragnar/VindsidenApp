@@ -104,12 +104,12 @@
 {
     SpeedConvertion unit = [[NSUserDefaults standardUserDefaults] integerForKey:@"selectedUnit"];
 
-    _windSpeed.text = (isnan([plot.windMin floatValue]) ? @"—.—" : [NSString stringWithFormat:@"%0.1f %@",  [plot.windMin speedConvertionTo:unit], [NSNumber shortUnitNameString:unit]]);
-    _windGust.text = (isnan([plot.windMax floatValue]) ? @"—.—" : [NSString stringWithFormat:@"%0.1f %@", [plot.windMax speedConvertionTo:unit], [NSNumber shortUnitNameString:unit]]);
-    _windAverage.text = (isnan([plot.windAvg floatValue]) ? @"—.—" : [NSString stringWithFormat:@"%0.1f %@", [plot.windAvg speedConvertionTo:unit], [NSNumber shortUnitNameString:unit]]);
+    _windSpeed.text = (isnan([plot.windMin floatValue]) ? @"—.—" : [NSString stringWithFormat:@"%@ %@",  [[self numberFormatter] stringFromNumber:@([plot.windMin speedConvertionTo:unit])], [NSNumber shortUnitNameString:unit]]);
+    _windGust.text = (isnan([plot.windMax floatValue]) ? @"—.—" : [NSString stringWithFormat:@"%@ %@", [[self numberFormatter] stringFromNumber:@([plot.windMax speedConvertionTo:unit])], [NSNumber shortUnitNameString:unit]]);
+    _windAverage.text = (isnan([plot.windAvg floatValue]) ? @"—.—" : [NSString stringWithFormat:@"%@ %@", [[self numberFormatter] stringFromNumber:@([plot.windAvg speedConvertionTo:unit])], [NSNumber shortUnitNameString:unit]]);
     _windBeaufort.text = (isnan([plot.windAvg floatValue]) ? @"—.—" : [NSString stringWithFormat:@"%0.0f", [plot.windMin speedInBeaufort]]);
     _windDirection.text = (isnan([plot.windDir floatValue]) ? @"—.—" : [NSString stringWithFormat:@"%0.0f° (%@)", [plot.windDir floatValue], [self windDirectionString:[plot.windDir floatValue]]]);
-    _tempAir.text = (isnan([plot.tempAir floatValue]) ? @"—.—" : [NSString stringWithFormat:@"%0.0f °C", [plot.tempAir floatValue]]);
+    _tempAir.text = (isnan([plot.tempAir floatValue]) ? @"—.—" : [NSString stringWithFormat:@"%@ °C", [[self numberFormatter] stringFromNumber:plot.tempAir]]);
 }
 
 
@@ -187,5 +187,20 @@
         return NSLocalizedString(@"DIRECTION_UKN", @"UKN");
     }
 }
+
+
+- (NSNumberFormatter *)numberFormatter
+{
+    static NSNumberFormatter *_numberformatter = nil;
+    if ( _numberformatter ) {
+        return _numberformatter;
+    }
+
+    _numberformatter = [[NSNumberFormatter alloc] init];
+    _numberformatter.maximumFractionDigits = 1;
+    _numberformatter.minimumFractionDigits = 1;
+    return _numberformatter;
+}
+
 
 @end

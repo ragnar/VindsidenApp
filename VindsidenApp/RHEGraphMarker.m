@@ -118,7 +118,10 @@ extern CGFloat RadiansToDegrees(CGFloat radians);
 {
     SpeedConvertion unit = [[NSUserDefaults standardUserDefaults] integerForKey:@"selectedUnit"];
 
-    self.label.text = [NSString stringWithFormat:NSLocalizedString(@"GRAPH_MARKER_POPUP", @"Gust: %0.1f, Avg: %0.1f, Speed: %0.1f"), [plot.windMax speedConvertionTo:unit], [plot.windAvg speedConvertionTo:unit], [plot.windMin speedConvertionTo:unit]];
+    self.label.text = [NSString stringWithFormat:NSLocalizedString(@"GRAPH_MARKER_POPUP", @"Gust: %@, Avg: %@, Speed: %@"),
+                       [[self numberFormatter] stringFromNumber:@([plot.windMax speedConvertionTo:unit])],
+                       [[self numberFormatter] stringFromNumber:@([plot.windAvg speedConvertionTo:unit])],
+                       [[self numberFormatter] stringFromNumber:@([plot.windMin speedConvertionTo:unit])]];
     CGSize size = [self.label.text sizeWithFont:self.label.font forWidth:300.0 lineBreakMode:NSLineBreakByTruncatingTail];
     CGRect lf = self.label.frame;
     lf.size.width = size.width;
@@ -153,6 +156,19 @@ extern CGFloat RadiansToDegrees(CGFloat radians);
     _markerAvgY = avg - self.frame.origin.y;
     _markerMaxY = max - self.frame.origin.y;
     [self setNeedsDisplay];
+}
+
+
+- (NSNumberFormatter *)numberFormatter
+{
+    static NSNumberFormatter *_numberformatter = nil;
+    if ( _numberformatter ) {
+        return _numberformatter;
+    }
+
+    _numberformatter = [[NSNumberFormatter alloc] init];
+    _numberformatter.maximumFractionDigits = 1;
+    return _numberformatter;
 }
 
 

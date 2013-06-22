@@ -127,8 +127,8 @@
 /* Temp air */
 "Temp air" = "Temp air";
 
-/* Gust: %0.1f Avg: %0.1f, Speed: %0.1f */
-"GRAPH_MARKER_POPUP" = "Gust: %0.1f, Avg: %0.1f, Speed: %0.1f";
+/* Gust: %@ Avg: %@, Speed: %@ */
+"GRAPH_MARKER_POPUP" = "Gust: %@ Avg: %@ Speed: %@";
 
 /* Not updated */
 "LABEL_NOT_UPDATED" = "Not updated";
