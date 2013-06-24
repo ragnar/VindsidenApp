@@ -514,6 +514,15 @@
 				CLASSPREFIX = RHC;
 				LastUpgradeCheck = 0460;
 				ORGANIZATIONNAME = RHC;
+				TargetAttributes = {
+					AD17ED431731012200943C33 = {
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+						};
+					};
+				};
 			};
 			buildConfigurationList = AD17ED3F1731012200943C33 /* Build configuration list for PBXProject "VindsidenApp" */;
 			compatibilityVersion = "Xcode 3.2";
