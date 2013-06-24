@@ -39,6 +39,10 @@ static NSString *kCellID = @"stationCellID";
     UIToolbar *toolbar = [UIToolbar new];
     toolbar.barStyle = UIBarStyleDefault;
 
+    UIView *v = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, 320.0, 20.0)];
+    v.backgroundColor = [UIColor whiteColor];
+    [self.view addSubview:v];
+
     // size up the toolbar and set its frame
     [toolbar sizeToFit];
     CGFloat toolbarHeight = CGRectGetHeight([toolbar frame]);
@@ -207,9 +211,9 @@ static NSString *kCellID = @"stationCellID";
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     if ( CGRectGetHeight(collectionView.bounds) > 460.0) {
-        return CGSizeMake( 320.0, 524.0);
+        return CGSizeMake( 320.0, 504.0);
     }
-    return CGSizeMake( 320.0, 436.0);
+    return CGSizeMake( 320.0, 416.0);
 }
 
 
@@ -217,6 +221,7 @@ static NSString *kCellID = @"stationCellID";
 {
     UIEdgeInsets ei = [(UICollectionViewFlowLayout *)collectionViewLayout sectionInset];
     ei.bottom = 44.0;
+    ei.top = 20.0;
     return ei;
 }
 
@@ -463,6 +468,24 @@ static NSString *kCellID = @"stationCellID";
     }
 
     [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+
+#pragma mark - 
+
+
+- (void)updateContentWithCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler;
+{
+    if ( [[self.collectionView visibleCells] count] ) {
+        RHCStationCell *cell = [self.collectionView visibleCells][0];
+        [cell fetchWithCompletionHandler:^(UIBackgroundFetchResult result) {
+            [cell syncDisplayPlots];
+            completionHandler(result);
+            DLOG(@"");
+        }];
+    } else {
+        completionHandler(UIBackgroundFetchResultFailed);
+    }
 }
 
 
