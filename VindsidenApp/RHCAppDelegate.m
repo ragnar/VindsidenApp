@@ -11,6 +11,7 @@
 #import "RHCStationViewController.h"
 #import "NSNumber+Convertion.h"
 #import "NSString+isNumeric.h"
+#import "RHCViewController.h"
 
 #import "CDPlot.h"
 #import "CDStation.h"
@@ -151,6 +152,17 @@
     DLOG(@"");
 }
 #endif
+
+
+- (void)application:(UIApplication *)application performFetchWithCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler
+{
+    DLOG(@"fetch");
+    UINavigationController *nc = (UINavigationController *)self.window.rootViewController;
+    RHCViewController *vc = (RHCViewController *)nc.visibleViewController;
+    [vc updateContentWithCompletionHandler:completionHandler];
+}
+
+
 
 #pragma mark - CoreData Stack
 
