@@ -89,14 +89,28 @@
 
 - (void)fetch
 {
+    [self fetchWithCompletionHandler:nil];
+}
+
+
+- (void)fetchWithCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler
+{
     if ( nil == self.currentStation ) {
         DLOG(@"");
         return;
     }
     [[RHEVindsidenAPIClient defaultManager] fetchStationsPlotsForStation:self.currentStation.stationId
-                                                              completion:^(BOOL success, NSArray *stations) {
+                                                              completion:^(BOOL success, NSArray *plots) {
+                                                                  DLOG(@"");
                                                                   if ( success ) {
-                                                                      [self updatePlots:stations];
+                                                                      [self updatePlots:plots];
+                                                                      if ( completionHandler ) {
+                                                                          completionHandler(UIBackgroundFetchResultNewData);
+                                                                      }
+                                                                  } else {
+                                                                      if ( completionHandler ) {
+                                                                          completionHandler(UIBackgroundFetchResultNoData);
+                                                                      }
                                                                   }
                                                               } error:^(BOOL cancelled, NSError *error) {
                                                                   if ( NO == cancelled ) {
@@ -161,16 +175,22 @@
 - (void)displayPlots
 {
     dispatch_async(dispatch_get_main_queue(), ^{
-        NSArray *cdplots = [[self.currentStation.plots filteredSetUsingPredicate:[NSPredicate predicateWithFormat:@"plotTime >= %@", [[NSDate date] dateByAddingTimeInterval:-1*(kPlotHistoryHours-1)*3600]]] sortedByKeyPath:@"plotTime" ascending:NO];
-
-        if ( [cdplots count] ) {
-            self.graphView.plots = cdplots;
-            [self.stationView updateWithPlot:cdplots[0]];
-            self.updatedAtLabel.text = [self.dateTransformer transformedValue:[cdplots[0] plotTime]];
-        } else {
-            self.updatedAtLabel.text = NSLocalizedString(@"LABEL_NOT_UPDATED", @"Not updated");
-        }
+        [self syncDisplayPlots];
     });
+}
+
+
+- (void)syncDisplayPlots
+{
+    NSArray *cdplots = [[self.currentStation.plots filteredSetUsingPredicate:[NSPredicate predicateWithFormat:@"plotTime >= %@", [[NSDate date] dateByAddingTimeInterval:-1*(kPlotHistoryHours-1)*3600]]] sortedByKeyPath:@"plotTime" ascending:NO];
+
+    if ( [cdplots count] ) {
+        self.graphView.plots = cdplots;
+        [self.stationView updateWithPlot:cdplots[0]];
+        self.updatedAtLabel.text = [self.dateTransformer transformedValue:[cdplots[0] plotTime]];
+    } else {
+        self.updatedAtLabel.text = NSLocalizedString(@"LABEL_NOT_UPDATED", @"Not updated");
+    }
 }
 
 
