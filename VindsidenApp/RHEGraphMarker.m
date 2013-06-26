@@ -122,9 +122,15 @@ extern CGFloat RadiansToDegrees(CGFloat radians);
                        [[self numberFormatter] stringFromNumber:@([plot.windMax speedConvertionTo:unit])],
                        [[self numberFormatter] stringFromNumber:@([plot.windAvg speedConvertionTo:unit])],
                        [[self numberFormatter] stringFromNumber:@([plot.windMin speedConvertionTo:unit])]];
-    CGSize size = [self.label.text sizeWithFont:self.label.font forWidth:300.0 lineBreakMode:NSLineBreakByTruncatingTail];
+
+    NSDictionary *fontAtts = @{NSFontAttributeName : self.label.font};
+    CGRect labelBounds = [self.label.text boundingRectWithSize:CGSizeMake( 300.0, 30.0)
+                                                            options:NSStringDrawingTruncatesLastVisibleLine
+                                                  attributes:fontAtts
+                                                     context:nil];
+
     CGRect lf = self.label.frame;
-    lf.size.width = size.width;
+    lf.size.width = CGRectGetWidth(labelBounds);
     lf.size.width += 6;
     lf.size.height = 30.0;
     CGFloat sw = CGRectGetMaxX(self.superview.bounds);
