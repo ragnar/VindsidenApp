@@ -223,11 +223,18 @@ const NSInteger kMinSpeedLines = 3;
 
     CGContextSetAllowsAntialiasing( context, YES);
 
+    NSDictionary *drawAttr = @{ NSFontAttributeName : [UIFont systemFontOfSize:10.0]};
+    CGRect labelBounds = CGRectZero;
+
     for ( NSInteger i = 0; i <= hours; i++ ) {
         CGFloat x = _minX + (i*((_maxX-_minX)/hours));
         NSString *hs = [NSString stringWithFormat:@"%02d", [self hourComponent:[startDate dateByAddingTimeInterval:3600*i]]];
-        CGSize size = [hs sizeWithFont:[UIFont systemFontOfSize:10.0]];
-        [hs drawAtPoint:CGPointMake( x-ceil(size.width/2), _maxY+5) withFont:[UIFont systemFontOfSize:10.0]];
+        labelBounds = [hs boundingRectWithSize:CGSizeMake( 40.0, 21.0)
+                                       options:NSStringDrawingUsesLineFragmentOrigin
+                                    attributes:drawAttr
+                                       context:nil];
+
+        [hs drawAtPoint:CGPointMake( x-ceil(CGRectGetWidth(labelBounds)/2), _maxY+5) withAttributes:drawAttr];
     }
 
     CGContextRestoreGState(context);
@@ -287,32 +294,56 @@ const NSInteger kMinSpeedLines = 3;
 
     CGContextSetAllowsAntialiasing( context, YES);
 
+    NSDictionary *drawAttr = @{ NSFontAttributeName : [UIFont fontWithName:@"HelveticaNeue-Light" size:10.0]};
+    CGRect labelBounds = CGRectZero;
+
     NSInteger i = 0;
     for ( CGFloat y = _maxY; y >= _minY; y=ceil(y-plotStep)) {
         NSString *hs = [[self numberFormatter] stringFromNumber:@(i*(plotMaxValue/totSteps))];
-        CGSize size = [hs sizeWithFont:[UIFont systemFontOfSize:10.0]];
-        [hs drawAtPoint:CGPointMake( _minX-size.width-5, y-(size.height/2) ) withFont:[UIFont systemFontOfSize:10.0]];
+
+        labelBounds = [hs boundingRectWithSize:CGSizeMake( 40.0, 21.0)
+                                       options:NSStringDrawingUsesLineFragmentOrigin
+                                    attributes:drawAttr
+                                       context:nil];
+
+        [hs drawAtPoint:CGPointMake( _minX-CGRectGetWidth(labelBounds)-5, y-(CGRectGetHeight(labelBounds)/2) ) withAttributes:drawAttr];
         i++;
     }
 
     NSString *unitName = [NSNumber shortUnitNameString:[[NSUserDefaults standardUserDefaults] integerForKey:@"selectedUnit"]];
-    CGSize size = [unitName sizeWithFont:[UIFont boldSystemFontOfSize:10.0]];
+    NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
+    [paragraphStyle setAlignment:NSTextAlignmentLeft];
 
-    [unitName drawInRect:CGRectMake( _minX, _minY - 18, size.width, size.height)
-                withFont:[UIFont boldSystemFontOfSize:10.0]
-           lineBreakMode:NSLineBreakByWordWrapping
-               alignment:NSTextAlignmentLeft];
+    drawAttr = @{
+                 NSFontAttributeName : [UIFont fontWithName:@"HelveticaNeue-Bold" size:10.0],
+                 NSParagraphStyleAttributeName : paragraphStyle
+                 };
+    labelBounds = [unitName boundingRectWithSize:CGSizeMake( 40.0, 21.0)
+                                   options:NSStringDrawingUsesLineFragmentOrigin
+                                attributes:drawAttr
+                                   context:nil];
 
-    [[UIColor lightGrayColor] set];
+    labelBounds.origin.x = _minX;
+    labelBounds.origin.y = _minY - 18;
+    [unitName drawInRect:labelBounds withAttributes:drawAttr];
 
     unitName = @"vindsiden.no";
-    size = [unitName sizeWithFont:[UIFont fontWithName:@"HelveticaNeue-Light" size:12.0]];
+    paragraphStyle = [[NSMutableParagraphStyle alloc] init];
+    [paragraphStyle setAlignment:NSTextAlignmentRight];
 
-    [unitName drawInRect:CGRectMake( _maxX-size.width, _minY - 18, size.width, size.height)
-                withFont:[UIFont fontWithName:@"HelveticaNeue-Light" size:12.0]
-           lineBreakMode:NSLineBreakByTruncatingTail
-               alignment:NSTextAlignmentRight];
+    drawAttr = @{
+                 NSFontAttributeName : [UIFont fontWithName:@"HelveticaNeue-Light" size:12.0],
+                 NSParagraphStyleAttributeName : paragraphStyle,
+                 NSForegroundColorAttributeName : [UIColor lightGrayColor]
+                 };
+    labelBounds = [unitName boundingRectWithSize:CGSizeMake( 140.0, 21.0)
+                                         options:NSStringDrawingUsesLineFragmentOrigin
+                                      attributes:drawAttr
+                                         context:nil];
 
+    labelBounds.origin.x = _maxX - CGRectGetWidth(labelBounds);
+    labelBounds.origin.y = _minY - 18;
+    [unitName drawInRect:labelBounds withAttributes:drawAttr];
 
     CGContextRestoreGState(context);
 }
