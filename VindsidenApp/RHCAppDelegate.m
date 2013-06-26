@@ -58,6 +58,7 @@
 
     [self cleanupPlots];
 
+    [application setMinimumBackgroundFetchInterval:UIApplicationBackgroundFetchIntervalMinimum];
     return YES;
 }
 
@@ -158,7 +159,8 @@
 {
     DLOG(@"fetch");
     UINavigationController *nc = (UINavigationController *)self.window.rootViewController;
-    RHCViewController *vc = (RHCViewController *)nc.visibleViewController;
+    RHCViewController *vc = (RHCViewController *)[nc.viewControllers firstObject];
+
     [vc updateContentWithCompletionHandler:completionHandler];
 }
 
