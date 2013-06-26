@@ -126,49 +126,62 @@
 
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    CGSize size = CGSizeMake( 0.0, 0.0);
+    CGRect labelBounds = CGRectZero;
+    NSDictionary *fontAtts = @{NSFontAttributeName : [UIFont preferredFontForTextStyle:UIFontTextStyleBody]};
 
     switch ( indexPath.row )
     {
         case 0:
-            size = [_station.stationName sizeWithFont:[UIFont boldSystemFontOfSize:15.0]
-                                    constrainedToSize:CGSizeMake( 207.0, 400.0)];
+            labelBounds = [_station.stationName boundingRectWithSize:CGSizeMake( 207.0, 400.0)
+                                                             options:NSStringDrawingUsesLineFragmentOrigin
+                                                          attributes:fontAtts
+                                                             context:nil];
             break;
         case 1:
-            size = [_station.city sizeWithFont:[UIFont boldSystemFontOfSize:15.0]
-                             constrainedToSize:CGSizeMake( 207.0, 400.0)];
+            labelBounds = [_station.city boundingRectWithSize:CGSizeMake( 207.0, 400.0)
+                                                      options:NSStringDrawingUsesLineFragmentOrigin
+                                                   attributes:fontAtts
+                                                      context:nil];
             break;
         case 2:
-            size = [_station.copyright sizeWithFont:[UIFont boldSystemFontOfSize:15.0]
-                                  constrainedToSize:CGSizeMake( 207.0, 400.0)];
+            labelBounds = [_station.copyright boundingRectWithSize:CGSizeMake( 207.0, 400.0)
+                                                           options:NSStringDrawingUsesLineFragmentOrigin
+                                                        attributes:fontAtts
+                                                           context:nil];
             break;
         case 3:
-            size = [[[self regexRemoveHTMLTags] stringByReplacingMatchesInString:_station.stationText
-                                                                         options:0
-                                                                           range:NSMakeRange(0, [_station.stationText length])
-                                                                    withTemplate:@""]
-                    sizeWithFont:[UIFont boldSystemFontOfSize:15.0]
-                    constrainedToSize:CGSizeMake( 207.0, 400.0)];
-            size.height += 4;
+            labelBounds = [[[self regexRemoveHTMLTags] stringByReplacingMatchesInString:_station.stationText
+                                                                                options:0
+                                                                                  range:NSMakeRange(0, [_station.stationText length])
+                                                                           withTemplate:@""]
+                           boundingRectWithSize:CGSizeMake( 207.0, 400.0)
+                           options:NSStringDrawingUsesLineFragmentOrigin
+                           attributes:fontAtts
+                           context:nil];
+            //size.height += 4;
             break;
         case 4:
-            size = [_station.statusMessage sizeWithFont:[UIFont boldSystemFontOfSize:15.0]
-                                      constrainedToSize:CGSizeMake( 207.0, 400.0)];
+            labelBounds = [_station.statusMessage boundingRectWithSize:CGSizeMake( 207.0, 400.0)
+                                                               options:NSStringDrawingUsesLineFragmentOrigin
+                                                            attributes:fontAtts
+                                                               context:nil];
             break;
         case 5:
             if ( [_station.webCamText length] > 0 ) {
-                size = [[[self regexRemoveHTMLTags] stringByReplacingMatchesInString:_station.webCamText
-                                                                             options:0
-                                                                               range:NSMakeRange(0, [_station.webCamText length])
-                                                                        withTemplate:@""]
-                        sizeWithFont:[UIFont boldSystemFontOfSize:15.0]
-                        constrainedToSize:CGSizeMake( 207.0, 400.0)];
-                size.height += 4;
+                labelBounds = [[[self regexRemoveHTMLTags] stringByReplacingMatchesInString:_station.webCamText
+                                                                                    options:0
+                                                                                      range:NSMakeRange(0, [_station.webCamText length])
+                                                                               withTemplate:@""]
+                               boundingRectWithSize:CGSizeMake( 207.0, 400.0)
+                               options:NSStringDrawingUsesLineFragmentOrigin
+                               attributes:fontAtts
+                               context:nil];
+                //size.height += 4;
             }
             break;
     }
 
-    return MAX( 50.0, size.height);
+    return MAX( 50.0, CGRectGetHeight(labelBounds));
 }
 
 
