@@ -65,6 +65,7 @@
 		AD17EDF71735541E00943C33 /* RHCNavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD17EDF61735541900943C33 /* RHCNavigationViewController.m */; };
 		AD17EDF91736492500943C33 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD17EDF81736492200943C33 /* AdSupport.framework */; };
 		AD4A378B1770F0EF003B8AF2 /* RHCAlertManager.m in Sources */ = {isa = PBXBuildFile; fileRef = AD4A378A1770F0EF003B8AF2 /* RHCAlertManager.m */; };
+		ADE5276517BECBB100666C76 /* NSString+fixDateString.m in Sources */ = {isa = PBXBuildFile; fileRef = ADE5276417BECBB100666C76 /* NSString+fixDateString.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -171,6 +172,8 @@
 		AD17EDF81736492200943C33 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		AD4A37891770F0EF003B8AF2 /* RHCAlertManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RHCAlertManager.h; sourceTree = "<group>"; };
 		AD4A378A1770F0EF003B8AF2 /* RHCAlertManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RHCAlertManager.m; sourceTree = "<group>"; };
+		ADE5276317BECBB100666C76 /* NSString+fixDateString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+fixDateString.h"; sourceTree = "<group>"; };
+		ADE5276417BECBB100666C76 /* NSString+fixDateString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+fixDateString.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -314,6 +317,8 @@
 		AD17EDB217310C2B00943C33 /* Categories */ = {
 			isa = PBXGroup;
 			children = (
+				ADE5276317BECBB100666C76 /* NSString+fixDateString.h */,
+				ADE5276417BECBB100666C76 /* NSString+fixDateString.m */,
 				AD0B8EB01754F7D700042B95 /* NSString+isNumeric.h */,
 				AD0B8EB11754F7D700042B95 /* NSString+isNumeric.m */,
 				AD17EDC2173116B700943C33 /* NSObject+performBlockCancel.h */,
@@ -639,6 +644,7 @@
 				AD0B8EAF1754F3C800042B95 /* RHCStationViewController.m in Sources */,
 				AD0B8EB21754F7D700042B95 /* NSString+isNumeric.m in Sources */,
 				AD4A378B1770F0EF003B8AF2 /* RHCAlertManager.m in Sources */,
+				ADE5276517BECBB100666C76 /* NSString+fixDateString.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
