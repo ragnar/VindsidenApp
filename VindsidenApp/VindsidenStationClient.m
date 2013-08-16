@@ -7,7 +7,7 @@
 //
 
 #import "VindsidenStationClient.h"
-
+#import "NSString+fixDateString.h"
 
 @implementation VindsidenStationClient
 
@@ -107,7 +107,7 @@
         [_currentStation setObject:[_currentString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]]
                             forKey:@"statusMessage"];
     } else if ( [elementName isEqualToString:@"LastMeasurementTime"]) {
-        NSString *dateString = [_currentString stringByReplacingCharactersInRange:NSMakeRange(19, 6) withString:([[NSTimeZone localTimeZone] isDaylightSavingTime] ? @"+0200" : @"+0100")];
+        NSString *dateString = [_currentString fixDateString];
         [_currentStation setObject:[[self dateFormatter] dateFromString:dateString] forKey:@"lastMeasurement"];
     } else if ( [elementName isEqualToString:@"City"]) {
         [_currentStation setObject:[_currentString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]]

@@ -9,7 +9,7 @@
 #import "CDPlot.h"
 #import "CDStation.h"
 #import "RHCAppDelegate.h"
-
+#import "NSString+fixDateString.h"
 
 @implementation CDPlot
 
@@ -28,7 +28,7 @@
 {
     CDPlot *existing = nil;
     RHCAppDelegate *_appDelegate = [[UIApplication sharedApplication] delegate];
-    NSString *dateString = [[dict objectForKey:@"plotTime"] stringByReplacingCharactersInRange:NSMakeRange(19, 6) withString:([[NSTimeZone localTimeZone] isDaylightSavingTime] ? @"+0200" : @"+0100")];
+    NSString *dateString = [[dict objectForKey:@"plotTime"] fixDateString];
     NSDate *date = [_appDelegate dateFromString:dateString];
     NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:@"CDPlot"];
 
