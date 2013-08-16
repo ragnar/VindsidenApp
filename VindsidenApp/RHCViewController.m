@@ -193,7 +193,7 @@ static NSString *kCellID = @"stationCellID";
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    id <NSFetchedResultsSectionInfo> sectionInfo = [[[self fetchedResultsController] sections] objectAtIndex:0];
+    id <NSFetchedResultsSectionInfo> sectionInfo = [[self fetchedResultsController] sections][0];
     return [sectionInfo numberOfObjects];
 }
 
@@ -299,7 +299,7 @@ static NSString *kCellID = @"stationCellID";
     fetchRequest.predicate = predicate;
 
     NSSortDescriptor *sortDescriptor1 = [[NSSortDescriptor alloc] initWithKey:@"order" ascending:YES];
-    NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:sortDescriptor1, nil];
+    NSArray *sortDescriptors = @[sortDescriptor1];
     [fetchRequest setSortDescriptors:sortDescriptors];
 
     NSFetchedResultsController *aFetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest

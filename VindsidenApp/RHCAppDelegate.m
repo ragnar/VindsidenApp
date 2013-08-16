@@ -237,7 +237,7 @@
 
     NSError *error = nil;
     NSURL *url = [NSURL fileURLWithPath:path];
-    [url setResourceValue:[NSNumber numberWithBool:YES] forKey:NSURLIsExcludedFromBackupKey error:&error];
+    [url setResourceValue:@YES forKey:NSURLIsExcludedFromBackupKey error:&error];
     return path;
 }
 

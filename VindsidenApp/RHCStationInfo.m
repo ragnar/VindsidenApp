@@ -149,7 +149,7 @@
     if ( direction > 360.0 || direction < 0 ) {
         direction = 0.0;
     }
-    NSNumber *dir = [NSNumber numberWithFloat:direction];
+    NSNumber *dir = @(direction);
 
 
     if ( [dir isBetween:0.0 and:11.25] || [dir isBetween:348.75 and:360.001]) {

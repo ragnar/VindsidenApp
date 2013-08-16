@@ -39,7 +39,7 @@
 
 - (CGFloat )speedInBeaufort
 {
-    NSNumber *knots = [NSNumber numberWithFloat:[self speedConvertionTo:SpeedConvertionToKnotsPerSecond]];
+    NSNumber *knots = @([self speedConvertionTo:SpeedConvertionToKnotsPerSecond]);
 
     if ( [knots isBetween:0 and:1.0] ) {
         return 0.0;

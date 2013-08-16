@@ -11,6 +11,7 @@
 #import "RHCAppDelegate.h"
 #import "NSString+fixDateString.h"
 
+
 @implementation CDPlot
 
 @dynamic plotTime;
@@ -28,7 +29,7 @@
 {
     CDPlot *existing = nil;
     RHCAppDelegate *_appDelegate = [[UIApplication sharedApplication] delegate];
-    NSString *dateString = [[dict objectForKey:@"plotTime"] fixDateString];
+    NSString *dateString = [dict[@"plotTime"] fixDateString];
     NSDate *date = [_appDelegate dateFromString:dateString];
     NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:@"CDPlot"];
 
@@ -38,27 +39,27 @@
     NSArray *array = [managedObjectContext executeFetchRequest:request error:nil];
 
     if ( [array count] > 0 ) {
-        existing = [array objectAtIndex:0];
+        existing = array[0];
     } else {
         existing = [[CDPlot alloc] initWithEntity:request.entity insertIntoManagedObjectContext:managedObjectContext];
 
         for (id key in dict ) {
-            id v = [dict objectForKey:key];
+            id v = dict[key];
             if ( [v class] == [NSNull class] ) {
                 continue;
             } else if ( [key isEqualToString:@"plotTime"] ) {
                 existing.plotTime = date;
                 continue;
             } else if ( [key isEqualToString:@"windDir"]  ) {
-                CGFloat value = [[dict objectForKey:key] floatValue];
+                CGFloat value = [dict[key] floatValue];
                 if ( value < 0 ) {
                     value = value + 360;
                 }
-                [existing setValue:[NSNumber numberWithFloat:value]
+                [existing setValue:@(value)
                             forKey:key];
                 continue;
             }
-            [existing setValue:[NSNumber numberWithFloat:[[dict objectForKey:key] floatValue]] forKey:key];
+            [existing setValue:@([dict[key] floatValue]) forKey:key];
         }
     }
 

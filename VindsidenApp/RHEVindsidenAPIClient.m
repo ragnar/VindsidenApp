@@ -44,7 +44,7 @@ NSString *const kBaseURL = @"http://vindsiden.no/";
 
         RHEVindsidenAPIClient __weak *blocksafeSelf = self;
         [self setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
-            [[NSNotificationCenter defaultCenter] postNotificationName:NETWORK_STATUS_CHANGED object:blocksafeSelf userInfo:@{@"AFNetworkReachabilityStatus": [NSNumber numberWithInteger:status]}];
+            [[NSNotificationCenter defaultCenter] postNotificationName:NETWORK_STATUS_CHANGED object:blocksafeSelf userInfo:@{@"AFNetworkReachabilityStatus": @(status)}];
         }];
     }
 

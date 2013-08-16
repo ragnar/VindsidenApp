@@ -61,8 +61,8 @@
     NSTimeInterval _refreshInterval = 0;
 
     if ( [plots count] >= 2 ) {
-        CDPlot *plot = [plots objectAtIndex:0];
-        CDPlot *plot2 = [plots objectAtIndex:1];
+        CDPlot *plot = plots[0];
+        CDPlot *plot2 = plots[1];
         _refreshInterval = [plot.plotTime timeIntervalSinceDate:plot2.plotTime];
 
         NSDate *nextRefresh  = [plot.plotTime dateByAddingTimeInterval:_refreshInterval];
@@ -92,10 +92,10 @@
         }
 
         for ( NSDictionary *station in stations ) {
-            CDStation *managedObject = [CDStation newOrExistingStation:[station objectForKey:@"stationId"] inManagedObjectContext:childContext];
+            CDStation *managedObject = [CDStation newOrExistingStation:station[@"stationId"] inManagedObjectContext:childContext];
 
             for (id key in station ) {
-                id v = [station objectForKey:key];
+                id v = station[key];
                 if ( [v class] == [NSNull class] ) {
                     continue;
                 }
@@ -108,7 +108,7 @@
                     managedObject.isHidden = @NO;
                 } else {
                     order++;
-                    managedObject.order = [NSNumber numberWithInteger:order];
+                    managedObject.order = @(order);
                     managedObject.isHidden = @YES;
                 }
             }
@@ -172,19 +172,19 @@
     request.entity = [NSEntityDescription entityForName:@"CDStation" inManagedObjectContext:managedObjectContext];
     request.fetchLimit = 1;
 
-    NSExpression *ex = [NSExpression expressionForFunction:@"max:" arguments:[NSArray arrayWithObject:[NSExpression expressionForKeyPath:@"order"]]];
+    NSExpression *ex = [NSExpression expressionForFunction:@"max:" arguments:@[[NSExpression expressionForKeyPath:@"order"]]];
     NSExpressionDescription *maxED = [[NSExpressionDescription alloc] init];
     [maxED setExpression:ex];
     [maxED setExpressionResultType:NSInteger16AttributeType];
     [maxED setName:@"nextNumber"];
 
-    [request setPropertiesToFetch:[NSArray arrayWithObject:maxED]];
+    [request setPropertiesToFetch:@[maxED]];
     [request setResultType:NSDictionaryResultType];
 
     NSArray *maxes = [managedObjectContext executeFetchRequest:request error:nil];
 
     if ( maxes.count > 0 ) {
-        return [[[maxes objectAtIndex:0] objectForKey:@"nextNumber"] integerValue];
+        return [maxes[0][@"nextNumber"] integerValue];
     }
     return 0;
     

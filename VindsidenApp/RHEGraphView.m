@@ -124,7 +124,7 @@ const NSInteger kMinSpeedLines = 3;
 
     if ( [_plots count] ) {
         self.earliestDate = [[plots lastObject] valueForKeyPath:@"plotTime"];
-        self.latestDate = [[[plots objectAtIndex:0] valueForKeyPath:@"plotTime"] dateByAddingTimeInterval:3600];
+        self.latestDate = [[plots[0] valueForKeyPath:@"plotTime"] dateByAddingTimeInterval:3600];
         self.absoluteStartDate = [self absoluteDate:self.earliestDate isStart:YES];
         self.absoluteEndDate = [self absoluteDate:self.latestDate isStart:NO];
 
@@ -359,7 +359,7 @@ const NSInteger kMinSpeedLines = 3;
     CGMutablePathRef pathAvg = CGPathCreateMutable();
     CGMutablePathRef pathMax = CGPathCreateMutable();
 
-    CDPlot *firstPlot = [self.plots objectAtIndex:0];
+    CDPlot *firstPlot = (self.plots)[0];
     NSTimeInterval interval = [firstPlot.plotTime timeIntervalSinceDate:startDate]/60;
     CGFloat x = ceil(_minX + (interval*self.stepX));
 
@@ -381,7 +381,7 @@ const NSInteger kMinSpeedLines = 3;
         CGFloat rAvg = [plot.windAvg speedConvertionTo:unit];
         CGFloat yAvg = _maxY - ((rAvg / plotMaxValue) * (_maxY - _minY));
 
-        if ( [plot isEqual:[self.plots objectAtIndex:0]] ) {
+        if ( [plot isEqual:(self.plots)[0]] ) {
             CGPathMoveToPoint(pathMax, NULL, x, yMax);
             CGPathMoveToPoint(pathAvg, NULL, x, yAvg);
             CGPathMoveToPoint(pathMin, NULL, x, yMin);

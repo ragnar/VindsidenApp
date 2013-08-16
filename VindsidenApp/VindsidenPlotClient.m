@@ -47,7 +47,7 @@
     
     DLOG(@"Parsing complete. %d plots found", [_plots count]);
     NSSortDescriptor *sortDescriptor1 = [[NSSortDescriptor alloc] initWithKey:@"Time" ascending:YES];
-    NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:sortDescriptor1, nil];
+    NSArray *sortDescriptors = @[sortDescriptor1];
     NSArray *sorted = [_plots sortedArrayUsingDescriptors:sortDescriptors];
 
     return sorted;
@@ -77,17 +77,17 @@
     if ([elementName isEqualToString:@"Measurement"]) {
         [_plots addObject:_currentPlot];
     } else if ([elementName isEqualToString:@"Time"]) {
-        [_currentPlot setObject:_currentString forKey:@"plotTime"];
+        _currentPlot[@"plotTime"] = _currentString;
     } else if ([elementName isEqualToString:@"WindAvg"]) {
-        [_currentPlot setObject:[NSNumber numberWithDouble:[_currentString doubleValue]] forKey:@"windAvg"];
+        _currentPlot[@"windAvg"] = @([_currentString doubleValue]);
     } else if ([elementName isEqualToString:@"WindMax"]) {
-        [_currentPlot setObject:[NSNumber numberWithDouble:[_currentString doubleValue]] forKey:@"windMax"];
+        _currentPlot[@"windMax"] = @([_currentString doubleValue]);
     } else if ( [elementName isEqualToString:@"WindMin"]) {
-        [_currentPlot setObject:[NSNumber numberWithDouble:[_currentString doubleValue]] forKey:@"windMin"];
+        _currentPlot[@"windMin"] = @([_currentString doubleValue]);
     } else if ( [elementName isEqualToString:@"DirectionAvg"]) {
-        [_currentPlot setObject:_currentString forKey:@"windDir"];
+        _currentPlot[@"windDir"] = _currentString;
     } else if ( [elementName isEqualToString:@"Temperature1"]) {
-        [_currentPlot setObject:_currentString forKey:@"tempAir"];
+        _currentPlot[@"tempAir"] = _currentString;
     }
     _isStoringCharacters = NO;
 }
