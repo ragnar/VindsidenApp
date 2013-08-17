@@ -6,12 +6,11 @@
 //  Copyright 2010 Shortcut AS. All rights reserved.
 //
 
+#import "RHCAppDelegate.h"
 #import "VindsidenStationClient.h"
 #import "NSString+fixDateString.h"
 
 @implementation VindsidenStationClient
-
-@synthesize dateFormatter = _dateFormatter;
 
 - (id) initWithXML:(NSString *)xml
 {
@@ -107,8 +106,10 @@
         [_currentStation setObject:[_currentString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]]
                             forKey:@"statusMessage"];
     } else if ( [elementName isEqualToString:@"LastMeasurementTime"]) {
+        RHCAppDelegate *_appDelegate = [[UIApplication sharedApplication] delegate];
         NSString *dateString = [_currentString fixDateString];
-        [_currentStation setObject:[[self dateFormatter] dateFromString:dateString] forKey:@"lastMeasurement"];
+        NSDate *date = [_appDelegate dateFromString:dateString];
+        [_currentStation setObject:date forKey:@"lastMeasurement"];
     } else if ( [elementName isEqualToString:@"City"]) {
         [_currentStation setObject:[_currentString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]]
                             forKey:@"city"];
@@ -134,19 +135,5 @@
     }
 }
 
-- (NSDateFormatter *) dateFormatter
-{
-    if ( _dateFormatter ) {
-        return _dateFormatter;
-    }
-
-    NSDateFormatter *df = [[NSDateFormatter alloc] init];
-    [df setDateFormat:@"yyyy-MM-dd'T'HH:mm:ssZZZ"];
-    NSLocale *noLocale = [[NSLocale alloc] initWithLocaleIdentifier:@"nb_NO"];
-    [df setLocale:noLocale];
-
-    _dateFormatter = df;
-    return df;
-}
 
 @end
