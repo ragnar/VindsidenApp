@@ -54,6 +54,7 @@
         [[NSUserDefaults standardUserDefaults] synchronize];
 
     }
+
     [self cleanupPlots];
 
     return YES;
@@ -282,7 +283,8 @@
     }
 
     _dateFormatter = [[NSDateFormatter alloc] init];
-    [_dateFormatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ssZZZ"];
+    [_dateFormatter setDateFormat:@"yyyy-MM-dd' 'HH:mm:ssZZZ"];
+    [_dateFormatter setTimeZone:[NSTimeZone timeZoneWithName:@"UTC"]];
 
     return _dateFormatter;
 }
