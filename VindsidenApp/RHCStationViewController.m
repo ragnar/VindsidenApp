@@ -77,7 +77,7 @@
 
 - (void)updatePlots:(NSArray *)plots
 {
-    [CDPlot updatePlots:plots forStation:self.currentStation completion:^{
+    [CDPlot updatePlots:plots completion:^{
         [self displayPlots];
     }];
 }

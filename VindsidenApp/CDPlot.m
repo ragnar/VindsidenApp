@@ -58,6 +58,8 @@
                 [existing setValue:@(value)
                             forKey:key];
                 continue;
+            } else if ( [key isEqualToString:@"stationID"] ) {
+                continue;
             }
             [existing setValue:@([dict[key] floatValue]) forKey:key];
         }
@@ -67,7 +69,7 @@
 }
 
 
-+ (void)updatePlots:(NSArray *)plots forStation:(CDStation *)station completion:(void (^)(void))completion
++ (void)updatePlots:(NSArray *)plots completion:(void (^)(void))completion
 {
     NSManagedObjectContext *context = [(id)[[UIApplication sharedApplication] delegate] managedObjectContext];
     NSManagedObjectContext *childContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
@@ -77,9 +79,9 @@
     __block NSError *err = nil;
 
     [childContext performBlock:^{
-        CDStation *thisStation = (CDStation *)[childContext objectWithID:[station objectID]];
+        CDStation *thisStation = [CDStation existingStation:plots[0][@"stationID"] inManagedObjectContext:childContext];
         for ( NSDictionary *dict in plots ) {
-            CDPlot *managedObject = [CDPlot newOrExistingPlot:dict forStation:station inManagedObjectContext:childContext];
+            CDPlot *managedObject = [CDPlot newOrExistingPlot:dict forStation:thisStation inManagedObjectContext:childContext];
             if ( [managedObject isInserted] ) {
                 managedObject.station = thisStation;
             }

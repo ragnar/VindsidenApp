@@ -65,7 +65,8 @@
                [elementName isEqualToString:@"WindMax"] ||
                [elementName isEqualToString:@"WindMin"] ||
                [elementName isEqualToString:@"DirectionAvg"] ||
-               [elementName isEqualToString:@"Temperature1"])
+               [elementName isEqualToString:@"Temperature1"] ||
+               [elementName isEqualToString:@"StationID"] )
     {
         _currentString = [[NSMutableString alloc] initWithCapacity:0];
         _isStoringCharacters = YES;
@@ -88,6 +89,8 @@
         _currentPlot[@"windDir"] = _currentString;
     } else if ( [elementName isEqualToString:@"Temperature1"]) {
         _currentPlot[@"tempAir"] = _currentString;
+    } else if ( [elementName isEqualToString:@"StationID"]) {
+        _currentPlot[@"stationID"] = _currentString;
     }
     _isStoringCharacters = NO;
 }
