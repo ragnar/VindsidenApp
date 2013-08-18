@@ -86,6 +86,7 @@
 
     [childContext performBlock:^{
         NSInteger order = [CDStation maxOrderForStationsInManagedObjectContext:childContext];
+        BOOL newStations = NO;
 
         if ( order == 0 ) {
             order = 200;
@@ -103,6 +104,7 @@
             }
 
             if ( [managedObject isInserted] ) {
+                newStations = YES;
                 if ( [managedObject.stationId integerValue] == 1 ) {
                     managedObject.order = @101;
                     managedObject.isHidden = @NO;
@@ -113,6 +115,17 @@
                 }
             }
         }
+
+        if ( newStations ) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [[[UIAlertView alloc] initWithTitle:nil
+                                            message:NSLocalizedString(@"ALERT_NEW_STATIONS_FOUND", @"New stations found. Go to settings to view them")
+                                           delegate:nil
+                                  cancelButtonTitle:@"OK"
+                                  otherButtonTitles:nil] show];
+            });
+        }
+
         [childContext save:&err];
         [context performBlock:^{
             [context save:&err];

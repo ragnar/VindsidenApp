@@ -150,3 +150,7 @@
 
 /* Unable to fetch data at this point. */
 "NETWORK_ERROR_UNABLE_TO_LOAD" = "Klarer ikke hente data for øyeblikket";
+
+/* New stations found. Go to settings to view them */
+"ALERT_NEW_STATIONS_FOUND" = "Nye værstasjoner lastet ned. Gå til settings for å se på dem.";
+
