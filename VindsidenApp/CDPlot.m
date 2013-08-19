@@ -71,6 +71,10 @@
 
 + (void)updatePlots:(NSArray *)plots completion:(void (^)(void))completion
 {
+    if ( 0 == [plots count] ) {
+        return;
+    }
+
     NSManagedObjectContext *context = [(id)[[UIApplication sharedApplication] delegate] managedObjectContext];
     NSManagedObjectContext *childContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
     childContext.parentContext = context;
