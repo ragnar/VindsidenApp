@@ -27,5 +27,6 @@
 - (void)fetch;
 - (void)displayPlots;
 - (void)syncDisplayPlots;
+- (void)updateLastUpdatedLabel;
 
 @end

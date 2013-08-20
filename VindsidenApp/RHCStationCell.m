@@ -165,7 +165,11 @@
     NSArray *cdplots = [[self.currentStation.plots filteredSetUsingPredicate:[NSPredicate predicateWithFormat:@"plotTime >= %@", [[NSDate date] dateByAddingTimeInterval:-1*(kPlotHistoryHours-1)*3600]]] sortedByKeyPath:@"plotTime" ascending:NO];
 
     if ( [cdplots count] ) {
-        self.updatedAtLabel.text = [self.dateTransformer transformedValue:[cdplots[0] plotTime]];
+        if ( [[cdplots[0] plotTime] compare:[NSDate date]] == NSOrderedAscending ) {
+            self.updatedAtLabel.text = [self.dateTransformer transformedValue:[cdplots[0] plotTime]];
+        } else {
+            self.updatedAtLabel.text = [self.dateTransformer transformedValue:nil];
+        }
     } else {
         self.updatedAtLabel.text = NSLocalizedString(@"LABEL_NOT_UPDATED", @"Not updated");
     }
@@ -187,7 +191,11 @@
     if ( [cdplots count] ) {
         self.graphView.plots = cdplots;
         [self.stationView updateWithPlot:cdplots[0]];
-        self.updatedAtLabel.text = [self.dateTransformer transformedValue:[cdplots[0] plotTime]];
+        if ( [[cdplots[0] plotTime] compare:[NSDate date]] == NSOrderedAscending ) {
+            self.updatedAtLabel.text = [self.dateTransformer transformedValue:[cdplots[0] plotTime]];
+        } else {
+            self.updatedAtLabel.text = [self.dateTransformer transformedValue:nil];
+        }
     } else {
         self.updatedAtLabel.text = NSLocalizedString(@"LABEL_NOT_UPDATED", @"Not updated");
     }
