@@ -21,7 +21,7 @@ NSString *const kBaseURL = @"http://vindsiden.no/";
     NSTimeInterval __block _imageLastUpdated;
 }
 
-+ (id) defaultManager
++ (instancetype) defaultManager
 {
     static RHEVindsidenAPIClient *_defaultManager;
     static dispatch_once_t once;
@@ -33,7 +33,7 @@ NSString *const kBaseURL = @"http://vindsiden.no/";
 
 
 
-- (id) initWithBaseURL:(NSURL *)url
+- (instancetype) initWithBaseURL:(NSURL *)url
 {
     self = [super initWithBaseURL:url];
 
@@ -70,7 +70,7 @@ NSString *const kBaseURL = @"http://vindsiden.no/";
                    completionBlock( NO, nil );
                }
 
-               if ( errorBlock ) {
+               if ( NO == self.background && errorBlock ) {
                    errorBlock( error );
                }
            }
@@ -81,6 +81,8 @@ NSString *const kBaseURL = @"http://vindsiden.no/";
 - (void)fetchStationsPlotsForStation:(NSNumber *)station completion:(void (^)(BOOL success, NSArray *stations))completionBlock error:(void (^)(BOOL cancelled, NSError *error))errorBlock
 {
     NSParameterAssert(station);
+
+    DLOG(@"IS BACKGROUND: %d",self.background);
 
     [self getPath:@"/xml.aspx"
        parameters:@{@"id": station, @"hours": @kPlotHistoryHours}
@@ -97,7 +99,7 @@ NSString *const kBaseURL = @"http://vindsiden.no/";
                   completionBlock( NO, nil );
               }
 
-              if ( errorBlock ) {
+              if ( NO == self.background && errorBlock ) {
                   errorBlock( [operation isCancelled], error );
               }
           }
