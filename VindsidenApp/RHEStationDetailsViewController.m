@@ -241,7 +241,7 @@
 
     CLLocationCoordinate2D spotCord = CLLocationCoordinate2DMake( [_station.coordinateLat doubleValue], [_station.coordinateLon doubleValue]);
     
-    NSMutableString *query = [NSMutableString stringWithString:@"http://maps.google.com/maps?t=h&z=10"];
+    NSMutableString *query = [NSMutableString stringWithString:@"http://maps.apple.com/?t=h&z=10"];
     
     if ( spotCord.latitude > 0 || spotCord.longitude > 0 ) {
         [query appendFormat:@"&ll=%f,%f", spotCord.latitude, spotCord.longitude];
