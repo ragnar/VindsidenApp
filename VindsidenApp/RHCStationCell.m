@@ -186,7 +186,11 @@
 
 - (void)syncDisplayPlots
 {
-    NSArray *cdplots = [[self.currentStation.plots filteredSetUsingPredicate:[NSPredicate predicateWithFormat:@"plotTime >= %@", [[NSDate date] dateByAddingTimeInterval:-1*(kPlotHistoryHours-1)*3600]]] sortedByKeyPath:@"plotTime" ascending:NO];
+    NSDate *inDate = [[NSDate date] dateByAddingTimeInterval:-1*(kPlotHistoryHours-1)*3600];
+    NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    NSDateComponents *inputComponents = [gregorian components:(NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit | NSHourCalendarUnit) fromDate:inDate];
+    NSDate *outDate = [gregorian dateFromComponents:inputComponents];
+    NSArray *cdplots = [[self.currentStation.plots filteredSetUsingPredicate:[NSPredicate predicateWithFormat:@"plotTime >= %@", outDate]] sortedByKeyPath:@"plotTime" ascending:NO];
 
     if ( [cdplots count] ) {
         self.graphView.plots = cdplots;
