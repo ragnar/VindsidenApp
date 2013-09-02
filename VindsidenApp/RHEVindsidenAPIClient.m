@@ -38,9 +38,7 @@ NSString *const kBaseURL = @"http://vindsiden.no/";
     self = [super initWithBaseURL:url];
 
     if ( nil != self ) {
-        [[AFNetworkActivityIndicatorManager sharedManager] setEnabled:YES];
-        [self registerHTTPOperationClass:[AFXMLRequestOperation class]];
-        [self setParameterEncoding:AFFormURLParameterEncoding];
+        self.responseSerializer = [AFXMLParserSerializer serializer];
 
         RHEVindsidenAPIClient __weak *blocksafeSelf = self;
         [self setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
@@ -54,17 +52,17 @@ NSString *const kBaseURL = @"http://vindsiden.no/";
 
 - (void)fetchStations:(void (^)(BOOL success, NSArray *stations))completionBlock error:(void (^)(NSError *error))errorBlock
 {
-    [self getPath:@"/xml.aspx"
+    [self GET:@"/xml.aspx"
         parameters:nil
-           success:^(AFHTTPRequestOperation *operation, id response) {
-               VindsidenStationClient *parser = [[VindsidenStationClient alloc] initWithData:response];
+           success:^(NSHTTPURLResponse *urlResponse, id response) {
+               VindsidenStationClient *parser = [[VindsidenStationClient alloc] initWithParser:response];
                NSArray *parsedStations = [parser parse];
 
                if ( completionBlock ) {
                    completionBlock( YES, parsedStations);
                }
            }
-           failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+           failure:^(NSError *error) {
                DLOG(@"Fetching failed: %@", error);
                if ( completionBlock ) {
                    completionBlock( NO, nil );
@@ -84,81 +82,34 @@ NSString *const kBaseURL = @"http://vindsiden.no/";
 
     DLOG(@"IS BACKGROUND: %d",self.background);
 
-    [self getPath:@"/xml.aspx"
-       parameters:@{@"id": station, @"hours": @kPlotHistoryHours}
-          success:^(AFHTTPRequestOperation *operation, id response) {
-              VindsidenPlotClient *parser = [[VindsidenPlotClient alloc] initWithData:response];
+    __weak __block NSURLSessionDataTask *task = [self GET:@"/xml.aspx"
+       parameters:@{@"id": station, @"hours": @(kPlotHistoryHours+1)}
+          success:^(NSHTTPURLResponse *urlResponse, id response) {
+              VindsidenPlotClient *parser = [[VindsidenPlotClient alloc] initWithParser:response];
               NSArray *parsedPlots = [parser parse];
 
               if ( completionBlock ) {
                   completionBlock( YES, parsedPlots);
               }
           }
-          failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+          failure:^(NSError *error) {
               if ( completionBlock ) {
                   completionBlock( NO, nil );
               }
 
+              BOOL isCancelled = NO;
+              NSURLSessionDataTask __strong *strongTask = task;
+              if ( strongTask ) {
+                  isCancelled = (strongTask.state == NSURLSessionTaskStateCanceling);
+              }
+              DLOG(@"%d - %d", isCancelled, strongTask.state);
+
               if ( NO == self.background && errorBlock ) {
-                  errorBlock( [operation isCancelled], error );
+                  errorBlock( isCancelled, error );
               }
           }
      ];
 }
 
-
-- (void)cancelFetchStationPlotsForStation:(NSNumber *)station
-{
-    NSURL *pathToBeMatched = [[self requestWithMethod:@"GET" path:@"/xml.aspx" parameters:@{@"id": station, @"hours": @kPlotHistoryHours}] URL];
-
-    for (NSOperation *operation in [self.operationQueue operations]) {
-        if (![operation isKindOfClass:[AFHTTPRequestOperation class]]) {
-            continue;
-        }
-
-        BOOL hasMatchingPath = [[[(AFHTTPRequestOperation *)operation request] URL] isEqual:pathToBeMatched];
-
-        if (hasMatchingPath) {
-            DLOG(@"%@", [[(AFHTTPRequestOperation *)operation request] URL]);
-            [operation cancel];
-        }
-    }
-}
-
-
-- (void)fetchWebCamImageForURL:(NSURL *)url ignoreFetchLimit:(BOOL)ignore success:(void (^)(UIImage *image))success failure:(void (^)(NSError *error))failure
-{
-    if ( NO == ignore ) {
-        NSTimeInterval now = [[NSDate date] timeIntervalSince1970];
-
-        @synchronized(self) {
-            if (  (now - 5*60) < _imageLastUpdated ) {
-                return;
-            }
-            _imageLastUpdated = [[NSDate date] timeIntervalSince1970];
-        }
-    }
-
-    NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:url];
-    [urlRequest setHTTPShouldHandleCookies:NO];
-    [urlRequest setHTTPShouldUsePipelining:YES];
-    [urlRequest addValue:@"image/*" forHTTPHeaderField:@"Accept"];
-
-    AFImageRequestOperation *requestOperation = [AFImageRequestOperation imageRequestOperationWithRequest:urlRequest
-                                                                                     imageProcessingBlock:nil
-                                                                                                  success:^(NSURLRequest __unused *request, NSHTTPURLResponse __unused *response, UIImage *image) {
-                                                                                                      if ( success ) {
-                                                                                                          success(image);
-                                                                                                      }
-                                                                                                  }
-                                                                                                  failure:^(NSURLRequest __unused *request, NSHTTPURLResponse __unused *response, NSError *error) {
-                                                                                                      if ( failure ) {
-                                                                                                          failure(error);
-                                                                                                      }
-                                                                                                  }
-                                                 ];
-
-    [self enqueueHTTPRequestOperation:requestOperation];
-}
 
 @end
