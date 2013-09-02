@@ -55,6 +55,7 @@
 		AD17EDF71735541E00943C33 /* RHCNavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD17EDF61735541900943C33 /* RHCNavigationViewController.m */; };
 		AD17EDF91736492500943C33 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD17EDF81736492200943C33 /* AdSupport.framework */; };
 		AD4A378B1770F0EF003B8AF2 /* RHCAlertManager.m in Sources */ = {isa = PBXBuildFile; fileRef = AD4A378A1770F0EF003B8AF2 /* RHCAlertManager.m */; };
+		ADACD25A1783471B00FBD4D5 /* UIImage+ImageFromView.m in Sources */ = {isa = PBXBuildFile; fileRef = ADACD259178345A900FBD4D5 /* UIImage+ImageFromView.m */; };
 		ADE5276517BECBB100666C76 /* NSString+fixDateString.m in Sources */ = {isa = PBXBuildFile; fileRef = ADE5276417BECBB100666C76 /* NSString+fixDateString.m */; };
 /* End PBXBuildFile section */
 
@@ -152,6 +153,8 @@
 		AD17EDF81736492200943C33 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		AD4A37891770F0EF003B8AF2 /* RHCAlertManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RHCAlertManager.h; sourceTree = "<group>"; };
 		AD4A378A1770F0EF003B8AF2 /* RHCAlertManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RHCAlertManager.m; sourceTree = "<group>"; };
+		ADACD258178345A900FBD4D5 /* UIImage+ImageFromView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIImage+ImageFromView.h"; sourceTree = "<group>"; };
+		ADACD259178345A900FBD4D5 /* UIImage+ImageFromView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ImageFromView.m"; sourceTree = "<group>"; };
 		ADE5276317BECBB100666C76 /* NSString+fixDateString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+fixDateString.h"; sourceTree = "<group>"; };
 		ADE5276417BECBB100666C76 /* NSString+fixDateString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+fixDateString.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -299,6 +302,8 @@
 			children = (
 				ADE5276317BECBB100666C76 /* NSString+fixDateString.h */,
 				ADE5276417BECBB100666C76 /* NSString+fixDateString.m */,
+				ADACD258178345A900FBD4D5 /* UIImage+ImageFromView.h */,
+				ADACD259178345A900FBD4D5 /* UIImage+ImageFromView.m */,
 				AD0B8EB01754F7D700042B95 /* NSString+isNumeric.h */,
 				AD0B8EB11754F7D700042B95 /* NSString+isNumeric.m */,
 				AD17EDC2173116B700943C33 /* NSObject+performBlockCancel.h */,
@@ -590,6 +595,7 @@
 				AD17EDA81731066F00943C33 /* NSNumber+Convertion.m in Sources */,
 				AD17EDA91731066F00943C33 /* NSSet+Sort.m in Sources */,
 				AD17EDAA1731066F00943C33 /* RHEGraphMarker.m in Sources */,
+				ADACD25A1783471B00FBD4D5 /* UIImage+ImageFromView.m in Sources */,
 				AD17EDAB1731066F00943C33 /* RHEGraphView.m in Sources */,
 				AD17EDAC1731066F00943C33 /* Vindsiden.xcdatamodeld in Sources */,
 				AD17EDAD1731066F00943C33 /* VindsidenPlotClient.m in Sources */,
