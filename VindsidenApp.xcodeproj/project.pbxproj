@@ -770,14 +770,15 @@
 		};
 		AD17ED801731012200943C33 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 15DC7F5398F749998EAC2FC7 /* Pods.xcconfig */;
 			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Vindsiden-v2.app/Vindsiden-v2";
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/VindsidenApp.app/VindsidenApp";
 				FRAMEWORK_SEARCH_PATHS = (
 					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
 					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Vindsiden-v2/Vindsiden-v2-Prefix.pch";
+				GCC_PREFIX_HEADER = "VindsidenApp/VindsidenApp-Prefix.pch";
 				INFOPLIST_FILE = "Vindsiden-v2Tests/VindsidenAppTests-Info.plist";
 				PRODUCT_NAME = VindsidenAppTests;
 				TEST_HOST = "$(BUNDLE_LOADER)";
@@ -787,14 +788,15 @@
 		};
 		AD17ED811731012200943C33 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 15DC7F5398F749998EAC2FC7 /* Pods.xcconfig */;
 			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Vindsiden-v2.app/Vindsiden-v2";
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/VindsidenApp.app/VindsidenApp";
 				FRAMEWORK_SEARCH_PATHS = (
 					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
 					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Vindsiden-v2/Vindsiden-v2-Prefix.pch";
+				GCC_PREFIX_HEADER = "VindsidenApp/VindsidenApp-Prefix.pch";
 				INFOPLIST_FILE = "Vindsiden-v2Tests/VindsidenAppTests-Info.plist";
 				PRODUCT_NAME = VindsidenAppTests;
 				TEST_HOST = "$(BUNDLE_LOADER)";
