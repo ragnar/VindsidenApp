@@ -10,6 +10,16 @@
 
 
 @implementation VindsidenPlotClient
+{
+    NSData *_data;
+    NSString            *_xml;
+    NSMutableArray      *_plots;
+    NSMutableDictionary *_currentPlot;
+    NSMutableString     *_currentString;
+    BOOL                _isStoringCharacters;
+    NSXMLParser         *_parser;
+}
+
 
 - (instancetype)initWithXML:(NSString *)xml
 {
@@ -32,13 +42,30 @@
     return self;
 }
 
+
+- (instancetype)initWithParser:(NSXMLParser *)parser
+{
+    self = [super init];
+
+    if ( self ) {
+        _parser = parser;
+        _isStoringCharacters = NO;
+    }
+
+    return self;
+}
+
+
 - (NSArray *) parse
 {
     _plots = [[NSMutableArray alloc] initWithCapacity:0];
-    NSXMLParser *parser = [[NSXMLParser alloc] initWithData:_data];
-    [parser setDelegate:self];
-    BOOL success = [parser parse];
-    
+
+    if ( nil == _parser ) {
+        _parser = [[NSXMLParser alloc] initWithData:_data];
+    }
+
+    [_parser setDelegate:self];
+    BOOL success = [_parser parse];
     
     if (!success) {
         DLOG(@"not a success");
