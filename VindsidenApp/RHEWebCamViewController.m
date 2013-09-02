@@ -10,6 +10,8 @@
 #import "RHEVindsidenAPIClient.h"
 #import <UIImageView+AFNetworking.h>
 
+#import <MotionJpegImageView/MotionJpegImageView.h>
+
 #define ZOOM_STEP 1.5
 
 @interface RHEWebCamViewController ()
@@ -33,6 +35,14 @@
 @implementation RHEWebCamViewController
 {
     BOOL _switchNavBack;
+    BOOL _statusBarHidden;
+    BOOL _updateConstraints;
+}
+
+
+- (void)dealloc
+{
+    [self.imageView removeObserver:self forKeyPath:@"image"];
 }
 
 
@@ -40,7 +50,11 @@
 {
     [super viewDidLoad];
 
+    self.edgesForExtendedLayout = UIRectEdgeAll;
+    self.automaticallyAdjustsScrollViewInsets = NO;
+
     _switchNavBack = YES;
+    _statusBarHidden = NO;
 
     UITapGestureRecognizer *doubleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleDoubleTap:)];
     [doubleTap setNumberOfTapsRequired:2];
@@ -48,15 +62,15 @@
 
     UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleSingleTap:)];
     [singleTap setNumberOfTapsRequired:1];
-    [_imageView addGestureRecognizer:singleTap];
+    [self.view addGestureRecognizer:singleTap];
 
     [singleTap requireGestureRecognizerToFail:doubleTap];
 
-    _imageView.backgroundColor = [UIColor blackColor];
+    _imageView.backgroundColor = [UIColor whiteColor];
 
-    [_scrollView setBackgroundColor:[UIColor blackColor]];
+    [_scrollView setBackgroundColor:[UIColor whiteColor]];
     [_scrollView setCanCancelContentTouches:NO];
-    _scrollView.clipsToBounds = YES;
+    _scrollView.clipsToBounds = NO;
     _scrollView.indicatorStyle = UIScrollViewIndicatorStyleDefault;
     _scrollView.showsHorizontalScrollIndicator = NO;
     _scrollView.showsVerticalScrollIndicator = NO;
@@ -66,6 +80,8 @@
                                                                                        action:@selector(getPhoto)];
     self.navigationItem.rightBarButtonItem = refreshButtonItem;
     _isFirstTime = YES;
+
+    [self.imageView addObserver:self forKeyPath:@"image" options:NSKeyValueObservingOptionNew context:nil];
 }
 
 
@@ -78,28 +94,17 @@
     _originalStatusBarStyle = [[UIApplication sharedApplication] statusBarStyle];
     _originalBarStyle = self.navigationController.navigationBar.barStyle;
     _originalTintColor = self.navigationController.navigationBar.tintColor;
+}
 
-//    [self setWantsFullScreenLayout:YES];
-//    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleBlackTranslucent animated:animated];
-//    [self.navigationController.navigationBar setTintColor:nil];
-//    [self.navigationController.navigationBar setBarStyle:UIBarStyleBlackTranslucent];
-//    [[self navigationController] setNavigationBarHidden:NO animated:animated];
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+
+    self.edgesForExtendedLayout = UIRectEdgeAll;
 
     [self initImageView];
     [self initZoom];
     [self getPhoto];
-}
-
-
-- (void)viewWillDisappear:(BOOL)animated
-{
-    [super viewWillDisappear:animated];
-
-//    if ( _switchNavBack ) {
-//        [[UIApplication sharedApplication] setStatusBarStyle:_originalStatusBarStyle animated:animated];
-//        [self.navigationController.navigationBar setBarStyle:_originalBarStyle];
-//        [self.navigationController.navigationBar setTintColor:_originalTintColor];
-//    }
 }
 
 
@@ -133,7 +138,7 @@
 #pragma mark - UIGestureRecognizer
 
 
-- (void) handleDoubleTap:(UIGestureRecognizer *)gestureRecognizer
+- (void)handleDoubleTap:(UIGestureRecognizer *)gestureRecognizer
 {
     if ( gestureRecognizer.state == UIGestureRecognizerStateEnded ) {
         if ( _scrollView.zoomScale >= _scrollView.maximumZoomScale ) {
@@ -146,21 +151,32 @@
 }
 
 
-- (void) handleSingleTap:(UIGestureRecognizer *)gestureRecognizer
+- (void)handleSingleTap:(UIGestureRecognizer *)gestureRecognizer
 {
     if ( gestureRecognizer.state == UIGestureRecognizerStateEnded ) {
         BOOL hidden = [[[self navigationController] navigationBar] isHidden];
-
-        [[UIApplication sharedApplication] setStatusBarHidden:!hidden withAnimation:UIStatusBarAnimationFade];
+        _statusBarHidden = !hidden;
         [[self navigationController] setNavigationBarHidden:!hidden animated:YES];
+        [UIView animateWithDuration:0.25
+                         animations:^{
+                             self.scrollView.backgroundColor = (hidden ? [UIColor whiteColor] : [UIColor blackColor] );
+                             [self setNeedsStatusBarAppearanceUpdate];
+                         }
+         ];
     }
+}
+
+
+- (BOOL)prefersStatusBarHidden
+{
+    return _statusBarHidden;
 }
 
 
 #pragma mark - Utils
 
 
-- (NSRegularExpression *) regexRemoveHTMLTags
+- (NSRegularExpression *)regexRemoveHTMLTags
 {
     if ( _regexRemoveHTMLTags ) {
         return _regexRemoveHTMLTags;
@@ -175,9 +191,9 @@
 }
 
 
-- (void) initImageView
+- (void)initImageView
 {
-    [self.scrollView removeConstraints: self.scrollView.constraints];
+    [self.scrollView removeConstraints:self.scrollView.constraints];
     [self addConstraintsForImageEdges];
     [self addConstraintsToCenterImage];
 }
@@ -239,18 +255,42 @@
 
 - (void)getPhoto
 {
+    _updateConstraints = YES;
+
+    if ( [[self.webCamURL path] rangeOfString:@".mjpg"].location != NSNotFound ) {
+        [self.imageView setUrl:self.webCamURL];
+        [self.imageView play];
+        return;
+    }
+
     NSURLRequest *request = [NSURLRequest requestWithURL:self.webCamURL];
     [self.imageView setImageWithURLRequest:request
                           placeholderImage:nil
                                    success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
                                        self.imageView.image = image;
-                                       [self initImageView];
-                                       [self initZoom];
                                    }
                                    failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
                                        NSLog(@"failure: %@", error);
                                    }
      ];
 }
+
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+{
+    if ( object == self.imageView ) {
+        if ( [keyPath isEqualToString:@"image"] ) {
+            if ( _updateConstraints && [change[@"new"] isKindOfClass:[UIImage class]] ) {
+                _updateConstraints = NO;
+                [self initImageView];
+                [self initZoom];
+            }
+        }
+        return;
+    }
+
+    [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
+}
+
 
 @end
