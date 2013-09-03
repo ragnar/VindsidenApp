@@ -39,9 +39,9 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    [[UIToolbar appearance] setTintColor:RGBCOLOR( 227.0, 60.0, 13.0)];
-    [[UINavigationBar appearance] setTintColor:RGBCOLOR( 227.0, 60.0, 13.0)];
     [[AFNetworkActivityIndicatorManager sharedManager] setEnabled:YES];
+
+    self.window.tintColor = RGBCOLOR( 227.0, 60.0, 13.0);
 
     _formatterQueue = dispatch_queue_create("formatter queue", NULL);
     
