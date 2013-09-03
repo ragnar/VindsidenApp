@@ -18,7 +18,7 @@
 "8kr-0C-mVT.title" = "Stasjon";
 
 /* Class = "IBUIButton"; normalTitle = "Yr.no"; ObjectID = "CDk-cZ-t0i"; */
-"CDk-cZ-t0i.normalTitle" = "Yr.no";
+"CDk-cZ-t0i.normalTitle" = "Gå til yr.no";
 
 /* Class = "IBUILabel"; text = "Detail"; ObjectID = "LfC-8v-xhT"; */
 "LfC-8v-xhT.text" = "Detailjer";
@@ -27,7 +27,7 @@
 "NUL-9N-0CU.text" = "Label";
 
 /* Class = "IBUIButton"; normalTitle = "Map"; ObjectID = "OAP-jQ-MLP"; */
-"OAP-jQ-MLP.normalTitle" = "Kart";
+"OAP-jQ-MLP.normalTitle" = "Vis i kart";
 
 /* Class = "IBUINavigationItem"; title = "Units"; ObjectID = "bkq-qy-gaE"; */
 "bkq-qy-gaE.title" = "Enheter";
@@ -45,4 +45,4 @@
 "ly3-dm-LY8.text" = "Tittel";
 
 /* Class = "IBUIButton"; normalTitle = "Camera"; ObjectID = "pVA-14-d0h"; */
-"pVA-14-d0h.normalTitle" = "Kamera";
+"pVA-14-d0h.normalTitle" = "Vis kamera";
