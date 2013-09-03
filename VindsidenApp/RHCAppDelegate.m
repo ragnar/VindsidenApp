@@ -6,6 +6,7 @@
 //  Copyright (c) 2013 RHC. All rights reserved.
 //
 
+#import <AFNetworking/AFNetworkActivityIndicatorManager.h>
 #import <TestFlightSDK/TestFlight.h>
 #import "RHCAppDelegate.h"
 #import "RHCStationViewController.h"
@@ -40,6 +41,7 @@
 {
     [[UIToolbar appearance] setTintColor:RGBCOLOR( 227.0, 60.0, 13.0)];
     [[UINavigationBar appearance] setTintColor:RGBCOLOR( 227.0, 60.0, 13.0)];
+    [[AFNetworkActivityIndicatorManager sharedManager] setEnabled:YES];
 
     _formatterQueue = dispatch_queue_create("formatter queue", NULL);
     
