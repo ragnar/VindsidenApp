@@ -9,6 +9,8 @@
 #import "RHEStationDetailsViewController.h"
 #import "CDStation.h"
 
+#import "UIFontDescriptor+textStyle.h"
+#import "UIFont+textStyle.h"
 
 @interface RHEStationDetailsViewController ()
 
@@ -19,6 +21,12 @@
 @implementation RHEStationDetailsViewController
 
 
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -26,6 +34,8 @@
     self.navigationItem.title = self.station.stationName;
     
     self.cameraButton.hidden = ( [self.station.webCamImage length] <= 0 );
+
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(preferredContentSizeChanged:) name:UIContentSizeCategoryDidChangeNotification object:nil];
 }
 
 
@@ -34,6 +44,19 @@
     [self setCameraButton:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
+}
+
+
+- (void)preferredContentSizeChanged:(NSNotification *)aNotification
+{
+    NSString *style = [[self.cameraButton.titleLabel.font fontDescriptor] objectForKey:@"NSCTFontUIUsageAttribute"];
+
+    for ( UIButton *button in self.tableView.tableFooterView.subviews ) {
+        button.titleLabel.font = [UIFont preferredFontForTextStyle:style];
+    }
+
+    [self.view setNeedsLayout];
+    [self.tableView reloadData];
 }
 
 
@@ -83,6 +106,13 @@
 }
 
 
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    cell.textLabel.font = [UIFont preferredFontForTextStyle:[[cell.textLabel.font fontDescriptor] objectForKey:@"NSCTFontUIUsageAttribute"]];
+    cell.detailTextLabel.font = [UIFont preferredFontForTextStyle:[[cell.detailTextLabel.font fontDescriptor] objectForKey:@"NSCTFontUIUsageAttribute"]];
+}
+
+
 - (void) configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath
 {
     switch ( indexPath.row )
@@ -100,11 +130,15 @@
             cell.detailTextLabel.text = _station.copyright;
             break;
         case 3:
+        {
+            NSString *tmp = [[[self regexRemoveHTMLTags] stringByReplacingMatchesInString:_station.stationText
+                                                                                  options:0
+                                                                                    range:NSMakeRange(0, [_station.stationText length])
+                                                                             withTemplate:@""] stringByReplacingOccurrencesOfString:@"\n" withString:@" "];
+
             cell.textLabel.text = NSLocalizedString(@"Info", nil);
-            cell.detailTextLabel.text = [[self regexRemoveHTMLTags] stringByReplacingMatchesInString:_station.stationText
-                                                                                             options:0
-                                                                                               range:NSMakeRange(0, [_station.stationText length])
-                                                                                        withTemplate:@""];
+            cell.detailTextLabel.text = tmp;
+        }
             break;
         case 4:
             cell.textLabel.text = NSLocalizedString(@"Status", nil);
@@ -132,36 +166,37 @@
     switch ( indexPath.row )
     {
         case 0:
-            labelBounds = [_station.stationName boundingRectWithSize:CGSizeMake( 207.0, 400.0)
+            labelBounds = [_station.stationName boundingRectWithSize:CGSizeMake( 150.0, 400.0)
                                                              options:NSStringDrawingUsesLineFragmentOrigin
                                                           attributes:fontAtts
                                                              context:nil];
             break;
         case 1:
-            labelBounds = [_station.city boundingRectWithSize:CGSizeMake( 207.0, 400.0)
+            labelBounds = [_station.city boundingRectWithSize:CGSizeMake( 150.0, 400.0)
                                                       options:NSStringDrawingUsesLineFragmentOrigin
                                                    attributes:fontAtts
                                                       context:nil];
             break;
         case 2:
-            labelBounds = [_station.copyright boundingRectWithSize:CGSizeMake( 207.0, 400.0)
+            labelBounds = [_station.copyright boundingRectWithSize:CGSizeMake( 150.0, 400.0)
                                                            options:NSStringDrawingUsesLineFragmentOrigin
                                                         attributes:fontAtts
                                                            context:nil];
             break;
         case 3:
-            labelBounds = [[[self regexRemoveHTMLTags] stringByReplacingMatchesInString:_station.stationText
-                                                                                options:0
-                                                                                  range:NSMakeRange(0, [_station.stationText length])
-                                                                           withTemplate:@""]
-                           boundingRectWithSize:CGSizeMake( 207.0, 400.0)
-                           options:NSStringDrawingUsesLineFragmentOrigin
-                           attributes:fontAtts
-                           context:nil];
-            //size.height += 4;
+        {
+            NSString *tmp = [[[self regexRemoveHTMLTags] stringByReplacingMatchesInString:_station.stationText
+                                                                                 options:0
+                                                                                   range:NSMakeRange(0, [_station.stationText length])
+                                                                            withTemplate:@""] stringByReplacingOccurrencesOfString:@"\n" withString:@" "];
+            labelBounds = [tmp boundingRectWithSize:CGSizeMake( 150.0, 800.0)
+                                            options:NSStringDrawingUsesLineFragmentOrigin
+                                         attributes:fontAtts
+                                            context:nil];
+        }
             break;
         case 4:
-            labelBounds = [_station.statusMessage boundingRectWithSize:CGSizeMake( 207.0, 400.0)
+            labelBounds = [_station.statusMessage boundingRectWithSize:CGSizeMake( 150.0, 400.0)
                                                                options:NSStringDrawingUsesLineFragmentOrigin
                                                             attributes:fontAtts
                                                                context:nil];
@@ -172,16 +207,15 @@
                                                                                     options:0
                                                                                       range:NSMakeRange(0, [_station.webCamText length])
                                                                                withTemplate:@""]
-                               boundingRectWithSize:CGSizeMake( 207.0, 400.0)
+                               boundingRectWithSize:CGSizeMake( 150.0, 400.0)
                                options:NSStringDrawingUsesLineFragmentOrigin
                                attributes:fontAtts
                                context:nil];
-                //size.height += 4;
             }
             break;
     }
 
-    return MAX( 50.0, CGRectGetHeight(labelBounds));
+    return MAX( 50.0, ceilf(CGRectGetHeight(labelBounds)));
 }
 
 
