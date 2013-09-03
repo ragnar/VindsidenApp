@@ -28,11 +28,18 @@
 @synthesize changeIsUserDriven = _changeIsUserDriven;
 
 
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 
     self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(preferredContentSizeChanged:) name:UIContentSizeCategoryDidChangeNotification object:nil];
 }
 
 
@@ -71,13 +78,18 @@
 }
 
 
+- (void)preferredContentSizeChanged:(NSNotification *)aNotification
+{
+    [self.tableView reloadData];
+}
+
+
 #pragma mark - Table view data source
 
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     return 2;
-    return [[[self fetchedResultsController] sections] count];
 }
 
 
@@ -108,6 +120,7 @@
     CDStation *station = (CDStation *)[[self fetchedResultsController] objectAtIndexPath:indexPath];
 
     cell.textLabel.text = station.stationName;
+    cell.detailTextLabel.text = station.city;
 }
 
 
@@ -197,6 +210,13 @@
         return NSLocalizedString(@"Visible", nil);
     }
     return NSLocalizedString(@"Not Visible", nil);
+}
+
+
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    cell.textLabel.font = [UIFont preferredFontForTextStyle:[[cell.textLabel.font fontDescriptor] objectForKey:@"NSCTFontUIUsageAttribute"]];
+    cell.detailTextLabel.font = [UIFont preferredFontForTextStyle:[[cell.detailTextLabel.font fontDescriptor] objectForKey:@"NSCTFontUIUsageAttribute"]];
 }
 
 
