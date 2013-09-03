@@ -256,7 +256,7 @@
         NSEntityDescription *entity = [NSEntityDescription entityForName:@"CDPlot" inManagedObjectContext:childContext];
         [fetchRequest setEntity:entity];
 
-        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"plotTime < %@", [[NSDate date] dateByAddingTimeInterval:-1*(kPlotHistoryHours*3600)]];
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"plotTime < %@", [[NSDate date] dateByAddingTimeInterval:-1*((1+kPlotHistoryHours)*3600)]];
         [fetchRequest setPredicate:predicate];
 
         NSArray *result = [childContext executeFetchRequest:fetchRequest error:nil];
