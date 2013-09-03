@@ -155,6 +155,10 @@
 		AD4A378A1770F0EF003B8AF2 /* RHCAlertManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RHCAlertManager.m; sourceTree = "<group>"; };
 		ADACD258178345A900FBD4D5 /* UIImage+ImageFromView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIImage+ImageFromView.h"; sourceTree = "<group>"; };
 		ADACD259178345A900FBD4D5 /* UIImage+ImageFromView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ImageFromView.m"; sourceTree = "<group>"; };
+		ADCD6D4C178217D100073500 /* UIFont+textStyle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIFont+textStyle.h"; sourceTree = "<group>"; };
+		ADCD6D4D178217D100073500 /* UIFont+textStyle.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIFont+textStyle.m"; sourceTree = "<group>"; };
+		ADCD6D4E17821AAA00073500 /* UIFontDescriptor+textStyle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIFontDescriptor+textStyle.h"; sourceTree = "<group>"; };
+		ADCD6D4F17821AAA00073500 /* UIFontDescriptor+textStyle.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIFontDescriptor+textStyle.m"; sourceTree = "<group>"; };
 		ADE5276317BECBB100666C76 /* NSString+fixDateString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+fixDateString.h"; sourceTree = "<group>"; };
 		ADE5276417BECBB100666C76 /* NSString+fixDateString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+fixDateString.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -314,6 +318,10 @@
 				AD17ED931731066D00943C33 /* NSNumber+Convertion.m */,
 				AD17ED941731066D00943C33 /* NSSet+Sort.h */,
 				AD17ED951731066D00943C33 /* NSSet+Sort.m */,
+				ADCD6D4C178217D100073500 /* UIFont+textStyle.h */,
+				ADCD6D4D178217D100073500 /* UIFont+textStyle.m */,
+				ADCD6D4E17821AAA00073500 /* UIFontDescriptor+textStyle.h */,
+				ADCD6D4F17821AAA00073500 /* UIFontDescriptor+textStyle.m */,
 			);
 			name = Categories;
 			sourceTree = "<group>";
