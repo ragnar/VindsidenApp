@@ -84,6 +84,9 @@
         case SpeedConvertionToMilesPerHour:
             return NSLocalizedString(@"Miles per hour", nil);
             break;
+        case SpeedConvertionBeaufort:
+            return NSLocalizedString(@"Beaufort", nil);
+            break;
         case SpeedConvertionToMetersPerSecond:
         default:
             return NSLocalizedString(@"Meters per second", nil);
@@ -106,6 +109,8 @@
         case SpeedConvertionToMilesPerHour:
             return NSLocalizedString(@"miles/h", nil);
             break;
+        case SpeedConvertionBeaufort:
+            return NSLocalizedString(@"bft", nil);
         case SpeedConvertionToMetersPerSecond:
         default:
             return NSLocalizedString(@"m/s", nil);
