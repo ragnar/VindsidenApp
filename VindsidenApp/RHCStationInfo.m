@@ -50,7 +50,7 @@
 - (void)initInfoLabels
 {
     CGFloat x = 75.0;
-    CGFloat y = 8.0;
+    CGFloat y = 9.0;
     CGFloat height = 14.0;
     CGFloat width = 85.0;
 
@@ -69,7 +69,7 @@
     self.windDirection = lbl;
 
     x = 215.0;
-    y = 8.0;
+    y = 9.0;
 
     lbl = [[UILabel alloc] initWithFrame:CGRectMake(x, y, width, height)];
     [self addSubview:lbl];
@@ -118,12 +118,13 @@
     CGContextRef context = UIGraphicsGetCurrentContext();
     CGContextSaveGState(context);
 
-    [NSLocalizedString(@"LABEL_WIND_SPEED", @"Wind speed") drawAtPoint:CGPointMake( 20.0, 10.0) withFont:[UIFont fontWithName:@"DIN 1451 Std" size:11.0]];
-    [NSLocalizedString(@"LABEL_WIND_GUST", @"Wind gust") drawAtPoint:CGPointMake( 20.0, 40.0) withFont:[UIFont fontWithName:@"DIN 1451 Std" size:11.0]];
-    [NSLocalizedString(@"LABEL_WIND_DIR", @"Wind direction") drawAtPoint:CGPointMake( 20.0, 70.0) withFont:[UIFont fontWithName:@"DIN 1451 Std" size:11.0]];
-    [NSLocalizedString(@"LABEL_WIND_AVG", @"Average") drawAtPoint:CGPointMake( 170.0, 10.0) withFont:[UIFont fontWithName:@"DIN 1451 Std" size:11.0]];
-    [NSLocalizedString(@"LABEL_WIND_BEU", @"Beaufort") drawAtPoint:CGPointMake( 170.0, 40.0) withFont:[UIFont fontWithName:@"DIN 1451 Std" size:11.0]];
-    [NSLocalizedString(@"Temp air", @"Temp air") drawAtPoint:CGPointMake( 170.0, 70.0) withFont:[UIFont fontWithName:@"DIN 1451 Std" size:11.0]];
+    NSDictionary *drawAttr = @{ NSFontAttributeName : [UIFont fontWithName:@"HelveticaNeue" size:11.0]};
+    [NSLocalizedString(@"LABEL_WIND_SPEED", @"Wind speed") drawAtPoint:CGPointMake( 20.0, 10.0) withAttributes:drawAttr];
+    [NSLocalizedString(@"LABEL_WIND_GUST", @"Wind gust") drawAtPoint:CGPointMake( 20.0, 40.0) withAttributes:drawAttr];
+    [NSLocalizedString(@"LABEL_WIND_DIR", @"Wind direction") drawAtPoint:CGPointMake( 20.0, 70.0) withAttributes:drawAttr];
+    [NSLocalizedString(@"LABEL_WIND_AVG", @"Average") drawAtPoint:CGPointMake( 170.0, 10.0) withAttributes:drawAttr];
+    [NSLocalizedString(@"LABEL_WIND_BEU", @"Beaufort") drawAtPoint:CGPointMake( 170.0, 40.0) withAttributes:drawAttr];
+    [NSLocalizedString(@"Temp air", @"Temp air") drawAtPoint:CGPointMake( 170.0, 70.0) withAttributes:drawAttr];
 
     [RGBACOLOR( 0.0, 0.0, 0.0, 0.13) set];
     CGContextBeginPath(context);
@@ -148,7 +149,7 @@
     if ( direction > 360.0 || direction < 0 ) {
         direction = 0.0;
     }
-    NSNumber *dir = [NSNumber numberWithFloat:direction];
+    NSNumber *dir = @(direction);
 
 
     if ( [dir isBetween:0.0 and:11.25] || [dir isBetween:348.75 and:360.001]) {

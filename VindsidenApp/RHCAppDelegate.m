@@ -6,11 +6,13 @@
 //  Copyright (c) 2013 RHC. All rights reserved.
 //
 
-#import <TestFlightSDK/TestFlight.h>
+#import <AFNetworking/AFNetworkActivityIndicatorManager.h>
 #import "RHCAppDelegate.h"
 #import "RHCStationViewController.h"
 #import "NSNumber+Convertion.h"
 #import "NSString+isNumeric.h"
+#import "RHCViewController.h"
+#import "RHEVindsidenAPIClient.h"
 
 #import "CDPlot.h"
 #import "CDStation.h"
@@ -36,8 +38,9 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    [[UIToolbar appearance] setTintColor:RGBCOLOR( 227.0, 60.0, 13.0)];
-    [[UINavigationBar appearance] setTintColor:RGBCOLOR( 227.0, 60.0, 13.0)];
+    [[AFNetworkActivityIndicatorManager sharedManager] setEnabled:YES];
+
+    self.window.tintColor = RGBCOLOR( 227.0, 60.0, 13.0);
 
     _formatterQueue = dispatch_queue_create("formatter queue", NULL);
     
@@ -57,6 +60,7 @@
 
     [self cleanupPlots];
 
+    [application setMinimumBackgroundFetchInterval:UIApplicationBackgroundFetchIntervalMinimum];
     return YES;
 }
 
@@ -105,6 +109,8 @@
 {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
     // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
+
+    [RHEVindsidenAPIClient defaultManager].background = YES;
 }
 
 
@@ -124,6 +130,7 @@
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+    [RHEVindsidenAPIClient defaultManager].background = NO;
 }
 
 
@@ -151,6 +158,18 @@
     DLOG(@"");
 }
 #endif
+
+
+- (void)application:(UIApplication *)application performFetchWithCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler
+{
+    DLOG(@"fetch");
+    UINavigationController *nc = (UINavigationController *)self.window.rootViewController;
+    RHCViewController *vc = (RHCViewController *)[nc.viewControllers firstObject];
+
+    [vc updateContentWithCompletionHandler:completionHandler];
+}
+
+
 
 #pragma mark - CoreData Stack
 
@@ -223,7 +242,7 @@
 
     NSError *error = nil;
     NSURL *url = [NSURL fileURLWithPath:path];
-    [url setResourceValue:[NSNumber numberWithBool:YES] forKey:NSURLIsExcludedFromBackupKey error:&error];
+    [url setResourceValue:@YES forKey:NSURLIsExcludedFromBackupKey error:&error];
     return path;
 }
 
@@ -242,7 +261,7 @@
         NSEntityDescription *entity = [NSEntityDescription entityForName:@"CDPlot" inManagedObjectContext:childContext];
         [fetchRequest setEntity:entity];
 
-        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"plotTime < %@", [[NSDate date] dateByAddingTimeInterval:-1*(kPlotHistoryHours*3600)]];
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"plotTime < %@", [[NSDate date] dateByAddingTimeInterval:-1*((1+kPlotHistoryHours)*3600)]];
         [fetchRequest setPredicate:predicate];
 
         NSArray *result = [childContext executeFetchRequest:fetchRequest error:nil];

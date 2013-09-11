@@ -9,6 +9,8 @@
 #import "RHEStationDetailsViewController.h"
 #import "CDStation.h"
 
+#import "UIFontDescriptor+textStyle.h"
+#import "UIFont+textStyle.h"
 
 @interface RHEStationDetailsViewController ()
 
@@ -17,6 +19,14 @@
 @end
 
 @implementation RHEStationDetailsViewController
+{
+    NSArray *_buttons;
+}
+
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
 
 
 - (void)viewDidLoad
@@ -24,16 +34,35 @@
     [super viewDidLoad];
 
     self.navigationItem.title = self.station.stationName;
-    
-    self.cameraButton.hidden = ( [self.station.webCamImage length] <= 0 );
+
+    UIView *v = [[UIView alloc] initWithFrame:CGRectMake(0.0, -6.0, 320.0, 30)];
+    v.backgroundColor = self.tableView.backgroundColor;
+    self.tableView.tableFooterView = v;
+
+    _buttons = @[NSLocalizedString(@"Go to yr.no", nil), NSLocalizedString(@"View in Maps", nil)];
+
+    if ( [self.station.webCamImage length] > 0 ) {
+        _buttons = [_buttons arrayByAddingObject:NSLocalizedString(@"Show Camera", nil)];
+    }
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(preferredContentSizeChanged:) name:UIContentSizeCategoryDidChangeNotification object:nil];
 }
 
 
 - (void)viewDidUnload
 {
-    [self setCameraButton:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
+}
+
+
+- (void)preferredContentSizeChanged:(NSNotification *)aNotification
+{
+    for ( UIButton *button in self.tableView.tableFooterView.subviews ) {
+        button.titleLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
+    }
+
+    [self.view setNeedsLayout];
+    [self.tableView reloadData];
 }
 
 
@@ -46,8 +75,6 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if ([segue.identifier isEqualToString:@"ShowWebCam"]) {
-        [TestFlight passCheckpoint:@"show web cam from details"];
-
         RHEWebCamViewController *controller = segue.destinationViewController;
         controller.navigationItem.leftBarButtonItem = nil;
         controller.webCamURL = [NSURL URLWithString:self.station.webCamImage];
@@ -63,23 +90,43 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 1;
+    return 2;
 }
 
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 6;
+    if ( 0 == section ) {
+        return 6;
+    } else {
+        return [_buttons count];
+    }
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"StationDetailsCell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    static NSString *ButtonCellIdentifier = @"ButtonCell";
 
-    [self configureCell:cell atIndexPath:indexPath];
+    UITableViewCell *cell = nil;
+
+    if ( 0 == indexPath.section ) {
+        cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+        [self configureCell:cell atIndexPath:indexPath];
+    } else {
+        cell = [tableView dequeueReusableCellWithIdentifier:ButtonCellIdentifier];
+        cell.textLabel.textColor = self.view.tintColor;
+        cell.textLabel.text = [_buttons objectAtIndex:indexPath.row];
+    }
     return cell;
+}
+
+
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    cell.textLabel.font = [UIFont preferredFontForTextStyle:[[cell.textLabel.font fontDescriptor] objectForKey:@"NSCTFontUIUsageAttribute"]];
+    cell.detailTextLabel.font = [UIFont preferredFontForTextStyle:[[cell.detailTextLabel.font fontDescriptor] objectForKey:@"NSCTFontUIUsageAttribute"]];
 }
 
 
@@ -100,11 +147,15 @@
             cell.detailTextLabel.text = _station.copyright;
             break;
         case 3:
+        {
+            NSString *tmp = [[[self regexRemoveHTMLTags] stringByReplacingMatchesInString:_station.stationText
+                                                                                  options:0
+                                                                                    range:NSMakeRange(0, [_station.stationText length])
+                                                                             withTemplate:@""] stringByReplacingOccurrencesOfString:@"\n" withString:@" "];
+
             cell.textLabel.text = NSLocalizedString(@"Info", nil);
-            cell.detailTextLabel.text = [[self regexRemoveHTMLTags] stringByReplacingMatchesInString:_station.stationText
-                                                                                             options:0
-                                                                                               range:NSMakeRange(0, [_station.stationText length])
-                                                                                        withTemplate:@""];
+            cell.detailTextLabel.text = tmp;
+        }
             break;
         case 4:
             cell.textLabel.text = NSLocalizedString(@"Status", nil);
@@ -126,49 +177,62 @@
 
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    CGSize size = CGSizeMake( 0.0, 0.0);
+    CGRect labelBounds = CGRectZero;
+    NSDictionary *fontAtts = @{NSFontAttributeName : [UIFont preferredFontForTextStyle:UIFontTextStyleBody]};
 
     switch ( indexPath.row )
     {
         case 0:
-            size = [_station.stationName sizeWithFont:[UIFont boldSystemFontOfSize:15.0]
-                                    constrainedToSize:CGSizeMake( 207.0, 400.0)];
+            labelBounds = [_station.stationName boundingRectWithSize:CGSizeMake( 150.0, 400.0)
+                                                             options:NSStringDrawingUsesLineFragmentOrigin
+                                                          attributes:fontAtts
+                                                             context:nil];
             break;
         case 1:
-            size = [_station.city sizeWithFont:[UIFont boldSystemFontOfSize:15.0]
-                             constrainedToSize:CGSizeMake( 207.0, 400.0)];
+            labelBounds = [_station.city boundingRectWithSize:CGSizeMake( 150.0, 400.0)
+                                                      options:NSStringDrawingUsesLineFragmentOrigin
+                                                   attributes:fontAtts
+                                                      context:nil];
             break;
         case 2:
-            size = [_station.copyright sizeWithFont:[UIFont boldSystemFontOfSize:15.0]
-                                  constrainedToSize:CGSizeMake( 207.0, 400.0)];
+            labelBounds = [_station.copyright boundingRectWithSize:CGSizeMake( 150.0, 400.0)
+                                                           options:NSStringDrawingUsesLineFragmentOrigin
+                                                        attributes:fontAtts
+                                                           context:nil];
             break;
         case 3:
-            size = [[[self regexRemoveHTMLTags] stringByReplacingMatchesInString:_station.stationText
-                                                                         options:0
-                                                                           range:NSMakeRange(0, [_station.stationText length])
-                                                                    withTemplate:@""]
-                    sizeWithFont:[UIFont boldSystemFontOfSize:15.0]
-                    constrainedToSize:CGSizeMake( 207.0, 400.0)];
-            size.height += 4;
+        {
+            NSString *tmp = [[[self regexRemoveHTMLTags] stringByReplacingMatchesInString:_station.stationText
+                                                                                 options:0
+                                                                                   range:NSMakeRange(0, [_station.stationText length])
+                                                                            withTemplate:@""] stringByReplacingOccurrencesOfString:@"\n" withString:@" "];
+            labelBounds = [tmp boundingRectWithSize:CGSizeMake( 150.0, 800.0)
+                                            options:NSStringDrawingUsesLineFragmentOrigin
+                                         attributes:fontAtts
+                                            context:nil];
+        }
             break;
         case 4:
-            size = [_station.statusMessage sizeWithFont:[UIFont boldSystemFontOfSize:15.0]
-                                      constrainedToSize:CGSizeMake( 207.0, 400.0)];
+            labelBounds = [_station.statusMessage boundingRectWithSize:CGSizeMake( 150.0, 400.0)
+                                                               options:NSStringDrawingUsesLineFragmentOrigin
+                                                            attributes:fontAtts
+                                                               context:nil];
             break;
         case 5:
             if ( [_station.webCamText length] > 0 ) {
-                size = [[[self regexRemoveHTMLTags] stringByReplacingMatchesInString:_station.webCamText
-                                                                             options:0
-                                                                               range:NSMakeRange(0, [_station.webCamText length])
-                                                                        withTemplate:@""]
-                        sizeWithFont:[UIFont boldSystemFontOfSize:15.0]
-                        constrainedToSize:CGSizeMake( 207.0, 400.0)];
-                size.height += 4;
+                labelBounds = [[[self regexRemoveHTMLTags] stringByReplacingMatchesInString:_station.webCamText
+                                                                                    options:0
+                                                                                      range:NSMakeRange(0, [_station.webCamText length])
+                                                                               withTemplate:@""]
+                               boundingRectWithSize:CGSizeMake( 150.0, 400.0)
+                               options:NSStringDrawingUsesLineFragmentOrigin
+                               attributes:fontAtts
+                               context:nil];
             }
             break;
     }
 
-    return MAX( 50.0, size.height);
+    return MAX( 50.0, ceilf(CGRectGetHeight(labelBounds)));
 }
 
 
@@ -176,10 +240,27 @@
 #pragma mark - Table view delegate
 
 
+- (BOOL)tableView:(UITableView *)tableView shouldHighlightRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return (indexPath.section == 1);
+}
+
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if ( indexPath.row == 1 ) {
-        [self showMap:nil];
+    if ( 0 == indexPath.section ) {
+        if ( 1 == indexPath.row ) {
+            [self showMap:nil];
+        }
+    } else {
+        if ( 0 == indexPath.row ) {
+            [self gotoYR:nil];
+        } else if ( 1 == indexPath.row ) {
+            [self showMap:nil];
+        } else {
+            [self showCamera:nil];
+        }
+
     }
 
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
@@ -215,8 +296,6 @@
 
 - (IBAction)gotoYR:(id)sender
 {
-    [TestFlight passCheckpoint:@"goto yr"];
-
     NSURL *url = [NSURL URLWithString:[_station.yrURL stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
     [[UIApplication sharedApplication] openURL:url];
 }
@@ -224,11 +303,9 @@
 
 - (IBAction)showMap:(id)sender
 {
-    [TestFlight passCheckpoint:@"show map"];
-
     CLLocationCoordinate2D spotCord = CLLocationCoordinate2DMake( [_station.coordinateLat doubleValue], [_station.coordinateLon doubleValue]);
     
-    NSMutableString *query = [NSMutableString stringWithString:@"http://maps.google.com/maps?t=h&z=10"];
+    NSMutableString *query = [NSMutableString stringWithString:@"http://maps.apple.com/?t=h&z=10"];
     
     if ( spotCord.latitude > 0 || spotCord.longitude > 0 ) {
         [query appendFormat:@"&ll=%f,%f", spotCord.latitude, spotCord.longitude];
@@ -242,6 +319,12 @@
     
     NSURL *url = [NSURL URLWithString:[query stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
     [[UIApplication sharedApplication] openURL:url];
+}
+
+
+- (IBAction)showCamera:(id)sender
+{
+    [self performSegueWithIdentifier:@"ShowWebCam" sender:nil];
 }
 
 

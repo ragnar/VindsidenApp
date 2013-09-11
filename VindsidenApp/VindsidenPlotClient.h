@@ -10,20 +10,11 @@
 
 
 @interface VindsidenPlotClient : NSObject <NSXMLParserDelegate>
-{
-
-    @private
-    NSData *_data;
-    NSString            *_xml;
-    NSMutableArray      *_plots;
-    NSMutableDictionary *_currentPlot;
-    NSMutableString     *_currentString;
-    BOOL                _isStoringCharacters;
-    
-}
 
 - (instancetype)initWithXML:(NSString *)xml;
 - (instancetype)initWithData:(NSData *)data;
+- (instancetype)initWithParser:(NSXMLParser *)parser;
+
 - (NSArray *)parse;
 
 @end

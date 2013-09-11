@@ -10,7 +10,20 @@
 #import "VindsidenStationClient.h"
 #import "NSString+fixDateString.h"
 
+
 @implementation VindsidenStationClient
+{
+    NSData *_data;
+    NSString            *_xml;
+    NSMutableArray      *_stations;
+    NSMutableDictionary *_currentStation;
+    NSMutableString     *_currentString;
+    BOOL                _isStoringCharacters;
+
+    NSDateFormatter     *_dateFormatter;
+    NSXMLParser         *_parser;
+}
+
 
 - (id) initWithXML:(NSString *)xml
 {
@@ -34,21 +47,38 @@
 }
 
 
-- (NSArray *) parse
+- (instancetype)initWithParser:(NSXMLParser *)parser
+{
+    self = [super init];
+
+    if ( self ) {
+        _parser = parser;
+        _isStoringCharacters = NO;
+    }
+
+    return self;
+}
+
+
+- (NSArray *)parse
 {
     _stations = [[NSMutableArray alloc] initWithCapacity:0];
-    NSXMLParser *parser = [[NSXMLParser alloc] initWithData:_data];
-    [parser setDelegate:self];
-    BOOL success = [parser parse];
+
+    if ( nil == _parser ) {
+        _parser = [[NSXMLParser alloc] initWithData:_data];
+    }
+
+    [_parser setDelegate:self];
+    BOOL success = [_parser parse];
 
     if (!success) {
         DLOG(@"not a success");
         return nil;
     }
 
-    DLOG(@"Parsing complete. %d stations found", [_stations count]);
+    DLOG(@"Parsing complete. %ld stations found", (unsigned long)[_stations count]);
     NSSortDescriptor *sortDescriptor1 = [[NSSortDescriptor alloc] initWithKey:@"stationId" ascending:NO];
-    NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:sortDescriptor1, nil];
+    NSArray *sortDescriptors = @[sortDescriptor1];
     NSArray *sorted = [_stations sortedArrayUsingDescriptors:sortDescriptors];
 
     return sorted;
@@ -85,42 +115,33 @@
     if ([elementName isEqualToString:@"Station"]) {
         [_stations addObject:_currentStation];
     } else if ([elementName isEqualToString:@"StationID"]) {
-        [_currentStation setObject:[NSNumber numberWithDouble:[_currentString doubleValue]] forKey:@"stationId"];
+        _currentStation[@"stationId"] = @([_currentString doubleValue]);
     } else if ([elementName isEqualToString:@"Name"]) {
-        [_currentStation setObject:[_currentString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]]
-                            forKey:@"stationName"];
+        _currentStation[@"stationName"] = [_currentString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
     } else if ([elementName isEqualToString:@"Latitude"]) {
-        [_currentStation setObject:[NSNumber numberWithDouble:[_currentString doubleValue]] forKey:@"coordinateLat"];
+        _currentStation[@"coordinateLat"] = @([_currentString doubleValue]);
     } else if ( [elementName isEqualToString:@"Longitude"]) {
-        [_currentStation setObject:[NSNumber numberWithDouble:[_currentString doubleValue]] forKey:@"coordinateLon"];
+        _currentStation[@"coordinateLon"] = @([_currentString doubleValue]);
     } else if ( [elementName isEqualToString:@"MeteogramUrl"]) {
-        [_currentStation setObject:[_currentString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]]
-                            forKey:@"yrURL"];
+        _currentStation[@"yrURL"] = [_currentString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
     } else if ( [elementName isEqualToString:@"Text"]) {
-        [_currentStation setObject:[_currentString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]]
-                            forKey:@"stationText"];
+        _currentStation[@"stationText"] = [_currentString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
     } else if ( [elementName isEqualToString:@"Copyright"]) {
-        [_currentStation setObject:[_currentString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]]
-                            forKey:@"copyright"];
+        _currentStation[@"copyright"] = [_currentString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
     } else if ( [elementName isEqualToString:@"StatusMessage"]) {
-        [_currentStation setObject:[_currentString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]]
-                            forKey:@"statusMessage"];
+        _currentStation[@"statusMessage"] = [_currentString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
     } else if ( [elementName isEqualToString:@"LastMeasurementTime"]) {
         RHCAppDelegate *_appDelegate = [[UIApplication sharedApplication] delegate];
         NSString *dateString = [_currentString fixDateString];
-        NSDate *date = [_appDelegate dateFromString:dateString];
-        [_currentStation setObject:date forKey:@"lastMeasurement"];
+        _currentStation[@"lastMeasurement"] = [_appDelegate dateFromString:dateString];
     } else if ( [elementName isEqualToString:@"City"]) {
-        [_currentStation setObject:[_currentString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]]
-                            forKey:@"city"];
+        _currentStation[@"city"] = [_currentString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
     } else if ( [elementName isEqualToString:@"WebcamImage"]) {
-        [_currentStation setObject:[_currentString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]]
-                            forKey:@"webCamImage"];
+        _currentStation[@"webCamImage"] = [_currentString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
     } else if ( [elementName isEqualToString:@"WebcamText"]) {
-        [_currentStation setObject:_currentString forKey:@"webCamText"];
+        _currentStation[@"webCamText"] = _currentString;
     } else if ( [elementName isEqualToString:@"WebcamUrl"]) {
-        [_currentStation setObject:[_currentString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]]
-                            forKey:@"webCamURL"];
+        _currentStation[@"webCamURL"] = [_currentString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
     }
 
     _isStoringCharacters = NO;

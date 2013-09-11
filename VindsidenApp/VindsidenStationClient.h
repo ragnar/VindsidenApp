@@ -10,24 +10,13 @@
 
 
 @interface VindsidenStationClient : NSObject <NSXMLParserDelegate>
-{
-
-    @private
-    NSData *_data;
-    NSString            *_xml;
-    NSMutableArray      *_stations;
-    NSMutableDictionary *_currentStation;
-    NSMutableString     *_currentString;
-    BOOL                _isStoringCharacters;
-    
-    NSDateFormatter     *_dateFormatter;
-    
-}
 
 @property (nonatomic, retain, readonly) NSDateFormatter *dateFormatter;
 
-- (id)initWithXML:(NSString *)xml;
+- (instancetype)initWithXML:(NSString *)xml;
 - (instancetype)initWithData:(NSData *)data;
+- (instancetype)initWithParser:(NSXMLParser *)parser;
+
 - (NSArray *)parse;
 
 @end

@@ -28,11 +28,18 @@
 @synthesize changeIsUserDriven = _changeIsUserDriven;
 
 
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 
     self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(preferredContentSizeChanged:) name:UIContentSizeCategoryDidChangeNotification object:nil];
 }
 
 
@@ -71,20 +78,25 @@
 }
 
 
+- (void)preferredContentSizeChanged:(NSNotification *)aNotification
+{
+    [self.tableView reloadData];
+}
+
+
 #pragma mark - Table view data source
 
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     return 2;
-    return [[[self fetchedResultsController] sections] count];
 }
 
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     @try {
-        id <NSFetchedResultsSectionInfo> sectionInfo = [[[self fetchedResultsController] sections] objectAtIndex:section];
+        id <NSFetchedResultsSectionInfo> sectionInfo = [[self fetchedResultsController] sections][section];
         return [sectionInfo numberOfObjects];
     }
     @catch (NSException *exception) {
@@ -108,6 +120,7 @@
     CDStation *station = (CDStation *)[[self fetchedResultsController] objectAtIndexPath:indexPath];
 
     cell.textLabel.text = station.stationName;
+    cell.detailTextLabel.text = station.city;
 }
 
 
@@ -116,8 +129,6 @@
     if ( fromIndexPath == toIndexPath ) {
         return;
     }
-
-    [TestFlight passCheckpoint:@"change stations"];
 
     _changeIsUserDriven = YES;
 
@@ -137,7 +148,7 @@
     int iHidden = 200;
     for ( CDStation *station in arr ) {
         if ( [station.isHidden boolValue] ) {
-            station.order = [NSNumber numberWithInt:++iHidden];
+            station.order = @(++iHidden);
         } else {
             station.order = @(++iVisible);
         }
@@ -200,6 +211,13 @@
 }
 
 
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    cell.textLabel.font = [UIFont preferredFontForTextStyle:[[cell.textLabel.font fontDescriptor] objectForKey:@"NSCTFontUIUsageAttribute"]];
+    cell.detailTextLabel.font = [UIFont preferredFontForTextStyle:[[cell.detailTextLabel.font fontDescriptor] objectForKey:@"NSCTFontUIUsageAttribute"]];
+}
+
+
 #pragma mark - Fetched results controller
 
 
@@ -247,12 +265,12 @@
     switch(type) {
 
         case NSFetchedResultsChangeInsert:
-            [tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath]
+            [tableView insertRowsAtIndexPaths:@[newIndexPath]
                              withRowAnimation:UITableViewRowAnimationTop];
             break;
 
         case NSFetchedResultsChangeDelete:
-            [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath]
+            [tableView deleteRowsAtIndexPaths:@[indexPath]
                              withRowAnimation:UITableViewRowAnimationTop];
             break;
 
@@ -262,9 +280,9 @@
             break;
 
         case NSFetchedResultsChangeMove:
-            [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath]
+            [tableView deleteRowsAtIndexPaths:@[indexPath]
                              withRowAnimation:UITableViewRowAnimationFade];
-            [tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath]
+            [tableView insertRowsAtIndexPaths:@[newIndexPath]
                              withRowAnimation:UITableViewRowAnimationFade];
             break;
     }
@@ -297,7 +315,7 @@
     [fetchRequest setFetchBatchSize:20];
 
     NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"order" ascending:YES];
-    NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:sortDescriptor, nil];
+    NSArray *sortDescriptors = @[sortDescriptor];
     [fetchRequest setSortDescriptors:sortDescriptors];
 
     NSFetchedResultsController *aFetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest

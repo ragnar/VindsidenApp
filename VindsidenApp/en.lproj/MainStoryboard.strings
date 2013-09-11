@@ -18,7 +18,7 @@
 "8kr-0C-mVT.title" = "Station";
 
 /* Class = "IBUIButton"; normalTitle = "Yr.no"; ObjectID = "CDk-cZ-t0i"; */
-"CDk-cZ-t0i.normalTitle" = "Yr.no";
+"CDk-cZ-t0i.normalTitle" = "Go to yr.no";
 
 /* Class = "IBUILabel"; text = "Detail"; ObjectID = "LfC-8v-xhT"; */
 "LfC-8v-xhT.text" = "Detail";
@@ -27,7 +27,7 @@
 "NUL-9N-0CU.text" = "Label";
 
 /* Class = "IBUIButton"; normalTitle = "Map"; ObjectID = "OAP-jQ-MLP"; */
-"OAP-jQ-MLP.normalTitle" = "Map";
+"OAP-jQ-MLP.normalTitle" = "View in Maps";
 
 /* Class = "IBUINavigationItem"; title = "Units"; ObjectID = "bkq-qy-gaE"; */
 "bkq-qy-gaE.title" = "Units";
@@ -45,4 +45,4 @@
 "ly3-dm-LY8.text" = "Title";
 
 /* Class = "IBUIButton"; normalTitle = "Camera"; ObjectID = "pVA-14-d0h"; */
-"pVA-14-d0h.normalTitle" = "Camera";
+"pVA-14-d0h.normalTitle" = "Show Camera";

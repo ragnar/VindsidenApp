@@ -49,18 +49,21 @@
         return;
     }
 
-    NSString *message = error.userInfo[NSLocalizedDescriptionKey];
+    dispatch_sync(dispatch_get_main_queue(), ^{
+        NSString *message = error.userInfo[NSLocalizedDescriptionKey];
 
-    if ( [error.domain isEqualToString:AFNetworkingErrorDomain]) {
-        message = NSLocalizedString(@"NETWORK_ERROR_UNABLE_TO_LOAD", @"Unable to fetch data at this point.");
-    }
+        if ( [error.domain isEqualToString:AFNetworkingErrorDomain]) {
+            message = NSLocalizedString(@"NETWORK_ERROR_UNABLE_TO_LOAD", @"Unable to fetch data at this point.");
+        }
 
-    _networkAlertView = [[UIAlertView alloc] initWithTitle:nil
-                                                   message:message
-                                                  delegate:self
-                                         cancelButtonTitle:@"OK"
-                                         otherButtonTitles:nil];
-    [_networkAlertView show];
+        _networkAlertView = [[UIAlertView alloc] initWithTitle:nil
+                                                       message:message
+                                                      delegate:self
+                                             cancelButtonTitle:@"OK"
+                                             otherButtonTitles:nil];
+        [_networkAlertView show];
+        
+    });
 }
 
 

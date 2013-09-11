@@ -20,9 +20,17 @@
 @implementation RHCSettingsViewController
 
 
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(preferredContentSizeChanged:) name:UIContentSizeCategoryDidChangeNotification object:nil];
 }
 
 
@@ -37,6 +45,13 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+
+- (void)preferredContentSizeChanged:(NSNotification *)aNotification
+{
+    [self.view setNeedsLayout];
+    [self.tableView reloadData];
 }
 
 
@@ -64,7 +79,7 @@
 
     if ( indexPath.row == 0 ) {
         cell.textLabel.text = NSLocalizedString(@"Stations", nil);
-        cell.detailTextLabel.text = [NSString stringWithFormat:@"%d", [CDStation numberOfVisibleStations]];
+        cell.detailTextLabel.text = [NSString stringWithFormat:@"%ld", (long)[CDStation numberOfVisibleStations]];
     } else {
         SpeedConvertion unit = [[NSUserDefaults standardUserDefaults] integerForKey:@"selectedUnit"];
         cell.textLabel.text = NSLocalizedString(@"Units", nil);
@@ -72,6 +87,13 @@
     }
     
     return cell;
+}
+
+
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    cell.textLabel.font = [UIFont preferredFontForTextStyle:[[cell.textLabel.font fontDescriptor] objectForKey:@"NSCTFontUIUsageAttribute"]];
+    cell.detailTextLabel.font = [UIFont preferredFontForTextStyle:[[cell.detailTextLabel.font fontDescriptor] objectForKey:@"NSCTFontUIUsageAttribute"]];
 }
 
 
@@ -87,7 +109,7 @@
     tv.textAlignment = NSTextAlignmentCenter;
     tv.backgroundColor = [UIColor clearColor];
     tv.dataDetectorTypes = UIDataDetectorTypeLink;
-    tv.font = [UIFont fontWithName:@"HelveticaNeue" size:15.0];
+    tv.font = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
     tv.textColor = [UIColor colorWithRed:0.298039 green:0.337255 blue:0.423529 alpha:1.0];
     tv.layer.shadowColor = [[UIColor whiteColor] CGColor];
     tv.layer.shadowOffset = CGSizeMake( 0.0f, 1.0f);
@@ -100,7 +122,14 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 {
-    return 100.0;
+    UITextView *tv = (UITextView *)[self tableView:tableView viewForFooterInSection:section];
+    UIFont *nameLabelFont = [UIFont preferredFontForTextStyle:[[tv.font fontDescriptor] objectForKey:@"NSCTFontUIUsageAttribute"]];
+    CGSize nameLabelFontSize = [tv.text sizeWithAttributes:[NSDictionary dictionaryWithObject:nameLabelFont forKey:NSFontAttributeName]];
+
+    CGFloat PADDING_OUTER = 20.0;
+    CGFloat totalHeight = PADDING_OUTER + nameLabelFontSize.height + PADDING_OUTER;
+
+    return ceilf(totalHeight);
 }
 
 
@@ -110,10 +139,8 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if ( indexPath.row == 0 ) {
-        [TestFlight passCheckpoint:@"show station picker"];
         [self performSegueWithIdentifier:@"ShowStationPicker" sender:self];
     } else {
-        [TestFlight passCheckpoint:@"show unit selector"];
         [self performSegueWithIdentifier:@"ShowUnitSelector" sender:self];
     }
 }

@@ -12,6 +12,9 @@
 #import "RHEStationDetailsViewController.h"
 
 #import "RHEVindsidenAPIClient.h"
+#import "UIImage+ImageFromView.h"
+#import <MotionJpegImageView/MotionJpegImageView.h>
+
 
 static NSString *kCellID = @"stationCellID";
 
@@ -19,6 +22,7 @@ static NSString *kCellID = @"stationCellID";
 
 @property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
 @property (weak, nonatomic) UIButton *cameraButton;
+@property (weak, nonatomic) MotionJpegImageView *cameraView;
 @property (weak, nonatomic) UIPageControl *pageControl;
 
 @end
@@ -27,7 +31,6 @@ static NSString *kCellID = @"stationCellID";
 @implementation RHCViewController
 {
     NSMutableSet *_transformedCells;
-    BOOL __block _fetchingImage;
     BOOL _wasVisible;
 }
 
@@ -36,37 +39,48 @@ static NSString *kCellID = @"stationCellID";
 {
     [super viewDidLoad];
 
+    self.automaticallyAdjustsScrollViewInsets = NO;
+
     UIToolbar *toolbar = [UIToolbar new];
     toolbar.barStyle = UIBarStyleDefault;
+
+    UIView *v = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, 320.0, 20.0)];
+    v.backgroundColor = [UIColor whiteColor];
+    [self.view addSubview:v];
 
     // size up the toolbar and set its frame
     [toolbar sizeToFit];
     CGFloat toolbarHeight = CGRectGetHeight([toolbar frame]);
-    CGRect mainViewBounds = self.view.bounds;
+    //CGRect mainViewBounds = self.view.bounds;
+    CGRect mainViewBounds = [[UIApplication sharedApplication].delegate window].bounds;
     [toolbar setFrame:CGRectMake(CGRectGetMinX(mainViewBounds),
                                  CGRectGetMinY(mainViewBounds) + CGRectGetHeight(mainViewBounds) - (toolbarHeight * 1.0),
                                  CGRectGetWidth(mainViewBounds),
                                  toolbarHeight)];
 
-    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-    button.frame = CGRectMake( 0.0, 0.0, 33.0, 33.0);
-    [button addTarget:self action:@selector(settings:) forControlEvents:UIControlEventTouchUpInside];
-    [button setImage:[UIImage imageNamed:@"icon_toolbar_settings21x21"] forState:UIControlStateNormal];
-    UIBarButtonItem *bb = [[UIBarButtonItem alloc] initWithCustomView:button];
+    UIButton *button = nil;
+    UIBarButtonItem *bb = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"settings"]
+                                                           style:UIBarButtonItemStylePlain
+                                                          target:self
+                                                          action:@selector(settings:)];
+
+    UIBarButtonItem *bd = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction
+                                                                        target:self
+                                                                        action:@selector(share:)];
 
     button = [UIButton buttonWithType:UIButtonTypeInfoLight];
-    //button.frame = CGRectMake( 0.0, 0.0, 33.0, 33.0);
     [button addTarget:self action:@selector(info:) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *bc = [[UIBarButtonItem alloc] initWithCustomView:button];
 
-    button = [UIButton buttonWithType:UIButtonTypeCustom];
-    button.frame = CGRectMake( 0.0, 0.0, 44.0, 33.0);
-    [button addTarget:self action:@selector(camera:) forControlEvents:UIControlEventTouchUpInside];
-    UIBarButtonItem *bt = [[UIBarButtonItem alloc] initWithCustomView:button];
-    self.cameraButton = button;
+    MotionJpegImageView *imageView = [[MotionJpegImageView alloc] initWithFrame:CGRectMake( 0.0, 0.0, 44.0, 33.0)];
+    UITapGestureRecognizer *gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(camera:)];
+    [imageView addGestureRecognizer:gesture];
+    UIBarButtonItem *bt = [[UIBarButtonItem alloc] initWithCustomView:imageView];
+    self.cameraView = imageView;
+
 
     UIBarButtonItem *flex = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
-    [toolbar setItems:@[bb, flex, bt,flex, bc]];
+    [toolbar setItems:@[bd, flex, bt, flex, bc, flex, bb]];
     [self.view addSubview:toolbar];
 
 
@@ -159,7 +173,7 @@ static NSString *kCellID = @"stationCellID";
     } else if ([segue.identifier isEqualToString:@"ShowWebCam"]) {
 		UINavigationController *navigationController = segue.destinationViewController;
 		RHEWebCamViewController *controller = navigationController.viewControllers[0];
-        [controller.navigationController.navigationBar setTintColor:nil];
+        //[controller.navigationController.navigationBar setTintColor:nil];
         controller.webCamURL = [NSURL URLWithString:cell.currentStation.webCamImage];
         controller.stationName = cell.currentStation.stationName;
         controller.permitText = cell.currentStation.webCamText;
@@ -187,7 +201,7 @@ static NSString *kCellID = @"stationCellID";
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    id <NSFetchedResultsSectionInfo> sectionInfo = [[[self fetchedResultsController] sections] objectAtIndex:0];
+    id <NSFetchedResultsSectionInfo> sectionInfo = [[self fetchedResultsController] sections][0];
     return [sectionInfo numberOfObjects];
 }
 
@@ -204,9 +218,10 @@ static NSString *kCellID = @"stationCellID";
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    if ( CGRectGetHeight(collectionView.bounds) > 460.0) {
+    if ( CGRectGetHeight(collectionView.bounds) > 480.0) {
         return CGSizeMake( 320.0, 504.0);
     }
+
     return CGSizeMake( 320.0, 416.0);
 }
 
@@ -215,6 +230,7 @@ static NSString *kCellID = @"stationCellID";
 {
     UIEdgeInsets ei = [(UICollectionViewFlowLayout *)collectionViewLayout sectionInset];
     ei.bottom = 44.0;
+    ei.top = 20.0;
     return ei;
 }
 
@@ -224,6 +240,8 @@ static NSString *kCellID = @"stationCellID";
     if ( scrollView != self.collectionView ) {
         return;
     }
+
+    [self updateCameraButton:NO];
 
     for ( RHCStationCell *cell in [self.collectionView visibleCells] ) {
         [_transformedCells addObject:cell];
@@ -236,7 +254,6 @@ static NSString *kCellID = @"stationCellID";
              ];
         }
     }
-    [self updateCameraButton:NO];
 }
 
 
@@ -292,7 +309,7 @@ static NSString *kCellID = @"stationCellID";
     fetchRequest.predicate = predicate;
 
     NSSortDescriptor *sortDescriptor1 = [[NSSortDescriptor alloc] initWithKey:@"order" ascending:YES];
-    NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:sortDescriptor1, nil];
+    NSArray *sortDescriptors = @[sortDescriptor1];
     [fetchRequest setSortDescriptors:sortDescriptors];
 
     NSFetchedResultsController *aFetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest
@@ -340,60 +357,35 @@ static NSString *kCellID = @"stationCellID";
 
 - (void)updateCameraButton:(BOOL)update
 {
-    if ( _fetchingImage ) {
-        return;
-    }
-
-    if ( [[self.collectionView visibleCells] count] == 0 ) {
-        return;
-    }
-
-    RHCStationCell *cell = [self.collectionView visibleCells][0];
-
-    
-    if ( [cell.currentStation.webCamImage length] == 0 ) {
-        return;
-    }
-    _fetchingImage = YES;
-
     [UIView animateWithDuration:0.25
                      animations:^{
-                         self.cameraButton.alpha = 0.0;
+                         self.cameraView.alpha = 0.0;
                      }
                      completion:^(BOOL finished) {
-                         if ( update ) {
-                             [[RHEVindsidenAPIClient defaultManager] fetchWebCamImageForURL:[NSURL URLWithString:cell.currentStation.webCamImage]
-                                                                           ignoreFetchLimit:YES
-                                                                                    success:^(UIImage *image) {
-                                                                                        [UIView animateWithDuration:0.2
-                                                                                                         animations:^{
-                                                                                                             self.cameraButton.layer.shadowColor = [[UIColor blackColor] CGColor];
-                                                                                                             self.cameraButton.layer.shadowOffset = CGSizeMake( 1, 2);
-                                                                                                             self.cameraButton.layer.shadowOpacity = 0.75;
-                                                                                                             self.cameraButton.layer.shadowRadius = 2.5;
-                                                                                                             self.cameraButton.layer.shadowPath = [UIBezierPath bezierPathWithRect:self.cameraButton.bounds].CGPath;
-                                                                                                             self.cameraButton.alpha = 1.0;
-                                                                                                             [self.cameraButton setImage:image forState:UIControlStateNormal];
-                                                                                                         }
-                                                                                                         completion:^(BOOL finished) {
-                                                                                                             _fetchingImage = NO;
-                                                                                                         }
-                                                                                         ];
-                                                                                    }
-                                                                                    failure:^(NSError *error) {
-                                                                                        [UIView animateWithDuration:0.2
-                                                                                                         animations:^{
-                                                                                                             self.cameraButton.alpha = 0.0;
-                                                                                                         }
-                                                                                                         completion:^(BOOL finished) {
-                                                                                                             _fetchingImage = NO;
-                                                                                                         }
-                                                                                         ];
-                                                                                    }
-                              ];
-                         } else {
-                             _fetchingImage = NO;
+                         [self.cameraView stop];
+
+                         if ( NO == update ) {
+                             return;
                          }
+
+                         if ( [[self.collectionView visibleCells] count] == 0 ) {
+                             return;
+                         }
+
+                         RHCStationCell *cell = [self.collectionView visibleCells][0];
+
+                         if ( [cell.currentStation.webCamImage length] == 0 ) {
+                             return;
+                         }
+                         
+                         [self.cameraView setUrl:[NSURL URLWithString:cell.currentStation.webCamImage]];
+                         [self.cameraView play];
+                         
+                         [UIView animateWithDuration:0.25
+                                          animations:^{
+                                              self.cameraView.alpha = 1.0;
+                                          }
+                          ];
                      }
      ];
 }
@@ -404,28 +396,38 @@ static NSString *kCellID = @"stationCellID";
 
 - (IBAction)settings:(id)sender
 {
-    [TestFlight passCheckpoint:@"show settings"];
     [self performSegueWithIdentifier:@"ShowSettings" sender:sender];
 }
 
 
 - (IBAction)info:(id)sender
 {
-    [TestFlight passCheckpoint:@"show info"];
     [self performSegueWithIdentifier:@"ShowStationDetails" sender:sender];
+}
+
+
+- (IBAction)share:(id)sender
+{
+    RHCStationCell *cell = [self.collectionView visibleCells][0];
+
+    UIImage *shareImage = [UIImage imageFromView:cell];
+    NSArray *activityProviders = @[shareImage];
+    UIActivityViewController *activityViewController = [[UIActivityViewController alloc] initWithActivityItems:activityProviders applicationActivities:nil];
+
+    activityViewController.excludedActivityTypes = @[UIActivityTypeAssignToContact];
+    activityViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+    [self presentViewController:activityViewController animated:YES completion:nil];
 }
 
 
 - (IBAction)camera:(id)sender
 {
-    [TestFlight passCheckpoint:@"show camera"];
     [self performSegueWithIdentifier:@"ShowWebCam" sender:sender];
 }
 
 
 - (IBAction)pageControlChangedValue:(id)sender
 {
-    [TestFlight passCheckpoint:@"changed page"];
     NSInteger page = [(UIPageControl *)sender currentPage];
     NSIndexPath *indexPath = [NSIndexPath indexPathForItem:page inSection:0];
     [self.collectionView scrollToItemAtIndexPath:indexPath atScrollPosition:UICollectionViewScrollPositionNone animated:YES];
@@ -461,6 +463,29 @@ static NSString *kCellID = @"stationCellID";
     }
 
     [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+
+#pragma mark - 
+
+
+- (void)updateContentWithCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler;
+{
+    if ( [[self.collectionView visibleCells] count] ) {
+        RHCStationCell *cell = [self.collectionView visibleCells][0];
+        [cell fetchWithCompletionHandler:^(UIBackgroundFetchResult result) {
+            double delayInSeconds = 2.0;
+            dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+            dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+                [cell syncDisplayPlots];
+                [cell updateLastUpdatedLabel];
+                completionHandler(result);
+            });
+        }];
+
+    } else {
+        completionHandler(UIBackgroundFetchResultFailed);
+    }
 }
 
 

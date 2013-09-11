@@ -10,13 +10,13 @@
 
 
 @protocol RHEWebCamImageViewDelegate;
-
+@class MotionJpegImageView;
 
 @interface RHEWebCamViewController : UIViewController <UIScrollViewDelegate>
 
 @property (weak, nonatomic) id<RHEWebCamImageViewDelegate> delegate;
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
-@property (weak, nonatomic) IBOutlet UIImageView *imageView;
+@property (weak, nonatomic) IBOutlet MotionJpegImageView *imageView;
 @property (copy, nonatomic) NSURL *webCamURL;
 @property (copy, nonatomic) NSString *stationName;
 @property (copy, nonatomic) NSString *permitText;
