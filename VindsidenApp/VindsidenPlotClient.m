@@ -10,6 +10,16 @@
 
 
 @implementation VindsidenPlotClient
+{
+    NSData *_data;
+    NSString            *_xml;
+    NSMutableArray      *_plots;
+    NSMutableDictionary *_currentPlot;
+    NSMutableString     *_currentString;
+    BOOL                _isStoringCharacters;
+    NSXMLParser         *_parser;
+}
+
 
 - (instancetype)initWithXML:(NSString *)xml
 {
@@ -32,22 +42,39 @@
     return self;
 }
 
+
+- (instancetype)initWithParser:(NSXMLParser *)parser
+{
+    self = [super init];
+
+    if ( self ) {
+        _parser = parser;
+        _isStoringCharacters = NO;
+    }
+
+    return self;
+}
+
+
 - (NSArray *) parse
 {
     _plots = [[NSMutableArray alloc] initWithCapacity:0];
-    NSXMLParser *parser = [[NSXMLParser alloc] initWithData:_data];
-    [parser setDelegate:self];
-    BOOL success = [parser parse];
-    
+
+    if ( nil == _parser ) {
+        _parser = [[NSXMLParser alloc] initWithData:_data];
+    }
+
+    [_parser setDelegate:self];
+    BOOL success = [_parser parse];
     
     if (!success) {
         DLOG(@"not a success");
         return nil;
     }
     
-    DLOG(@"Parsing complete. %d plots found", [_plots count]);
+    DLOG(@"Parsing complete. %ld plots found", (unsigned long)[_plots count]);
     NSSortDescriptor *sortDescriptor1 = [[NSSortDescriptor alloc] initWithKey:@"Time" ascending:YES];
-    NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:sortDescriptor1, nil];
+    NSArray *sortDescriptors = @[sortDescriptor1];
     NSArray *sorted = [_plots sortedArrayUsingDescriptors:sortDescriptors];
 
     return sorted;
@@ -65,7 +92,8 @@
                [elementName isEqualToString:@"WindMax"] ||
                [elementName isEqualToString:@"WindMin"] ||
                [elementName isEqualToString:@"DirectionAvg"] ||
-               [elementName isEqualToString:@"Temperature1"])
+               [elementName isEqualToString:@"Temperature1"] ||
+               [elementName isEqualToString:@"StationID"] )
     {
         _currentString = [[NSMutableString alloc] initWithCapacity:0];
         _isStoringCharacters = YES;
@@ -77,17 +105,19 @@
     if ([elementName isEqualToString:@"Measurement"]) {
         [_plots addObject:_currentPlot];
     } else if ([elementName isEqualToString:@"Time"]) {
-        [_currentPlot setObject:_currentString forKey:@"plotTime"];
+        _currentPlot[@"plotTime"] = _currentString;
     } else if ([elementName isEqualToString:@"WindAvg"]) {
-        [_currentPlot setObject:[NSNumber numberWithDouble:[_currentString doubleValue]] forKey:@"windAvg"];
+        _currentPlot[@"windAvg"] = @([_currentString doubleValue]);
     } else if ([elementName isEqualToString:@"WindMax"]) {
-        [_currentPlot setObject:[NSNumber numberWithDouble:[_currentString doubleValue]] forKey:@"windMax"];
+        _currentPlot[@"windMax"] = @([_currentString doubleValue]);
     } else if ( [elementName isEqualToString:@"WindMin"]) {
-        [_currentPlot setObject:[NSNumber numberWithDouble:[_currentString doubleValue]] forKey:@"windMin"];
+        _currentPlot[@"windMin"] = @([_currentString doubleValue]);
     } else if ( [elementName isEqualToString:@"DirectionAvg"]) {
-        [_currentPlot setObject:_currentString forKey:@"windDir"];
+        _currentPlot[@"windDir"] = _currentString;
     } else if ( [elementName isEqualToString:@"Temperature1"]) {
-        [_currentPlot setObject:_currentString forKey:@"tempAir"];
+        _currentPlot[@"tempAir"] = _currentString;
+    } else if ( [elementName isEqualToString:@"StationID"]) {
+        _currentPlot[@"stationID"] = _currentString;
     }
     _isStoringCharacters = NO;
 }

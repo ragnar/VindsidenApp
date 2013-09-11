@@ -110,6 +110,9 @@
 "Choose unit" = "Velg enhet";
 
 /* No comment provided by engineer. */
+"Copyright" = "Copyright";
+
+/* No comment provided by engineer. */
 "Info" = "Info";
 
 /* No comment provided by engineer. */
@@ -124,8 +127,8 @@
 /* Temp air */
 "Temp air" = "Luft temp";
 
-/* Gust: %0.1f Avg: %0.1f, Speed: %0.1f */
-"GRAPH_MARKER_POPUP" = "Gust: %0.1f, Gj.snt: %0.1f, Hastighet: %0.1f";
+/* Gust: %@ Avg: %@, Speed: %@ */
+"GRAPH_MARKER_POPUP" = "Gust: %@ Gj.snt: %@ Hastighet: %@";
 
 /* Not updated */
 "LABEL_NOT_UPDATED" = "Ikke oppdatert";
@@ -150,3 +153,22 @@
 
 /* Unable to fetch data at this point. */
 "NETWORK_ERROR_UNABLE_TO_LOAD" = "Klarer ikke hente data for øyeblikket";
+
+/* New stations found. Go to settings to view them */
+"ALERT_NEW_STATIONS_FOUND" = "Nye værstasjoner lastet ned. Gå til settings for å se på dem.";
+
+/* No comment provided by engineer. */
+"Beaufort" = "Beaufort";
+
+/* No comment provided by engineer. */
+"bft" = "bft";
+
+/* No comment provided by engineer. */
+"Go to yr.no" = "Gå til yr.no";
+
+/* No comment provided by engineer. */
+"Show Camera" = "Vis kamera";
+
+/* No comment provided by engineer. */
+"View in Maps" = "Vis i kart";
+

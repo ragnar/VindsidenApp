@@ -127,8 +127,8 @@
 /* Temp air */
 "Temp air" = "Temp air";
 
-/* Gust: %0.1f Avg: %0.1f, Speed: %0.1f */
-"GRAPH_MARKER_POPUP" = "Gust: %0.1f, Avg: %0.1f, Speed: %0.1f";
+/* Gust: %@ Avg: %@, Speed: %@ */
+"GRAPH_MARKER_POPUP" = "Gust: %@ Avg: %@ Speed: %@";
 
 /* Not updated */
 "LABEL_NOT_UPDATED" = "Not updated";
@@ -153,3 +153,22 @@
 
 /* Unable to fetch data at this point. */
 "NETWORK_ERROR_UNABLE_TO_LOAD" = "Unable to fetch data at this point.";
+
+/* New stations found. Go to settings to view them */
+"ALERT_NEW_STATIONS_FOUND" = "New weather stations downloaded. Go to settings to view them.";
+
+/* No comment provided by engineer. */
+"Beaufort" = "Beaufort";
+
+/* No comment provided by engineer. */
+"bft" = "bft";
+
+/* No comment provided by engineer. */
+"Go to yr.no" = "Go to yr.no";
+
+/* No comment provided by engineer. */
+"Show Camera" = "Show Camera";
+
+/* No comment provided by engineer. */
+"View in Maps" = "View in Maps";
+

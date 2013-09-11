@@ -89,14 +89,28 @@
 
 - (void)fetch
 {
+    [self fetchWithCompletionHandler:nil];
+}
+
+
+- (void)fetchWithCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler
+{
     if ( nil == self.currentStation ) {
         DLOG(@"");
         return;
     }
     [[RHEVindsidenAPIClient defaultManager] fetchStationsPlotsForStation:self.currentStation.stationId
-                                                              completion:^(BOOL success, NSArray *stations) {
+                                                              completion:^(BOOL success, NSArray *plots) {
+                                                                  DLOG(@"");
                                                                   if ( success ) {
-                                                                      [self updatePlots:stations];
+                                                                      [self updatePlots:plots];
+                                                                      if ( completionHandler ) {
+                                                                          completionHandler(UIBackgroundFetchResultNewData);
+                                                                      }
+                                                                  } else {
+                                                                      if ( completionHandler ) {
+                                                                          completionHandler(UIBackgroundFetchResultNoData);
+                                                                      }
                                                                   }
                                                               } error:^(BOOL cancelled, NSError *error) {
                                                                   if ( NO == cancelled ) {
@@ -137,7 +151,7 @@
         return;
     }
 
-    [CDPlot updatePlots:plots forStation:self.currentStation completion:^{
+    [CDPlot updatePlots:plots completion:^{
         [self displayPlots];
         [NSObject cancelBlock:self.autocompleteBlock];
         self.autocompleteBlock = nil;
@@ -151,7 +165,11 @@
     NSArray *cdplots = [[self.currentStation.plots filteredSetUsingPredicate:[NSPredicate predicateWithFormat:@"plotTime >= %@", [[NSDate date] dateByAddingTimeInterval:-1*(kPlotHistoryHours-1)*3600]]] sortedByKeyPath:@"plotTime" ascending:NO];
 
     if ( [cdplots count] ) {
-        self.updatedAtLabel.text = [self.dateTransformer transformedValue:[cdplots[0] plotTime]];
+        if ( [[cdplots[0] plotTime] compare:[NSDate date]] == NSOrderedAscending ) {
+            self.updatedAtLabel.text = [self.dateTransformer transformedValue:[cdplots[0] plotTime]];
+        } else {
+            self.updatedAtLabel.text = [self.dateTransformer transformedValue:nil];
+        }
     } else {
         self.updatedAtLabel.text = NSLocalizedString(@"LABEL_NOT_UPDATED", @"Not updated");
     }
@@ -161,16 +179,30 @@
 - (void)displayPlots
 {
     dispatch_async(dispatch_get_main_queue(), ^{
-        NSArray *cdplots = [[self.currentStation.plots filteredSetUsingPredicate:[NSPredicate predicateWithFormat:@"plotTime >= %@", [[NSDate date] dateByAddingTimeInterval:-1*(kPlotHistoryHours-1)*3600]]] sortedByKeyPath:@"plotTime" ascending:NO];
+        [self syncDisplayPlots];
+    });
+}
 
-        if ( [cdplots count] ) {
-            self.graphView.plots = cdplots;
-            [self.stationView updateWithPlot:cdplots[0]];
+
+- (void)syncDisplayPlots
+{
+    NSDate *inDate = [[NSDate date] dateByAddingTimeInterval:-1*(kPlotHistoryHours-1)*3600];
+    NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    NSDateComponents *inputComponents = [gregorian components:(NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit | NSHourCalendarUnit) fromDate:inDate];
+    NSDate *outDate = [gregorian dateFromComponents:inputComponents];
+    NSArray *cdplots = [[self.currentStation.plots filteredSetUsingPredicate:[NSPredicate predicateWithFormat:@"plotTime >= %@", outDate]] sortedByKeyPath:@"plotTime" ascending:NO];
+
+    if ( [cdplots count] ) {
+        self.graphView.plots = cdplots;
+        [self.stationView updateWithPlot:cdplots[0]];
+        if ( [[cdplots[0] plotTime] compare:[NSDate date]] == NSOrderedAscending ) {
             self.updatedAtLabel.text = [self.dateTransformer transformedValue:[cdplots[0] plotTime]];
         } else {
-            self.updatedAtLabel.text = NSLocalizedString(@"LABEL_NOT_UPDATED", @"Not updated");
+            self.updatedAtLabel.text = [self.dateTransformer transformedValue:nil];
         }
-    });
+    } else {
+        self.updatedAtLabel.text = NSLocalizedString(@"LABEL_NOT_UPDATED", @"Not updated");
+    }
 }
 
 

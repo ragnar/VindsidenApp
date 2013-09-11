@@ -14,7 +14,7 @@
 - (NSArray *) sortedByKeyPath:(NSString *)keyPath ascending:(BOOL)ascending
 {
     NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:keyPath ascending:ascending];
-    NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:sortDescriptor, nil];
+    NSArray *sortDescriptors = @[sortDescriptor];
     NSArray *sorted = [NSArray arrayWithArray:[self sortedSetUsingSortDescriptors:sortDescriptors]];
 
     return sorted;

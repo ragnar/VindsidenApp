@@ -50,7 +50,7 @@
 - (void)initInfoLabels
 {
     CGFloat x = 75.0;
-    CGFloat y = 8.0;
+    CGFloat y = 9.0;
     CGFloat height = 14.0;
     CGFloat width = 85.0;
 
@@ -69,7 +69,7 @@
     self.windDirection = lbl;
 
     x = 215.0;
-    y = 8.0;
+    y = 9.0;
 
     lbl = [[UILabel alloc] initWithFrame:CGRectMake(x, y, width, height)];
     [self addSubview:lbl];
@@ -104,12 +104,12 @@
 {
     SpeedConvertion unit = [[NSUserDefaults standardUserDefaults] integerForKey:@"selectedUnit"];
 
-    _windSpeed.text = (isnan([plot.windMin floatValue]) ? @"—.—" : [NSString stringWithFormat:@"%0.1f %@",  [plot.windMin speedConvertionTo:unit], [NSNumber shortUnitNameString:unit]]);
-    _windGust.text = (isnan([plot.windMax floatValue]) ? @"—.—" : [NSString stringWithFormat:@"%0.1f %@", [plot.windMax speedConvertionTo:unit], [NSNumber shortUnitNameString:unit]]);
-    _windAverage.text = (isnan([plot.windAvg floatValue]) ? @"—.—" : [NSString stringWithFormat:@"%0.1f %@", [plot.windAvg speedConvertionTo:unit], [NSNumber shortUnitNameString:unit]]);
+    _windSpeed.text = (isnan([plot.windMin floatValue]) ? @"—.—" : [NSString stringWithFormat:@"%@ %@",  [[self numberFormatter] stringFromNumber:@([plot.windMin speedConvertionTo:unit])], [NSNumber shortUnitNameString:unit]]);
+    _windGust.text = (isnan([plot.windMax floatValue]) ? @"—.—" : [NSString stringWithFormat:@"%@ %@", [[self numberFormatter] stringFromNumber:@([plot.windMax speedConvertionTo:unit])], [NSNumber shortUnitNameString:unit]]);
+    _windAverage.text = (isnan([plot.windAvg floatValue]) ? @"—.—" : [NSString stringWithFormat:@"%@ %@", [[self numberFormatter] stringFromNumber:@([plot.windAvg speedConvertionTo:unit])], [NSNumber shortUnitNameString:unit]]);
     _windBeaufort.text = (isnan([plot.windAvg floatValue]) ? @"—.—" : [NSString stringWithFormat:@"%0.0f", [plot.windMin speedInBeaufort]]);
     _windDirection.text = (isnan([plot.windDir floatValue]) ? @"—.—" : [NSString stringWithFormat:@"%0.0f° (%@)", [plot.windDir floatValue], [self windDirectionString:[plot.windDir floatValue]]]);
-    _tempAir.text = (isnan([plot.tempAir floatValue]) ? @"—.—" : [NSString stringWithFormat:@"%0.0f °C", [plot.tempAir floatValue]]);
+    _tempAir.text = (isnan([plot.tempAir floatValue]) ? @"—.—" : [NSString stringWithFormat:@"%@ °C", [[self numberFormatter] stringFromNumber:plot.tempAir]]);
 }
 
 
@@ -118,12 +118,13 @@
     CGContextRef context = UIGraphicsGetCurrentContext();
     CGContextSaveGState(context);
 
-    [NSLocalizedString(@"LABEL_WIND_SPEED", @"Wind speed") drawAtPoint:CGPointMake( 20.0, 10.0) withFont:[UIFont fontWithName:@"DIN 1451 Std" size:11.0]];
-    [NSLocalizedString(@"LABEL_WIND_GUST", @"Wind gust") drawAtPoint:CGPointMake( 20.0, 40.0) withFont:[UIFont fontWithName:@"DIN 1451 Std" size:11.0]];
-    [NSLocalizedString(@"LABEL_WIND_DIR", @"Wind direction") drawAtPoint:CGPointMake( 20.0, 70.0) withFont:[UIFont fontWithName:@"DIN 1451 Std" size:11.0]];
-    [NSLocalizedString(@"LABEL_WIND_AVG", @"Average") drawAtPoint:CGPointMake( 170.0, 10.0) withFont:[UIFont fontWithName:@"DIN 1451 Std" size:11.0]];
-    [NSLocalizedString(@"LABEL_WIND_BEU", @"Beaufort") drawAtPoint:CGPointMake( 170.0, 40.0) withFont:[UIFont fontWithName:@"DIN 1451 Std" size:11.0]];
-    [NSLocalizedString(@"Temp air", @"Temp air") drawAtPoint:CGPointMake( 170.0, 70.0) withFont:[UIFont fontWithName:@"DIN 1451 Std" size:11.0]];
+    NSDictionary *drawAttr = @{ NSFontAttributeName : [UIFont fontWithName:@"HelveticaNeue" size:11.0]};
+    [NSLocalizedString(@"LABEL_WIND_SPEED", @"Wind speed") drawAtPoint:CGPointMake( 20.0, 10.0) withAttributes:drawAttr];
+    [NSLocalizedString(@"LABEL_WIND_GUST", @"Wind gust") drawAtPoint:CGPointMake( 20.0, 40.0) withAttributes:drawAttr];
+    [NSLocalizedString(@"LABEL_WIND_DIR", @"Wind direction") drawAtPoint:CGPointMake( 20.0, 70.0) withAttributes:drawAttr];
+    [NSLocalizedString(@"LABEL_WIND_AVG", @"Average") drawAtPoint:CGPointMake( 170.0, 10.0) withAttributes:drawAttr];
+    [NSLocalizedString(@"LABEL_WIND_BEU", @"Beaufort") drawAtPoint:CGPointMake( 170.0, 40.0) withAttributes:drawAttr];
+    [NSLocalizedString(@"Temp air", @"Temp air") drawAtPoint:CGPointMake( 170.0, 70.0) withAttributes:drawAttr];
 
     [RGBACOLOR( 0.0, 0.0, 0.0, 0.13) set];
     CGContextBeginPath(context);
@@ -148,7 +149,7 @@
     if ( direction > 360.0 || direction < 0 ) {
         direction = 0.0;
     }
-    NSNumber *dir = [NSNumber numberWithFloat:direction];
+    NSNumber *dir = @(direction);
 
 
     if ( [dir isBetween:0.0 and:11.25] || [dir isBetween:348.75 and:360.001]) {
@@ -187,5 +188,25 @@
         return NSLocalizedString(@"DIRECTION_UKN", @"UKN");
     }
 }
+
+
+- (NSNumberFormatter *)numberFormatter
+{
+    static NSNumberFormatter *_numberformatter = nil;
+    if ( _numberformatter ) {
+        return _numberformatter;
+    }
+
+    _numberformatter = [[NSNumberFormatter alloc] init];
+    _numberformatter.numberStyle = kCFNumberFormatterDecimalStyle;
+    _numberformatter.maximumFractionDigits = 1;
+    _numberformatter.minimumFractionDigits = 1;
+    _numberformatter.minimumSignificantDigits = 1;
+    [_numberformatter setNotANumberSymbol:@"—.—"];
+    [_numberformatter setNilSymbol:@"—.—"];
+
+    return _numberformatter;
+}
+
 
 @end

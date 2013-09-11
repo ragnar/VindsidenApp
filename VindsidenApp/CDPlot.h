@@ -24,6 +24,6 @@
 @property (nonatomic, retain) CDStation * station;
 
 + (CDPlot *) newOrExistingPlot:(NSDictionary *)dict forStation:(CDStation *)station inManagedObjectContext:(NSManagedObjectContext *)managedObjectContext;
-+ (void)updatePlots:(NSArray *)plots forStation:(CDStation *)station completion:(void (^)(void))completion;
++ (void)updatePlots:(NSArray *)plots completion:(void (^)(void))completion;
 
 @end
