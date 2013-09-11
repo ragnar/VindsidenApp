@@ -18,7 +18,6 @@
     #import <SystemConfiguration/SystemConfiguration.h>
     #import <MobileCoreServices/MobileCoreServices.h>
 
-    #import <TestFlightSDK/TestFlight.h>
     #import "RHCAlertManager.h"
     #import "UIFont+textStyle.h"
     #import "UIFontDescriptor+textStyle.h"

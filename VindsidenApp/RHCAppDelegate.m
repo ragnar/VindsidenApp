@@ -7,7 +7,6 @@
 //
 
 #import <AFNetworking/AFNetworkActivityIndicatorManager.h>
-#import <TestFlightSDK/TestFlight.h>
 #import "RHCAppDelegate.h"
 #import "RHCStationViewController.h"
 #import "NSNumber+Convertion.h"

@@ -139,10 +139,8 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if ( indexPath.row == 0 ) {
-        [TestFlight passCheckpoint:@"show station picker"];
         [self performSegueWithIdentifier:@"ShowStationPicker" sender:self];
     } else {
-        [TestFlight passCheckpoint:@"show unit selector"];
         [self performSegueWithIdentifier:@"ShowUnitSelector" sender:self];
     }
 }

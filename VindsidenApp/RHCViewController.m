@@ -397,14 +397,12 @@ static NSString *kCellID = @"stationCellID";
 
 - (IBAction)settings:(id)sender
 {
-    [TestFlight passCheckpoint:@"show settings"];
     [self performSegueWithIdentifier:@"ShowSettings" sender:sender];
 }
 
 
 - (IBAction)info:(id)sender
 {
-    [TestFlight passCheckpoint:@"show info"];
     [self performSegueWithIdentifier:@"ShowStationDetails" sender:sender];
 }
 
@@ -425,14 +423,12 @@ static NSString *kCellID = @"stationCellID";
 
 - (IBAction)camera:(id)sender
 {
-    [TestFlight passCheckpoint:@"show camera"];
     [self performSegueWithIdentifier:@"ShowWebCam" sender:sender];
 }
 
 
 - (IBAction)pageControlChangedValue:(id)sender
 {
-    [TestFlight passCheckpoint:@"changed page"];
     NSInteger page = [(UIPageControl *)sender currentPage];
     NSIndexPath *indexPath = [NSIndexPath indexPathForItem:page inSection:0];
     [self.collectionView scrollToItemAtIndexPath:indexPath atScrollPosition:UICollectionViewScrollPositionNone animated:YES];

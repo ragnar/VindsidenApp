@@ -69,8 +69,6 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if ([segue.identifier isEqualToString:@"ShowWebCam"]) {
-        [TestFlight passCheckpoint:@"show web cam from details"];
-
         RHEWebCamViewController *controller = segue.destinationViewController;
         controller.navigationItem.leftBarButtonItem = nil;
         controller.webCamURL = [NSURL URLWithString:self.station.webCamImage];
@@ -262,8 +260,6 @@
 
 - (IBAction)gotoYR:(id)sender
 {
-    [TestFlight passCheckpoint:@"goto yr"];
-
     NSURL *url = [NSURL URLWithString:[_station.yrURL stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
     [[UIApplication sharedApplication] openURL:url];
 }
@@ -271,8 +267,6 @@
 
 - (IBAction)showMap:(id)sender
 {
-    [TestFlight passCheckpoint:@"show map"];
-
     CLLocationCoordinate2D spotCord = CLLocationCoordinate2DMake( [_station.coordinateLat doubleValue], [_station.coordinateLon doubleValue]);
     
     NSMutableString *query = [NSMutableString stringWithString:@"http://maps.apple.com/?t=h&z=10"];

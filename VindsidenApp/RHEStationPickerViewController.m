@@ -130,8 +130,6 @@
         return;
     }
 
-    [TestFlight passCheckpoint:@"change stations"];
-
     _changeIsUserDriven = YES;
 
     NSManagedObjectContext *context = [self.fetchedResultsController managedObjectContext];
