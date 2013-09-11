@@ -19,7 +19,9 @@
 @end
 
 @implementation RHEStationDetailsViewController
-
+{
+    NSArray *_buttons;
+}
 
 - (void)dealloc
 {
@@ -32,16 +34,22 @@
     [super viewDidLoad];
 
     self.navigationItem.title = self.station.stationName;
-    
-    self.cameraButton.hidden = ( [self.station.webCamImage length] <= 0 );
 
+    UIView *v = [[UIView alloc] initWithFrame:CGRectMake(0.0, -6.0, 320.0, 30)];
+    v.backgroundColor = self.tableView.backgroundColor;
+    self.tableView.tableFooterView = v;
+
+    _buttons = @[NSLocalizedString(@"Go to yr.no", nil), NSLocalizedString(@"View in Maps", nil)];
+
+    if ( [self.station.webCamImage length] > 0 ) {
+        _buttons = [_buttons arrayByAddingObject:NSLocalizedString(@"Show Camera", nil)];
+    }
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(preferredContentSizeChanged:) name:UIContentSizeCategoryDidChangeNotification object:nil];
 }
 
 
 - (void)viewDidUnload
 {
-    [self setCameraButton:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
 }
@@ -49,10 +57,8 @@
 
 - (void)preferredContentSizeChanged:(NSNotification *)aNotification
 {
-    NSString *style = [[self.cameraButton.titleLabel.font fontDescriptor] objectForKey:@"NSCTFontUIUsageAttribute"];
-
     for ( UIButton *button in self.tableView.tableFooterView.subviews ) {
-        button.titleLabel.font = [UIFont preferredFontForTextStyle:style];
+        button.titleLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
     }
 
     [self.view setNeedsLayout];
@@ -84,22 +90,35 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 1;
+    return 2;
 }
 
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 6;
+    if ( 0 == section ) {
+        return 6;
+    } else {
+        return [_buttons count];
+    }
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"StationDetailsCell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    static NSString *ButtonCellIdentifier = @"ButtonCell";
 
-    [self configureCell:cell atIndexPath:indexPath];
+    UITableViewCell *cell = nil;
+
+    if ( 0 == indexPath.section ) {
+        cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+        [self configureCell:cell atIndexPath:indexPath];
+    } else {
+        cell = [tableView dequeueReusableCellWithIdentifier:ButtonCellIdentifier];
+        cell.textLabel.textColor = self.view.tintColor;
+        cell.textLabel.text = [_buttons objectAtIndex:indexPath.row];
+    }
     return cell;
 }
 
@@ -221,10 +240,27 @@
 #pragma mark - Table view delegate
 
 
+- (BOOL)tableView:(UITableView *)tableView shouldHighlightRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return (indexPath.section == 1);
+}
+
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if ( indexPath.row == 1 ) {
-        [self showMap:nil];
+    if ( 0 == indexPath.section ) {
+        if ( 1 == indexPath.row ) {
+            [self showMap:nil];
+        }
+    } else {
+        if ( 0 == indexPath.row ) {
+            [self gotoYR:nil];
+        } else if ( 1 == indexPath.row ) {
+            [self showMap:nil];
+        } else {
+            [self showCamera:nil];
+        }
+
     }
 
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
@@ -283,6 +319,12 @@
     
     NSURL *url = [NSURL URLWithString:[query stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
     [[UIApplication sharedApplication] openURL:url];
+}
+
+
+- (IBAction)showCamera:(id)sender
+{
+    [self performSegueWithIdentifier:@"ShowWebCam" sender:nil];
 }
 
 

@@ -19,11 +19,11 @@
 
 @property (weak, nonatomic) id<RHEStationDetailsDelegate> delegate;
 @property (strong, nonatomic) CDStation *station;
-@property (strong, nonatomic) IBOutlet UIButton *cameraButton;
 
 - (IBAction)done:(id)sender;
 - (IBAction)gotoYR:(id)sender;
 - (IBAction)showMap:(id)sender;
+- (IBAction)showCamera:(id)sender;
 
 @end
 
