@@ -157,3 +157,18 @@
 /* New stations found. Go to settings to view them */
 "ALERT_NEW_STATIONS_FOUND" = "New weather stations downloaded. Go to settings to view them.";
 
+/* No comment provided by engineer. */
+"Beaufort" = "Beaufort";
+
+/* No comment provided by engineer. */
+"bft" = "bft";
+
+/* No comment provided by engineer. */
+"Go to yr.no" = "Go to yr.no";
+
+/* No comment provided by engineer. */
+"Show Camera" = "Show Camera";
+
+/* No comment provided by engineer. */
+"View in Maps" = "View in Maps";
+
