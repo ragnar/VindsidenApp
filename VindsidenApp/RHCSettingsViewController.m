@@ -79,7 +79,7 @@
 
     if ( indexPath.row == 0 ) {
         cell.textLabel.text = NSLocalizedString(@"Stations", nil);
-        cell.detailTextLabel.text = [NSString stringWithFormat:@"%d", [CDStation numberOfVisibleStations]];
+        cell.detailTextLabel.text = [NSString stringWithFormat:@"%ld", (long)[CDStation numberOfVisibleStations]];
     } else {
         SpeedConvertion unit = [[NSUserDefaults standardUserDefaults] integerForKey:@"selectedUnit"];
         cell.textLabel.text = NSLocalizedString(@"Units", nil);

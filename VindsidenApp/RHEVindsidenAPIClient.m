@@ -102,7 +102,7 @@ NSString *const kBaseURL = @"http://vindsiden.no/";
               if ( strongTask ) {
                   isCancelled = (strongTask.state == NSURLSessionTaskStateCanceling);
               }
-              DLOG(@"%d - %d", isCancelled, strongTask.state);
+              DLOG(@"%d - %ld", isCancelled, (long)strongTask.state);
 
               if ( NO == self.background && errorBlock ) {
                   errorBlock( isCancelled, error );

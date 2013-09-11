@@ -228,7 +228,7 @@ const NSInteger kMinSpeedLines = 3;
 
     for ( NSInteger i = 0; i <= hours; i++ ) {
         CGFloat x = _minX + (i*((_maxX-_minX)/hours));
-        NSString *hs = [NSString stringWithFormat:@"%02d", [self hourComponent:[startDate dateByAddingTimeInterval:3600*i]]];
+        NSString *hs = [NSString stringWithFormat:@"%02ld", (long)[self hourComponent:[startDate dateByAddingTimeInterval:3600*i]]];
         labelBounds = [hs boundingRectWithSize:CGSizeMake( 40.0, 21.0)
                                        options:NSStringDrawingUsesLineFragmentOrigin
                                     attributes:drawAttr
@@ -273,7 +273,7 @@ const NSInteger kMinSpeedLines = 3;
 
     [[UIColor lightGrayColor] set];
 
-    float lengths[] = {2.0, 3.0};
+    CGFloat lengths[] = {2.0, 3.0};
     CGContextSetLineDash( context, 0.0, lengths, 2);
     CGContextDrawPath( context, kCGPathStroke);
 

@@ -72,7 +72,7 @@
         return nil;
     }
     
-    DLOG(@"Parsing complete. %d plots found", [_plots count]);
+    DLOG(@"Parsing complete. %ld plots found", (unsigned long)[_plots count]);
     NSSortDescriptor *sortDescriptor1 = [[NSSortDescriptor alloc] initWithKey:@"Time" ascending:YES];
     NSArray *sortDescriptors = @[sortDescriptor1];
     NSArray *sorted = [_plots sortedArrayUsingDescriptors:sortDescriptors];

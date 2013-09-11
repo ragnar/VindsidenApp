@@ -76,7 +76,7 @@
         return nil;
     }
 
-    DLOG(@"Parsing complete. %d stations found", [_stations count]);
+    DLOG(@"Parsing complete. %ld stations found", (unsigned long)[_stations count]);
     NSSortDescriptor *sortDescriptor1 = [[NSSortDescriptor alloc] initWithKey:@"stationId" ascending:NO];
     NSArray *sortDescriptors = @[sortDescriptor1];
     NSArray *sorted = [_stations sortedArrayUsingDescriptors:sortDescriptors];
