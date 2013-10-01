@@ -6,7 +6,9 @@
 //  Copyright (c) 2013 RHC. All rights reserved.
 //
 
-#import <AFNetworking.h>
+#import <AFNetworking/AFHTTPSessionManager.h>
+#import <AFNetworking/AFURLResponseSerialization.h>
+#import <AFNetworking/AFNetworkReachabilityManager.h>
 
 #import "RHEVindsidenAPIClient.h"
 #import "VindsidenStationClient.h"
@@ -38,12 +40,13 @@ NSString *const kBaseURL = @"http://vindsiden.no/";
     self = [super initWithBaseURL:url];
 
     if ( nil != self ) {
-        self.responseSerializer = [AFXMLParserSerializer serializer];
+        self.responseSerializer = [AFXMLParserResponseSerializer serializer];
 
         RHEVindsidenAPIClient __weak *blocksafeSelf = self;
-        [self setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
+        [self.reachabilityManager setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
             [[NSNotificationCenter defaultCenter] postNotificationName:NETWORK_STATUS_CHANGED object:blocksafeSelf userInfo:@{@"AFNetworkReachabilityStatus": @(status)}];
         }];
+        [self.reachabilityManager startMonitoring];
     }
 
     return self;
@@ -54,7 +57,7 @@ NSString *const kBaseURL = @"http://vindsiden.no/";
 {
     [self GET:@"/xml.aspx"
         parameters:nil
-           success:^(NSHTTPURLResponse *urlResponse, id response) {
+           success:^(NSURLSessionDataTask *task, id response) {
                VindsidenStationClient *parser = [[VindsidenStationClient alloc] initWithParser:response];
                NSArray *parsedStations = [parser parse];
 
@@ -62,7 +65,7 @@ NSString *const kBaseURL = @"http://vindsiden.no/";
                    completionBlock( YES, parsedStations);
                }
            }
-           failure:^(NSError *error) {
+           failure:^(NSURLSessionDataTask *task, NSError *error) {
                DLOG(@"Fetching failed: %@", error);
                if ( completionBlock ) {
                    completionBlock( NO, nil );
@@ -82,9 +85,9 @@ NSString *const kBaseURL = @"http://vindsiden.no/";
 
     DLOG(@"IS BACKGROUND: %d",self.background);
 
-    __weak __block NSURLSessionDataTask *task = [self GET:@"/xml.aspx"
+    [self GET:@"/xml.aspx"
        parameters:@{@"id": station, @"hours": @(kPlotHistoryHours+1)}
-          success:^(NSHTTPURLResponse *urlResponse, id response) {
+          success:^(NSURLSessionDataTask *task, id response) {
               VindsidenPlotClient *parser = [[VindsidenPlotClient alloc] initWithParser:response];
               NSArray *parsedPlots = [parser parse];
 
@@ -92,17 +95,13 @@ NSString *const kBaseURL = @"http://vindsiden.no/";
                   completionBlock( YES, parsedPlots);
               }
           }
-          failure:^(NSError *error) {
+          failure:^(NSURLSessionDataTask *task, NSError *error) {
               if ( completionBlock ) {
                   completionBlock( NO, nil );
               }
 
               BOOL isCancelled = NO;
-              NSURLSessionDataTask __strong *strongTask = task;
-              if ( strongTask ) {
-                  isCancelled = (strongTask.state == NSURLSessionTaskStateCanceling);
-              }
-              DLOG(@"%d - %ld", isCancelled, (long)strongTask.state);
+              DLOG(@"%d - %d", isCancelled, task.state);
 
               if ( NO == self.background && errorBlock ) {
                   errorBlock( isCancelled, error );

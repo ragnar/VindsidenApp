@@ -6,7 +6,7 @@
 //  Copyright (c) 2013 RHC. All rights reserved.
 //
 
-#import <AFNetworking/AFNetworking.h>
+#import <AFNetworking/AFURLConnectionOperation.h>
 #import "RHCAlertManager.h"
 
 @interface RHCAlertManager () <UIAlertViewDelegate>
