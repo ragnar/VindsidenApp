@@ -21,7 +21,6 @@ static NSString *kCellID = @"stationCellID";
 @interface RHCViewController ()
 
 @property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
-@property (weak, nonatomic) UIButton *cameraButton;
 @property (weak, nonatomic) MotionJpegImageView *cameraView;
 @property (weak, nonatomic) IBOutlet UIPageControl *pageControl;
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
@@ -34,6 +33,14 @@ static NSString *kCellID = @"stationCellID";
 {
     NSMutableSet *_transformedCells;
     BOOL _wasVisible;
+}
+
+
+- (void)dealloc
+{
+    [self.cameraView removeObserver:self forKeyPath:@"image" context:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIApplicationDidBecomeActiveNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIApplicationWillResignActiveNotification object:nil];
 }
 
 
@@ -62,6 +69,7 @@ static NSString *kCellID = @"stationCellID";
     [imageView addGestureRecognizer:gesture];
     UIBarButtonItem *bt = [[UIBarButtonItem alloc] initWithCustomView:imageView];
     self.cameraView = imageView;
+    [self.cameraView addObserver:self forKeyPath:@"image" options:NSKeyValueObservingOptionNew context:nil];
 
 
     UIBarButtonItem *flex = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
@@ -86,6 +94,7 @@ static NSString *kCellID = @"stationCellID";
      ];
 
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationDidBecomeActive:) name:UIApplicationDidBecomeActiveNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationWillResignActive:) name:UIApplicationWillResignActiveNotification object:nil];
 }
 
 
@@ -166,6 +175,12 @@ static NSString *kCellID = @"stationCellID";
         }
     }
     isFirst = NO;
+}
+
+
+- (void)applicationWillResignActive:(NSNotification *)notification
+{
+    [self updateCameraButton:NO];
 }
 
 
@@ -430,8 +445,23 @@ static NSString *kCellID = @"stationCellID";
 }
 
 
-#pragma mark - 
+#pragma mark -
 
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+{
+    if ( [keyPath isEqualToString:@"image"] ) {
+        if ( [change[@"new"] isKindOfClass:[UIImage class]] ) {
+            [self.cameraView pause];
+        }
+        return;
+    }
+
+    [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
+}
+
+
+#pragma mark -
 
 - (void)updateContentWithCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler;
 {
