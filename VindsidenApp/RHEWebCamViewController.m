@@ -102,6 +102,7 @@
     [super viewDidAppear:animated];
 
     self.edgesForExtendedLayout = UIRectEdgeAll;
+    [[self navigationController] setNavigationBarHidden:NO animated:animated];
 
     [self initImageView];
     [self initZoom];
@@ -114,6 +115,13 @@
     [super didReceiveMemoryWarning];
 
     // Release any cached data, images, etc that aren't in use.
+}
+
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [[self navigationController] setNavigationBarHidden:YES animated:animated];
 }
 
 
