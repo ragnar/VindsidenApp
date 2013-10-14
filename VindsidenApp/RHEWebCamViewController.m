@@ -42,6 +42,7 @@
 
 - (void)dealloc
 {
+    [self.imageView stop];
     [self.imageView removeObserver:self forKeyPath:@"image"];
 }
 
