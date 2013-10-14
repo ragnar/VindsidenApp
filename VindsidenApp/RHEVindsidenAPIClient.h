@@ -6,11 +6,11 @@
 //  Copyright (c) 2013 RHC. All rights reserved.
 //
 
-#import "AFHTTPClient.h"
+#import <AFNetworking/AFHTTPSessionManager.h>
 
 extern NSString * const NETWORK_STATUS_CHANGED;
 
-@interface RHEVindsidenAPIClient : AFHTTPClient
+@interface RHEVindsidenAPIClient : AFHTTPSessionManager
 
 @property (nonatomic, assign) BOOL background;
 

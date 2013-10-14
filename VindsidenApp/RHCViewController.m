@@ -21,9 +21,10 @@ static NSString *kCellID = @"stationCellID";
 @interface RHCViewController ()
 
 @property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
-@property (weak, nonatomic) UIButton *cameraButton;
 @property (weak, nonatomic) MotionJpegImageView *cameraView;
-@property (weak, nonatomic) UIPageControl *pageControl;
+@property (weak, nonatomic) IBOutlet UIPageControl *pageControl;
+@property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
+@property (weak, nonatomic) IBOutlet UIToolbar *toolbar;
 
 @end
 
@@ -35,28 +36,19 @@ static NSString *kCellID = @"stationCellID";
 }
 
 
+- (void)dealloc
+{
+    [self.cameraView removeObserver:self forKeyPath:@"image" context:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIApplicationDidBecomeActiveNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIApplicationWillResignActiveNotification object:nil];
+}
+
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 
     self.automaticallyAdjustsScrollViewInsets = NO;
-
-    UIToolbar *toolbar = [UIToolbar new];
-    toolbar.barStyle = UIBarStyleDefault;
-
-    UIView *v = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, 320.0, 20.0)];
-    v.backgroundColor = [UIColor whiteColor];
-    [self.view addSubview:v];
-
-    // size up the toolbar and set its frame
-    [toolbar sizeToFit];
-    CGFloat toolbarHeight = CGRectGetHeight([toolbar frame]);
-    //CGRect mainViewBounds = self.view.bounds;
-    CGRect mainViewBounds = [[UIApplication sharedApplication].delegate window].bounds;
-    [toolbar setFrame:CGRectMake(CGRectGetMinX(mainViewBounds),
-                                 CGRectGetMinY(mainViewBounds) + CGRectGetHeight(mainViewBounds) - (toolbarHeight * 1.0),
-                                 CGRectGetWidth(mainViewBounds),
-                                 toolbarHeight)];
 
     UIButton *button = nil;
     UIBarButtonItem *bb = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"settings"]
@@ -77,25 +69,16 @@ static NSString *kCellID = @"stationCellID";
     [imageView addGestureRecognizer:gesture];
     UIBarButtonItem *bt = [[UIBarButtonItem alloc] initWithCustomView:imageView];
     self.cameraView = imageView;
+    [self.cameraView addObserver:self forKeyPath:@"image" options:NSKeyValueObservingOptionNew context:nil];
 
 
     UIBarButtonItem *flex = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
-    [toolbar setItems:@[bd, flex, bt, flex, bc, flex, bb]];
-    [self.view addSubview:toolbar];
+    [self.toolbar setItems:@[bd, flex, bt, flex, bc, flex, bb]];
 
 
-    UIPageControl *pControl = [UIPageControl new];
-    pControl.frame = CGRectMake(CGRectGetMinX(mainViewBounds),
-                                CGRectGetMinY(mainViewBounds) + CGRectGetHeight(mainViewBounds) - (toolbarHeight + 16.0),
-                                CGRectGetWidth(mainViewBounds),
-                                16.0);
-    pControl.pageIndicatorTintColor = [UIColor lightGrayColor];
-    pControl.currentPageIndicatorTintColor = [UIColor darkGrayColor];
-    pControl.numberOfPages = [CDStation numberOfVisibleStations];
-
-    [pControl addTarget:self action:@selector(pageControlChangedValue:) forControlEvents:UIControlEventValueChanged];
-    [self.view addSubview:pControl];
-    self.pageControl = pControl;
+    self.pageControl.pageIndicatorTintColor = [UIColor lightGrayColor];
+    self.pageControl.currentPageIndicatorTintColor = [UIColor darkGrayColor];
+    self.pageControl.numberOfPages = [CDStation numberOfVisibleStations];
 
     _transformedCells = [NSMutableSet set];
 
@@ -111,6 +94,7 @@ static NSString *kCellID = @"stationCellID";
      ];
 
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationDidBecomeActive:) name:UIApplicationDidBecomeActiveNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationWillResignActive:) name:UIApplicationWillResignActiveNotification object:nil];
 }
 
 
@@ -171,9 +155,7 @@ static NSString *kCellID = @"stationCellID";
         controller.delegate = self;
         controller.station = cell.currentStation;
     } else if ([segue.identifier isEqualToString:@"ShowWebCam"]) {
-		UINavigationController *navigationController = segue.destinationViewController;
-		RHEWebCamViewController *controller = navigationController.viewControllers[0];
-        //[controller.navigationController.navigationBar setTintColor:nil];
+        RHEWebCamViewController *controller = segue.destinationViewController;
         controller.webCamURL = [NSURL URLWithString:cell.currentStation.webCamImage];
         controller.stationName = cell.currentStation.stationName;
         controller.permitText = cell.currentStation.webCamText;
@@ -193,6 +175,12 @@ static NSString *kCellID = @"stationCellID";
         }
     }
     isFirst = NO;
+}
+
+
+- (void)applicationWillResignActive:(NSNotification *)notification
+{
+    [self updateCameraButton:NO];
 }
 
 
@@ -223,15 +211,6 @@ static NSString *kCellID = @"stationCellID";
     }
 
     return CGSizeMake( 320.0, 416.0);
-}
-
-
-- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
-{
-    UIEdgeInsets ei = [(UICollectionViewFlowLayout *)collectionViewLayout sectionInset];
-    ei.bottom = 44.0;
-    ei.top = 20.0;
-    return ei;
 }
 
 
@@ -377,7 +356,7 @@ static NSString *kCellID = @"stationCellID";
                          if ( [cell.currentStation.webCamImage length] == 0 ) {
                              return;
                          }
-                         
+
                          [self.cameraView setUrl:[NSURL URLWithString:cell.currentStation.webCamImage]];
                          [self.cameraView play];
                          
@@ -466,8 +445,23 @@ static NSString *kCellID = @"stationCellID";
 }
 
 
-#pragma mark - 
+#pragma mark -
 
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+{
+    if ( [keyPath isEqualToString:@"image"] ) {
+        if ( [change[@"new"] isKindOfClass:[UIImage class]] ) {
+            [self.cameraView pause];
+        }
+        return;
+    }
+
+    [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
+}
+
+
+#pragma mark -
 
 - (void)updateContentWithCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler;
 {

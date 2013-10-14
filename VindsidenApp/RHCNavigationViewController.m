@@ -17,7 +17,11 @@
 
 - (NSUInteger)supportedInterfaceOrientations
 {
+    if ( [self.topViewController isKindOfClass:NSClassFromString(@"RHEWebCamViewController")] ) {
+        return UIInterfaceOrientationMaskAllButUpsideDown;
+    }
     return UIInterfaceOrientationMaskPortrait;
 }
+
 
 @end

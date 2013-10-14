@@ -19,9 +19,6 @@
 @property (strong, nonatomic) NSRegularExpression *regexRemoveHTMLTags;
 
 @property (assign, nonatomic) BOOL isFirstTime;
-@property (assign, nonatomic) UIStatusBarStyle originalStatusBarStyle;
-@property (assign, nonatomic) UIBarStyle originalBarStyle;
-@property (strong, nonatomic) UIColor *originalTintColor;
 
 
 - (void) handleDoubleTap:(UIGestureRecognizer *)gestureRecognizer;
@@ -37,11 +34,13 @@
     BOOL _switchNavBack;
     BOOL _statusBarHidden;
     BOOL _updateConstraints;
+    BOOL _origNavBarHidden;
 }
 
 
 - (void)dealloc
 {
+    [self.imageView stop];
     [self.imageView removeObserver:self forKeyPath:@"image"];
 }
 
@@ -91,16 +90,16 @@
 
     self.navigationItem.title = _stationName;
 
-    _originalStatusBarStyle = [[UIApplication sharedApplication] statusBarStyle];
-    _originalBarStyle = self.navigationController.navigationBar.barStyle;
-    _originalTintColor = self.navigationController.navigationBar.tintColor;
+    _origNavBarHidden = [self.navigationController isNavigationBarHidden];
 }
+
 
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
 
     self.edgesForExtendedLayout = UIRectEdgeAll;
+    [[self navigationController] setNavigationBarHidden:NO animated:animated];
 
     [self initImageView];
     [self initZoom];
@@ -113,6 +112,13 @@
     [super didReceiveMemoryWarning];
 
     // Release any cached data, images, etc that aren't in use.
+}
+
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [[self navigationController] setNavigationBarHidden:_origNavBarHidden animated:animated];
 }
 
 

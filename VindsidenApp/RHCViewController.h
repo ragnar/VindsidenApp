@@ -13,7 +13,7 @@
 
 
 
-@interface RHCViewController : UICollectionViewController <UICollectionViewDelegateFlowLayout, NSFetchedResultsControllerDelegate, RHEStationDetailsDelegate, RHEWebCamImageViewDelegate, RHCSettingsDelegate>
+@interface RHCViewController : UIViewController <UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, NSFetchedResultsControllerDelegate, RHEStationDetailsDelegate, RHEWebCamImageViewDelegate, RHCSettingsDelegate>
 
 
 - (void)updateContentWithCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler;
