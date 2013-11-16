@@ -221,7 +221,7 @@
 
     [self.updatedTimer invalidate];
     self.updatedTimer = [[NSTimer alloc] initWithFireDate:[NSDate date]
-                                                 interval:10
+                                                 interval:1
                                                    target:self
                                                  selector:@selector(updateLastUpdatedLabel)
                                                  userInfo:nil

@@ -118,7 +118,7 @@
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-    [[self navigationController] setNavigationBarHidden:_origNavBarHidden animated:animated];
+    [[self navigationController] setNavigationBarHidden:YES animated:animated];
 }
 
 

@@ -395,6 +395,7 @@ static NSString *kCellID = @"stationCellID";
 
     activityViewController.excludedActivityTypes = @[UIActivityTypeAssignToContact];
     activityViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+
     [self presentViewController:activityViewController animated:YES completion:nil];
 }
 
