@@ -101,7 +101,6 @@ NSString *const kBaseURL = @"http://vindsiden.no/";
               }
 
               BOOL isCancelled = NO;
-              DLOG(@"%d - %d", isCancelled, task.state);
 
               if ( NO == self.background && errorBlock ) {
                   errorBlock( isCancelled, error );
