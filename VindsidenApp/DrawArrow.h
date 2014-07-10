@@ -6,7 +6,7 @@
 //  Copyright (c) 2010 Shortcut AS. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+@import UIKit;
 
 
 @interface DrawArrow : UIImage
