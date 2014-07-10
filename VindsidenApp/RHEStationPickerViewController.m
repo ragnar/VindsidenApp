@@ -11,6 +11,7 @@
 #import "RHEVindsidenAPIClient.h"
 #import "CDStation.h"
 
+@import VindsidenKit;
 
 @interface RHEStationPickerViewController ()
 
@@ -306,7 +307,7 @@
         return _fetchedResultsController;
     }
 
-    NSManagedObjectContext *context = [(id)[[UIApplication sharedApplication] delegate] managedObjectContext];
+    NSManagedObjectContext *context = [[Datamanager sharedManager] managedObjectContext];
     NSString *cacheName = @"StationPicker";
     [NSFetchedResultsController deleteCacheWithName:cacheName];
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];

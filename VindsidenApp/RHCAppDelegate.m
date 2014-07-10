@@ -14,12 +14,9 @@
 #import "RHCViewController.h"
 #import "RHEVindsidenAPIClient.h"
 
-#import "CDPlot.h"
-#import "CDStation.h"
+@import VindsidenKit;
 
 @interface RHCAppDelegate ()
-
-@property (nonatomic, strong, readonly) NSDateFormatter *dateFormatter;
 
 @end
 
@@ -28,12 +25,6 @@
 {
     dispatch_queue_t _formatterQueue;
 }
-
-
-@synthesize managedObjectContext = _managedObjectContext;
-@synthesize managedObjectModel = _managedObjectModel;
-@synthesize persistentStoreCoordinator = _persistentStoreCoordinator;
-@synthesize dateFormatter = _dateFormatter;
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
@@ -58,7 +49,7 @@
 
     }
 
-    [self cleanupPlots];
+    [[Datamanager sharedManager] cleanupPlots];
 
     [application setMinimumBackgroundFetchInterval:UIApplicationBackgroundFetchIntervalMinimum];
     return YES;
@@ -84,9 +75,9 @@
     id ident = [url.pathComponents lastObject];
     CDStation *station = nil;
     if ( [ident isNumeric] ) {
-        station = [CDStation existingStation:ident inManagedObjectContext:[self managedObjectContext]];
+        station = [CDStation existingStation:ident inManagedObjectContext:[[Datamanager sharedManager] managedObjectContext]];
     } else {
-        station = [CDStation searchForStation:ident inManagedObjectContext:[self managedObjectContext]];
+        station = [CDStation searchForStation:ident inManagedObjectContext:[[Datamanager sharedManager] managedObjectContext]];
     }
 
     if ( nil == station ) {
@@ -136,13 +127,7 @@
 
 - (void)applicationWillTerminate:(UIApplication *)application
 {
-    NSError *error = nil;
-    if ( _managedObjectContext ) {
-        if ( [_managedObjectContext hasChanges] && ![_managedObjectContext save:&error]) {
-            NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-            abort();
-        }
-    }
+    [[Datamanager sharedManager] saveContext];
 }
 
 
@@ -170,64 +155,6 @@
 }
 
 
-
-#pragma mark - CoreData Stack
-
-
-- (NSManagedObjectContext *)managedObjectContext
-{
-    if ( _managedObjectContext ) {
-        return _managedObjectContext;
-    }
-
-    NSPersistentStoreCoordinator *coordinator = [self persistentStoreCoordinator];
-    if (coordinator) {
-        _managedObjectContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
-        [_managedObjectContext setPersistentStoreCoordinator:coordinator];
-    }
-    return _managedObjectContext;
-}
-
-
-- (NSManagedObjectModel *)managedObjectModel
-{
-    if ( _managedObjectModel ) {
-        return _managedObjectModel;
-    }
-
-    _managedObjectModel = [NSManagedObjectModel mergedModelFromBundles:nil];
-    return _managedObjectModel;
-}
-
-
-- (NSPersistentStoreCoordinator *)persistentStoreCoordinator
-{
-    if ( _persistentStoreCoordinator ) {
-        return _persistentStoreCoordinator;
-    }
-
-    NSURL *storeUrl = [NSURL fileURLWithPath:[[self applicationPrivateDocumentsDirectory] stringByAppendingPathComponent:@"Vindsiden.sqlite"]];
-
-    NSError *error = nil;
-    _persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self managedObjectModel]];
-    if ( ![_persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeUrl options:nil error:&error]) {
-        NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-        abort();
-    }
-
-    
-
-    NSDictionary *fileAttributes = @{ NSFileProtectionKey : NSFileProtectionComplete };
-
-    if ( ! [[NSFileManager defaultManager] setAttributes:fileAttributes ofItemAtPath:[storeUrl path] error:&error] ) {
-        DLOG(@"Unresolved error %@, %@", error, [error userInfo]);
-        abort();
-    }
-
-    return _persistentStoreCoordinator;
-}
-
-
 #pragma mark - Application's Documents directory
 
 
@@ -247,37 +174,6 @@
 }
 
 
-- (void) cleanupPlots
-{
-    NSManagedObjectContext *context = [(id)[[UIApplication sharedApplication] delegate] managedObjectContext];
-    NSManagedObjectContext *childContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
-    childContext.parentContext = context;
-    childContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy;
-    childContext.undoManager = nil;
-    __block NSError *err = nil;
-
-    [childContext performBlock:^{
-        NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-        NSEntityDescription *entity = [NSEntityDescription entityForName:@"CDPlot" inManagedObjectContext:childContext];
-        [fetchRequest setEntity:entity];
-
-        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"plotTime < %@", [[NSDate date] dateByAddingTimeInterval:-1*((1+kPlotHistoryHours)*3600)]];
-        [fetchRequest setPredicate:predicate];
-
-        NSArray *result = [childContext executeFetchRequest:fetchRequest error:nil];
-
-        for ( CDPlot *object in result ) {
-            [childContext deleteObject:object];
-        }
-        [childContext save:&err];
-        [context performBlock:^{
-            [context save:&err];
-        }];
-        
-    }];
-}
-
-
 #pragma mark - 
 
 
@@ -292,31 +188,6 @@
                                                    controller.currentStation = station;
                                                }
      ];
-}
-
-
-- (NSDateFormatter *)dateFormatter
-{
-    if ( nil != _dateFormatter ) {
-        return _dateFormatter;
-    }
-
-    _dateFormatter = [[NSDateFormatter alloc] init];
-    [_dateFormatter setDateFormat:@"yyyy-MM-dd' 'HH:mm:ssZZZ"];
-    [_dateFormatter setTimeZone:[NSTimeZone timeZoneWithName:@"UTC"]];
-
-    return _dateFormatter;
-}
-
-
-- (NSDate *)dateFromString:(NSString *)string
-{
-    NSDate __block *date = nil;
-    dispatch_sync(_formatterQueue, ^{
-        date = [[self dateFormatter] dateFromString:string];
-    });
-
-    return date;
 }
 
 

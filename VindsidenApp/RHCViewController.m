@@ -15,6 +15,7 @@
 #import "UIImage+ImageFromView.h"
 #import <MotionJpegImageView/MotionJpegImageView.h>
 
+@import VindsidenKit;
 
 static NSString *kCellID = @"stationCellID";
 
@@ -279,7 +280,7 @@ static NSString *kCellID = @"stationCellID";
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     NSString *cacheName = @"StationList";
 
-    NSManagedObjectContext *context = [(id)[[UIApplication sharedApplication] delegate] managedObjectContext];
+    NSManagedObjectContext *context = [[Datamanager sharedManager] managedObjectContext];
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"CDStation" inManagedObjectContext:context];
     [fetchRequest setEntity:entity];
     [fetchRequest setFetchBatchSize:20];
