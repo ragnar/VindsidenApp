@@ -52,7 +52,7 @@
     dispatch_sync(dispatch_get_main_queue(), ^{
         NSString *message = error.userInfo[NSLocalizedDescriptionKey];
 
-        if ( [error.domain isEqualToString:AFNetworkingErrorDomain]) {
+        if ( [error.domain isEqualToString:(NSString *)kCFErrorDomainCFNetwork]) {
             message = NSLocalizedString(@"NETWORK_ERROR_UNABLE_TO_LOAD", @"Unable to fetch data at this point.");
         }
 
