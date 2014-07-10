@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		192A528F7DE34EB5BFD1EF88 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A795A60F33B14BC9B7DC4A3E /* libPods.a */; };
+		AD003850196E7A6400C3232A /* RHCTodayCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD00384F196E7A6400C3232A /* RHCTodayCell.swift */; };
 		AD07B2C11779E90A004BC24C /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AD07B2C01779E90A004BC24C /* Media.xcassets */; };
 		AD0B8EAF1754F3C800042B95 /* RHCStationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD0B8EAE1754F3C800042B95 /* RHCStationViewController.m */; };
 		AD17ED481731012200943C33 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD17ED471731012200943C33 /* UIKit.framework */; };
@@ -215,6 +216,7 @@
 		15DC7F5398F749998EAC2FC7 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
 		A795A60F33B14BC9B7DC4A3E /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		AD00384E196E741800C3232A /* VindsidenApp-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "VindsidenApp-Bridging-Header.h"; sourceTree = "<group>"; };
+		AD00384F196E7A6400C3232A /* RHCTodayCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RHCTodayCell.swift; sourceTree = "<group>"; };
 		AD07B2C01779E90A004BC24C /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Media.xcassets; path = VindsidenApp/Media.xcassets; sourceTree = "<group>"; };
 		AD0B8EAD1754F3C800042B95 /* RHCStationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RHCStationViewController.h; sourceTree = "<group>"; };
 		AD0B8EAE1754F3C800042B95 /* RHCStationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RHCStationViewController.m; sourceTree = "<group>"; };
@@ -608,6 +610,7 @@
 				AD539C961947B2D0002644BD /* org.juniks.VindsidenApp.VindsidenToday.entitlements */,
 				AD539C881947B0F7002644BD /* TodayViewController.swift */,
 				AD539C8A1947B0F7002644BD /* MainInterface.storyboard */,
+				AD00384F196E7A6400C3232A /* RHCTodayCell.swift */,
 				AD539C861947B0F7002644BD /* Supporting Files */,
 			);
 			path = VindsidenToday;
@@ -1014,6 +1017,7 @@
 			files = (
 				AD539C891947B0F7002644BD /* TodayViewController.swift in Sources */,
 				ADFE6079196E56810025F346 /* DrawArrow.m in Sources */,
+				AD003850196E7A6400C3232A /* RHCTodayCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
