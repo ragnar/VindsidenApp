@@ -14,6 +14,7 @@
 #import "RHEVindsidenAPIClient.h"
 #import "UIImage+ImageFromView.h"
 #import <MotionJpegImageView/MotionJpegImageView.h>
+#import <JTSImageViewController/JTSImageViewController.h>
 
 @import VindsidenKit;
 
@@ -403,7 +404,24 @@ static NSString *kCellID = @"stationCellID";
 
 - (IBAction)camera:(id)sender
 {
-    [self performSegueWithIdentifier:@"ShowWebCam" sender:sender];
+    if ( [[self.collectionView visibleCells] count] == 0 ) {
+        return;
+    }
+
+    MotionJpegImageView *view = (MotionJpegImageView *)[(UITapGestureRecognizer *)sender view];
+
+    if ( view.image ) {
+        JTSImageInfo *imageInfo = [[JTSImageInfo alloc] init];
+        imageInfo.image = view.image;
+        imageInfo.referenceRect = [view frame];
+        imageInfo.referenceView = [view superview];
+
+        JTSImageViewController *controller = [[JTSImageViewController alloc] initWithImageInfo:imageInfo
+                                                                                          mode:JTSImageViewControllerMode_Image
+                                                                               backgroundStyle:JTSImageViewControllerBackgroundStyle_ScaledDimmedBlurred];
+
+        [controller showFromViewController:self transition:JTSImageViewControllerTransition_FromOriginalPosition];
+    }
 }
 
 
