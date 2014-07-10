@@ -180,31 +180,4 @@ import CoreData
 
         return date!;
     }
-
-    /*
-    - (NSDateFormatter *)dateFormatter
-    {
-    if ( nil != _dateFormatter ) {
-    return _dateFormatter;
-    }
-
-    _dateFormatter = [[NSDateFormatter alloc] init];
-    [_dateFormatter setDateFormat:@"yyyy-MM-dd' 'HH:mm:ssZZZ"];
-    [_dateFormatter setTimeZone:[NSTimeZone timeZoneWithName:@"UTC"]];
-
-    return _dateFormatter;
-    }
-
-
-    - (NSDate *)dateFromString:(NSString *)string
-    {
-    NSDate __block *date = nil;
-    dispatch_sync(_formatterQueue, ^{
-    date = [[self dateFormatter] dateFromString:string];
-    });
-    
-    return date;
-    }
-    
-*/
 }
