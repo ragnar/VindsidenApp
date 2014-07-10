@@ -6,7 +6,8 @@
 //  Copyright 2011 Shortcut AS. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+@import Foundation;
+@import CoreGraphics;
 
 
 @interface NSNumber (Between)

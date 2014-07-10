@@ -5,10 +5,10 @@
 //  Copyright 2009 Shortcut AS. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+@import Foundation;
 
 @interface NSString (isNumeric)
 
-- (BOOL) isNumeric;
+- (BOOL)isNumeric;
 
 @end

@@ -6,7 +6,7 @@
 //  Copyright (c) 2010 Shortcut AS. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+@import UIKit;
 
 
 @interface UIImage (ImageFromView)

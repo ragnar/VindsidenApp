@@ -8,7 +8,7 @@
 //  Source: https://gist.github.com/955123
 //
 
-#import <Foundation/Foundation.h>
+@import Foundation;
 
 @interface NSObject (performBlockCancel)
 

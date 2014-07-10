@@ -8,7 +8,6 @@
 
 #import "NSNumber+Between.h"
 
-
 @implementation NSNumber (Between)
 
 - (BOOL) isBetween:(CGFloat)from and:(CGFloat)to

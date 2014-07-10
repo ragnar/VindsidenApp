@@ -9,7 +9,7 @@
 
 @implementation NSString (isNumeric)
 
-- (BOOL) isNumeric
+- (BOOL)isNumeric
 {
     NSScanner *sc = [NSScanner scannerWithString:self];
     if ( [sc scanFloat:NULL] ) {

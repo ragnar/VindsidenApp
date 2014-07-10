@@ -5,9 +5,8 @@
 //  Created by Ragnar Henriksen on 19.09.10.
 //  Copyright (c) 2010 Shortcut AS. All rights reserved.
 //
-
-#import <Foundation/Foundation.h>
-
+@import Foundation;
+@import CoreGraphics;
 
 typedef NS_ENUM(NSInteger, SpeedConvertion)
 {
@@ -21,9 +20,9 @@ typedef NS_ENUM(NSInteger, SpeedConvertion)
 
 @interface NSNumber (Convertion)
 
-- (CGFloat) speedConvertionTo:(SpeedConvertion)toUnit;
-- (CGFloat )speedInBeaufort;
-+ (NSString *) longUnitNameString:(SpeedConvertion)unit;
-+ (NSString *) shortUnitNameString:(SpeedConvertion)unit;
+- (CGFloat)speedConvertionTo:(SpeedConvertion)toUnit;
+- (CGFloat)speedInBeaufort;
++ (NSString *)longUnitNameString:(SpeedConvertion)unit;
++ (NSString *)shortUnitNameString:(SpeedConvertion)unit;
 
 @end

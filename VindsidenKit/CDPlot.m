@@ -8,7 +8,6 @@
 
 #import "CDPlot.h"
 #import "CDStation.h"
-#import "RHCAppDelegate.h"
 #import "NSString+fixDateString.h"
 
 #import <VindsidenKit/VindsidenKit-Swift.h>

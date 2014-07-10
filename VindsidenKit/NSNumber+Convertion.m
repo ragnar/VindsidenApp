@@ -11,7 +11,7 @@
 
 @implementation NSNumber (Convertion)
 
-- (CGFloat) speedConvertionTo:(SpeedConvertion)toUnit
+- (CGFloat)speedConvertionTo:(SpeedConvertion)toUnit
 {
     switch ( toUnit ) 
     {
