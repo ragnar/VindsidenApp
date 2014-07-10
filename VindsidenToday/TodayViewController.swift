@@ -20,6 +20,7 @@ class TodayViewController: UITableViewController, NCWidgetProviding, NSFetchedRe
         struct CellIdentifiers {
             static let content = "todayViewCell"
             static let message = "Cell"
+            static let showall = "ShowAll"
         }
     }
 
@@ -80,13 +81,27 @@ class TodayViewController: UITableViewController, NCWidgetProviding, NSFetchedRe
     override func tableView(tableView: UITableView!, cellForRowAtIndexPath indexPath: NSIndexPath!) -> UITableViewCell!
     {
         if indexPath.row == TableViewConstants.baseRowCount /*&&  list!.count != TableViewConstants.baseRowCount + 1*/ {
-            let cell = tableView.dequeueReusableCellWithIdentifier(TableViewConstants.CellIdentifiers.message, forIndexPath: indexPath) as UITableViewCell
+            let cell = tableView.dequeueReusableCellWithIdentifier(TableViewConstants.CellIdentifiers.showall, forIndexPath: indexPath) as UITableViewCell
             cell.textLabel.text = NSLocalizedString("Show All...", comment: "")
             return cell
         } else {
-            let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as UITableViewCell
+            let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as RHCTodayCell
             let stationInfo = self.fetchedResultsController.objectAtIndexPath(indexPath) as CDStation
-            cell.textLabel.text = stationInfo.stationName
+            let tmpplot: CDPlot? = stationInfo.lastRegisteredPlot()
+
+            if let plot = tmpplot {
+                let image = DrawArrow.drawArrowAtAngle(Float(plot.windDir), forSpeed:Float(plot.windAvg), highlighted: false, color: UIColor.whiteColor(), hightlightedColor: UIColor.blackColor())
+
+                let unit = SpeedConvertion.ToMetersPerSecond // NSUserDefaults.standardUserDefaults().integerForKey("selectedUnit")
+                let speed = plot.windAvg.speedConvertionTo(unit)
+                cell.speedLabel.text = "\(Int(speed)) \(NSNumber.shortUnitNameString(unit))"
+                cell.arrowImageView.image = image
+            } else {
+                cell.speedLabel.text = "—.—"
+                //cell.arrowImageView.image = nil;
+            }
+            cell.nameLabel.text = stationInfo.stationName
+
             return cell
         }
     }
