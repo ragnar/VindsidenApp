@@ -568,8 +568,8 @@ const NSInteger kMinSpeedLines = 3;
 
 - (NSInteger)hourComponent:(NSDate *)date
 {
-    NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
-    NSDateComponents *hourComponents = [gregorian components:(NSHourCalendarUnit) fromDate:date];
+    NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+    NSDateComponents *hourComponents = [gregorian components:(NSCalendarUnitHour) fromDate:date];
 
     return [hourComponents hour];
 }
@@ -577,8 +577,8 @@ const NSInteger kMinSpeedLines = 3;
 
 - (NSDate *)absoluteDate:(NSDate *)date isStart:(BOOL)isStart
 {
-    NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
-    NSDateComponents *inputComponents = [gregorian components:(NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit | NSHourCalendarUnit) fromDate:date];
+    NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+    NSDateComponents *inputComponents = [gregorian components:(NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay | NSCalendarUnitHour) fromDate:date];
 
     NSDateComponents *components = [[NSDateComponents alloc] init];
     [components setYear:[inputComponents year]];
