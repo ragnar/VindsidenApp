@@ -11,6 +11,7 @@
 #import "RHCAppDelegate.h"
 #import "NSString+fixDateString.h"
 
+#import <VindsidenKit/VindsidenKit-Swift.h>
 
 @implementation CDPlot
 
@@ -28,9 +29,8 @@
 + (CDPlot *) newOrExistingPlot:(NSDictionary *)dict forStation:(CDStation *)station inManagedObjectContext:(NSManagedObjectContext *)managedObjectContext
 {
     CDPlot *existing = nil;
-    RHCAppDelegate *_appDelegate = [[UIApplication sharedApplication] delegate];
     NSString *dateString = [dict[@"plotTime"] fixDateString];
-    NSDate *date = [_appDelegate dateFromString:dateString];
+    NSDate *date = [[Datamanager sharedManager] dateFromString:dateString];
     NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:@"CDPlot"];
 
     request.predicate = [NSPredicate predicateWithFormat:@"station == %@ and plotTime == %@", station, date];
@@ -75,7 +75,7 @@
         return;
     }
 
-    NSManagedObjectContext *context = [(id)[[UIApplication sharedApplication] delegate] managedObjectContext];
+    NSManagedObjectContext *context = [[Datamanager sharedManager] managedObjectContext];
     NSManagedObjectContext *childContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
     childContext.parentContext = context;
     childContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy;

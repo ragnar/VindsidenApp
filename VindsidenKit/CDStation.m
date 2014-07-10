@@ -10,6 +10,10 @@
 #import "CDPlot.h"
 #import "NSSet+Sort.h"
 
+#import "VindsidenKit/VindsidenKit-Swift.h"
+
+#define kPlotHistoryHours 5
+
 
 @implementation CDStation
 
@@ -77,7 +81,7 @@
 
 + (void)updateStations:(NSArray *)stations
 {
-    NSManagedObjectContext *context = [(id)[[UIApplication sharedApplication] delegate] managedObjectContext];
+    NSManagedObjectContext *context = [[Datamanager sharedManager] managedObjectContext];
     NSManagedObjectContext *childContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
     childContext.parentContext = context;
     childContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy;
@@ -206,7 +210,7 @@
 
 + (NSInteger)numberOfVisibleStations
 {
-    NSManagedObjectContext *context = [(id)[[UIApplication sharedApplication] delegate] managedObjectContext];
+    NSManagedObjectContext *context = [[Datamanager sharedManager] managedObjectContext];
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"CDStation"];
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"isHidden == NO"];
     fetchRequest.predicate = predicate;
