@@ -41,6 +41,8 @@
 + (NSInteger)maxOrderForStationsInManagedObjectContext:(NSManagedObjectContext *)managedObjectContext;
 + (NSInteger)numberOfVisibleStations;
 
+- (CDPlot *)lastRegisteredPlot;
+
 @end
 
 @interface CDStation (CoreDataGeneratedAccessors)

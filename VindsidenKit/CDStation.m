@@ -219,4 +219,20 @@
 }
 
 
+- (CDPlot *)lastRegisteredPlot
+{
+    NSDate *inDate = [[NSDate date] dateByAddingTimeInterval:-1*(kPlotHistoryHours-1)*3600];
+    NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+    NSDateComponents *inputComponents = [gregorian components:(NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay | NSCalendarUnitHour) fromDate:inDate];
+    NSDate *outDate = [gregorian dateFromComponents:inputComponents];
+    NSArray *cdplots = [[self.plots filteredSetUsingPredicate:[NSPredicate predicateWithFormat:@"plotTime >= %@", outDate]] sortedByKeyPath:@"plotTime" ascending:NO];
+
+    if ( [cdplots count] ) {
+        return [cdplots firstObject];
+    }
+
+    return nil;
+}
+
+
 @end
