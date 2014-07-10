@@ -82,6 +82,7 @@
 		ADCD425D196E4E42004973E9 /* UIFontDescriptor+textStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = ADCD424B196E4E42004973E9 /* UIFontDescriptor+textStyle.m */; };
 		ADCD425E196E4E42004973E9 /* UIImage+ImageFromView.h in Headers */ = {isa = PBXBuildFile; fileRef = ADCD424C196E4E42004973E9 /* UIImage+ImageFromView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		ADCD425F196E4E42004973E9 /* UIImage+ImageFromView.m in Sources */ = {isa = PBXBuildFile; fileRef = ADCD424D196E4E42004973E9 /* UIImage+ImageFromView.m */; };
+		ADFE6079196E56810025F346 /* DrawArrow.m in Sources */ = {isa = PBXBuildFile; fileRef = AD17ED8F1731066C00943C33 /* DrawArrow.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -213,6 +214,7 @@
 /* Begin PBXFileReference section */
 		15DC7F5398F749998EAC2FC7 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
 		A795A60F33B14BC9B7DC4A3E /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		AD00384E196E741800C3232A /* VindsidenApp-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "VindsidenApp-Bridging-Header.h"; sourceTree = "<group>"; };
 		AD07B2C01779E90A004BC24C /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Media.xcassets; path = VindsidenApp/Media.xcassets; sourceTree = "<group>"; };
 		AD0B8EAD1754F3C800042B95 /* RHCStationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RHCStationViewController.h; sourceTree = "<group>"; };
 		AD0B8EAE1754F3C800042B95 /* RHCStationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RHCStationViewController.m; sourceTree = "<group>"; };
@@ -380,6 +382,7 @@
 		AD17ED3B1731012200943C33 = {
 			isa = PBXGroup;
 			children = (
+				AD00384E196E741800C3232A /* VindsidenApp-Bridging-Header.h */,
 				AD07B2C01779E90A004BC24C /* Media.xcassets */,
 				AD17EDC817312B2500943C33 /* Fonts */,
 				AD17ED4D1731012200943C33 /* VindsidenApp */,
@@ -1010,6 +1013,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AD539C891947B0F7002644BD /* TodayViewController.swift in Sources */,
+				ADFE6079196E56810025F346 /* DrawArrow.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1317,6 +1321,7 @@
 				PRODUCT_NAME = "org.juniks.VindsidenApp.$(TARGET_NAME:rfc1034identifier)";
 				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "VindsidenApp-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
@@ -1344,6 +1349,7 @@
 				PRODUCT_NAME = "org.juniks.VindsidenApp.$(TARGET_NAME:rfc1034identifier)";
 				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "VindsidenApp-Bridging-Header.h";
 			};
 			name = Release;
 		};
