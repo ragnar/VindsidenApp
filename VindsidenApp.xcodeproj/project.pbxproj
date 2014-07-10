@@ -10,7 +10,6 @@
 		192A528F7DE34EB5BFD1EF88 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A795A60F33B14BC9B7DC4A3E /* libPods.a */; };
 		AD07B2C11779E90A004BC24C /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AD07B2C01779E90A004BC24C /* Media.xcassets */; };
 		AD0B8EAF1754F3C800042B95 /* RHCStationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD0B8EAE1754F3C800042B95 /* RHCStationViewController.m */; };
-		AD0B8EB21754F7D700042B95 /* NSString+isNumeric.m in Sources */ = {isa = PBXBuildFile; fileRef = AD0B8EB11754F7D700042B95 /* NSString+isNumeric.m */; };
 		AD17ED481731012200943C33 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD17ED471731012200943C33 /* UIKit.framework */; };
 		AD17ED4A1731012200943C33 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD17ED491731012200943C33 /* Foundation.framework */; };
 		AD17ED4C1731012200943C33 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD17ED4B1731012200943C33 /* CoreGraphics.framework */; };
@@ -27,9 +26,6 @@
 		AD17ED881731058400943C33 /* RHCStationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AD17ED851731058400943C33 /* RHCStationCell.m */; };
 		AD17ED891731058400943C33 /* RHCStationInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = AD17ED871731058400943C33 /* RHCStationInfo.m */; };
 		AD17EDA61731066F00943C33 /* DrawArrow.m in Sources */ = {isa = PBXBuildFile; fileRef = AD17ED8F1731066C00943C33 /* DrawArrow.m */; };
-		AD17EDA71731066F00943C33 /* NSNumber+Between.m in Sources */ = {isa = PBXBuildFile; fileRef = AD17ED911731066D00943C33 /* NSNumber+Between.m */; };
-		AD17EDA81731066F00943C33 /* NSNumber+Convertion.m in Sources */ = {isa = PBXBuildFile; fileRef = AD17ED931731066D00943C33 /* NSNumber+Convertion.m */; };
-		AD17EDA91731066F00943C33 /* NSSet+Sort.m in Sources */ = {isa = PBXBuildFile; fileRef = AD17ED951731066D00943C33 /* NSSet+Sort.m */; };
 		AD17EDAA1731066F00943C33 /* RHEGraphMarker.m in Sources */ = {isa = PBXBuildFile; fileRef = AD17ED971731066E00943C33 /* RHEGraphMarker.m */; };
 		AD17EDAB1731066F00943C33 /* RHEGraphView.m in Sources */ = {isa = PBXBuildFile; fileRef = AD17ED991731066E00943C33 /* RHEGraphView.m */; };
 		AD17EDB717310E5400943C33 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD17EDB617310E5300943C33 /* CoreData.framework */; };
@@ -38,7 +34,6 @@
 		AD17EDBD17310E6A00943C33 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD17EDBC17310E6A00943C33 /* MobileCoreServices.framework */; };
 		AD17EDBF17310E7200943C33 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD17EDBE17310E7200943C33 /* MapKit.framework */; };
 		AD17EDC117310E7A00943C33 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD17EDC017310E7A00943C33 /* CoreLocation.framework */; };
-		AD17EDC4173116B700943C33 /* NSObject+performBlockCancel.m in Sources */ = {isa = PBXBuildFile; fileRef = AD17EDC3173116B700943C33 /* NSObject+performBlockCancel.m */; };
 		AD17EDC717312A5000943C33 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = AD17EDC517312A5000943C33 /* Localizable.strings */; };
 		AD17EDCC17312B2600943C33 /* DINMittelschriftStd.otf in Resources */ = {isa = PBXBuildFile; fileRef = AD17EDCA17312B2600943C33 /* DINMittelschriftStd.otf */; };
 		AD17EDCF1731963000943C33 /* RHEStationPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD17EDCE1731963000943C33 /* RHEStationPickerViewController.m */; };
@@ -61,16 +56,32 @@
 		AD539CB31947B5CA002644BD /* VindsidenKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = AD539C9D1947B5CA002644BD /* VindsidenKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		AD539CC51947B61E002644BD /* VindsidenKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD539C9D1947B5CA002644BD /* VindsidenKit.framework */; };
 		AD539CC71947B684002644BD /* Datamanager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD539CC61947B684002644BD /* Datamanager.swift */; };
-		AD7AA501196E46BA00B1518B /* CDPlot.h in Headers */ = {isa = PBXBuildFile; fileRef = AD7AA4FD196E46BA00B1518B /* CDPlot.h */; };
+		AD7AA501196E46BA00B1518B /* CDPlot.h in Headers */ = {isa = PBXBuildFile; fileRef = AD7AA4FD196E46BA00B1518B /* CDPlot.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AD7AA502196E46BA00B1518B /* CDPlot.m in Sources */ = {isa = PBXBuildFile; fileRef = AD7AA4FE196E46BA00B1518B /* CDPlot.m */; };
-		AD7AA503196E46BA00B1518B /* CDStation.h in Headers */ = {isa = PBXBuildFile; fileRef = AD7AA4FF196E46BA00B1518B /* CDStation.h */; };
+		AD7AA503196E46BA00B1518B /* CDStation.h in Headers */ = {isa = PBXBuildFile; fileRef = AD7AA4FF196E46BA00B1518B /* CDStation.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AD7AA504196E46BA00B1518B /* CDStation.m in Sources */ = {isa = PBXBuildFile; fileRef = AD7AA500196E46BA00B1518B /* CDStation.m */; };
 		AD7AA507196E46D800B1518B /* Vindsiden.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = AD7AA505196E46D800B1518B /* Vindsiden.xcdatamodeld */; };
-		ADACD25A1783471B00FBD4D5 /* UIImage+ImageFromView.m in Sources */ = {isa = PBXBuildFile; fileRef = ADACD259178345A900FBD4D5 /* UIImage+ImageFromView.m */; };
 		ADC8CB8A196D5FE200D167CD /* VindsidenPlotClient.m in Sources */ = {isa = PBXBuildFile; fileRef = AD17ED9D1731066F00943C33 /* VindsidenPlotClient.m */; };
 		ADC8CB8B196D5FE600D167CD /* VindsidenStationClient.m in Sources */ = {isa = PBXBuildFile; fileRef = AD17EDA11731066F00943C33 /* VindsidenStationClient.m */; };
 		ADC8CB8C196D5FEA00D167CD /* RHEVindsidenAPIClient.m in Sources */ = {isa = PBXBuildFile; fileRef = AD17EDB417310C5A00943C33 /* RHEVindsidenAPIClient.m */; };
-		ADE5276517BECBB100666C76 /* NSString+fixDateString.m in Sources */ = {isa = PBXBuildFile; fileRef = ADE5276417BECBB100666C76 /* NSString+fixDateString.m */; };
+		ADCD424E196E4E42004973E9 /* NSNumber+Between.h in Headers */ = {isa = PBXBuildFile; fileRef = ADCD423C196E4E42004973E9 /* NSNumber+Between.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		ADCD424F196E4E42004973E9 /* NSNumber+Between.m in Sources */ = {isa = PBXBuildFile; fileRef = ADCD423D196E4E42004973E9 /* NSNumber+Between.m */; };
+		ADCD4250196E4E42004973E9 /* NSNumber+Convertion.h in Headers */ = {isa = PBXBuildFile; fileRef = ADCD423E196E4E42004973E9 /* NSNumber+Convertion.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		ADCD4251196E4E42004973E9 /* NSNumber+Convertion.m in Sources */ = {isa = PBXBuildFile; fileRef = ADCD423F196E4E42004973E9 /* NSNumber+Convertion.m */; };
+		ADCD4252196E4E42004973E9 /* NSObject+performBlockCancel.h in Headers */ = {isa = PBXBuildFile; fileRef = ADCD4240196E4E42004973E9 /* NSObject+performBlockCancel.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		ADCD4253196E4E42004973E9 /* NSObject+performBlockCancel.m in Sources */ = {isa = PBXBuildFile; fileRef = ADCD4241196E4E42004973E9 /* NSObject+performBlockCancel.m */; };
+		ADCD4254196E4E42004973E9 /* NSSet+Sort.h in Headers */ = {isa = PBXBuildFile; fileRef = ADCD4242196E4E42004973E9 /* NSSet+Sort.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		ADCD4255196E4E42004973E9 /* NSSet+Sort.m in Sources */ = {isa = PBXBuildFile; fileRef = ADCD4243196E4E42004973E9 /* NSSet+Sort.m */; };
+		ADCD4256196E4E42004973E9 /* NSString+fixDateString.h in Headers */ = {isa = PBXBuildFile; fileRef = ADCD4244196E4E42004973E9 /* NSString+fixDateString.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		ADCD4257196E4E42004973E9 /* NSString+fixDateString.m in Sources */ = {isa = PBXBuildFile; fileRef = ADCD4245196E4E42004973E9 /* NSString+fixDateString.m */; };
+		ADCD4258196E4E42004973E9 /* NSString+isNumeric.h in Headers */ = {isa = PBXBuildFile; fileRef = ADCD4246196E4E42004973E9 /* NSString+isNumeric.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		ADCD4259196E4E42004973E9 /* NSString+isNumeric.m in Sources */ = {isa = PBXBuildFile; fileRef = ADCD4247196E4E42004973E9 /* NSString+isNumeric.m */; };
+		ADCD425A196E4E42004973E9 /* UIFont+textStyle.h in Headers */ = {isa = PBXBuildFile; fileRef = ADCD4248196E4E42004973E9 /* UIFont+textStyle.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		ADCD425B196E4E42004973E9 /* UIFont+textStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = ADCD4249196E4E42004973E9 /* UIFont+textStyle.m */; };
+		ADCD425C196E4E42004973E9 /* UIFontDescriptor+textStyle.h in Headers */ = {isa = PBXBuildFile; fileRef = ADCD424A196E4E42004973E9 /* UIFontDescriptor+textStyle.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		ADCD425D196E4E42004973E9 /* UIFontDescriptor+textStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = ADCD424B196E4E42004973E9 /* UIFontDescriptor+textStyle.m */; };
+		ADCD425E196E4E42004973E9 /* UIImage+ImageFromView.h in Headers */ = {isa = PBXBuildFile; fileRef = ADCD424C196E4E42004973E9 /* UIImage+ImageFromView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		ADCD425F196E4E42004973E9 /* UIImage+ImageFromView.m in Sources */ = {isa = PBXBuildFile; fileRef = ADCD424D196E4E42004973E9 /* UIImage+ImageFromView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -165,6 +176,13 @@
 			remoteGlobalIDString = AD17ED431731012200943C33;
 			remoteInfo = VindsidenApp;
 		};
+		ADCD4262196E5252004973E9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AD17ED3C1731012200943C33 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = AD17ED431731012200943C33;
+			remoteInfo = VindsidenApp;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -198,8 +216,6 @@
 		AD07B2C01779E90A004BC24C /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Media.xcassets; path = VindsidenApp/Media.xcassets; sourceTree = "<group>"; };
 		AD0B8EAD1754F3C800042B95 /* RHCStationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RHCStationViewController.h; sourceTree = "<group>"; };
 		AD0B8EAE1754F3C800042B95 /* RHCStationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RHCStationViewController.m; sourceTree = "<group>"; };
-		AD0B8EB01754F7D700042B95 /* NSString+isNumeric.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+isNumeric.h"; sourceTree = "<group>"; };
-		AD0B8EB11754F7D700042B95 /* NSString+isNumeric.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+isNumeric.m"; sourceTree = "<group>"; };
 		AD146F4C1741251E00205BB9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
 		AD146F4D1741255B00205BB9 /* nb */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nb; path = nb.lproj/Localizable.strings; sourceTree = "<group>"; };
 		AD146F4F1741255B00205BB9 /* nb */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nb; path = nb.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -230,12 +246,6 @@
 		AD17ED871731058400943C33 /* RHCStationInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RHCStationInfo.m; sourceTree = "<group>"; };
 		AD17ED8E1731066C00943C33 /* DrawArrow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DrawArrow.h; sourceTree = "<group>"; };
 		AD17ED8F1731066C00943C33 /* DrawArrow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DrawArrow.m; sourceTree = "<group>"; };
-		AD17ED901731066C00943C33 /* NSNumber+Between.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSNumber+Between.h"; sourceTree = "<group>"; };
-		AD17ED911731066D00943C33 /* NSNumber+Between.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSNumber+Between.m"; sourceTree = "<group>"; };
-		AD17ED921731066D00943C33 /* NSNumber+Convertion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSNumber+Convertion.h"; sourceTree = "<group>"; };
-		AD17ED931731066D00943C33 /* NSNumber+Convertion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSNumber+Convertion.m"; sourceTree = "<group>"; };
-		AD17ED941731066D00943C33 /* NSSet+Sort.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSSet+Sort.h"; sourceTree = "<group>"; };
-		AD17ED951731066D00943C33 /* NSSet+Sort.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSSet+Sort.m"; sourceTree = "<group>"; };
 		AD17ED961731066D00943C33 /* RHEGraphMarker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RHEGraphMarker.h; sourceTree = "<group>"; };
 		AD17ED971731066E00943C33 /* RHEGraphMarker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RHEGraphMarker.m; sourceTree = "<group>"; };
 		AD17ED981731066E00943C33 /* RHEGraphView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RHEGraphView.h; sourceTree = "<group>"; };
@@ -252,8 +262,6 @@
 		AD17EDBC17310E6A00943C33 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		AD17EDBE17310E7200943C33 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		AD17EDC017310E7A00943C33 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
-		AD17EDC2173116B700943C33 /* NSObject+performBlockCancel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+performBlockCancel.h"; sourceTree = "<group>"; };
-		AD17EDC3173116B700943C33 /* NSObject+performBlockCancel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+performBlockCancel.m"; sourceTree = "<group>"; };
 		AD17EDC617312A5000943C33 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		AD17EDCA17312B2600943C33 /* DINMittelschriftStd.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = DINMittelschriftStd.otf; sourceTree = "<group>"; };
 		AD17EDCD1731962F00943C33 /* RHEStationPickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RHEStationPickerViewController.h; sourceTree = "<group>"; };
@@ -291,14 +299,24 @@
 		AD7AA4FF196E46BA00B1518B /* CDStation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDStation.h; sourceTree = "<group>"; };
 		AD7AA500196E46BA00B1518B /* CDStation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDStation.m; sourceTree = "<group>"; };
 		AD7AA506196E46D800B1518B /* Vindsiden.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Vindsiden.xcdatamodel; sourceTree = "<group>"; };
-		ADACD258178345A900FBD4D5 /* UIImage+ImageFromView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIImage+ImageFromView.h"; sourceTree = "<group>"; };
-		ADACD259178345A900FBD4D5 /* UIImage+ImageFromView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ImageFromView.m"; sourceTree = "<group>"; };
-		ADCD6D4C178217D100073500 /* UIFont+textStyle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIFont+textStyle.h"; sourceTree = "<group>"; };
-		ADCD6D4D178217D100073500 /* UIFont+textStyle.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIFont+textStyle.m"; sourceTree = "<group>"; };
-		ADCD6D4E17821AAA00073500 /* UIFontDescriptor+textStyle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIFontDescriptor+textStyle.h"; sourceTree = "<group>"; };
-		ADCD6D4F17821AAA00073500 /* UIFontDescriptor+textStyle.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIFontDescriptor+textStyle.m"; sourceTree = "<group>"; };
-		ADE5276317BECBB100666C76 /* NSString+fixDateString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+fixDateString.h"; sourceTree = "<group>"; };
-		ADE5276417BECBB100666C76 /* NSString+fixDateString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+fixDateString.m"; sourceTree = "<group>"; };
+		ADCD423C196E4E42004973E9 /* NSNumber+Between.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSNumber+Between.h"; sourceTree = "<group>"; };
+		ADCD423D196E4E42004973E9 /* NSNumber+Between.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSNumber+Between.m"; sourceTree = "<group>"; };
+		ADCD423E196E4E42004973E9 /* NSNumber+Convertion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSNumber+Convertion.h"; sourceTree = "<group>"; };
+		ADCD423F196E4E42004973E9 /* NSNumber+Convertion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSNumber+Convertion.m"; sourceTree = "<group>"; };
+		ADCD4240196E4E42004973E9 /* NSObject+performBlockCancel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+performBlockCancel.h"; sourceTree = "<group>"; };
+		ADCD4241196E4E42004973E9 /* NSObject+performBlockCancel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+performBlockCancel.m"; sourceTree = "<group>"; };
+		ADCD4242196E4E42004973E9 /* NSSet+Sort.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSSet+Sort.h"; sourceTree = "<group>"; };
+		ADCD4243196E4E42004973E9 /* NSSet+Sort.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSSet+Sort.m"; sourceTree = "<group>"; };
+		ADCD4244196E4E42004973E9 /* NSString+fixDateString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+fixDateString.h"; sourceTree = "<group>"; };
+		ADCD4245196E4E42004973E9 /* NSString+fixDateString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+fixDateString.m"; sourceTree = "<group>"; };
+		ADCD4246196E4E42004973E9 /* NSString+isNumeric.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+isNumeric.h"; sourceTree = "<group>"; };
+		ADCD4247196E4E42004973E9 /* NSString+isNumeric.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+isNumeric.m"; sourceTree = "<group>"; };
+		ADCD4248196E4E42004973E9 /* UIFont+textStyle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIFont+textStyle.h"; sourceTree = "<group>"; };
+		ADCD4249196E4E42004973E9 /* UIFont+textStyle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIFont+textStyle.m"; sourceTree = "<group>"; };
+		ADCD424A196E4E42004973E9 /* UIFontDescriptor+textStyle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIFontDescriptor+textStyle.h"; sourceTree = "<group>"; };
+		ADCD424B196E4E42004973E9 /* UIFontDescriptor+textStyle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIFontDescriptor+textStyle.m"; sourceTree = "<group>"; };
+		ADCD424C196E4E42004973E9 /* UIImage+ImageFromView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ImageFromView.h"; sourceTree = "<group>"; };
+		ADCD424D196E4E42004973E9 /* UIImage+ImageFromView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ImageFromView.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -412,7 +430,6 @@
 			children = (
 				AD539C951947B2B1002644BD /* VindsidenApp.entitlements */,
 				AD17EDDF173447EC00943C33 /* Communication */,
-				AD17EDB217310C2B00943C33 /* Categories */,
 				AD17EDB117310C1D00943C33 /* Core Data */,
 				AD17EDE11734482100943C33 /* Views */,
 				AD17EDE01734480300943C33 /* App Delegate */,
@@ -467,31 +484,6 @@
 			children = (
 			);
 			name = "Core Data";
-			sourceTree = "<group>";
-		};
-		AD17EDB217310C2B00943C33 /* Categories */ = {
-			isa = PBXGroup;
-			children = (
-				ADE5276317BECBB100666C76 /* NSString+fixDateString.h */,
-				ADE5276417BECBB100666C76 /* NSString+fixDateString.m */,
-				ADACD258178345A900FBD4D5 /* UIImage+ImageFromView.h */,
-				ADACD259178345A900FBD4D5 /* UIImage+ImageFromView.m */,
-				AD0B8EB01754F7D700042B95 /* NSString+isNumeric.h */,
-				AD0B8EB11754F7D700042B95 /* NSString+isNumeric.m */,
-				AD17EDC2173116B700943C33 /* NSObject+performBlockCancel.h */,
-				AD17EDC3173116B700943C33 /* NSObject+performBlockCancel.m */,
-				AD17ED901731066C00943C33 /* NSNumber+Between.h */,
-				AD17ED911731066D00943C33 /* NSNumber+Between.m */,
-				AD17ED921731066D00943C33 /* NSNumber+Convertion.h */,
-				AD17ED931731066D00943C33 /* NSNumber+Convertion.m */,
-				AD17ED941731066D00943C33 /* NSSet+Sort.h */,
-				AD17ED951731066D00943C33 /* NSSet+Sort.m */,
-				ADCD6D4C178217D100073500 /* UIFont+textStyle.h */,
-				ADCD6D4D178217D100073500 /* UIFont+textStyle.m */,
-				ADCD6D4E17821AAA00073500 /* UIFontDescriptor+textStyle.h */,
-				ADCD6D4F17821AAA00073500 /* UIFontDescriptor+textStyle.m */,
-			);
-			name = Categories;
 			sourceTree = "<group>";
 		};
 		AD17EDC817312B2500943C33 /* Fonts */ = {
@@ -629,6 +621,7 @@
 		AD539C9E1947B5CA002644BD /* VindsidenKit */ = {
 			isa = PBXGroup;
 			children = (
+				ADCD4260196E4E8A004973E9 /* Categories */,
 				AD7AA505196E46D800B1518B /* Vindsiden.xcdatamodeld */,
 				AD7AA4FD196E46BA00B1518B /* CDPlot.h */,
 				AD7AA4FE196E46BA00B1518B /* CDPlot.m */,
@@ -666,6 +659,31 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		ADCD4260196E4E8A004973E9 /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				ADCD423C196E4E42004973E9 /* NSNumber+Between.h */,
+				ADCD423D196E4E42004973E9 /* NSNumber+Between.m */,
+				ADCD423E196E4E42004973E9 /* NSNumber+Convertion.h */,
+				ADCD423F196E4E42004973E9 /* NSNumber+Convertion.m */,
+				ADCD4240196E4E42004973E9 /* NSObject+performBlockCancel.h */,
+				ADCD4241196E4E42004973E9 /* NSObject+performBlockCancel.m */,
+				ADCD4242196E4E42004973E9 /* NSSet+Sort.h */,
+				ADCD4243196E4E42004973E9 /* NSSet+Sort.m */,
+				ADCD4244196E4E42004973E9 /* NSString+fixDateString.h */,
+				ADCD4245196E4E42004973E9 /* NSString+fixDateString.m */,
+				ADCD4246196E4E42004973E9 /* NSString+isNumeric.h */,
+				ADCD4247196E4E42004973E9 /* NSString+isNumeric.m */,
+				ADCD4248196E4E42004973E9 /* UIFont+textStyle.h */,
+				ADCD4249196E4E42004973E9 /* UIFont+textStyle.m */,
+				ADCD424A196E4E42004973E9 /* UIFontDescriptor+textStyle.h */,
+				ADCD424B196E4E42004973E9 /* UIFontDescriptor+textStyle.m */,
+				ADCD424C196E4E42004973E9 /* UIImage+ImageFromView.h */,
+				ADCD424D196E4E42004973E9 /* UIImage+ImageFromView.m */,
+			);
+			name = Categories;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -675,7 +693,16 @@
 			files = (
 				AD7AA501196E46BA00B1518B /* CDPlot.h in Headers */,
 				AD539CA21947B5CA002644BD /* VindsidenKit.h in Headers */,
+				ADCD4250196E4E42004973E9 /* NSNumber+Convertion.h in Headers */,
+				ADCD425E196E4E42004973E9 /* UIImage+ImageFromView.h in Headers */,
+				ADCD425C196E4E42004973E9 /* UIFontDescriptor+textStyle.h in Headers */,
 				AD7AA503196E46BA00B1518B /* CDStation.h in Headers */,
+				ADCD4252196E4E42004973E9 /* NSObject+performBlockCancel.h in Headers */,
+				ADCD4256196E4E42004973E9 /* NSString+fixDateString.h in Headers */,
+				ADCD424E196E4E42004973E9 /* NSNumber+Between.h in Headers */,
+				ADCD4254196E4E42004973E9 /* NSSet+Sort.h in Headers */,
+				ADCD425A196E4E42004973E9 /* UIFont+textStyle.h in Headers */,
+				ADCD4258196E4E42004973E9 /* NSString+isNumeric.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -721,6 +748,7 @@
 			dependencies = (
 				AD17ED701731012200943C33 /* PBXTargetDependency */,
 				AD6CFB2A195CAF3400860FEB /* PBXTargetDependency */,
+				ADCD4263196E5252004973E9 /* PBXTargetDependency */,
 			);
 			name = VindsidenAppTests;
 			productName = "Vindsiden-v2Tests";
@@ -953,14 +981,9 @@
 				AD17ED881731058400943C33 /* RHCStationCell.m in Sources */,
 				AD17ED891731058400943C33 /* RHCStationInfo.m in Sources */,
 				AD17EDA61731066F00943C33 /* DrawArrow.m in Sources */,
-				AD17EDA71731066F00943C33 /* NSNumber+Between.m in Sources */,
-				AD17EDA81731066F00943C33 /* NSNumber+Convertion.m in Sources */,
-				AD17EDA91731066F00943C33 /* NSSet+Sort.m in Sources */,
 				ADC8CB8B196D5FE600D167CD /* VindsidenStationClient.m in Sources */,
 				AD17EDAA1731066F00943C33 /* RHEGraphMarker.m in Sources */,
-				ADACD25A1783471B00FBD4D5 /* UIImage+ImageFromView.m in Sources */,
 				AD17EDAB1731066F00943C33 /* RHEGraphView.m in Sources */,
-				AD17EDC4173116B700943C33 /* NSObject+performBlockCancel.m in Sources */,
 				AD17EDCF1731963000943C33 /* RHEStationPickerViewController.m in Sources */,
 				AD17EDD21732B7F600943C33 /* RHEStationDetailsViewController.m in Sources */,
 				AD17EDD51732B82700943C33 /* RHEWebCamViewController.m in Sources */,
@@ -970,9 +993,7 @@
 				AD17EDF71735541E00943C33 /* RHCNavigationViewController.m in Sources */,
 				AD0B8EAF1754F3C800042B95 /* RHCStationViewController.m in Sources */,
 				ADC8CB8C196D5FEA00D167CD /* RHEVindsidenAPIClient.m in Sources */,
-				AD0B8EB21754F7D700042B95 /* NSString+isNumeric.m in Sources */,
 				AD4A378B1770F0EF003B8AF2 /* RHCAlertManager.m in Sources */,
-				ADE5276517BECBB100666C76 /* NSString+fixDateString.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -996,10 +1017,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ADCD425D196E4E42004973E9 /* UIFontDescriptor+textStyle.m in Sources */,
+				ADCD4257196E4E42004973E9 /* NSString+fixDateString.m in Sources */,
 				AD7AA502196E46BA00B1518B /* CDPlot.m in Sources */,
 				AD7AA507196E46D800B1518B /* Vindsiden.xcdatamodeld in Sources */,
+				ADCD425F196E4E42004973E9 /* UIImage+ImageFromView.m in Sources */,
+				ADCD4253196E4E42004973E9 /* NSObject+performBlockCancel.m in Sources */,
+				ADCD425B196E4E42004973E9 /* UIFont+textStyle.m in Sources */,
+				ADCD4251196E4E42004973E9 /* NSNumber+Convertion.m in Sources */,
 				AD539CC71947B684002644BD /* Datamanager.swift in Sources */,
 				AD7AA504196E46BA00B1518B /* CDStation.m in Sources */,
+				ADCD424F196E4E42004973E9 /* NSNumber+Between.m in Sources */,
+				ADCD4255196E4E42004973E9 /* NSSet+Sort.m in Sources */,
+				ADCD4259196E4E42004973E9 /* NSString+isNumeric.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1078,6 +1108,11 @@
 			isa = PBXTargetDependency;
 			target = AD17ED431731012200943C33 /* VindsidenApp */;
 			targetProxy = AD6CFB29195CAF3400860FEB /* PBXContainerItemProxy */;
+		};
+		ADCD4263196E5252004973E9 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = AD17ED431731012200943C33 /* VindsidenApp */;
+			targetProxy = ADCD4262196E5252004973E9 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
