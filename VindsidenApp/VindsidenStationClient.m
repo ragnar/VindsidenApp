@@ -10,6 +10,7 @@
 #import "VindsidenStationClient.h"
 #import "NSString+fixDateString.h"
 
+@import VindsidenKit;
 
 @implementation VindsidenStationClient
 {
@@ -131,9 +132,8 @@
     } else if ( [elementName isEqualToString:@"StatusMessage"]) {
         _currentStation[@"statusMessage"] = [_currentString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
     } else if ( [elementName isEqualToString:@"LastMeasurementTime"]) {
-        RHCAppDelegate *_appDelegate = [[UIApplication sharedApplication] delegate];
         NSString *dateString = [_currentString fixDateString];
-        _currentStation[@"lastMeasurement"] = [_appDelegate dateFromString:dateString];
+        _currentStation[@"lastMeasurement"] = [[Datamanager sharedManager] dateFromString:dateString];
     } else if ( [elementName isEqualToString:@"City"]) {
         _currentStation[@"city"] = [_currentString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
     } else if ( [elementName isEqualToString:@"WebcamImage"]) {
