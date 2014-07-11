@@ -59,6 +59,13 @@
                 continue;
             } else if ( [key isEqualToString:@"stationID"] ) {
                 continue;
+            } else if ( [key isEqualToString:@"windMin"] ) {
+                CGFloat value = [dict[key] floatValue];
+                if ( value < 0 ) {
+                    value = 0.0;
+                }
+                [existing setValue:@(value) forKey:key];
+                continue;
             }
             [existing setValue:@([dict[key] floatValue]) forKey:key];
         }
