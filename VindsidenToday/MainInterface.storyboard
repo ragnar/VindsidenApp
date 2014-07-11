@@ -35,7 +35,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="tVJ-95-IMx">
-                                            <rect key="frame" x="268" y="6" width="32" height="32"/>
+                                            <rect key="frame" x="278" y="6" width="32" height="32"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="32" id="BZs-Ml-gi4"/>
                                                 <constraint firstAttribute="height" constant="32" id="Fzc-P5-WcT"/>
@@ -43,7 +43,7 @@
                                             </constraints>
                                         </imageView>
                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12 m/s" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Vy-Ub-dTY">
-                                            <rect key="frame" x="212" y="12" width="50" height="20"/>
+                                            <rect key="frame" x="222" y="12" width="50" height="20"/>
                                             <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
@@ -62,7 +62,7 @@
                                         <constraint firstAttribute="centerY" secondItem="8mw-VB-p9g" secondAttribute="centerY" id="Vbx-mq-Y9y"/>
                                         <constraint firstItem="tVJ-95-IMx" firstAttribute="leading" secondItem="2Vy-Ub-dTY" secondAttribute="trailing" constant="6" id="X8F-g1-Rox"/>
                                         <constraint firstAttribute="centerY" secondItem="2Vy-Ub-dTY" secondAttribute="centerY" id="fCI-ey-Ha0"/>
-                                        <constraint firstAttribute="trailing" secondItem="tVJ-95-IMx" secondAttribute="trailing" constant="20" id="lXh-c1-HSc"/>
+                                        <constraint firstAttribute="trailing" secondItem="tVJ-95-IMx" secondAttribute="trailing" constant="10" id="lXh-c1-HSc"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
