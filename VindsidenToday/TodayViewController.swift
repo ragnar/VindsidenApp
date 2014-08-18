@@ -24,13 +24,13 @@ class TodayViewController: UITableViewController, NCWidgetProviding, NSFetchedRe
         }
     }
 
-    init(coder aDecoder: NSCoder!)
+    required init(coder aDecoder: NSCoder!)
     {
         super.init(coder: aDecoder)
     }
 
 
-    init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
         // Custom initialization
     }
@@ -90,17 +90,17 @@ class TodayViewController: UITableViewController, NCWidgetProviding, NSFetchedRe
             let tmpplot: CDPlot? = stationInfo.lastRegisteredPlot()
 
             if let plot = tmpplot {
-                let image = DrawArrow.drawArrowAtAngle(Float(plot.windDir), forSpeed:Float(plot.windAvg), highlighted: false, color: UIColor.whiteColor(), hightlightedColor: UIColor.blackColor())
+                let image = DrawArrow.drawArrowAtAngle(plot.windDir, forSpeed: plot.windAvg, highlighted: false, color: UIColor.whiteColor(), hightlightedColor: UIColor.blackColor())
 
                 let unit = SpeedConvertion.ToMetersPerSecond // NSUserDefaults.standardUserDefaults().integerForKey("selectedUnit")
                 let speed = plot.windAvg.speedConvertionTo(unit)
-                cell.speedLabel.text = "\(Int(speed)) \(NSNumber.shortUnitNameString(unit))"
-                cell.arrowImageView.image = image
+                cell.speedLabel!.text = "\(speedFormatter.stringFromNumber(speed)) \(NSNumber.shortUnitNameString(unit))"
+                cell.arrowImageView!.image = image
             } else {
-                cell.speedLabel.text = "—.—"
+                cell.speedLabel!.text = "—.—"
                 //cell.arrowImageView.image = nil;
             }
-            cell.nameLabel.text = stationInfo.stationName
+            cell.nameLabel!.text = stationInfo.stationName
 
             return cell
         }
@@ -110,12 +110,19 @@ class TodayViewController: UITableViewController, NCWidgetProviding, NSFetchedRe
         cell.layer.backgroundColor = UIColor.clearColor().CGColor
     }
 
+    override func tableView(tableView: UITableView!, didSelectRowAtIndexPath indexPath: NSIndexPath!)
+    {
+        let stationInfo = self.fetchedResultsController.objectAtIndexPath(indexPath) as CDStation
+
+        let url = NSURL.URLWithString("vindsiden://station/\(stationInfo.stationId)")
+        extensionContext.openURL(url, completionHandler: nil)
+    }
 
     // NSFetchedResultsController
 
     var fetchedResultsController: NSFetchedResultsController {
-    if _fetchedResultsController {
-        return _fetchedResultsController!
+        if let actual = _fetchedResultsController {
+            return actual
         }
 
         let fetchRequest = NSFetchRequest(entityName: "CDStation")
@@ -144,5 +151,22 @@ class TodayViewController: UITableViewController, NCWidgetProviding, NSFetchedRe
         }
     }
 
+
+    var speedFormatter : NSNumberFormatter {
+        if let actual = _speedFormatter {
+            return actual
+        }
+
+        _speedFormatter = NSNumberFormatter()
+        _speedFormatter!.numberStyle = NSNumberFormatterStyle.DecimalStyle
+        _speedFormatter!.maximumFractionDigits = 1
+        _speedFormatter!.minimumFractionDigits = 1
+        _speedFormatter!.minimumSignificantDigits = 1
+        _speedFormatter!.notANumberSymbol = "—.—"
+        _speedFormatter!.nilSymbol = "—.—"
+
+        return _speedFormatter!
+    }
+    var _speedFormatter: NSNumberFormatter? = nil;
 }
 
