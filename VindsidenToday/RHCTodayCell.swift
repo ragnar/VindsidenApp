@@ -10,7 +10,7 @@ import UIKit
 
 class RHCTodayCell: UITableViewCell {
 
-    @IBOutlet var arrowImageView: UIImageView
-    @IBOutlet var speedLabel: UILabel
-    @IBOutlet var nameLabel: UILabel
+    @IBOutlet var arrowImageView: UIImageView?
+    @IBOutlet var speedLabel: UILabel?
+    @IBOutlet var nameLabel: UILabel?
 }
