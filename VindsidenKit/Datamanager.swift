@@ -10,7 +10,7 @@ import Foundation
 import CoreData
 
 
-@objc class Datamanager
+@objc public class Datamanager
 {
     struct Config {
         static let sharedBundleIdentifier = "org.juniks.VindsidenKit"
@@ -23,7 +23,7 @@ import CoreData
     let _formatterQueue: dispatch_queue_t = dispatch_queue_create("formatter queue", nil)
 
 
-    class func sharedManager() -> Datamanager! {
+    public class func sharedManager() -> Datamanager! {
         struct Static {
             static var instance: Datamanager? = nil
             static var onceToken: dispatch_once_t = 0
@@ -36,11 +36,11 @@ import CoreData
         return Static.instance!
     }
 
-    @required init() {
+    public required init() {
 
     }
 
-    func saveContext () {
+    public func saveContext () {
         var error: NSError? = nil
         let managedObjectContext = self.managedObjectContext
         if managedObjectContext != nil {
@@ -50,7 +50,7 @@ import CoreData
         }
     }
 
-    func cleanupPlots() {
+    public func cleanupPlots() {
 //        NSManagedObjectContext *context = [(id)[[UIApplication sharedApplication] delegate] managedObjectContext];
 //        NSManagedObjectContext *childContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
 //        childContext.parentContext = context;
@@ -105,29 +105,35 @@ import CoreData
     }
 
 
-    var managedObjectContext: NSManagedObjectContext {
-    if !_managedObjectContext {
+    public var managedObjectContext: NSManagedObjectContext {
+        if let actual = _managedObjectContext {
+            return actual
+        }
         let coordinator = self.persistentStoreCoordinator
         if coordinator != nil {
             _managedObjectContext = NSManagedObjectContext(concurrencyType: NSManagedObjectContextConcurrencyType.MainQueueConcurrencyType)
             _managedObjectContext!.persistentStoreCoordinator = coordinator
         }
-        }
+
         return _managedObjectContext!
     }
     var _managedObjectContext: NSManagedObjectContext? = nil
 
     var managedObjectModel: NSManagedObjectModel {
-    if !_managedObjectModel {
+        if let actual = _managedObjectModel {
+            return actual
+        }
         let modelURL = NSBundle(identifier:Config.sharedBundleIdentifier).URLForResource(Config.datamodelName, withExtension: "momd")
         _managedObjectModel = NSManagedObjectModel(contentsOfURL: modelURL)
-        }
+
         return _managedObjectModel!
     }
     var _managedObjectModel: NSManagedObjectModel? = nil
 
     var persistentStoreCoordinator: NSPersistentStoreCoordinator {
-    if !_persistentStoreCoordinator {
+        if let actual = _persistentStoreCoordinator {
+            return actual
+        }
         let storeURL = self.applicationDocumentsDirectory.URLByAppendingPathComponent(Config.sqliteName)
         var error: NSError? = nil
 
@@ -137,7 +143,7 @@ import CoreData
         if _persistentStoreCoordinator!.addPersistentStoreWithType(NSSQLiteStoreType, configuration: nil, URL: storeURL, options: nil, error: &error) == nil {
             abort()
         }
-        }
+
         return _persistentStoreCoordinator!
     }
     var _persistentStoreCoordinator: NSPersistentStoreCoordinator? = nil
@@ -162,16 +168,19 @@ import CoreData
     }
 
     var dateFormatter: NSDateFormatter {
-    if !_dateFormatter {
-        _dateFormatter = NSDateFormatter()
-        _dateFormatter!.dateFormat = "yyyy-MM-dd' 'HH:mm:ssZZZ"
-        _dateFormatter!.timeZone = NSTimeZone(name: "UTC")
-        }
-        return _dateFormatter!
+        if let actdate = _dateFormatter {
+            return actdate
+       }
+
+       _dateFormatter = NSDateFormatter()
+       _dateFormatter!.dateFormat = "yyyy-MM-dd' 'HH:mm:ssZZZ"
+       _dateFormatter!.timeZone = NSTimeZone(name: "UTC")
+
+       return _dateFormatter!
     }
     var _dateFormatter: NSDateFormatter? = nil
 
-    func dateFromString(string: String) -> NSDate!
+    public func dateFromString(string: String) -> NSDate!
     {
         var date: NSDate? = nil
         dispatch_sync(_formatterQueue) {
