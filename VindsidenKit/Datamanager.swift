@@ -41,10 +41,10 @@ import CoreData
     }
 
     public func saveContext () {
-        var error: NSError? = nil
-        let managedObjectContext = self.managedObjectContext
-        if managedObjectContext != nil {
-            if managedObjectContext.hasChanges && !managedObjectContext.save(&error) {
+        if let moc = self.managedObjectContext {
+            var error: NSError? = nil
+            if moc.hasChanges && !moc.save(&error) {
+                NSLog("Unresolved error \(error), \(error!.userInfo)")
                 abort()
             }
         }
@@ -90,63 +90,65 @@ import CoreData
             let time = NSDate(timeIntervalSinceNow: interval)
             fetchRequest.predicate = NSPredicate(format: "plotTime < %@", time)
 
-            let result = childContext.executeFetchRequest(fetchRequest, error: &err) as Array<CDPlot>
+            let result = childContext.executeFetchRequest(fetchRequest, error: &err) as Array<NSManagedObject>
 
             for object  in result {
                 childContext.deleteObject(object)
             }
 
             childContext.save(&err)
-            self.managedObjectContext.performBlock {
-                self.managedObjectContext.save(&err)
-                return
+            if let moc = self.managedObjectContext {
+                moc.performBlock {
+                    moc.save(&err)
+                    return
+                }
             }
         }
     }
 
 
-    public var managedObjectContext: NSManagedObjectContext {
-        if let actual = _managedObjectContext {
-            return actual
-        }
+    public lazy var managedObjectContext: NSManagedObjectContext? = {
         let coordinator = self.persistentStoreCoordinator
-        if coordinator != nil {
-            _managedObjectContext = NSManagedObjectContext(concurrencyType: NSManagedObjectContextConcurrencyType.MainQueueConcurrencyType)
-            _managedObjectContext!.persistentStoreCoordinator = coordinator
+        if coordinator == nil {
+            return nil
         }
+        var managedObjectContext = NSManagedObjectContext(concurrencyType: NSManagedObjectContextConcurrencyType.MainQueueConcurrencyType)
+        managedObjectContext.persistentStoreCoordinator = coordinator
+        return managedObjectContext
+    }()
 
-        return _managedObjectContext!
-    }
-    var _managedObjectContext: NSManagedObjectContext? = nil
 
-    var managedObjectModel: NSManagedObjectModel {
-        if let actual = _managedObjectModel {
-            return actual
-        }
+    lazy var managedObjectModel: NSManagedObjectModel? = {
         let modelURL = NSBundle(identifier:Config.sharedBundleIdentifier).URLForResource(Config.datamodelName, withExtension: "momd")
-        _managedObjectModel = NSManagedObjectModel(contentsOfURL: modelURL)
+        var _managedObjectModel = NSManagedObjectModel(contentsOfURL: modelURL)
 
-        return _managedObjectModel!
-    }
-    var _managedObjectModel: NSManagedObjectModel? = nil
+        return _managedObjectModel
+    }()
 
-    var persistentStoreCoordinator: NSPersistentStoreCoordinator {
-        if let actual = _persistentStoreCoordinator {
-            return actual
-        }
-        let storeURL = self.applicationDocumentsDirectory.URLByAppendingPathComponent(Config.sqliteName)
+    lazy var persistentStoreCoordinator: NSPersistentStoreCoordinator? = {
+        let storeUrl = self.applicationDocumentsDirectory.URLByAppendingPathComponent(Config.sqliteName)
         var error: NSError? = nil
+        var coordinator: NSPersistentStoreCoordinator? = NSPersistentStoreCoordinator(managedObjectModel: self.managedObjectModel)
 
-        addSkipBackupAttributeToItemAtURL(storeURL)
+        self.addSkipBackupAttributeToItemAtURL(storeUrl)
 
-        _persistentStoreCoordinator = NSPersistentStoreCoordinator(managedObjectModel: self.managedObjectModel)
-        if _persistentStoreCoordinator!.addPersistentStoreWithType(NSSQLiteStoreType, configuration: nil, URL: storeURL, options: nil, error: &error) == nil {
+        if coordinator!.addPersistentStoreWithType(NSSQLiteStoreType, configuration: nil, URL: storeUrl, options: nil, error: &error) == nil {
+            coordinator = nil
+            // Report any error we got.
+            var failureReason = "There was an error creating or loading the application's saved data."
+            let dict = NSMutableDictionary()
+            dict[NSLocalizedDescriptionKey] = "Failed to initialize the application's saved data"
+            dict[NSLocalizedFailureReasonErrorKey] = failureReason
+            dict[NSUnderlyingErrorKey] = error
+            error = NSError.errorWithDomain("YOUR_ERROR_DOMAIN", code: 9999, userInfo: dict)
+            // Replace this with code to handle the error appropriately.
+            // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+            NSLog("Unresolved error \(error), \(error!.userInfo)")
             abort()
         }
 
-        return _persistentStoreCoordinator!
-    }
-    var _persistentStoreCoordinator: NSPersistentStoreCoordinator? = nil
+        return coordinator
+    }()
 
     var applicationDocumentsDirectory: NSURL {
     let url = NSFileManager.defaultManager().containerURLForSecurityApplicationGroupIdentifier(Config.sharedGroupName)
