@@ -44,6 +44,7 @@
 		AD17EDF41734ED4500943C33 /* RHCUnitSelectorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD17EDF31734ED4500943C33 /* RHCUnitSelectorViewController.m */; };
 		AD17EDF71735541E00943C33 /* RHCNavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD17EDF61735541900943C33 /* RHCNavigationViewController.m */; };
 		AD17EDF91736492500943C33 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD17EDF81736492200943C33 /* AdSupport.framework */; };
+		AD1B7EF219A7E82900D8B253 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AD1B7EF119A7E82900D8B253 /* libPods.a */; };
 		AD4A378B1770F0EF003B8AF2 /* RHCAlertManager.m in Sources */ = {isa = PBXBuildFile; fileRef = AD4A378A1770F0EF003B8AF2 /* RHCAlertManager.m */; };
 		AD539C841947B0F7002644BD /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD539C831947B0F6002644BD /* NotificationCenter.framework */; };
 		AD539C891947B0F7002644BD /* TodayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD539C881947B0F7002644BD /* TodayViewController.swift */; };
@@ -84,6 +85,7 @@
 		ADCD425E196E4E42004973E9 /* UIImage+ImageFromView.h in Headers */ = {isa = PBXBuildFile; fileRef = ADCD424C196E4E42004973E9 /* UIImage+ImageFromView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		ADCD425F196E4E42004973E9 /* UIImage+ImageFromView.m in Sources */ = {isa = PBXBuildFile; fileRef = ADCD424D196E4E42004973E9 /* UIImage+ImageFromView.m */; };
 		ADFE6079196E56810025F346 /* DrawArrow.m in Sources */ = {isa = PBXBuildFile; fileRef = AD17ED8F1731066C00943C33 /* DrawArrow.m */; };
+		B528A69EDD574160BC438886 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A795A60F33B14BC9B7DC4A3E /* libPods.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -281,6 +283,7 @@
 		AD17EDF51735541600943C33 /* RHCNavigationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RHCNavigationViewController.h; sourceTree = "<group>"; };
 		AD17EDF61735541900943C33 /* RHCNavigationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RHCNavigationViewController.m; sourceTree = "<group>"; };
 		AD17EDF81736492200943C33 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
+		AD1B7EF119A7E82900D8B253 /* libPods.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libPods.a; path = "Pods/build/Debug-iphoneos/libPods.a"; sourceTree = "<group>"; };
 		AD4A37891770F0EF003B8AF2 /* RHCAlertManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RHCAlertManager.h; sourceTree = "<group>"; };
 		AD4A378A1770F0EF003B8AF2 /* RHCAlertManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RHCAlertManager.m; sourceTree = "<group>"; };
 		AD539C821947B0F6002644BD /* org.juniks.VindsidenApp.VindsidenToday.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = org.juniks.VindsidenApp.VindsidenToday.appex; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -350,6 +353,7 @@
 				AD17ED6C1731012200943C33 /* SenTestingKit.framework in Frameworks */,
 				AD17ED6D1731012200943C33 /* UIKit.framework in Frameworks */,
 				AD17ED6E1731012200943C33 /* Foundation.framework in Frameworks */,
+				B528A69EDD574160BC438886 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -357,6 +361,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AD1B7EF219A7E82900D8B253 /* libPods.a in Frameworks */,
 				AD539CC51947B61E002644BD /* VindsidenKit.framework in Frameworks */,
 				AD539C971947B301002644BD /* MapKit.framework in Frameworks */,
 				AD539C841947B0F7002644BD /* NotificationCenter.framework in Frameworks */,
@@ -412,6 +417,7 @@
 		AD17ED461731012200943C33 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				AD1B7EF119A7E82900D8B253 /* libPods.a */,
 				AD674DA81962EB7100BF257B /* libPods.a */,
 				AD17EDF81736492200943C33 /* AdSupport.framework */,
 				AD17EDC017310E7A00943C33 /* CoreLocation.framework */,
@@ -744,10 +750,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = AD17ED7F1731012200943C33 /* Build configuration list for PBXNativeTarget "VindsidenAppTests" */;
 			buildPhases = (
+				B9EF3A6202774490ABAF6319 /* Check Pods Manifest.lock */,
 				AD17ED651731012200943C33 /* Sources */,
 				AD17ED661731012200943C33 /* Frameworks */,
 				AD17ED671731012200943C33 /* Resources */,
 				AD17ED681731012200943C33 /* ShellScript */,
+				2055396651F244CBB8647A09 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -768,6 +776,7 @@
 				AD539C7E1947B0F6002644BD /* Sources */,
 				AD539C7F1947B0F6002644BD /* Frameworks */,
 				AD539C801947B0F6002644BD /* Resources */,
+				AD1B7EF319ABB40B00D8B253 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -933,6 +942,21 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		2055396651F244CBB8647A09 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		A142F9E3FC9E43748F035C84 /* Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -959,6 +983,35 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
+		AD1B7EF319ABB40B00D8B253 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
+		};
+		B9EF3A6202774490ABAF6319 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
 		};
 		C241475BBB04408D897C0220 /* Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1301,6 +1354,7 @@
 		};
 		AD539C921947B0F7002644BD /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 15DC7F5398F749998EAC2FC7 /* Pods.xcconfig */;
 			buildSettings = {
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
@@ -1321,6 +1375,10 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				INFOPLIST_FILE = VindsidenToday/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Pods/build/Debug-iphoneos",
+				);
 				METAL_ENABLE_DEBUG_INFO = YES;
 				PRODUCT_NAME = "org.juniks.VindsidenApp.$(TARGET_NAME:rfc1034identifier)";
 				PROVISIONING_PROFILE = "";
@@ -1349,6 +1407,10 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				INFOPLIST_FILE = VindsidenToday/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Pods/build/Debug-iphoneos",
+				);
 				METAL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_NAME = "org.juniks.VindsidenApp.$(TARGET_NAME:rfc1034identifier)";
 				PROVISIONING_PROFILE = "";

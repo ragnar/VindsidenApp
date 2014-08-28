@@ -5,3 +5,5 @@ pod "AFNetworking", "~>2.3.0"
 pod "SORelativeDateTransformer"
 pod "MotionJpegImageView"
 pod "JTSImageViewController"
+
+link_with 'VindsidenApp', 'VindsidenAppTests', 'VindsidenToday'
