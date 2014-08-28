@@ -485,20 +485,33 @@ static NSString *kCellID = @"stationCellID";
 
 - (void)updateContentWithCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler;
 {
-    if ( [[self.collectionView visibleCells] count] ) {
-        RHCStationCell *cell = [self.collectionView visibleCells][0];
-        [cell fetchWithCompletionHandler:^(UIBackgroundFetchResult result) {
-            double delayInSeconds = 2.0;
-            dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
-            dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-                [cell syncDisplayPlots];
-                [cell updateLastUpdatedLabel];
-                completionHandler(result);
-            });
-        }];
+    if ( self.fetchedResultsController.fetchedObjects.count ) {
+        NSInteger __block remaining = self.fetchedResultsController.fetchedObjects.count;
+
+        for ( CDStation *station in self.fetchedResultsController.fetchedObjects ) {
+            [[RHEVindsidenAPIClient defaultManager] fetchStationsPlotsForStation:station.stationId
+                                                                      completion:^(BOOL success, NSArray *plots) {
+                                                                          DLOG(@"");
+                                                                          if ( success ) {
+                                                                              [CDPlot updatePlots:plots completion:nil];
+                                                                          }
+                                                                          remaining -= 1;
+                                                                      } error:^(BOOL cancelled, NSError *error) {
+                                                                      }
+             ];
+        }
+
+        while (remaining > 0 ) {
+            [[NSRunLoop currentRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:0.1]];
+            DLOG(@"waiting: %ld", (long)remaining);
+        }
+
+        if ( completionHandler ) {
+            completionHandler(UIBackgroundFetchResultNewData);
+        }
 
     } else {
-        completionHandler(UIBackgroundFetchResultFailed);
+        completionHandler(UIBackgroundFetchResultNoData);
     }
 }
 
