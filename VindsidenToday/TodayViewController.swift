@@ -160,7 +160,7 @@ class TodayViewController: UITableViewController, NCWidgetProviding, NSFetchedRe
         _speedFormatter!.numberStyle = NSNumberFormatterStyle.DecimalStyle
         _speedFormatter!.maximumFractionDigits = 1
         _speedFormatter!.minimumFractionDigits = 1
-        _speedFormatter!.minimumSignificantDigits = 1
+        //_speedFormatter!.minimumSignificantDigits = 1
         _speedFormatter!.notANumberSymbol = "—.—"
         _speedFormatter!.nilSymbol = "—.—"
 

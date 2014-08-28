@@ -36,6 +36,8 @@ const NSInteger kMinSpeedLines = 3;
 
 @property (strong, nonatomic) RHEGraphMarker *marker;
 
+@property (strong, nonatomic) NSNumberFormatter *speedFormatter;
+
 - (void)drawGridInContext:(CGContextRef)context;
 - (void)drawHourLines:(NSInteger)hours inContext:(CGContextRef)context;
 - (void)drawHourText:(NSDate *)startDate numHours:(NSInteger)hours inContext:(CGContextRef)context;
@@ -606,21 +608,21 @@ const NSInteger kMinSpeedLines = 3;
 }
 
 
-- (NSNumberFormatter *)numberFormatter
+- (NSNumberFormatter *)speedFormatter
 {
-    static NSNumberFormatter *_numberformatter = nil;
-    if ( _numberformatter ) {
-        return _numberformatter;
+    if ( _speedFormatter ) {
+        return _speedFormatter;
     }
 
-    _numberformatter = [[NSNumberFormatter alloc] init];
-    _numberformatter.numberStyle = kCFNumberFormatterDecimalStyle;
-    _numberformatter.maximumFractionDigits = 1;
-    _numberformatter.minimumSignificantDigits = 1;
-    [_numberformatter setNotANumberSymbol:@"—.—"];
-    [_numberformatter setNilSymbol:@"—.—"];
+    _speedFormatter = [[NSNumberFormatter alloc] init];
+    [_speedFormatter setNotANumberSymbol:@"—.—"];
+    [_speedFormatter setNilSymbol:@"—.—"];
+    _speedFormatter.numberStyle = NSNumberFormatterDecimalStyle;
+//    _speedFormatter.minimumSignificantDigits = 1;
+    _speedFormatter.minimumFractionDigits = 1;
+    _speedFormatter.maximumFractionDigits = 1;
 
-    return _numberformatter;
+    return _speedFormatter;
 }
 
 

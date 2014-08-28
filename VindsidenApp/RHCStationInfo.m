@@ -202,7 +202,7 @@
     _numberformatter.numberStyle = kCFNumberFormatterDecimalStyle;
     _numberformatter.maximumFractionDigits = 1;
     _numberformatter.minimumFractionDigits = 1;
-    _numberformatter.minimumSignificantDigits = 1;
+    //_numberformatter.minimumSignificantDigits = 1;
     [_numberformatter setNotANumberSymbol:@"—.—"];
     [_numberformatter setNilSymbol:@"—.—"];
 
