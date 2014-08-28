@@ -14,6 +14,8 @@
 
 #import "CDPlot.h"
 
+@import VindsidenKit;
+
 const NSInteger kMaxSpeedLines = 8;
 const NSInteger kMinSpeedLines = 3;
 
@@ -245,7 +247,7 @@ const NSInteger kMinSpeedLines = 3;
 {
     CGContextSaveGState(context);
 
-    SpeedConvertion unit = [[NSUserDefaults standardUserDefaults] integerForKey:@"selectedUnit"];
+    SpeedConvertion unit = [[Datamanager sharedManager].sharedDefaults integerForKey:@"selectedUnit"];
     CGFloat plotMaxValue = ceil([[self.plots valueForKeyPath:@"@max.windMax"] speedConvertionTo:unit]+1);
     NSInteger totSteps = MIN( kMaxSpeedLines, plotMaxValue);
     totSteps = MAX( kMinSpeedLines, totSteps);
@@ -285,7 +287,7 @@ const NSInteger kMinSpeedLines = 3;
 {
     CGContextSaveGState(context);
 
-    SpeedConvertion unit = [[NSUserDefaults standardUserDefaults] integerForKey:@"selectedUnit"];
+    SpeedConvertion unit = [[Datamanager sharedManager].sharedDefaults integerForKey:@"selectedUnit"];
     CGFloat plotMaxValue = ceil([[self.plots valueForKeyPath:@"@max.windMax"] speedConvertionTo:unit]+1);
     NSInteger totSteps = MIN( kMaxSpeedLines, plotMaxValue);
     totSteps = MAX( kMinSpeedLines, totSteps);
@@ -299,7 +301,7 @@ const NSInteger kMinSpeedLines = 3;
 
     NSInteger i = 0;
     for ( CGFloat y = _maxY; y >= _minY; y=ceil(y-plotStep)) {
-        NSString *hs = [[self numberFormatter] stringFromNumber:@(i*(plotMaxValue/totSteps))];
+        NSString *hs = [[self speedFormatter] stringFromNumber:@(i*(plotMaxValue/totSteps))];
 
         labelBounds = [hs boundingRectWithSize:CGSizeMake( 40.0, 21.0)
                                        options:NSStringDrawingUsesLineFragmentOrigin
@@ -310,7 +312,7 @@ const NSInteger kMinSpeedLines = 3;
         i++;
     }
 
-    NSString *unitName = [NSNumber shortUnitNameString:[[NSUserDefaults standardUserDefaults] integerForKey:@"selectedUnit"]];
+    NSString *unitName = [NSNumber shortUnitNameString:[[Datamanager sharedManager].sharedDefaults integerForKey:@"selectedUnit"]];
     NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
     [paragraphStyle setAlignment:NSTextAlignmentLeft];
 
@@ -353,7 +355,7 @@ const NSInteger kMinSpeedLines = 3;
 {
     CGContextSaveGState(context);
 
-    SpeedConvertion unit = [[NSUserDefaults standardUserDefaults] integerForKey:@"selectedUnit"];
+    SpeedConvertion unit = [[Datamanager sharedManager].sharedDefaults integerForKey:@"selectedUnit"];
 
     CGMutablePathRef pathMin = CGPathCreateMutable();
     CGMutablePathRef pathAvg = CGPathCreateMutable();
@@ -506,7 +508,7 @@ const NSInteger kMinSpeedLines = 3;
 
 - (CGFloat)YForMinPlot:(CDPlot *)plot
 {
-    SpeedConvertion unit = [[NSUserDefaults standardUserDefaults] integerForKey:@"selectedUnit"];
+    SpeedConvertion unit = [[Datamanager sharedManager].sharedDefaults integerForKey:@"selectedUnit"];
     CGFloat rMin = [plot.windMin speedConvertionTo:unit];
     CGFloat yMin = _maxY - ((rMin / [self plotMaxValue]) * (_maxY - _minY));
 
@@ -516,7 +518,7 @@ const NSInteger kMinSpeedLines = 3;
 
 - (CGFloat)YForAvgPlot:(CDPlot *)plot
 {
-    SpeedConvertion unit = [[NSUserDefaults standardUserDefaults] integerForKey:@"selectedUnit"];
+    SpeedConvertion unit = [[Datamanager sharedManager].sharedDefaults integerForKey:@"selectedUnit"];
     CGFloat rMin = [plot.windAvg speedConvertionTo:unit];
     CGFloat yMin = _maxY - ((rMin / [self plotMaxValue]) * (_maxY - _minY));
     
@@ -526,7 +528,7 @@ const NSInteger kMinSpeedLines = 3;
 
 - (CGFloat)YForMaxPlot:(CDPlot *)plot
 {
-    SpeedConvertion unit = [[NSUserDefaults standardUserDefaults] integerForKey:@"selectedUnit"];
+    SpeedConvertion unit = [[Datamanager sharedManager].sharedDefaults integerForKey:@"selectedUnit"];
     CGFloat rMin = [plot.windMax speedConvertionTo:unit];
     CGFloat yMin = _maxY - ((rMin / [self plotMaxValue]) * (_maxY - _minY));
     
@@ -599,7 +601,7 @@ const NSInteger kMinSpeedLines = 3;
 
 - (CGFloat)plotMaxValue
 {
-    SpeedConvertion unit = [[NSUserDefaults standardUserDefaults] integerForKey:@"selectedUnit"];
+    SpeedConvertion unit = [[Datamanager sharedManager].sharedDefaults integerForKey:@"selectedUnit"];
     return ceil([[self.plots valueForKeyPath:@"@max.windMax"] speedConvertionTo:unit]+1);
 }
 

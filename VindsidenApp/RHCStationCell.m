@@ -16,6 +16,8 @@
 #import "CDPlot.h"
 #import "CDStation.h"
 
+@import VindsidenKit;
+
 @interface RHCStationCell ()
 
 @property (strong, nonatomic) NSDateFormatter *dateFormatter;
@@ -213,8 +215,8 @@
 {
     _currentStation = currentStation;
 
-    [[NSUserDefaults standardUserDefaults] setInteger:[self.currentStation.stationId integerValue] forKey:@"selectedDefaultStation"];
-    [[NSUserDefaults standardUserDefaults] synchronize];
+    [[Datamanager sharedManager].sharedDefaults setInteger:[self.currentStation.stationId integerValue] forKey:@"selectedDefaultStation"];
+    [[Datamanager sharedManager].sharedDefaults synchronize];
 
     self.stationNameLabel.text = self.currentStation.stationName;
     [self displayPlots];

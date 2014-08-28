@@ -43,9 +43,9 @@
 //    [TestFlight takeOff:@"b97e9c55-3aae-4f18-bc27-6fac0e973438"];
 
     // Override point for customization after application launch.
-    if ( [[NSUserDefaults standardUserDefaults] integerForKey:@"selectedUnit"] == 0 ) {
-        [[NSUserDefaults standardUserDefaults] setInteger:SpeedConvertionToMetersPerSecond forKey:@"selectedUnit"];
-        [[NSUserDefaults standardUserDefaults] synchronize];
+    if ( [[Datamanager sharedManager].sharedDefaults integerForKey:@"selectedUnit"] == 0 ) {
+        [[Datamanager sharedManager].sharedDefaults setInteger:SpeedConvertionToMetersPerSecond forKey:@"selectedUnit"];
+        [[Datamanager sharedManager].sharedDefaults synchronize];
 
     }
 

@@ -253,8 +253,8 @@ static NSString *kCellID = @"stationCellID";
                              [_transformedCells removeObject:cell];
 
                              NSIndexPath *indexPath = [self.collectionView indexPathsForVisibleItems][0];
-                             [[NSUserDefaults standardUserDefaults] setObject:@(indexPath.row) forKey:@"selectedIndexPath"];
-                             [[NSUserDefaults standardUserDefaults] synchronize];
+                             [[Datamanager sharedManager].sharedDefaults setObject:@(indexPath.row) forKey:@"selectedIndexPath"];
+                             [[Datamanager sharedManager].sharedDefaults synchronize];
                              [self updateCameraButton:YES];
                              self.pageControl.currentPage = indexPath.row;
                          }
@@ -330,8 +330,8 @@ static NSString *kCellID = @"stationCellID";
     [CDStation updateStations:stations];
 
     if ( [stations count] > 0 ) {
-        [[NSUserDefaults standardUserDefaults] setObject:[NSDate date] forKey:@"lastUpdated"];
-        [[NSUserDefaults standardUserDefaults] synchronize];
+        [[Datamanager sharedManager].sharedDefaults setObject:[NSDate date] forKey:@"lastUpdated"];
+        [[Datamanager sharedManager].sharedDefaults synchronize];
     }
 }
 

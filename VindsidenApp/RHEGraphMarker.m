@@ -12,6 +12,8 @@
 
 #import "NSNumber+Convertion.h"
 
+@import VindsidenKit;
+
 extern CGFloat DegreesToRadians(CGFloat degrees);
 extern CGFloat RadiansToDegrees(CGFloat radians);
 
@@ -116,7 +118,7 @@ extern CGFloat RadiansToDegrees(CGFloat radians);
 
 - (void)updateWithPlot:(CDPlot *)plot
 {
-    SpeedConvertion unit = [[NSUserDefaults standardUserDefaults] integerForKey:@"selectedUnit"];
+    SpeedConvertion unit = [[Datamanager sharedManager].sharedDefaults integerForKey:@"selectedUnit"];
 
     self.label.text = [NSString stringWithFormat:NSLocalizedString(@"GRAPH_MARKER_POPUP", @"Gust: %@, Avg: %@, Speed: %@"),
                        [[self numberFormatter] stringFromNumber:@([plot.windMax speedConvertionTo:unit])],

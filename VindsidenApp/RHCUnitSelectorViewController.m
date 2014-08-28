@@ -9,6 +9,8 @@
 #import "RHCUnitSelectorViewController.h"
 #import "NSNumber+Convertion.h"
 
+@import VindsidenKit;
+
 
 @interface RHCUnitSelectorViewController ()
 
@@ -69,7 +71,7 @@
 
     // Configure the cell...
     cell.textLabel.text = [NSNumber longUnitNameString:indexPath.row+1];
-    if ( [[NSUserDefaults standardUserDefaults] integerForKey:@"selectedUnit"] == indexPath.row+1 ) {
+    if ( [[Datamanager sharedManager].sharedDefaults integerForKey:@"selectedUnit"] == indexPath.row+1 ) {
         cell.accessoryType = UITableViewCellAccessoryCheckmark;
     } else {
         cell.accessoryType = UITableViewCellAccessoryNone;
@@ -90,8 +92,8 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    [[NSUserDefaults standardUserDefaults] setInteger:indexPath.row+1 forKey:@"selectedUnit"];
-    [[NSUserDefaults standardUserDefaults] synchronize];
+    [[Datamanager sharedManager].sharedDefaults setInteger:indexPath.row+1 forKey:@"selectedUnit"];
+    [[Datamanager sharedManager].sharedDefaults synchronize];
 
     [tableView reloadData];
 }
