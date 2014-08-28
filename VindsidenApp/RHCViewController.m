@@ -327,7 +327,20 @@ static NSString *kCellID = @"stationCellID";
 
 - (void)updateStations:(NSArray *)stations
 {
-    [CDStation updateStations:stations];
+    [CDStation updateStations:stations completion:^(BOOL newStations) {
+        if ( newStations ) {
+            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@""
+                                                                           message:NSLocalizedString(@"ALERT_NEW_STATIONS_FOUND", @"New stations found. Go to settings to view them")
+                                                                    preferredStyle:UIAlertControllerStyleAlert];
+            UIAlertController* __weak weakAlert = alert;
+            UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault
+                                                                  handler:^(UIAlertAction * action) {
+                                                                      [weakAlert dismissViewControllerAnimated:YES completion:nil];
+                                                                  }];
+            [alert addAction:defaultAction];
+            [self presentViewController:alert animated:YES completion:nil];
+        }
+    }];
 
     if ( [stations count] > 0 ) {
         [[Datamanager sharedManager].sharedDefaults setObject:[NSDate date] forKey:@"lastUpdated"];
