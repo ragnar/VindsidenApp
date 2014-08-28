@@ -79,7 +79,7 @@
 }
 
 
-+ (void)updateStations:(NSArray *)stations
++ (void)updateStations:(NSArray *)stations completion:(void (^)(BOOL newStations))completion
 {
     NSManagedObjectContext *context = [[Datamanager sharedManager] managedObjectContext];
     NSManagedObjectContext *childContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
@@ -104,6 +104,7 @@
                 if ( [v class] == [NSNull class] ) {
                     continue;
                 }
+                
                 [managedObject setValue:v forKey:key];
             }
 
@@ -119,14 +120,10 @@
                 }
             }
         }
-
-        if ( newStations ) {
+        newStations = YES;
+        if ( newStations && completion ) {
             dispatch_async(dispatch_get_main_queue(), ^{
-                [[[UIAlertView alloc] initWithTitle:nil
-                                            message:NSLocalizedString(@"ALERT_NEW_STATIONS_FOUND", @"New stations found. Go to settings to view them")
-                                           delegate:nil
-                                  cancelButtonTitle:@"OK"
-                                  otherButtonTitles:nil] show];
+                completion(newStations);
             });
         }
 

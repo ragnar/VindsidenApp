@@ -34,7 +34,7 @@
 @property (nonatomic, retain) NSSet *plots;
 
 - (NSTimeInterval)fetchInterval;
-+ (void)updateStations:(NSArray *)stations;
++ (void)updateStations:(NSArray *)stations completion:(void (^)(BOOL newStations))completion;
 + (CDStation *)existingStation:(NSNumber *)stationId inManagedObjectContext:(NSManagedObjectContext *)managedObjectContext;
 + (CDStation *)newOrExistingStation:(NSNumber *)stationId inManagedObjectContext:(NSManagedObjectContext *)managedObjectContext;
 + (CDStation *)searchForStation:(NSString *)search inManagedObjectContext:(NSManagedObjectContext *)managedObjectContext;
