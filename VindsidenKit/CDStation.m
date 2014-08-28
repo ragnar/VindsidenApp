@@ -120,7 +120,7 @@
                 }
             }
         }
-        newStations = YES;
+
         if ( newStations && completion ) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 completion(newStations);
