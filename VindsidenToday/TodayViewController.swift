@@ -15,7 +15,7 @@ class TodayViewController: UITableViewController, NCWidgetProviding, NSFetchedRe
 {
     struct TableViewConstants {
         static let baseRowCount = 3
-        static let todayRowHeight = 44.0
+        static let todayRowHeight = 43.0
 
         struct CellIdentifiers {
             static let content = "todayViewCell"
@@ -29,22 +29,36 @@ class TodayViewController: UITableViewController, NCWidgetProviding, NSFetchedRe
     }
 
 
+    let dateTransformer = SORelativeDateTransformer()
+
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
         // Custom initialization
     }
-    
+
+    var showingAll: Bool = false {
+        didSet {
+            resetContentSize()
+        }
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view from its nib.
-        let count = self.fetchedResultsController.fetchedObjects.count
-        let height: CGFloat = 44.0 * CGFloat(count)
-        preferredContentSize = CGSizeMake(320.0, height);
+
+        let vibrancyView = UIVisualEffectView(effect: UIVibrancyEffect.notificationCenterVibrancyEffect())
+
+        //vibrancyView.backgroundColor =  UIColor(white: 255.0, alpha: 0.15)
+        view.addSubview(vibrancyView)
+
+        resetContentSize()
+        tableView.reloadData()
     }
 
 
     func widgetMarginInsetsForProposedMarginInsets( defaultMarginInsets: UIEdgeInsets) -> UIEdgeInsets
     {
+        return UIEdgeInsetsZero;
         return UIEdgeInsetsMake( defaultMarginInsets.top, 30.0, defaultMarginInsets.bottom, 10)
     }
 
@@ -74,12 +88,16 @@ class TodayViewController: UITableViewController, NCWidgetProviding, NSFetchedRe
     override func tableView(tableView: UITableView!, numberOfRowsInSection section: Int) -> Int
     {
         let sectionInfo = self.fetchedResultsController.sections[section] as NSFetchedResultsSectionInfo
-        return min( sectionInfo.numberOfObjects, TableViewConstants.baseRowCount+1)
+
+        let rows:Int = showingAll ? sectionInfo.numberOfObjects : min(sectionInfo.numberOfObjects, TableViewConstants.baseRowCount + 1)
+        return rows
     }
 
     override func tableView(tableView: UITableView!, cellForRowAtIndexPath indexPath: NSIndexPath!) -> UITableViewCell!
     {
-        if indexPath.row == TableViewConstants.baseRowCount /*&&  list!.count != TableViewConstants.baseRowCount + 1*/ {
+        let itemCount = self.fetchedResultsController.fetchedObjects.count
+
+        if !showingAll && indexPath.row == TableViewConstants.baseRowCount &&  itemCount != TableViewConstants.baseRowCount + 1 {
             let cell = tableView.dequeueReusableCellWithIdentifier(TableViewConstants.CellIdentifiers.showall, forIndexPath: indexPath) as UITableViewCell
             cell.textLabel.text = NSLocalizedString("Show All...", comment: "")
             return cell
@@ -91,26 +109,64 @@ class TodayViewController: UITableViewController, NCWidgetProviding, NSFetchedRe
             if let plot = tmpplot {
                 let image = DrawArrow.drawArrowAtAngle(plot.windDir, forSpeed: plot.windAvg, highlighted: false, color: UIColor.whiteColor(), hightlightedColor: UIColor.blackColor())
 
-                let unit = SpeedConvertion.ToMetersPerSecond // NSUserDefaults.standardUserDefaults().integerForKey("selectedUnit")
-                let speed = plot.windAvg.speedConvertionTo(unit)
-                cell.speedLabel!.text = "\(speedFormatter.stringFromNumber(speed)) \(NSNumber.shortUnitNameString(unit))"
+                let raw = Datamanager.sharedManager().sharedDefaults!.integerForKey("selectedUnit")
+                let unit = SpeedConvertion.fromRaw(raw)
+
+                if let realUnit = unit {
+                    let speed = plot.windAvg.speedConvertionTo(realUnit)
+                    cell.speedLabel!.text = "\(speedFormatter.stringFromNumber(speed)) \(NSNumber.shortUnitNameString(realUnit))"
+                }
                 cell.arrowImageView!.image = image
+                cell.updatedLabel!.text = dateTransformer.transformedValue(plot.plotTime) as String
             } else {
                 cell.speedLabel!.text = "—.—"
                 //cell.arrowImageView.image = nil;
+                cell.updatedLabel!.text = NSLocalizedString("Not updated", comment: "")
             }
             cell.nameLabel!.text = stationInfo.stationName
-
             return cell
         }
     }
 
+    override func tableView(tableView: UITableView!, heightForRowAtIndexPath indexPath: NSIndexPath!) -> CGFloat {
+        return CGFloat(TableViewConstants.todayRowHeight)
+    }
+
     override func tableView(_: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
         cell.layer.backgroundColor = UIColor.clearColor().CGColor
+
+//        let vibrancyView = UIVisualEffectView(effect: UIVibrancyEffect.notificationCenterVibrancyEffect())
+//
+//        vibrancyView.backgroundColor =  UIColor(white: 255.0, alpha: 0.15)
+//        cell.selectedBackgroundView = vibrancyView
     }
 
     override func tableView(tableView: UITableView!, didSelectRowAtIndexPath indexPath: NSIndexPath!)
     {
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+
+        if !showingAll && indexPath.row == TableViewConstants.baseRowCount {
+            showingAll = true
+            let itemCount = self.fetchedResultsController.fetchedObjects.count
+
+            tableView.beginUpdates()
+
+            let indexPathForRemoval = NSIndexPath(forRow: TableViewConstants.baseRowCount, inSection: 0)
+            tableView.deleteRowsAtIndexPaths([indexPathForRemoval], withRowAnimation: .Fade)
+
+            var insertedIndexPaths = Array<NSIndexPath>()
+
+            for idx in TableViewConstants.baseRowCount..<itemCount {
+                insertedIndexPaths.append(NSIndexPath(forRow: idx, inSection: 0))
+            }
+
+            tableView.insertRowsAtIndexPaths(insertedIndexPaths, withRowAnimation: .Fade)
+
+            tableView.endUpdates()
+            
+            return
+        }
+
         let stationInfo = self.fetchedResultsController.objectAtIndexPath(indexPath) as CDStation
 
         let url = NSURL.URLWithString("vindsiden://station/\(stationInfo.stationId)")
@@ -126,7 +182,6 @@ class TodayViewController: UITableViewController, NCWidgetProviding, NSFetchedRe
 
         let fetchRequest = NSFetchRequest(entityName: "CDStation")
         fetchRequest.fetchBatchSize = 3
-        fetchRequest.fetchLimit = TableViewConstants.baseRowCount+1
         fetchRequest.predicate = NSPredicate(format: "isHidden = NO", argumentArray: nil)
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: "order", ascending: true)]
 
@@ -167,5 +222,20 @@ class TodayViewController: UITableViewController, NCWidgetProviding, NSFetchedRe
         return _speedFormatter!
     }
     var _speedFormatter: NSNumberFormatter? = nil;
+
+    func resetContentSize() {
+        var preferredSize = preferredContentSize
+        preferredSize.height = preferredViewHeight
+        preferredSize.width = 320.0;
+        preferredContentSize = preferredSize
+        println("Preferred size: \(preferredSize)")
+    }
+
+    var preferredViewHeight: CGFloat {
+        let itemCount = self.fetchedResultsController.fetchedObjects.count
+        let rowCount = showingAll ? itemCount : min(itemCount, TableViewConstants.baseRowCount + 1)
+        return CGFloat(Double(rowCount) * TableViewConstants.todayRowHeight)
+    }
+
 }
 
