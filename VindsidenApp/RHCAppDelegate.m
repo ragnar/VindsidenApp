@@ -68,31 +68,13 @@
 
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
 {
+    DLOG(@"url: %@", url);
+
     if ( url.host == nil || [url.host rangeOfString:@"station" options:NSCaseInsensitiveSearch].location == NSNotFound ) {
         return NO;
     }
 
-    id ident = [url.pathComponents lastObject];
-    CDStation *station = nil;
-    if ( [ident isNumeric] ) {
-        station = [CDStation existingStation:ident inManagedObjectContext:[[Datamanager sharedManager] managedObjectContext]];
-    } else {
-        station = [CDStation searchForStation:ident inManagedObjectContext:[[Datamanager sharedManager] managedObjectContext]];
-    }
-
-    if ( nil == station ) {
-        return NO;
-    }
-
-    if ( self.window.rootViewController.presentedViewController ) {
-        [self.window.rootViewController dismissViewControllerAnimated:NO completion:^{
-            [self openStationViewController:station];
-        }];
-    } else {
-        [self openStationViewController:station];
-    }
-
-    return YES;
+    return [self openLaunchOptionsURL:url];
 }
 
 
@@ -188,6 +170,42 @@
                                                    controller.currentStation = station;
                                                }
      ];
+}
+
+
+- (BOOL)openLaunchOptionsURL:(NSURL *)url
+{
+    id ident = [url.pathComponents lastObject];
+    CDStation *station = nil;
+    if ( [ident isNumeric] ) {
+        station = [CDStation existingStation:ident inManagedObjectContext:[[Datamanager sharedManager] managedObjectContext]];
+    } else {
+        station = [CDStation searchForStation:ident inManagedObjectContext:[[Datamanager sharedManager] managedObjectContext]];
+    }
+
+    if ( nil == station ) {
+        return NO;
+    }
+
+    if ( [url.query rangeOfString:@"todayView=1"].location == NSNotFound ) {
+        if ( self.window.rootViewController.presentedViewController ) {
+            [self.window.rootViewController dismissViewControllerAnimated:NO completion:^{
+                [self openStationViewController:station];
+            }];
+        } else {
+            [self openStationViewController:station];
+        }
+    } else {
+        RHCViewController *controller = [(UINavigationController *)self.window.rootViewController viewControllers][0];
+        if ( self.window.rootViewController.presentedViewController ) {
+            [self.window.rootViewController dismissViewControllerAnimated:NO completion:^{
+                [controller scrollToStation:station];
+            }];
+        } else {
+            [controller scrollToStation:station];
+        }
+    }
+    return YES;
 }
 
 
