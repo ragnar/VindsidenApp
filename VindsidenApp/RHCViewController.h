@@ -18,5 +18,7 @@
 
 - (void)updateContentWithCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler;
 
+- (void)scrollToStation:(CDStation *)station;
+
 @end
 

@@ -27,6 +27,7 @@ static NSString *kCellID = @"stationCellID";
 @property (weak, nonatomic) IBOutlet UIPageControl *pageControl;
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 @property (weak, nonatomic) IBOutlet UIToolbar *toolbar;
+@property (strong, nonatomic) CDStation *pendingScrollToStation;
 
 @end
 
@@ -97,6 +98,11 @@ static NSString *kCellID = @"stationCellID";
 
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationDidBecomeActive:) name:UIApplicationDidBecomeActiveNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationWillResignActive:) name:UIApplicationWillResignActiveNotification object:nil];
+
+    if ( self.pendingScrollToStation ) {
+        [self scrollToStation:self.pendingScrollToStation];
+        self.pendingScrollToStation = nil;
+    }
 }
 
 
@@ -525,6 +531,18 @@ static NSString *kCellID = @"stationCellID";
 
     } else {
         completionHandler(UIBackgroundFetchResultNoData);
+    }
+}
+
+
+- (void)scrollToStation:(CDStation *)station
+{
+    if ( self.collectionView ) {
+        NSIndexPath *indexPath = [self.fetchedResultsController indexPathForObject:station];
+        [self.collectionView scrollToItemAtIndexPath:indexPath atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:NO];
+        self.pageControl.currentPage = indexPath.row;
+    } else {
+        self.pendingScrollToStation = station;
     }
 }
 
