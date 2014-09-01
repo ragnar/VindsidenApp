@@ -20,7 +20,7 @@ PODS:
   - AFNetworking/UIKit (2.3.1):
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
-  - JTSImageViewController (1.1.1)
+  - JTSImageViewController (1.3)
   - MotionJpegImageView (0.0.1)
   - SORelativeDateTransformer (1.1.10)
 
@@ -32,7 +32,7 @@ DEPENDENCIES:
 
 SPEC CHECKSUMS:
   AFNetworking: 6d7b76aa5d04c8c37daad3eef4b7e3f2a7620da3
-  JTSImageViewController: e8167cffe5ffdb9203a8931d41ba5a4dd5ac5f5a
+  JTSImageViewController: 3951f79d2643c79b57f3961dd030bd328771a27d
   MotionJpegImageView: 8e464973003e03694a5726c1ab880388c2b75c2c
   SORelativeDateTransformer: de7936811c9988af8e129a097af48c828f933f5f
 
