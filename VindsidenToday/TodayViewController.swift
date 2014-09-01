@@ -172,7 +172,7 @@ class TodayViewController: UITableViewController, NCWidgetProviding, NSFetchedRe
 
         let stationInfo = self.fetchedResultsController.objectAtIndexPath(indexPath) as CDStation
 
-        let url = NSURL.URLWithString("vindsiden://station/\(stationInfo.stationId)")
+        let url = NSURL.URLWithString("vindsiden://station/\(stationInfo.stationId)?todayView=1")
         extensionContext.openURL(url, completionHandler: nil)
     }
 
