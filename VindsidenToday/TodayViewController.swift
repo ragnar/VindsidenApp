@@ -135,10 +135,13 @@ class TodayViewController: UITableViewController, NCWidgetProviding, NSFetchedRe
     override func tableView(_: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
         cell.layer.backgroundColor = UIColor.clearColor().CGColor
 
-//        let vibrancyView = UIVisualEffectView(effect: UIVibrancyEffect.notificationCenterVibrancyEffect())
-//
-//        vibrancyView.backgroundColor =  UIColor(white: 255.0, alpha: 0.15)
-//        cell.selectedBackgroundView = vibrancyView
+        let vibrancyView = UIVisualEffectView(effect: UIVibrancyEffect.notificationCenterVibrancyEffect())
+        vibrancyView.frame = cell.contentView.bounds
+
+        let view = UIView(frame: vibrancyView.bounds)
+        view.backgroundColor = UIColor.lightGrayColor()
+        vibrancyView.contentView.addSubview(view)
+        cell.selectedBackgroundView = vibrancyView
     }
 
     override func tableView(tableView: UITableView!, didSelectRowAtIndexPath indexPath: NSIndexPath!)
