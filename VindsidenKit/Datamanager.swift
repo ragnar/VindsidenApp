@@ -120,7 +120,7 @@ import CoreData
 
     lazy var managedObjectModel: NSManagedObjectModel? = {
         let modelURL = NSBundle(identifier:Config.sharedBundleIdentifier).URLForResource(Config.datamodelName, withExtension: "momd")
-        var _managedObjectModel = NSManagedObjectModel(contentsOfURL: modelURL)
+        var _managedObjectModel = NSManagedObjectModel(contentsOfURL: modelURL!)
 
         return _managedObjectModel
     }()
@@ -128,7 +128,7 @@ import CoreData
     lazy var persistentStoreCoordinator: NSPersistentStoreCoordinator? = {
         let storeUrl = self.applicationDocumentsDirectory.URLByAppendingPathComponent(Config.sqliteName)
         var error: NSError? = nil
-        var coordinator: NSPersistentStoreCoordinator? = NSPersistentStoreCoordinator(managedObjectModel: self.managedObjectModel)
+        var coordinator: NSPersistentStoreCoordinator? = NSPersistentStoreCoordinator(managedObjectModel: self.managedObjectModel!)
 
         self.addSkipBackupAttributeToItemAtURL(storeUrl)
 
