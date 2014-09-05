@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6206.8" systemVersion="14A329f" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="trP-cr-shP">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6206.9" systemVersion="14A343f" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="trP-cr-shP">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7026.1"/>
         <capability name="Constraints with attributes relative to the layout margin" minToolsVersion="6.0"/>
@@ -34,38 +34,40 @@
                                             </constraints>
                                         </imageView>
                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12 m/s" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Vy-Ub-dTY">
-                                            <rect key="frame" x="221" y="11" width="51" height="20"/>
+                                            <rect key="frame" x="212" y="11" width="60" height="20"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="60" id="Bd9-cm-uta"/>
+                                            </constraints>
                                             <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Larkollen" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8mw-VB-p9g">
-                                            <rect key="frame" x="50" y="2" width="68" height="20"/>
+                                            <rect key="frame" x="50" y="3" width="149" height="20"/>
                                             <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="updated" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xcL-tw-nBm">
-                                            <rect key="frame" x="50" y="23" width="68" height="17"/>
+                                            <rect key="frame" x="50" y="23" width="149" height="17"/>
                                             <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                                             <color key="textColor" cocoaTouchSystemColor="lightTextColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
-                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     <constraints>
                                         <constraint firstAttribute="centerY" secondItem="tVJ-95-IMx" secondAttribute="centerY" id="05V-nm-awp"/>
                                         <constraint firstItem="8mw-VB-p9g" firstAttribute="leading" secondItem="OUk-Np-mOd" secondAttribute="leading" constant="50" id="84h-s3-PUf"/>
+                                        <constraint firstItem="2Vy-Ub-dTY" firstAttribute="leading" secondItem="8mw-VB-p9g" secondAttribute="trailing" constant="13" id="HAY-nL-Pgl"/>
                                         <constraint firstItem="xcL-tw-nBm" firstAttribute="leading" secondItem="OUk-Np-mOd" secondAttribute="leadingMargin" constant="42" id="JIc-Rm-zhI"/>
-                                        <constraint firstAttribute="centerY" secondItem="8mw-VB-p9g" secondAttribute="centerY" constant="9" id="Vbx-mq-Y9y"/>
+                                        <constraint firstItem="2Vy-Ub-dTY" firstAttribute="leading" secondItem="xcL-tw-nBm" secondAttribute="trailing" constant="13" id="PLg-pN-Sxc"/>
+                                        <constraint firstAttribute="centerY" secondItem="8mw-VB-p9g" secondAttribute="centerY" constant="8" id="Vbx-mq-Y9y"/>
                                         <constraint firstItem="tVJ-95-IMx" firstAttribute="leading" secondItem="2Vy-Ub-dTY" secondAttribute="trailing" constant="6" id="X8F-g1-Rox"/>
                                         <constraint firstAttribute="centerY" secondItem="2Vy-Ub-dTY" secondAttribute="centerY" id="fCI-ey-Ha0"/>
                                         <constraint firstAttribute="trailing" secondItem="tVJ-95-IMx" secondAttribute="trailing" constant="10" id="lXh-c1-HSc"/>
                                         <constraint firstItem="xcL-tw-nBm" firstAttribute="top" secondItem="tVJ-95-IMx" secondAttribute="top" constant="18" id="m34-hW-Fjp"/>
-                                        <constraint firstItem="xcL-tw-nBm" firstAttribute="trailing" secondItem="8mw-VB-p9g" secondAttribute="trailing" id="twq-yr-gbO"/>
                                     </constraints>
                                 </tableViewCellContentView>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <inset key="separatorInset" minX="50" minY="0.0" maxX="10" maxY="0.0"/>
                                 <connections>
                                     <outlet property="arrowImageView" destination="tVJ-95-IMx" id="oCF-JD-hsX"/>
@@ -99,7 +101,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eyZ-T3-dhB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="678" y="386"/>
+            <point key="canvasLocation" x="678" y="384"/>
         </scene>
     </scenes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
