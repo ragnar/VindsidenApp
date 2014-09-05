@@ -15,25 +15,25 @@ class TodayViewController: UITableViewController, NCWidgetProviding, NSFetchedRe
 {
     struct TableViewConstants {
         static let baseRowCount = 3
-        static let todayRowHeight = 43.0
-
+        static let todayRowHeight :CGFloat = 44.0
+        static let todayRowPadding :CGFloat = 20.0
         struct CellIdentifiers {
-            static let content = "todayViewCell"
             static let message = "Cell"
             static let showall = "ShowAll"
         }
     }
 
-    required init(coder aDecoder: NSCoder) {
+    required init(coder aDecoder: NSCoder)
+    {
         super.init(coder: aDecoder)
     }
 
 
     let dateTransformer = SORelativeDateTransformer()
 
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?)
+    {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-        // Custom initialization
     }
 
     var showingAll: Bool = false {
@@ -42,28 +42,24 @@ class TodayViewController: UITableViewController, NCWidgetProviding, NSFetchedRe
         }
     }
 
-    override func viewDidLoad() {
+    override func viewDidLoad()
+    {
         super.viewDidLoad()
-        // Do any additional setup after loading the view from its nib.
-
-        let vibrancyView = UIVisualEffectView(effect: UIVibrancyEffect.notificationCenterVibrancyEffect())
-
-        //vibrancyView.backgroundColor =  UIColor(white: 255.0, alpha: 0.15)
-        view.addSubview(vibrancyView)
 
         resetContentSize()
         tableView.reloadData()
     }
 
+    // MARK: - NotificationCenter
 
     func widgetMarginInsetsForProposedMarginInsets( defaultMarginInsets: UIEdgeInsets) -> UIEdgeInsets
     {
         return UIEdgeInsetsZero;
-        return UIEdgeInsetsMake( defaultMarginInsets.top, 30.0, defaultMarginInsets.bottom, 10)
     }
 
 
-    func widgetPerformUpdateWithCompletionHandler(completionHandler: ((NCUpdateResult) -> Void)!) {
+    func widgetPerformUpdateWithCompletionHandler(completionHandler: ((NCUpdateResult) -> Void)!)
+    {
         // Perform any setup necessary in order to update the view.
 
         // If an error is encoutered, use NCUpdateResult.Failed
@@ -78,31 +74,33 @@ class TodayViewController: UITableViewController, NCWidgetProviding, NSFetchedRe
         }
     }
 
-    // TableView
+    // MARK: - TableView
 
-    override func numberOfSectionsInTableView(tableView: UITableView!) -> Int
+    override func numberOfSectionsInTableView(tableView: UITableView) -> Int
     {
-        return self.fetchedResultsController.sections.count;
+        let sections = fetchedResultsController.sections as Array!
+        return sections.count;
     }
 
-    override func tableView(tableView: UITableView!, numberOfRowsInSection section: Int) -> Int
+    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
-        let sectionInfo = self.fetchedResultsController.sections[section] as NSFetchedResultsSectionInfo
+        let sections = fetchedResultsController.sections as Array!
+        let sectionInfo = sections[section] as NSFetchedResultsSectionInfo
 
         let rows:Int = showingAll ? sectionInfo.numberOfObjects : min(sectionInfo.numberOfObjects, TableViewConstants.baseRowCount + 1)
         return rows
     }
 
-    override func tableView(tableView: UITableView!, cellForRowAtIndexPath indexPath: NSIndexPath!) -> UITableViewCell!
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
     {
-        let itemCount = self.fetchedResultsController.fetchedObjects.count
+        let itemCount = (fetchedResultsController.fetchedObjects as Array!).count
 
         if !showingAll && indexPath.row == TableViewConstants.baseRowCount &&  itemCount != TableViewConstants.baseRowCount + 1 {
             let cell = tableView.dequeueReusableCellWithIdentifier(TableViewConstants.CellIdentifiers.showall, forIndexPath: indexPath) as UITableViewCell
-            cell.textLabel.text = NSLocalizedString("Show All...", comment: "")
+            cell.textLabel!.text = NSLocalizedString("Show All...", comment: "")
             return cell
         } else {
-            let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as RHCTodayCell
+            let cell = tableView.dequeueReusableCellWithIdentifier(TableViewConstants.CellIdentifiers.message, forIndexPath: indexPath) as RHCTodayCell
             let stationInfo = self.fetchedResultsController.objectAtIndexPath(indexPath) as CDStation
             let tmpplot: CDPlot? = stationInfo.lastRegisteredPlot()
 
@@ -117,10 +115,9 @@ class TodayViewController: UITableViewController, NCWidgetProviding, NSFetchedRe
                     cell.speedLabel!.text = "\(speedFormatter.stringFromNumber(speed)) \(NSNumber.shortUnitNameString(realUnit))"
                 }
                 cell.arrowImageView!.image = image
-                cell.updatedLabel!.text = dateTransformer.transformedValue(plot.plotTime) as String
+                cell.updatedLabel!.text = dateTransformer.transformedValue(plot.plotTime) as? String
             } else {
                 cell.speedLabel!.text = "—.—"
-                //cell.arrowImageView.image = nil;
                 cell.updatedLabel!.text = NSLocalizedString("Not updated", comment: "")
             }
             cell.nameLabel!.text = stationInfo.stationName
@@ -128,11 +125,23 @@ class TodayViewController: UITableViewController, NCWidgetProviding, NSFetchedRe
         }
     }
 
-    override func tableView(tableView: UITableView!, heightForRowAtIndexPath indexPath: NSIndexPath!) -> CGFloat {
-        return CGFloat(TableViewConstants.todayRowHeight)
+    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat
+    {
+        let itemCount = (fetchedResultsController.fetchedObjects as Array!).count
+        var size : CGFloat
+
+        if !showingAll && indexPath.row == TableViewConstants.baseRowCount &&  itemCount != TableViewConstants.baseRowCount + 1 {
+            size = CGFloat(TableViewConstants.todayRowHeight)
+        } else {
+            let font = UIFont.preferredFontForTextStyle(UIFontTextStyleSubheadline)
+            size = (font.pointSize*2.0)+TableViewConstants.todayRowPadding
+        }
+        return max(CGFloat(TableViewConstants.todayRowHeight), size)
     }
 
-    override func tableView(_: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+
+    override func tableView(_: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath)
+    {
         cell.layer.backgroundColor = UIColor.clearColor().CGColor
 
         let vibrancyView = UIVisualEffectView(effect: UIVibrancyEffect.notificationCenterVibrancyEffect())
@@ -144,13 +153,13 @@ class TodayViewController: UITableViewController, NCWidgetProviding, NSFetchedRe
         cell.selectedBackgroundView = vibrancyView
     }
 
-    override func tableView(tableView: UITableView!, didSelectRowAtIndexPath indexPath: NSIndexPath!)
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath)
     {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
 
         if !showingAll && indexPath.row == TableViewConstants.baseRowCount {
             showingAll = true
-            let itemCount = self.fetchedResultsController.fetchedObjects.count
+            let itemCount = (fetchedResultsController.fetchedObjects as Array!).count
 
             tableView.beginUpdates()
 
@@ -173,10 +182,10 @@ class TodayViewController: UITableViewController, NCWidgetProviding, NSFetchedRe
         let stationInfo = self.fetchedResultsController.objectAtIndexPath(indexPath) as CDStation
 
         let url = NSURL.URLWithString("vindsiden://station/\(stationInfo.stationId)?todayView=1")
-        extensionContext.openURL(url, completionHandler: nil)
+        extensionContext?.openURL(url, completionHandler:  nil)
     }
 
-    // NSFetchedResultsController
+    // MARK: - NSFetchedResultsController
 
     var fetchedResultsController: NSFetchedResultsController {
         if let actual = _fetchedResultsController {
@@ -188,7 +197,7 @@ class TodayViewController: UITableViewController, NCWidgetProviding, NSFetchedRe
         fetchRequest.predicate = NSPredicate(format: "isHidden = NO", argumentArray: nil)
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: "order", ascending: true)]
 
-        _fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: Datamanager.sharedManager().managedObjectContext, sectionNameKeyPath: nil, cacheName: nil)
+        _fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: Datamanager.sharedManager().managedObjectContext!, sectionNameKeyPath: nil, cacheName: nil)
         _fetchedResultsController!.delegate = self
 
         let success = _fetchedResultsController!.performFetch(nil)
@@ -208,37 +217,40 @@ class TodayViewController: UITableViewController, NCWidgetProviding, NSFetchedRe
         }
     }
 
+    // MARK: -
 
-    var speedFormatter : NSNumberFormatter {
-        if let actual = _speedFormatter {
-            return actual
-        }
+    lazy var speedFormatter : NSNumberFormatter = {
 
-        _speedFormatter = NSNumberFormatter()
-        _speedFormatter!.numberStyle = NSNumberFormatterStyle.DecimalStyle
-        _speedFormatter!.maximumFractionDigits = 1
-        _speedFormatter!.minimumFractionDigits = 1
+        let _speedFormatter = NSNumberFormatter()
+        _speedFormatter.numberStyle = NSNumberFormatterStyle.DecimalStyle
+        _speedFormatter.maximumFractionDigits = 1
+        _speedFormatter.minimumFractionDigits = 1
         //_speedFormatter!.minimumSignificantDigits = 1
-        _speedFormatter!.notANumberSymbol = "—.—"
-        _speedFormatter!.nilSymbol = "—.—"
+        _speedFormatter.notANumberSymbol = "—.—"
+        _speedFormatter.nilSymbol = "—.—"
 
-        return _speedFormatter!
-    }
-    var _speedFormatter: NSNumberFormatter? = nil;
+        return _speedFormatter
+    }()
 
     func resetContentSize() {
         var preferredSize = preferredContentSize
         preferredSize.height = preferredViewHeight
         preferredSize.width = 320.0;
         preferredContentSize = preferredSize
-        println("Preferred size: \(preferredSize)")
     }
 
     var preferredViewHeight: CGFloat {
-        let itemCount = self.fetchedResultsController.fetchedObjects.count
+        let itemCount = (fetchedResultsController.fetchedObjects as Array!).count
         let rowCount = showingAll ? itemCount : min(itemCount, TableViewConstants.baseRowCount + 1)
-        return CGFloat(Double(rowCount) * TableViewConstants.todayRowHeight)
+        let font = UIFont.preferredFontForTextStyle(UIFontTextStyleSubheadline)
+        var size = (font.pointSize*2)+TableViewConstants.todayRowPadding
+
+        size = max(TableViewConstants.todayRowHeight, size)
+
+        if !showingAll {
+            return CGFloat(Double(rowCount-1) * Double(size)) + TableViewConstants.todayRowHeight
+        } else {
+            return CGFloat(Double(rowCount) * Double(size))
+        }
     }
-
 }
-
