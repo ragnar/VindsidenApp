@@ -107,7 +107,7 @@ class TodayViewController: UITableViewController, NCWidgetProviding, NSFetchedRe
             if let plot = tmpplot {
                 let image = DrawArrow.drawArrowAtAngle(plot.windDir, forSpeed: plot.windAvg, highlighted: false, color: UIColor.whiteColor(), hightlightedColor: UIColor.blackColor())
 
-                let raw = Datamanager.sharedManager().sharedDefaults!.integerForKey("selectedUnit")
+                let raw = Datamanager.sharedManager().sharedDefaults.integerForKey("selectedUnit")
                 let unit = SpeedConvertion.fromRaw(raw)
 
                 if let realUnit = unit {

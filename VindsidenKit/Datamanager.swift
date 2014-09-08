@@ -192,7 +192,7 @@ import CoreData
         return date!;
     }
 
-    public lazy var sharedDefaults: NSUserDefaults? = {
+    public lazy var sharedDefaults: NSUserDefaults = {
         var _defaultManager = NSUserDefaults(suiteName: "group.org.juniks.VindsidenApp")
         return _defaultManager
     }()
