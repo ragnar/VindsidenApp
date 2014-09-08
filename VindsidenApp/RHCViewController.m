@@ -151,7 +151,11 @@ static NSString *kCellID = @"stationCellID";
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    RHCStationCell *cell = [self.collectionView visibleCells][0];
+    RHCStationCell *cell =  nil;
+
+    if ( [self.collectionView.visibleCells count] ) {
+        cell = [self.collectionView visibleCells][0];
+    }
 
     if ( [segue.identifier isEqualToString:@"ShowSettings"] ) {
         UINavigationController *navCon = segue.destinationViewController;
