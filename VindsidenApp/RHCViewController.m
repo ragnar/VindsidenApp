@@ -218,11 +218,7 @@ static NSString *kCellID = @"stationCellID";
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    if ( CGRectGetHeight(collectionView.bounds) > 480.0) {
-        return CGSizeMake( 320.0, 504.0);
-    }
-
-    return CGSizeMake( 320.0, 416.0);
+    return self.collectionView.bounds.size;
 }
 
 
