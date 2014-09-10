@@ -48,6 +48,10 @@ class TodayViewController: UITableViewController, NCWidgetProviding, NSFetchedRe
 
         resetContentSize()
         tableView.reloadData()
+        let footer = tableView.tableFooterView
+        footer?.frame = CGRectMake(0.0, 0.0, 320.0, 0.5)
+
+        tableView.tableFooterView = nil;
     }
 
     // MARK: - NotificationCenter
@@ -133,7 +137,7 @@ class TodayViewController: UITableViewController, NCWidgetProviding, NSFetchedRe
         if !showingAll && indexPath.row == TableViewConstants.baseRowCount &&  itemCount != TableViewConstants.baseRowCount + 1 {
             size = CGFloat(TableViewConstants.todayRowHeight)
         } else {
-            let font = UIFont.preferredFontForTextStyle(UIFontTextStyleSubheadline)
+            let font = UIFont.preferredFontForTextStyle(UIFontTextStyleHeadline)
             size = (font.pointSize*2.0)+TableViewConstants.todayRowPadding
         }
         return max(CGFloat(TableViewConstants.todayRowHeight), size)
@@ -242,15 +246,20 @@ class TodayViewController: UITableViewController, NCWidgetProviding, NSFetchedRe
     var preferredViewHeight: CGFloat {
         let itemCount = (fetchedResultsController.fetchedObjects as Array!).count
         let rowCount = showingAll ? itemCount : min(itemCount, TableViewConstants.baseRowCount + 1)
-        let font = UIFont.preferredFontForTextStyle(UIFontTextStyleSubheadline)
-        var size = (font.pointSize*2)+TableViewConstants.todayRowPadding
+        let font1 = UIFont.preferredFontForTextStyle(UIFontTextStyleHeadline)
+        let font2 = UIFont.preferredFontForTextStyle(UIFontTextStyleSubheadline)
+        var size = (font1.pointSize+font2.pointSize)+TableViewConstants.todayRowPadding
 
         size = max(TableViewConstants.todayRowHeight, size)
 
         if !showingAll {
-            return CGFloat(Double(rowCount-1) * Double(size)) + TableViewConstants.todayRowHeight
+            if itemCount > TableViewConstants.baseRowCount {
+                return CGFloat(Double(rowCount-1) * Double(size)) + TableViewConstants.todayRowHeight
+            } else {
+                return CGFloat(Double(rowCount) * Double(size))
+            }
         } else {
-            return CGFloat(Double(rowCount) * Double(size))
+            return CGFloat(Double(rowCount) * Double(size)) + TableViewConstants.todayRowPadding
         }
     }
 }
