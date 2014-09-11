@@ -147,8 +147,7 @@ class TodayViewController: UITableViewController, NCWidgetProviding, NSFetchedRe
     override func tableView(_: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath)
     {
         cell.layer.backgroundColor = UIColor.clearColor().CGColor
-
-        (cell as RHCTodayCell).configureSelectedBackgroundView()
+        cell.configureSelectedBackgroundView()
     }
 
     
