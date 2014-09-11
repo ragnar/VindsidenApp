@@ -101,7 +101,7 @@ class TodayViewController: UITableViewController, NCWidgetProviding, NSFetchedRe
 
         if !showingAll && indexPath.row == TableViewConstants.baseRowCount &&  itemCount != TableViewConstants.baseRowCount + 1 {
             let cell = tableView.dequeueReusableCellWithIdentifier(TableViewConstants.CellIdentifiers.showall, forIndexPath: indexPath) as UITableViewCell
-            cell.textLabel!.text = NSLocalizedString("Show All...", comment: "")
+            cell.textLabel!.text = NSLocalizedString("Show All...", tableName: nil, bundle: NSBundle.mainBundle(), value: "Show all...", comment: "Show all")
             return cell
         } else {
             let cell = tableView.dequeueReusableCellWithIdentifier(TableViewConstants.CellIdentifiers.message, forIndexPath: indexPath) as RHCTodayCell
@@ -122,7 +122,7 @@ class TodayViewController: UITableViewController, NCWidgetProviding, NSFetchedRe
                 cell.updatedLabel!.text = dateTransformer.transformedValue(plot.plotTime) as? String
             } else {
                 cell.speedLabel!.text = "—.—"
-                cell.updatedLabel!.text = NSLocalizedString("Not updated", comment: "")
+                cell.updatedLabel?.text = NSLocalizedString("LABEL_NOT_UPDATED", tableName: nil, bundle: NSBundle.mainBundle(), value: "LABEL_NOT_UPDATED", comment: "Not updated")
             }
             cell.nameLabel!.text = stationInfo.stationName
             return cell
