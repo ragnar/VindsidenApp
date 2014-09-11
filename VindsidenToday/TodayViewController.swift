@@ -148,15 +148,10 @@ class TodayViewController: UITableViewController, NCWidgetProviding, NSFetchedRe
     {
         cell.layer.backgroundColor = UIColor.clearColor().CGColor
 
-        let vibrancyView = UIVisualEffectView(effect: UIVibrancyEffect.notificationCenterVibrancyEffect())
-        vibrancyView.frame = cell.contentView.bounds
-
-        let view = UIView(frame: vibrancyView.bounds)
-        view.backgroundColor = UIColor.lightGrayColor()
-        vibrancyView.contentView.addSubview(view)
-        cell.selectedBackgroundView = vibrancyView
+        (cell as RHCTodayCell).configureSelectedBackgroundView()
     }
 
+    
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath)
     {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
