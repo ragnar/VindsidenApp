@@ -48,7 +48,6 @@
 		AD4A378B1770F0EF003B8AF2 /* RHCAlertManager.m in Sources */ = {isa = PBXBuildFile; fileRef = AD4A378A1770F0EF003B8AF2 /* RHCAlertManager.m */; };
 		AD539C841947B0F7002644BD /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD539C831947B0F6002644BD /* NotificationCenter.framework */; };
 		AD539C891947B0F7002644BD /* TodayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD539C881947B0F7002644BD /* TodayViewController.swift */; };
-		AD539C8B1947B0F7002644BD /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AD539C8A1947B0F7002644BD /* MainInterface.storyboard */; };
 		AD539C8E1947B0F7002644BD /* org.juniks.VindsidenApp.VindsidenToday.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = AD539C821947B0F6002644BD /* org.juniks.VindsidenApp.VindsidenToday.appex */; };
 		AD539C971947B301002644BD /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD17EDBE17310E7200943C33 /* MapKit.framework */; };
 		AD539CA21947B5CA002644BD /* VindsidenKit.h in Headers */ = {isa = PBXBuildFile; fileRef = AD539CA11947B5CA002644BD /* VindsidenKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -63,6 +62,8 @@
 		AD7AA503196E46BA00B1518B /* CDStation.h in Headers */ = {isa = PBXBuildFile; fileRef = AD7AA4FF196E46BA00B1518B /* CDStation.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AD7AA504196E46BA00B1518B /* CDStation.m in Sources */ = {isa = PBXBuildFile; fileRef = AD7AA500196E46BA00B1518B /* CDStation.m */; };
 		AD7AA507196E46D800B1518B /* Vindsiden.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = AD7AA505196E46D800B1518B /* Vindsiden.xcdatamodeld */; };
+		ADA0C64019C0EEBC00152005 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ADA0C64219C0EEBC00152005 /* MainInterface.storyboard */; };
+		ADA0C64719C0EF1A00152005 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = AD17EDC517312A5000943C33 /* Localizable.strings */; };
 		ADC8CB8A196D5FE200D167CD /* VindsidenPlotClient.m in Sources */ = {isa = PBXBuildFile; fileRef = AD17ED9D1731066F00943C33 /* VindsidenPlotClient.m */; };
 		ADC8CB8B196D5FE600D167CD /* VindsidenStationClient.m in Sources */ = {isa = PBXBuildFile; fileRef = AD17EDA11731066F00943C33 /* VindsidenStationClient.m */; };
 		ADC8CB8C196D5FEA00D167CD /* RHEVindsidenAPIClient.m in Sources */ = {isa = PBXBuildFile; fileRef = AD17EDB417310C5A00943C33 /* RHEVindsidenAPIClient.m */; };
@@ -289,7 +290,6 @@
 		AD539C831947B0F6002644BD /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
 		AD539C871947B0F7002644BD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AD539C881947B0F7002644BD /* TodayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayViewController.swift; sourceTree = "<group>"; };
-		AD539C8A1947B0F7002644BD /* MainInterface.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MainInterface.storyboard; sourceTree = "<group>"; };
 		AD539C951947B2B1002644BD /* VindsidenApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = VindsidenApp.entitlements; sourceTree = "<group>"; };
 		AD539C961947B2D0002644BD /* org.juniks.VindsidenApp.VindsidenToday.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = org.juniks.VindsidenApp.VindsidenToday.entitlements; sourceTree = "<group>"; };
 		AD539C9D1947B5CA002644BD /* VindsidenKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = VindsidenKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -305,6 +305,9 @@
 		AD7AA4FF196E46BA00B1518B /* CDStation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDStation.h; sourceTree = "<group>"; };
 		AD7AA500196E46BA00B1518B /* CDStation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDStation.m; sourceTree = "<group>"; };
 		AD7AA506196E46D800B1518B /* Vindsiden.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Vindsiden.xcdatamodel; sourceTree = "<group>"; };
+		ADA0C64119C0EEBC00152005 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
+		ADA0C64419C0EEC000152005 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/MainInterface.strings; sourceTree = "<group>"; };
+		ADA0C64619C0EEC200152005 /* nb */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nb; path = nb.lproj/MainInterface.strings; sourceTree = "<group>"; };
 		ADCD423C196E4E42004973E9 /* NSNumber+Between.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSNumber+Between.h"; sourceTree = "<group>"; };
 		ADCD423D196E4E42004973E9 /* NSNumber+Between.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSNumber+Between.m"; sourceTree = "<group>"; };
 		ADCD423E196E4E42004973E9 /* NSNumber+Convertion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSNumber+Convertion.h"; sourceTree = "<group>"; };
@@ -611,7 +614,7 @@
 			isa = PBXGroup;
 			children = (
 				AD539C881947B0F7002644BD /* TodayViewController.swift */,
-				AD539C8A1947B0F7002644BD /* MainInterface.storyboard */,
+				ADA0C64219C0EEBC00152005 /* MainInterface.storyboard */,
 				AD00384F196E7A6400C3232A /* RHCTodayCell.swift */,
 				AD539C861947B0F7002644BD /* Supporting Files */,
 			);
@@ -919,7 +922,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AD539C8B1947B0F7002644BD /* MainInterface.storyboard in Resources */,
+				ADA0C64019C0EEBC00152005 /* MainInterface.storyboard in Resources */,
+				ADA0C64719C0EF1A00152005 /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1211,6 +1215,16 @@
 				AD146F4D1741255B00205BB9 /* nb */,
 			);
 			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		ADA0C64219C0EEBC00152005 /* MainInterface.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				ADA0C64119C0EEBC00152005 /* Base */,
+				ADA0C64419C0EEC000152005 /* en */,
+				ADA0C64619C0EEC200152005 /* nb */,
+			);
+			name = MainInterface.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
