@@ -8,15 +8,14 @@
 
 #import <AFNetworking/AFURLConnectionOperation.h>
 #import "RHCAlertManager.h"
+#import "RHCAppDelegate.h"
 
-@interface RHCAlertManager () <UIAlertViewDelegate>
-
-@end
 
 
 @implementation RHCAlertManager
 {
-    UIAlertView *_networkAlertView;
+    BOOL _showingError;
+    UIAlertController *_networkAlertController;
 }
 
 
@@ -42,36 +41,41 @@
     return self;
 }
 
+
 - (void)showNetworkError:(NSError *)error
 {
-    if ( _networkAlertView ) {
+    if ( _showingError ) {
         DLOG(@"");
         return;
     }
 
-    dispatch_sync(dispatch_get_main_queue(), ^{
+    _showingError = YES;
+
+    dispatch_async(dispatch_get_main_queue(), ^{
+
         NSString *message = error.userInfo[NSLocalizedDescriptionKey];
 
-        if ( [error.domain isEqualToString:(NSString *)kCFErrorDomainCFNetwork]) {
+        if ( [error.domain isEqualToString:(NSString *)kCFErrorDomainCFNetwork] || [error.domain isEqualToString:NSURLErrorDomain]) {
             message = NSLocalizedString(@"NETWORK_ERROR_UNABLE_TO_LOAD", @"Unable to fetch data at this point.");
         }
 
-        _networkAlertView = [[UIAlertView alloc] initWithTitle:nil
-                                                       message:message
-                                                      delegate:self
-                                             cancelButtonTitle:@"OK"
-                                             otherButtonTitles:nil];
-        [_networkAlertView show];
-        
+        _networkAlertController = [UIAlertController alertControllerWithTitle:@""
+                                                                      message:message
+                                                               preferredStyle:UIAlertControllerStyleAlert];
+
+        UIAlertController* __weak weakAlert = _networkAlertController;
+        UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault
+                                                              handler:^(UIAlertAction * action) {
+                                                                  [weakAlert dismissViewControllerAnimated:YES completion:nil];
+                                                                  _showingError = NO;
+                                                              }];
+        [_networkAlertController addAction:defaultAction];
+
+        RHCAppDelegate *delegate = (RHCAppDelegate *)[UIApplication sharedApplication].delegate;
+
+        UIViewController *controller = delegate.window.rootViewController;
+        [controller presentViewController:_networkAlertController animated:YES completion:nil];
     });
-}
-
-
-- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
-{
-    if ( alertView == _networkAlertView ) {
-        _networkAlertView = nil;
-    }
 }
 
 @end
