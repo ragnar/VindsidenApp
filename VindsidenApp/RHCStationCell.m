@@ -54,7 +54,6 @@
 - (void)prepareForReuse
 {
     [super prepareForReuse];
-    [self.stationView resetInfoLabels];
 
     [self.updatedTimer invalidate];
     self.updatedTimer = nil;

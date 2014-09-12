@@ -21,7 +21,6 @@ typedef NS_ENUM( NSUInteger, StationViewTempKind)
 
 @property (nonatomic, assign) StationViewTempKind tempKind;
 
-- (void)resetInfoLabels;
 - (void)updateWithPlot:(CDPlot *)plot;
 
 @end

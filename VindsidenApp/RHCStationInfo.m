@@ -5,8 +5,6 @@
 //  Created by Ragnar Henriksen on 25.04.13.
 //  Copyright (c) 2013 RHC. All rights reserved.
 //
-#import "NSNumber+Convertion.h"
-#import "NSNumber+Between.h"
 
 #import "RHCStationInfo.h"
 #import "CDPlot.h"
@@ -39,65 +37,7 @@
 
 - (id)initWithCoder:(NSCoder *)aDecoder
 {
-    self = [super initWithCoder:aDecoder];
-    if ( self ) {
-        [self initInfoLabels];
-    }
-
-    return self;
-}
-
-
-- (void)initInfoLabels
-{
-    CGFloat x = 75.0;
-    CGFloat y = 9.0;
-    CGFloat height = 14.0;
-    CGFloat width = 85.0;
-
-    UILabel *lbl = [[UILabel alloc] initWithFrame:CGRectMake( x, y, width, height)];
-    [self addSubview:lbl];
-    self.windSpeed = lbl;
-    y += 30;
-
-    lbl = [[UILabel alloc] initWithFrame:CGRectMake( x, y, width, height)];
-    [self addSubview:lbl];
-    self.windGust = lbl;
-    y += 30;
-
-    lbl = [[UILabel alloc] initWithFrame:CGRectMake(x, y, width, height)];
-    [self addSubview:lbl];
-    self.windDirection = lbl;
-
-    x = 215.0;
-    y = 9.0;
-
-    lbl = [[UILabel alloc] initWithFrame:CGRectMake(x, y, width, height)];
-    [self addSubview:lbl];
-    self.windAverage = lbl;
-    y += 30;
-
-    lbl = [[UILabel alloc] initWithFrame:CGRectMake(x, y, width, height)];
-    [self addSubview:lbl];
-    self.windBeaufort = lbl;
-    y += 30;
-
-    lbl = [[UILabel alloc] initWithFrame:CGRectMake(x, y, width, height)];
-    [self addSubview:lbl];
-    self.tempAir = lbl;
-
-    [self resetInfoLabels];
-}
-
-
-- (void)resetInfoLabels
-{
-    for ( UILabel *l in @[self.windSpeed, self.windGust, self.windAverage, self.windBeaufort, self.windDirection, self.tempAir] ) {
-        l.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:12.0];
-        l.backgroundColor = [UIColor clearColor];
-        l.textAlignment = NSTextAlignmentRight;
-        l.text = @"—.—";
-    }
+    return [super initWithCoder:aDecoder];
 }
 
 
@@ -111,37 +51,6 @@
     _windBeaufort.text = (isnan([plot.windAvg floatValue]) ? @"—.—" : [NSString stringWithFormat:@"%0.0f", [plot.windMin speedInBeaufort]]);
     _windDirection.text = (isnan([plot.windDir floatValue]) ? @"—.—" : [NSString stringWithFormat:@"%0.0f° (%@)", [plot.windDir floatValue], [self windDirectionString:[plot.windDir floatValue]]]);
     _tempAir.text = (isnan([plot.tempAir floatValue]) ? @"—.—" : [NSString stringWithFormat:@"%@ °C", [[self numberFormatter] stringFromNumber:plot.tempAir]]);
-}
-
-
-- (void)drawRect:(CGRect)rect
-{
-    CGContextRef context = UIGraphicsGetCurrentContext();
-    CGContextSaveGState(context);
-
-    NSDictionary *drawAttr = @{ NSFontAttributeName : [UIFont fontWithName:@"HelveticaNeue" size:11.0]};
-    [NSLocalizedString(@"LABEL_WIND_SPEED", @"Wind speed") drawAtPoint:CGPointMake( 20.0, 10.0) withAttributes:drawAttr];
-    [NSLocalizedString(@"LABEL_WIND_GUST", @"Wind gust") drawAtPoint:CGPointMake( 20.0, 40.0) withAttributes:drawAttr];
-    [NSLocalizedString(@"LABEL_WIND_DIR", @"Wind direction") drawAtPoint:CGPointMake( 20.0, 70.0) withAttributes:drawAttr];
-    [NSLocalizedString(@"LABEL_WIND_AVG", @"Average") drawAtPoint:CGPointMake( 170.0, 10.0) withAttributes:drawAttr];
-    [NSLocalizedString(@"LABEL_WIND_BEU", @"Beaufort") drawAtPoint:CGPointMake( 170.0, 40.0) withAttributes:drawAttr];
-    [NSLocalizedString(@"Temp air", @"Temp air") drawAtPoint:CGPointMake( 170.0, 70.0) withAttributes:drawAttr];
-
-    [RGBACOLOR( 0.0, 0.0, 0.0, 0.13) set];
-    CGContextBeginPath(context);
-
-    CGFloat y = 24.0;
-    for ( int i = 0; i < 3; ++i ) {
-        CGContextMoveToPoint(context, 20.0, y);
-        CGContextAddLineToPoint(context, 160.0, y);
-
-        CGContextMoveToPoint(context, 160.0, y);
-        CGContextAddLineToPoint(context, 300.0, y);
-        y += 30.0;
-    }
-    CGContextDrawPath(context, kCGPathStroke);
-
-    CGContextRestoreGState(context);
 }
 
 
