@@ -8,9 +8,6 @@
 
 #import <AFNetworking/AFNetworkActivityIndicatorManager.h>
 #import "RHCAppDelegate.h"
-#import "RHCStationViewController.h"
-#import "NSNumber+Convertion.h"
-#import "NSString+isNumeric.h"
 #import "RHCViewController.h"
 #import "RHEVindsidenAPIClient.h"
 
@@ -159,20 +156,6 @@
 #pragma mark - 
 
 
-- (void)openStationViewController:(CDStation *)station
-{
-    UINavigationController *navCon = [self.window.rootViewController.storyboard instantiateViewControllerWithIdentifier:@"modalStationView"];
-    RHCStationViewController *controller = navCon.viewControllers[0];
-
-    [self.window.rootViewController presentViewController:navCon
-                                                 animated:YES
-                                               completion:^{
-                                                   controller.currentStation = station;
-                                               }
-     ];
-}
-
-
 - (BOOL)openLaunchOptionsURL:(NSURL *)url
 {
     id ident = [url.pathComponents lastObject];
@@ -187,24 +170,22 @@
         return NO;
     }
 
-    if ( [url.query rangeOfString:@"todayView=1"].location == NSNotFound ) {
-        if ( self.window.rootViewController.presentedViewController ) {
-            [self.window.rootViewController dismissViewControllerAnimated:NO completion:^{
-                [self openStationViewController:station];
-            }];
-        } else {
-            [self openStationViewController:station];
-        }
-    } else {
-        RHCViewController *controller = [(UINavigationController *)self.window.rootViewController viewControllers][0];
-        if ( self.window.rootViewController.presentedViewController ) {
-            [self.window.rootViewController dismissViewControllerAnimated:NO completion:^{
-                [controller scrollToStation:station];
-            }];
-        } else {
-            [controller scrollToStation:station];
-        }
+    if ( [station.isHidden boolValue] ) {
+        [station.managedObjectContext performBlockAndWait:^{
+            station.isHidden = @NO;
+            [station.managedObjectContext save:nil];
+        }];
     }
+
+    RHCViewController *controller = [(UINavigationController *)self.window.rootViewController viewControllers].firstObject;
+    if ( self.window.rootViewController.presentedViewController ) {
+        [self.window.rootViewController dismissViewControllerAnimated:NO completion:^{
+            [controller scrollToStation:station];
+        }];
+    } else {
+        [controller scrollToStation:station];
+    }
+
     return YES;
 }
 
