@@ -2,7 +2,6 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="14A343f" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="trP-cr-shP">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Today View Controller-->
@@ -20,36 +19,36 @@
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         </view>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="0.0" shouldIndentWhileEditing="NO" reuseIdentifier="Cell" rowHeight="43" id="snJ-Vq-uxG" customClass="RHCTodayCell" customModule="org_juniks_VindsidenApp_VindsidenToday" customModuleProvider="target">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="0.0" shouldIndentWhileEditing="NO" reuseIdentifier="Cell" rowHeight="50" id="snJ-Vq-uxG" customClass="RHCTodayCell" customModule="org_juniks_VindsidenApp_VindsidenToday" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="snJ-Vq-uxG" id="OUk-Np-mOd">
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="tVJ-95-IMx">
-                                            <rect key="frame" x="278" y="5" width="32" height="32"/>
+                                            <rect key="frame" x="278" y="9" width="32" height="32"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="32" id="BZs-Ml-gi4"/>
                                                 <constraint firstAttribute="height" constant="32" id="Fzc-P5-WcT"/>
                                             </constraints>
                                         </imageView>
                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12 m/s" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2Vy-Ub-dTY">
-                                            <rect key="frame" x="218" y="11" width="60" height="20"/>
+                                            <rect key="frame" x="218" y="15" width="60" height="20"/>
                                             <constraints>
-                                                <constraint firstAttribute="width" constant="60" id="Bd9-cm-uta"/>
+                                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="60" id="Bd9-cm-uta"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Larkollen" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8mw-VB-p9g">
-                                            <rect key="frame" x="50" y="3" width="155" height="20"/>
+                                            <rect key="frame" x="50" y="5" width="68" height="20"/>
                                             <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="updated" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xcL-tw-nBm">
-                                            <rect key="frame" x="50" y="23" width="155" height="17"/>
+                                            <rect key="frame" x="50" y="28" width="54" height="17"/>
                                             <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                                             <color key="textColor" cocoaTouchSystemColor="lightTextColor"/>
                                             <nil key="highlightedColor"/>
@@ -57,15 +56,16 @@
                                     </subviews>
                                     <constraints>
                                         <constraint firstAttribute="centerY" secondItem="tVJ-95-IMx" secondAttribute="centerY" id="05V-nm-awp"/>
+                                        <constraint firstItem="xcL-tw-nBm" firstAttribute="leading" secondItem="8mw-VB-p9g" secondAttribute="leading" id="75k-tC-bUA"/>
                                         <constraint firstItem="8mw-VB-p9g" firstAttribute="leading" secondItem="OUk-Np-mOd" secondAttribute="leading" constant="50" id="84h-s3-PUf"/>
-                                        <constraint firstItem="2Vy-Ub-dTY" firstAttribute="leading" secondItem="8mw-VB-p9g" secondAttribute="trailing" constant="13" id="HAY-nL-Pgl"/>
-                                        <constraint firstItem="xcL-tw-nBm" firstAttribute="leading" secondItem="OUk-Np-mOd" secondAttribute="leadingMargin" constant="42" id="JIc-Rm-zhI"/>
-                                        <constraint firstItem="2Vy-Ub-dTY" firstAttribute="leading" secondItem="xcL-tw-nBm" secondAttribute="trailing" constant="13" id="PLg-pN-Sxc"/>
-                                        <constraint firstAttribute="centerY" secondItem="8mw-VB-p9g" secondAttribute="centerY" constant="8" id="Vbx-mq-Y9y"/>
+                                        <constraint firstAttribute="bottom" secondItem="xcL-tw-nBm" secondAttribute="bottom" constant="4" id="C27-9f-Uyh"/>
+                                        <constraint firstItem="2Vy-Ub-dTY" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="8mw-VB-p9g" secondAttribute="trailing" constant="2" id="HAY-nL-Pgl"/>
+                                        <constraint firstItem="2Vy-Ub-dTY" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="xcL-tw-nBm" secondAttribute="trailing" constant="2" id="PLg-pN-Sxc"/>
+                                        <constraint firstItem="8mw-VB-p9g" firstAttribute="top" secondItem="OUk-Np-mOd" secondAttribute="top" constant="5" id="Tna-La-aEO"/>
                                         <constraint firstItem="tVJ-95-IMx" firstAttribute="leading" secondItem="2Vy-Ub-dTY" secondAttribute="trailing" id="X8F-g1-Rox"/>
                                         <constraint firstAttribute="centerY" secondItem="2Vy-Ub-dTY" secondAttribute="centerY" id="fCI-ey-Ha0"/>
                                         <constraint firstAttribute="trailing" secondItem="tVJ-95-IMx" secondAttribute="trailing" constant="10" id="lXh-c1-HSc"/>
-                                        <constraint firstItem="xcL-tw-nBm" firstAttribute="top" secondItem="tVJ-95-IMx" secondAttribute="top" constant="18" id="m34-hW-Fjp"/>
+                                        <constraint firstItem="xcL-tw-nBm" firstAttribute="top" secondItem="8mw-VB-p9g" secondAttribute="bottom" constant="3" id="znV-Tp-eVM"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <inset key="separatorInset" minX="50" minY="0.0" maxX="10" maxY="0.0"/>

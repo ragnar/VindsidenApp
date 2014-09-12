@@ -130,15 +130,12 @@ class TodayViewController: UITableViewController, NCWidgetProviding, NSFetchedRe
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat
     {
         let itemCount = (fetchedResultsController.fetchedObjects as Array!).count
-        var size : CGFloat
 
         if !showingAll && indexPath.row == TableViewConstants.baseRowCount &&  itemCount != TableViewConstants.baseRowCount + 1 {
-            size = CGFloat(TableViewConstants.todayRowHeight)
+            return showCellHeight()
         } else {
-            let font = UIFont.preferredFontForTextStyle(UIFontTextStyleHeadline)
-            size = (font.pointSize*2.0)+TableViewConstants.todayRowPadding
+            return infoCellHeight()
         }
-        return max(CGFloat(TableViewConstants.todayRowHeight), size)
     }
 
 
@@ -236,22 +233,42 @@ class TodayViewController: UITableViewController, NCWidgetProviding, NSFetchedRe
     }
 
     var preferredViewHeight: CGFloat {
+
+        let infoHeight = infoCellHeight()
+        let showHeight = showCellHeight()
         let itemCount = (fetchedResultsController.fetchedObjects as Array!).count
         let rowCount = showingAll ? itemCount : min(itemCount, TableViewConstants.baseRowCount + 1)
-        let font1 = UIFont.preferredFontForTextStyle(UIFontTextStyleHeadline)
-        let font2 = UIFont.preferredFontForTextStyle(UIFontTextStyleSubheadline)
-        var size = (font1.pointSize+font2.pointSize)+TableViewConstants.todayRowPadding
-
-        size = max(TableViewConstants.todayRowHeight, size)
 
         if !showingAll {
             if itemCount > TableViewConstants.baseRowCount {
-                return CGFloat(Double(rowCount-1) * Double(size)) + TableViewConstants.todayRowHeight
+                return infoHeight*CGFloat(rowCount-1) + showHeight - 1.0
             } else {
-                return CGFloat(Double(rowCount) * Double(size))
+                return infoHeight*CGFloat(rowCount) - 1.0
             }
         } else {
-            return CGFloat(Double(rowCount) * Double(size)) + TableViewConstants.todayRowPadding
+            return infoHeight*CGFloat(rowCount) - 1.0
         }
     }
+
+    func infoCellHeight() -> CGFloat
+    {
+        let infoCell = tableView.dequeueReusableCellWithIdentifier(TableViewConstants.CellIdentifiers.message) as RHCTodayCell
+        infoCell.nameLabel?.text = "123"
+        infoCell.updatedLabel?.text = "123"
+        infoCell.layoutIfNeeded()
+
+        let infoSize = infoCell.contentView.systemLayoutSizeFittingSize(UILayoutFittingCompressedSize)
+        return infoSize.height
+    }
+
+    func showCellHeight() -> CGFloat
+    {
+        let infoCell = tableView.dequeueReusableCellWithIdentifier(TableViewConstants.CellIdentifiers.showall) as UITableViewCell
+        infoCell.textLabel?.text = "123"
+        infoCell.layoutIfNeeded()
+
+        let infoSize = infoCell.contentView.systemLayoutSizeFittingSize(UILayoutFittingCompressedSize)
+        return infoSize.height
+    }
+
 }
