@@ -50,37 +50,11 @@ import CoreData
         }
     }
 
-    public func cleanupPlots() {
-//        NSManagedObjectContext *context = [(id)[[UIApplication sharedApplication] delegate] managedObjectContext];
-//        NSManagedObjectContext *childContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
-//        childContext.parentContext = context;
-//        childContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy;
-//        childContext.undoManager = nil;
-//        __block NSError *err = nil;
-//
-//        [childContext performBlock:^{
-//            NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-//            NSEntityDescription *entity = [NSEntityDescription entityForName:@"CDPlot" inManagedObjectContext:childContext];
-//            [fetchRequest setEntity:entity];
-//
-//            NSPredicate *predicate = [NSPredicate predicateWithFormat:@"plotTime < %@", [[NSDate date] dateByAddingTimeInterval:-1*((1+kPlotHistoryHours)*3600)]];
-//            [fetchRequest setPredicate:predicate];
-//
-//            NSArray *result = [childContext executeFetchRequest:fetchRequest error:nil];
-//
-//            for ( CDPlot *object in result ) {
-//            [childContext deleteObject:object];
-//            }
-//            [childContext save:&err];
-//            [context performBlock:^{
-//            [context save:&err];
-//            }];
-//            
-//            }];
-
+    public func cleanupPlots()
+    {
         let childContext = NSManagedObjectContext(concurrencyType: NSManagedObjectContextConcurrencyType.PrivateQueueConcurrencyType)
         childContext.parentContext = managedObjectContext
-        //childContext.mergePolicy =
+        childContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
         childContext.undoManager = nil
         var err: NSError?
 
@@ -126,6 +100,7 @@ import CoreData
     }()
 
     lazy var persistentStoreCoordinator: NSPersistentStoreCoordinator? = {
+
         let storeUrl = self.applicationDocumentsDirectory.URLByAppendingPathComponent(Config.sqliteName)
         var error: NSError? = nil
         var coordinator: NSPersistentStoreCoordinator? = NSPersistentStoreCoordinator(managedObjectModel: self.managedObjectModel!)
@@ -151,22 +126,26 @@ import CoreData
     }()
 
     var applicationDocumentsDirectory: NSURL {
-    let url = NSFileManager.defaultManager().containerURLForSecurityApplicationGroupIdentifier(Config.sharedGroupName)
-        if let actualurl = url {
-            return actualurl as NSURL
-        } else {
-            return NSURL()
-        }
+        let url = NSFileManager.defaultManager().containerURLForSecurityApplicationGroupIdentifier(Config.sharedGroupName)
+            if let actualurl = url {
+                return actualurl as NSURL
+            } else {
+                return NSURL()
+            }
     }
 
-    func addSkipBackupAttributeToItemAtURL( url: NSURL) -> Void {
-//        assert(NSFileManager.defaultManager().fileExistsAtPath(url.path), "File must exist", file: __FILE__, line: __LINE__)
-//
-//        var error: NSError? = nil
-//        let success = url.setResourceValue(true, forKey: NSURLIsExcludedFromBackupKey, error:&error)
-//        if success == false {
-//            NSLog("Error excluding \(url.lastPathComponent) from backup \(error)");
-//        }
+    func addSkipBackupAttributeToItemAtURL( url: NSURL) -> Void
+    {
+        if let path = url.path {
+            if NSFileManager.defaultManager().fileExistsAtPath(path) {
+                var error: NSError?
+                let success = url.setResourceValue(true, forKey: NSURLIsExcludedFromBackupKey, error: &error)
+
+                if success == false {
+                    NSLog("Error excluding \(url.lastPathComponent) from backup \(error)");
+                }
+            }
+        }
     }
 
     var dateFormatter: NSDateFormatter {
