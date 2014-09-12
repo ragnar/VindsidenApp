@@ -46,12 +46,10 @@ class TodayViewController: UITableViewController, NCWidgetProviding, NSFetchedRe
     {
         super.viewDidLoad()
 
+        tableView.tableFooterView = UIView()
+
         resetContentSize()
         tableView.reloadData()
-        let footer = tableView.tableFooterView
-        footer?.frame = CGRectMake(0.0, 0.0, 320.0, 0.5)
-
-        tableView.tableFooterView = nil;
     }
 
     // MARK: - NotificationCenter
