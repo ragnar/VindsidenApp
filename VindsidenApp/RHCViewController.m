@@ -284,6 +284,8 @@ static NSString *kCellID = @"stationCellID";
         return _fetchedResultsController;
     }
 
+    [NSFetchedResultsController deleteCacheWithName:@"StationList"];
+
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     NSString *cacheName = @"StationList";
 
