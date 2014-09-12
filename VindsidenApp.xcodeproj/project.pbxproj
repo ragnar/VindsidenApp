@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		192A528F7DE34EB5BFD1EF88 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A795A60F33B14BC9B7DC4A3E /* libPods.a */; };
+		3B5D05C719C3002F000AE4E0 /* Launch Screen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3B5D05C619C3002F000AE4E0 /* Launch Screen.xib */; };
 		AD003850196E7A6400C3232A /* RHCTodayCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD00384F196E7A6400C3232A /* RHCTodayCell.swift */; };
 		AD07B2C11779E90A004BC24C /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AD07B2C01779E90A004BC24C /* Media.xcassets */; };
 		AD0B8EAF1754F3C800042B95 /* RHCStationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD0B8EAE1754F3C800042B95 /* RHCStationViewController.m */; };
@@ -217,6 +218,7 @@
 
 /* Begin PBXFileReference section */
 		15DC7F5398F749998EAC2FC7 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
+		3B5D05C619C3002F000AE4E0 /* Launch Screen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "Launch Screen.xib"; sourceTree = "<group>"; };
 		A795A60F33B14BC9B7DC4A3E /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		AD00384E196E741800C3232A /* VindsidenApp-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "VindsidenApp-Bridging-Header.h"; path = "../VindsidenApp-Bridging-Header.h"; sourceTree = "<group>"; };
 		AD00384F196E7A6400C3232A /* RHCTodayCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RHCTodayCell.swift; sourceTree = "<group>"; };
@@ -460,6 +462,7 @@
 		AD17ED4E1731012200943C33 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				3B5D05C619C3002F000AE4E0 /* Launch Screen.xib */,
 				AD32E37F19BA2FC1008F00EB /* VindsidenApp-Bridging-Header.h */,
 				AD539C951947B2B1002644BD /* VindsidenApp.entitlements */,
 				AD17EDC517312A5000943C33 /* Localizable.strings */,
@@ -907,6 +910,7 @@
 				AD17EDC717312A5000943C33 /* Localizable.strings in Resources */,
 				AD17EDCC17312B2600943C33 /* DINMittelschriftStd.otf in Resources */,
 				AD07B2C11779E90A004BC24C /* Media.xcassets in Resources */,
+				3B5D05C719C3002F000AE4E0 /* Launch Screen.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1293,7 +1297,6 @@
 			baseConfigurationReference = 15DC7F5398F749998EAC2FC7 /* Pods.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = VindsidenApp/VindsidenApp.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -1316,7 +1319,6 @@
 			baseConfigurationReference = 15DC7F5398F749998EAC2FC7 /* Pods.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = VindsidenApp/VindsidenApp.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
