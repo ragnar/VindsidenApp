@@ -73,13 +73,13 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="nr2" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pRF-Gf-OHu">
-                                                            <rect key="frame" x="135" y="8" width="19" height="15"/>
+                                                            <rect key="frame" x="145" y="8" width="19" height="15"/>
                                                             <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="12"/>
                                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Average" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ydn-Pe-HF2">
-                                                            <rect key="frame" x="160" y="8" width="44" height="14"/>
+                                                            <rect key="frame" x="170" y="8" width="44" height="14"/>
                                                             <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
                                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                             <nil key="highlightedColor"/>
@@ -97,13 +97,13 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="nr6" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Nd-be-0RW">
-                                                            <rect key="frame" x="135" y="47" width="19" height="15"/>
+                                                            <rect key="frame" x="145" y="47" width="19" height="15"/>
                                                             <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="12"/>
                                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Beaufort" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u8o-PO-LuG">
-                                                            <rect key="frame" x="160" y="47" width="46" height="14"/>
+                                                            <rect key="frame" x="170" y="47" width="46" height="14"/>
                                                             <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
                                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                             <nil key="highlightedColor"/>
@@ -120,14 +120,17 @@
                                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="nr10" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KN1-dX-8Yo">
-                                                            <rect key="frame" x="128" y="88" width="26" height="15"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="nr10" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="KN1-dX-8Yo">
+                                                            <rect key="frame" x="124" y="88" width="40" height="15"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="40" id="7uM-j6-8wQ"/>
+                                                            </constraints>
                                                             <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="12"/>
                                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Temp air" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HCH-43-Lb8">
-                                                            <rect key="frame" x="160" y="88" width="46" height="14"/>
+                                                            <rect key="frame" x="170" y="88" width="46" height="14"/>
                                                             <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
                                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                             <nil key="highlightedColor"/>
@@ -177,7 +180,7 @@
                                                         <constraint firstItem="R7C-CF-x4f" firstAttribute="top" secondItem="sIY-as-DQo" secondAttribute="bottom" constant="25" id="66X-oQ-QjT">
                                                             <variation key="heightClass=regular" constant="15"/>
                                                         </constraint>
-                                                        <constraint firstAttribute="centerX" secondItem="ALE-vn-F97" secondAttribute="centerX" id="B2S-Vm-DAy"/>
+                                                        <constraint firstAttribute="centerX" secondItem="ALE-vn-F97" secondAttribute="centerX" constant="-10" id="B2S-Vm-DAy"/>
                                                         <constraint firstItem="S6k-3c-4lq" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="u8o-PO-LuG" secondAttribute="trailing" constant="4" id="Bez-5v-vEL"/>
                                                         <constraint firstItem="R7C-CF-x4f" firstAttribute="leading" secondItem="gQM-kn-Uu6" secondAttribute="leading" id="D3G-vz-MH2"/>
                                                         <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="8RF-9K-JGL" secondAttribute="bottom" constant="4" id="Dhq-eu-h0Z"/>
