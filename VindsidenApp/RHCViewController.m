@@ -417,9 +417,12 @@ static NSString *kCellID = @"stationCellID";
     UIActivityViewController *activityViewController = [[UIActivityViewController alloc] initWithActivityItems:activityProviders applicationActivities:nil];
 
     activityViewController.excludedActivityTypes = @[UIActivityTypeAssignToContact];
-    activityViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
-
+    activityViewController.modalPresentationStyle = UIModalPresentationPopover;
     [self presentViewController:activityViewController animated:YES completion:nil];
+
+    UIPopoverPresentationController *presentationController = [activityViewController popoverPresentationController];
+    presentationController.permittedArrowDirections = UIPopoverArrowDirectionDown;
+    presentationController.barButtonItem = sender;
 }
 
 
