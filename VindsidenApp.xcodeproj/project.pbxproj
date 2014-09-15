@@ -43,6 +43,10 @@
 		AD17EDF71735541E00943C33 /* RHCNavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD17EDF61735541900943C33 /* RHCNavigationViewController.m */; };
 		AD17EDF91736492500943C33 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD17EDF81736492200943C33 /* AdSupport.framework */; };
 		AD1B7EF219A7E82900D8B253 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AD1B7EF119A7E82900D8B253 /* libPods.a */; };
+		AD2AB4F819C722320029C739 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = AD2AB4FA19C722320029C739 /* InfoPlist.strings */; };
+		AD2AB4FD19C722330029C739 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = AD2AB4FF19C722330029C739 /* InfoPlist.strings */; };
+		AD2AB50219C722330029C739 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = AD2AB50419C722330029C739 /* Localizable.strings */; };
+		AD2AB50719C722340029C739 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = AD2AB50919C722340029C739 /* InfoPlist.strings */; };
 		AD32E38119BA2FC2008F00EB /* RHEStationPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD32E38019BA2FC2008F00EB /* RHEStationPickerViewController.swift */; };
 		AD32E38319BC5037008F00EB /* RHCUnitSelectorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD32E38219BC5037008F00EB /* RHCUnitSelectorViewController.swift */; };
 		AD4A378B1770F0EF003B8AF2 /* RHCAlertManager.m in Sources */ = {isa = PBXBuildFile; fileRef = AD4A378A1770F0EF003B8AF2 /* RHCAlertManager.m */; };
@@ -280,6 +284,10 @@
 		AD17EDF61735541900943C33 /* RHCNavigationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RHCNavigationViewController.m; sourceTree = "<group>"; };
 		AD17EDF81736492200943C33 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		AD1B7EF119A7E82900D8B253 /* libPods.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libPods.a; path = "Pods/build/Debug-iphoneos/libPods.a"; sourceTree = "<group>"; };
+		AD2AB4F919C722320029C739 /* nb */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nb; path = nb.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		AD2AB4FE19C722330029C739 /* nb */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nb; path = nb.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		AD2AB50319C722330029C739 /* nb */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nb; path = nb.lproj/Localizable.strings; sourceTree = "<group>"; };
+		AD2AB50819C722340029C739 /* nb */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nb; path = nb.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		AD32E37F19BA2FC1008F00EB /* VindsidenApp-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "VindsidenApp-Bridging-Header.h"; sourceTree = "<group>"; };
 		AD32E38019BA2FC2008F00EB /* RHEStationPickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RHEStationPickerViewController.swift; sourceTree = "<group>"; };
 		AD32E38219BC5037008F00EB /* RHCUnitSelectorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RHCUnitSelectorViewController.swift; sourceTree = "<group>"; };
@@ -622,6 +630,7 @@
 		AD539C861947B0F7002644BD /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				AD2AB50919C722340029C739 /* InfoPlist.strings */,
 				AD00384E196E741800C3232A /* VindsidenApp-Bridging-Header.h */,
 				AD539C961947B2D0002644BD /* org.juniks.VindsidenApp.VindsidenToday.entitlements */,
 				AD539C871947B0F7002644BD /* Info.plist */,
@@ -648,6 +657,8 @@
 		AD539C9F1947B5CA002644BD /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				AD2AB50419C722330029C739 /* Localizable.strings */,
+				AD2AB4FA19C722320029C739 /* InfoPlist.strings */,
 				AD539CA01947B5CA002644BD /* Info.plist */,
 			);
 			name = "Supporting Files";
@@ -665,6 +676,7 @@
 		AD539CAC1947B5CA002644BD /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				AD2AB4FF19C722330029C739 /* InfoPlist.strings */,
 				AD539CAD1947B5CA002644BD /* Info.plist */,
 			);
 			name = "Supporting Files";
@@ -922,6 +934,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				ADA0C64019C0EEBC00152005 /* Today.storyboard in Resources */,
+				AD2AB50719C722340029C739 /* InfoPlist.strings in Resources */,
 				ADA0C64719C0EF1A00152005 /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -930,6 +943,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AD2AB4F819C722320029C739 /* InfoPlist.strings in Resources */,
+				AD2AB50219C722330029C739 /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -937,6 +952,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AD2AB4FD19C722330029C739 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1213,6 +1229,38 @@
 				AD146F4D1741255B00205BB9 /* nb */,
 			);
 			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		AD2AB4FA19C722320029C739 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				AD2AB4F919C722320029C739 /* nb */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		AD2AB4FF19C722330029C739 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				AD2AB4FE19C722330029C739 /* nb */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		AD2AB50419C722330029C739 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				AD2AB50319C722330029C739 /* nb */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		AD2AB50919C722340029C739 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				AD2AB50819C722340029C739 /* nb */,
+			);
+			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
 		ADA0C64219C0EEBC00152005 /* Today.storyboard */ = {
