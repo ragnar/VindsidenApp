@@ -19,11 +19,6 @@
 		AD17ED581731012200943C33 /* RHCAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = AD17ED571731012200943C33 /* RHCAppDelegate.m */; };
 		AD17ED611731012200943C33 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AD17ED5F1731012200943C33 /* MainStoryboard.storyboard */; };
 		AD17ED641731012200943C33 /* RHCViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD17ED631731012200943C33 /* RHCViewController.m */; };
-		AD17ED6C1731012200943C33 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD17ED6B1731012200943C33 /* SenTestingKit.framework */; };
-		AD17ED6D1731012200943C33 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD17ED471731012200943C33 /* UIKit.framework */; };
-		AD17ED6E1731012200943C33 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD17ED491731012200943C33 /* Foundation.framework */; };
-		AD17ED761731012200943C33 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = AD17ED741731012200943C33 /* InfoPlist.strings */; };
-		AD17ED791731012200943C33 /* Vindsiden_v2Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = AD17ED781731012200943C33 /* Vindsiden_v2Tests.m */; };
 		AD17ED881731058400943C33 /* RHCStationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AD17ED851731058400943C33 /* RHCStationCell.m */; };
 		AD17ED891731058400943C33 /* RHCStationInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = AD17ED871731058400943C33 /* RHCStationInfo.m */; };
 		AD17EDA61731066F00943C33 /* DrawArrow.m in Sources */ = {isa = PBXBuildFile; fileRef = AD17ED8F1731066C00943C33 /* DrawArrow.m */; };
@@ -47,6 +42,7 @@
 		AD2AB4FD19C722330029C739 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = AD2AB4FF19C722330029C739 /* InfoPlist.strings */; };
 		AD2AB50219C722330029C739 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = AD2AB50419C722330029C739 /* Localizable.strings */; };
 		AD2AB50719C722340029C739 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = AD2AB50919C722340029C739 /* InfoPlist.strings */; };
+		AD2BB34F19C7718600349495 /* VindsidenAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD2BB34E19C7718600349495 /* VindsidenAppTests.swift */; };
 		AD32E38119BA2FC2008F00EB /* RHEStationPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD32E38019BA2FC2008F00EB /* RHEStationPickerViewController.swift */; };
 		AD32E38319BC5037008F00EB /* RHCUnitSelectorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD32E38219BC5037008F00EB /* RHCUnitSelectorViewController.swift */; };
 		AD4A378B1770F0EF003B8AF2 /* RHCAlertManager.m in Sources */ = {isa = PBXBuildFile; fileRef = AD4A378A1770F0EF003B8AF2 /* RHCAlertManager.m */; };
@@ -90,16 +86,15 @@
 		ADCD425E196E4E42004973E9 /* UIImage+ImageFromView.h in Headers */ = {isa = PBXBuildFile; fileRef = ADCD424C196E4E42004973E9 /* UIImage+ImageFromView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		ADCD425F196E4E42004973E9 /* UIImage+ImageFromView.m in Sources */ = {isa = PBXBuildFile; fileRef = ADCD424D196E4E42004973E9 /* UIImage+ImageFromView.m */; };
 		ADFE6079196E56810025F346 /* DrawArrow.m in Sources */ = {isa = PBXBuildFile; fileRef = AD17ED8F1731066C00943C33 /* DrawArrow.m */; };
-		B528A69EDD574160BC438886 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A795A60F33B14BC9B7DC4A3E /* libPods.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		AD17ED6F1731012200943C33 /* PBXContainerItemProxy */ = {
+		AD2BB35019C7718600349495 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = AD17ED3C1731012200943C33 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = AD17ED431731012200943C33;
-			remoteInfo = "Vindsiden-v2";
+			remoteInfo = VindsidenApp;
 		};
 		AD539C8C1947B0F7002644BD /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -178,20 +173,6 @@
 			remoteGlobalIDString = AD539C9C1947B5CA002644BD;
 			remoteInfo = VindsidenKit;
 		};
-		AD6CFB29195CAF3400860FEB /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = AD17ED3C1731012200943C33 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = AD17ED431731012200943C33;
-			remoteInfo = VindsidenApp;
-		};
-		ADCD4262196E5252004973E9 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = AD17ED3C1731012200943C33 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = AD17ED431731012200943C33;
-			remoteInfo = VindsidenApp;
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -229,7 +210,6 @@
 		AD146F4C1741251E00205BB9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
 		AD146F4D1741255B00205BB9 /* nb */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nb; path = nb.lproj/Localizable.strings; sourceTree = "<group>"; };
 		AD146F4F1741255B00205BB9 /* nb */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nb; path = nb.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		AD146F501741255B00205BB9 /* nb */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nb; path = nb.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		AD146F52174126FF00205BB9 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/MainStoryboard.strings; sourceTree = "<group>"; };
 		AD146F541741270700205BB9 /* nb */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nb; path = nb.lproj/MainStoryboard.strings; sourceTree = "<group>"; };
 		AD17ED441731012200943C33 /* VindsidenApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VindsidenApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -244,12 +224,7 @@
 		AD17ED571731012200943C33 /* RHCAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RHCAppDelegate.m; sourceTree = "<group>"; };
 		AD17ED621731012200943C33 /* RHCViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RHCViewController.h; sourceTree = "<group>"; };
 		AD17ED631731012200943C33 /* RHCViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RHCViewController.m; sourceTree = "<group>"; };
-		AD17ED6A1731012200943C33 /* VindsidenAppTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VindsidenAppTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		AD17ED6B1731012200943C33 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
-		AD17ED731731012200943C33 /* VindsidenAppTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "VindsidenAppTests-Info.plist"; sourceTree = "<group>"; };
-		AD17ED751731012200943C33 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		AD17ED771731012200943C33 /* Vindsiden_v2Tests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Vindsiden_v2Tests.h; sourceTree = "<group>"; };
-		AD17ED781731012200943C33 /* Vindsiden_v2Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Vindsiden_v2Tests.m; sourceTree = "<group>"; };
 		AD17ED841731058400943C33 /* RHCStationCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RHCStationCell.h; sourceTree = "<group>"; };
 		AD17ED851731058400943C33 /* RHCStationCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RHCStationCell.m; sourceTree = "<group>"; };
 		AD17ED861731058400943C33 /* RHCStationInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RHCStationInfo.h; sourceTree = "<group>"; };
@@ -288,6 +263,9 @@
 		AD2AB4FE19C722330029C739 /* nb */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nb; path = nb.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		AD2AB50319C722330029C739 /* nb */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nb; path = nb.lproj/Localizable.strings; sourceTree = "<group>"; };
 		AD2AB50819C722340029C739 /* nb */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nb; path = nb.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		AD2BB34A19C7718600349495 /* VindsidenAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VindsidenAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		AD2BB34D19C7718600349495 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		AD2BB34E19C7718600349495 /* VindsidenAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VindsidenAppTests.swift; sourceTree = "<group>"; };
 		AD32E37F19BA2FC1008F00EB /* VindsidenApp-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "VindsidenApp-Bridging-Header.h"; sourceTree = "<group>"; };
 		AD32E38019BA2FC2008F00EB /* RHEStationPickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RHEStationPickerViewController.swift; sourceTree = "<group>"; };
 		AD32E38219BC5037008F00EB /* RHCUnitSelectorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RHCUnitSelectorViewController.swift; sourceTree = "<group>"; };
@@ -355,14 +333,10 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		AD17ED661731012200943C33 /* Frameworks */ = {
+		AD2BB34719C7718600349495 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AD17ED6C1731012200943C33 /* SenTestingKit.framework in Frameworks */,
-				AD17ED6D1731012200943C33 /* UIKit.framework in Frameworks */,
-				AD17ED6E1731012200943C33 /* Foundation.framework in Frameworks */,
-				B528A69EDD574160BC438886 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -400,10 +374,10 @@
 			children = (
 				AD17EDC817312B2500943C33 /* Fonts */,
 				AD17ED4D1731012200943C33 /* VindsidenApp */,
-				AD17ED711731012200943C33 /* Vindsiden-v2Tests */,
 				AD539C851947B0F7002644BD /* VindsidenToday */,
 				AD539C9E1947B5CA002644BD /* VindsidenKit */,
 				AD539CAB1947B5CA002644BD /* VindsidenKitTests */,
+				AD2BB34B19C7718600349495 /* VindsidenAppTests */,
 				AD17ED461731012200943C33 /* Frameworks */,
 				AD17ED451731012200943C33 /* Products */,
 			);
@@ -413,10 +387,10 @@
 			isa = PBXGroup;
 			children = (
 				AD17ED441731012200943C33 /* VindsidenApp.app */,
-				AD17ED6A1731012200943C33 /* VindsidenAppTests.octest */,
 				AD539C821947B0F6002644BD /* org.juniks.VindsidenApp.VindsidenToday.appex */,
 				AD539C9D1947B5CA002644BD /* VindsidenKit.framework */,
 				AD539CA71947B5CA002644BD /* VindsidenKitTests.xctest */,
+				AD2BB34A19C7718600349495 /* VindsidenAppTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -477,25 +451,6 @@
 				AD17ED531731012200943C33 /* main.m */,
 				AD17ED551731012200943C33 /* VindsidenApp-Prefix.pch */,
 				15DC7F5398F749998EAC2FC7 /* Pods.xcconfig */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		AD17ED711731012200943C33 /* Vindsiden-v2Tests */ = {
-			isa = PBXGroup;
-			children = (
-				AD17ED771731012200943C33 /* Vindsiden_v2Tests.h */,
-				AD17ED781731012200943C33 /* Vindsiden_v2Tests.m */,
-				AD17ED721731012200943C33 /* Supporting Files */,
-			);
-			path = "Vindsiden-v2Tests";
-			sourceTree = "<group>";
-		};
-		AD17ED721731012200943C33 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				AD17ED731731012200943C33 /* VindsidenAppTests-Info.plist */,
-				AD17ED741731012200943C33 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -614,6 +569,23 @@
 				AD17EDD41732B82500943C33 /* RHEWebCamViewController.m */,
 			);
 			name = "Web Camera View Controller";
+			sourceTree = "<group>";
+		};
+		AD2BB34B19C7718600349495 /* VindsidenAppTests */ = {
+			isa = PBXGroup;
+			children = (
+				AD2BB34E19C7718600349495 /* VindsidenAppTests.swift */,
+				AD2BB34C19C7718600349495 /* Supporting Files */,
+			);
+			path = VindsidenAppTests;
+			sourceTree = "<group>";
+		};
+		AD2BB34C19C7718600349495 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				AD2BB34D19C7718600349495 /* Info.plist */,
+			);
+			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
 		AD539C851947B0F7002644BD /* VindsidenToday */ = {
@@ -757,28 +729,23 @@
 			productReference = AD17ED441731012200943C33 /* VindsidenApp.app */;
 			productType = "com.apple.product-type.application";
 		};
-		AD17ED691731012200943C33 /* VindsidenAppTests */ = {
+		AD2BB34919C7718600349495 /* VindsidenAppTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = AD17ED7F1731012200943C33 /* Build configuration list for PBXNativeTarget "VindsidenAppTests" */;
+			buildConfigurationList = AD2BB35219C7718600349495 /* Build configuration list for PBXNativeTarget "VindsidenAppTests" */;
 			buildPhases = (
-				B9EF3A6202774490ABAF6319 /* Check Pods Manifest.lock */,
-				AD17ED651731012200943C33 /* Sources */,
-				AD17ED661731012200943C33 /* Frameworks */,
-				AD17ED671731012200943C33 /* Resources */,
-				AD17ED681731012200943C33 /* ShellScript */,
-				2055396651F244CBB8647A09 /* Copy Pods Resources */,
+				AD2BB34619C7718600349495 /* Sources */,
+				AD2BB34719C7718600349495 /* Frameworks */,
+				AD2BB34819C7718600349495 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				AD17ED701731012200943C33 /* PBXTargetDependency */,
-				AD6CFB2A195CAF3400860FEB /* PBXTargetDependency */,
-				ADCD4263196E5252004973E9 /* PBXTargetDependency */,
+				AD2BB35119C7718600349495 /* PBXTargetDependency */,
 			);
 			name = VindsidenAppTests;
-			productName = "Vindsiden-v2Tests";
-			productReference = AD17ED6A1731012200943C33 /* VindsidenAppTests.octest */;
-			productType = "com.apple.product-type.bundle.ocunit-test";
+			productName = VindsidenAppTests;
+			productReference = AD2BB34A19C7718600349495 /* VindsidenAppTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
 		};
 		AD539C811947B0F6002644BD /* VindsidenToday */ = {
 			isa = PBXNativeTarget;
@@ -862,7 +829,8 @@
 							};
 						};
 					};
-					AD17ED691731012200943C33 = {
+					AD2BB34919C7718600349495 = {
+						CreatedOnToolsVersion = 6.0;
 						TestTargetID = AD17ED431731012200943C33;
 					};
 					AD539C811947B0F6002644BD = {
@@ -899,10 +867,10 @@
 			projectRoot = "";
 			targets = (
 				AD17ED431731012200943C33 /* VindsidenApp */,
-				AD17ED691731012200943C33 /* VindsidenAppTests */,
 				AD539C811947B0F6002644BD /* VindsidenToday */,
 				AD539C9C1947B5CA002644BD /* VindsidenKit */,
 				AD539CA61947B5CA002644BD /* VindsidenKitTests */,
+				AD2BB34919C7718600349495 /* VindsidenAppTests */,
 			);
 		};
 /* End PBXProject section */
@@ -921,11 +889,10 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		AD17ED671731012200943C33 /* Resources */ = {
+		AD2BB34819C7718600349495 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AD17ED761731012200943C33 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -959,21 +926,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		2055396651F244CBB8647A09 /* Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		A142F9E3FC9E43748F035C84 /* Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -988,19 +940,6 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
 		};
-		AD17ED681731012200943C33 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
-		};
 		AD1B7EF319ABB40B00D8B253 /* Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1014,21 +953,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
-		};
-		B9EF3A6202774490ABAF6319 /* Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
 		};
 		C241475BBB04408D897C0220 /* Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1072,11 +996,11 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		AD17ED651731012200943C33 /* Sources */ = {
+		AD2BB34619C7718600349495 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AD17ED791731012200943C33 /* Vindsiden_v2Tests.m in Sources */,
+				AD2BB34F19C7718600349495 /* VindsidenAppTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1121,10 +1045,10 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		AD17ED701731012200943C33 /* PBXTargetDependency */ = {
+		AD2BB35119C7718600349495 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = AD17ED431731012200943C33 /* VindsidenApp */;
-			targetProxy = AD17ED6F1731012200943C33 /* PBXContainerItemProxy */;
+			targetProxy = AD2BB35019C7718600349495 /* PBXContainerItemProxy */;
 		};
 		AD539C8D1947B0F7002644BD /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -1181,16 +1105,6 @@
 			target = AD539C9C1947B5CA002644BD /* VindsidenKit */;
 			targetProxy = AD674DA01962E94900BF257B /* PBXContainerItemProxy */;
 		};
-		AD6CFB2A195CAF3400860FEB /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = AD17ED431731012200943C33 /* VindsidenApp */;
-			targetProxy = AD6CFB29195CAF3400860FEB /* PBXContainerItemProxy */;
-		};
-		ADCD4263196E5252004973E9 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = AD17ED431731012200943C33 /* VindsidenApp */;
-			targetProxy = ADCD4262196E5252004973E9 /* PBXContainerItemProxy */;
-		};
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
@@ -1211,15 +1125,6 @@
 				AD146F541741270700205BB9 /* nb */,
 			);
 			name = MainStoryboard.storyboard;
-			sourceTree = "<group>";
-		};
-		AD17ED741731012200943C33 /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				AD17ED751731012200943C33 /* en */,
-				AD146F501741255B00205BB9 /* nb */,
-			);
-			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
 		AD17EDC517312A5000943C33 /* Localizable.strings */ = {
@@ -1377,39 +1282,60 @@
 			};
 			name = Release;
 		};
-		AD17ED801731012200943C33 /* Debug */ = {
+		AD2BB35319C7718600349495 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 15DC7F5398F749998EAC2FC7 /* Pods.xcconfig */;
 			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/VindsidenApp.app/VindsidenApp";
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				FRAMEWORK_SEARCH_PATHS = (
-					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
-					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
 				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "VindsidenApp/VindsidenApp-Prefix.pch";
-				INFOPLIST_FILE = "Vindsiden-v2Tests/VindsidenAppTests-Info.plist";
-				PRODUCT_NAME = VindsidenAppTests;
-				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = octest;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				INFOPLIST_FILE = VindsidenAppTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/VindsidenApp.app/VindsidenApp";
 			};
 			name = Debug;
 		};
-		AD17ED811731012200943C33 /* Release */ = {
+		AD2BB35419C7718600349495 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 15DC7F5398F749998EAC2FC7 /* Pods.xcconfig */;
 			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/VindsidenApp.app/VindsidenApp";
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				FRAMEWORK_SEARCH_PATHS = (
-					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
-					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
 				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "VindsidenApp/VindsidenApp-Prefix.pch";
-				INFOPLIST_FILE = "Vindsiden-v2Tests/VindsidenAppTests-Info.plist";
-				PRODUCT_NAME = VindsidenAppTests;
-				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = octest;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				INFOPLIST_FILE = VindsidenAppTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/VindsidenApp.app/VindsidenApp";
 			};
 			name = Release;
 		};
@@ -1633,14 +1559,13 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		AD17ED7F1731012200943C33 /* Build configuration list for PBXNativeTarget "VindsidenAppTests" */ = {
+		AD2BB35219C7718600349495 /* Build configuration list for PBXNativeTarget "VindsidenAppTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				AD17ED801731012200943C33 /* Debug */,
-				AD17ED811731012200943C33 /* Release */,
+				AD2BB35319C7718600349495 /* Debug */,
+				AD2BB35419C7718600349495 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
 		};
 		AD539C911947B0F7002644BD /* Build configuration list for PBXNativeTarget "VindsidenToday" */ = {
 			isa = XCConfigurationList;
