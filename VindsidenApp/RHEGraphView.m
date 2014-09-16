@@ -14,6 +14,8 @@
 
 #import "CDPlot.h"
 
+@import VindsidenKit;
+
 const NSInteger kMaxSpeedLines = 8;
 const NSInteger kMinSpeedLines = 3;
 
@@ -33,6 +35,8 @@ const NSInteger kMinSpeedLines = 3;
 @property (assign, nonatomic) CGFloat stepX;
 
 @property (strong, nonatomic) RHEGraphMarker *marker;
+
+@property (strong, nonatomic) NSNumberFormatter *speedFormatter;
 
 - (void)drawGridInContext:(CGContextRef)context;
 - (void)drawHourLines:(NSInteger)hours inContext:(CGContextRef)context;
@@ -245,7 +249,7 @@ const NSInteger kMinSpeedLines = 3;
 {
     CGContextSaveGState(context);
 
-    SpeedConvertion unit = [[NSUserDefaults standardUserDefaults] integerForKey:@"selectedUnit"];
+    SpeedConvertion unit = [[Datamanager sharedManager].sharedDefaults integerForKey:@"selectedUnit"];
     CGFloat plotMaxValue = ceil([[self.plots valueForKeyPath:@"@max.windMax"] speedConvertionTo:unit]+1);
     NSInteger totSteps = MIN( kMaxSpeedLines, plotMaxValue);
     totSteps = MAX( kMinSpeedLines, totSteps);
@@ -285,7 +289,7 @@ const NSInteger kMinSpeedLines = 3;
 {
     CGContextSaveGState(context);
 
-    SpeedConvertion unit = [[NSUserDefaults standardUserDefaults] integerForKey:@"selectedUnit"];
+    SpeedConvertion unit = [[Datamanager sharedManager].sharedDefaults integerForKey:@"selectedUnit"];
     CGFloat plotMaxValue = ceil([[self.plots valueForKeyPath:@"@max.windMax"] speedConvertionTo:unit]+1);
     NSInteger totSteps = MIN( kMaxSpeedLines, plotMaxValue);
     totSteps = MAX( kMinSpeedLines, totSteps);
@@ -299,7 +303,7 @@ const NSInteger kMinSpeedLines = 3;
 
     NSInteger i = 0;
     for ( CGFloat y = _maxY; y >= _minY; y=ceil(y-plotStep)) {
-        NSString *hs = [[self numberFormatter] stringFromNumber:@(i*(plotMaxValue/totSteps))];
+        NSString *hs = [[self speedFormatter] stringFromNumber:@(i*(plotMaxValue/totSteps))];
 
         labelBounds = [hs boundingRectWithSize:CGSizeMake( 40.0, 21.0)
                                        options:NSStringDrawingUsesLineFragmentOrigin
@@ -310,7 +314,7 @@ const NSInteger kMinSpeedLines = 3;
         i++;
     }
 
-    NSString *unitName = [NSNumber shortUnitNameString:[[NSUserDefaults standardUserDefaults] integerForKey:@"selectedUnit"]];
+    NSString *unitName = [NSNumber shortUnitNameString:[[Datamanager sharedManager].sharedDefaults integerForKey:@"selectedUnit"]];
     NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
     [paragraphStyle setAlignment:NSTextAlignmentLeft];
 
@@ -353,25 +357,22 @@ const NSInteger kMinSpeedLines = 3;
 {
     CGContextSaveGState(context);
 
-    SpeedConvertion unit = [[NSUserDefaults standardUserDefaults] integerForKey:@"selectedUnit"];
-
-    CGMutablePathRef pathMin = CGPathCreateMutable();
-    CGMutablePathRef pathAvg = CGPathCreateMutable();
-    CGMutablePathRef pathMax = CGPathCreateMutable();
+    SpeedConvertion unit = [[Datamanager sharedManager].sharedDefaults integerForKey:@"selectedUnit"];
 
     CDPlot *firstPlot = (self.plots)[0];
     NSTimeInterval interval = [firstPlot.plotTime timeIntervalSinceDate:startDate]/60;
     CGFloat x = ceil(_minX + (interval*self.stepX));
 
-    CGContextSetLineWidth( context, 3);
     CGContextSetAllowsAntialiasing( context, YES);
     CGContextBeginPath(context);
-
-    CGContextSetLineJoin( context, kCGLineJoinRound);
-    CGContextSetLineCap( context, kCGLineCapRound);
     CGContextSetShadowWithColor( context, CGSizeMake(0.0, 2.0), 2.0, [UIColor colorWithWhite:0.0 alpha:0.25].CGColor);
 
+    NSMutableArray *minPoints = [NSMutableArray array];
+    NSMutableArray *avgPoints = [NSMutableArray array];
+    NSMutableArray *maxPoints = [NSMutableArray array];
+
     for ( CDPlot *plot in self.plots ) {
+
         CGFloat rMax = [plot.windMax speedConvertionTo:unit];
         CGFloat yMax = _maxY - ((rMax / plotMaxValue) * (_maxY - _minY));
 
@@ -381,38 +382,57 @@ const NSInteger kMinSpeedLines = 3;
         CGFloat rAvg = [plot.windAvg speedConvertionTo:unit];
         CGFloat yAvg = _maxY - ((rAvg / plotMaxValue) * (_maxY - _minY));
 
-        if ( [plot isEqual:(self.plots)[0]] ) {
-            CGPathMoveToPoint(pathMax, NULL, x, yMax);
-            CGPathMoveToPoint(pathAvg, NULL, x, yAvg);
-            CGPathMoveToPoint(pathMin, NULL, x, yMin);
+
+
+        if ( [plot isEqual:[self.plots firstObject]] ) {
+            CGPoint minPoint = CGPointMake(x, yMin);
+            [minPoints addObject:[NSValue valueWithCGPoint:minPoint]];
+
+            CGPoint avgPoint = CGPointMake(x, yAvg);
+            [avgPoints addObject:[NSValue valueWithCGPoint:avgPoint]];
+
+            CGPoint maxPoint = CGPointMake(x, yMax);
+            [maxPoints addObject:[NSValue valueWithCGPoint:maxPoint]];
+
             continue;
         }
         else {
             NSTimeInterval interval = [plot.plotTime timeIntervalSinceDate:startDate]/60;
             x = ceil(_minX + (interval*self.stepX));
 
-            CGPathAddLineToPoint(pathMax, NULL, x, yMax);
-            CGPathAddLineToPoint(pathAvg, NULL, x, yAvg);
-            CGPathAddLineToPoint(pathMin, NULL, x, yMin);
+            CGPoint minPoint = CGPointMake(x, yMin);
+            [minPoints addObject:[NSValue valueWithCGPoint:minPoint]];
+
+            CGPoint avgPoint = CGPointMake(x, yAvg);
+            [avgPoints addObject:[NSValue valueWithCGPoint:avgPoint]];
+
+            CGPoint maxPoint = CGPointMake(x, yMax);
+            [maxPoints addObject:[NSValue valueWithCGPoint:maxPoint]];
         }
     }
 
     [COLOR_MIN set];
-    CGContextAddPath( context, pathMin);
-    CGContextDrawPath(context, kCGPathStroke);
+
+    UIBezierPath *minBezier = [self quadCurvedPathWithPoints:minPoints];
+    minBezier.lineJoinStyle = kCGLineJoinRound;
+    minBezier.lineCapStyle = kCGLineCapRound;
+    minBezier.lineWidth = 3;
+    [minBezier stroke];
 
     [COLOR_AVG set];
-    CGContextAddPath( context, pathAvg);
-    CGContextDrawPath(context, kCGPathStroke);
+    UIBezierPath *avgBezier = [self quadCurvedPathWithPoints:avgPoints];
+    avgBezier.lineJoinStyle = kCGLineJoinRound;
+    avgBezier.lineCapStyle = kCGLineCapRound;
+    avgBezier.lineWidth = 3;
+    [avgBezier stroke];
 
     [COLOR_MAX set];
-    CGContextAddPath( context, pathMax);
-    CGContextDrawPath(context, kCGPathStroke);
+    UIBezierPath *maxBezier = [self quadCurvedPathWithPoints:maxPoints];
+    maxBezier.lineJoinStyle = kCGLineJoinRound;
+    maxBezier.lineCapStyle = kCGLineCapRound;
+    maxBezier.lineWidth = 3;
+    [maxBezier stroke];
 
-    CGPathRelease(pathMin);
-    CGPathRelease(pathAvg);
-    CGPathRelease(pathMax);
-    
     CGContextRestoreGState(context);
 }
 
@@ -506,7 +526,7 @@ const NSInteger kMinSpeedLines = 3;
 
 - (CGFloat)YForMinPlot:(CDPlot *)plot
 {
-    SpeedConvertion unit = [[NSUserDefaults standardUserDefaults] integerForKey:@"selectedUnit"];
+    SpeedConvertion unit = [[Datamanager sharedManager].sharedDefaults integerForKey:@"selectedUnit"];
     CGFloat rMin = [plot.windMin speedConvertionTo:unit];
     CGFloat yMin = _maxY - ((rMin / [self plotMaxValue]) * (_maxY - _minY));
 
@@ -516,7 +536,7 @@ const NSInteger kMinSpeedLines = 3;
 
 - (CGFloat)YForAvgPlot:(CDPlot *)plot
 {
-    SpeedConvertion unit = [[NSUserDefaults standardUserDefaults] integerForKey:@"selectedUnit"];
+    SpeedConvertion unit = [[Datamanager sharedManager].sharedDefaults integerForKey:@"selectedUnit"];
     CGFloat rMin = [plot.windAvg speedConvertionTo:unit];
     CGFloat yMin = _maxY - ((rMin / [self plotMaxValue]) * (_maxY - _minY));
     
@@ -526,7 +546,7 @@ const NSInteger kMinSpeedLines = 3;
 
 - (CGFloat)YForMaxPlot:(CDPlot *)plot
 {
-    SpeedConvertion unit = [[NSUserDefaults standardUserDefaults] integerForKey:@"selectedUnit"];
+    SpeedConvertion unit = [[Datamanager sharedManager].sharedDefaults integerForKey:@"selectedUnit"];
     CGFloat rMin = [plot.windMax speedConvertionTo:unit];
     CGFloat yMin = _maxY - ((rMin / [self plotMaxValue]) * (_maxY - _minY));
     
@@ -568,8 +588,8 @@ const NSInteger kMinSpeedLines = 3;
 
 - (NSInteger)hourComponent:(NSDate *)date
 {
-    NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
-    NSDateComponents *hourComponents = [gregorian components:(NSHourCalendarUnit) fromDate:date];
+    NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+    NSDateComponents *hourComponents = [gregorian components:(NSCalendarUnitHour) fromDate:date];
 
     return [hourComponents hour];
 }
@@ -577,8 +597,8 @@ const NSInteger kMinSpeedLines = 3;
 
 - (NSDate *)absoluteDate:(NSDate *)date isStart:(BOOL)isStart
 {
-    NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
-    NSDateComponents *inputComponents = [gregorian components:(NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit | NSHourCalendarUnit) fromDate:date];
+    NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+    NSDateComponents *inputComponents = [gregorian components:(NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay | NSCalendarUnitHour) fromDate:date];
 
     NSDateComponents *components = [[NSDateComponents alloc] init];
     [components setYear:[inputComponents year]];
@@ -599,26 +619,75 @@ const NSInteger kMinSpeedLines = 3;
 
 - (CGFloat)plotMaxValue
 {
-    SpeedConvertion unit = [[NSUserDefaults standardUserDefaults] integerForKey:@"selectedUnit"];
+    SpeedConvertion unit = [[Datamanager sharedManager].sharedDefaults integerForKey:@"selectedUnit"];
     return ceil([[self.plots valueForKeyPath:@"@max.windMax"] speedConvertionTo:unit]+1);
 }
 
 
-- (NSNumberFormatter *)numberFormatter
+- (NSNumberFormatter *)speedFormatter
 {
-    static NSNumberFormatter *_numberformatter = nil;
-    if ( _numberformatter ) {
-        return _numberformatter;
+    if ( _speedFormatter ) {
+        return _speedFormatter;
     }
 
-    _numberformatter = [[NSNumberFormatter alloc] init];
-    _numberformatter.numberStyle = kCFNumberFormatterDecimalStyle;
-    _numberformatter.maximumFractionDigits = 1;
-    _numberformatter.minimumSignificantDigits = 1;
-    [_numberformatter setNotANumberSymbol:@"—.—"];
-    [_numberformatter setNilSymbol:@"—.—"];
+    _speedFormatter = [[NSNumberFormatter alloc] init];
+    [_speedFormatter setNotANumberSymbol:@"—.—"];
+    [_speedFormatter setNilSymbol:@"—.—"];
+    _speedFormatter.numberStyle = NSNumberFormatterDecimalStyle;
+//    _speedFormatter.minimumSignificantDigits = 1;
+    _speedFormatter.minimumFractionDigits = 1;
+    _speedFormatter.maximumFractionDigits = 1;
 
-    return _numberformatter;
+    return _speedFormatter;
+}
+
+
+- (UIBezierPath *)quadCurvedPathWithPoints:(NSArray *)points
+{
+    UIBezierPath *path = [UIBezierPath bezierPath];
+
+    NSValue *value = points[0];
+    CGPoint p1 = [value CGPointValue];
+    [path moveToPoint:p1];
+
+    if ( points.count == 2 ) {
+        value = points[1];
+        CGPoint p2 = [value CGPointValue];
+        [path addLineToPoint:p2];
+        return path;
+    }
+
+    for ( NSUInteger i = 1; i < points.count; i++ ) {
+        value = points[i];
+        CGPoint p2 = [value CGPointValue];
+        CGPoint midPoint = midPointForPoints(p1, p2);
+        [path addQuadCurveToPoint:midPoint controlPoint:controlPointForPoints(midPoint, p1)];
+        [path addQuadCurveToPoint:p2 controlPoint:controlPointForPoints(midPoint, p2)];
+
+        p1 = p2;
+    }
+    return path;
+}
+
+
+static CGPoint midPointForPoints(CGPoint p1, CGPoint p2)
+{
+    return CGPointMake((p1.x + p2.x) / 2, (p1.y + p2.y) / 2);
+}
+
+
+static CGPoint controlPointForPoints(CGPoint p1, CGPoint p2)
+{
+    CGPoint controlPoint = midPointForPoints(p1, p2);
+    CGFloat diffY = abs(p2.y - controlPoint.y);
+
+    if ( p1.y < p2.y ) {
+        controlPoint.y += diffY;
+    } else if ( p1.y > p2.y ) {
+        controlPoint.y -= diffY;
+    }
+    
+    return controlPoint;
 }
 
 

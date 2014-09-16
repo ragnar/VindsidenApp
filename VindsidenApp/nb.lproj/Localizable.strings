@@ -1,3 +1,21 @@
+/* Version string in settings view */
+"%@ version %@" = "%1$@ versjon %2$@";
+
+/* New stations found. Go to settings to view them */
+"ALERT_NEW_STATIONS_FOUND" = "Nye værstasjoner lastet ned. Gå til settings for å se på dem.";
+
+/* (No Commment) */
+"Beaufort" = "Beaufort";
+
+/* No comment provided by engineer. */
+"Camera" = "Kamera";
+
+/* (No Commment) */
+"Choose unit" = "Velg enhet";
+
+/* No comment provided by engineer. */
+"Copyright" = "Copyright";
+
 /* E */
 "DIRECTION_E" = "Ø";
 
@@ -49,86 +67,23 @@
 /* WSW */
 "DIRECTION_WSW" = "VSV";
 
-/* No comment provided by engineer. */
-"Kilometers per hour" = "Kilometer i timen";
+/* Gust: %@, Avg: %@, Speed: %@ */
+"GRAPH_MARKER_POPUP" = "Gust: %@ Gj.snt: %@ Hastighet: %@";
 
 /* No comment provided by engineer. */
-"km/h" = "km/t";
-
-/* No comment provided by engineer. */
-"Knots" = "Knop";
-
-/* No comment provided by engineer. */
-"kts" = "kts";
-
-/* Unable to retrieve information from station */
-"LABEL_LAST_UPDATED_FAILED" = "Oppdatering feilet";
-
-/* Temp max */
-"LABEL_TEMP_MAX" = "Temp maks";
-
-/* Temp min */
-"LABEL_TEMP_MIN" = "Temp min";
-
-/* Temp now */
-"LABEL_TEMP_NOW" = "Temp nå";
-
-/* Average */
-"LABEL_WIND_AVG" = "Gjennomsnitt";
-
-/* Beaufort */
-"LABEL_WIND_BEU" = "Beaufort";
-
-/* Wind direction */
-"LABEL_WIND_DIR" = "Vind retning";
-
-/* Wind gust */
-"LABEL_WIND_GUST" = "Vind gust";
-
-/* Wind speed */
-"LABEL_WIND_SPEED" = "Vind hastighet";
-
-/* No comment provided by engineer. */
-"m/s" = "m/s";
-
-/* No comment provided by engineer. */
-"Meters per second" = "Meter i sekundet";
-
-/* No comment provided by engineer. */
-"Miles per hour" = "Miles i timen";
-
-/* No comment provided by engineer. */
-"miles/h" = "miles/t";
-
-/* Version string in settings view */
-"%@ version %@" = "%1$@ versjon %2$@";
-
-/* No comment provided by engineer. */
-"Camera" = "Kamera";
-
-/* No comment provided by engineer. */
-"Choose unit" = "Velg enhet";
-
-/* No comment provided by engineer. */
-"Copyright" = "Copyright";
+"Go to yr.no" = "Gå til yr.no";
 
 /* No comment provided by engineer. */
 "Info" = "Info";
 
-/* No comment provided by engineer. */
-"Name" = "Navn";
+/* (No Commment) */
+"Kilometers per hour" = "Kilometer i timen";
 
-/* No comment provided by engineer. */
-"Place" = "Sted";
+/* (No Commment) */
+"Knots" = "Knop";
 
-/* No comment provided by engineer. */
-"Status" = "Status";
-
-/* Temp air */
-"Temp air" = "Luft temp";
-
-/* Gust: %@ Avg: %@, Speed: %@ */
-"GRAPH_MARKER_POPUP" = "Gust: %@ Gj.snt: %@ Hastighet: %@";
+/* (No Commment) */
+"LABEL_LAST_UPDATED_FAILED" = "Oppdatering feilet";
 
 /* Not updated */
 "LABEL_NOT_UPDATED" = "Ikke oppdatert";
@@ -136,39 +91,87 @@
 /* Værdata hentet med tillatelse fra\nhttp://vindsiden.no\n\n */
 "LABEL_PERMIT" = "Værdata hentet med tillatelse fra\nhttp://vindsiden.no\n\n";
 
+/* (No Commment) */
+"LABEL_TEMP_MAX" = "Temp maks";
+
+/* (No Commment) */
+"LABEL_TEMP_MIN" = "Temp min";
+
+/* (No Commment) */
+"LABEL_TEMP_NOW" = "Temp nå";
+
 /* Updating */
 "LABEL_UPDATING" = "Oppdaterer";
 
-/* No comment provided by engineer. */
-"Not Visible" = "Ikke synlig";
+/* (No Commment) */
+"LABEL_WIND_AVG" = "Gjennomsnitt";
 
-/* No comment provided by engineer. */
-"Stations" = "Stasjoner";
+/* (No Commment) */
+"LABEL_WIND_BEU" = "Beaufort";
 
-/* No comment provided by engineer. */
-"Units" = "Enheter";
+/* (No Commment) */
+"LABEL_WIND_DIR" = "Vind retning";
 
-/* No comment provided by engineer. */
-"Visible" = "Synlig";
+/* (No Commment) */
+"LABEL_WIND_GUST" = "Vind gust";
+
+/* (No Commment) */
+"LABEL_WIND_SPEED" = "Vind hastighet";
+
+/* (No Commment) */
+"Meters per second" = "Meter i sekundet";
+
+/* (No Commment) */
+"Miles per hour" = "Miles i timen";
 
 /* Unable to fetch data at this point. */
 "NETWORK_ERROR_UNABLE_TO_LOAD" = "Klarer ikke hente data for øyeblikket";
 
-/* New stations found. Go to settings to view them */
-"ALERT_NEW_STATIONS_FOUND" = "Nye værstasjoner lastet ned. Gå til settings for å se på dem.";
+/* No comment provided by engineer. */
+"Name" = "Navn";
+
+/* (No Commment) */
+"Not Visible" = "Ikke synlig";
 
 /* No comment provided by engineer. */
-"Beaufort" = "Beaufort";
+"Place" = "Sted";
 
-/* No comment provided by engineer. */
-"bft" = "bft";
-
-/* No comment provided by engineer. */
-"Go to yr.no" = "Gå til yr.no";
+/* (No Commment) */
+"Show All..." = "Vis alle...";
 
 /* No comment provided by engineer. */
 "Show Camera" = "Vis kamera";
 
 /* No comment provided by engineer. */
+"Stations" = "Stasjoner";
+
+/* No comment provided by engineer. */
+"Status" = "Status";
+
+/* (No Commment) */
+"Temp air" = "Luft temp";
+
+/* No comment provided by engineer. */
+"Units" = "Enheter";
+
+/* No comment provided by engineer. */
 "View in Maps" = "Vis i kart";
+
+/* (No Commment) */
+"Visible" = "Synlig";
+
+/* (No Commment) */
+"bft" = "bft";
+
+/* (No Commment) */
+"km/h" = "km/t";
+
+/* (No Commment) */
+"kts" = "kts";
+
+/* (No Commment) */
+"m/s" = "m/s";
+
+/* (No Commment) */
+"miles/h" = "miles/t";
 

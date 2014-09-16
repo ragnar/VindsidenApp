@@ -16,6 +16,8 @@
 #import "CDPlot.h"
 #import "CDStation.h"
 
+@import VindsidenKit;
+
 @interface RHCStationCell ()
 
 @property (strong, nonatomic) NSDateFormatter *dateFormatter;
@@ -52,7 +54,6 @@
 - (void)prepareForReuse
 {
     [super prepareForReuse];
-    [self.stationView resetInfoLabels];
 
     [self.updatedTimer invalidate];
     self.updatedTimer = nil;
@@ -187,8 +188,8 @@
 - (void)syncDisplayPlots
 {
     NSDate *inDate = [[NSDate date] dateByAddingTimeInterval:-1*(kPlotHistoryHours-1)*3600];
-    NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
-    NSDateComponents *inputComponents = [gregorian components:(NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit | NSHourCalendarUnit) fromDate:inDate];
+    NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+    NSDateComponents *inputComponents = [gregorian components:(NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay | NSCalendarUnitHour) fromDate:inDate];
     NSDate *outDate = [gregorian dateFromComponents:inputComponents];
     NSArray *cdplots = [[self.currentStation.plots filteredSetUsingPredicate:[NSPredicate predicateWithFormat:@"plotTime >= %@", outDate]] sortedByKeyPath:@"plotTime" ascending:NO];
 
@@ -213,8 +214,8 @@
 {
     _currentStation = currentStation;
 
-    [[NSUserDefaults standardUserDefaults] setInteger:[self.currentStation.stationId integerValue] forKey:@"selectedDefaultStation"];
-    [[NSUserDefaults standardUserDefaults] synchronize];
+    [[Datamanager sharedManager].sharedDefaults setInteger:[self.currentStation.stationId integerValue] forKey:@"selectedDefaultStation"];
+    [[Datamanager sharedManager].sharedDefaults synchronize];
 
     self.stationNameLabel.text = self.currentStation.stationName;
     [self displayPlots];

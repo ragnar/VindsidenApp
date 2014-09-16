@@ -1,48 +1,84 @@
+/* Class = "IBUILabel"; text = "Title"; ObjectID = "2Iy-A8-ofO"; */
+"2Iy-A8-ofO.text" = "Title";
 
-/* Class = "IBUILabel"; text = "Label"; ObjectID = "2Y0-do-02J"; */
-"2Y0-do-02J.text" = "Label";
+/* Class = "IBUILabel"; text = "Wind speed"; ObjectID = "2O1-Wu-nV1"; */
+"2O1-Wu-nV1.text" = "Vind hastighet";
+
+/* Class = "IBUILabel"; text = "nr12"; ObjectID = "2vF-fz-xPY"; */
+"2vF-fz-xPY.text" = "nr12";
+
+/* Class = "IBUILabel"; text = "nr6"; ObjectID = "3Nd-be-0RW"; */
+"3Nd-be-0RW.text" = "nr6";
 
 /* Class = "IBUINavigationItem"; title = "Station Picker"; ObjectID = "4GR-cF-l56"; */
-"4GR-cF-l56.title" = "Stasjonvelger";
-
-/* Class = "IBUILabel"; text = "Title"; ObjectID = "4qC-uK-OkE"; */
-"4qC-uK-OkE.text" = "Tittle";
+"4GR-cF-l56.title" = "Station Picker";
 
 /* Class = "IBUINavigationItem"; title = "Settings"; ObjectID = "6Tn-38-GBf"; */
 "6Tn-38-GBf.title" = "Innstillinger";
 
-/* Class = "IBUILabel"; text = "Title"; ObjectID = "8Zx-Nc-0Uj"; */
-"8Zx-Nc-0Uj.text" = "Title";
-
 /* Class = "IBUINavigationItem"; title = "Station"; ObjectID = "8kr-0C-mVT"; */
 "8kr-0C-mVT.title" = "Stasjon";
 
-/* Class = "IBUIButton"; normalTitle = "Yr.no"; ObjectID = "CDk-cZ-t0i"; */
-"CDk-cZ-t0i.normalTitle" = "Gå til yr.no";
+/* Class = "IBUILabel"; text = "Temp air"; ObjectID = "HCH-43-Lb8"; */
+"HCH-43-Lb8.text" = "Temp luft";
+
+/* Class = "IBUILabel"; text = "Verket"; ObjectID = "HRG-g4-QSb"; */
+"HRG-g4-QSb.text" = "Verket";
+
+/* Class = "IBUILabel"; text = "nr10"; ObjectID = "KN1-dX-8Yo"; */
+"KN1-dX-8Yo.text" = "nr10";
+
+/* Class = "IBUILabel"; text = "Label"; ObjectID = "LRv-Ay-aga"; */
+"LRv-Ay-aga.text" = "Label";
 
 /* Class = "IBUILabel"; text = "Detail"; ObjectID = "LfC-8v-xhT"; */
-"LfC-8v-xhT.text" = "Detailjer";
+"LfC-8v-xhT.text" = "Detail";
 
-/* Class = "IBUILabel"; text = "Label"; ObjectID = "NUL-9N-0CU"; */
-"NUL-9N-0CU.text" = "Label";
+/* Class = "IBUILabel"; text = "Title"; ObjectID = "OCw-xJ-J7L"; */
+"OCw-xJ-J7L.text" = "Title";
 
-/* Class = "IBUIButton"; normalTitle = "Map"; ObjectID = "OAP-jQ-MLP"; */
-"OAP-jQ-MLP.normalTitle" = "Vis i kart";
+/* Class = "IBUILabel"; text = "Detail"; ObjectID = "Pqc-6U-AO8"; */
+"Pqc-6U-AO8.text" = "Detail";
+
+/* Class = "IBUILabel"; text = "Wind gust"; ObjectID = "R7C-CF-x4f"; */
+"R7C-CF-x4f.text" = "Vind gust";
+
+/* Class = "IBUILabel"; text = "nr8"; ObjectID = "S6k-3c-4lq"; */
+"S6k-3c-4lq.text" = "nr8";
+
+/* Class = "IBUILabel"; text = "Average"; ObjectID = "Ydn-Pe-HF2"; */
+"Ydn-Pe-HF2.text" = "Gjennomsnitt";
 
 /* Class = "IBUINavigationItem"; title = "Units"; ObjectID = "bkq-qy-gaE"; */
-"bkq-qy-gaE.title" = "Enheter";
+"bkq-qy-gaE.title" = "Units";
 
-/* Class = "IBUILabel"; text = "Detail"; ObjectID = "eKF-3N-nq2"; */
-"eKF-3N-nq2.text" = "Detailjer";
+/* Class = "IBUILabel"; text = "nr4"; ObjectID = "gL2-g9-tf3"; */
+"gL2-g9-tf3.text" = "nr4";
 
-/* Class = "IBUILabel"; text = "Verket"; ObjectID = "evI-Ny-d2E"; */
-"evI-Ny-d2E.text" = "Verket";
+/* Class = "IBUILabel"; text = "Wind direction"; ObjectID = "gQM-kn-Uu6"; */
+"gQM-kn-Uu6.text" = "Vind retning";
+
+/* Class = "IBUILabel"; text = "Title"; ObjectID = "gvw-Yl-x7e"; */
+"gvw-Yl-x7e.text" = "Title";
 
 /* Class = "IBUILabel"; text = "Title"; ObjectID = "jJ9-mm-uE4"; */
-"jJ9-mm-uE4.text" = "Tittel";
+"jJ9-mm-uE4.text" = "Title";
+
+/* (No Commment) */
+"jp3-RL-ISu.text" = "Verket";
+
+/* Class = "IBUILabel"; text = "Detail"; ObjectID = "kMN-3o-MPF"; */
+"kMN-3o-MPF.text" = "Detail";
+
+/* (No Commment) */
+"kog-Ms-KMI.text" = "Label";
 
 /* Class = "IBUILabel"; text = "Title"; ObjectID = "ly3-dm-LY8"; */
-"ly3-dm-LY8.text" = "Tittel";
+"ly3-dm-LY8.text" = "Title";
 
-/* Class = "IBUIButton"; normalTitle = "Camera"; ObjectID = "pVA-14-d0h"; */
-"pVA-14-d0h.normalTitle" = "Vis kamera";
+/* Class = "IBUILabel"; text = "nr2"; ObjectID = "pRF-Gf-OHu"; */
+"pRF-Gf-OHu.text" = "nr2";
+
+/* Class = "IBUILabel"; text = "Beaufort"; ObjectID = "u8o-PO-LuG"; */
+"u8o-PO-LuG.text" = "Beaufort";
+

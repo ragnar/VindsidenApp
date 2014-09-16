@@ -12,6 +12,9 @@
 #import "UIFontDescriptor+textStyle.h"
 #import "UIFont+textStyle.h"
 
+#import <JTSImageViewController/JTSImageViewController.h>
+
+
 @interface RHEStationDetailsViewController ()
 
 @property (strong, nonatomic) NSRegularExpression *regexRemoveHTMLTags;
@@ -324,7 +327,17 @@
 
 - (IBAction)showCamera:(id)sender
 {
-    [self performSegueWithIdentifier:@"ShowWebCam" sender:nil];
+    //[self performSegueWithIdentifier:@"ShowWebCam" sender:nil];
+    JTSImageInfo *imageInfo = [[JTSImageInfo alloc] init];
+    imageInfo.imageURL = [NSURL URLWithString:self.station.webCamImage];
+    imageInfo.referenceRect = [sender frame];
+    imageInfo.referenceView = self.view;
+
+    JTSImageViewController *controller = [[JTSImageViewController alloc] initWithImageInfo:imageInfo
+                                                                                      mode:JTSImageViewControllerMode_Image
+                                                                           backgroundStyle:JTSImageViewControllerBackgroundStyle_ScaledDimmedBlurred];
+
+    [controller showFromViewController:self transition:JTSImageViewControllerTransition_FromOriginalPosition];
 }
 
 

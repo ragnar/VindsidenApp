@@ -10,6 +10,8 @@
 #import "NSNumber+Convertion.h"
 #import "CDStation.h"
 
+@import VindsidenKit;
+
 @interface RHCSettingsViewController ()
 
 - (IBAction)done:(id)sender;
@@ -81,7 +83,7 @@
         cell.textLabel.text = NSLocalizedString(@"Stations", nil);
         cell.detailTextLabel.text = [NSString stringWithFormat:@"%ld", (long)[CDStation numberOfVisibleStations]];
     } else {
-        SpeedConvertion unit = [[NSUserDefaults standardUserDefaults] integerForKey:@"selectedUnit"];
+        SpeedConvertion unit = [[Datamanager sharedManager].sharedDefaults integerForKey:@"selectedUnit"];
         cell.textLabel.text = NSLocalizedString(@"Units", nil);
         cell.detailTextLabel.text = [NSNumber shortUnitNameString:unit];
     }

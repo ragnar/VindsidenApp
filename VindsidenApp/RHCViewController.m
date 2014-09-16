@@ -8,13 +8,13 @@
 
 #import "RHCViewController.h"
 #import "RHCStationCell.h"
-#import "CDStation.h"
 #import "RHEStationDetailsViewController.h"
 
 #import "RHEVindsidenAPIClient.h"
-#import "UIImage+ImageFromView.h"
 #import <MotionJpegImageView/MotionJpegImageView.h>
+#import <JTSImageViewController/JTSImageViewController.h>
 
+@import VindsidenKit;
 
 static NSString *kCellID = @"stationCellID";
 
@@ -25,6 +25,7 @@ static NSString *kCellID = @"stationCellID";
 @property (weak, nonatomic) IBOutlet UIPageControl *pageControl;
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 @property (weak, nonatomic) IBOutlet UIToolbar *toolbar;
+@property (strong, nonatomic) CDStation *pendingScrollToStation;
 
 @end
 
@@ -95,6 +96,11 @@ static NSString *kCellID = @"stationCellID";
 
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationDidBecomeActive:) name:UIApplicationDidBecomeActiveNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationWillResignActive:) name:UIApplicationWillResignActiveNotification object:nil];
+
+    if ( self.pendingScrollToStation ) {
+        [self scrollToStation:self.pendingScrollToStation];
+        self.pendingScrollToStation = nil;
+    }
 }
 
 
@@ -143,7 +149,11 @@ static NSString *kCellID = @"stationCellID";
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    RHCStationCell *cell = [self.collectionView visibleCells][0];
+    RHCStationCell *cell =  nil;
+
+    if ( [self.collectionView.visibleCells count] ) {
+        cell = [self.collectionView visibleCells][0];
+    }
 
     if ( [segue.identifier isEqualToString:@"ShowSettings"] ) {
         UINavigationController *navCon = segue.destinationViewController;
@@ -206,11 +216,7 @@ static NSString *kCellID = @"stationCellID";
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    if ( CGRectGetHeight(collectionView.bounds) > 480.0) {
-        return CGSizeMake( 320.0, 504.0);
-    }
-
-    return CGSizeMake( 320.0, 416.0);
+    return self.collectionView.bounds.size;
 }
 
 
@@ -251,8 +257,8 @@ static NSString *kCellID = @"stationCellID";
                              [_transformedCells removeObject:cell];
 
                              NSIndexPath *indexPath = [self.collectionView indexPathsForVisibleItems][0];
-                             [[NSUserDefaults standardUserDefaults] setObject:@(indexPath.row) forKey:@"selectedIndexPath"];
-                             [[NSUserDefaults standardUserDefaults] synchronize];
+                             [[Datamanager sharedManager].sharedDefaults setObject:@(indexPath.row) forKey:@"selectedIndexPath"];
+                             [[Datamanager sharedManager].sharedDefaults synchronize];
                              [self updateCameraButton:YES];
                              self.pageControl.currentPage = indexPath.row;
                          }
@@ -276,10 +282,12 @@ static NSString *kCellID = @"stationCellID";
         return _fetchedResultsController;
     }
 
+    [NSFetchedResultsController deleteCacheWithName:@"StationList"];
+
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     NSString *cacheName = @"StationList";
 
-    NSManagedObjectContext *context = [(id)[[UIApplication sharedApplication] delegate] managedObjectContext];
+    NSManagedObjectContext *context = [[Datamanager sharedManager] managedObjectContext];
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"CDStation" inManagedObjectContext:context];
     [fetchRequest setEntity:entity];
     [fetchRequest setFetchBatchSize:20];
@@ -325,11 +333,24 @@ static NSString *kCellID = @"stationCellID";
 
 - (void)updateStations:(NSArray *)stations
 {
-    [CDStation updateStations:stations];
+    [CDStation updateStations:stations completion:^(BOOL newStations) {
+        if ( newStations ) {
+            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@""
+                                                                           message:NSLocalizedString(@"ALERT_NEW_STATIONS_FOUND", @"New stations found. Go to settings to view them")
+                                                                    preferredStyle:UIAlertControllerStyleAlert];
+            UIAlertController* __weak weakAlert = alert;
+            UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault
+                                                                  handler:^(UIAlertAction * action) {
+                                                                      [weakAlert dismissViewControllerAnimated:YES completion:nil];
+                                                                  }];
+            [alert addAction:defaultAction];
+            [self presentViewController:alert animated:YES completion:nil];
+        }
+    }];
 
     if ( [stations count] > 0 ) {
-        [[NSUserDefaults standardUserDefaults] setObject:[NSDate date] forKey:@"lastUpdated"];
-        [[NSUserDefaults standardUserDefaults] synchronize];
+        [[Datamanager sharedManager].sharedDefaults setObject:[NSDate date] forKey:@"lastUpdated"];
+        [[Datamanager sharedManager].sharedDefaults synchronize];
     }
 }
 
@@ -394,15 +415,35 @@ static NSString *kCellID = @"stationCellID";
     UIActivityViewController *activityViewController = [[UIActivityViewController alloc] initWithActivityItems:activityProviders applicationActivities:nil];
 
     activityViewController.excludedActivityTypes = @[UIActivityTypeAssignToContact];
-    activityViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
-
+    activityViewController.modalPresentationStyle = UIModalPresentationPopover;
     [self presentViewController:activityViewController animated:YES completion:nil];
+
+    UIPopoverPresentationController *presentationController = [activityViewController popoverPresentationController];
+    presentationController.permittedArrowDirections = UIPopoverArrowDirectionDown;
+    presentationController.barButtonItem = sender;
 }
 
 
 - (IBAction)camera:(id)sender
 {
-    [self performSegueWithIdentifier:@"ShowWebCam" sender:sender];
+    if ( [[self.collectionView visibleCells] count] == 0 ) {
+        return;
+    }
+
+    MotionJpegImageView *view = (MotionJpegImageView *)[(UITapGestureRecognizer *)sender view];
+
+    if ( view.image ) {
+        JTSImageInfo *imageInfo = [[JTSImageInfo alloc] init];
+        imageInfo.image = view.image;
+        imageInfo.referenceRect = [view frame];
+        imageInfo.referenceView = [view superview];
+
+        JTSImageViewController *controller = [[JTSImageViewController alloc] initWithImageInfo:imageInfo
+                                                                                          mode:JTSImageViewControllerMode_Image
+                                                                               backgroundStyle:JTSImageViewControllerBackgroundStyle_ScaledDimmedBlurred];
+
+        [controller showFromViewController:self transition:JTSImageViewControllerTransition_FromOriginalPosition];
+    }
 }
 
 
@@ -466,20 +507,45 @@ static NSString *kCellID = @"stationCellID";
 
 - (void)updateContentWithCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler;
 {
-    if ( [[self.collectionView visibleCells] count] ) {
-        RHCStationCell *cell = [self.collectionView visibleCells][0];
-        [cell fetchWithCompletionHandler:^(UIBackgroundFetchResult result) {
-            double delayInSeconds = 2.0;
-            dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
-            dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-                [cell syncDisplayPlots];
-                [cell updateLastUpdatedLabel];
-                completionHandler(result);
-            });
-        }];
+    if ( self.fetchedResultsController.fetchedObjects.count ) {
+        NSInteger __block remaining = self.fetchedResultsController.fetchedObjects.count;
+
+        for ( CDStation *station in self.fetchedResultsController.fetchedObjects ) {
+            [[RHEVindsidenAPIClient defaultManager] fetchStationsPlotsForStation:station.stationId
+                                                                      completion:^(BOOL success, NSArray *plots) {
+                                                                          DLOG(@"");
+                                                                          if ( success ) {
+                                                                              [CDPlot updatePlots:plots completion:nil];
+                                                                          }
+                                                                          remaining -= 1;
+                                                                      } error:^(BOOL cancelled, NSError *error) {
+                                                                      }
+             ];
+        }
+
+        while (remaining > 0 ) {
+            [[NSRunLoop currentRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:0.1]];
+            DLOG(@"waiting: %ld", (long)remaining);
+        }
+
+        if ( completionHandler ) {
+            completionHandler(UIBackgroundFetchResultNewData);
+        }
 
     } else {
-        completionHandler(UIBackgroundFetchResultFailed);
+        completionHandler(UIBackgroundFetchResultNoData);
+    }
+}
+
+
+- (void)scrollToStation:(CDStation *)station
+{
+    if ( self.collectionView ) {
+        NSIndexPath *indexPath = [self.fetchedResultsController indexPathForObject:station];
+        [self.collectionView scrollToItemAtIndexPath:indexPath atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:NO];
+        self.pageControl.currentPage = indexPath.row;
+    } else {
+        self.pendingScrollToStation = station;
     }
 }
 
