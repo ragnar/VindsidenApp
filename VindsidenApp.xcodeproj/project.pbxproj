@@ -35,7 +35,6 @@
 		AD17EDD21732B7F600943C33 /* RHEStationDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD17EDD11732B7F500943C33 /* RHEStationDetailsViewController.m */; };
 		AD17EDD51732B82700943C33 /* RHEWebCamViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD17EDD41732B82500943C33 /* RHEWebCamViewController.m */; };
 		AD17EDF11734EC4400943C33 /* RHCSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD17EDF01734EC4300943C33 /* RHCSettingsViewController.m */; };
-		AD17EDF71735541E00943C33 /* RHCNavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD17EDF61735541900943C33 /* RHCNavigationViewController.m */; };
 		AD17EDF91736492500943C33 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD17EDF81736492200943C33 /* AdSupport.framework */; };
 		AD1B7EF219A7E82900D8B253 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AD1B7EF119A7E82900D8B253 /* libPods.a */; };
 		AD2AB4F819C722320029C739 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = AD2AB4FA19C722320029C739 /* InfoPlist.strings */; };
@@ -45,6 +44,7 @@
 		AD2BB34F19C7718600349495 /* VindsidenAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD2BB34E19C7718600349495 /* VindsidenAppTests.swift */; };
 		AD32E38119BA2FC2008F00EB /* RHEStationPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD32E38019BA2FC2008F00EB /* RHEStationPickerViewController.swift */; };
 		AD32E38319BC5037008F00EB /* RHCUnitSelectorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD32E38219BC5037008F00EB /* RHCUnitSelectorViewController.swift */; };
+		AD4DEA7719CB7528002A220B /* RHCNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD4DEA7619CB7528002A220B /* RHCNavigationViewController.swift */; };
 		AD539C841947B0F7002644BD /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD539C831947B0F6002644BD /* NotificationCenter.framework */; };
 		AD539C891947B0F7002644BD /* TodayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD539C881947B0F7002644BD /* TodayViewController.swift */; };
 		AD539C8E1947B0F7002644BD /* org.juniks.VindsidenApp.VindsidenToday.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = AD539C821947B0F6002644BD /* org.juniks.VindsidenApp.VindsidenToday.appex */; };
@@ -255,8 +255,6 @@
 		AD17EDD41732B82500943C33 /* RHEWebCamViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RHEWebCamViewController.m; sourceTree = "<group>"; };
 		AD17EDEF1734EC4300943C33 /* RHCSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RHCSettingsViewController.h; sourceTree = "<group>"; };
 		AD17EDF01734EC4300943C33 /* RHCSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RHCSettingsViewController.m; sourceTree = "<group>"; };
-		AD17EDF51735541600943C33 /* RHCNavigationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RHCNavigationViewController.h; sourceTree = "<group>"; };
-		AD17EDF61735541900943C33 /* RHCNavigationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RHCNavigationViewController.m; sourceTree = "<group>"; };
 		AD17EDF81736492200943C33 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		AD1B7EF119A7E82900D8B253 /* libPods.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libPods.a; path = "Pods/build/Debug-iphoneos/libPods.a"; sourceTree = "<group>"; };
 		AD2AB4F919C722320029C739 /* nb */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nb; path = nb.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -269,6 +267,7 @@
 		AD32E37F19BA2FC1008F00EB /* VindsidenApp-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "VindsidenApp-Bridging-Header.h"; sourceTree = "<group>"; };
 		AD32E38019BA2FC2008F00EB /* RHEStationPickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RHEStationPickerViewController.swift; sourceTree = "<group>"; };
 		AD32E38219BC5037008F00EB /* RHCUnitSelectorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RHCUnitSelectorViewController.swift; sourceTree = "<group>"; };
+		AD4DEA7619CB7528002A220B /* RHCNavigationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RHCNavigationViewController.swift; sourceTree = "<group>"; };
 		AD539C821947B0F6002644BD /* org.juniks.VindsidenApp.VindsidenToday.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = org.juniks.VindsidenApp.VindsidenToday.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		AD539C831947B0F6002644BD /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
 		AD539C871947B0F7002644BD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -427,8 +426,7 @@
 				AD17EDE51734487F00943C33 /* Settings */,
 				AD17EDE61734488F00943C33 /* Web Camera View Controller */,
 				AD17ED4E1731012200943C33 /* Supporting Files */,
-				AD17EDF51735541600943C33 /* RHCNavigationViewController.h */,
-				AD17EDF61735541900943C33 /* RHCNavigationViewController.m */,
+				AD4DEA7619CB7528002A220B /* RHCNavigationViewController.swift */,
 				ADDB4F4F19CB68F1005D5D38 /* RHCAlertManager.swift */,
 			);
 			path = VindsidenApp;
@@ -975,13 +973,13 @@
 				AD32E38319BC5037008F00EB /* RHCUnitSelectorViewController.swift in Sources */,
 				AD17EDAA1731066F00943C33 /* RHEGraphMarker.m in Sources */,
 				AD17EDAB1731066F00943C33 /* RHEGraphView.m in Sources */,
+				AD4DEA7719CB7528002A220B /* RHCNavigationViewController.swift in Sources */,
 				AD32E38119BA2FC2008F00EB /* RHEStationPickerViewController.swift in Sources */,
 				AD17EDD21732B7F600943C33 /* RHEStationDetailsViewController.m in Sources */,
 				ADDB4F5019CB68F1005D5D38 /* RHCAlertManager.swift in Sources */,
 				AD17EDD51732B82700943C33 /* RHEWebCamViewController.m in Sources */,
 				AD17EDF11734EC4400943C33 /* RHCSettingsViewController.m in Sources */,
 				ADC8CB8A196D5FE200D167CD /* VindsidenPlotClient.m in Sources */,
-				AD17EDF71735541E00943C33 /* RHCNavigationViewController.m in Sources */,
 				ADC8CB8C196D5FEA00D167CD /* RHEVindsidenAPIClient.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
