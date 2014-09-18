@@ -3,3 +3,4 @@
 //
 
 #import "RHEVindsidenAPIClient.h"
+#import "RHCAppDelegate.h"
