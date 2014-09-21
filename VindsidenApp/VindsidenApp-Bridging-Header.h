@@ -5,3 +5,4 @@
 #import "RHEVindsidenAPIClient.h"
 #import "RHCAppDelegate.h"
 #import "RHEWebCamViewController.h"
+#import "RHEGraphView.h"
