@@ -7,7 +7,6 @@
 //
 
 #import "RHCStationInfo.h"
-#import "CDPlot.h"
 
 @import VindsidenKit;
 
