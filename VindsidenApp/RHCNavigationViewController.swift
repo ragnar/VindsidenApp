@@ -9,7 +9,8 @@
 import UIKit
 
 
-@objc class RHCNavigationViewController : UINavigationController
+@objc(RHCNavigationViewController)
+class RHCNavigationViewController : UINavigationController
 {
     override func supportedInterfaceOrientations() -> Int {
         if self.topViewController is RHEWebCamViewController {
