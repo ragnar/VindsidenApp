@@ -84,6 +84,8 @@
 		ADCD425D196E4E42004973E9 /* UIFontDescriptor+textStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = ADCD424B196E4E42004973E9 /* UIFontDescriptor+textStyle.m */; };
 		ADCD425E196E4E42004973E9 /* UIImage+ImageFromView.h in Headers */ = {isa = PBXBuildFile; fileRef = ADCD424C196E4E42004973E9 /* UIImage+ImageFromView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		ADCD425F196E4E42004973E9 /* UIImage+ImageFromView.m in Sources */ = {isa = PBXBuildFile; fileRef = ADCD424D196E4E42004973E9 /* UIImage+ImageFromView.m */; };
+		ADD211C119CF139300497DC1 /* RHCLandscapeGraphViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADD211C019CF139300497DC1 /* RHCLandscapeGraphViewController.swift */; };
+		ADD211C419CF1EC400497DC1 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = ADD211C619CF1EC400497DC1 /* InfoPlist.strings */; };
 		ADDB4F5019CB68F1005D5D38 /* RHCAlertManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADDB4F4F19CB68F1005D5D38 /* RHCAlertManager.swift */; };
 		ADFE6079196E56810025F346 /* DrawArrow.m in Sources */ = {isa = PBXBuildFile; fileRef = AD17ED8F1731066C00943C33 /* DrawArrow.m */; };
 /* End PBXBuildFile section */
@@ -308,6 +310,8 @@
 		ADCD424B196E4E42004973E9 /* UIFontDescriptor+textStyle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIFontDescriptor+textStyle.m"; sourceTree = "<group>"; };
 		ADCD424C196E4E42004973E9 /* UIImage+ImageFromView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ImageFromView.h"; sourceTree = "<group>"; };
 		ADCD424D196E4E42004973E9 /* UIImage+ImageFromView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ImageFromView.m"; sourceTree = "<group>"; };
+		ADD211C019CF139300497DC1 /* RHCLandscapeGraphViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RHCLandscapeGraphViewController.swift; sourceTree = "<group>"; };
+		ADD211C519CF1EC400497DC1 /* nb */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nb; path = nb.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		ADDB4F4F19CB68F1005D5D38 /* RHCAlertManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RHCAlertManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -526,6 +530,7 @@
 				AD17ED631731012200943C33 /* RHCViewController.m */,
 				AD17ED841731058400943C33 /* RHCStationCell.h */,
 				AD17ED851731058400943C33 /* RHCStationCell.m */,
+				ADD211C019CF139300497DC1 /* RHCLandscapeGraphViewController.swift */,
 			);
 			name = "Main View Controller";
 			sourceTree = "<group>";
@@ -571,6 +576,7 @@
 		AD2BB34C19C7718600349495 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				ADD211C619CF1EC400497DC1 /* InfoPlist.strings */,
 				AD2BB34D19C7718600349495 /* Info.plist */,
 			);
 			name = "Supporting Files";
@@ -881,6 +887,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ADD211C419CF1EC400497DC1 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -969,6 +976,7 @@
 				AD17ED881731058400943C33 /* RHCStationCell.m in Sources */,
 				AD17ED891731058400943C33 /* RHCStationInfo.m in Sources */,
 				AD17EDA61731066F00943C33 /* DrawArrow.m in Sources */,
+				ADD211C119CF139300497DC1 /* RHCLandscapeGraphViewController.swift in Sources */,
 				ADC8CB8B196D5FE600D167CD /* VindsidenStationClient.m in Sources */,
 				AD32E38319BC5037008F00EB /* RHCUnitSelectorViewController.swift in Sources */,
 				AD17EDAA1731066F00943C33 /* RHEGraphMarker.m in Sources */,
@@ -1164,6 +1172,14 @@
 				ADA0C64619C0EEC200152005 /* nb */,
 			);
 			name = Today.storyboard;
+			sourceTree = "<group>";
+		};
+		ADD211C619CF1EC400497DC1 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				ADD211C519CF1EC400497DC1 /* nb */,
+			);
+			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

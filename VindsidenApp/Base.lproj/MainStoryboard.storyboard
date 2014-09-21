@@ -163,7 +163,7 @@
                                                                 <constraint firstAttribute="height" constant="1" id="9BQ-UG-RBU"/>
                                                             </constraints>
                                                         </view>
-                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ALE-vn-F97" userLabel="spacing view">
+                                                        <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ALE-vn-F97" userLabel="spacing view">
                                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" id="bRf-5N-RTG"/>
@@ -324,6 +324,7 @@
                         <outlet property="toolbar" destination="EdT-XP-BFV" id="Rsv-s5-zFY"/>
                         <segue destination="KWr-m7-T9q" kind="presentation" identifier="ShowStationDetails" modalTransitionStyle="flipHorizontal" id="gZG-1Q-BfR"/>
                         <segue destination="Cgk-DP-Q6C" kind="presentation" identifier="ShowSettings" modalTransitionStyle="flipHorizontal" id="3GC-Jp-jHf"/>
+                        <segue destination="Z90-Vm-Lch" kind="presentation" identifier="PresentGraphLandscape" modalTransitionStyle="crossDissolve" id="UBO-jo-R7X"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xXh-KP-MIO" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -546,6 +547,55 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sm2-J3-tHg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2821" y="1044"/>
+        </scene>
+        <!--Landscape Graph View Controller-->
+        <scene sceneID="sFL-pN-9RF">
+            <objects>
+                <viewController id="Z90-Vm-Lch" customClass="RHCLandscapeGraphViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="y3j-tr-ZQK"/>
+                        <viewControllerLayoutGuide type="bottom" id="m1l-h0-fsg"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="khe-U2-fMd">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zxU-hP-1XR" customClass="RHEGraphView">
+                                <rect key="frame" x="0.0" y="60" width="320" height="508"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nHp-c8-bEx">
+                                <rect key="frame" x="10" y="30" width="41" height="20"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="nHp-c8-bEx" firstAttribute="top" secondItem="y3j-tr-ZQK" secondAttribute="bottom" constant="10" id="54P-se-tbD"/>
+                            <constraint firstAttribute="trailing" secondItem="zxU-hP-1XR" secondAttribute="trailing" id="85P-uC-r78"/>
+                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="nHp-c8-bEx" secondAttribute="trailing" constant="10" id="GCa-SJ-FIj"/>
+                            <constraint firstItem="m1l-h0-fsg" firstAttribute="top" secondItem="zxU-hP-1XR" secondAttribute="bottom" id="IBR-oE-ihN"/>
+                            <constraint firstItem="zxU-hP-1XR" firstAttribute="top" secondItem="khe-U2-fMd" secondAttribute="top" id="SVo-OJ-cIp"/>
+                            <constraint firstItem="zxU-hP-1XR" firstAttribute="top" secondItem="nHp-c8-bEx" secondAttribute="bottom" constant="10" id="fmd-QI-Pjh"/>
+                            <constraint firstItem="nHp-c8-bEx" firstAttribute="leading" secondItem="khe-U2-fMd" secondAttribute="leading" constant="10" id="lfH-QB-8B5"/>
+                            <constraint firstItem="zxU-hP-1XR" firstAttribute="leading" secondItem="khe-U2-fMd" secondAttribute="leading" id="wur-nd-LYf"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="SVo-OJ-cIp"/>
+                            </mask>
+                        </variation>
+                    </view>
+                    <connections>
+                        <outlet property="graphView" destination="zxU-hP-1XR" id="I5u-pf-UuT"/>
+                        <outlet property="stationName" destination="nHp-c8-bEx" id="aa2-Te-JVn"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="KCE-JW-liA" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1073" y="1218"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="coP-8m-qSA">
