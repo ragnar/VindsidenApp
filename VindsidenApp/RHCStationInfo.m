@@ -41,6 +41,19 @@
 }
 
 
+- (void)awakeFromNib
+{
+    [self resetInfoLabels];
+}
+
+- (void)resetInfoLabels
+{
+    for ( UILabel *l in @[self.windSpeed, self.windGust, self.windAverage, self.windBeaufort, self.windDirection, self.tempAir] ) {
+        l.text = @"—.—";
+    }
+}
+
+
 - (void)updateWithPlot:(CDPlot *)plot
 {
     SpeedConvertion unit = [[Datamanager sharedManager].sharedDefaults integerForKey:@"selectedUnit"];
