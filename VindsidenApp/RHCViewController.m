@@ -152,6 +152,13 @@ static NSString *kCellID = @"stationCellID";
 }
 
 
+- (void)viewWillLayoutSubviews
+{
+    [super viewWillLayoutSubviews];
+    [self.collectionView.collectionViewLayout invalidateLayout];
+}
+
+
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     RHCStationCell *cell =  nil;
