@@ -76,6 +76,9 @@
 /* Class = "IBUILabel"; text = "Title"; ObjectID = "ly3-dm-LY8"; */
 "ly3-dm-LY8.text" = "Title";
 
+/* Class = "IBUILabel"; text = "Label"; ObjectID = "nHp-c8-bEx"; */
+"nHp-c8-bEx.text" = "Stasjonsnavn";
+
 /* Class = "IBUILabel"; text = "nr2"; ObjectID = "pRF-Gf-OHu"; */
 "pRF-Gf-OHu.text" = "nr2";
 

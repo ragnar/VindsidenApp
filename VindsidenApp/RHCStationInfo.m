@@ -7,7 +7,6 @@
 //
 
 #import "RHCStationInfo.h"
-#import "CDPlot.h"
 
 @import VindsidenKit;
 
@@ -38,6 +37,19 @@
 - (id)initWithCoder:(NSCoder *)aDecoder
 {
     return [super initWithCoder:aDecoder];
+}
+
+
+- (void)awakeFromNib
+{
+    [self resetInfoLabels];
+}
+
+- (void)resetInfoLabels
+{
+    for ( UILabel *l in @[self.windSpeed, self.windGust, self.windAverage, self.windBeaufort, self.windDirection, self.tempAir] ) {
+        l.text = @"—.—";
+    }
 }
 
 

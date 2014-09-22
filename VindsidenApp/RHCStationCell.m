@@ -62,6 +62,7 @@
 
     self.cameraButton.alpha = 0.0;
     self.graphView.plots = nil;
+    [self.stationView resetInfoLabels];
 
     [NSObject cancelBlock:self.autocompleteBlock];
     self.autocompleteBlock = nil;

@@ -18,7 +18,8 @@
     #import <SystemConfiguration/SystemConfiguration.h>
     #import <MobileCoreServices/MobileCoreServices.h>
 
-    #import "RHCAlertManager.h"
+    #import "VindsidenApp-Swift.h"
+
     #import "UIFont+textStyle.h"
     #import "UIFontDescriptor+textStyle.h"
 #endif

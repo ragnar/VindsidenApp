@@ -9,6 +9,7 @@
 #import "RHCViewController.h"
 #import "RHCStationCell.h"
 #import "RHEStationDetailsViewController.h"
+#import "RHEGraphView.h"
 
 #import "RHEVindsidenAPIClient.h"
 #import <MotionJpegImageView/MotionJpegImageView.h>
@@ -26,15 +27,15 @@ static NSString *kCellID = @"stationCellID";
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 @property (weak, nonatomic) IBOutlet UIToolbar *toolbar;
 @property (strong, nonatomic) CDStation *pendingScrollToStation;
+@property (assign, nonatomic) BOOL isShowingLandscapeView;
+@property (assign, nonatomic) BOOL wasVisible;
+@property (strong, nonatomic) NSMutableSet *transformedCells;
+
 
 @end
 
 
 @implementation RHCViewController
-{
-    NSMutableSet *_transformedCells;
-    BOOL _wasVisible;
-}
 
 
 - (void)dealloc
@@ -42,12 +43,14 @@ static NSString *kCellID = @"stationCellID";
     [self.cameraView removeObserver:self forKeyPath:@"image" context:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIApplicationDidBecomeActiveNotification object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIApplicationWillResignActiveNotification object:nil];
+    [self endObservingOrientation];
 }
 
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [self beginObservingOrientation];
 
     self.automaticallyAdjustsScrollViewInsets = NO;
 
@@ -112,6 +115,8 @@ static NSString *kCellID = @"stationCellID";
         _wasVisible = NO;
         [self updateCameraButton:YES];
     }
+
+    [self beginObservingOrientation];
 }
 
 
@@ -152,7 +157,7 @@ static NSString *kCellID = @"stationCellID";
     RHCStationCell *cell =  nil;
 
     if ( [self.collectionView.visibleCells count] ) {
-        cell = [self.collectionView visibleCells][0];
+        cell = [self.collectionView visibleCells].firstObject;
     }
 
     if ( [segue.identifier isEqualToString:@"ShowSettings"] ) {
@@ -170,6 +175,10 @@ static NSString *kCellID = @"stationCellID";
         controller.stationName = cell.currentStation.stationName;
         controller.permitText = cell.currentStation.webCamText;
         controller.delegate = self;
+    } else if ( [segue.identifier isEqualToString:@"PresentGraphLandscape"] ) {
+        RHCLandscapeGraphViewController *controller = segue.destinationViewController;
+        controller.plots = cell.graphView.plots;
+        controller.station = cell.currentStation;
     }
 }
 
@@ -549,5 +558,42 @@ static NSString *kCellID = @"stationCellID";
     }
 }
 
+
+- (void)orientationChanged:(NSNotification *)notification
+{
+    UIDeviceOrientation deviceOrientation = [UIDevice currentDevice].orientation;
+    if (UIDeviceOrientationIsLandscape(deviceOrientation) && !_isShowingLandscapeView) {
+        if ( self.presentedViewController ) {
+            return;
+        }
+        _isShowingLandscapeView = YES;
+        [self performSegueWithIdentifier:@"PresentGraphLandscape" sender:self];
+    }
+    else if (UIDeviceOrientationIsPortrait(deviceOrientation) && _isShowingLandscapeView) {
+        if ( NO == [self.presentedViewController isKindOfClass:[RHCLandscapeGraphViewController class]] ) {
+            return;
+        }
+        [self dismissViewControllerAnimated:YES completion:nil];
+        _isShowingLandscapeView = NO;
+    }
+}
+
+
+- (void)beginObservingOrientation
+{
+    _isShowingLandscapeView = NO;
+    [[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(orientationChanged:)
+                                                 name:UIDeviceOrientationDidChangeNotification
+                                               object:nil];
+}
+
+
+- (void)endObservingOrientation
+{
+    [[UIDevice currentDevice] endGeneratingDeviceOrientationNotifications];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIDeviceOrientationDidChangeNotification object:nil];
+}
 
 @end

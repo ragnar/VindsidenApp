@@ -22,11 +22,11 @@ extension UITableViewCell {
     }
 }
 
-class RHCTodayCell: UITableViewCell {
-
-    @IBOutlet var arrowImageView: UIImageView?
-    @IBOutlet var speedLabel: UILabel?
-    @IBOutlet var nameLabel: UILabel?
-    @IBOutlet var updatedLabel: UILabel?
+class RHCTodayCell: UITableViewCell
+{
+    @IBOutlet weak var arrowImageView: UIImageView?
+    @IBOutlet weak var speedLabel: UILabel?
+    @IBOutlet weak var nameLabel: UILabel?
+    @IBOutlet weak var updatedLabel: UILabel?
 
 }
