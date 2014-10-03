@@ -28,3 +28,4 @@ FOUNDATION_EXPORT const unsigned char VindsidenKitVersionString[];
 
 #import <VindsidenKit/CDPlot.h>
 #import <VindsidenKit/CDStation.h>
+#import <VindsidenKit/DrawArrow.h>

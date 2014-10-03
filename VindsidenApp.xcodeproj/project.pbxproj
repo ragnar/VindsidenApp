@@ -21,7 +21,6 @@
 		AD17ED641731012200943C33 /* RHCViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD17ED631731012200943C33 /* RHCViewController.m */; };
 		AD17ED881731058400943C33 /* RHCStationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AD17ED851731058400943C33 /* RHCStationCell.m */; };
 		AD17ED891731058400943C33 /* RHCStationInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = AD17ED871731058400943C33 /* RHCStationInfo.m */; };
-		AD17EDA61731066F00943C33 /* DrawArrow.m in Sources */ = {isa = PBXBuildFile; fileRef = AD17ED8F1731066C00943C33 /* DrawArrow.m */; };
 		AD17EDAA1731066F00943C33 /* RHEGraphMarker.m in Sources */ = {isa = PBXBuildFile; fileRef = AD17ED971731066E00943C33 /* RHEGraphMarker.m */; };
 		AD17EDAB1731066F00943C33 /* RHEGraphView.m in Sources */ = {isa = PBXBuildFile; fileRef = AD17ED991731066E00943C33 /* RHEGraphView.m */; };
 		AD17EDB717310E5400943C33 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD17EDB617310E5300943C33 /* CoreData.framework */; };
@@ -63,6 +62,8 @@
 		AD7AA507196E46D800B1518B /* Vindsiden.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = AD7AA505196E46D800B1518B /* Vindsiden.xcdatamodeld */; };
 		ADA0C64019C0EEBC00152005 /* Today.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ADA0C64219C0EEBC00152005 /* Today.storyboard */; };
 		ADA0C64719C0EF1A00152005 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = AD17EDC517312A5000943C33 /* Localizable.strings */; };
+		ADB5A78A19DEC29A009AE4A5 /* DrawArrow.h in Headers */ = {isa = PBXBuildFile; fileRef = ADB5A78819DEC29A009AE4A5 /* DrawArrow.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		ADB5A78B19DEC29A009AE4A5 /* DrawArrow.m in Sources */ = {isa = PBXBuildFile; fileRef = ADB5A78919DEC29A009AE4A5 /* DrawArrow.m */; };
 		ADC8CB8A196D5FE200D167CD /* VindsidenPlotClient.m in Sources */ = {isa = PBXBuildFile; fileRef = AD17ED9D1731066F00943C33 /* VindsidenPlotClient.m */; };
 		ADC8CB8B196D5FE600D167CD /* VindsidenStationClient.m in Sources */ = {isa = PBXBuildFile; fileRef = AD17EDA11731066F00943C33 /* VindsidenStationClient.m */; };
 		ADC8CB8C196D5FEA00D167CD /* RHEVindsidenAPIClient.m in Sources */ = {isa = PBXBuildFile; fileRef = AD17EDB417310C5A00943C33 /* RHEVindsidenAPIClient.m */; };
@@ -87,7 +88,6 @@
 		ADD211C119CF139300497DC1 /* RHCLandscapeGraphViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADD211C019CF139300497DC1 /* RHCLandscapeGraphViewController.swift */; };
 		ADD211C419CF1EC400497DC1 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = ADD211C619CF1EC400497DC1 /* InfoPlist.strings */; };
 		ADDB4F5019CB68F1005D5D38 /* RHCAlertManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADDB4F4F19CB68F1005D5D38 /* RHCAlertManager.swift */; };
-		ADFE6079196E56810025F346 /* DrawArrow.m in Sources */ = {isa = PBXBuildFile; fileRef = AD17ED8F1731066C00943C33 /* DrawArrow.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -231,8 +231,6 @@
 		AD17ED851731058400943C33 /* RHCStationCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RHCStationCell.m; sourceTree = "<group>"; };
 		AD17ED861731058400943C33 /* RHCStationInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RHCStationInfo.h; sourceTree = "<group>"; };
 		AD17ED871731058400943C33 /* RHCStationInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RHCStationInfo.m; sourceTree = "<group>"; };
-		AD17ED8E1731066C00943C33 /* DrawArrow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DrawArrow.h; sourceTree = "<group>"; };
-		AD17ED8F1731066C00943C33 /* DrawArrow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DrawArrow.m; sourceTree = "<group>"; };
 		AD17ED961731066D00943C33 /* RHEGraphMarker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RHEGraphMarker.h; sourceTree = "<group>"; };
 		AD17ED971731066E00943C33 /* RHEGraphMarker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RHEGraphMarker.m; sourceTree = "<group>"; };
 		AD17ED981731066E00943C33 /* RHEGraphView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RHEGraphView.h; sourceTree = "<group>"; };
@@ -292,6 +290,8 @@
 		ADA0C64119C0EEBC00152005 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Today.storyboard; sourceTree = "<group>"; };
 		ADA0C64419C0EEC000152005 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Today.strings; sourceTree = "<group>"; };
 		ADA0C64619C0EEC200152005 /* nb */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nb; path = nb.lproj/Today.strings; sourceTree = "<group>"; };
+		ADB5A78819DEC29A009AE4A5 /* DrawArrow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DrawArrow.h; sourceTree = "<group>"; };
+		ADB5A78919DEC29A009AE4A5 /* DrawArrow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DrawArrow.m; sourceTree = "<group>"; };
 		ADCD423C196E4E42004973E9 /* NSNumber+Between.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSNumber+Between.h"; sourceTree = "<group>"; };
 		ADCD423D196E4E42004973E9 /* NSNumber+Between.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSNumber+Between.m"; sourceTree = "<group>"; };
 		ADCD423E196E4E42004973E9 /* NSNumber+Convertion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSNumber+Convertion.h"; sourceTree = "<group>"; };
@@ -462,15 +462,6 @@
 			path = Fonts;
 			sourceTree = "<group>";
 		};
-		AD17EDDD173447B500943C33 /* Draw Arrow */ = {
-			isa = PBXGroup;
-			children = (
-				AD17ED8E1731066C00943C33 /* DrawArrow.h */,
-				AD17ED8F1731066C00943C33 /* DrawArrow.m */,
-			);
-			name = "Draw Arrow";
-			sourceTree = "<group>";
-		};
 		AD17EDDE173447CB00943C33 /* Graph View */ = {
 			isa = PBXGroup;
 			children = (
@@ -507,7 +498,6 @@
 		AD17EDE11734482100943C33 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				AD17EDDD173447B500943C33 /* Draw Arrow */,
 				AD17EDDE173447CB00943C33 /* Graph View */,
 				AD17EDE21734483400943C33 /* Station View */,
 			);
@@ -607,6 +597,8 @@
 		AD539C9E1947B5CA002644BD /* VindsidenKit */ = {
 			isa = PBXGroup;
 			children = (
+				ADB5A78819DEC29A009AE4A5 /* DrawArrow.h */,
+				ADB5A78919DEC29A009AE4A5 /* DrawArrow.m */,
 				ADCD4260196E4E8A004973E9 /* Categories */,
 				AD7AA505196E46D800B1518B /* Vindsiden.xcdatamodeld */,
 				AD7AA4FD196E46BA00B1518B /* CDPlot.h */,
@@ -680,6 +672,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ADB5A78A19DEC29A009AE4A5 /* DrawArrow.h in Headers */,
 				AD7AA501196E46BA00B1518B /* CDPlot.h in Headers */,
 				AD539CA21947B5CA002644BD /* VindsidenKit.h in Headers */,
 				ADCD4250196E4E42004973E9 /* NSNumber+Convertion.h in Headers */,
@@ -975,7 +968,6 @@
 				AD17ED641731012200943C33 /* RHCViewController.m in Sources */,
 				AD17ED881731058400943C33 /* RHCStationCell.m in Sources */,
 				AD17ED891731058400943C33 /* RHCStationInfo.m in Sources */,
-				AD17EDA61731066F00943C33 /* DrawArrow.m in Sources */,
 				ADD211C119CF139300497DC1 /* RHCLandscapeGraphViewController.swift in Sources */,
 				ADC8CB8B196D5FE600D167CD /* VindsidenStationClient.m in Sources */,
 				AD32E38319BC5037008F00EB /* RHCUnitSelectorViewController.swift in Sources */,
@@ -1005,7 +997,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				AD539C891947B0F7002644BD /* TodayViewController.swift in Sources */,
-				ADFE6079196E56810025F346 /* DrawArrow.m in Sources */,
 				AD003850196E7A6400C3232A /* RHCTodayCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1023,6 +1014,7 @@
 				ADCD425B196E4E42004973E9 /* UIFont+textStyle.m in Sources */,
 				ADCD4251196E4E42004973E9 /* NSNumber+Convertion.m in Sources */,
 				AD539CC71947B684002644BD /* Datamanager.swift in Sources */,
+				ADB5A78B19DEC29A009AE4A5 /* DrawArrow.m in Sources */,
 				AD7AA504196E46BA00B1518B /* CDStation.m in Sources */,
 				ADCD424F196E4E42004973E9 /* NSNumber+Between.m in Sources */,
 				ADCD4255196E4E42004973E9 /* NSSet+Sort.m in Sources */,
