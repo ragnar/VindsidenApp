@@ -107,10 +107,12 @@ class TodayViewController: UITableViewController, NCWidgetProviding, NSFetchedRe
             let tmpplot: CDPlot? = stationInfo.lastRegisteredPlot()
 
             if let plot = tmpplot {
-                let image = DrawArrow.drawArrowAtAngle(plot.windDir, forSpeed: plot.windAvg, highlighted: false, color: UIColor.whiteColor(), hightlightedColor: UIColor.blackColor())
+                let winddir = CGFloat(plot.windDir.floatValue)
+                let windspeed = CGFloat(plot.windAvg.floatValue)
+                let image = DrawArrow.drawArrowAtAngle( winddir, forSpeed:windspeed, highlighted:false, color: UIColor.whiteColor(), hightlightedColor: UIColor.blackColor())
 
                 let raw = Datamanager.sharedManager().sharedDefaults.integerForKey("selectedUnit")
-                let unit = SpeedConvertion.fromRaw(raw)
+                let unit = SpeedConvertion(rawValue: raw)
 
                 if let realUnit = unit {
                     let speed = plot.windAvg.speedConvertionTo(realUnit)
@@ -174,8 +176,10 @@ class TodayViewController: UITableViewController, NCWidgetProviding, NSFetchedRe
 
         let stationInfo = self.fetchedResultsController.objectAtIndexPath(indexPath) as CDStation
 
-        let url = NSURL.URLWithString("vindsiden://station/\(stationInfo.stationId)?todayView=1")
-        extensionContext?.openURL(url, completionHandler:  nil)
+        let url = NSURL(string: "vindsiden://station/\(stationInfo.stationId)?todayView=1")
+        if let actual = url {
+            extensionContext?.openURL( actual, completionHandler:  nil)
+        }
     }
 
     // MARK: - NSFetchedResultsController

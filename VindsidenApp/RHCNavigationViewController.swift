@@ -14,8 +14,8 @@ class RHCNavigationViewController : UINavigationController
 {
     override func supportedInterfaceOrientations() -> Int {
         if self.topViewController is RHEWebCamViewController {
-            return Int(UIInterfaceOrientationMask.AllButUpsideDown.toRaw())
+            return Int(UIInterfaceOrientationMask.AllButUpsideDown.rawValue)
         }
-        return Int(UIInterfaceOrientationMask.Portrait.toRaw())
+        return Int(UIInterfaceOrientationMask.Portrait.rawValue)
     }
 }

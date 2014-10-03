@@ -93,7 +93,7 @@ import CoreData
 
 
     lazy var managedObjectModel: NSManagedObjectModel? = {
-        let modelURL = NSBundle(identifier:Config.sharedBundleIdentifier).URLForResource(Config.datamodelName, withExtension: "momd")
+        let modelURL = NSBundle(identifier: Config.sharedBundleIdentifier)?.URLForResource(Config.datamodelName, withExtension: "momd")
         var _managedObjectModel = NSManagedObjectModel(contentsOfURL: modelURL!)
 
         return _managedObjectModel
@@ -115,7 +115,7 @@ import CoreData
             dict[NSLocalizedDescriptionKey] = "Failed to initialize the application's saved data"
             dict[NSLocalizedFailureReasonErrorKey] = failureReason
             dict[NSUnderlyingErrorKey] = error
-            error = NSError.errorWithDomain("YOUR_ERROR_DOMAIN", code: 9999, userInfo: dict)
+            error = NSError(domain: "org.juniks.VindsidenApp", code: 9999, userInfo: dict)
             // Replace this with code to handle the error appropriately.
             // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
             NSLog("Unresolved error \(error), \(error!.userInfo)")
@@ -173,7 +173,7 @@ import CoreData
 
     public lazy var sharedDefaults: NSUserDefaults = {
         var _defaultManager = NSUserDefaults(suiteName: "group.org.juniks.VindsidenApp")
-        return _defaultManager
+        return _defaultManager!
     }()
 
 }
