@@ -9,8 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "RHEStationDetailsViewController.h"
 #import "RHEWebCamViewController.h"
-#import "RHCSettingsViewController.h"
-
 
 
 @interface RHCViewController : UIViewController <UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, NSFetchedResultsControllerDelegate, RHEStationDetailsDelegate, RHEWebCamImageViewDelegate, RHCSettingsDelegate>
