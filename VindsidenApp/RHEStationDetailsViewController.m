@@ -7,7 +7,7 @@
 //
 
 #import "RHEStationDetailsViewController.h"
-#import "CDStation.h"
+#import "VindsidenKit.h"
 
 #import "UIFontDescriptor+textStyle.h"
 #import "UIFont+textStyle.h"
@@ -72,19 +72,6 @@
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
-}
-
-
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    if ([segue.identifier isEqualToString:@"ShowWebCam"]) {
-        RHEWebCamViewController *controller = segue.destinationViewController;
-        controller.navigationItem.leftBarButtonItem = nil;
-        controller.webCamURL = [NSURL URLWithString:self.station.webCamImage];
-        controller.stationName = self.station.stationName;
-        controller.permitText = self.station.webCamText;
-        controller.delegate = self;
-    }
 }
 
 
@@ -338,15 +325,6 @@
                                                                            backgroundStyle:JTSImageViewControllerBackgroundStyle_ScaledDimmedBlurred];
 
     [controller showFromViewController:self transition:JTSImageViewControllerTransition_FromOriginalPosition];
-}
-
-
-#pragma mark - WebCamImage Delegate
-
-
-- (void)rheWebCamViewDidFinish:(RHEWebCamViewController *)controller
-{
-    [self.navigationController popViewControllerAnimated:YES];
 }
 
 

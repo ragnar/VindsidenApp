@@ -32,7 +32,6 @@
 		AD17EDC717312A5000943C33 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = AD17EDC517312A5000943C33 /* Localizable.strings */; };
 		AD17EDCC17312B2600943C33 /* DINMittelschriftStd.otf in Resources */ = {isa = PBXBuildFile; fileRef = AD17EDCA17312B2600943C33 /* DINMittelschriftStd.otf */; };
 		AD17EDD21732B7F600943C33 /* RHEStationDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD17EDD11732B7F500943C33 /* RHEStationDetailsViewController.m */; };
-		AD17EDD51732B82700943C33 /* RHEWebCamViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD17EDD41732B82500943C33 /* RHEWebCamViewController.m */; };
 		AD17EDF91736492500943C33 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD17EDF81736492200943C33 /* AdSupport.framework */; };
 		AD1B7EF219A7E82900D8B253 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AD1B7EF119A7E82900D8B253 /* libPods.a */; };
 		AD2AB4F819C722320029C739 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = AD2AB4FA19C722320029C739 /* InfoPlist.strings */; };
@@ -253,8 +252,6 @@
 		AD17EDCA17312B2600943C33 /* DINMittelschriftStd.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = DINMittelschriftStd.otf; sourceTree = "<group>"; };
 		AD17EDD01732B7F400943C33 /* RHEStationDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RHEStationDetailsViewController.h; sourceTree = "<group>"; };
 		AD17EDD11732B7F500943C33 /* RHEStationDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RHEStationDetailsViewController.m; sourceTree = "<group>"; };
-		AD17EDD31732B82300943C33 /* RHEWebCamViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RHEWebCamViewController.h; sourceTree = "<group>"; };
-		AD17EDD41732B82500943C33 /* RHEWebCamViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RHEWebCamViewController.m; sourceTree = "<group>"; };
 		AD17EDF81736492200943C33 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		AD1B7EF119A7E82900D8B253 /* libPods.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libPods.a; path = "Pods/build/Debug-iphoneos/libPods.a"; sourceTree = "<group>"; };
 		AD2AB4F919C722320029C739 /* nb */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nb; path = nb.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -440,7 +437,6 @@
 				AD17EDE31734485A00943C33 /* Main View Controller */,
 				AD17EDE41734486D00943C33 /* Station Details View Controller */,
 				AD17EDE51734487F00943C33 /* Settings */,
-				AD17EDE61734488F00943C33 /* Web Camera View Controller */,
 				AD17ED4E1731012200943C33 /* Supporting Files */,
 				AD4DEA7619CB7528002A220B /* RHCNavigationViewController.swift */,
 				ADDB4F4F19CB68F1005D5D38 /* RHCAlertManager.swift */,
@@ -553,15 +549,6 @@
 				AD71965B19EED713006FA2BC /* RHCSettingsViewController.swift */,
 			);
 			name = Settings;
-			sourceTree = "<group>";
-		};
-		AD17EDE61734488F00943C33 /* Web Camera View Controller */ = {
-			isa = PBXGroup;
-			children = (
-				AD17EDD31732B82300943C33 /* RHEWebCamViewController.h */,
-				AD17EDD41732B82500943C33 /* RHEWebCamViewController.m */,
-			);
-			name = "Web Camera View Controller";
 			sourceTree = "<group>";
 		};
 		AD2BB34B19C7718600349495 /* VindsidenAppTests */ = {
@@ -1019,7 +1006,6 @@
 				AD32E38119BA2FC2008F00EB /* RHEStationPickerViewController.swift in Sources */,
 				AD17EDD21732B7F600943C33 /* RHEStationDetailsViewController.m in Sources */,
 				ADDB4F5019CB68F1005D5D38 /* RHCAlertManager.swift in Sources */,
-				AD17EDD51732B82700943C33 /* RHEWebCamViewController.m in Sources */,
 				AD71965C19EED713006FA2BC /* RHCSettingsViewController.swift in Sources */,
 				ADC8CB8A196D5FE200D167CD /* VindsidenPlotClient.m in Sources */,
 				ADC8CB8C196D5FEA00D167CD /* RHEVindsidenAPIClient.m in Sources */,

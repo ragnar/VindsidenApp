@@ -7,14 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "RHEWebCamViewController.h"
 
 @protocol RHEStationDetailsDelegate;
 
 @class CDStation;
 
 
-@interface RHEStationDetailsViewController : UITableViewController <RHEWebCamImageViewDelegate>
+@interface RHEStationDetailsViewController : UITableViewController
 
 
 @property (weak, nonatomic) id<RHEStationDetailsDelegate> delegate;

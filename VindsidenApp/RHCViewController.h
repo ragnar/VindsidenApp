@@ -8,10 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "RHEStationDetailsViewController.h"
-#import "RHEWebCamViewController.h"
 
 
-@interface RHCViewController : UIViewController <UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, NSFetchedResultsControllerDelegate, RHEStationDetailsDelegate, RHEWebCamImageViewDelegate, RHCSettingsDelegate>
+@interface RHCViewController : UIViewController <UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, NSFetchedResultsControllerDelegate, RHEStationDetailsDelegate, RHCSettingsDelegate>
 
 
 - (void)updateContentWithCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler;

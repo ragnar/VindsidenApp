@@ -176,12 +176,6 @@ static NSString *kCellID = @"stationCellID";
         RHEStationDetailsViewController *controller = navCon.viewControllers[0];
         controller.delegate = self;
         controller.station = cell.currentStation;
-    } else if ([segue.identifier isEqualToString:@"ShowWebCam"]) {
-        RHEWebCamViewController *controller = segue.destinationViewController;
-        controller.webCamURL = [NSURL URLWithString:cell.currentStation.webCamImage];
-        controller.stationName = cell.currentStation.stationName;
-        controller.permitText = cell.currentStation.webCamText;
-        controller.delegate = self;
     } else if ( [segue.identifier isEqualToString:@"PresentGraphLandscape"] ) {
         RHCLandscapeGraphViewController *controller = segue.destinationViewController;
         controller.plots = cell.graphView.plots;
@@ -475,15 +469,6 @@ static NSString *kCellID = @"stationCellID";
 
 
 - (void)rheStationDetailsViewControllerDidFinish:(RHEStationDetailsViewController *)controller
-{
-    [self dismissViewControllerAnimated:YES completion:nil];
-}
-
-
-#pragma mark - WebCam Delegate
-
-
-- (void)rheWebCamViewDidFinish:(RHEWebCamViewController *)controller
 {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
