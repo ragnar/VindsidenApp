@@ -15,8 +15,6 @@
 		AD17ED4A1731012200943C33 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD17ED491731012200943C33 /* Foundation.framework */; };
 		AD17ED4C1731012200943C33 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD17ED4B1731012200943C33 /* CoreGraphics.framework */; };
 		AD17ED521731012200943C33 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = AD17ED501731012200943C33 /* InfoPlist.strings */; };
-		AD17ED541731012200943C33 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = AD17ED531731012200943C33 /* main.m */; };
-		AD17ED581731012200943C33 /* RHCAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = AD17ED571731012200943C33 /* RHCAppDelegate.m */; };
 		AD17ED611731012200943C33 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AD17ED5F1731012200943C33 /* MainStoryboard.storyboard */; };
 		AD17ED641731012200943C33 /* RHCViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD17ED631731012200943C33 /* RHCViewController.m */; };
 		AD17ED881731058400943C33 /* RHCStationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AD17ED851731058400943C33 /* RHCStationCell.m */; };
@@ -39,6 +37,7 @@
 		AD2AB50219C722330029C739 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = AD2AB50419C722330029C739 /* Localizable.strings */; };
 		AD2AB50719C722340029C739 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = AD2AB50919C722340029C739 /* InfoPlist.strings */; };
 		AD2BB34F19C7718600349495 /* VindsidenAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD2BB34E19C7718600349495 /* VindsidenAppTests.swift */; };
+		AD30BC5219F024D9000CE40C /* RHCAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD30BC5119F024D9000CE40C /* RHCAppDelegate.swift */; };
 		AD32E38119BA2FC2008F00EB /* RHEStationPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD32E38019BA2FC2008F00EB /* RHEStationPickerViewController.swift */; };
 		AD32E38319BC5037008F00EB /* RHCUnitSelectorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD32E38219BC5037008F00EB /* RHCUnitSelectorViewController.swift */; };
 		AD4DEA7719CB7528002A220B /* RHCNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD4DEA7619CB7528002A220B /* RHCNavigationViewController.swift */; };
@@ -221,10 +220,7 @@
 		AD17ED4B1731012200943C33 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		AD17ED4F1731012200943C33 /* VindsidenApp-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "VindsidenApp-Info.plist"; sourceTree = "<group>"; };
 		AD17ED511731012200943C33 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		AD17ED531731012200943C33 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		AD17ED551731012200943C33 /* VindsidenApp-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "VindsidenApp-Prefix.pch"; sourceTree = "<group>"; };
-		AD17ED561731012200943C33 /* RHCAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RHCAppDelegate.h; sourceTree = "<group>"; };
-		AD17ED571731012200943C33 /* RHCAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RHCAppDelegate.m; sourceTree = "<group>"; };
 		AD17ED621731012200943C33 /* RHCViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RHCViewController.h; sourceTree = "<group>"; };
 		AD17ED631731012200943C33 /* RHCViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RHCViewController.m; sourceTree = "<group>"; };
 		AD17ED6B1731012200943C33 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
@@ -261,6 +257,7 @@
 		AD2BB34A19C7718600349495 /* VindsidenAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VindsidenAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		AD2BB34D19C7718600349495 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AD2BB34E19C7718600349495 /* VindsidenAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VindsidenAppTests.swift; sourceTree = "<group>"; };
+		AD30BC5119F024D9000CE40C /* RHCAppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RHCAppDelegate.swift; sourceTree = "<group>"; };
 		AD32E37F19BA2FC1008F00EB /* VindsidenApp-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "VindsidenApp-Bridging-Header.h"; sourceTree = "<group>"; };
 		AD32E38019BA2FC2008F00EB /* RHEStationPickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RHEStationPickerViewController.swift; sourceTree = "<group>"; };
 		AD32E38219BC5037008F00EB /* RHCUnitSelectorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RHCUnitSelectorViewController.swift; sourceTree = "<group>"; };
@@ -455,7 +452,6 @@
 				AD17ED5F1731012200943C33 /* MainStoryboard.storyboard */,
 				AD17ED4F1731012200943C33 /* VindsidenApp-Info.plist */,
 				AD17ED501731012200943C33 /* InfoPlist.strings */,
-				AD17ED531731012200943C33 /* main.m */,
 				AD17ED551731012200943C33 /* VindsidenApp-Prefix.pch */,
 			);
 			name = "Supporting Files";
@@ -496,8 +492,7 @@
 		AD17EDE01734480300943C33 /* App Delegate */ = {
 			isa = PBXGroup;
 			children = (
-				AD17ED561731012200943C33 /* RHCAppDelegate.h */,
-				AD17ED571731012200943C33 /* RHCAppDelegate.m */,
+				AD30BC5119F024D9000CE40C /* RHCAppDelegate.swift */,
 			);
 			name = "App Delegate";
 			sourceTree = "<group>";
@@ -992,8 +987,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AD17ED541731012200943C33 /* main.m in Sources */,
-				AD17ED581731012200943C33 /* RHCAppDelegate.m in Sources */,
+				AD30BC5219F024D9000CE40C /* RHCAppDelegate.swift in Sources */,
 				AD17ED641731012200943C33 /* RHCViewController.m in Sources */,
 				AD17ED881731058400943C33 /* RHCStationCell.m in Sources */,
 				AD17ED891731058400943C33 /* RHCStationInfo.m in Sources */,
