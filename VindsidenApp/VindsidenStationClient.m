@@ -6,7 +6,6 @@
 //  Copyright 2010 Shortcut AS. All rights reserved.
 //
 
-#import "RHCAppDelegate.h"
 #import "VindsidenStationClient.h"
 #import "NSString+fixDateString.h"
 

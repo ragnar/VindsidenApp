@@ -8,7 +8,6 @@
 
 #import "RHCViewController.h"
 #import "RHCStationCell.h"
-#import "RHEStationDetailsViewController.h"
 #import "RHEGraphView.h"
 
 #import "RHEVindsidenAPIClient.h"
