@@ -3,5 +3,8 @@
 //
 
 #import "RHEVindsidenAPIClient.h"
-#import "RHCAppDelegate.h"
+#import "RHCViewController.h"
 #import "RHEGraphView.h"
+
+#import <AFNetworking/AFNetworkActivityIndicatorManager.h>
+#import <JTSImageViewController/JTSImageViewController.h>
