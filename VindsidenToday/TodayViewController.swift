@@ -116,15 +116,19 @@ class TodayViewController: UITableViewController, NCWidgetProviding, NSFetchedRe
 
                 if let realUnit = unit {
                     let speed = plot.windAvg.speedConvertionTo(realUnit)
-                    cell.speedLabel!.text = "\(speedFormatter.stringFromNumber(speed)) \(NSNumber.shortUnitNameString(realUnit))"
+                    if let speedString = speedFormatter.stringFromNumber(speed) {
+                        cell.speedLabel.text = "\(speedString) \(NSNumber.shortUnitNameString(realUnit))"
+                    } else {
+                        cell.speedLabel.text = "—.—"
+                    }
                 }
-                cell.arrowImageView!.image = image
-                cell.updatedLabel!.text = dateTransformer.transformedValue(plot.plotTime) as? String
+                cell.arrowImageView.image = image
+                cell.updatedLabel.text = dateTransformer.transformedValue(plot.plotTime) as? String
             } else {
-                cell.speedLabel!.text = "—.—"
-                cell.updatedLabel?.text = NSLocalizedString("LABEL_NOT_UPDATED", tableName: nil, bundle: NSBundle.mainBundle(), value: "LABEL_NOT_UPDATED", comment: "Not updated")
+                cell.speedLabel.text = "—.—"
+                cell.updatedLabel.text = NSLocalizedString("LABEL_NOT_UPDATED", tableName: nil, bundle: NSBundle.mainBundle(), value: "LABEL_NOT_UPDATED", comment: "Not updated")
             }
-            cell.nameLabel!.text = stationInfo.stationName
+            cell.nameLabel.text = stationInfo.stationName
             return cell
         }
     }
