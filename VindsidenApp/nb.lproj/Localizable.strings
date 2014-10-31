@@ -1,5 +1,5 @@
-/* (No Commment) */
-"%@ version %@" = "%1$@ versjon %2$@";
+/* Version string in settings view */
+"%@ version %@.%@" = "%@ versjon %@.%@";
 
 /* New stations found. Go to settings to view them */
 "ALERT_NEW_STATIONS_FOUND" = "Nye værstasjoner lastet ned. Gå til settings for å se på dem.";
@@ -159,9 +159,6 @@
 
 /* (No Commment) */
 "Visible" = "Synlig";
-
-/* Version string in settings view */
-"%@ version %@.%@" = "%@ versjon %@.%@";
 
 /* (No Commment) */
 "bft" = "bft";

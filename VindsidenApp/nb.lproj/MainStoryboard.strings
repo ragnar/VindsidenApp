@@ -31,8 +31,11 @@
 /* Class = "IBUILabel"; text = "Label"; ObjectID = "LRv-Ay-aga"; */
 "LRv-Ay-aga.text" = "Label";
 
-/* Class = "IBUILabel"; text = "Detail"; ObjectID = "LfC-8v-xhT"; */
+/* (No Commment) */
 "LfC-8v-xhT.text" = "Detail";
+
+/* Class = "IBUILabel"; text = "Header"; ObjectID = "Md2-ug-Xzs"; */
+"Md2-ug-Xzs.text" = "Header";
 
 /* Class = "IBUILabel"; text = "Title"; ObjectID = "OCw-xJ-J7L"; */
 "OCw-xJ-J7L.text" = "Title";
@@ -61,7 +64,10 @@
 /* Class = "IBUILabel"; text = "Title"; ObjectID = "gvw-Yl-x7e"; */
 "gvw-Yl-x7e.text" = "Title";
 
-/* Class = "IBUILabel"; text = "Title"; ObjectID = "jJ9-mm-uE4"; */
+/* Class = "IBUILabel"; text = "Details"; ObjectID = "jGW-4Z-Yha"; */
+"jGW-4Z-Yha.text" = "Detaljer";
+
+/* (No Commment) */
 "jJ9-mm-uE4.text" = "Title";
 
 /* (No Commment) */
