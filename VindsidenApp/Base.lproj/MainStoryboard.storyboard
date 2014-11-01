@@ -487,11 +487,10 @@
         <scene sceneID="zUe-fO-jd3">
             <objects>
                 <tableViewController storyboardIdentifier="RHEStationDetailsViewController" id="Dq9-g0-ifY" customClass="RHEStationDetailsViewController" sceneMemberID="viewController">
-                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="TGy-pq-7GV">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="TGy-pq-7GV">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <inset key="separatorInset" minX="20" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="StationDetailsCell" rowHeight="50" id="U0H-Z2-vlo" customClass="RHCDStationDetailsCell" customModule="VindsidenApp" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="86" width="320" height="44"/>
@@ -527,7 +526,7 @@
                                         <constraint firstItem="YQi-6u-bX2" firstAttribute="leading" secondItem="Sxy-4S-ueg" secondAttribute="leading" id="Adw-lX-5hP"/>
                                         <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Md2-ug-Xzs" secondAttribute="trailing" constant="10" id="EzM-OB-89l"/>
                                         <constraint firstItem="jGW-4Z-Yha" firstAttribute="top" secondItem="Md2-ug-Xzs" secondAttribute="bottom" constant="4" id="LP8-bX-Ags"/>
-                                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="jGW-4Z-Yha" secondAttribute="trailing" constant="10" id="P02-s2-M8r"/>
+                                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="jGW-4Z-Yha" secondAttribute="trailing" constant="20" id="P02-s2-M8r"/>
                                         <constraint firstAttribute="bottom" secondItem="jGW-4Z-Yha" secondAttribute="bottom" constant="4" id="Sfa-x6-jKR"/>
                                         <constraint firstAttribute="bottom" secondItem="YQi-6u-bX2" secondAttribute="bottom" id="dXu-Sg-k3B"/>
                                         <constraint firstItem="Md2-ug-Xzs" firstAttribute="top" secondItem="Sxy-4S-ueg" secondAttribute="top" constant="4" id="nVR-cj-ewN"/>

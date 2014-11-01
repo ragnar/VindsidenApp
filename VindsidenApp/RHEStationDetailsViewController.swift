@@ -47,9 +47,6 @@ import VindsidenKit
             }
         }
 
-        let v = UIView(frame: CGRectMake(0.0, -6.0, 320.0, 30.0))
-        v.backgroundColor = self.tableView.backgroundColor;
-        self.tableView.tableFooterView = v;
         self.tableView.rowHeight = UITableViewAutomaticDimension
 
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("preferredContentSizeDidChange:"), name: UIContentSizeCategoryDidChangeNotification, object: nil)
