@@ -506,7 +506,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Details" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jGW-4Z-Yha">
-                                            <rect key="frame" x="20" y="26" width="49.5" height="19.5"/>
+                                            <rect key="frame" x="20" y="26" width="280" height="19.5"/>
                                             <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
@@ -526,7 +526,7 @@
                                         <constraint firstItem="YQi-6u-bX2" firstAttribute="leading" secondItem="Sxy-4S-ueg" secondAttribute="leading" id="Adw-lX-5hP"/>
                                         <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Md2-ug-Xzs" secondAttribute="trailing" constant="10" id="EzM-OB-89l"/>
                                         <constraint firstItem="jGW-4Z-Yha" firstAttribute="top" secondItem="Md2-ug-Xzs" secondAttribute="bottom" constant="4" id="LP8-bX-Ags"/>
-                                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="jGW-4Z-Yha" secondAttribute="trailing" constant="20" id="P02-s2-M8r"/>
+                                        <constraint firstAttribute="trailing" secondItem="jGW-4Z-Yha" secondAttribute="trailing" constant="20" id="P02-s2-M8r"/>
                                         <constraint firstAttribute="bottom" secondItem="jGW-4Z-Yha" secondAttribute="bottom" constant="4" id="Sfa-x6-jKR"/>
                                         <constraint firstAttribute="bottom" secondItem="YQi-6u-bX2" secondAttribute="bottom" id="dXu-Sg-k3B"/>
                                         <constraint firstItem="Md2-ug-Xzs" firstAttribute="top" secondItem="Sxy-4S-ueg" secondAttribute="top" constant="4" id="nVR-cj-ewN"/>
