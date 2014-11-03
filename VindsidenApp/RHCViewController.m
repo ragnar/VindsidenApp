@@ -608,6 +608,7 @@ static NSString *kCellID = @"stationCellID";
                                };
 
     userActivity.title = cell.currentStation.stationName;
+    userActivity.webpageURL = [NSURL URLWithString:[NSString stringWithFormat:@"http://vindsiden.no/default.aspx?id=%@", cell.currentStation.stationId]];
     [userActivity addUserInfoEntriesFromDictionary:userInfo];
 }
 
