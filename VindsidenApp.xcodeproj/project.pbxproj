@@ -63,6 +63,7 @@
 		ADA2351C1A040839006A72D4 /* RHCDStationDetailsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADA2351B1A040839006A72D4 /* RHCDStationDetailsCell.swift */; };
 		ADB5A78A19DEC29A009AE4A5 /* DrawArrow.h in Headers */ = {isa = PBXBuildFile; fileRef = ADB5A78819DEC29A009AE4A5 /* DrawArrow.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		ADB5A78B19DEC29A009AE4A5 /* DrawArrow.m in Sources */ = {isa = PBXBuildFile; fileRef = ADB5A78919DEC29A009AE4A5 /* DrawArrow.m */; };
+		ADBEA4CF1A07ECF600B168BF /* UIColor+AppColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADBEA4CE1A07ECF600B168BF /* UIColor+AppColors.swift */; };
 		ADC8CB8A196D5FE200D167CD /* VindsidenPlotClient.m in Sources */ = {isa = PBXBuildFile; fileRef = AD17ED9D1731066F00943C33 /* VindsidenPlotClient.m */; };
 		ADC8CB8B196D5FE600D167CD /* VindsidenStationClient.m in Sources */ = {isa = PBXBuildFile; fileRef = AD17EDA11731066F00943C33 /* VindsidenStationClient.m */; };
 		ADC8CB8C196D5FEA00D167CD /* RHEVindsidenAPIClient.m in Sources */ = {isa = PBXBuildFile; fileRef = AD17EDB417310C5A00943C33 /* RHEVindsidenAPIClient.m */; };
@@ -288,6 +289,7 @@
 		ADA2351B1A040839006A72D4 /* RHCDStationDetailsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RHCDStationDetailsCell.swift; sourceTree = "<group>"; };
 		ADB5A78819DEC29A009AE4A5 /* DrawArrow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DrawArrow.h; sourceTree = "<group>"; };
 		ADB5A78919DEC29A009AE4A5 /* DrawArrow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DrawArrow.m; sourceTree = "<group>"; };
+		ADBEA4CE1A07ECF600B168BF /* UIColor+AppColors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+AppColors.swift"; sourceTree = "<group>"; };
 		ADCD423C196E4E42004973E9 /* NSNumber+Between.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSNumber+Between.h"; sourceTree = "<group>"; };
 		ADCD423D196E4E42004973E9 /* NSNumber+Between.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSNumber+Between.m"; sourceTree = "<group>"; };
 		ADCD423E196E4E42004973E9 /* NSNumber+Convertion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSNumber+Convertion.h"; sourceTree = "<group>"; };
@@ -600,6 +602,7 @@
 				AD7AA500196E46BA00B1518B /* CDStation.m */,
 				AD539CA11947B5CA002644BD /* VindsidenKit.h */,
 				AD539CC61947B684002644BD /* Datamanager.swift */,
+				ADBEA4CE1A07ECF600B168BF /* UIColor+AppColors.swift */,
 				AD539C9F1947B5CA002644BD /* Supporting Files */,
 			);
 			path = VindsidenKit;
@@ -1040,6 +1043,7 @@
 				AD539CC71947B684002644BD /* Datamanager.swift in Sources */,
 				ADB5A78B19DEC29A009AE4A5 /* DrawArrow.m in Sources */,
 				AD7AA504196E46BA00B1518B /* CDStation.m in Sources */,
+				ADBEA4CF1A07ECF600B168BF /* UIColor+AppColors.swift in Sources */,
 				ADCD424F196E4E42004973E9 /* NSNumber+Between.m in Sources */,
 				ADCD4255196E4E42004973E9 /* NSSet+Sort.m in Sources */,
 				ADCD4259196E4E42004973E9 /* NSString+isNumeric.m in Sources */,
