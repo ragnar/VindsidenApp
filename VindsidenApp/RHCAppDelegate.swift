@@ -121,4 +121,29 @@ class RHCAppDelegate: UIResponder, UIApplicationDelegate {
 
         return true
     }
+
+    // MARK: - NSUserActivity
+
+    func application(application: UIApplication, willContinueUserActivityWithType userActivityType: String) -> Bool {
+        return true
+    }
+
+
+    func application(application: UIApplication, continueUserActivity userActivity: NSUserActivity, restorationHandler: ([AnyObject]!) -> Void) -> Bool {
+        NSLog("Activity: \(userActivity.userInfo)")
+
+        if let userInfo = userActivity.userInfo {
+            if let urlString = userInfo["urlToActivate"] as? String {
+                let url = NSURL(string: urlString)
+                let success = openLaunchOptionsURL(url!)
+                return success
+            }
+        }
+        return false
+    }
+
+    
+    func application(application: UIApplication, didFailToContinueUserActivityWithType userActivityType: String, error: NSError) {
+        print("did fail to continue: \(userActivityType), \(error)")
+    }
 }

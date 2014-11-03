@@ -43,6 +43,10 @@
 	<string>44</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSUserActivityTypes</key>
+	<array>
+		<string>org.juniks.${PRODUCT_NAME:rfc1034identifier}</string>
+	</array>
 	<key>UIAppFonts</key>
 	<array>
 		<string>DINMittelschriftStd.otf</string>

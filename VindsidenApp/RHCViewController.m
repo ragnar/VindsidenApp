@@ -18,7 +18,7 @@
 
 static NSString *kCellID = @"stationCellID";
 
-@interface RHCViewController ()
+@interface RHCViewController ()<NSUserActivityDelegate>
 
 @property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
 @property (weak, nonatomic) MotionJpegImageView *cameraView;
@@ -116,6 +116,7 @@ static NSString *kCellID = @"stationCellID";
     }
 
     [self beginObservingOrientation];
+    [self saveActivity];
 }
 
 
@@ -270,6 +271,7 @@ static NSString *kCellID = @"stationCellID";
                              [[Datamanager sharedManager].sharedDefaults synchronize];
                              [self updateCameraButton:YES];
                              self.pageControl.currentPage = indexPath.row;
+                             [self saveActivity];
                          }
          ];
     }
@@ -586,5 +588,42 @@ static NSString *kCellID = @"stationCellID";
     [[UIDevice currentDevice] endGeneratingDeviceOrientationNotifications];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIDeviceOrientationDidChangeNotification object:nil];
 }
+
+
+#pragma mark - NSUserActivity
+
+
+- (void)userActivityWasContinued:(NSUserActivity *)userActivity
+{
+    DLOG(@"continued on other device");
+}
+
+
+- (void)updateUserActivityState:(NSUserActivity *)userActivity
+{
+    RHCStationCell *cell = [self.collectionView visibleCells][0];
+    NSString *urlString = [NSString stringWithFormat:@"vindsiden://station/%@", cell.currentStation.stationId];
+    NSDictionary *userInfo = @{
+                               @"urlToActivate" : urlString
+                               };
+
+    userActivity.title = cell.currentStation.stationName;
+    [userActivity addUserInfoEntriesFromDictionary:userInfo];
+}
+
+
+- (void)saveActivity
+{
+    NSUserActivity *userActivity = self.userActivity;
+
+    if (userActivity == nil) {
+        userActivity = [[NSUserActivity alloc] initWithActivityType:[[NSBundle mainBundle] bundleIdentifier]];
+        userActivity.delegate = self;
+    }
+
+    userActivity.needsSave = YES;
+    self.userActivity = userActivity;
+}
+
 
 @end
