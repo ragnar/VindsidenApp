@@ -231,7 +231,7 @@ import VindsidenKit
 
             imageInfo.referenceView = self.view
 
-            let controller = JTSImageViewController(imageInfo: imageInfo, mode: .Image, backgroundStyle: ._ScaledDimmedBlurred)
+            let controller = JTSImageViewController(imageInfo: imageInfo, mode: .Image, backgroundStyle: .Blurred | .Scaled)
             controller.showFromViewController(self, transition: ._FromOriginalPosition)
         }
         

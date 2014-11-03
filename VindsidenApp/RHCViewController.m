@@ -449,7 +449,7 @@ static NSString *kCellID = @"stationCellID";
 
         JTSImageViewController *controller = [[JTSImageViewController alloc] initWithImageInfo:imageInfo
                                                                                           mode:JTSImageViewControllerMode_Image
-                                                                               backgroundStyle:JTSImageViewControllerBackgroundStyle_ScaledDimmedBlurred];
+                                                                               backgroundStyle:JTSImageViewControllerBackgroundOption_Blurred|JTSImageViewControllerBackgroundOption_Scaled];
 
         [controller showFromViewController:self transition:JTSImageViewControllerTransition_FromOriginalPosition];
     }
