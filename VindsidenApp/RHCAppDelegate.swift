@@ -19,7 +19,7 @@ class RHCAppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         AFNetworkActivityIndicatorManager.sharedManager().enabled = true
 
-//        self.window.tintColor = RGBCOLOR( 227.0, 60.0, 13.0);
+        self.window?.tintColor = UIColor.vindsidenGloablTintColor()
 
         if Datamanager.sharedManager().sharedDefaults.integerForKey("selectedUnit") == 0 {
             Datamanager.sharedManager().sharedDefaults.setInteger(SpeedConvertion.ToMetersPerSecond.rawValue, forKey: "selectedUnit")
