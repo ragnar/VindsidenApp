@@ -10,6 +10,13 @@ import UIKit
 import VindsidenKit
 
 
+func DLOG( message: String, file: String = __FILE__, function: String = __FUNCTION__, line: Int = __LINE__ ) {
+//    #if Debug
+//        NSLog("([\(file.lastPathComponent) \(function)] line: \(line)) \(message)")
+//    #endif
+}
+
+
 @UIApplicationMain
 class RHCAppDelegate: UIResponder, UIApplicationDelegate {
 
@@ -78,8 +85,7 @@ class RHCAppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(application: UIApplication, performFetchWithCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
-        let nc = self.window?.rootViewController as UINavigationController
-        if let vc = nc.viewControllers.first as? RHCViewController {
+        if let vc = primaryViewController() {
             vc.updateContentWithCompletionHandler(completionHandler)
         }
     }
@@ -109,7 +115,7 @@ class RHCAppDelegate: UIResponder, UIApplicationDelegate {
 
 
         let nc = self.window?.rootViewController as? UINavigationController
-        let controller = nc?.viewControllers.first as? RHCViewController
+        let controller = primaryViewController()
 
         if let pc = nc?.presentedViewController {
             nc?.dismissViewControllerAnimated(false, completion: { () -> Void in
@@ -130,7 +136,7 @@ class RHCAppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(application: UIApplication, continueUserActivity userActivity: NSUserActivity, restorationHandler: ([AnyObject]!) -> Void) -> Bool {
-        NSLog("Activity: \(userActivity.userInfo)")
+        DLOG("Activity: \(userActivity.userInfo)")
 
         if let userInfo = userActivity.userInfo {
             if let urlString = userInfo["urlToActivate"] as? String {
@@ -144,6 +150,13 @@ class RHCAppDelegate: UIResponder, UIApplicationDelegate {
 
     
     func application(application: UIApplication, didFailToContinueUserActivityWithType userActivityType: String, error: NSError) {
-        print("did fail to continue: \(userActivityType), \(error)")
+        DLOG("did fail to continue: \(userActivityType), \(error)")
+    }
+
+
+    func primaryViewController() -> RHCViewController? {
+        let nc = self.window?.rootViewController as? UINavigationController
+        let controller = nc?.viewControllers.first as? RHCViewController
+        return controller
     }
 }
