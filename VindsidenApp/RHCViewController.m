@@ -89,6 +89,7 @@ static NSString *kCellID = @"stationCellID";
         if ( success ) {
             [self updateStations:stations];
             [self updateCameraButton:YES];
+            [self saveActivity];
         }
     }
                                                     error:^(NSError *error) {
@@ -116,7 +117,6 @@ static NSString *kCellID = @"stationCellID";
     }
 
     [self beginObservingOrientation];
-    [self saveActivity];
 }
 
 
@@ -335,6 +335,7 @@ static NSString *kCellID = @"stationCellID";
         case NSFetchedResultsChangeMove:
             [self.collectionView reloadData];
             self.pageControl.numberOfPages = [CDStation numberOfVisibleStations];
+            [self saveActivity];
             break;
         case NSFetchedResultsChangeUpdate:
             break;
@@ -601,15 +602,17 @@ static NSString *kCellID = @"stationCellID";
 
 - (void)updateUserActivityState:(NSUserActivity *)userActivity
 {
-    RHCStationCell *cell = [self.collectionView visibleCells][0];
-    NSString *urlString = [NSString stringWithFormat:@"vindsiden://station/%@", cell.currentStation.stationId];
-    NSDictionary *userInfo = @{
-                               @"urlToActivate" : urlString
-                               };
+    if ( [self.collectionView visibleCells].count > 0 ) {
+        RHCStationCell *cell = [self.collectionView visibleCells][0];
+        NSString *urlString = [NSString stringWithFormat:@"vindsiden://station/%@", cell.currentStation.stationId];
+        NSDictionary *userInfo = @{
+                                   @"urlToActivate" : urlString
+                                   };
 
-    userActivity.title = cell.currentStation.stationName;
-    userActivity.webpageURL = [NSURL URLWithString:[NSString stringWithFormat:@"http://vindsiden.no/default.aspx?id=%@", cell.currentStation.stationId]];
-    [userActivity addUserInfoEntriesFromDictionary:userInfo];
+        userActivity.title = cell.currentStation.stationName;
+        userActivity.webpageURL = [NSURL URLWithString:[NSString stringWithFormat:@"http://vindsiden.no/default.aspx?id=%@", cell.currentStation.stationId]];
+        [userActivity addUserInfoEntriesFromDictionary:userInfo];
+    }
 }
 
 
