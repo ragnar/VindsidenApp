@@ -118,6 +118,8 @@ class TodayViewController: UITableViewController, NCWidgetProviding, NSFetchedRe
                     let speed = plot.windAvg.speedConvertionTo(realUnit)
                     if let speedString = speedFormatter.stringFromNumber(speed) {
                         cell.speedLabel.text = "\(speedString) \(NSNumber.shortUnitNameString(realUnit))"
+                        cell.speedLabel.text = speedString
+                        cell.unitLabel.text = NSNumber.shortUnitNameString(realUnit)
                     } else {
                         cell.speedLabel.text = "—.—"
                     }
