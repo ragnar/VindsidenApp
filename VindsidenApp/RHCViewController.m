@@ -8,7 +8,6 @@
 
 #import "RHCViewController.h"
 #import "RHCStationCell.h"
-#import "RHEStationDetailsViewController.h"
 #import "RHEGraphView.h"
 
 #import "RHEVindsidenAPIClient.h"
@@ -19,7 +18,7 @@
 
 static NSString *kCellID = @"stationCellID";
 
-@interface RHCViewController ()
+@interface RHCViewController ()<NSUserActivityDelegate>
 
 @property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
 @property (weak, nonatomic) MotionJpegImageView *cameraView;
@@ -90,6 +89,7 @@ static NSString *kCellID = @"stationCellID";
         if ( success ) {
             [self updateStations:stations];
             [self updateCameraButton:YES];
+            [self saveActivity];
         }
     }
                                                     error:^(NSError *error) {
@@ -176,12 +176,6 @@ static NSString *kCellID = @"stationCellID";
         RHEStationDetailsViewController *controller = navCon.viewControllers[0];
         controller.delegate = self;
         controller.station = cell.currentStation;
-    } else if ([segue.identifier isEqualToString:@"ShowWebCam"]) {
-        RHEWebCamViewController *controller = segue.destinationViewController;
-        controller.webCamURL = [NSURL URLWithString:cell.currentStation.webCamImage];
-        controller.stationName = cell.currentStation.stationName;
-        controller.permitText = cell.currentStation.webCamText;
-        controller.delegate = self;
     } else if ( [segue.identifier isEqualToString:@"PresentGraphLandscape"] ) {
         RHCLandscapeGraphViewController *controller = segue.destinationViewController;
         controller.plots = cell.graphView.plots;
@@ -277,6 +271,7 @@ static NSString *kCellID = @"stationCellID";
                              [[Datamanager sharedManager].sharedDefaults synchronize];
                              [self updateCameraButton:YES];
                              self.pageControl.currentPage = indexPath.row;
+                             [self saveActivity];
                          }
          ];
     }
@@ -340,6 +335,7 @@ static NSString *kCellID = @"stationCellID";
         case NSFetchedResultsChangeMove:
             [self.collectionView reloadData];
             self.pageControl.numberOfPages = [CDStation numberOfVisibleStations];
+            [self saveActivity];
             break;
         case NSFetchedResultsChangeUpdate:
             break;
@@ -456,7 +452,7 @@ static NSString *kCellID = @"stationCellID";
 
         JTSImageViewController *controller = [[JTSImageViewController alloc] initWithImageInfo:imageInfo
                                                                                           mode:JTSImageViewControllerMode_Image
-                                                                               backgroundStyle:JTSImageViewControllerBackgroundStyle_ScaledDimmedBlurred];
+                                                                               backgroundStyle:JTSImageViewControllerBackgroundOption_Blurred|JTSImageViewControllerBackgroundOption_Scaled];
 
         [controller showFromViewController:self transition:JTSImageViewControllerTransition_FromOriginalPosition];
     }
@@ -475,15 +471,6 @@ static NSString *kCellID = @"stationCellID";
 
 
 - (void)rheStationDetailsViewControllerDidFinish:(RHEStationDetailsViewController *)controller
-{
-    [self dismissViewControllerAnimated:YES completion:nil];
-}
-
-
-#pragma mark - WebCam Delegate
-
-
-- (void)rheWebCamViewDidFinish:(RHEWebCamViewController *)controller
 {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
@@ -602,5 +589,45 @@ static NSString *kCellID = @"stationCellID";
     [[UIDevice currentDevice] endGeneratingDeviceOrientationNotifications];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIDeviceOrientationDidChangeNotification object:nil];
 }
+
+
+#pragma mark - NSUserActivity
+
+
+- (void)userActivityWasContinued:(NSUserActivity *)userActivity
+{
+    DLOG(@"continued on other device");
+}
+
+
+- (void)updateUserActivityState:(NSUserActivity *)userActivity
+{
+    if ( [self.collectionView visibleCells].count > 0 ) {
+        RHCStationCell *cell = [self.collectionView visibleCells][0];
+        NSString *urlString = [NSString stringWithFormat:@"vindsiden://station/%@", cell.currentStation.stationId];
+        NSDictionary *userInfo = @{
+                                   @"urlToActivate" : urlString
+                                   };
+
+        userActivity.title = cell.currentStation.stationName;
+        userActivity.webpageURL = [NSURL URLWithString:[NSString stringWithFormat:@"http://vindsiden.no/default.aspx?id=%@", cell.currentStation.stationId]];
+        [userActivity addUserInfoEntriesFromDictionary:userInfo];
+    }
+}
+
+
+- (void)saveActivity
+{
+    NSUserActivity *userActivity = self.userActivity;
+
+    if (userActivity == nil) {
+        userActivity = [[NSUserActivity alloc] initWithActivityType:[[NSBundle mainBundle] bundleIdentifier]];
+        userActivity.delegate = self;
+    }
+
+    userActivity.needsSave = YES;
+    self.userActivity = userActivity;
+}
+
 
 @end

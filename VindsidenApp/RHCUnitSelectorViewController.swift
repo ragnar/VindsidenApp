@@ -47,8 +47,8 @@ class RHCUnitSelectorViewController : UITableViewController
     {
         let cell = tableView.dequeueReusableCellWithIdentifier("UnitCell", forIndexPath: indexPath) as UITableViewCell
 
-        let unit = SpeedConvertion.fromRaw(indexPath.row+1)
-        cell.textLabel?.text = NSNumber.longUnitNameString(unit!)
+        let unit = SpeedConvertion(rawValue: indexPath.row+1)
+        cell.textLabel.text = NSNumber.longUnitNameString(unit!)
 
         if Datamanager.sharedManager().sharedDefaults.integerForKey("selectedUnit") == indexPath.row+1 {
             cell.accessoryType = .Checkmark;
@@ -61,7 +61,7 @@ class RHCUnitSelectorViewController : UITableViewController
 
     override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath)
     {
-        cell.textLabel?.font = UIFont.preferredFontForTextStyle((cell.textLabel!.font.fontDescriptor().objectForKey("NSCTFontUIUsageAttribute") as String))
+        cell.textLabel.font = UIFont.preferredFontForTextStyle((cell.textLabel.font.fontDescriptor().objectForKey("NSCTFontUIUsageAttribute") as String))
     }
 
 

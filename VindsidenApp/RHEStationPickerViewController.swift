@@ -63,13 +63,13 @@ class RHEStationPickerViewController : UITableViewController, NSFetchedResultsCo
     func configureCell( cell: UITableViewCell, atIndexPath indexPath: NSIndexPath)
     {
         let station = fetchedResultsController.objectAtIndexPath(indexPath) as CDStation
-        cell.textLabel?.text = station.stationName;
+        cell.textLabel.text = station.stationName;
         cell.detailTextLabel?.text = station.city;
 
         if station.isHidden.boolValue {
-            cell.imageView?.image = UIImage(named: "uncheckmark_icon", inBundle: nil, compatibleWithTraitCollection: self.traitCollection)
+            cell.imageView.image = UIImage(named: "uncheckmark_icon", inBundle: nil, compatibleWithTraitCollection: self.traitCollection)
         } else {
-            cell.imageView?.image = UIImage(named: "checkmark_icon", inBundle: nil, compatibleWithTraitCollection: self.traitCollection)
+            cell.imageView.image = UIImage(named: "checkmark_icon", inBundle: nil, compatibleWithTraitCollection: self.traitCollection)
         }
     }
 
@@ -156,8 +156,8 @@ class RHEStationPickerViewController : UITableViewController, NSFetchedResultsCo
 
     override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath)
     {
-        cell.textLabel!.font = UIFont.preferredFontForTextStyle((cell.textLabel!.font.fontDescriptor().objectForKey("NSCTFontUIUsageAttribute") as String))
-        cell.detailTextLabel!.font = UIFont.preferredFontForTextStyle((cell.detailTextLabel!.font.fontDescriptor().objectForKey("NSCTFontUIUsageAttribute") as String))
+        cell.textLabel.font = UIFont.preferredFontForTextStyle((cell.textLabel.font.fontDescriptor().objectForKey("NSCTFontUIUsageAttribute") as String))
+        cell.detailTextLabel?.font = UIFont.preferredFontForTextStyle((cell.detailTextLabel?.font.fontDescriptor().objectForKey("NSCTFontUIUsageAttribute") as String))
     }
 
 

@@ -7,13 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "RHEStationDetailsViewController.h"
-#import "RHEWebCamViewController.h"
-#import "RHCSettingsViewController.h"
+
+@protocol RHEStationDetailsDelegate;
+@protocol RHCSettingsDelegate;
+
+@import CoreData;
+@import VindsidenKit;
 
 
-
-@interface RHCViewController : UIViewController <UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, NSFetchedResultsControllerDelegate, RHEStationDetailsDelegate, RHEWebCamImageViewDelegate, RHCSettingsDelegate>
+@interface RHCViewController : UIViewController <UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, NSFetchedResultsControllerDelegate, RHEStationDetailsDelegate, RHCSettingsDelegate>
 
 
 - (void)updateContentWithCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler;

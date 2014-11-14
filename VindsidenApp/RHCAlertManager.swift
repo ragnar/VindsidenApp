@@ -54,7 +54,7 @@ class RHCAlertManager
             self.networkAlertController?.addAction(defaultAction)
 
             let appDelegate = UIApplication.sharedApplication().delegate as RHCAppDelegate
-            let controller = appDelegate.window.rootViewController
+            let controller = appDelegate.window?.rootViewController
 
             controller?.presentViewController(self.networkAlertController!, animated: true, completion: nil)
         })

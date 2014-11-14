@@ -101,7 +101,7 @@
 "miles/h" = "miles/h";
 
 /* Version string in settings view */
-"%@ version %@" = "%1$@ version %2$@";
+"%@ version %@.%@" = "%@ version %@.%@";
 
 /* No comment provided by engineer. */
 "Camera" = "Camera";

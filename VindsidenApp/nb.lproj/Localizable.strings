@@ -1,5 +1,5 @@
 /* Version string in settings view */
-"%@ version %@" = "%1$@ versjon %2$@";
+"%@ version %@.%@" = "%@ versjon %@.%@";
 
 /* New stations found. Go to settings to view them */
 "ALERT_NEW_STATIONS_FOUND" = "Nye værstasjoner lastet ned. Gå til settings for å se på dem.";

@@ -99,7 +99,7 @@ class TodayViewController: UITableViewController, NCWidgetProviding, NSFetchedRe
 
         if !showingAll && indexPath.row == TableViewConstants.baseRowCount &&  itemCount != TableViewConstants.baseRowCount + 1 {
             let cell = tableView.dequeueReusableCellWithIdentifier(TableViewConstants.CellIdentifiers.showall, forIndexPath: indexPath) as UITableViewCell
-            cell.textLabel!.text = NSLocalizedString("Show All...", tableName: nil, bundle: NSBundle.mainBundle(), value: "Show all...", comment: "Show all")
+            cell.textLabel.text = NSLocalizedString("Show All...", tableName: nil, bundle: NSBundle.mainBundle(), value: "Show all...", comment: "Show all")
             return cell
         } else {
             let cell = tableView.dequeueReusableCellWithIdentifier(TableViewConstants.CellIdentifiers.message, forIndexPath: indexPath) as RHCTodayCell
@@ -107,22 +107,28 @@ class TodayViewController: UITableViewController, NCWidgetProviding, NSFetchedRe
             let tmpplot: CDPlot? = stationInfo.lastRegisteredPlot()
 
             if let plot = tmpplot {
-                let image = DrawArrow.drawArrowAtAngle(plot.windDir, forSpeed: plot.windAvg, highlighted: false, color: UIColor.whiteColor(), hightlightedColor: UIColor.blackColor())
+                let winddir = CGFloat(plot.windDir.floatValue)
+                let windspeed = CGFloat(plot.windAvg.floatValue)
+                let image = DrawArrow.drawArrowAtAngle( winddir, forSpeed:windspeed, highlighted:false, color: UIColor.whiteColor(), hightlightedColor: UIColor.blackColor())
 
                 let raw = Datamanager.sharedManager().sharedDefaults.integerForKey("selectedUnit")
-                let unit = SpeedConvertion.fromRaw(raw)
+                let unit = SpeedConvertion(rawValue: raw)
 
                 if let realUnit = unit {
                     let speed = plot.windAvg.speedConvertionTo(realUnit)
-                    cell.speedLabel!.text = "\(speedFormatter.stringFromNumber(speed)) \(NSNumber.shortUnitNameString(realUnit))"
+                    if let speedString = speedFormatter.stringFromNumber(speed) {
+                        cell.speedLabel.text = "\(speedString) \(NSNumber.shortUnitNameString(realUnit))"
+                    } else {
+                        cell.speedLabel.text = "—.—"
+                    }
                 }
-                cell.arrowImageView!.image = image
-                cell.updatedLabel!.text = dateTransformer.transformedValue(plot.plotTime) as? String
+                cell.arrowImageView.image = image
+                cell.updatedLabel.text = dateTransformer.transformedValue(plot.plotTime) as? String
             } else {
-                cell.speedLabel!.text = "—.—"
-                cell.updatedLabel?.text = NSLocalizedString("LABEL_NOT_UPDATED", tableName: nil, bundle: NSBundle.mainBundle(), value: "LABEL_NOT_UPDATED", comment: "Not updated")
+                cell.speedLabel.text = "—.—"
+                cell.updatedLabel.text = NSLocalizedString("LABEL_NOT_UPDATED", tableName: nil, bundle: NSBundle.mainBundle(), value: "LABEL_NOT_UPDATED", comment: "Not updated")
             }
-            cell.nameLabel!.text = stationInfo.stationName
+            cell.nameLabel.text = stationInfo.stationName
             return cell
         }
     }
@@ -174,8 +180,10 @@ class TodayViewController: UITableViewController, NCWidgetProviding, NSFetchedRe
 
         let stationInfo = self.fetchedResultsController.objectAtIndexPath(indexPath) as CDStation
 
-        let url = NSURL.URLWithString("vindsiden://station/\(stationInfo.stationId)?todayView=1")
-        extensionContext?.openURL(url, completionHandler:  nil)
+        let url = NSURL(string: "vindsiden://station/\(stationInfo.stationId)?todayView=1")
+        if let actual = url {
+            extensionContext?.openURL( actual, completionHandler:  nil)
+        }
     }
 
     // MARK: - NSFetchedResultsController
@@ -264,7 +272,7 @@ class TodayViewController: UITableViewController, NCWidgetProviding, NSFetchedRe
     func showCellHeight() -> CGFloat
     {
         let infoCell = tableView.dequeueReusableCellWithIdentifier(TableViewConstants.CellIdentifiers.showall) as UITableViewCell
-        infoCell.textLabel?.text = "123"
+        infoCell.textLabel.text = "123"
         infoCell.layoutIfNeeded()
 
         let infoSize = infoCell.contentView.systemLayoutSizeFittingSize(UILayoutFittingCompressedSize)
