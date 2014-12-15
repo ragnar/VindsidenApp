@@ -99,7 +99,7 @@ class TodayViewController: UITableViewController, NCWidgetProviding, NSFetchedRe
 
         if !showingAll && indexPath.row == TableViewConstants.baseRowCount &&  itemCount != TableViewConstants.baseRowCount + 1 {
             let cell = tableView.dequeueReusableCellWithIdentifier(TableViewConstants.CellIdentifiers.showall, forIndexPath: indexPath) as UITableViewCell
-            cell.textLabel.text = NSLocalizedString("Show All...", tableName: nil, bundle: NSBundle.mainBundle(), value: "Show all...", comment: "Show all")
+            cell.textLabel?.text = NSLocalizedString("Show All...", tableName: nil, bundle: NSBundle.mainBundle(), value: "Show all...", comment: "Show all")
             return cell
         } else {
             let cell = tableView.dequeueReusableCellWithIdentifier(TableViewConstants.CellIdentifiers.message, forIndexPath: indexPath) as RHCTodayCell
@@ -274,7 +274,7 @@ class TodayViewController: UITableViewController, NCWidgetProviding, NSFetchedRe
     func showCellHeight() -> CGFloat
     {
         let infoCell = tableView.dequeueReusableCellWithIdentifier(TableViewConstants.CellIdentifiers.showall) as UITableViewCell
-        infoCell.textLabel.text = "123"
+        infoCell.textLabel?.text = "123"
         infoCell.layoutIfNeeded()
 
         let infoSize = infoCell.contentView.systemLayoutSizeFittingSize(UILayoutFittingCompressedSize)

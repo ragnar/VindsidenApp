@@ -93,7 +93,7 @@ class RHCAppDelegate: UIResponder, UIApplicationDelegate {
     // MARK: - 
 
     func openLaunchOptionsURL( url: NSURL) -> Bool {
-        let ident = url.pathComponents.last as String
+        let ident = url.pathComponents?.last as String
         var station: CDStation?
 
         if let stationId = ident.toInt() {

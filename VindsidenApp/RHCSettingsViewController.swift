@@ -48,12 +48,12 @@ import VindsidenKit
         let cell = tableView.dequeueReusableCellWithIdentifier("SettingsCell", forIndexPath: indexPath) as UITableViewCell
 
         if indexPath.row == 0 {
-            cell.textLabel.text = NSLocalizedString("Stations", comment: "")
+            cell.textLabel?.text = NSLocalizedString("Stations", comment: "")
             cell.detailTextLabel?.text = "\(CDStation.numberOfVisibleStations())"
         } else {
             let unit = SpeedConvertion(rawValue: Datamanager.sharedManager().sharedDefaults.integerForKey("selectedUnit"))
 
-            cell.textLabel.text = NSLocalizedString("Units", comment: "")
+            cell.textLabel?.text = NSLocalizedString("Units", comment: "")
             cell.detailTextLabel?.text = NSNumber.shortUnitNameString(unit!)
         }
 
