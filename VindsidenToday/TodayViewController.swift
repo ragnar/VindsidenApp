@@ -23,18 +23,18 @@ class TodayViewController: UITableViewController, NCWidgetProviding, NSFetchedRe
         }
     }
 
-    required init(coder aDecoder: NSCoder)
-    {
+    let dateTransformer = SORelativeDateTransformer()
+
+
+    required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
 
 
-    let dateTransformer = SORelativeDateTransformer()
-
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?)
-    {
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
     }
+
 
     var showingAll: Bool = false {
         didSet {
@@ -42,50 +42,41 @@ class TodayViewController: UITableViewController, NCWidgetProviding, NSFetchedRe
         }
     }
 
-    override func viewDidLoad()
-    {
+
+    override func viewDidLoad() {
         super.viewDidLoad()
 
         tableView.tableFooterView = UIView()
 
         resetContentSize()
         tableView.reloadData()
+        updateContentWithCompletionHandler()
     }
+
 
     // MARK: - NotificationCenter
 
-    func widgetMarginInsetsForProposedMarginInsets( defaultMarginInsets: UIEdgeInsets) -> UIEdgeInsets
-    {
+
+    func widgetMarginInsetsForProposedMarginInsets( defaultMarginInsets: UIEdgeInsets) -> UIEdgeInsets {
         return UIEdgeInsetsZero;
     }
 
 
-    func widgetPerformUpdateWithCompletionHandler(completionHandler: ((NCUpdateResult) -> Void)!)
-    {
-        // Perform any setup necessary in order to update the view.
-
-        // If an error is encoutered, use NCUpdateResult.Failed
-        // If there's no update required, use NCUpdateResult.NoData
-        // If there's an update, use NCUpdateResult.NewData
-
-        if 1 == 1 {
-            tableView.reloadData()
-            completionHandler(NCUpdateResult.NewData)
-        } else {
-            completionHandler(NCUpdateResult.NoData)
-        }
+    func widgetPerformUpdateWithCompletionHandler(completionHandler: ((NCUpdateResult) -> Void)!) {
+        updateContentWithCompletionHandler(completionHandler)
     }
+
 
     // MARK: - TableView
 
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int
-    {
+
+    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         let sections = fetchedResultsController.sections as Array!
         return sections.count;
     }
 
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int
-    {
+
+    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let sections = fetchedResultsController.sections as Array!
         let sectionInfo = sections[section] as NSFetchedResultsSectionInfo
 
@@ -93,8 +84,8 @@ class TodayViewController: UITableViewController, NCWidgetProviding, NSFetchedRe
         return rows
     }
 
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
-    {
+
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let itemCount = (fetchedResultsController.fetchedObjects as Array!).count
 
         if !showingAll && indexPath.row == TableViewConstants.baseRowCount &&  itemCount != TableViewConstants.baseRowCount + 1 {
@@ -135,8 +126,8 @@ class TodayViewController: UITableViewController, NCWidgetProviding, NSFetchedRe
         }
     }
 
-    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat
-    {
+
+    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         let itemCount = (fetchedResultsController.fetchedObjects as Array!).count
 
         if !showingAll && indexPath.row == TableViewConstants.baseRowCount &&  itemCount != TableViewConstants.baseRowCount + 1 {
@@ -147,15 +138,13 @@ class TodayViewController: UITableViewController, NCWidgetProviding, NSFetchedRe
     }
 
 
-    override func tableView(_: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath)
-    {
+    override func tableView(_: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
         cell.layer.backgroundColor = UIColor.clearColor().CGColor
         cell.configureSelectedBackgroundView()
     }
 
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath)
-    {
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
 
         if !showingAll && indexPath.row == TableViewConstants.baseRowCount {
@@ -188,7 +177,9 @@ class TodayViewController: UITableViewController, NCWidgetProviding, NSFetchedRe
         }
     }
 
+
     // MARK: - NSFetchedResultsController
+
 
     var fetchedResultsController: NSFetchedResultsController {
         if let actual = _fetchedResultsController {
@@ -220,20 +211,21 @@ class TodayViewController: UITableViewController, NCWidgetProviding, NSFetchedRe
         }
     }
 
+
     // MARK: -
 
-    lazy var speedFormatter : NSNumberFormatter = {
 
+    lazy var speedFormatter : NSNumberFormatter = {
         let _speedFormatter = NSNumberFormatter()
         _speedFormatter.numberStyle = NSNumberFormatterStyle.DecimalStyle
         _speedFormatter.maximumFractionDigits = 1
         _speedFormatter.minimumFractionDigits = 1
-        //_speedFormatter!.minimumSignificantDigits = 1
         _speedFormatter.notANumberSymbol = "—.—"
         _speedFormatter.nilSymbol = "—.—"
 
         return _speedFormatter
     }()
+
 
     func resetContentSize() {
         var preferredSize = preferredContentSize
@@ -242,8 +234,8 @@ class TodayViewController: UITableViewController, NCWidgetProviding, NSFetchedRe
         preferredContentSize = preferredSize
     }
 
-    var preferredViewHeight: CGFloat {
 
+    var preferredViewHeight: CGFloat {
         let infoHeight = infoCellHeight()
         let showHeight = showCellHeight()
         let itemCount = (fetchedResultsController.fetchedObjects as Array!).count
@@ -260,8 +252,8 @@ class TodayViewController: UITableViewController, NCWidgetProviding, NSFetchedRe
         }
     }
 
-    func infoCellHeight() -> CGFloat
-    {
+
+    func infoCellHeight() -> CGFloat {
         let infoCell = tableView.dequeueReusableCellWithIdentifier(TableViewConstants.CellIdentifiers.message) as RHCTodayCell
         infoCell.nameLabel?.text = "123"
         infoCell.updatedLabel?.text = "123"
@@ -271,8 +263,8 @@ class TodayViewController: UITableViewController, NCWidgetProviding, NSFetchedRe
         return infoSize.height
     }
 
-    func showCellHeight() -> CGFloat
-    {
+
+    func showCellHeight() -> CGFloat {
         let infoCell = tableView.dequeueReusableCellWithIdentifier(TableViewConstants.CellIdentifiers.showall) as UITableViewCell
         infoCell.textLabel?.text = "123"
         infoCell.layoutIfNeeded()
@@ -281,4 +273,42 @@ class TodayViewController: UITableViewController, NCWidgetProviding, NSFetchedRe
         return infoSize.height
     }
 
+
+    // MARK: - Fetch
+
+
+    func updateContentWithCompletionHandler(completionHandler: ((NCUpdateResult) -> Void)? = nil) {
+        if let count = fetchedResultsController.fetchedObjects?.count {
+            if count <= 0 {
+                completionHandler?(.NoData)
+                return;
+            }
+
+            var remaining = count
+
+            for station in fetchedResultsController.fetchedObjects? as [CDStation] {
+
+                let complete = { (success:Bool, plots: [AnyObject]!) -> Void in
+                    if success == true {
+                        CDPlot.updatePlots(plots, completion: nil)
+                    }
+
+                    remaining--
+
+                    if remaining == 0 {
+                        Logger.DLOG("Finished")
+                        completionHandler?(.NewData)
+                    }
+                }
+
+                let error = { (cancelled:Bool, error: NSError!) -> Void in
+                    Logger.DLOG("error: \(error)")
+                }
+
+                RHEVindsidenAPIClient.defaultManager().fetchStationsPlotsForStation(station.stationId, completion: complete, error: error)
+            }
+        } else {
+            completionHandler?(.NoData)
+        }
+    }
 }
