@@ -611,19 +611,12 @@
 		AD539C9E1947B5CA002644BD /* VindsidenKit */ = {
 			isa = PBXGroup;
 			children = (
-				AD7BBB461A3F53F400883770 /* Logger.swift */,
-				AD17EDDF173447EC00943C33 /* Communication */,
-				ADB5A78819DEC29A009AE4A5 /* DrawArrow.h */,
-				ADB5A78919DEC29A009AE4A5 /* DrawArrow.m */,
-				ADCD4260196E4E8A004973E9 /* Categories */,
-				AD7AA505196E46D800B1518B /* Vindsiden.xcdatamodeld */,
-				AD7AA4FD196E46BA00B1518B /* CDPlot.h */,
-				AD7AA4FE196E46BA00B1518B /* CDPlot.m */,
-				AD7AA4FF196E46BA00B1518B /* CDStation.h */,
-				AD7AA500196E46BA00B1518B /* CDStation.m */,
 				AD539CA11947B5CA002644BD /* VindsidenKit.h */,
-				AD539CC61947B684002644BD /* Datamanager.swift */,
-				ADBEA4CE1A07ECF600B168BF /* UIColor+AppColors.swift */,
+				AD7BBB4F1A40A01900883770 /* Managers */,
+				AD17EDDF173447EC00943C33 /* Communication */,
+				AD7BBB501A40A02600883770 /* Views */,
+				ADCD4260196E4E8A004973E9 /* Categories */,
+				AD7BBB4E1A409FF000883770 /* Data Model */,
 				AD539C9F1947B5CA002644BD /* Supporting Files */,
 			);
 			path = VindsidenKit;
@@ -657,9 +650,40 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		AD7BBB4E1A409FF000883770 /* Data Model */ = {
+			isa = PBXGroup;
+			children = (
+				AD7AA505196E46D800B1518B /* Vindsiden.xcdatamodeld */,
+				AD7AA4FD196E46BA00B1518B /* CDPlot.h */,
+				AD7AA4FE196E46BA00B1518B /* CDPlot.m */,
+				AD7AA4FF196E46BA00B1518B /* CDStation.h */,
+				AD7AA500196E46BA00B1518B /* CDStation.m */,
+			);
+			name = "Data Model";
+			sourceTree = "<group>";
+		};
+		AD7BBB4F1A40A01900883770 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				AD539CC61947B684002644BD /* Datamanager.swift */,
+				AD7BBB461A3F53F400883770 /* Logger.swift */,
+			);
+			name = Managers;
+			sourceTree = "<group>";
+		};
+		AD7BBB501A40A02600883770 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				ADB5A78819DEC29A009AE4A5 /* DrawArrow.h */,
+				ADB5A78919DEC29A009AE4A5 /* DrawArrow.m */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
 		ADCD4260196E4E8A004973E9 /* Categories */ = {
 			isa = PBXGroup;
 			children = (
+				ADBEA4CE1A07ECF600B168BF /* UIColor+AppColors.swift */,
 				ADCD423C196E4E42004973E9 /* NSNumber+Between.h */,
 				ADCD423D196E4E42004973E9 /* NSNumber+Between.m */,
 				ADCD423E196E4E42004973E9 /* NSNumber+Convertion.h */,
