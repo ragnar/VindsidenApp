@@ -64,6 +64,7 @@
 		AD7BBB431A3F539100883770 /* VindsidenPlotClient.m in Sources */ = {isa = PBXBuildFile; fileRef = AD7BBB3D1A3F539100883770 /* VindsidenPlotClient.m */; };
 		AD7BBB441A3F539100883770 /* VindsidenStationClient.h in Headers */ = {isa = PBXBuildFile; fileRef = AD7BBB3E1A3F539100883770 /* VindsidenStationClient.h */; };
 		AD7BBB451A3F539100883770 /* VindsidenStationClient.m in Sources */ = {isa = PBXBuildFile; fileRef = AD7BBB3F1A3F539100883770 /* VindsidenStationClient.m */; };
+		AD7BBB471A3F53F400883770 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD7BBB461A3F53F400883770 /* Logger.swift */; };
 		AD7BBB4C1A3F5A6800883770 /* RHEVindsidenAPIClient.h in Headers */ = {isa = PBXBuildFile; fileRef = AD7BBB4A1A3F5A6800883770 /* RHEVindsidenAPIClient.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AD7BBB4D1A3F5A6800883770 /* RHEVindsidenAPIClient.m in Sources */ = {isa = PBXBuildFile; fileRef = AD7BBB4B1A3F5A6800883770 /* RHEVindsidenAPIClient.m */; };
 		ADA0C64019C0EEBC00152005 /* Today.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ADA0C64219C0EEBC00152005 /* Today.storyboard */; };
@@ -290,6 +291,7 @@
 		AD7BBB3D1A3F539100883770 /* VindsidenPlotClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VindsidenPlotClient.m; path = VindsidenKit/VindsidenPlotClient.m; sourceTree = SOURCE_ROOT; };
 		AD7BBB3E1A3F539100883770 /* VindsidenStationClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VindsidenStationClient.h; path = VindsidenKit/VindsidenStationClient.h; sourceTree = SOURCE_ROOT; };
 		AD7BBB3F1A3F539100883770 /* VindsidenStationClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VindsidenStationClient.m; path = VindsidenKit/VindsidenStationClient.m; sourceTree = SOURCE_ROOT; };
+		AD7BBB461A3F53F400883770 /* Logger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		AD7BBB4A1A3F5A6800883770 /* RHEVindsidenAPIClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RHEVindsidenAPIClient.h; path = VindsidenKit/RHEVindsidenAPIClient.h; sourceTree = SOURCE_ROOT; };
 		AD7BBB4B1A3F5A6800883770 /* RHEVindsidenAPIClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RHEVindsidenAPIClient.m; path = VindsidenKit/RHEVindsidenAPIClient.m; sourceTree = SOURCE_ROOT; };
 		ADA0C64119C0EEBC00152005 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Today.storyboard; sourceTree = "<group>"; };
@@ -609,6 +611,7 @@
 		AD539C9E1947B5CA002644BD /* VindsidenKit */ = {
 			isa = PBXGroup;
 			children = (
+				AD7BBB461A3F53F400883770 /* Logger.swift */,
 				AD17EDDF173447EC00943C33 /* Communication */,
 				ADB5A78819DEC29A009AE4A5 /* DrawArrow.h */,
 				ADB5A78919DEC29A009AE4A5 /* DrawArrow.m */,
@@ -1083,6 +1086,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AD7BBB471A3F53F400883770 /* Logger.swift in Sources */,
 				ADCD425D196E4E42004973E9 /* UIFontDescriptor+textStyle.m in Sources */,
 				ADCD4257196E4E42004973E9 /* NSString+fixDateString.m in Sources */,
 				AD7AA502196E46BA00B1518B /* CDPlot.m in Sources */,
@@ -1287,6 +1291,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				ONLY_ACTIVE_ARCH = YES;
+				OTHER_SWIFT_FLAGS = "-DDebug";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
