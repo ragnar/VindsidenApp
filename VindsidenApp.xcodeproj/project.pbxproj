@@ -57,6 +57,14 @@
 		AD7AA503196E46BA00B1518B /* CDStation.h in Headers */ = {isa = PBXBuildFile; fileRef = AD7AA4FF196E46BA00B1518B /* CDStation.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AD7AA504196E46BA00B1518B /* CDStation.m in Sources */ = {isa = PBXBuildFile; fileRef = AD7AA500196E46BA00B1518B /* CDStation.m */; };
 		AD7AA507196E46D800B1518B /* Vindsiden.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = AD7AA505196E46D800B1518B /* Vindsiden.xcdatamodeld */; };
+		AD7BBB401A3F539100883770 /* RHEVindsidenAPIClientPrivate.h in Headers */ = {isa = PBXBuildFile; fileRef = AD7BBB3A1A3F539100883770 /* RHEVindsidenAPIClientPrivate.h */; };
+		AD7BBB411A3F539100883770 /* RHEVindsidenAPIClientPrivate.m in Sources */ = {isa = PBXBuildFile; fileRef = AD7BBB3B1A3F539100883770 /* RHEVindsidenAPIClientPrivate.m */; };
+		AD7BBB421A3F539100883770 /* VindsidenPlotClient.h in Headers */ = {isa = PBXBuildFile; fileRef = AD7BBB3C1A3F539100883770 /* VindsidenPlotClient.h */; };
+		AD7BBB431A3F539100883770 /* VindsidenPlotClient.m in Sources */ = {isa = PBXBuildFile; fileRef = AD7BBB3D1A3F539100883770 /* VindsidenPlotClient.m */; };
+		AD7BBB441A3F539100883770 /* VindsidenStationClient.h in Headers */ = {isa = PBXBuildFile; fileRef = AD7BBB3E1A3F539100883770 /* VindsidenStationClient.h */; };
+		AD7BBB451A3F539100883770 /* VindsidenStationClient.m in Sources */ = {isa = PBXBuildFile; fileRef = AD7BBB3F1A3F539100883770 /* VindsidenStationClient.m */; };
+		AD7BBB4C1A3F5A6800883770 /* RHEVindsidenAPIClient.h in Headers */ = {isa = PBXBuildFile; fileRef = AD7BBB4A1A3F5A6800883770 /* RHEVindsidenAPIClient.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AD7BBB4D1A3F5A6800883770 /* RHEVindsidenAPIClient.m in Sources */ = {isa = PBXBuildFile; fileRef = AD7BBB4B1A3F5A6800883770 /* RHEVindsidenAPIClient.m */; };
 		ADA0C64019C0EEBC00152005 /* Today.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ADA0C64219C0EEBC00152005 /* Today.storyboard */; };
 		ADA0C64719C0EF1A00152005 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = AD17EDC517312A5000943C33 /* Localizable.strings */; };
 		ADA2351A19FD69C6006A72D4 /* RHEStationDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADA2351919FD69C6006A72D4 /* RHEStationDetailsViewController.swift */; };
@@ -64,9 +72,6 @@
 		ADB5A78A19DEC29A009AE4A5 /* DrawArrow.h in Headers */ = {isa = PBXBuildFile; fileRef = ADB5A78819DEC29A009AE4A5 /* DrawArrow.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		ADB5A78B19DEC29A009AE4A5 /* DrawArrow.m in Sources */ = {isa = PBXBuildFile; fileRef = ADB5A78919DEC29A009AE4A5 /* DrawArrow.m */; };
 		ADBEA4CF1A07ECF600B168BF /* UIColor+AppColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADBEA4CE1A07ECF600B168BF /* UIColor+AppColors.swift */; };
-		ADC8CB8A196D5FE200D167CD /* VindsidenPlotClient.m in Sources */ = {isa = PBXBuildFile; fileRef = AD17ED9D1731066F00943C33 /* VindsidenPlotClient.m */; };
-		ADC8CB8B196D5FE600D167CD /* VindsidenStationClient.m in Sources */ = {isa = PBXBuildFile; fileRef = AD17EDA11731066F00943C33 /* VindsidenStationClient.m */; };
-		ADC8CB8C196D5FEA00D167CD /* RHEVindsidenAPIClient.m in Sources */ = {isa = PBXBuildFile; fileRef = AD17EDB417310C5A00943C33 /* RHEVindsidenAPIClient.m */; };
 		ADCD424E196E4E42004973E9 /* NSNumber+Between.h in Headers */ = {isa = PBXBuildFile; fileRef = ADCD423C196E4E42004973E9 /* NSNumber+Between.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		ADCD424F196E4E42004973E9 /* NSNumber+Between.m in Sources */ = {isa = PBXBuildFile; fileRef = ADCD423D196E4E42004973E9 /* NSNumber+Between.m */; };
 		ADCD4250196E4E42004973E9 /* NSNumber+Convertion.h in Headers */ = {isa = PBXBuildFile; fileRef = ADCD423E196E4E42004973E9 /* NSNumber+Convertion.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -234,12 +239,6 @@
 		AD17ED971731066E00943C33 /* RHEGraphMarker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RHEGraphMarker.m; sourceTree = "<group>"; };
 		AD17ED981731066E00943C33 /* RHEGraphView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RHEGraphView.h; sourceTree = "<group>"; };
 		AD17ED991731066E00943C33 /* RHEGraphView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RHEGraphView.m; sourceTree = "<group>"; };
-		AD17ED9C1731066F00943C33 /* VindsidenPlotClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VindsidenPlotClient.h; sourceTree = "<group>"; };
-		AD17ED9D1731066F00943C33 /* VindsidenPlotClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VindsidenPlotClient.m; sourceTree = "<group>"; };
-		AD17EDA01731066F00943C33 /* VindsidenStationClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VindsidenStationClient.h; sourceTree = "<group>"; };
-		AD17EDA11731066F00943C33 /* VindsidenStationClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VindsidenStationClient.m; sourceTree = "<group>"; };
-		AD17EDB317310C5A00943C33 /* RHEVindsidenAPIClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RHEVindsidenAPIClient.h; sourceTree = "<group>"; };
-		AD17EDB417310C5A00943C33 /* RHEVindsidenAPIClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RHEVindsidenAPIClient.m; sourceTree = "<group>"; };
 		AD17EDB617310E5300943C33 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		AD17EDB817310E5B00943C33 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		AD17EDBA17310E6200943C33 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -282,6 +281,14 @@
 		AD7AA4FF196E46BA00B1518B /* CDStation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDStation.h; sourceTree = "<group>"; };
 		AD7AA500196E46BA00B1518B /* CDStation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDStation.m; sourceTree = "<group>"; };
 		AD7AA506196E46D800B1518B /* Vindsiden.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Vindsiden.xcdatamodel; sourceTree = "<group>"; };
+		AD7BBB3A1A3F539100883770 /* RHEVindsidenAPIClientPrivate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RHEVindsidenAPIClientPrivate.h; path = VindsidenKit/RHEVindsidenAPIClientPrivate.h; sourceTree = SOURCE_ROOT; };
+		AD7BBB3B1A3F539100883770 /* RHEVindsidenAPIClientPrivate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RHEVindsidenAPIClientPrivate.m; path = VindsidenKit/RHEVindsidenAPIClientPrivate.m; sourceTree = SOURCE_ROOT; };
+		AD7BBB3C1A3F539100883770 /* VindsidenPlotClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VindsidenPlotClient.h; path = VindsidenKit/VindsidenPlotClient.h; sourceTree = SOURCE_ROOT; };
+		AD7BBB3D1A3F539100883770 /* VindsidenPlotClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VindsidenPlotClient.m; path = VindsidenKit/VindsidenPlotClient.m; sourceTree = SOURCE_ROOT; };
+		AD7BBB3E1A3F539100883770 /* VindsidenStationClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VindsidenStationClient.h; path = VindsidenKit/VindsidenStationClient.h; sourceTree = SOURCE_ROOT; };
+		AD7BBB3F1A3F539100883770 /* VindsidenStationClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VindsidenStationClient.m; path = VindsidenKit/VindsidenStationClient.m; sourceTree = SOURCE_ROOT; };
+		AD7BBB4A1A3F5A6800883770 /* RHEVindsidenAPIClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RHEVindsidenAPIClient.h; path = VindsidenKit/RHEVindsidenAPIClient.h; sourceTree = SOURCE_ROOT; };
+		AD7BBB4B1A3F5A6800883770 /* RHEVindsidenAPIClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RHEVindsidenAPIClient.m; path = VindsidenKit/RHEVindsidenAPIClient.m; sourceTree = SOURCE_ROOT; };
 		ADA0C64119C0EEBC00152005 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Today.storyboard; sourceTree = "<group>"; };
 		ADA0C64419C0EEC000152005 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Today.strings; sourceTree = "<group>"; };
 		ADA0C64619C0EEC200152005 /* nb */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nb; path = nb.lproj/Today.strings; sourceTree = "<group>"; };
@@ -431,7 +438,6 @@
 		AD17ED4D1731012200943C33 /* VindsidenApp */ = {
 			isa = PBXGroup;
 			children = (
-				AD17EDDF173447EC00943C33 /* Communication */,
 				AD17EDE11734482100943C33 /* Views */,
 				AD17EDE01734480300943C33 /* App Delegate */,
 				AD17EDE31734485A00943C33 /* Main View Controller */,
@@ -482,14 +488,17 @@
 		AD17EDDF173447EC00943C33 /* Communication */ = {
 			isa = PBXGroup;
 			children = (
-				AD17ED9C1731066F00943C33 /* VindsidenPlotClient.h */,
-				AD17ED9D1731066F00943C33 /* VindsidenPlotClient.m */,
-				AD17EDA01731066F00943C33 /* VindsidenStationClient.h */,
-				AD17EDA11731066F00943C33 /* VindsidenStationClient.m */,
-				AD17EDB317310C5A00943C33 /* RHEVindsidenAPIClient.h */,
-				AD17EDB417310C5A00943C33 /* RHEVindsidenAPIClient.m */,
+				AD7BBB4A1A3F5A6800883770 /* RHEVindsidenAPIClient.h */,
+				AD7BBB4B1A3F5A6800883770 /* RHEVindsidenAPIClient.m */,
+				AD7BBB3A1A3F539100883770 /* RHEVindsidenAPIClientPrivate.h */,
+				AD7BBB3B1A3F539100883770 /* RHEVindsidenAPIClientPrivate.m */,
+				AD7BBB3C1A3F539100883770 /* VindsidenPlotClient.h */,
+				AD7BBB3D1A3F539100883770 /* VindsidenPlotClient.m */,
+				AD7BBB3E1A3F539100883770 /* VindsidenStationClient.h */,
+				AD7BBB3F1A3F539100883770 /* VindsidenStationClient.m */,
 			);
 			name = Communication;
+			path = ../VindsidenApp;
 			sourceTree = "<group>";
 		};
 		AD17EDE01734480300943C33 /* App Delegate */ = {
@@ -592,6 +601,7 @@
 		AD539C9E1947B5CA002644BD /* VindsidenKit */ = {
 			isa = PBXGroup;
 			children = (
+				AD17EDDF173447EC00943C33 /* Communication */,
 				ADB5A78819DEC29A009AE4A5 /* DrawArrow.h */,
 				ADB5A78919DEC29A009AE4A5 /* DrawArrow.m */,
 				ADCD4260196E4E8A004973E9 /* Categories */,
@@ -668,17 +678,21 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AD7BBB421A3F539100883770 /* VindsidenPlotClient.h in Headers */,
 				ADB5A78A19DEC29A009AE4A5 /* DrawArrow.h in Headers */,
 				AD7AA501196E46BA00B1518B /* CDPlot.h in Headers */,
+				AD7BBB441A3F539100883770 /* VindsidenStationClient.h in Headers */,
 				AD539CA21947B5CA002644BD /* VindsidenKit.h in Headers */,
 				ADCD4250196E4E42004973E9 /* NSNumber+Convertion.h in Headers */,
 				ADCD425E196E4E42004973E9 /* UIImage+ImageFromView.h in Headers */,
 				ADCD425C196E4E42004973E9 /* UIFontDescriptor+textStyle.h in Headers */,
 				AD7AA503196E46BA00B1518B /* CDStation.h in Headers */,
 				ADCD4252196E4E42004973E9 /* NSObject+performBlockCancel.h in Headers */,
+				AD7BBB4C1A3F5A6800883770 /* RHEVindsidenAPIClient.h in Headers */,
 				ADCD4256196E4E42004973E9 /* NSString+fixDateString.h in Headers */,
 				ADCD424E196E4E42004973E9 /* NSNumber+Between.h in Headers */,
 				ADCD4254196E4E42004973E9 /* NSSet+Sort.h in Headers */,
+				AD7BBB401A3F539100883770 /* RHEVindsidenAPIClientPrivate.h in Headers */,
 				ADCD425A196E4E42004973E9 /* UIFont+textStyle.h in Headers */,
 				ADCD4258196E4E42004973E9 /* NSString+isNumeric.h in Headers */,
 			);
@@ -998,7 +1012,6 @@
 				AD17ED891731058400943C33 /* RHCStationInfo.m in Sources */,
 				ADD211C119CF139300497DC1 /* RHCLandscapeGraphViewController.swift in Sources */,
 				ADA2351C1A040839006A72D4 /* RHCDStationDetailsCell.swift in Sources */,
-				ADC8CB8B196D5FE600D167CD /* VindsidenStationClient.m in Sources */,
 				AD32E38319BC5037008F00EB /* RHCUnitSelectorViewController.swift in Sources */,
 				AD17EDAA1731066F00943C33 /* RHEGraphMarker.m in Sources */,
 				AD17EDAB1731066F00943C33 /* RHEGraphView.m in Sources */,
@@ -1006,8 +1019,6 @@
 				AD32E38119BA2FC2008F00EB /* RHEStationPickerViewController.swift in Sources */,
 				ADDB4F5019CB68F1005D5D38 /* RHCAlertManager.swift in Sources */,
 				AD71965C19EED713006FA2BC /* RHCSettingsViewController.swift in Sources */,
-				ADC8CB8A196D5FE200D167CD /* VindsidenPlotClient.m in Sources */,
-				ADC8CB8C196D5FEA00D167CD /* RHEVindsidenAPIClient.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1041,11 +1052,15 @@
 				ADCD425B196E4E42004973E9 /* UIFont+textStyle.m in Sources */,
 				ADCD4251196E4E42004973E9 /* NSNumber+Convertion.m in Sources */,
 				AD539CC71947B684002644BD /* Datamanager.swift in Sources */,
+				AD7BBB4D1A3F5A6800883770 /* RHEVindsidenAPIClient.m in Sources */,
 				ADB5A78B19DEC29A009AE4A5 /* DrawArrow.m in Sources */,
 				AD7AA504196E46BA00B1518B /* CDStation.m in Sources */,
+				AD7BBB431A3F539100883770 /* VindsidenPlotClient.m in Sources */,
 				ADBEA4CF1A07ECF600B168BF /* UIColor+AppColors.swift in Sources */,
 				ADCD424F196E4E42004973E9 /* NSNumber+Between.m in Sources */,
 				ADCD4255196E4E42004973E9 /* NSSet+Sort.m in Sources */,
+				AD7BBB411A3F539100883770 /* RHEVindsidenAPIClientPrivate.m in Sources */,
+				AD7BBB451A3F539100883770 /* VindsidenStationClient.m in Sources */,
 				ADCD4259196E4E42004973E9 /* NSString+isNumeric.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

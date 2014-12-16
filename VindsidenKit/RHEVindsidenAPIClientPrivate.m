@@ -10,43 +10,40 @@
 #import <AFNetworking/AFURLResponseSerialization.h>
 #import <AFNetworking/AFNetworkReachabilityManager.h>
 
-#import "RHEVindsidenAPIClient.h"
+#import <VindsidenKit/VindsidenKit-Swift.h>
+#import "RHEVindsidenAPIClientPrivate.h"
 #import "VindsidenStationClient.h"
 #import "VindsidenPlotClient.h"
+
+#define kPlotHistoryHours 5
 
 NSString * const NETWORK_STATUS_CHANGED = @"NetworkStatus_changed";
 NSString *const kBaseURL = @"http://vindsiden.no/";
 
 
-@implementation RHEVindsidenAPIClient
+@implementation RHEVindsidenAPIClientPrivate
 {
     NSTimeInterval __block _imageLastUpdated;
 }
 
 + (instancetype) defaultManager
 {
-    static RHEVindsidenAPIClient *_defaultManager;
+    static RHEVindsidenAPIClientPrivate *_defaultManager;
     static dispatch_once_t once;
     dispatch_once(&once, ^{
-        _defaultManager = [[RHEVindsidenAPIClient alloc] initWithBaseURL:[NSURL URLWithString:kBaseURL]];
+        _defaultManager = [[RHEVindsidenAPIClientPrivate alloc] initWithBaseURL:[NSURL URLWithString:kBaseURL]];
     });
     return _defaultManager;
 }
 
 
 
-- (instancetype) initWithBaseURL:(NSURL *)url
+- (instancetype)initWithBaseURL:(NSURL *)url
 {
     self = [super initWithBaseURL:url];
 
     if ( nil != self ) {
         self.responseSerializer = [AFXMLParserResponseSerializer serializer];
-
-        RHEVindsidenAPIClient __weak *blocksafeSelf = self;
-        [self.reachabilityManager setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
-            [[NSNotificationCenter defaultCenter] postNotificationName:NETWORK_STATUS_CHANGED object:blocksafeSelf userInfo:@{@"AFNetworkReachabilityStatus": @(status)}];
-        }];
-        [self.reachabilityManager startMonitoring];
     }
 
     return self;
@@ -66,7 +63,8 @@ NSString *const kBaseURL = @"http://vindsiden.no/";
                }
            }
            failure:^(NSURLSessionDataTask *task, NSError *error) {
-               DLOG(@"Fetching failed: %@", error);
+               [Logger DLOG:[NSString stringWithFormat:@"Fetching failed: %@", error] file:@"" function:@(__PRETTY_FUNCTION__) line:__LINE__];
+
                if ( completionBlock ) {
                    completionBlock( NO, nil );
                }
@@ -83,7 +81,7 @@ NSString *const kBaseURL = @"http://vindsiden.no/";
 {
     NSParameterAssert(station);
 
-    DLOG(@"IS BACKGROUND: %d",self.background);
+    [Logger DLOG:[NSString stringWithFormat:@"IS BACKGROUND: %d", self.background] file:@"" function:@(__PRETTY_FUNCTION__) line:__LINE__];
 
     [self GET:@"/xml.aspx"
        parameters:@{@"id": station, @"hours": @(kPlotHistoryHours+1)}

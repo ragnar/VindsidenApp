@@ -9,7 +9,9 @@
 #import "VindsidenStationClient.h"
 #import "NSString+fixDateString.h"
 
-@import VindsidenKit;
+#import <VindsidenKit/VindsidenKit.h>
+#import <VindsidenKit/VindsidenKit-Swift.h>
+
 
 @implementation VindsidenStationClient
 {
@@ -72,11 +74,12 @@
     BOOL success = [_parser parse];
 
     if (!success) {
-        DLOG(@"not a success");
+        [Logger DLOG:[NSString stringWithFormat:@"not a success"] file:@"" function:@(__PRETTY_FUNCTION__) line:__LINE__];
+
         return nil;
     }
 
-    DLOG(@"Parsing complete. %ld stations found", (unsigned long)[_stations count]);
+    [Logger DLOG:[NSString stringWithFormat:@"Parsing complete. %ld stations found", (unsigned long)[_stations count]] file:@"" function:@(__PRETTY_FUNCTION__) line:__LINE__];
     NSSortDescriptor *sortDescriptor1 = [[NSSortDescriptor alloc] initWithKey:@"stationId" ascending:NO];
     NSArray *sortDescriptors = @[sortDescriptor1];
     NSArray *sorted = [_stations sortedArrayUsingDescriptors:sortDescriptors];

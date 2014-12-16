@@ -7,6 +7,7 @@
 //
 
 #import "VindsidenPlotClient.h"
+#import <VindsidenKit/VindsidenKit-Swift.h>
 
 
 @implementation VindsidenPlotClient
@@ -68,11 +69,12 @@
     BOOL success = [_parser parse];
     
     if (!success) {
-        DLOG(@"not a success");
+        [Logger DLOG:[NSString stringWithFormat:@"not a success"] file:@"" function:@(__PRETTY_FUNCTION__) line:__LINE__];
         return nil;
     }
     
-    DLOG(@"Parsing complete. %ld plots found", (unsigned long)[_plots count]);
+    [Logger DLOG:[NSString stringWithFormat:@"Parsing complete. %ld plots found", (unsigned long)[_plots count]] file:@"" function:@(__PRETTY_FUNCTION__) line:__LINE__];
+
     NSSortDescriptor *sortDescriptor1 = [[NSSortDescriptor alloc] initWithKey:@"Time" ascending:YES];
     NSArray *sortDescriptors = @[sortDescriptor1];
     NSArray *sorted = [_plots sortedArrayUsingDescriptors:sortDescriptors];
