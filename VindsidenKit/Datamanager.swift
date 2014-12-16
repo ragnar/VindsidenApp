@@ -10,7 +10,8 @@ import Foundation
 import CoreData
 
 
-@objc public class Datamanager
+@objc(Datamanager)
+public class Datamanager
 {
     struct Config {
         static let sharedBundleIdentifier = "org.juniks.VindsidenKit"
