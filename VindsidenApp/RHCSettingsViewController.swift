@@ -51,7 +51,7 @@ import VindsidenKit
             cell.textLabel?.text = NSLocalizedString("Stations", comment: "")
             cell.detailTextLabel?.text = "\(CDStation.numberOfVisibleStations())"
         } else {
-            let unit = SpeedConvertion(rawValue: Datamanager.sharedManager().sharedDefaults.integerForKey("selectedUnit"))
+            let unit = SpeedConvertion(rawValue: AppConfig.sharedConfiguration.applicationUserDefaults.integerForKey("selectedUnit"))
 
             cell.textLabel?.text = NSLocalizedString("Units", comment: "")
             cell.detailTextLabel?.text = NSNumber.shortUnitNameString(unit!)

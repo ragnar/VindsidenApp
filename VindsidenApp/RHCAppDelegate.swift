@@ -28,9 +28,9 @@ class RHCAppDelegate: UIResponder, UIApplicationDelegate {
 
         self.window?.tintColor = UIColor.vindsidenGloablTintColor()
 
-        if Datamanager.sharedManager().sharedDefaults.integerForKey("selectedUnit") == 0 {
-            Datamanager.sharedManager().sharedDefaults.setInteger(SpeedConvertion.ToMetersPerSecond.rawValue, forKey: "selectedUnit")
-            Datamanager.sharedManager().sharedDefaults.synchronize()
+        if AppConfig.sharedConfiguration.applicationUserDefaults.integerForKey("selectedUnit") == 0 {
+            AppConfig.sharedConfiguration.applicationUserDefaults.setInteger(SpeedConvertion.ToMetersPerSecond.rawValue, forKey: "selectedUnit")
+            AppConfig.sharedConfiguration.applicationUserDefaults.synchronize()
         }
 
 

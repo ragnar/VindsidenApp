@@ -50,7 +50,7 @@ class RHCUnitSelectorViewController : UITableViewController
         let unit = SpeedConvertion(rawValue: indexPath.row+1)
         cell.textLabel?.text = NSNumber.longUnitNameString(unit!)
 
-        if Datamanager.sharedManager().sharedDefaults.integerForKey("selectedUnit") == indexPath.row+1 {
+        if AppConfig.sharedConfiguration.applicationUserDefaults.integerForKey("selectedUnit") == indexPath.row+1 {
             cell.accessoryType = .Checkmark;
         } else {
             cell.accessoryType = .None;
@@ -73,8 +73,8 @@ class RHCUnitSelectorViewController : UITableViewController
 
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath)
     {
-        Datamanager.sharedManager().sharedDefaults.setInteger(indexPath.row+1, forKey: "selectedUnit")
-        Datamanager.sharedManager().sharedDefaults.synchronize()
+        AppConfig.sharedConfiguration.applicationUserDefaults.setInteger(indexPath.row+1, forKey: "selectedUnit")
+        AppConfig.sharedConfiguration.applicationUserDefaults.synchronize()
         tableView.reloadData()
     }
 }

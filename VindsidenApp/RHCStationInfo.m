@@ -55,7 +55,7 @@
 
 - (void)updateWithPlot:(CDPlot *)plot
 {
-    SpeedConvertion unit = [[Datamanager sharedManager].sharedDefaults integerForKey:@"selectedUnit"];
+    SpeedConvertion unit = [[AppConfig sharedConfiguration].applicationUserDefaults integerForKey:@"selectedUnit"];
 
     _windSpeed.text = (isnan([plot.windMin floatValue]) ? @"—.—" : [NSString stringWithFormat:@"%@ %@",  [[self numberFormatter] stringFromNumber:@([plot.windMin speedConvertionTo:unit])], [NSNumber shortUnitNameString:unit]]);
     _windGust.text = (isnan([plot.windMax floatValue]) ? @"—.—" : [NSString stringWithFormat:@"%@ %@", [[self numberFormatter] stringFromNumber:@([plot.windMax speedConvertionTo:unit])], [NSNumber shortUnitNameString:unit]]);
