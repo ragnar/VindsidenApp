@@ -5,6 +5,7 @@
 //  Created by Ragnar Henriksen on 01.05.13.
 //  Copyright (c) 2013 RHC. All rights reserved.
 //
+#import "VindsidenApp-Swift.h"
 
 #import "RHCViewController.h"
 #import "RHCStationCell.h"
@@ -18,7 +19,7 @@
 
 static NSString *kCellID = @"stationCellID";
 
-@interface RHCViewController ()<NSUserActivityDelegate, UIDataSourceModelAssociation>
+@interface RHCViewController ()<NSUserActivityDelegate, UIDataSourceModelAssociation, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, NSFetchedResultsControllerDelegate, RHEStationDetailsDelegate, RHCSettingsDelegate>
 
 @property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
 @property (weak, nonatomic) MotionJpegImageView *cameraView;
