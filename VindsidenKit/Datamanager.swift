@@ -10,15 +10,9 @@ import Foundation
 import CoreData
 
 
-@objc public class Datamanager
+@objc(Datamanager)
+public class Datamanager
 {
-    struct Config {
-        static let sharedBundleIdentifier = "org.juniks.VindsidenKit"
-        static let datamodelName = "Vindsiden"
-        static let sqliteName = "Vindsiden.sqlite"
-        static let sharedGroupName = "group.org.juniks.VindsidenApp"
-        static let plotHistoryHours = 5.0
-    }
 
     let _formatterQueue: dispatch_queue_t = dispatch_queue_create("formatter queue", nil)
 
@@ -60,7 +54,7 @@ import CoreData
 
         childContext.performBlock {
             let fetchRequest = NSFetchRequest(entityName: "CDPlot")
-            let interval: NSTimeInterval = -1.0*((1.0+Config.plotHistoryHours)*3600.0)
+            let interval: NSTimeInterval = -1.0*((1.0+AppConfig.Global.plotHistory)*3600.0)
             let time = NSDate(timeIntervalSinceNow: interval)
             fetchRequest.predicate = NSPredicate(format: "plotTime < %@", time)
 
@@ -93,7 +87,7 @@ import CoreData
 
 
     lazy var managedObjectModel: NSManagedObjectModel? = {
-        let modelURL = NSBundle(identifier: Config.sharedBundleIdentifier)?.URLForResource(Config.datamodelName, withExtension: "momd")
+        let modelURL = NSBundle(identifier: AppConfig.Bundle.frameworkBundleIdentifier)?.URLForResource(AppConfig.CoreData.datamodelName, withExtension: "momd")
         var _managedObjectModel = NSManagedObjectModel(contentsOfURL: modelURL!)
 
         return _managedObjectModel
@@ -101,7 +95,7 @@ import CoreData
 
     lazy var persistentStoreCoordinator: NSPersistentStoreCoordinator? = {
 
-        let storeUrl = self.applicationDocumentsDirectory.URLByAppendingPathComponent(Config.sqliteName)
+        let storeUrl = self.applicationDocumentsDirectory.URLByAppendingPathComponent(AppConfig.CoreData.sqliteName)
         var error: NSError? = nil
         var coordinator: NSPersistentStoreCoordinator? = NSPersistentStoreCoordinator(managedObjectModel: self.managedObjectModel!)
 
@@ -126,12 +120,12 @@ import CoreData
     }()
 
     var applicationDocumentsDirectory: NSURL {
-        let url = NSFileManager.defaultManager().containerURLForSecurityApplicationGroupIdentifier(Config.sharedGroupName)
-            if let actualurl = url {
-                return actualurl as NSURL
-            } else {
-                return NSURL()
-            }
+        let url = NSFileManager.defaultManager().containerURLForSecurityApplicationGroupIdentifier(AppConfig.ApplicationGroups.primary)
+        if let actualurl = url {
+            return actualurl as NSURL
+        } else {
+            return NSURL()
+        }
     }
 
     func addSkipBackupAttributeToItemAtURL( url: NSURL) -> Void
@@ -170,10 +164,4 @@ import CoreData
 
         return date!;
     }
-
-    public lazy var sharedDefaults: NSUserDefaults = {
-        var _defaultManager = NSUserDefaults(suiteName: "group.org.juniks.VindsidenApp")
-        return _defaultManager!
-    }()
-
 }

@@ -8,11 +8,6 @@
 
 #import "RHEGraphView.h"
 #import "RHEGraphMarker.h"
-#import "DrawArrow.h"
-
-#import "NSNumber+Convertion.h"
-
-#import "CDPlot.h"
 
 @import VindsidenKit;
 
@@ -249,7 +244,7 @@ const NSInteger kMinSpeedLines = 3;
 {
     CGContextSaveGState(context);
 
-    SpeedConvertion unit = [[Datamanager sharedManager].sharedDefaults integerForKey:@"selectedUnit"];
+    SpeedConvertion unit = [[AppConfig sharedConfiguration].applicationUserDefaults integerForKey:@"selectedUnit"];
     CGFloat plotMaxValue = ceil([[self.plots valueForKeyPath:@"@max.windMax"] speedConvertionTo:unit]+1);
     NSInteger totSteps = MIN( kMaxSpeedLines, plotMaxValue);
     totSteps = MAX( kMinSpeedLines, totSteps);
@@ -289,7 +284,7 @@ const NSInteger kMinSpeedLines = 3;
 {
     CGContextSaveGState(context);
 
-    SpeedConvertion unit = [[Datamanager sharedManager].sharedDefaults integerForKey:@"selectedUnit"];
+    SpeedConvertion unit = [[AppConfig sharedConfiguration].applicationUserDefaults integerForKey:@"selectedUnit"];
     CGFloat plotMaxValue = ceil([[self.plots valueForKeyPath:@"@max.windMax"] speedConvertionTo:unit]+1);
     NSInteger totSteps = MIN( kMaxSpeedLines, plotMaxValue);
     totSteps = MAX( kMinSpeedLines, totSteps);
@@ -314,7 +309,7 @@ const NSInteger kMinSpeedLines = 3;
         i++;
     }
 
-    NSString *unitName = [NSNumber shortUnitNameString:[[Datamanager sharedManager].sharedDefaults integerForKey:@"selectedUnit"]];
+    NSString *unitName = [NSNumber shortUnitNameString:[[AppConfig sharedConfiguration].applicationUserDefaults integerForKey:@"selectedUnit"]];
     NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
     [paragraphStyle setAlignment:NSTextAlignmentLeft];
 
@@ -357,7 +352,7 @@ const NSInteger kMinSpeedLines = 3;
 {
     CGContextSaveGState(context);
 
-    SpeedConvertion unit = [[Datamanager sharedManager].sharedDefaults integerForKey:@"selectedUnit"];
+    SpeedConvertion unit = [[AppConfig sharedConfiguration].applicationUserDefaults integerForKey:@"selectedUnit"];
 
     CDPlot *firstPlot = (self.plots)[0];
     NSTimeInterval interval = [firstPlot.plotTime timeIntervalSinceDate:startDate]/60;
@@ -526,7 +521,7 @@ const NSInteger kMinSpeedLines = 3;
 
 - (CGFloat)YForMinPlot:(CDPlot *)plot
 {
-    SpeedConvertion unit = [[Datamanager sharedManager].sharedDefaults integerForKey:@"selectedUnit"];
+    SpeedConvertion unit = [[AppConfig sharedConfiguration].applicationUserDefaults integerForKey:@"selectedUnit"];
     CGFloat rMin = [plot.windMin speedConvertionTo:unit];
     CGFloat yMin = _maxY - ((rMin / [self plotMaxValue]) * (_maxY - _minY));
 
@@ -536,7 +531,7 @@ const NSInteger kMinSpeedLines = 3;
 
 - (CGFloat)YForAvgPlot:(CDPlot *)plot
 {
-    SpeedConvertion unit = [[Datamanager sharedManager].sharedDefaults integerForKey:@"selectedUnit"];
+    SpeedConvertion unit = [[AppConfig sharedConfiguration].applicationUserDefaults integerForKey:@"selectedUnit"];
     CGFloat rMin = [plot.windAvg speedConvertionTo:unit];
     CGFloat yMin = _maxY - ((rMin / [self plotMaxValue]) * (_maxY - _minY));
     
@@ -546,7 +541,7 @@ const NSInteger kMinSpeedLines = 3;
 
 - (CGFloat)YForMaxPlot:(CDPlot *)plot
 {
-    SpeedConvertion unit = [[Datamanager sharedManager].sharedDefaults integerForKey:@"selectedUnit"];
+    SpeedConvertion unit = [[AppConfig sharedConfiguration].applicationUserDefaults integerForKey:@"selectedUnit"];
     CGFloat rMin = [plot.windMax speedConvertionTo:unit];
     CGFloat yMin = _maxY - ((rMin / [self plotMaxValue]) * (_maxY - _minY));
     
@@ -619,7 +614,7 @@ const NSInteger kMinSpeedLines = 3;
 
 - (CGFloat)plotMaxValue
 {
-    SpeedConvertion unit = [[Datamanager sharedManager].sharedDefaults integerForKey:@"selectedUnit"];
+    SpeedConvertion unit = [[AppConfig sharedConfiguration].applicationUserDefaults integerForKey:@"selectedUnit"];
     return ceil([[self.plots valueForKeyPath:@"@max.windMax"] speedConvertionTo:unit]+1);
 }
 

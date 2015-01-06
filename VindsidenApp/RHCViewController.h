@@ -8,14 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-@protocol RHEStationDetailsDelegate;
-@protocol RHCSettingsDelegate;
-
 @import CoreData;
 @import VindsidenKit;
 
 
-@interface RHCViewController : UIViewController <UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, NSFetchedResultsControllerDelegate, RHEStationDetailsDelegate, RHCSettingsDelegate>
+@interface RHCViewController : UIViewController
 
 
 - (void)updateContentWithCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler;

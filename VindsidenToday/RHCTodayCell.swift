@@ -28,5 +28,5 @@ class RHCTodayCell: UITableViewCell
     @IBOutlet weak var speedLabel: UILabel!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var updatedLabel: UILabel!
-
+    @IBOutlet weak var unitLabel: UILabel!
 }

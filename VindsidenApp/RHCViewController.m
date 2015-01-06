@@ -5,6 +5,7 @@
 //  Created by Ragnar Henriksen on 01.05.13.
 //  Copyright (c) 2013 RHC. All rights reserved.
 //
+#import "VindsidenApp-Swift.h"
 
 #import "RHCViewController.h"
 #import "RHCStationCell.h"
@@ -18,7 +19,7 @@
 
 static NSString *kCellID = @"stationCellID";
 
-@interface RHCViewController ()<NSUserActivityDelegate>
+@interface RHCViewController ()<NSUserActivityDelegate, UIDataSourceModelAssociation, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, NSFetchedResultsControllerDelegate, RHEStationDetailsDelegate, RHCSettingsDelegate>
 
 @property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
 @property (weak, nonatomic) MotionJpegImageView *cameraView;
@@ -99,7 +100,11 @@ static NSString *kCellID = @"stationCellID";
 
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationDidBecomeActive:) name:UIApplicationDidBecomeActiveNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationWillResignActive:) name:UIApplicationWillResignActiveNotification object:nil];
+}
 
+
+- (void)viewDidLayoutSubviews
+{
     if ( self.pendingScrollToStation ) {
         [self scrollToStation:self.pendingScrollToStation];
         self.pendingScrollToStation = nil;
@@ -267,8 +272,8 @@ static NSString *kCellID = @"stationCellID";
                              [_transformedCells removeObject:cell];
 
                              NSIndexPath *indexPath = [self.collectionView indexPathsForVisibleItems][0];
-                             [[Datamanager sharedManager].sharedDefaults setObject:@(indexPath.row) forKey:@"selectedIndexPath"];
-                             [[Datamanager sharedManager].sharedDefaults synchronize];
+                             [[AppConfig sharedConfiguration].applicationUserDefaults setObject:@(indexPath.row) forKey:@"selectedIndexPath"];
+                             [[AppConfig sharedConfiguration].applicationUserDefaults synchronize];
                              [self updateCameraButton:YES];
                              self.pageControl.currentPage = indexPath.row;
                              [self saveActivity];
@@ -361,8 +366,8 @@ static NSString *kCellID = @"stationCellID";
     }];
 
     if ( [stations count] > 0 ) {
-        [[Datamanager sharedManager].sharedDefaults setObject:[NSDate date] forKey:@"lastUpdated"];
-        [[Datamanager sharedManager].sharedDefaults synchronize];
+        [[AppConfig sharedConfiguration].applicationUserDefaults setObject:[NSDate date] forKey:@"lastUpdated"];
+        [[AppConfig sharedConfiguration].applicationUserDefaults synchronize];
     }
 }
 
@@ -629,5 +634,49 @@ static NSString *kCellID = @"stationCellID";
     self.userActivity = userActivity;
 }
 
+
+#pragma mark - Restoration
+
+
+- (void)encodeRestorableStateWithCoder:(NSCoder *)coder
+{
+    [super encodeRestorableStateWithCoder:coder];
+    [coder encodeInteger:self.pageControl.currentPage forKey:@"currentPage"];
+}
+
+
+- (void)decodeRestorableStateWithCoder:(NSCoder *)coder
+{
+    [super decodeRestorableStateWithCoder:coder];
+    self.pageControl.currentPage = [coder decodeIntegerForKey:@"currentPage"];
+}
+
+
+- (NSString *)modelIdentifierForElementAtIndexPath:(NSIndexPath *)idx inView:(UIView *)view
+{
+    NSString *identifier = nil;
+
+    if ( idx && view ) {
+        CDStation *station = [[self fetchedResultsController] objectAtIndexPath:idx];
+        identifier = [station.stationId stringValue];
+    }
+
+    return identifier;
+}
+
+
+- (NSIndexPath *)indexPathForElementWithModelIdentifier:(NSString *)identifier inView:(UIView *)view
+{
+    NSIndexPath *indexPath = nil;
+
+    if ( identifier && view ) {
+        NSNumber *stationId = @([identifier integerValue]);
+        CDStation *station = [CDStation existingStation:stationId inManagedObjectContext:[self fetchedResultsController].managedObjectContext];
+        if ( station ) {
+            indexPath = [[self fetchedResultsController] indexPathForObject:station];
+        }
+    }
+    return indexPath;
+}
 
 @end

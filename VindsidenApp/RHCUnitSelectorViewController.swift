@@ -48,9 +48,9 @@ class RHCUnitSelectorViewController : UITableViewController
         let cell = tableView.dequeueReusableCellWithIdentifier("UnitCell", forIndexPath: indexPath) as UITableViewCell
 
         let unit = SpeedConvertion(rawValue: indexPath.row+1)
-        cell.textLabel.text = NSNumber.longUnitNameString(unit!)
+        cell.textLabel?.text = NSNumber.longUnitNameString(unit!)
 
-        if Datamanager.sharedManager().sharedDefaults.integerForKey("selectedUnit") == indexPath.row+1 {
+        if AppConfig.sharedConfiguration.applicationUserDefaults.integerForKey("selectedUnit") == indexPath.row+1 {
             cell.accessoryType = .Checkmark;
         } else {
             cell.accessoryType = .None;
@@ -61,7 +61,7 @@ class RHCUnitSelectorViewController : UITableViewController
 
     override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath)
     {
-        cell.textLabel.font = UIFont.preferredFontForTextStyle((cell.textLabel.font.fontDescriptor().objectForKey("NSCTFontUIUsageAttribute") as String))
+        cell.textLabel?.font = UIFont.preferredFontForTextStyle((cell.textLabel?.font.fontDescriptor().objectForKey("NSCTFontUIUsageAttribute") as String))
     }
 
 
@@ -73,8 +73,8 @@ class RHCUnitSelectorViewController : UITableViewController
 
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath)
     {
-        Datamanager.sharedManager().sharedDefaults.setInteger(indexPath.row+1, forKey: "selectedUnit")
-        Datamanager.sharedManager().sharedDefaults.synchronize()
+        AppConfig.sharedConfiguration.applicationUserDefaults.setInteger(indexPath.row+1, forKey: "selectedUnit")
+        AppConfig.sharedConfiguration.applicationUserDefaults.synchronize()
         tableView.reloadData()
     }
 }

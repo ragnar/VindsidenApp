@@ -28,9 +28,9 @@ class RHCAppDelegate: UIResponder, UIApplicationDelegate {
 
         self.window?.tintColor = UIColor.vindsidenGloablTintColor()
 
-        if Datamanager.sharedManager().sharedDefaults.integerForKey("selectedUnit") == 0 {
-            Datamanager.sharedManager().sharedDefaults.setInteger(SpeedConvertion.ToMetersPerSecond.rawValue, forKey: "selectedUnit")
-            Datamanager.sharedManager().sharedDefaults.synchronize()
+        if AppConfig.sharedConfiguration.applicationUserDefaults.integerForKey("selectedUnit") == 0 {
+            AppConfig.sharedConfiguration.applicationUserDefaults.setInteger(SpeedConvertion.ToMetersPerSecond.rawValue, forKey: "selectedUnit")
+            AppConfig.sharedConfiguration.applicationUserDefaults.synchronize()
         }
 
 
@@ -93,7 +93,7 @@ class RHCAppDelegate: UIResponder, UIApplicationDelegate {
     // MARK: - 
 
     func openLaunchOptionsURL( url: NSURL) -> Bool {
-        let ident = url.pathComponents.last as String
+        let ident = url.pathComponents?.last as String
         var station: CDStation?
 
         if let stationId = ident.toInt() {
@@ -128,6 +128,20 @@ class RHCAppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
 
+
+    // MARK: - Restoration
+
+
+    func application(application: UIApplication, shouldRestoreApplicationState coder: NSCoder) -> Bool {
+        return true
+    }
+
+
+    func application(application: UIApplication, shouldSaveApplicationState coder: NSCoder) -> Bool {
+        return true
+    }
+
+    
     // MARK: - NSUserActivity
 
     func application(application: UIApplication, willContinueUserActivityWithType userActivityType: String) -> Bool {

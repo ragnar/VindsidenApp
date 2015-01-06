@@ -85,8 +85,8 @@ import VindsidenKit
             configureCell(cell as RHCDStationDetailsCell, atIndexPath: indexPath)
         } else {
             cell = tableView.dequeueReusableCellWithIdentifier("ButtonCell", forIndexPath: indexPath) as UITableViewCell
-            cell.textLabel.textColor = self.view.tintColor;
-            cell.textLabel.text = buttons[indexPath.row]
+            cell.textLabel?.textColor = self.view.tintColor;
+            cell.textLabel?.text = buttons[indexPath.row]
         }
 
         return cell

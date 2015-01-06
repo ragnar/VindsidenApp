@@ -215,8 +215,8 @@
 {
     _currentStation = currentStation;
 
-    [[Datamanager sharedManager].sharedDefaults setInteger:[self.currentStation.stationId integerValue] forKey:@"selectedDefaultStation"];
-    [[Datamanager sharedManager].sharedDefaults synchronize];
+    [[AppConfig sharedConfiguration].applicationUserDefaults setInteger:[self.currentStation.stationId integerValue] forKey:@"selectedDefaultStation"];
+    [[AppConfig sharedConfiguration].applicationUserDefaults synchronize];
 
     self.stationNameLabel.text = self.currentStation.stationName;
     [self displayPlots];

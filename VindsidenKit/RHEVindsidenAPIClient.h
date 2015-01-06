@@ -1,18 +1,20 @@
 //
-//  RHEVindsidenAPIClient.h
-//  Vindsiden-v2
+//  RHCVindsidenAPIClient.h
+//  VindsidenApp
 //
-//  Created by Ragnar Henriksen on 01.05.13.
-//  Copyright (c) 2013 RHC. All rights reserved.
+//  Created by Ragnar Henriksen on 15/12/14.
+//  Copyright (c) 2014 RHC. All rights reserved.
 //
 
-#import <AFNetworking/AFHTTPSessionManager.h>
+#import <Foundation/Foundation.h>
 
 extern NSString * const NETWORK_STATUS_CHANGED;
 
-@interface RHEVindsidenAPIClient : AFHTTPSessionManager
+
+@interface RHEVindsidenAPIClient : NSObject
 
 @property (nonatomic, assign) BOOL background;
+@property (nonatomic, strong, readonly) NSOperationQueue *operationQueue;
 
 + (instancetype)defaultManager;
 

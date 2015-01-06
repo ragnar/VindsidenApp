@@ -118,7 +118,7 @@ extern CGFloat RadiansToDegrees(CGFloat radians);
 
 - (void)updateWithPlot:(CDPlot *)plot
 {
-    SpeedConvertion unit = [[Datamanager sharedManager].sharedDefaults integerForKey:@"selectedUnit"];
+    SpeedConvertion unit = [[AppConfig sharedConfiguration].applicationUserDefaults integerForKey:@"selectedUnit"];
 
     self.label.text = [NSString stringWithFormat:NSLocalizedString(@"GRAPH_MARKER_POPUP", @"Gust: %@, Avg: %@, Speed: %@"),
                        [[self numberFormatter] stringFromNumber:@([plot.windMax speedConvertionTo:unit])],
