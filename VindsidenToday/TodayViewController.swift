@@ -297,7 +297,10 @@ class TodayViewController: UITableViewController, NCWidgetProviding, NSFetchedRe
 
                     if remaining == 0 {
                         Logger.DLOG("Finished")
-                        completionHandler?(.NewData)
+                        dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                            completionHandler?(.NewData)
+                            return
+                        })
                     }
                 }
 
