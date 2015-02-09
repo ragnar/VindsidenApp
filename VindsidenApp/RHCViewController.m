@@ -50,7 +50,6 @@ static NSString *kCellID = @"stationCellID";
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self beginObservingOrientation];
 
     self.automaticallyAdjustsScrollViewInsets = NO;
 

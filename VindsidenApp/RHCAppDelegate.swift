@@ -65,6 +65,16 @@ class RHCAppDelegate: UIResponder, UIApplicationDelegate {
         return false
     }
 
+
+    func application(application: UIApplication, supportedInterfaceOrientationsForWindow window: UIWindow?) -> Int {
+        if let rootVC = self.window?.rootViewController as? RHCNavigationViewController {
+            return Int(UIInterfaceOrientationMask.AllButUpsideDown.rawValue)
+        } else {
+            return Int(UIInterfaceOrientationMask.Portrait.rawValue);
+        }
+    }
+
+
     func applicationWillResignActive(application: UIApplication) {
         RHEVindsidenAPIClient.defaultManager().background = true
     }
