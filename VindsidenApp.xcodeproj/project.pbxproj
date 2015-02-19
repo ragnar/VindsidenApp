@@ -52,6 +52,7 @@
 		AD539CB31947B5CA002644BD /* VindsidenKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = AD539C9D1947B5CA002644BD /* VindsidenKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		AD539CC51947B61E002644BD /* VindsidenKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD539C9D1947B5CA002644BD /* VindsidenKit.framework */; };
 		AD539CC71947B684002644BD /* Datamanager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD539CC61947B684002644BD /* Datamanager.swift */; };
+		AD6BD0ED1A9506C900E6686B /* Global.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD6BD0EC1A9506C900E6686B /* Global.swift */; };
 		AD71965C19EED713006FA2BC /* RHCSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD71965B19EED713006FA2BC /* RHCSettingsViewController.swift */; };
 		AD7AA501196E46BA00B1518B /* CDPlot.h in Headers */ = {isa = PBXBuildFile; fileRef = AD7AA4FD196E46BA00B1518B /* CDPlot.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AD7AA502196E46BA00B1518B /* CDPlot.m in Sources */ = {isa = PBXBuildFile; fileRef = AD7AA4FE196E46BA00B1518B /* CDPlot.m */; };
@@ -303,6 +304,7 @@
 		AD539CAE1947B5CA002644BD /* VindsidenKitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VindsidenKitTests.swift; sourceTree = "<group>"; };
 		AD539CC61947B684002644BD /* Datamanager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Datamanager.swift; sourceTree = "<group>"; };
 		AD674DA81962EB7100BF257B /* libPods.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libPods.a; path = "Pods/build/Debug-iphoneos/libPods.a"; sourceTree = "<group>"; };
+		AD6BD0EC1A9506C900E6686B /* Global.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Global.swift; sourceTree = "<group>"; };
 		AD71965B19EED713006FA2BC /* RHCSettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RHCSettingsViewController.swift; sourceTree = "<group>"; };
 		AD7AA4FD196E46BA00B1518B /* CDPlot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDPlot.h; sourceTree = "<group>"; };
 		AD7AA4FE196E46BA00B1518B /* CDPlot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDPlot.m; sourceTree = "<group>"; };
@@ -658,6 +660,7 @@
 		AD539C9E1947B5CA002644BD /* VindsidenKit */ = {
 			isa = PBXGroup;
 			children = (
+				AD6BD0EC1A9506C900E6686B /* Global.swift */,
 				AD539CA11947B5CA002644BD /* VindsidenKit.h */,
 				AD7BBB4F1A40A01900883770 /* Managers */,
 				AD17EDDF173447EC00943C33 /* Communication */,
@@ -1264,6 +1267,7 @@
 				ADCD4257196E4E42004973E9 /* NSString+fixDateString.m in Sources */,
 				AD7AA502196E46BA00B1518B /* CDPlot.m in Sources */,
 				AD7AA507196E46D800B1518B /* Vindsiden.xcdatamodeld in Sources */,
+				AD6BD0ED1A9506C900E6686B /* Global.swift in Sources */,
 				ADCD425F196E4E42004973E9 /* UIImage+ImageFromView.m in Sources */,
 				ADCD4253196E4E42004973E9 /* NSObject+performBlockCancel.m in Sources */,
 				ADCD425B196E4E42004973E9 /* UIFont+textStyle.m in Sources */,
