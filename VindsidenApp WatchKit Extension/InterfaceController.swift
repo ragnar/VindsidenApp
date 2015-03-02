@@ -16,7 +16,7 @@ class InterfaceController: WKInterfaceController {
     @IBOutlet weak var interfaceTable: WKInterfaceTable!
 
     var stations = [CDStation]()
-    //let dateTransformer = SORelativeDateTransformer()
+    let dateTransformer = SORelativeDateTransformer()
 
     override func awakeWithContext(context: AnyObject!) {
         super.awakeWithContext(context)
@@ -75,8 +75,7 @@ class InterfaceController: WKInterfaceController {
                 let windspeed = CGFloat(plot.windAvg.floatValue)
                 let image = DrawArrow.drawArrowAtAngle( winddir, forSpeed:windspeed, highlighted:false, color: UIColor.whiteColor(), hightlightedColor: UIColor.blackColor())
                 elementRow.elementImage.setImage(image)
-                //elementRow.elementUpdated.setText( dateTransformer.transformedValue(plot.plotTime) as? String)
-                elementRow.elementUpdated.setText("ragnar")
+                elementRow.elementUpdated.setText( dateTransformer.transformedValue(plot.plotTime) as? String)
             } else {
                 elementRow.elementUpdated.setText( NSLocalizedString("LABEL_NOT_UPDATED", tableName: nil, bundle: NSBundle.mainBundle(), value: "LABEL_NOT_UPDATED", comment: "Not updated"))
             }
