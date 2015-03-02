@@ -89,7 +89,7 @@ class StationDetailsInterfaceController: WKInterfaceController {
 
         index++
         elementRow = interfaceTable.rowControllerAtIndex(index) as StationDetailsRowController
-        elementRow.textLabel.setText("Air water")
+        elementRow.textLabel.setText("Water temp")
         elementRow.detailsTextLabel.setText("\(convertNumberToString(plot.tempWater))℃")
     }
 
