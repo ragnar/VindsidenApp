@@ -7,7 +7,7 @@
 //
 
 import Foundation
-
+import SORelativeDateTransformer
 
 @objc(AppConfig)
 public class AppConfig {
@@ -112,4 +112,14 @@ public class AppConfig {
             firstLaunchHandler()
         }
     }
+
+    public func relativeDate( date: NSDate) -> NSString {
+        return self.relativeDateTransformer.transformedValue(date) as NSString
+    }
+
+
+    private lazy var relativeDateTransformer: SORelativeDateTransformer = {
+        var _relativeDateTransformer = SORelativeDateTransformer()
+        return _relativeDateTransformer
+        }()
 }
