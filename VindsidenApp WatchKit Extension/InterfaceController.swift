@@ -15,37 +15,30 @@ class InterfaceController: WKInterfaceController {
 
     @IBOutlet weak var interfaceTable: WKInterfaceTable!
 
-    var stations: [CDStation]? = nil
+    var stations = [CDStation]()
     //let dateTransformer = SORelativeDateTransformer()
 
     override func awakeWithContext(context: AnyObject!) {
-        // Initialize variables here.
         super.awakeWithContext(context)
-
-        // Configure interface objects here.
-        DLOG("")
-
-        stations = populateData()
-        loadTableData()
     }
+
 
     override func willActivate() {
-        // This method is called when watch view controller is about to be visible to user
-        super.willActivate()
         DLOG("")
+        super.willActivate()
         stations = populateData()
         loadTableData()
     }
 
+
     override func didDeactivate() {
-        // This method is called when watch view controller is no longer visible
         DLOG("")
         super.didDeactivate()
     }
 
 
     override func table(table: WKInterfaceTable, didSelectRowAtIndex rowIndex: Int) {
-        pushControllerWithName("stationDetails", context: stations![rowIndex])
+        pushControllerWithName("stationDetails", context: stations[rowIndex])
     }
 
 
@@ -61,13 +54,21 @@ class InterfaceController: WKInterfaceController {
 
 
     func loadTableData() -> Void {
-        interfaceTable.setNumberOfRows(stations!.count, withRowType: "default")
+        interfaceTable.setNumberOfRows(stations.count, withRowType: "default")
 
-        for (index, station) in enumerate(stations!) {
-            let elementRow = interfaceTable.rowControllerAtIndex(index) as StationsRowController
-            elementRow.elementText.setText(station.stationName)
-
+        for (index, station) in enumerate(stations) {
             Datamanager.sharedManager().managedObjectContext?.refreshObject(station, mergeChanges: true)
+
+            let elementRow = interfaceTable.rowControllerAtIndex(index) as StationsRowController
+
+            // FIXME: Workaround for Beta 5
+            elementRow.elementText.setText("*")
+            elementRow.elementUpdated.setText("*")
+            elementRow.elementImage.setImage(nil)
+            //
+
+
+            elementRow.elementText.setText(station.stationName)
 
             if let plot = station.lastRegisteredPlot() {
                 let winddir = CGFloat(plot.windDir.floatValue)
@@ -75,10 +76,28 @@ class InterfaceController: WKInterfaceController {
                 let image = DrawArrow.drawArrowAtAngle( winddir, forSpeed:windspeed, highlighted:false, color: UIColor.whiteColor(), hightlightedColor: UIColor.blackColor())
                 elementRow.elementImage.setImage(image)
                 //elementRow.elementUpdated.setText( dateTransformer.transformedValue(plot.plotTime) as? String)
+                elementRow.elementUpdated.setText("ragnar")
             } else {
                 elementRow.elementUpdated.setText( NSLocalizedString("LABEL_NOT_UPDATED", tableName: nil, bundle: NSBundle.mainBundle(), value: "LABEL_NOT_UPDATED", comment: "Not updated"))
             }
         }
     }
 
+
+    override func handleUserActivity(userInfo: [NSObject : AnyObject]!) {
+        let stationId = userInfo?["station"] as? NSNumber
+        if stationId == nil {
+            DLOG("No station provided")
+            return
+        }
+
+        stations = populateData()
+
+        for station in stations {
+            if station.stationId.isEqualToNumber(stationId!) {
+                pushControllerWithName("stationDetails", context: station)
+                break
+            }
+        }
+    }
 }
