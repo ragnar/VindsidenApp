@@ -23,8 +23,6 @@ class TodayViewController: UITableViewController, NCWidgetProviding, NSFetchedRe
         }
     }
 
-    let dateTransformer = SORelativeDateTransformer()
-
 
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -116,7 +114,7 @@ class TodayViewController: UITableViewController, NCWidgetProviding, NSFetchedRe
                     }
                 }
                 cell.arrowImageView.image = image
-                cell.updatedLabel.text = dateTransformer.transformedValue(plot.plotTime) as? String
+                cell.updatedLabel.text = AppConfig.sharedConfiguration.relativeDate(plot.plotTime)
             } else {
                 cell.speedLabel.text = "—.—"
                 cell.updatedLabel.text = NSLocalizedString("LABEL_NOT_UPDATED", tableName: nil, bundle: NSBundle.mainBundle(), value: "LABEL_NOT_UPDATED", comment: "Not updated")

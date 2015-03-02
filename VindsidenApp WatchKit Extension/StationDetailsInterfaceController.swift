@@ -17,8 +17,6 @@ class StationDetailsInterfaceController: WKInterfaceController {
     @IBOutlet weak var windUnitLabel: WKInterfaceLabel!
     @IBOutlet weak var updatedAtLabel: WKInterfaceLabel!
 
-    let dateTransformer = SORelativeDateTransformer()
-
     override func awakeWithContext(context: AnyObject!) {
         super.awakeWithContext(context)
 
@@ -36,7 +34,7 @@ class StationDetailsInterfaceController: WKInterfaceController {
             let windspeed = CGFloat(plot.windAvg.floatValue)
             let image = DrawArrow.drawArrowAtAngle( winddir, forSpeed:windspeed, highlighted:false, color: UIColor.whiteColor(), hightlightedColor: UIColor.blackColor())
             windDirectionImage.setImage(image)
-            updatedAtLabel.setText( dateTransformer.transformedValue(plot.plotTime) as? String)
+            updatedAtLabel.setText( AppConfig.sharedConfiguration.relativeDate(plot.plotTime))
 
             let raw = AppConfig.sharedConfiguration.applicationUserDefaults.integerForKey("selectedUnit")
             let unit = SpeedConvertion(rawValue: raw)
