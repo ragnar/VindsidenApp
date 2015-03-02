@@ -21,9 +21,13 @@ class StationDetailsInterfaceController: WKInterfaceController {
         super.awakeWithContext(context)
 
         if let station = context as? CDStation {
-            Datamanager.sharedManager().managedObjectContext?.refreshObject(station, mergeChanges: true)
+            Datamanager.sharedManager().managedObjectContext?.processPendingChanges()
+            let oldStaleness = Datamanager.sharedManager().managedObjectContext?.stalenessInterval
+            Datamanager.sharedManager().managedObjectContext?.stalenessInterval = 0.0
+            Datamanager.sharedManager().managedObjectContext?.refreshObject(station, mergeChanges: false)
             setTitle(station.stationName)
             updateUI(station)
+            Datamanager.sharedManager().managedObjectContext?.stalenessInterval = oldStaleness!
         }
     }
 
