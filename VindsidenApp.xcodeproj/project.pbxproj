@@ -57,6 +57,7 @@
 		AD6BD0F51A967A8800E6686B /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AD6BD0F41A967A8800E6686B /* libPods.a */; };
 		AD6BD0F61A967AD800E6686B /* VindsidenKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD539C9D1947B5CA002644BD /* VindsidenKit.framework */; };
 		AD71965C19EED713006FA2BC /* RHCSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD71965B19EED713006FA2BC /* RHCSettingsViewController.swift */; };
+		AD7398D81AA4455A00236D52 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = AD17EDC517312A5000943C33 /* Localizable.strings */; };
 		AD7AA501196E46BA00B1518B /* CDPlot.h in Headers */ = {isa = PBXBuildFile; fileRef = AD7AA4FD196E46BA00B1518B /* CDPlot.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AD7AA502196E46BA00B1518B /* CDPlot.m in Sources */ = {isa = PBXBuildFile; fileRef = AD7AA4FE196E46BA00B1518B /* CDPlot.m */; };
 		AD7AA503196E46BA00B1518B /* CDStation.h in Headers */ = {isa = PBXBuildFile; fileRef = AD7AA4FF196E46BA00B1518B /* CDStation.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -1116,6 +1117,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				ADCB8A821A94F52D009225B1 /* Images.xcassets in Resources */,
+				AD7398D81AA4455A00236D52 /* Localizable.strings in Resources */,
 				ADCB8A861A94F52D009225B1 /* VindsidenApp WatchKit App.app in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
