@@ -6,27 +6,25 @@
 //  Copyright (c) 2013 RHC. All rights reserved.
 //
 
+@import VindsidenKit;
+
 #import "RHCStationCell.h"
-#import <SORelativeDateTransformer/SORelativeDateTransformer.h>
 #import "NSSet+Sort.h"
 
 #import "NSObject+performBlockCancel.h"
 #import "RHEVindsidenAPIClient.h"
 #import "RHEGraphView.h"
-#import "CDPlot.h"
-#import "CDStation.h"
 
-@import VindsidenKit;
 
 @interface RHCStationCell ()
 
 @property (strong, nonatomic) NSDateFormatter *dateFormatter;
 @property (strong, nonatomic) id autocompleteBlock;
 
-@property (strong, nonatomic) SORelativeDateTransformer *dateTransformer;
 @property (strong, nonatomic) NSTimer *updatedTimer;
 
 @end
+
 
 @implementation RHCStationCell
 
@@ -41,8 +39,6 @@
 - (void)awakeFromNib
 {
     [super awakeFromNib];
-
-    self.dateTransformer = [[SORelativeDateTransformer alloc] init];
 
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(networkReachabilityStatusChanged:) name:NETWORK_STATUS_CHANGED object:nil];
 
@@ -101,6 +97,7 @@
         DLOG(@"");
         return;
     }
+
     [[RHEVindsidenAPIClient defaultManager] fetchStationsPlotsForStation:self.currentStation.stationId
                                                               completion:^(BOOL success, NSArray *plots) {
                                                                   DLOG(@"");
@@ -168,9 +165,9 @@
 
     if ( [cdplots count] ) {
         if ( [[cdplots[0] plotTime] compare:[NSDate date]] == NSOrderedAscending ) {
-            self.updatedAtLabel.text = [self.dateTransformer transformedValue:[cdplots[0] plotTime]];
+            self.updatedAtLabel.text = [[AppConfig sharedConfiguration] relativeDate:[cdplots[0] plotTime]];
         } else {
-            self.updatedAtLabel.text = [self.dateTransformer transformedValue:nil];
+            self.updatedAtLabel.text = [[AppConfig sharedConfiguration] relativeDate:nil];
         }
     } else {
         self.updatedAtLabel.text = NSLocalizedString(@"LABEL_NOT_UPDATED", @"Not updated");
@@ -198,9 +195,9 @@
         self.graphView.plots = cdplots;
         [self.stationView updateWithPlot:cdplots[0]];
         if ( [[cdplots[0] plotTime] compare:[NSDate date]] == NSOrderedAscending ) {
-            self.updatedAtLabel.text = [self.dateTransformer transformedValue:[cdplots[0] plotTime]];
+            self.updatedAtLabel.text = [[AppConfig sharedConfiguration] relativeDate:[cdplots[0] plotTime]];
         } else {
-            self.updatedAtLabel.text = [self.dateTransformer transformedValue:nil];
+            self.updatedAtLabel.text = [[AppConfig sharedConfiguration] relativeDate:nil];
         }
     } else {
         self.updatedAtLabel.text = NSLocalizedString(@"LABEL_NOT_UPDATED", @"Not updated");
