@@ -8,13 +8,7 @@
 
 import UIKit
 import VindsidenKit
-
-
-func DLOG( message: String, file: String = __FILE__, function: String = __FUNCTION__, line: Int = __LINE__ ) {
-//    #if Debug
-//        NSLog("([\(file.lastPathComponent) \(function)] line: \(line)) \(message)")
-//    #endif
-}
+import AFNetworking
 
 
 @UIApplicationMain
@@ -32,7 +26,6 @@ class RHCAppDelegate: UIResponder, UIApplicationDelegate {
             AppConfig.sharedConfiguration.applicationUserDefaults.setInteger(SpeedConvertion.ToMetersPerSecond.rawValue, forKey: "selectedUnit")
             AppConfig.sharedConfiguration.applicationUserDefaults.synchronize()
         }
-
 
         Datamanager.sharedManager().cleanupPlots()
 

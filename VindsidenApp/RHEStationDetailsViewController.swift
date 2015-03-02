@@ -8,6 +8,7 @@
 
 import UIKit
 import VindsidenKit
+import JTSImageViewController
 
 @objc(RHEStationDetailsDelegate) protocol RHEStationDetailsDelegate {
     func rheStationDetailsViewControllerDidFinish( controller: RHEStationDetailsViewController )
