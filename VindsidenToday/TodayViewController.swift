@@ -276,6 +276,8 @@ class TodayViewController: UITableViewController, NCWidgetProviding, NSFetchedRe
 
 
     func updateContentWithCompletionHandler(completionHandler: ((NCUpdateResult) -> Void)? = nil) {
+        _fetchedResultsController = nil
+
         if let count = fetchedResultsController.fetchedObjects?.count {
             if count <= 0 {
                 completionHandler?(.NoData)
@@ -294,7 +296,7 @@ class TodayViewController: UITableViewController, NCWidgetProviding, NSFetchedRe
                     remaining--
 
                     if remaining == 0 {
-                        Logger.DLOG("Finished")
+                        DLOG("Finished")
                         dispatch_async(dispatch_get_main_queue(), { () -> Void in
                             completionHandler?(.NewData)
                             return
@@ -303,7 +305,7 @@ class TodayViewController: UITableViewController, NCWidgetProviding, NSFetchedRe
                 }
 
                 let error = { (cancelled:Bool, error: NSError!) -> Void in
-                    Logger.DLOG("error: \(error)")
+                    DLOG("error: \(error)")
                 }
 
                 RHEVindsidenAPIClient.defaultManager().fetchStationsPlotsForStation(station.stationId, completion: complete, error: error)
