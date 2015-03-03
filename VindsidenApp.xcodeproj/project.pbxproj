@@ -52,7 +52,6 @@
 		AD6BD0F11A96797D00E6686B /* StationDetailsInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD6BD0EE1A96797D00E6686B /* StationDetailsInterfaceController.swift */; };
 		AD6BD0F21A96797D00E6686B /* StationDetailsRowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD6BD0EF1A96797D00E6686B /* StationDetailsRowController.swift */; };
 		AD6BD0F31A96797D00E6686B /* StationsRowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD6BD0F01A96797D00E6686B /* StationsRowController.swift */; };
-		AD6BD0F51A967A8800E6686B /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AD6BD0F41A967A8800E6686B /* libPods.a */; };
 		AD6BD0F61A967AD800E6686B /* VindsidenKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD539C9D1947B5CA002644BD /* VindsidenKit.framework */; };
 		AD71965C19EED713006FA2BC /* RHCSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD71965B19EED713006FA2BC /* RHCSettingsViewController.swift */; };
 		AD7398D81AA4455A00236D52 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = AD17EDC517312A5000943C33 /* Localizable.strings */; };
@@ -430,7 +429,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AD6BD0F51A967A8800E6686B /* libPods.a in Frameworks */,
 				AD6BD0F61A967AD800E6686B /* VindsidenKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1035,6 +1033,7 @@
 					};
 					ADCB8A841A94F52D009225B1 = {
 						CreatedOnToolsVersion = 6.2;
+						DevelopmentTeam = U69P77X647;
 					};
 				};
 			};
@@ -1672,7 +1671,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = D077413EC6AD6C77CEEEA239 /* Pods-VindsidenApp.debug.xcconfig */;
 			buildSettings = {
-				APPLICATION_EXTENSION_API_ONLY = NO;
+				APPLICATION_EXTENSION_API_ONLY = YES;
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
@@ -1716,7 +1715,7 @@
 		AD539CB81947B5CA002644BD /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				APPLICATION_EXTENSION_API_ONLY = NO;
+				APPLICATION_EXTENSION_API_ONLY = YES;
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
