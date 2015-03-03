@@ -192,11 +192,8 @@ static NSString *kCellID = @"stationCellID";
 {
     static BOOL isFirst = YES;
     if ( NO == isFirst ) {
-        if ( [[self.collectionView visibleCells] count] ) {
-            RHCStationCell *cell = [self.collectionView visibleCells][0];
-            [cell fetch];
-            [self updateCameraButton:YES];
-        }
+        self.fetchedResultsController = nil;
+        [self.collectionView reloadData];
     }
     isFirst = NO;
 }
