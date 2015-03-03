@@ -114,7 +114,8 @@ public class AppConfig {
     }
 
     public func relativeDate( date: NSDate) -> NSString {
-        return self.relativeDateTransformer.transformedValue(date) as NSString
+        var dateToUse = date.earlierDate(NSDate())
+        return self.relativeDateTransformer.transformedValue(dateToUse) as NSString
     }
 
 
