@@ -222,7 +222,14 @@
     NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
     NSDateComponents *inputComponents = [gregorian components:(NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay | NSCalendarUnitHour) fromDate:inDate];
     NSDate *outDate = [gregorian dateFromComponents:inputComponents];
-    NSArray *cdplots = [[self.plots filteredSetUsingPredicate:[NSPredicate predicateWithFormat:@"plotTime >= %@", outDate]] sortedByKeyPath:@"plotTime" ascending:NO];
+    NSManagedObjectContext *context = self.managedObjectContext;
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"CDPlot"];
+
+    fetchRequest.fetchLimit = 1;
+    fetchRequest.predicate = [NSPredicate predicateWithFormat:@"station == %@ AND plotTime >= %@", self, outDate];
+    fetchRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"plotTime" ascending:NO]];
+
+    NSArray *cdplots = [context executeFetchRequest:fetchRequest error:nil];
 
     if ( [cdplots count] ) {
         return [cdplots firstObject];
