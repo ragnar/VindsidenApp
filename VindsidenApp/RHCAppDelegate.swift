@@ -31,6 +31,9 @@ class RHCAppDelegate: UIResponder, UIApplicationDelegate {
 
         application.setMinimumBackgroundFetchInterval(UIApplicationBackgroundFetchIntervalMinimum)
 
+        WindManager.sharedManager.refreshInterval = 60
+        WindManager.sharedManager.startUpdating()
+
         return true
     }
 
@@ -88,13 +91,16 @@ class RHCAppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(application: UIApplication, performFetchWithCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
-        if let vc = primaryViewController() {
-            vc.updateContentWithCompletionHandler(completionHandler)
+        WindManager.sharedManager.fetch { (result: UIBackgroundFetchResult) -> Void in
+            DLOG("Fetch finished")
+            completionHandler(result)
         }
     }
 
+
     // MARK: - 
 
+    
     func openLaunchOptionsURL( url: NSURL) -> Bool {
         let ident = url.pathComponents?.last as String
         var station: CDStation?
