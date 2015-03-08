@@ -24,6 +24,12 @@ class TodayViewController: UITableViewController, NCWidgetProviding, NSFetchedRe
     }
 
 
+    deinit {
+        _fetchedResultsController = nil
+        DLOG("")
+    }
+
+
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
@@ -92,8 +98,8 @@ class TodayViewController: UITableViewController, NCWidgetProviding, NSFetchedRe
             return cell
         } else {
             let cell = tableView.dequeueReusableCellWithIdentifier(TableViewConstants.CellIdentifiers.message, forIndexPath: indexPath) as RHCTodayCell
-            let stationInfo = self.fetchedResultsController.objectAtIndexPath(indexPath) as CDStation
-            let tmpplot: CDPlot? = stationInfo.lastRegisteredPlot()
+            var stationInfo = self.fetchedResultsController.objectAtIndexPath(indexPath) as CDStation
+            var tmpplot: CDPlot? = stationInfo.lastRegisteredPlot()
 
             if let plot = tmpplot {
                 let winddir = CGFloat(plot.windDir.floatValue)
@@ -276,42 +282,15 @@ class TodayViewController: UITableViewController, NCWidgetProviding, NSFetchedRe
 
 
     func updateContentWithCompletionHandler(completionHandler: ((NCUpdateResult) -> Void)? = nil) {
-        _fetchedResultsController = nil
 
-        if let count = fetchedResultsController.fetchedObjects?.count {
-            if count <= 0 {
-                completionHandler?(.NoData)
-                return;
-            }
-
-            var remaining = count
-
-            for station in fetchedResultsController.fetchedObjects? as [CDStation] {
-
-                let complete = { (success:Bool, plots: [AnyObject]!) -> Void in
-                    if success == true {
-                        CDPlot.updatePlots(plots, completion: nil)
-                    }
-
-                    remaining--
-
-                    if remaining == 0 {
-                        DLOG("Finished")
-                        dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                            completionHandler?(.NewData)
-                            return
-                        })
-                    }
-                }
-
-                let error = { (cancelled:Bool, error: NSError!) -> Void in
-                    DLOG("error: \(error)")
-                }
-
-                RHEVindsidenAPIClient.defaultManager().fetchStationsPlotsForStation(station.stationId, completion: complete, error: error)
-            }
-        } else {
-            completionHandler?(.NoData)
+        WindManager.sharedManager.fetch { (fetchResult: UIBackgroundFetchResult) -> Void in
+            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                self.tableView.reloadData()
+                completionHandler?(.NewData)
+                return
+            })
         }
+
+        //_fetchedResultsController = nil
     }
 }
