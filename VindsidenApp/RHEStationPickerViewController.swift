@@ -222,7 +222,9 @@ class RHEStationPickerViewController : UITableViewController, NSFetchedResultsCo
         case .Delete:
             tableView.deleteRowsAtIndexPaths([indexPath!], withRowAnimation: .Top)
         case .Update:
-            configureCell(tableView.cellForRowAtIndexPath(indexPath!)!, atIndexPath: indexPath!)
+            if let cell = tableView.cellForRowAtIndexPath(indexPath!) {
+                configureCell(cell, atIndexPath: indexPath!)
+            }
         case .Move:
             tableView.deleteRowsAtIndexPaths([indexPath!], withRowAnimation: .Fade)
             tableView.insertRowsAtIndexPaths([newIndexPath!], withRowAnimation: .Fade)
