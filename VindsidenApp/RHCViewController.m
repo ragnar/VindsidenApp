@@ -188,6 +188,9 @@ static NSString *kCellID = @"stationCellID";
 }
 
 
+#pragma mark - Notifications
+
+
 - (void)applicationDidBecomeActive:(NSNotification *)notificaiton
 {
     static BOOL isFirst = YES;
@@ -294,14 +297,8 @@ static NSString *kCellID = @"stationCellID";
         return _fetchedResultsController;
     }
 
-    [NSFetchedResultsController deleteCacheWithName:@"StationList"];
-
-    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-    NSString *cacheName = @"StationList";
-
     NSManagedObjectContext *context = [[Datamanager sharedManager] managedObjectContext];
-    NSEntityDescription *entity = [NSEntityDescription entityForName:@"CDStation" inManagedObjectContext:context];
-    [fetchRequest setEntity:entity];
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"CDStation"];
     [fetchRequest setFetchBatchSize:20];
 
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"isHidden == NO"];
@@ -314,7 +311,7 @@ static NSString *kCellID = @"stationCellID";
     NSFetchedResultsController *aFetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest
                                                                                                 managedObjectContext:context
                                                                                                   sectionNameKeyPath:nil
-                                                                                                           cacheName:cacheName];
+                                                                                                           cacheName:nil];
     aFetchedResultsController.delegate = self;
     self.fetchedResultsController = aFetchedResultsController;
 
