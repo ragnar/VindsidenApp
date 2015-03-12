@@ -1643,6 +1643,7 @@
 		};
 		AD539C931947B0F7002644BD /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1773D1A53059031A48563071 /* Pods-VindsidenApp.release.xcconfig */;
 			buildSettings = {
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
@@ -1718,6 +1719,7 @@
 		};
 		AD539CB81947B5CA002644BD /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1773D1A53059031A48563071 /* Pods-VindsidenApp.release.xcconfig */;
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = YES;
 				CLANG_ENABLE_MODULES = YES;
@@ -1850,6 +1852,7 @@
 		};
 		ADCB8A951A94F52D009225B1 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1773D1A53059031A48563071 /* Pods-VindsidenApp.release.xcconfig */;
 			buildSettings = {
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
@@ -1913,6 +1916,7 @@
 		};
 		ADCB8A971A94F52D009225B1 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1773D1A53059031A48563071 /* Pods-VindsidenApp.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_WARN_BOOL_CONVERSION = YES;
