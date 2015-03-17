@@ -127,9 +127,14 @@
             });
         }
 
-        [childContext save:&err];
+        if ( [childContext hasChanges] && [childContext save:&err] == NO ) {
+            [Logger DLOG:[NSString stringWithFormat:@"Save failed: %@", err.localizedDescription] file:@"" function:@(__PRETTY_FUNCTION__) line:__LINE__];
+        }
+
         [context performBlock:^{
-            [context save:&err];
+            if ( [context hasChanges] && [context save:&err] == NO ) {
+                [Logger DLOG:[NSString stringWithFormat:@"Save failed: %@", err.localizedDescription] file:@"" function:@(__PRETTY_FUNCTION__) line:__LINE__];
+            }
         }];
     }];
 }
@@ -142,9 +147,12 @@
     request.predicate = [NSPredicate predicateWithFormat:@"stationId == %@", stationId];
     request.fetchLimit = 1;
 
-    NSArray *array = [managedObjectContext executeFetchRequest:request error:nil];
+    NSError *err = nil;
+    NSArray *array = [managedObjectContext executeFetchRequest:request error:&err];
     if ( [array count] ) {
         existing = array[0];
+    } else {
+        [Logger DLOG:[NSString stringWithFormat:@"Fetch failed: %@", err.localizedDescription] file:@"" function:@(__PRETTY_FUNCTION__) line:__LINE__];
     }
     return existing;
 }

@@ -89,9 +89,9 @@ public class WindManager : NSObject {
         isUpdating = true
 
         let stations = activeStations()
-        var remaining = stations.count
+        var remainingStations = UInt8(stations.count)
 
-        if remaining <= 0 {
+        if remainingStations <= 0 {
             isUpdating = false
             completionHandler?(.NoData)
             return
@@ -99,17 +99,16 @@ public class WindManager : NSObject {
 
         for station in stations {
             let complete = { (success:Bool, plots: [AnyObject]!) -> Void in
-                if success == true {
-                    CDPlot.updatePlots(plots, completion: nil)
-                }
+                CDPlot.updatePlots(plots ?? [CDPlot](), completion: { () -> Void in
+                    remainingStations -= 1
 
-                remaining--
+                    if remainingStations == 0 {
+                        DLOG("Finished")
 
-                if remaining == 0 {
-                    DLOG("Finished")
-                    self.isUpdating = false
-                    completionHandler?(.NewData)
-                }
+                        self.isUpdating = false
+                        completionHandler?(.NewData)
+                    }
+                })
             }
 
             let error = { (cancelled:Bool, error: NSError!) -> Void in
