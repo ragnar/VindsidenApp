@@ -336,6 +336,10 @@ static NSString *kCellID = @"stationCellID";
             [self saveActivity];
             break;
         case NSFetchedResultsChangeUpdate:
+        {
+            RHCStationCell *cell = (RHCStationCell *)[self.collectionView cellForItemAtIndexPath:indexPath];
+            cell.currentStation = anObject;
+        }
             break;
     }
 }
@@ -479,6 +483,8 @@ static NSString *kCellID = @"stationCellID";
 
 - (void)rhcSettingsDidFinish:(RHCSettingsViewController *)controller
 {
+    [[WindManager sharedManager] updateNow];
+
     if ( [[self.collectionView visibleCells] count] ) {
         RHCStationCell *cell = [self.collectionView visibleCells][0];
         [cell displayPlots];
