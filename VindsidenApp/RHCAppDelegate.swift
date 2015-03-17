@@ -17,6 +17,7 @@ class RHCAppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     let _formatterQueue = dispatch_queue_create("formatter queue", nil);
 
+
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         AFNetworkActivityIndicatorManager.sharedManager().enabled = true
 
@@ -27,15 +28,16 @@ class RHCAppDelegate: UIResponder, UIApplicationDelegate {
             AppConfig.sharedConfiguration.applicationUserDefaults.synchronize()
         }
 
-        Datamanager.sharedManager().cleanupPlots()
+        Datamanager.sharedManager().cleanupPlots { () -> Void in
+            WindManager.sharedManager.refreshInterval = 60
+            WindManager.sharedManager.startUpdating()
+        }
 
         application.setMinimumBackgroundFetchInterval(UIApplicationBackgroundFetchIntervalMinimum)
 
-        WindManager.sharedManager.refreshInterval = 60
-        WindManager.sharedManager.startUpdating()
-
         return true
     }
+
 
     func application(application: UIApplication, willFinishLaunchingWithOptions launchOptions: [NSObject : AnyObject]?) -> Bool {
 
@@ -51,6 +53,7 @@ class RHCAppDelegate: UIResponder, UIApplicationDelegate {
 
         return true
     }
+
 
     func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject?) -> Bool {
 
@@ -75,15 +78,19 @@ class RHCAppDelegate: UIResponder, UIApplicationDelegate {
         RHEVindsidenAPIClient.defaultManager().background = true
     }
 
+
     func applicationDidEnterBackground(application: UIApplication) {
     }
+
 
     func applicationWillEnterForeground(application: UIApplication) {
     }
 
+
     func applicationDidBecomeActive(application: UIApplication) {
         RHEVindsidenAPIClient.defaultManager().background = false
     }
+
 
     func applicationWillTerminate(application: UIApplication) {
         Datamanager.sharedManager().saveContext()
