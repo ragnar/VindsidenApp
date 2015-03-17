@@ -32,7 +32,15 @@ public class Datamanager
 
     public required init() {
 
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("mainManagedObjectContextDidSave:"), name: NSManagedObjectContextDidSaveNotification, object: managedObjectContext)
     }
+
+
+    func mainManagedObjectContextDidSave(notification: NSNotification) -> Void {
+        DLOG("Saving MOC based on notification")
+        managedObjectContext?.mergeChangesFromContextDidSaveNotification(notification)
+    }
+
 
     public func saveContext () {
         if let moc = self.managedObjectContext {
@@ -44,11 +52,10 @@ public class Datamanager
         }
     }
 
-    public func cleanupPlots()
-    {
+    public func cleanupPlots(completionHandler: ((Void) -> Void)? = nil) -> Void {
         let childContext = NSManagedObjectContext(concurrencyType: NSManagedObjectContextConcurrencyType.PrivateQueueConcurrencyType)
         childContext.parentContext = managedObjectContext
-        childContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
+        childContext.mergePolicy = NSRollbackMergePolicy;
         childContext.undoManager = nil
         var err: NSError?
 
@@ -64,10 +71,19 @@ public class Datamanager
                 childContext.deleteObject(object)
             }
 
-            childContext.save(&err)
+            if childContext.save(&err) == false {
+                DLOG("Save failed: \(err)")
+            }
+
+            childContext.processPendingChanges()
+
             if let moc = self.managedObjectContext {
                 moc.performBlock {
-                    moc.save(&err)
+                    if moc.save(&err) == false {
+                        DLOG("Save failed: \(err)")
+                    }
+                    moc.processPendingChanges()
+                    completionHandler?()
                     return
                 }
             }
@@ -82,6 +98,7 @@ public class Datamanager
         }
         var managedObjectContext = NSManagedObjectContext(concurrencyType: NSManagedObjectContextConcurrencyType.MainQueueConcurrencyType)
         managedObjectContext.persistentStoreCoordinator = coordinator
+        managedObjectContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
         return managedObjectContext
     }()
 
