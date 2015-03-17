@@ -70,11 +70,11 @@
 
 - (void)updateLastUpdatedLabel
 {
-    NSArray *cdplots = [[self.currentStation.plots filteredSetUsingPredicate:[NSPredicate predicateWithFormat:@"plotTime >= %@", [[NSDate date] dateByAddingTimeInterval:-1*(kPlotHistoryHours-1)*3600]]] sortedByKeyPath:@"plotTime" ascending:NO];
+    CDPlot *plot = self.currentStation.lastRegisteredPlot;
 
-    if ( [cdplots count] ) {
-        if ( [[cdplots[0] plotTime] compare:[NSDate date]] == NSOrderedAscending ) {
-            self.updatedAtLabel.text = [[AppConfig sharedConfiguration] relativeDate:[cdplots[0] plotTime]];
+    if ( plot != nil ) {
+        if ( [plot.plotTime compare:[NSDate date]] == NSOrderedAscending ) {
+            self.updatedAtLabel.text = [[AppConfig sharedConfiguration] relativeDate:plot.plotTime];
         } else {
             self.updatedAtLabel.text = [[AppConfig sharedConfiguration] relativeDate:nil];
         }
@@ -127,9 +127,6 @@
 {
     _currentStation = currentStation;
 
-    [[AppConfig sharedConfiguration].applicationUserDefaults setInteger:[self.currentStation.stationId integerValue] forKey:@"selectedDefaultStation"];
-    [[AppConfig sharedConfiguration].applicationUserDefaults synchronize];
-
     self.stationNameLabel.text = self.currentStation.stationName;
     [self displayPlots];
 
@@ -141,18 +138,6 @@
                                                  userInfo:nil
                                                   repeats:YES];
     [[NSRunLoop currentRunLoop] addTimer:self.updatedTimer forMode:NSDefaultRunLoopMode];
-}
-
-
-- (CDStation *)currentStation
-{
-    [[[Datamanager sharedManager] managedObjectContext] processPendingChanges];
-    NSTimeInterval oldStaleness = [[[Datamanager sharedManager] managedObjectContext] stalenessInterval];
-    [[[Datamanager sharedManager] managedObjectContext] setStalenessInterval:0.0];
-    [[[Datamanager sharedManager] managedObjectContext] refreshObject:_currentStation mergeChanges:NO];
-    [[[Datamanager sharedManager] managedObjectContext] setStalenessInterval:oldStaleness];
-
-    return _currentStation;
 }
 
 
