@@ -349,6 +349,8 @@ static NSString *kCellID = @"stationCellID";
 {
     [CDStation updateStations:stations completion:^(BOOL newStations) {
         if ( newStations ) {
+            [[WindManager sharedManager] updateNow];
+
             UIAlertController *alert = [UIAlertController alertControllerWithTitle:@""
                                                                            message:NSLocalizedString(@"ALERT_NEW_STATIONS_FOUND", @"New stations found. Go to settings to view them")
                                                                     preferredStyle:UIAlertControllerStyleAlert];
