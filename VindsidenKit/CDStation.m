@@ -121,12 +121,6 @@
             }
         }
 
-        if ( newStations && completion ) {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                completion(newStations);
-            });
-        }
-
         if ( [childContext hasChanges] && [childContext save:&err] == NO ) {
             [Logger DLOG:[NSString stringWithFormat:@"Save failed: %@", err.localizedDescription] file:@"" function:@(__PRETTY_FUNCTION__) line:__LINE__];
         }
@@ -134,6 +128,12 @@
         [context performBlock:^{
             if ( [context hasChanges] && [context save:&err] == NO ) {
                 [Logger DLOG:[NSString stringWithFormat:@"Save failed: %@", err.localizedDescription] file:@"" function:@(__PRETTY_FUNCTION__) line:__LINE__];
+            }
+
+            if ( newStations && completion ) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    completion(newStations);
+                });
             }
         }];
     }];
