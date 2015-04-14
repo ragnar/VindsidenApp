@@ -75,7 +75,7 @@ public class WindManager : NSObject {
 
         let context = Datamanager.sharedManager().managedObjectContext
 
-        var stations = context?.executeFetchRequest(fetchRequest, error: nil) as [CDStation]
+        var stations = context?.executeFetchRequest(fetchRequest, error: nil) as! [CDStation]
         return stations ?? [CDStation]()
     }
 
@@ -83,6 +83,7 @@ public class WindManager : NSObject {
     public func fetch(completionHandler: ((UIBackgroundFetchResult) -> Void)? = nil) -> Void {
         if ( isUpdating ) {
             DLOG("Already updating")
+            completionHandler?(.NewData)
             return;
         }
 
