@@ -81,8 +81,6 @@ NSString *const kBaseURL = @"http://vindsiden.no/";
 {
     NSParameterAssert(station);
 
-    [Logger DLOG:[NSString stringWithFormat:@"IS BACKGROUND: %d", self.background] file:@"" function:@(__PRETTY_FUNCTION__) line:__LINE__];
-
     [self GET:@"/xml.aspx"
        parameters:@{@"id": station, @"hours": @(kPlotHistoryHours+1)}
           success:^(NSURLSessionDataTask *task, id response) {

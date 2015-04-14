@@ -32,7 +32,15 @@ public class Datamanager
 
     public required init() {
 
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("mainManagedObjectContextDidSave:"), name: NSManagedObjectContextDidSaveNotification, object: managedObjectContext)
     }
+
+
+    func mainManagedObjectContextDidSave(notification: NSNotification) -> Void {
+        DLOG("Saving MOC based on notification")
+        managedObjectContext?.mergeChangesFromContextDidSaveNotification(notification)
+    }
+
 
     public func saveContext () {
         if let moc = self.managedObjectContext {
@@ -44,11 +52,10 @@ public class Datamanager
         }
     }
 
-    public func cleanupPlots()
-    {
+    public func cleanupPlots(completionHandler: ((Void) -> Void)? = nil) -> Void {
         let childContext = NSManagedObjectContext(concurrencyType: NSManagedObjectContextConcurrencyType.PrivateQueueConcurrencyType)
         childContext.parentContext = managedObjectContext
-        childContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
+        childContext.mergePolicy = NSRollbackMergePolicy;
         childContext.undoManager = nil
         var err: NSError?
 
@@ -58,16 +65,25 @@ public class Datamanager
             let time = NSDate(timeIntervalSinceNow: interval)
             fetchRequest.predicate = NSPredicate(format: "plotTime < %@", time)
 
-            let result = childContext.executeFetchRequest(fetchRequest, error: &err) as Array<NSManagedObject>
+            let result = childContext.executeFetchRequest(fetchRequest, error: &err) as! [NSManagedObject]
 
             for object  in result {
                 childContext.deleteObject(object)
             }
 
-            childContext.save(&err)
+            if childContext.save(&err) == false {
+                DLOG("Save failed: \(err)")
+            }
+
+            childContext.processPendingChanges()
+
             if let moc = self.managedObjectContext {
                 moc.performBlock {
-                    moc.save(&err)
+                    if moc.save(&err) == false {
+                        DLOG("Save failed: \(err)")
+                    }
+                    moc.processPendingChanges()
+                    completionHandler?()
                     return
                 }
             }
@@ -82,6 +98,7 @@ public class Datamanager
         }
         var managedObjectContext = NSManagedObjectContext(concurrencyType: NSManagedObjectContextConcurrencyType.MainQueueConcurrencyType)
         managedObjectContext.persistentStoreCoordinator = coordinator
+        managedObjectContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
         return managedObjectContext
     }()
 
@@ -109,7 +126,7 @@ public class Datamanager
             dict[NSLocalizedDescriptionKey] = "Failed to initialize the application's saved data"
             dict[NSLocalizedFailureReasonErrorKey] = failureReason
             dict[NSUnderlyingErrorKey] = error
-            error = NSError(domain: "org.juniks.VindsidenApp", code: 9999, userInfo: dict)
+            error = NSError(domain: "org.juniks.VindsidenApp", code: 9999, userInfo: dict as [NSObject : AnyObject])
             // Replace this with code to handle the error appropriately.
             // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
             NSLog("Unresolved error \(error), \(error!.userInfo)")

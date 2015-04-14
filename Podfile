@@ -1,16 +1,13 @@
 source 'https://github.com/CocoaPods/Specs.git'
 
-platform :ios, "8.0"
-
-pod "MotionJpegImageView"
-pod "JTSImageViewController"
-
-link_with 'VindsidenApp', 'VindsidenAppTests'
-
-
-target :VindsidenKit, exclusive: true do
+target:"VindsidenApp", exclusive: true do
     platform :ios, "8.0"
+    use_frameworks!
+    link_with "VindsidenApp"
+
     pod "AFNetworking", "~>2.5.1"
     pod "SORelativeDateTransformer"
-    link_with 'VindsidenKit'
+    #pod "Alamofire"
+    pod "MotionJpegImageView"
+    pod "JTSImageViewController"
 end

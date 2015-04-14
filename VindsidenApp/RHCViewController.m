@@ -188,15 +188,15 @@ static NSString *kCellID = @"stationCellID";
 }
 
 
+#pragma mark - Notifications
+
+
 - (void)applicationDidBecomeActive:(NSNotification *)notificaiton
 {
     static BOOL isFirst = YES;
     if ( NO == isFirst ) {
-        if ( [[self.collectionView visibleCells] count] ) {
-            RHCStationCell *cell = [self.collectionView visibleCells][0];
-            [cell fetch];
-            [self updateCameraButton:YES];
-        }
+        self.fetchedResultsController = nil;
+        [self.collectionView reloadData];
     }
     isFirst = NO;
 }
@@ -297,14 +297,8 @@ static NSString *kCellID = @"stationCellID";
         return _fetchedResultsController;
     }
 
-    [NSFetchedResultsController deleteCacheWithName:@"StationList"];
-
-    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-    NSString *cacheName = @"StationList";
-
     NSManagedObjectContext *context = [[Datamanager sharedManager] managedObjectContext];
-    NSEntityDescription *entity = [NSEntityDescription entityForName:@"CDStation" inManagedObjectContext:context];
-    [fetchRequest setEntity:entity];
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"CDStation"];
     [fetchRequest setFetchBatchSize:20];
 
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"isHidden == NO"];
@@ -317,7 +311,7 @@ static NSString *kCellID = @"stationCellID";
     NSFetchedResultsController *aFetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest
                                                                                                 managedObjectContext:context
                                                                                                   sectionNameKeyPath:nil
-                                                                                                           cacheName:cacheName];
+                                                                                                           cacheName:nil];
     aFetchedResultsController.delegate = self;
     self.fetchedResultsController = aFetchedResultsController;
 
@@ -342,6 +336,10 @@ static NSString *kCellID = @"stationCellID";
             [self saveActivity];
             break;
         case NSFetchedResultsChangeUpdate:
+        {
+            RHCStationCell *cell = (RHCStationCell *)[self.collectionView cellForItemAtIndexPath:indexPath];
+            cell.currentStation = anObject;
+        }
             break;
     }
 }
@@ -351,6 +349,8 @@ static NSString *kCellID = @"stationCellID";
 {
     [CDStation updateStations:stations completion:^(BOOL newStations) {
         if ( newStations ) {
+            [[WindManager sharedManager] updateNow];
+
             UIAlertController *alert = [UIAlertController alertControllerWithTitle:@""
                                                                            message:NSLocalizedString(@"ALERT_NEW_STATIONS_FOUND", @"New stations found. Go to settings to view them")
                                                                     preferredStyle:UIAlertControllerStyleAlert];
@@ -485,6 +485,8 @@ static NSString *kCellID = @"stationCellID";
 
 - (void)rhcSettingsDidFinish:(RHCSettingsViewController *)controller
 {
+    [[WindManager sharedManager] updateNow];
+
     if ( [[self.collectionView visibleCells] count] ) {
         RHCStationCell *cell = [self.collectionView visibleCells][0];
         [cell displayPlots];
@@ -511,38 +513,6 @@ static NSString *kCellID = @"stationCellID";
 
 
 #pragma mark -
-
-- (void)updateContentWithCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler;
-{
-    if ( self.fetchedResultsController.fetchedObjects.count ) {
-        NSInteger __block remaining = self.fetchedResultsController.fetchedObjects.count;
-
-        for ( CDStation *station in self.fetchedResultsController.fetchedObjects ) {
-            [[RHEVindsidenAPIClient defaultManager] fetchStationsPlotsForStation:station.stationId
-                                                                      completion:^(BOOL success, NSArray *plots) {
-                                                                          DLOG(@"");
-                                                                          if ( success ) {
-                                                                              [CDPlot updatePlots:plots completion:nil];
-                                                                          }
-                                                                          remaining -= 1;
-                                                                      } error:^(BOOL cancelled, NSError *error) {
-                                                                      }
-             ];
-        }
-
-        while (remaining > 0 ) {
-            [[NSRunLoop currentRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:0.1]];
-            DLOG(@"waiting: %ld", (long)remaining);
-        }
-
-        if ( completionHandler ) {
-            completionHandler(UIBackgroundFetchResultNewData);
-        }
-
-    } else {
-        completionHandler(UIBackgroundFetchResultNoData);
-    }
-}
 
 
 - (void)scrollToStation:(CDStation *)station

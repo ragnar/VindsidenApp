@@ -23,16 +23,15 @@ class TodayViewController: UITableViewController, NCWidgetProviding, NSFetchedRe
         }
     }
 
-    let dateTransformer = SORelativeDateTransformer()
+
+    deinit {
+        _fetchedResultsController = nil
+        DLOG("")
+    }
 
 
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-    }
-
-
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
-        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
     }
 
 
@@ -63,7 +62,9 @@ class TodayViewController: UITableViewController, NCWidgetProviding, NSFetchedRe
 
 
     func widgetPerformUpdateWithCompletionHandler(completionHandler: ((NCUpdateResult) -> Void)!) {
-        updateContentWithCompletionHandler(completionHandler)
+        DLOG("")
+        completionHandler(.NewData)
+        updateContentWithCompletionHandler(completionHandler: completionHandler)
     }
 
 
@@ -78,7 +79,7 @@ class TodayViewController: UITableViewController, NCWidgetProviding, NSFetchedRe
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let sections = fetchedResultsController.sections as Array!
-        let sectionInfo = sections[section] as NSFetchedResultsSectionInfo
+        let sectionInfo = sections[section] as! NSFetchedResultsSectionInfo
 
         let rows:Int = showingAll ? sectionInfo.numberOfObjects : min(sectionInfo.numberOfObjects, TableViewConstants.baseRowCount + 1)
         return rows
@@ -89,13 +90,13 @@ class TodayViewController: UITableViewController, NCWidgetProviding, NSFetchedRe
         let itemCount = (fetchedResultsController.fetchedObjects as Array!).count
 
         if !showingAll && indexPath.row == TableViewConstants.baseRowCount &&  itemCount != TableViewConstants.baseRowCount + 1 {
-            let cell = tableView.dequeueReusableCellWithIdentifier(TableViewConstants.CellIdentifiers.showall, forIndexPath: indexPath) as UITableViewCell
+            let cell = tableView.dequeueReusableCellWithIdentifier(TableViewConstants.CellIdentifiers.showall, forIndexPath: indexPath) as! UITableViewCell
             cell.textLabel?.text = NSLocalizedString("Show All...", tableName: nil, bundle: NSBundle.mainBundle(), value: "Show all...", comment: "Show all")
             return cell
         } else {
-            let cell = tableView.dequeueReusableCellWithIdentifier(TableViewConstants.CellIdentifiers.message, forIndexPath: indexPath) as RHCTodayCell
-            let stationInfo = self.fetchedResultsController.objectAtIndexPath(indexPath) as CDStation
-            let tmpplot: CDPlot? = stationInfo.lastRegisteredPlot()
+            let cell = tableView.dequeueReusableCellWithIdentifier(TableViewConstants.CellIdentifiers.message, forIndexPath: indexPath) as! RHCTodayCell
+            var stationInfo = self.fetchedResultsController.objectAtIndexPath(indexPath) as! CDStation
+            var tmpplot: CDPlot? = stationInfo.lastRegisteredPlot()
 
             if let plot = tmpplot {
                 let winddir = CGFloat(plot.windDir.floatValue)
@@ -116,7 +117,7 @@ class TodayViewController: UITableViewController, NCWidgetProviding, NSFetchedRe
                     }
                 }
                 cell.arrowImageView.image = image
-                cell.updatedLabel.text = dateTransformer.transformedValue(plot.plotTime) as? String
+                cell.updatedLabel.text = AppConfig.sharedConfiguration.relativeDate(plot.plotTime) as String
             } else {
                 cell.speedLabel.text = "—.—"
                 cell.updatedLabel.text = NSLocalizedString("LABEL_NOT_UPDATED", tableName: nil, bundle: NSBundle.mainBundle(), value: "LABEL_NOT_UPDATED", comment: "Not updated")
@@ -169,7 +170,7 @@ class TodayViewController: UITableViewController, NCWidgetProviding, NSFetchedRe
             return
         }
 
-        let stationInfo = self.fetchedResultsController.objectAtIndexPath(indexPath) as CDStation
+        let stationInfo = self.fetchedResultsController.objectAtIndexPath(indexPath) as! CDStation
 
         let url = NSURL(string: "vindsiden://station/\(stationInfo.stationId)?todayView=1")
         if let actual = url {
@@ -205,7 +206,7 @@ class TodayViewController: UITableViewController, NCWidgetProviding, NSFetchedRe
     var _fetchedResultsController: NSFetchedResultsController? = nil;
 
 
-    func controllerDidChangeContent(controller: NSFetchedResultsController!) {
+    func controllerDidChangeContent(controller: NSFetchedResultsController) {
         if tableView.editing == false {
             tableView.reloadData()
         }
@@ -254,7 +255,7 @@ class TodayViewController: UITableViewController, NCWidgetProviding, NSFetchedRe
 
 
     func infoCellHeight() -> CGFloat {
-        let infoCell = tableView.dequeueReusableCellWithIdentifier(TableViewConstants.CellIdentifiers.message) as RHCTodayCell
+        let infoCell = tableView.dequeueReusableCellWithIdentifier(TableViewConstants.CellIdentifiers.message) as! RHCTodayCell
         infoCell.nameLabel?.text = "123"
         infoCell.updatedLabel?.text = "123"
         infoCell.layoutIfNeeded()
@@ -265,7 +266,7 @@ class TodayViewController: UITableViewController, NCWidgetProviding, NSFetchedRe
 
 
     func showCellHeight() -> CGFloat {
-        let infoCell = tableView.dequeueReusableCellWithIdentifier(TableViewConstants.CellIdentifiers.showall) as UITableViewCell
+        let infoCell = tableView.dequeueReusableCellWithIdentifier(TableViewConstants.CellIdentifiers.showall) as! UITableViewCell
         infoCell.textLabel?.text = "123"
         infoCell.layoutIfNeeded()
 
@@ -278,40 +279,15 @@ class TodayViewController: UITableViewController, NCWidgetProviding, NSFetchedRe
 
 
     func updateContentWithCompletionHandler(completionHandler: ((NCUpdateResult) -> Void)? = nil) {
-        if let count = fetchedResultsController.fetchedObjects?.count {
-            if count <= 0 {
-                completionHandler?(.NoData)
-                return;
-            }
-
-            var remaining = count
-
-            for station in fetchedResultsController.fetchedObjects? as [CDStation] {
-
-                let complete = { (success:Bool, plots: [AnyObject]!) -> Void in
-                    if success == true {
-                        CDPlot.updatePlots(plots, completion: nil)
-                    }
-
-                    remaining--
-
-                    if remaining == 0 {
-                        Logger.DLOG("Finished")
-                        dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                            completionHandler?(.NewData)
-                            return
-                        })
-                    }
-                }
-
-                let error = { (cancelled:Bool, error: NSError!) -> Void in
-                    Logger.DLOG("error: \(error)")
-                }
-
-                RHEVindsidenAPIClient.defaultManager().fetchStationsPlotsForStation(station.stationId, completion: complete, error: error)
-            }
-        } else {
-            completionHandler?(.NoData)
+        DLOG("Updating content")
+        WindManager.sharedManager.fetch { (fetchResult: UIBackgroundFetchResult) -> Void in
+            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                self.tableView.reloadData()
+                completionHandler?(.NewData)
+                return
+            })
         }
+
+        //_fetchedResultsController = nil
     }
 }

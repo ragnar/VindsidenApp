@@ -62,7 +62,7 @@ class RHEStationPickerViewController : UITableViewController, NSFetchedResultsCo
 
     func configureCell( cell: UITableViewCell, atIndexPath indexPath: NSIndexPath)
     {
-        let station = fetchedResultsController.objectAtIndexPath(indexPath) as CDStation
+        let station = fetchedResultsController.objectAtIndexPath(indexPath) as! CDStation
         cell.textLabel?.text = station.stationName;
         cell.detailTextLabel?.text = station.city;
 
@@ -86,7 +86,7 @@ class RHEStationPickerViewController : UITableViewController, NSFetchedResultsCo
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
         let sections = fetchedResultsController.sections as Array!
-        let sectionInfo = sections[section] as NSFetchedResultsSectionInfo
+        let sectionInfo = sections[section] as! NSFetchedResultsSectionInfo
 
         return sectionInfo.numberOfObjects
     }
@@ -94,7 +94,7 @@ class RHEStationPickerViewController : UITableViewController, NSFetchedResultsCo
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
     {
-        let cell = tableView.dequeueReusableCellWithIdentifier("StationCell", forIndexPath: indexPath) as UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("StationCell", forIndexPath: indexPath) as! UITableViewCell
 
         configureCell(cell, atIndexPath: indexPath)
 
@@ -134,8 +134,8 @@ class RHEStationPickerViewController : UITableViewController, NSFetchedResultsCo
 
         changeIsUserDriven = true
 
-        var array = fetchedResultsController.fetchedObjects as [CDStation]
-        let objectToMove = fetchedResultsController.objectAtIndexPath(sourceIndexPath) as CDStation
+        var array = fetchedResultsController.fetchedObjects as! [CDStation]
+        let objectToMove = fetchedResultsController.objectAtIndexPath(sourceIndexPath) as! CDStation
         array.removeAtIndex(sourceIndexPath.row)
         array.insert(objectToMove, atIndex: destinationIndexPath.row)
 
@@ -156,14 +156,14 @@ class RHEStationPickerViewController : UITableViewController, NSFetchedResultsCo
 
     override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath)
     {
-        cell.textLabel?.font = UIFont.preferredFontForTextStyle((cell.textLabel?.font.fontDescriptor().objectForKey("NSCTFontUIUsageAttribute") as String))
-        cell.detailTextLabel?.font = UIFont.preferredFontForTextStyle((cell.detailTextLabel?.font.fontDescriptor().objectForKey("NSCTFontUIUsageAttribute") as String))
+        cell.textLabel?.font = UIFont.preferredFontForTextStyle((cell.textLabel?.font.fontDescriptor().objectForKey("NSCTFontUIUsageAttribute") as! String))
+        cell.detailTextLabel?.font = UIFont.preferredFontForTextStyle((cell.detailTextLabel?.font.fontDescriptor().objectForKey("NSCTFontUIUsageAttribute") as! String))
     }
 
 
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath)
     {
-        let station = fetchedResultsController.objectAtIndexPath(indexPath) as CDStation
+        let station = fetchedResultsController.objectAtIndexPath(indexPath) as! CDStation
         //let cell = tableView.cellForRowAtIndexPath(indexPath)
 
         station.isHidden = NSNumber(bool: !station.isHidden.boolValue)
@@ -222,7 +222,9 @@ class RHEStationPickerViewController : UITableViewController, NSFetchedResultsCo
         case .Delete:
             tableView.deleteRowsAtIndexPaths([indexPath!], withRowAnimation: .Top)
         case .Update:
-            configureCell(tableView.cellForRowAtIndexPath(indexPath!)!, atIndexPath: indexPath!)
+            if let cell = tableView.cellForRowAtIndexPath(indexPath!) {
+                configureCell(cell, atIndexPath: indexPath!)
+            }
         case .Move:
             tableView.deleteRowsAtIndexPaths([indexPath!], withRowAnimation: .Fade)
             tableView.insertRowsAtIndexPaths([newIndexPath!], withRowAnimation: .Fade)

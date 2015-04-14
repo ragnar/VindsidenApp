@@ -8,6 +8,7 @@
 
 import UIKit
 import VindsidenKit
+import JTSImageViewController
 
 @objc(RHEStationDetailsDelegate) protocol RHEStationDetailsDelegate {
     func rheStationDetailsViewControllerDidFinish( controller: RHEStationDetailsViewController )
@@ -81,10 +82,10 @@ import VindsidenKit
         var cell :UITableViewCell
 
         if ( 0 == indexPath.section) {
-            cell = tableView.dequeueReusableCellWithIdentifier("StationDetailsCell", forIndexPath: indexPath) as UITableViewCell
-            configureCell(cell as RHCDStationDetailsCell, atIndexPath: indexPath)
+            cell = tableView.dequeueReusableCellWithIdentifier("StationDetailsCell", forIndexPath: indexPath) as! UITableViewCell
+            configureCell(cell as! RHCDStationDetailsCell, atIndexPath: indexPath)
         } else {
-            cell = tableView.dequeueReusableCellWithIdentifier("ButtonCell", forIndexPath: indexPath) as UITableViewCell
+            cell = tableView.dequeueReusableCellWithIdentifier("ButtonCell", forIndexPath: indexPath) as! UITableViewCell
             cell.textLabel?.textColor = self.view.tintColor;
             cell.textLabel?.text = buttons[indexPath.row]
         }
@@ -97,8 +98,8 @@ import VindsidenKit
     {
         if indexPath.section == 0 {
             if let actual = cell as? RHCDStationDetailsCell {
-                actual.headerLabel.font = UIFont.preferredFontForTextStyle((actual.headerLabel.font.fontDescriptor().objectForKey("NSCTFontUIUsageAttribute") as String))
-                actual.detailsLabel.font = UIFont.preferredFontForTextStyle((actual.detailsLabel.font.fontDescriptor().objectForKey("NSCTFontUIUsageAttribute") as String))
+                actual.headerLabel.font = UIFont.preferredFontForTextStyle((actual.headerLabel.font.fontDescriptor().objectForKey("NSCTFontUIUsageAttribute") as! String))
+                actual.detailsLabel.font = UIFont.preferredFontForTextStyle((actual.detailsLabel.font.fontDescriptor().objectForKey("NSCTFontUIUsageAttribute") as! String))
             }
         }
     }
@@ -106,7 +107,7 @@ import VindsidenKit
 
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         if indexPath.section == 0 {
-            let cell = tableView.dequeueReusableCellWithIdentifier("StationDetailsCell") as RHCDStationDetailsCell
+            let cell = tableView.dequeueReusableCellWithIdentifier("StationDetailsCell") as! RHCDStationDetailsCell
             configureCell(cell, atIndexPath: indexPath)
             return cell.systemLayoutSizeFittingSize(UILayoutFittingCompressedSize).height
         }
@@ -155,13 +156,13 @@ import VindsidenKit
                 cell.detailsLabel.text = current.copyright
             case 3:
                 cell.headerLabel.text = NSLocalizedString("Info", comment: "")
-                cell.detailsLabel.text = regexRemoveHTMLTags?.stringByReplacingMatchesInString(current.stationText, options: .allZeros, range: NSMakeRange(0, current.stationText.utf16Count), withTemplate: "").stringByReplacingOccurrencesOfString("\n", withString: "")
+                cell.detailsLabel.text = regexRemoveHTMLTags?.stringByReplacingMatchesInString(current.stationText, options: .allZeros, range: NSMakeRange(0, count(current.stationText.utf16)), withTemplate: "").stringByReplacingOccurrencesOfString("\n", withString: "")
             case 4:
                 cell.headerLabel.text = NSLocalizedString("Status", comment: "")
-                cell.detailsLabel.text = regexRemoveHTMLTags?.stringByReplacingMatchesInString(current.statusMessage, options: .allZeros, range: NSMakeRange(0, current.statusMessage.utf16Count), withTemplate: "").stringByReplacingOccurrencesOfString("\n", withString: "")
+                cell.detailsLabel.text = regexRemoveHTMLTags?.stringByReplacingMatchesInString(current.statusMessage, options: .allZeros, range: NSMakeRange(0, count(current.statusMessage.utf16)), withTemplate: "").stringByReplacingOccurrencesOfString("\n", withString: "")
             case 5:
                 cell.headerLabel.text = NSLocalizedString("Camera", comment: "")
-                cell.detailsLabel.text = regexRemoveHTMLTags?.stringByReplacingMatchesInString(current.webCamText, options: .allZeros, range: NSMakeRange(0, current.webCamText.utf16Count), withTemplate: "").stringByReplacingOccurrencesOfString("\n", withString: "")
+                cell.detailsLabel.text = regexRemoveHTMLTags?.stringByReplacingMatchesInString(current.webCamText, options: .allZeros, range: NSMakeRange(0, count(current.webCamText.utf16)), withTemplate: "").stringByReplacingOccurrencesOfString("\n", withString: "")
             default:
                 cell.headerLabel.text = NSLocalizedString("Unknown", comment: "")
             }
