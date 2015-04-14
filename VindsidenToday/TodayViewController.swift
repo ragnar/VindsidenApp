@@ -35,11 +35,6 @@ class TodayViewController: UITableViewController, NCWidgetProviding, NSFetchedRe
     }
 
 
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
-        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-    }
-
-
     var showingAll: Bool = false {
         didSet {
             resetContentSize()
@@ -67,7 +62,9 @@ class TodayViewController: UITableViewController, NCWidgetProviding, NSFetchedRe
 
 
     func widgetPerformUpdateWithCompletionHandler(completionHandler: ((NCUpdateResult) -> Void)!) {
-        updateContentWithCompletionHandler(completionHandler)
+        DLOG("")
+        completionHandler(.NewData)
+        updateContentWithCompletionHandler(completionHandler: completionHandler)
     }
 
 
@@ -82,7 +79,7 @@ class TodayViewController: UITableViewController, NCWidgetProviding, NSFetchedRe
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let sections = fetchedResultsController.sections as Array!
-        let sectionInfo = sections[section] as NSFetchedResultsSectionInfo
+        let sectionInfo = sections[section] as! NSFetchedResultsSectionInfo
 
         let rows:Int = showingAll ? sectionInfo.numberOfObjects : min(sectionInfo.numberOfObjects, TableViewConstants.baseRowCount + 1)
         return rows
@@ -93,12 +90,12 @@ class TodayViewController: UITableViewController, NCWidgetProviding, NSFetchedRe
         let itemCount = (fetchedResultsController.fetchedObjects as Array!).count
 
         if !showingAll && indexPath.row == TableViewConstants.baseRowCount &&  itemCount != TableViewConstants.baseRowCount + 1 {
-            let cell = tableView.dequeueReusableCellWithIdentifier(TableViewConstants.CellIdentifiers.showall, forIndexPath: indexPath) as UITableViewCell
+            let cell = tableView.dequeueReusableCellWithIdentifier(TableViewConstants.CellIdentifiers.showall, forIndexPath: indexPath) as! UITableViewCell
             cell.textLabel?.text = NSLocalizedString("Show All...", tableName: nil, bundle: NSBundle.mainBundle(), value: "Show all...", comment: "Show all")
             return cell
         } else {
-            let cell = tableView.dequeueReusableCellWithIdentifier(TableViewConstants.CellIdentifiers.message, forIndexPath: indexPath) as RHCTodayCell
-            var stationInfo = self.fetchedResultsController.objectAtIndexPath(indexPath) as CDStation
+            let cell = tableView.dequeueReusableCellWithIdentifier(TableViewConstants.CellIdentifiers.message, forIndexPath: indexPath) as! RHCTodayCell
+            var stationInfo = self.fetchedResultsController.objectAtIndexPath(indexPath) as! CDStation
             var tmpplot: CDPlot? = stationInfo.lastRegisteredPlot()
 
             if let plot = tmpplot {
@@ -120,7 +117,7 @@ class TodayViewController: UITableViewController, NCWidgetProviding, NSFetchedRe
                     }
                 }
                 cell.arrowImageView.image = image
-                cell.updatedLabel.text = AppConfig.sharedConfiguration.relativeDate(plot.plotTime)
+                cell.updatedLabel.text = AppConfig.sharedConfiguration.relativeDate(plot.plotTime) as String
             } else {
                 cell.speedLabel.text = "—.—"
                 cell.updatedLabel.text = NSLocalizedString("LABEL_NOT_UPDATED", tableName: nil, bundle: NSBundle.mainBundle(), value: "LABEL_NOT_UPDATED", comment: "Not updated")
@@ -173,7 +170,7 @@ class TodayViewController: UITableViewController, NCWidgetProviding, NSFetchedRe
             return
         }
 
-        let stationInfo = self.fetchedResultsController.objectAtIndexPath(indexPath) as CDStation
+        let stationInfo = self.fetchedResultsController.objectAtIndexPath(indexPath) as! CDStation
 
         let url = NSURL(string: "vindsiden://station/\(stationInfo.stationId)?todayView=1")
         if let actual = url {
@@ -209,7 +206,7 @@ class TodayViewController: UITableViewController, NCWidgetProviding, NSFetchedRe
     var _fetchedResultsController: NSFetchedResultsController? = nil;
 
 
-    func controllerDidChangeContent(controller: NSFetchedResultsController!) {
+    func controllerDidChangeContent(controller: NSFetchedResultsController) {
         if tableView.editing == false {
             tableView.reloadData()
         }
@@ -258,7 +255,7 @@ class TodayViewController: UITableViewController, NCWidgetProviding, NSFetchedRe
 
 
     func infoCellHeight() -> CGFloat {
-        let infoCell = tableView.dequeueReusableCellWithIdentifier(TableViewConstants.CellIdentifiers.message) as RHCTodayCell
+        let infoCell = tableView.dequeueReusableCellWithIdentifier(TableViewConstants.CellIdentifiers.message) as! RHCTodayCell
         infoCell.nameLabel?.text = "123"
         infoCell.updatedLabel?.text = "123"
         infoCell.layoutIfNeeded()
@@ -269,7 +266,7 @@ class TodayViewController: UITableViewController, NCWidgetProviding, NSFetchedRe
 
 
     func showCellHeight() -> CGFloat {
-        let infoCell = tableView.dequeueReusableCellWithIdentifier(TableViewConstants.CellIdentifiers.showall) as UITableViewCell
+        let infoCell = tableView.dequeueReusableCellWithIdentifier(TableViewConstants.CellIdentifiers.showall) as! UITableViewCell
         infoCell.textLabel?.text = "123"
         infoCell.layoutIfNeeded()
 
@@ -282,7 +279,7 @@ class TodayViewController: UITableViewController, NCWidgetProviding, NSFetchedRe
 
 
     func updateContentWithCompletionHandler(completionHandler: ((NCUpdateResult) -> Void)? = nil) {
-
+        DLOG("Updating content")
         WindManager.sharedManager.fetch { (fetchResult: UIBackgroundFetchResult) -> Void in
             dispatch_async(dispatch_get_main_queue(), { () -> Void in
                 self.tableView.reloadData()
