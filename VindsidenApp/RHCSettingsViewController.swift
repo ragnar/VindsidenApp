@@ -45,7 +45,7 @@ import VindsidenKit
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
 
-        let cell = tableView.dequeueReusableCellWithIdentifier("SettingsCell", forIndexPath: indexPath) as UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("SettingsCell", forIndexPath: indexPath) as! UITableViewCell
 
         if indexPath.row == 0 {
             cell.textLabel?.text = NSLocalizedString("Stations", comment: "")
@@ -72,11 +72,11 @@ import VindsidenKit
     override func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         let tv = UITextView(frame: CGRectZero)
 
-        let appName = NSBundle.mainBundle().objectForInfoDictionaryKey("CFBundleDisplayName") as String
-        let appVersion = NSBundle.mainBundle().objectForInfoDictionaryKey("CFBundleShortVersionString") as String
-        let appBuild = NSBundle.mainBundle().objectForInfoDictionaryKey("CFBundleVersion") as String
+        let appName = NSBundle.mainBundle().objectForInfoDictionaryKey("CFBundleDisplayName") as! String
+        let appVersion = NSBundle.mainBundle().objectForInfoDictionaryKey("CFBundleShortVersionString") as! String
+        let appBuild = NSBundle.mainBundle().objectForInfoDictionaryKey("CFBundleVersion") as! String
         var version = NSString(format: NSLocalizedString("%@ version %@.%@", comment: "Version string in settings view"), appName, appVersion, appBuild)
-        tv.text = NSLocalizedString("LABEL_PERMIT", comment: "Værdata hentet med tillatelse fra\nhttp://vindsiden.no\n\n").stringByAppendingString(version)
+        tv.text = NSLocalizedString("LABEL_PERMIT", comment: "Værdata hentet med tillatelse fra\nhttp://vindsiden.no\n\n").stringByAppendingString(version as String)
 
         tv.editable = false
         tv.textAlignment = .Center
