@@ -84,6 +84,7 @@
 		ADCB8A861A94F52D009225B1 /* VindsidenApp WatchKit App.app in Resources */ = {isa = PBXBuildFile; fileRef = ADCB8A851A94F52D009225B1 /* VindsidenApp WatchKit App.app */; };
 		ADCB8A8E1A94F52D009225B1 /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ADCB8A8C1A94F52D009225B1 /* Interface.storyboard */; };
 		ADCB8A901A94F52D009225B1 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ADCB8A8F1A94F52D009225B1 /* Images.xcassets */; };
+		ADCB8A931A94F52D009225B1 /* VindsidenApp WatchKit Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = ADCB8A761A94F52D009225B1 /* VindsidenApp WatchKit Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		ADCD424E196E4E42004973E9 /* NSNumber+Between.h in Headers */ = {isa = PBXBuildFile; fileRef = ADCD423C196E4E42004973E9 /* NSNumber+Between.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		ADCD424F196E4E42004973E9 /* NSNumber+Between.m in Sources */ = {isa = PBXBuildFile; fileRef = ADCD423D196E4E42004973E9 /* NSNumber+Between.m */; };
 		ADCD4250196E4E42004973E9 /* NSNumber+Convertion.h in Headers */ = {isa = PBXBuildFile; fileRef = ADCD423E196E4E42004973E9 /* NSNumber+Convertion.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -201,6 +202,13 @@
 			remoteGlobalIDString = ADCB8A841A94F52D009225B1;
 			remoteInfo = "VindsidenApp WatchKit App";
 		};
+		ADCB8A911A94F52D009225B1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AD17ED3C1731012200943C33 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = ADCB8A751A94F52D009225B1;
+			remoteInfo = "VindsidenApp WatchKit Extension";
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -210,6 +218,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
+				ADCB8A931A94F52D009225B1 /* VindsidenApp WatchKit Extension.appex in Embed App Extensions */,
 				AD539C8E1947B0F7002644BD /* org.juniks.VindsidenApp.VindsidenToday.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
@@ -856,6 +865,7 @@
 				AD539C8D1947B0F7002644BD /* PBXTargetDependency */,
 				AD539C901947B0F7002644BD /* PBXTargetDependency */,
 				AD539CB51947B5CA002644BD /* PBXTargetDependency */,
+				ADCB8A921A94F52D009225B1 /* PBXTargetDependency */,
 			);
 			name = VindsidenApp;
 			productName = "Vindsiden-v2";
@@ -1330,6 +1340,11 @@
 			target = ADCB8A841A94F52D009225B1 /* VindsidenApp WatchKit App */;
 			targetProxy = ADCB8A871A94F52D009225B1 /* PBXContainerItemProxy */;
 		};
+		ADCB8A921A94F52D009225B1 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = ADCB8A751A94F52D009225B1 /* VindsidenApp WatchKit Extension */;
+			targetProxy = ADCB8A911A94F52D009225B1 /* PBXContainerItemProxy */;
+		};
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
@@ -1491,6 +1506,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = VindsidenApp/VindsidenApp.entitlements;
 				CURRENT_PROJECT_VERSION = 50;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "VindsidenApp/VindsidenApp-Prefix.pch";
 				INFOPLIST_FILE = "VindsidenApp/VindsidenApp-Info.plist";
@@ -1513,6 +1529,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = VindsidenApp/VindsidenApp.entitlements;
 				CURRENT_PROJECT_VERSION = 50;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "VindsidenApp/VindsidenApp-Prefix.pch";
 				INFOPLIST_FILE = "VindsidenApp/VindsidenApp-Info.plist";
