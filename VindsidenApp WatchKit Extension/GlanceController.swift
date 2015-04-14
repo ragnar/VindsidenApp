@@ -53,7 +53,7 @@ class GlanceController: WKInterfaceController {
         fetchRequest.predicate = NSPredicate(format: "isHidden = NO", argumentArray: nil)
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: "order", ascending: true)]
 
-        let stations = Datamanager.sharedManager().managedObjectContext?.executeFetchRequest(fetchRequest, error: nil) as [CDStation]
+        let stations = Datamanager.sharedManager().managedObjectContext?.executeFetchRequest(fetchRequest, error: nil) as! [CDStation]
 
         return stations.first
     }
@@ -86,7 +86,7 @@ class GlanceController: WKInterfaceController {
             self.glanceWindCurrentLabel.setText(convertWindToString(plot.windAvg, toUnit: unit))
             self.glanceWindGustLabel.setText("Gust: \(convertWindToString(plot.windMax, toUnit: unit)) \(unitString)")
             self.glanceWindLullLabel.setText("Lull: \(convertWindToString(plot.windMin, toUnit: unit)) \(unitString)")
-            self.glanceWindUpdatedAtLabel.setText( AppConfig.sharedConfiguration.relativeDate(plot.plotTime))
+            self.glanceWindUpdatedAtLabel.setText( AppConfig.sharedConfiguration.relativeDate(plot.plotTime) as String)
         } else {
             self.glanceWindDirectionImage.setImage(nil)
             self.glanceWindCurrentLabel.setText("–.–")
