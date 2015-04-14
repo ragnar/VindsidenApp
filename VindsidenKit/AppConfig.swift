@@ -113,9 +113,15 @@ public class AppConfig {
         }
     }
 
-    public func relativeDate( date: NSDate) -> NSString {
-        var dateToUse = date.earlierDate(NSDate())
-        return self.relativeDateTransformer.transformedValue(dateToUse) as NSString
+    public func relativeDate( dateOrNil: NSDate?) -> NSString {
+        var dateToUse: NSDate
+
+        if let date = dateOrNil {
+            dateToUse = date.earlierDate(NSDate())
+        } else {
+            dateToUse = NSDate()
+        }
+        return self.relativeDateTransformer.transformedValue(dateToUse) as! NSString
     }
 
 
