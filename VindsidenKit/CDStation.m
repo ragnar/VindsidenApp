@@ -121,15 +121,20 @@
             }
         }
 
-        if ( newStations && completion ) {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                completion(newStations);
-            });
+        if ( [childContext hasChanges] && [childContext save:&err] == NO ) {
+            [Logger DLOG:[NSString stringWithFormat:@"Save failed: %@", err.localizedDescription] file:@"" function:@(__PRETTY_FUNCTION__) line:__LINE__];
         }
 
-        [childContext save:&err];
         [context performBlock:^{
-            [context save:&err];
+            if ( [context hasChanges] && [context save:&err] == NO ) {
+                [Logger DLOG:[NSString stringWithFormat:@"Save failed: %@", err.localizedDescription] file:@"" function:@(__PRETTY_FUNCTION__) line:__LINE__];
+            }
+
+            if ( newStations && completion ) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    completion(newStations);
+                });
+            }
         }];
     }];
 }
@@ -142,9 +147,12 @@
     request.predicate = [NSPredicate predicateWithFormat:@"stationId == %@", stationId];
     request.fetchLimit = 1;
 
-    NSArray *array = [managedObjectContext executeFetchRequest:request error:nil];
+    NSError *err = nil;
+    NSArray *array = [managedObjectContext executeFetchRequest:request error:&err];
     if ( [array count] ) {
         existing = array[0];
+    } else {
+        [Logger DLOG:[NSString stringWithFormat:@"Fetch failed: %@", err.localizedDescription] file:@"" function:@(__PRETTY_FUNCTION__) line:__LINE__];
     }
     return existing;
 }
@@ -222,7 +230,14 @@
     NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
     NSDateComponents *inputComponents = [gregorian components:(NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay | NSCalendarUnitHour) fromDate:inDate];
     NSDate *outDate = [gregorian dateFromComponents:inputComponents];
-    NSArray *cdplots = [[self.plots filteredSetUsingPredicate:[NSPredicate predicateWithFormat:@"plotTime >= %@", outDate]] sortedByKeyPath:@"plotTime" ascending:NO];
+    NSManagedObjectContext *context = self.managedObjectContext;
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"CDPlot"];
+
+    fetchRequest.fetchLimit = 1;
+    fetchRequest.predicate = [NSPredicate predicateWithFormat:@"station == %@ AND plotTime >= %@", self, outDate];
+    fetchRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"plotTime" ascending:NO]];
+
+    NSArray *cdplots = [context executeFetchRequest:fetchRequest error:nil];
 
     if ( [cdplots count] ) {
         return [cdplots firstObject];

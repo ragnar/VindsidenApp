@@ -23,8 +23,6 @@
 
 @property (weak, nonatomic) CDStation *currentStation;
 
-- (void)fetchWithCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler;
-- (void)fetch;
 - (void)displayPlots;
 - (void)syncDisplayPlots;
 - (void)updateLastUpdatedLabel;

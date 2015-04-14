@@ -78,6 +78,10 @@
 + (void)updatePlots:(NSArray *)plots completion:(void (^)(void))completion
 {
     if ( 0 == [plots count] ) {
+        if ( completion ) {
+            completion();
+        }
+
         return;
     }
 
@@ -90,16 +94,47 @@
 
     [childContext performBlock:^{
         CDStation *thisStation = [CDStation existingStation:plots[0][@"stationID"] inManagedObjectContext:childContext];
+
+        if ( thisStation == nil ) {
+            [Logger DLOG:[NSString stringWithFormat:@"StationID %@ not found", plots[0][@"stationID"]] file:@"*" function:@(__PRETTY_FUNCTION__) line:__LINE__];
+
+            if ( completion ) {
+                completion();
+            }
+
+            return;
+        }
+
+        NSMutableSet *insertedPlots = [NSMutableSet set];
+
         for ( NSDictionary *dict in plots ) {
             CDPlot *managedObject = [CDPlot newOrExistingPlot:dict forStation:thisStation inManagedObjectContext:childContext];
             if ( [managedObject isInserted] ) {
-                managedObject.station = thisStation;
+                [insertedPlots addObject:managedObject];
             }
         }
 
-        [childContext save:&err];
-        [context performBlockAndWait:^{
-            [context save:&err];
+        if ( insertedPlots.count ) {
+            [thisStation willChangeValueForKey:@"plots"];
+            [thisStation addPlots:insertedPlots];
+            [thisStation didChangeValueForKey:@"plots"];
+        }
+
+        if ( [childContext hasChanges] && [childContext save:&err] == NO ) {
+            [Logger DLOG:[NSString stringWithFormat:@"Save failed: %@", err.localizedDescription] file:@"*" function:@(__PRETTY_FUNCTION__) line:__LINE__];
+            [Logger DLOG:[NSString stringWithFormat:@"Save failed: stationID: %@ - %@", plots[0][@"stationID"], thisStation] file:@"*" function:@(__PRETTY_FUNCTION__) line:__LINE__];
+        }
+
+        [childContext processPendingChanges];
+
+        [context performBlock:^{
+            if ( [context hasChanges] && [context save:&err] == NO ) {
+                [Logger DLOG:[NSString stringWithFormat:@"Save failed: %@", err.localizedDescription] file:@"*" function:@(__PRETTY_FUNCTION__) line:__LINE__];
+            }
+
+            [context processPendingChanges];
+
+
             if ( completion ) {
                 completion();
             }

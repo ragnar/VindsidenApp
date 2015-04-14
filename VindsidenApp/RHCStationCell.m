@@ -6,45 +6,33 @@
 //  Copyright (c) 2013 RHC. All rights reserved.
 //
 
+@import VindsidenKit;
+
 #import "RHCStationCell.h"
-#import <SORelativeDateTransformer/SORelativeDateTransformer.h>
 #import "NSSet+Sort.h"
 
 #import "NSObject+performBlockCancel.h"
 #import "RHEVindsidenAPIClient.h"
 #import "RHEGraphView.h"
-#import "CDPlot.h"
-#import "CDStation.h"
 
-@import VindsidenKit;
 
 @interface RHCStationCell ()
 
 @property (strong, nonatomic) NSDateFormatter *dateFormatter;
-@property (strong, nonatomic) id autocompleteBlock;
 
-@property (strong, nonatomic) SORelativeDateTransformer *dateTransformer;
 @property (strong, nonatomic) NSTimer *updatedTimer;
 
 @end
 
+
 @implementation RHCStationCell
 
-
-- (void)dealloc
-{
-    IGNORE_EXCEPTION( [[NSNotificationCenter defaultCenter] removeObserver:self name:NETWORK_STATUS_CHANGED object:nil] );
-    DLOG(@"");
-}
+@synthesize currentStation = _currentStation;
 
 
 - (void)awakeFromNib
 {
     [super awakeFromNib];
-
-    self.dateTransformer = [[SORelativeDateTransformer alloc] init];
-
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(networkReachabilityStatusChanged:) name:NETWORK_STATUS_CHANGED object:nil];
 
     self.updatedAtLabel.text = @"";
     self.cameraButton.alpha = 0.0;
@@ -63,9 +51,6 @@
     self.cameraButton.alpha = 0.0;
     self.graphView.plots = nil;
     [self.stationView resetInfoLabels];
-
-    [NSObject cancelBlock:self.autocompleteBlock];
-    self.autocompleteBlock = nil;
 }
 
 
@@ -83,94 +68,15 @@
 }
 
 
-- (void)networkReachabilityStatusChanged:(NSNotification *)notification
-{
-    DLOG(@"");
-}
-
-
-- (void)fetch
-{
-    [self fetchWithCompletionHandler:nil];
-}
-
-
-- (void)fetchWithCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler
-{
-    if ( nil == self.currentStation ) {
-        DLOG(@"");
-        return;
-    }
-    [[RHEVindsidenAPIClient defaultManager] fetchStationsPlotsForStation:self.currentStation.stationId
-                                                              completion:^(BOOL success, NSArray *plots) {
-                                                                  DLOG(@"");
-                                                                  if ( success ) {
-                                                                      [self updatePlots:plots];
-                                                                      if ( completionHandler ) {
-                                                                          completionHandler(UIBackgroundFetchResultNewData);
-                                                                      }
-                                                                  } else {
-                                                                      if ( completionHandler ) {
-                                                                          completionHandler(UIBackgroundFetchResultNoData);
-                                                                      }
-                                                                  }
-                                                              } error:^(BOOL cancelled, NSError *error) {
-                                                                  if ( NO == cancelled ) {
-                                                                      [[RHCAlertManager defaultManager] showNetworkError:error];
-
-                                                                      [self refresh];
-                                                                  }
-                                                              }
-     ];
-}
-
-
-- (void)refresh
-{
-    if ( self.autocompleteBlock ) {
-        [NSObject cancelBlock:self.autocompleteBlock];
-        self.autocompleteBlock = nil;
-    }
-
-    self.autocompleteBlock = [NSObject performBlock:^{
-        [self fetch];
-        self.autocompleteBlock = nil;
-    }
-                                         afterDelay:[self.currentStation fetchInterval]];
-}
-
-
-- (void)updatePlots:(NSArray *)plots
-{
-    UIScrollView *scrollView = (UIScrollView *)self.superview;
-
-    if ( [scrollView isDragging] ) {
-        [NSObject performBlock:^{
-            [self updatePlots:plots];
-        }
-                    afterDelay:0.2
-         ];
-        return;
-    }
-
-    [CDPlot updatePlots:plots completion:^{
-        [self displayPlots];
-        [NSObject cancelBlock:self.autocompleteBlock];
-        self.autocompleteBlock = nil;
-        [self refresh];
-    }];
-}
-
-
 - (void)updateLastUpdatedLabel
 {
-    NSArray *cdplots = [[self.currentStation.plots filteredSetUsingPredicate:[NSPredicate predicateWithFormat:@"plotTime >= %@", [[NSDate date] dateByAddingTimeInterval:-1*(kPlotHistoryHours-1)*3600]]] sortedByKeyPath:@"plotTime" ascending:NO];
+    CDPlot *plot = self.currentStation.lastRegisteredPlot;
 
-    if ( [cdplots count] ) {
-        if ( [[cdplots[0] plotTime] compare:[NSDate date]] == NSOrderedAscending ) {
-            self.updatedAtLabel.text = [self.dateTransformer transformedValue:[cdplots[0] plotTime]];
+    if ( plot != nil ) {
+        if ( [plot.plotTime compare:[NSDate date]] == NSOrderedAscending ) {
+            self.updatedAtLabel.text = [[AppConfig sharedConfiguration] relativeDate:plot.plotTime];
         } else {
-            self.updatedAtLabel.text = [self.dateTransformer transformedValue:nil];
+            self.updatedAtLabel.text = [[AppConfig sharedConfiguration] relativeDate:nil];
         }
     } else {
         self.updatedAtLabel.text = NSLocalizedString(@"LABEL_NOT_UPDATED", @"Not updated");
@@ -192,15 +98,21 @@
     NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
     NSDateComponents *inputComponents = [gregorian components:(NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay | NSCalendarUnitHour) fromDate:inDate];
     NSDate *outDate = [gregorian dateFromComponents:inputComponents];
-    NSArray *cdplots = [[self.currentStation.plots filteredSetUsingPredicate:[NSPredicate predicateWithFormat:@"plotTime >= %@", outDate]] sortedByKeyPath:@"plotTime" ascending:NO];
+    NSManagedObjectContext *context = self.currentStation.managedObjectContext;
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"CDPlot"];
+
+    fetchRequest.predicate = [NSPredicate predicateWithFormat:@"station == %@ AND plotTime >= %@", self.currentStation, outDate];
+    fetchRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"plotTime" ascending:NO]];
+
+    NSArray *cdplots = [context executeFetchRequest:fetchRequest error:nil];
 
     if ( [cdplots count] ) {
         self.graphView.plots = cdplots;
-        [self.stationView updateWithPlot:cdplots[0]];
+        [self.stationView updateWithPlot:cdplots.firstObject];
         if ( [[cdplots[0] plotTime] compare:[NSDate date]] == NSOrderedAscending ) {
-            self.updatedAtLabel.text = [self.dateTransformer transformedValue:[cdplots[0] plotTime]];
+            self.updatedAtLabel.text = [[AppConfig sharedConfiguration] relativeDate:[cdplots.firstObject plotTime]];
         } else {
-            self.updatedAtLabel.text = [self.dateTransformer transformedValue:nil];
+            self.updatedAtLabel.text = [[AppConfig sharedConfiguration] relativeDate:nil];
         }
     } else {
         self.updatedAtLabel.text = NSLocalizedString(@"LABEL_NOT_UPDATED", @"Not updated");
@@ -215,9 +127,6 @@
 {
     _currentStation = currentStation;
 
-    [[AppConfig sharedConfiguration].applicationUserDefaults setInteger:[self.currentStation.stationId integerValue] forKey:@"selectedDefaultStation"];
-    [[AppConfig sharedConfiguration].applicationUserDefaults synchronize];
-
     self.stationNameLabel.text = self.currentStation.stationName;
     [self displayPlots];
 
@@ -229,13 +138,6 @@
                                                  userInfo:nil
                                                   repeats:YES];
     [[NSRunLoop currentRunLoop] addTimer:self.updatedTimer forMode:NSDefaultRunLoopMode];
-
-    [NSObject cancelBlock:self.autocompleteBlock];
-    self.autocompleteBlock = nil;
-
-    if ( NO == [self.currentStation isUpdated] ) {
-        [self fetch];
-    }
 }
 
 

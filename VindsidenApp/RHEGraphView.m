@@ -674,7 +674,7 @@ static CGPoint midPointForPoints(CGPoint p1, CGPoint p2)
 static CGPoint controlPointForPoints(CGPoint p1, CGPoint p2)
 {
     CGPoint controlPoint = midPointForPoints(p1, p2);
-    CGFloat diffY = abs(p2.y - controlPoint.y);
+    CGFloat diffY = fabs(p2.y - controlPoint.y);
 
     if ( p1.y < p2.y ) {
         controlPoint.y += diffY;
