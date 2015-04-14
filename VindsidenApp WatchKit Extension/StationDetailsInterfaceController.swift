@@ -38,7 +38,7 @@ class StationDetailsInterfaceController: WKInterfaceController {
             let windspeed = CGFloat(plot.windAvg.floatValue)
             let image = DrawArrow.drawArrowAtAngle( winddir, forSpeed:windspeed, highlighted:false, color: UIColor.whiteColor(), hightlightedColor: UIColor.blackColor())
             windDirectionImage.setImage(image)
-            updatedAtLabel.setText( AppConfig.sharedConfiguration.relativeDate(plot.plotTime))
+            updatedAtLabel.setText( AppConfig.sharedConfiguration.relativeDate(plot.plotTime) as String)
 
             let raw = AppConfig.sharedConfiguration.applicationUserDefaults.integerForKey("selectedUnit")
             let unit = SpeedConvertion(rawValue: raw)
@@ -60,37 +60,37 @@ class StationDetailsInterfaceController: WKInterfaceController {
         interfaceTable.setNumberOfRows( 7, withRowType: "stationDetails")
 
         var index = 0
-        var elementRow = interfaceTable.rowControllerAtIndex(index) as StationDetailsRowController
+        var elementRow = interfaceTable.rowControllerAtIndex(index) as! StationDetailsRowController
         elementRow.textLabel.setText("Direction")
         elementRow.detailsTextLabel.setText("\(Int(plot.windDir))°")
 
         index++
-        elementRow = interfaceTable.rowControllerAtIndex(index) as StationDetailsRowController
+        elementRow = interfaceTable.rowControllerAtIndex(index) as! StationDetailsRowController
         elementRow.textLabel.setText("Average")
         elementRow.detailsTextLabel.setText(convertWindToString(plot.windAvg, toUnit: unit))
 
         index++
-        elementRow = interfaceTable.rowControllerAtIndex(index) as StationDetailsRowController
+        elementRow = interfaceTable.rowControllerAtIndex(index) as! StationDetailsRowController
         elementRow.textLabel.setText("Gust")
         elementRow.detailsTextLabel.setText(convertWindToString(plot.windMax, toUnit: unit))
 
         index++
-        elementRow = interfaceTable.rowControllerAtIndex(index) as StationDetailsRowController
+        elementRow = interfaceTable.rowControllerAtIndex(index) as! StationDetailsRowController
         elementRow.textLabel.setText("Lull")
         elementRow.detailsTextLabel.setText(convertWindToString(plot.windMin, toUnit: unit))
 
         index++
-        elementRow = interfaceTable.rowControllerAtIndex(index) as StationDetailsRowController
+        elementRow = interfaceTable.rowControllerAtIndex(index) as! StationDetailsRowController
         elementRow.textLabel.setText("Beaufort")
         elementRow.detailsTextLabel.setText("\(Int(plot.windMin.speedInBeaufort()))")
 
         index++
-        elementRow = interfaceTable.rowControllerAtIndex(index) as StationDetailsRowController
+        elementRow = interfaceTable.rowControllerAtIndex(index) as! StationDetailsRowController
         elementRow.textLabel.setText("Air temp")
         elementRow.detailsTextLabel.setText("\(convertNumberToString(plot.tempAir))℃")
 
         index++
-        elementRow = interfaceTable.rowControllerAtIndex(index) as StationDetailsRowController
+        elementRow = interfaceTable.rowControllerAtIndex(index) as! StationDetailsRowController
         elementRow.textLabel.setText("Water temp")
         elementRow.detailsTextLabel.setText("\(convertNumberToString(plot.tempWater))℃")
     }
