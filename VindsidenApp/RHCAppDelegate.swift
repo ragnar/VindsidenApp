@@ -15,7 +15,6 @@ import AFNetworking
 class RHCAppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-    let _formatterQueue = dispatch_queue_create("formatter queue", nil);
 
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
@@ -109,7 +108,7 @@ class RHCAppDelegate: UIResponder, UIApplicationDelegate {
 
     
     func openLaunchOptionsURL( url: NSURL) -> Bool {
-        let ident = url.pathComponents?.last as String
+        let ident = url.pathComponents?.last as! String
         var station: CDStation?
 
         if let stationId = ident.toInt() {
