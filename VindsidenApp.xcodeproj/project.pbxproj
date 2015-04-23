@@ -78,7 +78,6 @@
 		ADB5A78B19DEC29A009AE4A5 /* DrawArrow.m in Sources */ = {isa = PBXBuildFile; fileRef = ADB5A78919DEC29A009AE4A5 /* DrawArrow.m */; };
 		ADBEA4CF1A07ECF600B168BF /* UIColor+AppColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADBEA4CE1A07ECF600B168BF /* UIColor+AppColors.swift */; };
 		ADCB8A7C1A94F52D009225B1 /* InterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADCB8A7B1A94F52D009225B1 /* InterfaceController.swift */; };
-		ADCB8A7E1A94F52D009225B1 /* NotificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADCB8A7D1A94F52D009225B1 /* NotificationController.swift */; };
 		ADCB8A801A94F52D009225B1 /* GlanceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADCB8A7F1A94F52D009225B1 /* GlanceController.swift */; };
 		ADCB8A821A94F52D009225B1 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ADCB8A811A94F52D009225B1 /* Images.xcassets */; };
 		ADCB8A861A94F52D009225B1 /* VindsidenApp WatchKit App.app in Resources */ = {isa = PBXBuildFile; fileRef = ADCB8A851A94F52D009225B1 /* VindsidenApp WatchKit App.app */; };
@@ -342,7 +341,6 @@
 		ADCB8A791A94F52D009225B1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		ADCB8A7A1A94F52D009225B1 /* PushNotificationPayload.apns */ = {isa = PBXFileReference; lastKnownFileType = text; path = PushNotificationPayload.apns; sourceTree = "<group>"; };
 		ADCB8A7B1A94F52D009225B1 /* InterfaceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterfaceController.swift; sourceTree = "<group>"; };
-		ADCB8A7D1A94F52D009225B1 /* NotificationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationController.swift; sourceTree = "<group>"; };
 		ADCB8A7F1A94F52D009225B1 /* GlanceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlanceController.swift; sourceTree = "<group>"; };
 		ADCB8A811A94F52D009225B1 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		ADCB8A851A94F52D009225B1 /* VindsidenApp WatchKit App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "VindsidenApp WatchKit App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -754,7 +752,6 @@
 				AD6BD0EF1A96797D00E6686B /* StationDetailsRowController.swift */,
 				AD6BD0F01A96797D00E6686B /* StationsRowController.swift */,
 				ADCB8A7B1A94F52D009225B1 /* InterfaceController.swift */,
-				ADCB8A7D1A94F52D009225B1 /* NotificationController.swift */,
 				ADCB8A7F1A94F52D009225B1 /* GlanceController.swift */,
 				ADCB8A811A94F52D009225B1 /* Images.xcassets */,
 				ADCB8A781A94F52D009225B1 /* Supporting Files */,
@@ -1263,7 +1260,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				ADCB8A7E1A94F52D009225B1 /* NotificationController.swift in Sources */,
 				ADCB8A7C1A94F52D009225B1 /* InterfaceController.swift in Sources */,
 				AD6BD0F21A96797D00E6686B /* StationDetailsRowController.swift in Sources */,
 				ADCB8A801A94F52D009225B1 /* GlanceController.swift in Sources */,
