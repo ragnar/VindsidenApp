@@ -53,6 +53,7 @@
 		AD6BD0F21A96797D00E6686B /* StationDetailsRowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD6BD0EF1A96797D00E6686B /* StationDetailsRowController.swift */; };
 		AD6BD0F31A96797D00E6686B /* StationsRowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD6BD0F01A96797D00E6686B /* StationsRowController.swift */; };
 		AD6BD0F61A967AD800E6686B /* VindsidenKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD539C9D1947B5CA002644BD /* VindsidenKit.framework */; };
+		AD6E8F021AE8E3C700FA5C79 /* RHCNotConfiguredInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD6E8F011AE8E3C700FA5C79 /* RHCNotConfiguredInterfaceController.swift */; };
 		AD71965C19EED713006FA2BC /* RHCSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD71965B19EED713006FA2BC /* RHCSettingsViewController.swift */; };
 		AD7398D81AA4455A00236D52 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = AD17EDC517312A5000943C33 /* Localizable.strings */; };
 		AD7AA501196E46BA00B1518B /* CDPlot.h in Headers */ = {isa = PBXBuildFile; fileRef = AD7AA4FD196E46BA00B1518B /* CDPlot.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -313,6 +314,7 @@
 		AD6BD0F01A96797D00E6686B /* StationsRowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StationsRowController.swift; sourceTree = "<group>"; };
 		AD6BD0F41A967A8800E6686B /* libPods.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libPods.a; path = "Pods/build/Debug-iphoneos/libPods.a"; sourceTree = "<group>"; };
 		AD6BD0F71A967D7700E6686B /* VindsidenApp WatchKit Extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "VindsidenApp WatchKit Extension.entitlements"; sourceTree = "<group>"; };
+		AD6E8F011AE8E3C700FA5C79 /* RHCNotConfiguredInterfaceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RHCNotConfiguredInterfaceController.swift; sourceTree = "<group>"; };
 		AD71965B19EED713006FA2BC /* RHCSettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RHCSettingsViewController.swift; sourceTree = "<group>"; };
 		AD7AA4FD196E46BA00B1518B /* CDPlot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDPlot.h; sourceTree = "<group>"; };
 		AD7AA4FE196E46BA00B1518B /* CDPlot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDPlot.m; sourceTree = "<group>"; };
@@ -753,6 +755,7 @@
 				AD6BD0F01A96797D00E6686B /* StationsRowController.swift */,
 				ADCB8A7B1A94F52D009225B1 /* InterfaceController.swift */,
 				ADCB8A7F1A94F52D009225B1 /* GlanceController.swift */,
+				AD6E8F011AE8E3C700FA5C79 /* RHCNotConfiguredInterfaceController.swift */,
 				ADCB8A811A94F52D009225B1 /* Images.xcassets */,
 				ADCB8A781A94F52D009225B1 /* Supporting Files */,
 			);
@@ -1263,6 +1266,7 @@
 				ADCB8A7C1A94F52D009225B1 /* InterfaceController.swift in Sources */,
 				AD6BD0F21A96797D00E6686B /* StationDetailsRowController.swift in Sources */,
 				ADCB8A801A94F52D009225B1 /* GlanceController.swift in Sources */,
+				AD6E8F021AE8E3C700FA5C79 /* RHCNotConfiguredInterfaceController.swift in Sources */,
 				AD6BD0F11A96797D00E6686B /* StationDetailsInterfaceController.swift in Sources */,
 				AD6BD0F31A96797D00E6686B /* StationsRowController.swift in Sources */,
 			);
