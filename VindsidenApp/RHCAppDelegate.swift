@@ -98,8 +98,30 @@ class RHCAppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, performFetchWithCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
         WindManager.sharedManager.fetch { (result: UIBackgroundFetchResult) -> Void in
-            DLOG("Fetch finished")
             completionHandler(result)
+        }
+    }
+
+
+    func application(application: UIApplication, handleWatchKitExtensionRequest userInfo: [NSObject : AnyObject]?, reply: (([NSObject : AnyObject]!) -> Void)!) {
+        let taskID = application.beginBackgroundTaskWithExpirationHandler({})
+
+        if  let unwrapped = userInfo, let interface = unwrapped["interface"] as? String {
+            switch (interface) {
+            case "glance":
+                WindManager.sharedManager.fetchForStationId(unwrapped["station"] as! Int) { (result: UIBackgroundFetchResult) -> Void in
+                    reply(["result": "updated"])
+                    UIApplication.sharedApplication().endBackgroundTask(taskID)
+                }
+            case "main":
+                WindManager.sharedManager.fetch { (result: UIBackgroundFetchResult) -> Void in
+                    reply(["result": "updated"])
+                    UIApplication.sharedApplication().endBackgroundTask(taskID)
+                }
+            default:
+                reply(["result": "not_updated"])
+                UIApplication.sharedApplication().endBackgroundTask(taskID)
+            }
         }
     }
 
