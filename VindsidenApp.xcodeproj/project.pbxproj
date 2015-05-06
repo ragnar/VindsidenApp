@@ -29,6 +29,7 @@
 		AD17EDC717312A5000943C33 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = AD17EDC517312A5000943C33 /* Localizable.strings */; };
 		AD17EDCC17312B2600943C33 /* DINMittelschriftStd.otf in Resources */ = {isa = PBXBuildFile; fileRef = AD17EDCA17312B2600943C33 /* DINMittelschriftStd.otf */; };
 		AD17EDF91736492500943C33 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD17EDF81736492200943C33 /* AdSupport.framework */; };
+		AD1812A81AF9E77F0040080D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = AD1812A61AF9E77F0040080D /* InfoPlist.strings */; };
 		AD2AB4F819C722320029C739 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = AD2AB4FA19C722320029C739 /* InfoPlist.strings */; };
 		AD2AB4FD19C722330029C739 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = AD2AB4FF19C722330029C739 /* InfoPlist.strings */; };
 		AD2AB50219C722330029C739 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = AD2AB50419C722330029C739 /* Localizable.strings */; };
@@ -251,7 +252,7 @@
 		AD07B2C01779E90A004BC24C /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Media.xcassets; sourceTree = "<group>"; };
 		AD146F4C1741251E00205BB9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
 		AD146F4D1741255B00205BB9 /* nb */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nb; path = nb.lproj/Localizable.strings; sourceTree = "<group>"; };
-		AD146F4F1741255B00205BB9 /* nb */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nb; path = nb.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		AD146F4F1741255B00205BB9 /* nb */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = nb; path = nb.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		AD146F52174126FF00205BB9 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/MainStoryboard.strings; sourceTree = "<group>"; };
 		AD146F541741270700205BB9 /* nb */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nb; path = nb.lproj/MainStoryboard.strings; sourceTree = "<group>"; };
 		AD17ED441731012200943C33 /* VindsidenApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VindsidenApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -259,7 +260,7 @@
 		AD17ED491731012200943C33 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		AD17ED4B1731012200943C33 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		AD17ED4F1731012200943C33 /* VindsidenApp-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "VindsidenApp-Info.plist"; sourceTree = "<group>"; };
-		AD17ED511731012200943C33 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		AD17ED511731012200943C33 /* en */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		AD17ED551731012200943C33 /* VindsidenApp-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "VindsidenApp-Prefix.pch"; sourceTree = "<group>"; };
 		AD17ED621731012200943C33 /* RHCViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RHCViewController.h; sourceTree = "<group>"; };
 		AD17ED631731012200943C33 /* RHCViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RHCViewController.m; sourceTree = "<group>"; };
@@ -281,11 +282,17 @@
 		AD17EDC617312A5000943C33 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		AD17EDCA17312B2600943C33 /* DINMittelschriftStd.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = DINMittelschriftStd.otf; sourceTree = "<group>"; };
 		AD17EDF81736492200943C33 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
+		AD1812A71AF9E77F0040080D /* Base */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		AD1812A91AF9E7B40040080D /* Base */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		AD1812AA1AF9E7CE0040080D /* en */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		AD1812AB1AF9E7CE0040080D /* Base */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		AD1812AC1AF9E7E50040080D /* en */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		AD1812AD1AF9E7E60040080D /* nb */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = nb; path = nb.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		AD1B7EF119A7E82900D8B253 /* libPods.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libPods.a; path = "Pods/build/Debug-iphoneos/libPods.a"; sourceTree = "<group>"; };
 		AD2AB4F919C722320029C739 /* nb */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nb; path = nb.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		AD2AB4FE19C722330029C739 /* nb */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nb; path = nb.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		AD2AB50319C722330029C739 /* nb */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nb; path = nb.lproj/Localizable.strings; sourceTree = "<group>"; };
-		AD2AB50819C722340029C739 /* nb */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nb; path = nb.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		AD2AB50819C722340029C739 /* nb */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = nb; path = nb.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		AD2BB34A19C7718600349495 /* VindsidenAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VindsidenAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		AD2BB34D19C7718600349495 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AD2BB34E19C7718600349495 /* VindsidenAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VindsidenAppTests.swift; sourceTree = "<group>"; };
@@ -785,6 +792,7 @@
 			isa = PBXGroup;
 			children = (
 				ADCB8A8B1A94F52D009225B1 /* Info.plist */,
+				AD1812A61AF9E77F0040080D /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -1129,6 +1137,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				ADCB8A8E1A94F52D009225B1 /* Interface.storyboard in Resources */,
+				AD1812A81AF9E77F0040080D /* InfoPlist.strings in Resources */,
 				ADCB8A901A94F52D009225B1 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1353,6 +1362,7 @@
 			children = (
 				AD17ED511731012200943C33 /* en */,
 				AD146F4F1741255B00205BB9 /* nb */,
+				AD1812A91AF9E7B40040080D /* Base */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -1374,6 +1384,16 @@
 				AD146F4D1741255B00205BB9 /* nb */,
 			);
 			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		AD1812A61AF9E77F0040080D /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				AD1812A71AF9E77F0040080D /* Base */,
+				AD1812AC1AF9E7E50040080D /* en */,
+				AD1812AD1AF9E7E60040080D /* nb */,
+			);
+			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
 		AD2AB4FA19C722320029C739 /* InfoPlist.strings */ = {
@@ -1404,6 +1424,8 @@
 			isa = PBXVariantGroup;
 			children = (
 				AD2AB50819C722340029C739 /* nb */,
+				AD1812AA1AF9E7CE0040080D /* en */,
+				AD1812AB1AF9E7CE0040080D /* Base */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
