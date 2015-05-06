@@ -25,6 +25,7 @@ public class AppConfig {
         static var prefix = "org.juniks" // Could be done automatic by reading info.plist
         static let appName = "VindsidenApp" // Could be done automatic by reading info.plist
         static let todayName = "VindsidenToday"
+        static let watchName = "Watch"
         public static let frameworkBundleIdentifier = "\(prefix).VindsidenKit"
     }
 
@@ -36,6 +37,7 @@ public class AppConfig {
 
     public struct Extensions {
         public static let widgetBundleIdentifier = "\(Bundle.prefix).\(Bundle.appName).\(Bundle.todayName)"
+        public static let watchBundleIdentifier = "\(Bundle.prefix).\(Bundle.appName).\(Bundle.watchName)"
     }
 
 
