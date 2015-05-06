@@ -19,6 +19,7 @@ class InterfaceController: WKInterfaceController {
 
     override func awakeWithContext(context: AnyObject!) {
         super.awakeWithContext(context)
+        fetchContent()
     }
 
 
@@ -75,6 +76,23 @@ class InterfaceController: WKInterfaceController {
         }
     }
 
+
+    func fetchContent() -> Void {
+        let userInfo = [
+            "interface": "main",
+            "action": "update",
+        ]
+
+        [WKInterfaceController .openParentApplication( userInfo, reply: { (reply: [NSObject : AnyObject]!, error: NSError!) -> Void in
+            self.stations = self.populateData()
+
+            if count(self.stations) == 0 {
+                self.pushControllerWithName("notConfigured", context: nil)
+            } else {
+                self.loadTableData()
+            }
+        })]
+    }
 
     override func handleUserActivity(userInfo: [NSObject : AnyObject]!) {
         let stationId = userInfo?["station"] as? NSNumber
