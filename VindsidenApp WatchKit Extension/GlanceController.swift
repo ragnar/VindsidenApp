@@ -24,20 +24,20 @@ class GlanceController: WKInterfaceController {
 
     override func awakeWithContext(context: AnyObject?) {
         super.awakeWithContext(context)
-    }
-
-
-    override func willActivate() {
-        super.willActivate()
 
         if let station = populateStation() {
             self.updateUI(station)
 
             let userInfo = ["station": station.stationId]
-            self.updateUserActivity("AppConfiguration.UserActivity.watch", userInfo: userInfo, webpageURL: nil)
+            self.updateUserActivity(AppConfig.Extensions.watchBundleIdentifier, userInfo: userInfo, webpageURL: nil)
 
             updatePlotInfo(station)
         }
+    }
+
+
+    override func willActivate() {
+        super.willActivate()
     }
 
 
@@ -60,13 +60,18 @@ class GlanceController: WKInterfaceController {
 
 
     func updatePlotInfo( station: CDStation ) {
-        RHEVindsidenAPIClient.defaultManager().fetchStationsPlotsForStation(station.stationId, completion: { (success:Bool, plots: [AnyObject]!) -> Void in
-            CDPlot.updatePlots(plots, completion: { () -> Void in
+
+        let userInfo = [
+            "interface": "glance",
+            "action": "update",
+            "station": station.stationId
+        ]
+
+        [WKInterfaceController .openParentApplication( userInfo, reply: { (reply: [NSObject : AnyObject]!, error: NSError!) -> Void in
+            if  let station = self.populateStation() {
                 self.updateUI(station)
-            })
-            }, error: { (cancelled: Bool, error: NSError!) -> Void in
-                DLOG("")
-        })
+            }
+        })]
     }
 
 
