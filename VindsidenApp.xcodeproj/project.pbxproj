@@ -51,7 +51,6 @@
 		AD539CC71947B684002644BD /* Datamanager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD539CC61947B684002644BD /* Datamanager.swift */; };
 		AD6BD0ED1A9506C900E6686B /* Global.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD6BD0EC1A9506C900E6686B /* Global.swift */; };
 		AD6BD0F11A96797D00E6686B /* StationDetailsInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD6BD0EE1A96797D00E6686B /* StationDetailsInterfaceController.swift */; };
-		AD6BD0F21A96797D00E6686B /* StationDetailsRowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD6BD0EF1A96797D00E6686B /* StationDetailsRowController.swift */; };
 		AD6BD0F31A96797D00E6686B /* StationsRowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD6BD0F01A96797D00E6686B /* StationsRowController.swift */; };
 		AD6BD0F61A967AD800E6686B /* VindsidenKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD539C9D1947B5CA002644BD /* VindsidenKit.framework */; };
 		AD6E8F021AE8E3C700FA5C79 /* RHCNotConfiguredInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD6E8F011AE8E3C700FA5C79 /* RHCNotConfiguredInterfaceController.swift */; };
@@ -317,7 +316,6 @@
 		AD674DA81962EB7100BF257B /* libPods.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libPods.a; path = "Pods/build/Debug-iphoneos/libPods.a"; sourceTree = "<group>"; };
 		AD6BD0EC1A9506C900E6686B /* Global.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Global.swift; sourceTree = "<group>"; };
 		AD6BD0EE1A96797D00E6686B /* StationDetailsInterfaceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StationDetailsInterfaceController.swift; sourceTree = "<group>"; };
-		AD6BD0EF1A96797D00E6686B /* StationDetailsRowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StationDetailsRowController.swift; sourceTree = "<group>"; };
 		AD6BD0F01A96797D00E6686B /* StationsRowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StationsRowController.swift; sourceTree = "<group>"; };
 		AD6BD0F41A967A8800E6686B /* libPods.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libPods.a; path = "Pods/build/Debug-iphoneos/libPods.a"; sourceTree = "<group>"; };
 		AD6BD0F71A967D7700E6686B /* VindsidenApp WatchKit Extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "VindsidenApp WatchKit Extension.entitlements"; sourceTree = "<group>"; };
@@ -758,7 +756,6 @@
 			children = (
 				AD6BD0F71A967D7700E6686B /* VindsidenApp WatchKit Extension.entitlements */,
 				AD6BD0EE1A96797D00E6686B /* StationDetailsInterfaceController.swift */,
-				AD6BD0EF1A96797D00E6686B /* StationDetailsRowController.swift */,
 				AD6BD0F01A96797D00E6686B /* StationsRowController.swift */,
 				ADCB8A7B1A94F52D009225B1 /* InterfaceController.swift */,
 				ADCB8A7F1A94F52D009225B1 /* GlanceController.swift */,
@@ -1273,7 +1270,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				ADCB8A7C1A94F52D009225B1 /* InterfaceController.swift in Sources */,
-				AD6BD0F21A96797D00E6686B /* StationDetailsRowController.swift in Sources */,
 				ADCB8A801A94F52D009225B1 /* GlanceController.swift in Sources */,
 				AD6E8F021AE8E3C700FA5C79 /* RHCNotConfiguredInterfaceController.swift in Sources */,
 				AD6BD0F11A96797D00E6686B /* StationDetailsInterfaceController.swift in Sources */,
