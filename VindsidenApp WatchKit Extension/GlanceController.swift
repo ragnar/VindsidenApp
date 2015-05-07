@@ -67,11 +67,11 @@ class GlanceController: WKInterfaceController {
             "station": station.stationId
         ]
 
-        [WKInterfaceController .openParentApplication( userInfo, reply: { (reply: [NSObject : AnyObject]!, error: NSError!) -> Void in
+        WKInterfaceController.openParentApplication( userInfo, reply: { (reply: [NSObject : AnyObject]!, error: NSError!) -> Void in
             if  let station = self.populateStation() {
                 self.updateUI(station)
             }
-        })]
+        })
     }
 
 
