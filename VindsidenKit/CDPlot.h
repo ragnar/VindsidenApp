@@ -26,4 +26,6 @@
 + (CDPlot *) newOrExistingPlot:(NSDictionary *)dict forStation:(CDStation *)station inManagedObjectContext:(NSManagedObjectContext *)managedObjectContext;
 + (void)updatePlots:(NSArray *)plots completion:(void (^)(void))completion;
 
+- (NSString *)windDirectionString;
+
 @end
