@@ -16,7 +16,7 @@
                                     <group key="rootItem" width="1" alignment="left" id="lYN-Nh-gPy">
                                         <items>
                                             <imageView width="32" height="32" alignment="left" verticalAlignment="center" id="tXJ-KC-TeQ"/>
-                                            <group alignment="left" layout="vertical" id="IuX-Ns-ROO">
+                                            <group alignment="left" layout="vertical" spacing="0.0" id="IuX-Ns-ROO">
                                                 <items>
                                                     <label alignment="left" text="Label" id="7B4-dW-qTp"/>
                                                     <label alignment="left" text="Label" id="Iq3-Fr-BgZ">
@@ -24,9 +24,11 @@
                                                         <fontDescription key="font" style="UICTFontTextStyleFootnote"/>
                                                     </label>
                                                 </items>
+                                                <edgeInsets key="margins" left="0.0" right="0.0" top="1" bottom="0.0"/>
                                             </group>
                                         </items>
                                         <color key="backgroundColor" red="0.1215686275" green="0.12941176469999999" blue="0.14117647059999999" alpha="1" colorSpace="calibratedRGB"/>
+                                        <edgeInsets key="margins" left="0.0" right="0.0" top="0.0" bottom="0.0"/>
                                     </group>
                                     <connections>
                                         <outlet property="elementImage" destination="tXJ-KC-TeQ" id="1Ow-Gn-psk"/>
@@ -58,8 +60,8 @@
                                 </group>
                                 <group alignment="left" verticalAlignment="center" layout="vertical" id="5IY-33-6pW">
                                     <items>
-                                        <label alignment="left" text="Gust: 89.9 m/s" minimumScaleFactor="0.70000000000000007" id="FTw-dM-715"/>
-                                        <label alignment="left" text="L: 19.0" minimumScaleFactor="0.70000000000000007" id="Qtx-mh-7rd"/>
+                                        <label alignment="left" text="Gust: -.- m/s" minimumScaleFactor="0.70000000000000007" id="FTw-dM-715"/>
+                                        <label alignment="left" text="Lull: -.- m/s" minimumScaleFactor="0.70000000000000007" id="Qtx-mh-7rd"/>
                                     </items>
                                     <edgeInsets key="margins" left="3" right="0.0" top="0.0" bottom="0.0"/>
                                 </group>
@@ -69,7 +71,7 @@
                             <items>
                                 <group alignment="left" id="zj7-XC-VqY">
                                     <items>
-                                        <label height="53" alignment="left" text="77.7" id="dEF-St-huj">
+                                        <label height="53" alignment="left" text="-.-" id="dEF-St-huj">
                                             <fontDescription key="font" type="system" pointSize="62"/>
                                         </label>
                                         <label alignment="left" text="m/s" id="OP4-tM-zLy"/>
@@ -77,10 +79,10 @@
                                 </group>
                                 <group alignment="left" layout="vertical" id="fJa-A7-8Pp">
                                     <items>
-                                        <label alignment="left" text="Larkollen" id="tdY-or-dZH">
+                                        <label alignment="left" text="Ikke konfigurert" numberOfLines="2" id="tdY-or-dZH">
                                             <color key="textColor" red="0.89019607840000003" green="0.23529411759999999" blue="0.050980392159999999" alpha="1" colorSpace="calibratedRGB"/>
                                         </label>
-                                        <label alignment="left" text="10 minutes ago" id="bQj-mR-h7D">
+                                        <label alignment="left" text="Never updated" id="bQj-mR-h7D">
                                             <fontDescription key="font" style="UICTFontTextStyleFootnote"/>
                                         </label>
                                     </items>
@@ -120,61 +122,95 @@
             <point key="canvasLocation" x="495" y="663"/>
         </scene>
         <!--stationDetails-->
-        <scene sceneID="Wtb-1V-DOc">
+        <scene sceneID="AWu-yB-euV">
             <objects>
-                <controller identifier="stationDetails" id="qwI-qZ-bph" customClass="StationDetailsInterfaceController" customModule="VindsidenApp_WatchKit_Extension">
+                <controller identifier="stationDetails" id="m7g-vb-vvd" customClass="StationDetailsInterfaceController" customModule="VindsidenApp_WatchKit_Extension">
                     <items>
-                        <group width="1" alignment="left" id="hfi-5z-qcg">
+                        <group width="1" alignment="left" id="HfH-Vj-rtq">
                             <items>
-                                <group width="1" alignment="left" id="61R-U0-a1i">
+                                <imageView width="32" height="32" alignment="left" id="RSi-uv-MdJ"/>
+                                <label alignment="left" verticalAlignment="center" text="Label" id="LMr-Eq-tMg"/>
+                            </items>
+                        </group>
+                        <group width="1" alignment="left" id="gs4-ez-pPy">
+                            <items>
+                                <label height="53" alignment="left" text="-.-" textAlignment="left" minimumScaleFactor="0.50000000000000011" id="2O0-wh-T8a">
+                                    <fontDescription key="font" type="system" pointSize="62"/>
+                                    <variation key="device=watch38mm" height="35">
+                                        <fontDescription key="font" type="system" pointSize="44"/>
+                                    </variation>
+                                </label>
+                                <label alignment="left" text="m/s" id="6gj-Pc-sn0"/>
+                            </items>
+                            <edgeInsets key="margins" left="0.0" right="0.0" top="0.0" bottom="0.0"/>
+                        </group>
+                        <group width="1" alignment="left" verticalAlignment="bottom" id="kjg-fM-cFV">
+                            <items>
+                                <group alignment="left" layout="vertical" spacing="0.0" id="rr0-ue-HVX">
                                     <items>
-                                        <imageView width="32" height="32" alignment="center" verticalAlignment="center" id="rr3-cr-FDL"/>
-                                        <group alignment="right" id="YXG-R0-0HG">
-                                            <items>
-                                                <label alignment="right" verticalAlignment="center" text="7.0" textAlignment="right" id="kga-zf-1Jv">
-                                                    <fontDescription key="font" type="system" pointSize="30"/>
-                                                </label>
-                                                <label alignment="right" text=" m/s" textAlignment="right" id="9bd-7B-N1k"/>
-                                            </items>
-                                        </group>
+                                        <label alignment="left" text="Wind gust:" id="cFU-aX-gv7">
+                                            <fontDescription key="font" style="UICTFontTextStyleFootnote"/>
+                                        </label>
+                                        <label alignment="left" text="Average:" id="EP8-lv-urV">
+                                            <fontDescription key="font" style="UICTFontTextStyleFootnote"/>
+                                        </label>
                                     </items>
-                                    <edgeInsets key="margins" left="0.0" right="7" top="0.0" bottom="0.0"/>
+                                </group>
+                                <group alignment="right" layout="vertical" spacing="0.0" id="Ez4-mh-IhW">
+                                    <items>
+                                        <label alignment="right" text="Label" textAlignment="right" id="oj1-Lq-E66">
+                                            <fontDescription key="font" style="UICTFontTextStyleFootnote"/>
+                                        </label>
+                                        <label alignment="right" text="Label" textAlignment="right" id="sDR-HI-pmc">
+                                            <fontDescription key="font" style="UICTFontTextStyleFootnote"/>
+                                        </label>
+                                    </items>
                                 </group>
                             </items>
                         </group>
-                        <separator alignment="left" id="4qa-fg-AfP"/>
-                        <table alignment="left" id="e1r-4E-jf0">
+                        <group width="1" alignment="left" verticalAlignment="bottom" id="HgO-Zl-Pa8">
                             <items>
-                                <tableRow identifier="stationDetails" selectable="NO" id="LRm-Sl-oeY" customClass="StationDetailsRowController" customModule="VindsidenApp_WatchKit_Extension">
-                                    <group key="rootItem" width="1" height="0.0" alignment="left" id="M8Y-9H-T5Z">
-                                        <items>
-                                            <label alignment="left" text="Label" textAlignment="left" id="ZPl-MK-Fdv"/>
-                                            <label alignment="right" text="Label" textAlignment="right" id="cpW-4r-3rm"/>
-                                        </items>
-                                        <edgeInsets key="margins" left="0.0" right="7" top="0.0" bottom="0.0"/>
-                                    </group>
-                                    <connections>
-                                        <outlet property="detailsTextLabel" destination="cpW-4r-3rm" id="fHA-jv-ANG"/>
-                                        <outlet property="textLabel" destination="ZPl-MK-Fdv" id="Kh6-mH-zF9"/>
-                                    </connections>
-                                </tableRow>
+                                <group alignment="left" layout="vertical" spacing="0.0" id="cPI-yM-pqm">
+                                    <items>
+                                        <label alignment="left" text="Beaufort" id="GTK-xa-ecI">
+                                            <fontDescription key="font" style="UICTFontTextStyleFootnote"/>
+                                        </label>
+                                        <label alignment="left" text="Air temp" id="ToV-eP-uxn">
+                                            <fontDescription key="font" style="UICTFontTextStyleFootnote"/>
+                                        </label>
+                                    </items>
+                                </group>
+                                <group alignment="right" layout="vertical" spacing="0.0" id="QIz-uD-A91">
+                                    <items>
+                                        <label alignment="left" text="Label" textAlignment="right" id="DUi-i2-yv2">
+                                            <fontDescription key="font" style="UICTFontTextStyleFootnote"/>
+                                        </label>
+                                        <label alignment="left" text="Label" textAlignment="right" id="vKG-Yz-WDV">
+                                            <fontDescription key="font" style="UICTFontTextStyleFootnote"/>
+                                        </label>
+                                    </items>
+                                </group>
                             </items>
-                        </table>
-                        <label alignment="center" verticalAlignment="bottom" text="Label" id="dgB-IR-rBR">
-                            <color key="textColor" red="0.89019607840000003" green="0.23529411759999999" blue="0.050980392159999999" alpha="1" colorSpace="calibratedRGB"/>
+                        </group>
+                        <label alignment="center" verticalAlignment="bottom" text="Label" textAlignment="center" id="8df-jM-x00">
+                            <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                             <fontDescription key="font" style="UICTFontTextStyleFootnote"/>
                         </label>
                     </items>
                     <connections>
-                        <outlet property="interfaceTable" destination="e1r-4E-jf0" id="n9M-wJ-v41"/>
-                        <outlet property="updatedAtLabel" destination="dgB-IR-rBR" id="Dlf-ze-NdC"/>
-                        <outlet property="windDirectionImage" destination="rr3-cr-FDL" id="bwL-4s-nIU"/>
-                        <outlet property="windSpeedLabel" destination="kga-zf-1Jv" id="st7-5Z-UHa"/>
-                        <outlet property="windUnitLabel" destination="9bd-7B-N1k" id="K4o-pp-8qD"/>
+                        <outlet property="airTempLabel" destination="vKG-Yz-WDV" id="rz4-a5-0Gg"/>
+                        <outlet property="updatedAtLabel" destination="8df-jM-x00" id="6QE-Wi-Pxd"/>
+                        <outlet property="windBeaufortLabel" destination="DUi-i2-yv2" id="YZf-Yr-f5z"/>
+                        <outlet property="windDirectionImage" destination="RSi-uv-MdJ" id="ykd-JY-673"/>
+                        <outlet property="windDirectionLabel" destination="LMr-Eq-tMg" id="oJo-Sj-VfA"/>
+                        <outlet property="windGustLabel" destination="oj1-Lq-E66" id="riv-p3-cR5"/>
+                        <outlet property="windLull" destination="sDR-HI-pmc" id="xP4-OG-F0w"/>
+                        <outlet property="windSpeedLabel" destination="2O0-wh-T8a" id="sUw-D9-7Qy"/>
+                        <outlet property="windUnitLabel" destination="6gj-Pc-sn0" id="OOd-50-2qf"/>
                     </connections>
                 </controller>
             </objects>
-            <point key="canvasLocation" x="495" y="347"/>
+            <point key="canvasLocation" x="495" y="362"/>
         </scene>
     </scenes>
     <color key="tintColor" red="0.89019607840000003" green="0.23529411759999999" blue="0.050980392159999999" alpha="1" colorSpace="calibratedRGB"/>
