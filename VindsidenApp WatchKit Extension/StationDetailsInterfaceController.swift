@@ -13,9 +13,16 @@ class StationDetailsInterfaceController: WKInterfaceController {
 
     @IBOutlet weak var interfaceTable: WKInterfaceTable!
     @IBOutlet weak var windDirectionImage: WKInterfaceImage!
+    @IBOutlet weak var windDirectionLabel: WKInterfaceLabel!
     @IBOutlet weak var windSpeedLabel: WKInterfaceLabel!
     @IBOutlet weak var windUnitLabel: WKInterfaceLabel!
     @IBOutlet weak var updatedAtLabel: WKInterfaceLabel!
+
+    @IBOutlet weak var windGustLabel: WKInterfaceLabel!
+    @IBOutlet weak var windLull: WKInterfaceLabel!
+    @IBOutlet weak var windBeaufortLabel: WKInterfaceLabel!
+    @IBOutlet weak var airTempLabel: WKInterfaceLabel!
+
 
     override func awakeWithContext(context: AnyObject!) {
         super.awakeWithContext(context)
@@ -28,11 +35,30 @@ class StationDetailsInterfaceController: WKInterfaceController {
             setTitle(station.stationName)
             updateUI(station)
             Datamanager.sharedManager().managedObjectContext?.stalenessInterval = oldStaleness!
+
+            let userInfo = [
+                "station": station.stationId
+            ]
+
+            self.updateUserActivity(AppConfig.Extensions.watchBundleIdentifier, userInfo: userInfo, webpageURL: nil)
         }
     }
 
 
+    override func didDeactivate() {
+        self.invalidateUserActivity()
+        super.didDeactivate()
+    }
+
+
     func updateUI( station: CDStation ) -> Void {
+        let raw = AppConfig.sharedConfiguration.applicationUserDefaults.integerForKey("selectedUnit")
+        let unit = SpeedConvertion(rawValue: raw)
+
+        if let realUnit = unit {
+            windUnitLabel.setText(NSNumber.shortUnitNameString(realUnit))
+        }
+
         if let plot = station.lastRegisteredPlot() {
             let winddir = CGFloat(plot.windDir.floatValue)
             let windspeed = CGFloat(plot.windAvg.floatValue)
@@ -40,59 +66,30 @@ class StationDetailsInterfaceController: WKInterfaceController {
             windDirectionImage.setImage(image)
             updatedAtLabel.setText( AppConfig.sharedConfiguration.relativeDate(plot.plotTime) as String)
 
-            let raw = AppConfig.sharedConfiguration.applicationUserDefaults.integerForKey("selectedUnit")
-            let unit = SpeedConvertion(rawValue: raw)
-
             if let realUnit = unit {
-                windUnitLabel.setText(NSNumber.shortUnitNameString(realUnit))
+                let unitString = NSNumber.shortUnitNameString(realUnit)
+
                 windSpeedLabel.setText(convertWindToString(plot.windAvg, toUnit: realUnit))
+                windDirectionLabel.setText("\(Int(plot.windDir))° (\(plot.windDirectionString()))")
+                windGustLabel.setText("\(convertWindToString(plot.windMax, toUnit: realUnit)) \(unitString)")
+                windLull.setText("\(convertWindToString(plot.windMin, toUnit: realUnit)) \(unitString)")
+                windBeaufortLabel.setText("\(Int(plot.windMin.speedInBeaufort()))")
+                airTempLabel.setText("\(convertNumberToString(plot.tempAir))℃")
             }
+        } else {
+            if let realUnit = unit {
+                let unitString = NSNumber.shortUnitNameString(realUnit)
 
-            updateTableRows(plot)
+                windDirectionImage.setImage(nil)
+                windDirectionLabel.setText("—° (—)")
+                windSpeedLabel.setText("–.–")
+                windGustLabel.setText("-.- \(unitString)")
+                windLull.setText("-.- \(unitString)")
+                windBeaufortLabel.setText("-")
+                airTempLabel.setText("-.-℃")
+                updatedAtLabel.setText( NSLocalizedString("LABEL_NOT_UPDATED", tableName: nil, bundle: NSBundle.mainBundle(), value: "LABEL_NOT_UPDATED", comment: "Not updated"))
+            }
         }
-    }
-
-
-    func updateTableRows( plot: CDPlot) -> Void {
-        let raw = AppConfig.sharedConfiguration.applicationUserDefaults.integerForKey("selectedUnit")
-        let unit = SpeedConvertion(rawValue: raw)!
-
-        interfaceTable.setNumberOfRows( 7, withRowType: "stationDetails")
-
-        var index = 0
-        var elementRow = interfaceTable.rowControllerAtIndex(index) as! StationDetailsRowController
-        elementRow.textLabel.setText("Direction")
-        elementRow.detailsTextLabel.setText("\(Int(plot.windDir))°")
-
-        index++
-        elementRow = interfaceTable.rowControllerAtIndex(index) as! StationDetailsRowController
-        elementRow.textLabel.setText("Average")
-        elementRow.detailsTextLabel.setText(convertWindToString(plot.windAvg, toUnit: unit))
-
-        index++
-        elementRow = interfaceTable.rowControllerAtIndex(index) as! StationDetailsRowController
-        elementRow.textLabel.setText("Gust")
-        elementRow.detailsTextLabel.setText(convertWindToString(plot.windMax, toUnit: unit))
-
-        index++
-        elementRow = interfaceTable.rowControllerAtIndex(index) as! StationDetailsRowController
-        elementRow.textLabel.setText("Lull")
-        elementRow.detailsTextLabel.setText(convertWindToString(plot.windMin, toUnit: unit))
-
-        index++
-        elementRow = interfaceTable.rowControllerAtIndex(index) as! StationDetailsRowController
-        elementRow.textLabel.setText("Beaufort")
-        elementRow.detailsTextLabel.setText("\(Int(plot.windMin.speedInBeaufort()))")
-
-        index++
-        elementRow = interfaceTable.rowControllerAtIndex(index) as! StationDetailsRowController
-        elementRow.textLabel.setText("Air temp")
-        elementRow.detailsTextLabel.setText("\(convertNumberToString(plot.tempAir))℃")
-
-        index++
-        elementRow = interfaceTable.rowControllerAtIndex(index) as! StationDetailsRowController
-        elementRow.textLabel.setText("Water temp")
-        elementRow.detailsTextLabel.setText("\(convertNumberToString(plot.tempWater))℃")
     }
 
 
@@ -104,6 +101,7 @@ class StationDetailsInterfaceController: WKInterfaceController {
         }
     }
 
+
     func convertNumberToString( number: NSNumber) -> String {
         if let numberString = speedFormatter.stringFromNumber(number) {
             return numberString
@@ -111,6 +109,7 @@ class StationDetailsInterfaceController: WKInterfaceController {
             return "—.—"
         }
     }
+
 
     lazy var speedFormatter : NSNumberFormatter = {
         let _speedFormatter = NSNumberFormatter()
@@ -123,4 +122,3 @@ class StationDetailsInterfaceController: WKInterfaceController {
         return _speedFormatter
         }()
 }
-
