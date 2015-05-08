@@ -83,7 +83,7 @@ class InterfaceController: WKInterfaceController {
             "action": "update",
         ]
 
-        [WKInterfaceController .openParentApplication( userInfo, reply: { (reply: [NSObject : AnyObject]!, error: NSError!) -> Void in
+        WKInterfaceController.openParentApplication( userInfo, reply: { (reply: [NSObject : AnyObject]!, error: NSError!) -> Void in
             self.stations = self.populateData()
 
             if count(self.stations) == 0 {
@@ -91,8 +91,9 @@ class InterfaceController: WKInterfaceController {
             } else {
                 self.loadTableData()
             }
-        })]
+        })
     }
+
 
     override func handleUserActivity(userInfo: [NSObject : AnyObject]!) {
         let stationId = userInfo?["station"] as? NSNumber
