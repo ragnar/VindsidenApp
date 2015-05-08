@@ -14,6 +14,7 @@ import VindsidenKit
 class GlanceController: WKInterfaceController {
 
     @IBOutlet weak var glanceWindDirectionImage: WKInterfaceImage!
+    @IBOutlet weak var glanceWindDirectionLabel: WKInterfaceLabel!
     @IBOutlet weak var glanceHeadingLabel: WKInterfaceLabel!
     @IBOutlet weak var glanceWindCurrentLabel: WKInterfaceLabel!
     @IBOutlet weak var glanceWindGustLabel: WKInterfaceLabel!
@@ -81,6 +82,7 @@ class GlanceController: WKInterfaceController {
         let unitString = NSNumber.shortUnitNameString(unit)
 
         self.glanceHeadingLabel.setText(station.stationName)
+        self.glanceHeadingLabel.setTextColor(UIColor.vindsidenGloablTintColor())
         self.glanceWindUnitLabel.setText(unitString)
 
         if let plot = station.lastRegisteredPlot() {
@@ -88,18 +90,21 @@ class GlanceController: WKInterfaceController {
             let windspeed = CGFloat(plot.windAvg.floatValue)
             let image = DrawArrow.drawArrowAtAngle( winddir, forSpeed:windspeed, highlighted:false, color: UIColor.whiteColor(), hightlightedColor: UIColor.blackColor())
             self.glanceWindDirectionImage.setImage(image)
+            self.glanceWindDirectionLabel.setText("\(Int(plot.windDir))° (\(plot.windDirectionString()))")
             self.glanceWindCurrentLabel.setText(convertWindToString(plot.windAvg, toUnit: unit))
-            self.glanceWindGustLabel.setText("Gust: \(convertWindToString(plot.windMax, toUnit: unit)) \(unitString)")
-            self.glanceWindLullLabel.setText("Lull: \(convertWindToString(plot.windMin, toUnit: unit)) \(unitString)")
+            self.glanceWindGustLabel.setText("\(convertWindToString(plot.windMax, toUnit: unit)) \(unitString)")
+            self.glanceWindLullLabel.setText("\(convertWindToString(plot.windMin, toUnit: unit)) \(unitString)")
             self.glanceWindUpdatedAtLabel.setText( AppConfig.sharedConfiguration.relativeDate(plot.plotTime) as String)
         } else {
             self.glanceWindDirectionImage.setImage(nil)
+            self.glanceWindDirectionLabel.setText("—° (—)")
             self.glanceWindCurrentLabel.setText("–.–")
             self.glanceWindGustLabel.setText("G: -.- \(unitString)")
             self.glanceWindLullLabel.setText("L: -.- \(unitString)")
             self.glanceWindUpdatedAtLabel.setText( NSLocalizedString("LABEL_NOT_UPDATED", tableName: nil, bundle: NSBundle.mainBundle(), value: "LABEL_NOT_UPDATED", comment: "Not updated"))
         }
     }
+
 
     func convertWindToString( wind: NSNumber, toUnit unit: SpeedConvertion) -> String {
         if let speedString = speedFormatter.stringFromNumber(wind.speedConvertionTo(unit)) {
@@ -109,6 +114,7 @@ class GlanceController: WKInterfaceController {
         }
     }
 
+
     func convertNumberToString( number: NSNumber) -> String {
         if let numberString = speedFormatter.stringFromNumber(number) {
             return numberString
@@ -117,6 +123,7 @@ class GlanceController: WKInterfaceController {
         }
     }
 
+    
     lazy var speedFormatter : NSNumberFormatter = {
         let _speedFormatter = NSNumberFormatter()
         _speedFormatter.numberStyle = NSNumberFormatterStyle.DecimalStyle
