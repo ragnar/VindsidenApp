@@ -78,6 +78,7 @@
 		ADB5A78A19DEC29A009AE4A5 /* DrawArrow.h in Headers */ = {isa = PBXBuildFile; fileRef = ADB5A78819DEC29A009AE4A5 /* DrawArrow.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		ADB5A78B19DEC29A009AE4A5 /* DrawArrow.m in Sources */ = {isa = PBXBuildFile; fileRef = ADB5A78919DEC29A009AE4A5 /* DrawArrow.m */; };
 		ADBEA4CF1A07ECF600B168BF /* UIColor+AppColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADBEA4CE1A07ECF600B168BF /* UIColor+AppColors.swift */; };
+		ADC161851B0218D8004F6DAE /* GraphImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADC161841B0218D8004F6DAE /* GraphImage.swift */; };
 		ADCB8A7C1A94F52D009225B1 /* InterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADCB8A7B1A94F52D009225B1 /* InterfaceController.swift */; };
 		ADCB8A801A94F52D009225B1 /* GlanceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADCB8A7F1A94F52D009225B1 /* GlanceController.swift */; };
 		ADCB8A821A94F52D009225B1 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ADCB8A811A94F52D009225B1 /* Images.xcassets */; };
@@ -344,6 +345,7 @@
 		ADB5A78819DEC29A009AE4A5 /* DrawArrow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DrawArrow.h; sourceTree = "<group>"; };
 		ADB5A78919DEC29A009AE4A5 /* DrawArrow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DrawArrow.m; sourceTree = "<group>"; };
 		ADBEA4CE1A07ECF600B168BF /* UIColor+AppColors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+AppColors.swift"; sourceTree = "<group>"; };
+		ADC161841B0218D8004F6DAE /* GraphImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphImage.swift; sourceTree = "<group>"; };
 		ADCB8A761A94F52D009225B1 /* VindsidenApp WatchKit Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "VindsidenApp WatchKit Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		ADCB8A791A94F52D009225B1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		ADCB8A7A1A94F52D009225B1 /* PushNotificationPayload.apns */ = {isa = PBXFileReference; lastKnownFileType = text; path = PushNotificationPayload.apns; sourceTree = "<group>"; };
@@ -747,6 +749,7 @@
 			children = (
 				ADB5A78819DEC29A009AE4A5 /* DrawArrow.h */,
 				ADB5A78919DEC29A009AE4A5 /* DrawArrow.m */,
+				ADC161841B0218D8004F6DAE /* GraphImage.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -1251,6 +1254,7 @@
 				ADBEA4CF1A07ECF600B168BF /* UIColor+AppColors.swift in Sources */,
 				ADCD424F196E4E42004973E9 /* NSNumber+Between.m in Sources */,
 				ADCD4255196E4E42004973E9 /* NSSet+Sort.m in Sources */,
+				ADC161851B0218D8004F6DAE /* GraphImage.swift in Sources */,
 				AD7BBB411A3F539100883770 /* RHEVindsidenAPIClientPrivate.m in Sources */,
 				AD7BBB451A3F539100883770 /* VindsidenStationClient.m in Sources */,
 				ADCD4259196E4E42004973E9 /* NSString+isNumeric.m in Sources */,
