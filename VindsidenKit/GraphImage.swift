@@ -57,7 +57,7 @@ public final class GraphImage {
         self.scale = scale
         self.plots = plots
 
-        bounds = GraphBounds(minX: 15.0, minY: 20.0, maxX: size.width-15.0, maxY: size.height-30.0)
+        bounds = GraphBounds(minX: 15.0, minY: 20.0, maxX: size.width-6.0, maxY: size.height-30.0)
 
         let earliestDate: NSDate
         let latestDate: NSDate
