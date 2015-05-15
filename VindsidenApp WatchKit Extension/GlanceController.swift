@@ -44,6 +44,8 @@ class GlanceController: WKInterfaceController {
             let url = NSURL(string: "http://vindsiden.no/default.aspx?id=\(station.stationId)")
 
             self.updateUserActivity("org.juniks.VindsidenApp", userInfo: userInfo, webpageURL: url)
+        } else {
+            updateEmptyUI()
         }
 
     }
@@ -108,13 +110,22 @@ class GlanceController: WKInterfaceController {
             self.glanceWindLullLabel.setText("\(convertWindToString(plot.windMin, toUnit: unit)) \(unitString)")
             self.glanceWindUpdatedAtLabel.setText( AppConfig.sharedConfiguration.relativeDate(plot.plotTime) as String)
         } else {
-            self.glanceWindDirectionImage.setImage(nil)
-            self.glanceWindDirectionLabel.setText("—° (—)")
-            self.glanceWindCurrentLabel.setText("–.–")
-            self.glanceWindGustLabel.setText("G: -.- \(unitString)")
-            self.glanceWindLullLabel.setText("L: -.- \(unitString)")
-            self.glanceWindUpdatedAtLabel.setText( NSLocalizedString("LABEL_NOT_UPDATED", tableName: nil, bundle: NSBundle.mainBundle(), value: "LABEL_NOT_UPDATED", comment: "Not updated"))
+            updateEmptyUI()
         }
+    }
+
+
+    func updateEmptyUI() -> Void {
+        let raw = AppConfig.sharedConfiguration.applicationUserDefaults.integerForKey("selectedUnit")
+        let unit = SpeedConvertion(rawValue: raw)!
+        let unitString = NSNumber.shortUnitNameString(unit)
+
+        self.glanceWindDirectionImage.setImage(nil)
+        self.glanceWindDirectionLabel.setText("—° (—)")
+        self.glanceWindCurrentLabel.setText("-.-")
+        self.glanceWindGustLabel.setText("-.- \(unitString)")
+        self.glanceWindLullLabel.setText("-.- \(unitString)")
+        self.glanceWindUpdatedAtLabel.setText( NSLocalizedString("LABEL_NOT_UPDATED", tableName: nil, bundle: NSBundle.mainBundle(), value: "LABEL_NOT_UPDATED", comment: "Not updated"))
     }
 
 
