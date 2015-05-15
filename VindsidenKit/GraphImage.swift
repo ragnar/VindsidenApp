@@ -90,6 +90,7 @@ public final class GraphImage {
         drawHourText(context)
         drawSpeedText(context)
         drawGraphLines(context)
+        drawWindArrows(context)
 
         let image = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
@@ -307,6 +308,28 @@ public final class GraphImage {
 
         let maxBezier = self.bezierPathWithPoints(maxPoints)
         maxBezier.stroke()
+
+        CGContextRestoreGState(context);
+    }
+
+
+    func drawWindArrows( context: CGContext!) {
+        CGContextSaveGState(context)
+
+        let firstPlot = plots.first!
+        let interval = CGFloat(firstPlot.plotTime.timeIntervalSinceDate(self.absoluteStartDate)/60.0)
+        var x = ceil(bounds.minX + (interval*self.stepX))
+
+        for (idx, plot) in enumerate(plots) {
+            let interval = CGFloat(plot.plotTime.timeIntervalSinceDate(self.absoluteStartDate)/60.0)
+            x = ceil(bounds.minX + (interval*self.stepX))
+
+            let winddir = CGFloat(plot.windDir.floatValue)
+            let windspeed = CGFloat(plot.windAvg.floatValue)
+            let image = DrawArrow.drawArrowAtAngle( winddir, forSpeed:windspeed, highlighted:false, color: UIColor.whiteColor(), hightlightedColor: UIColor.blackColor())
+
+            image.drawInRect(CGRectMake(x-8.0, bounds.maxY+10, 16.0, 16.0))
+        }
 
         CGContextRestoreGState(context);
     }
