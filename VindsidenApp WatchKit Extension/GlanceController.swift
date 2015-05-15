@@ -25,26 +25,38 @@ class GlanceController: WKInterfaceController {
 
     override func awakeWithContext(context: AnyObject?) {
         super.awakeWithContext(context)
-
-        if let station = populateStation() {
-            self.updateUI(station)
-
-            let userInfo = ["station": station.stationId]
-            self.updateUserActivity(AppConfig.Extensions.watchBundleIdentifier, userInfo: userInfo, webpageURL: nil)
-
-            updatePlotInfo(station)
-        }
     }
 
 
     override func willActivate() {
         super.willActivate()
+
+        if let station = populateStation() {
+            updateUI(station)
+            updatePlotInfo(station)
+
+            let userInfo = [
+                "station": station.stationId,
+                "urlToActivate": "vindsiden://station/\(station.stationId)"
+
+            ]
+
+            let url = NSURL(string: "http://vindsiden.no/default.aspx?id=\(station.stationId)")
+
+            self.updateUserActivity("org.juniks.VindsidenApp", userInfo: userInfo, webpageURL: url)
+        }
+
     }
 
 
     override func didDeactivate() {
+        self.invalidateUserActivity()
         super.didDeactivate()
     }
+
+
+
+    // MARK: - Convenience
 
 
     func populateStation() -> CDStation? {
