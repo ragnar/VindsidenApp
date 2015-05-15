@@ -379,6 +379,8 @@
 		ADD211C019CF139300497DC1 /* RHCLandscapeGraphViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RHCLandscapeGraphViewController.swift; sourceTree = "<group>"; };
 		ADD211C519CF1EC400497DC1 /* nb */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nb; path = nb.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		ADDB4F4F19CB68F1005D5D38 /* RHCAlertManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RHCAlertManager.swift; sourceTree = "<group>"; };
+		ADDDB1831B0691E70091D4E8 /* en */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Interface.strings; sourceTree = "<group>"; };
+		ADDDB1851B0691EE0091D4E8 /* nb */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = nb; path = nb.lproj/Interface.strings; sourceTree = "<group>"; };
 		ADE9C4071AAB32840089EB19 /* WindManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WindManager.swift; sourceTree = "<group>"; };
 		ADF8B2131AA47D9D000CF266 /* Pods_VindsidenApp.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Pods_VindsidenApp.framework; path = "Pods/../build/Debug-iphoneos/Pods_VindsidenApp.framework"; sourceTree = "<group>"; };
 		D077413EC6AD6C77CEEEA239 /* Pods-VindsidenApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VindsidenApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-VindsidenApp/Pods-VindsidenApp.debug.xcconfig"; sourceTree = "<group>"; };
@@ -1448,6 +1450,8 @@
 			isa = PBXVariantGroup;
 			children = (
 				ADCB8A8D1A94F52D009225B1 /* Base */,
+				ADDDB1831B0691E70091D4E8 /* en */,
+				ADDDB1851B0691EE0091D4E8 /* nb */,
 			);
 			name = Interface.storyboard;
 			sourceTree = "<group>";
