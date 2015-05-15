@@ -108,6 +108,7 @@
 		ADD211C119CF139300497DC1 /* RHCLandscapeGraphViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADD211C019CF139300497DC1 /* RHCLandscapeGraphViewController.swift */; };
 		ADD211C419CF1EC400497DC1 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = ADD211C619CF1EC400497DC1 /* InfoPlist.strings */; };
 		ADDB4F5019CB68F1005D5D38 /* RHCAlertManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADDB4F4F19CB68F1005D5D38 /* RHCAlertManager.swift */; };
+		ADDDB1881B0693C60091D4E8 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = ADDDB1861B0693C60091D4E8 /* Localizable.strings */; };
 		ADE9C4081AAB32840089EB19 /* WindManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADE9C4071AAB32840089EB19 /* WindManager.swift */; };
 		ADF8B2141AA47D9D000CF266 /* Pods_VindsidenApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ADF8B2131AA47D9D000CF266 /* Pods_VindsidenApp.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 /* End PBXBuildFile section */
@@ -381,6 +382,9 @@
 		ADDB4F4F19CB68F1005D5D38 /* RHCAlertManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RHCAlertManager.swift; sourceTree = "<group>"; };
 		ADDDB1831B0691E70091D4E8 /* en */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Interface.strings; sourceTree = "<group>"; };
 		ADDDB1851B0691EE0091D4E8 /* nb */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = nb; path = nb.lproj/Interface.strings; sourceTree = "<group>"; };
+		ADDDB1871B0693C60091D4E8 /* Base */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
+		ADDDB1891B0693D30091D4E8 /* en */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		ADDDB18A1B0693D40091D4E8 /* nb */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = nb; path = nb.lproj/Localizable.strings; sourceTree = "<group>"; };
 		ADE9C4071AAB32840089EB19 /* WindManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WindManager.swift; sourceTree = "<group>"; };
 		ADF8B2131AA47D9D000CF266 /* Pods_VindsidenApp.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Pods_VindsidenApp.framework; path = "Pods/../build/Debug-iphoneos/Pods_VindsidenApp.framework"; sourceTree = "<group>"; };
 		D077413EC6AD6C77CEEEA239 /* Pods-VindsidenApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VindsidenApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-VindsidenApp/Pods-VindsidenApp.debug.xcconfig"; sourceTree = "<group>"; };
@@ -779,6 +783,7 @@
 			children = (
 				ADCB8A791A94F52D009225B1 /* Info.plist */,
 				ADCB8A7A1A94F52D009225B1 /* PushNotificationPayload.apns */,
+				ADDDB1861B0693C60091D4E8 /* Localizable.strings */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -1131,6 +1136,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ADDDB1881B0693C60091D4E8 /* Localizable.strings in Resources */,
 				ADCB8A821A94F52D009225B1 /* Images.xcassets in Resources */,
 				AD7398D81AA4455A00236D52 /* Localizable.strings in Resources */,
 				ADCB8A861A94F52D009225B1 /* VindsidenApp WatchKit App.app in Resources */,
@@ -1462,6 +1468,16 @@
 				ADD211C519CF1EC400497DC1 /* nb */,
 			);
 			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		ADDDB1861B0693C60091D4E8 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				ADDDB1871B0693C60091D4E8 /* Base */,
+				ADDDB1891B0693D30091D4E8 /* en */,
+				ADDDB18A1B0693D40091D4E8 /* nb */,
+			);
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
