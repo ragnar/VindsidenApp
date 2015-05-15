@@ -230,7 +230,7 @@ public final class GraphImage {
         for ( var y = bounds.maxY; y >= bounds.minY; y=ceil(y-plotStep)) {
             if let hs = speedFormatter.stringFromNumber(i*(plotMaxValue/totSteps)) {
                 labelBounds = hs.boundingRectWithSize(CGSizeMake( 40.0, 21.0), options: .UsesLineFragmentOrigin, attributes: drawAttr, context: nil)
-                let point = CGPointMake( ceil(bounds.minX-CGRectGetWidth(labelBounds)-5), ceil(y-(CGRectGetHeight(labelBounds)/2)) )
+                let point = CGPointMake( ceil(bounds.minX-CGRectGetWidth(labelBounds)-5), ceil(y-(CGRectGetHeight(labelBounds)/2)-(2/scale)) )
                 hs.drawAtPoint( point, withAttributes: drawAttr)
             }
             i++;
@@ -277,7 +277,7 @@ public final class GraphImage {
         for (idx, plot) in enumerate(plots) {
             if idx > 0 {
                 let interval = CGFloat(plot.plotTime.timeIntervalSinceDate(self.absoluteStartDate)/60.0)
-                x = ceil(bounds.minY + (interval*self.stepX))
+                x = ceil(bounds.minX + (interval*self.stepX))
             }
 
             let rMax = plot.windMax.speedConvertionTo(unit)
@@ -319,7 +319,7 @@ public final class GraphImage {
         let bezierPath = self.quadCurvedPathWithPoints(points)
         bezierPath.lineJoinStyle = kCGLineJoinRound
         bezierPath.lineCapStyle = kCGLineCapRound
-        bezierPath.lineWidth = 1.0/scale
+        bezierPath.lineWidth = 2.0/scale
 
         return bezierPath
     }
