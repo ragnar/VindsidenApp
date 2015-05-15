@@ -38,6 +38,7 @@
 		AD30BC5219F024D9000CE40C /* RHCAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD30BC5119F024D9000CE40C /* RHCAppDelegate.swift */; };
 		AD32E38119BA2FC2008F00EB /* RHEStationPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD32E38019BA2FC2008F00EB /* RHEStationPickerViewController.swift */; };
 		AD32E38319BC5037008F00EB /* RHCUnitSelectorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD32E38219BC5037008F00EB /* RHCUnitSelectorViewController.swift */; };
+		AD48F80A1B01D47B0087E14C /* RHCGraphInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD48F8091B01D47B0087E14C /* RHCGraphInterfaceController.swift */; };
 		AD4DEA7719CB7528002A220B /* RHCNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD4DEA7619CB7528002A220B /* RHCNavigationViewController.swift */; };
 		AD539C841947B0F7002644BD /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD539C831947B0F6002644BD /* NotificationCenter.framework */; };
 		AD539C891947B0F7002644BD /* TodayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD539C881947B0F7002644BD /* TodayViewController.swift */; };
@@ -300,6 +301,7 @@
 		AD32E37F19BA2FC1008F00EB /* VindsidenApp-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "VindsidenApp-Bridging-Header.h"; sourceTree = "<group>"; };
 		AD32E38019BA2FC2008F00EB /* RHEStationPickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RHEStationPickerViewController.swift; sourceTree = "<group>"; };
 		AD32E38219BC5037008F00EB /* RHCUnitSelectorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RHCUnitSelectorViewController.swift; sourceTree = "<group>"; };
+		AD48F8091B01D47B0087E14C /* RHCGraphInterfaceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RHCGraphInterfaceController.swift; sourceTree = "<group>"; };
 		AD4DEA7619CB7528002A220B /* RHCNavigationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RHCNavigationViewController.swift; sourceTree = "<group>"; };
 		AD539C821947B0F6002644BD /* org.juniks.VindsidenApp.VindsidenToday.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = org.juniks.VindsidenApp.VindsidenToday.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		AD539C831947B0F6002644BD /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
@@ -761,6 +763,7 @@
 				AD6BD0EE1A96797D00E6686B /* StationDetailsInterfaceController.swift */,
 				AD6BD0F01A96797D00E6686B /* StationsRowController.swift */,
 				ADCB8A7B1A94F52D009225B1 /* InterfaceController.swift */,
+				AD48F8091B01D47B0087E14C /* RHCGraphInterfaceController.swift */,
 				ADCB8A7F1A94F52D009225B1 /* GlanceController.swift */,
 				AD6E8F011AE8E3C700FA5C79 /* RHCNotConfiguredInterfaceController.swift */,
 				ADCB8A811A94F52D009225B1 /* Images.xcassets */,
@@ -1273,6 +1276,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AD48F80A1B01D47B0087E14C /* RHCGraphInterfaceController.swift in Sources */,
 				ADCB8A7C1A94F52D009225B1 /* InterfaceController.swift in Sources */,
 				ADCB8A801A94F52D009225B1 /* GlanceController.swift in Sources */,
 				AD6E8F021AE8E3C700FA5C79 /* RHCNotConfiguredInterfaceController.swift in Sources */,
