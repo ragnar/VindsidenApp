@@ -23,11 +23,15 @@ class StationDetailsInterfaceController: WKInterfaceController {
     @IBOutlet weak var windBeaufortLabel: WKInterfaceLabel!
     @IBOutlet weak var airTempLabel: WKInterfaceLabel!
 
+    var station: CDStation?
 
     override func awakeWithContext(context: AnyObject!) {
         super.awakeWithContext(context)
 
         if let station = context as? CDStation {
+
+            self.station = station
+
             Datamanager.sharedManager().managedObjectContext?.processPendingChanges()
             let oldStaleness = Datamanager.sharedManager().managedObjectContext?.stalenessInterval
             Datamanager.sharedManager().managedObjectContext?.stalenessInterval = 0.0
@@ -37,10 +41,14 @@ class StationDetailsInterfaceController: WKInterfaceController {
             Datamanager.sharedManager().managedObjectContext?.stalenessInterval = oldStaleness!
 
             let userInfo = [
-                "station": station.stationId
+                "station": station.stationId,
+                "urlToActivate": "vindsiden://station/\(station.stationId)"
+
             ]
 
-            self.updateUserActivity(AppConfig.Extensions.watchBundleIdentifier, userInfo: userInfo, webpageURL: nil)
+            let url = NSURL(string: "http://vindsiden.no/default.aspx?id=\(station.stationId)")
+
+            self.updateUserActivity("org.juniks.VindsidenApp", userInfo: userInfo, webpageURL: url)
         }
     }
 
@@ -49,6 +57,17 @@ class StationDetailsInterfaceController: WKInterfaceController {
         self.invalidateUserActivity()
         super.didDeactivate()
     }
+
+
+    // MARK: - Actions
+
+
+    @IBAction func graphButtonPressed() {
+        presentControllerWithName("graph", context: station)
+    }
+
+
+    // MARK: - Convenience
 
 
     func updateUI( station: CDStation ) -> Void {
