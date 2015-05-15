@@ -111,18 +111,52 @@ class RHCAppDelegate: UIResponder, UIApplicationDelegate {
             case "glance":
                 WindManager.sharedManager.fetchForStationId(unwrapped["station"] as! Int) { (result: UIBackgroundFetchResult) -> Void in
                     reply(["result": "updated"])
-                    UIApplication.sharedApplication().endBackgroundTask(taskID)
+                    application.endBackgroundTask(taskID)
                 }
             case "main":
                 WindManager.sharedManager.fetch { (result: UIBackgroundFetchResult) -> Void in
                     reply(["result": "updated"])
-                    UIApplication.sharedApplication().endBackgroundTask(taskID)
+                    application.endBackgroundTask(taskID)
                 }
+            case "graph":
+                let graph = [
+                    "result": "updated",
+                    "graph": generateGraphImage(unwrapped["station"] as! Int, screenSize: CGRectFromString(unwrapped["bounds"] as! String), scale: unwrapped["scale"] as! CGFloat)
+                    ] as [NSObject:AnyObject]
+
+                reply(graph)
+                application.endBackgroundTask(taskID)
             default:
                 reply(["result": "not_updated"])
-                UIApplication.sharedApplication().endBackgroundTask(taskID)
+                application.endBackgroundTask(taskID)
             }
         }
+    }
+
+
+    func generateGraphImage( stationId: Int, screenSize: CGRect, scale: CGFloat ) -> NSData {
+        let graphImage: GraphImage
+
+        if let gregorian = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian) {
+            let inDate = NSDate().dateByAddingTimeInterval(-1*5*3600)
+            let inputComponents = gregorian.components(.CalendarUnitYear | .CalendarUnitMonth | .CalendarUnitDay | .CalendarUnitHour, fromDate: inDate)
+            let outDate = gregorian.dateFromComponents(inputComponents)!
+
+            let fetchRequest = NSFetchRequest(entityName: "CDPlot")
+            fetchRequest.predicate = NSPredicate(format: "station.stationId = %ld AND plotTime >= %@", stationId, outDate)
+            fetchRequest.sortDescriptors = [NSSortDescriptor(key: "plotTime", ascending: false)]
+
+            if let result = Datamanager.sharedManager().managedObjectContext?.executeFetchRequest(fetchRequest, error: nil) as? [CDPlot] {
+                graphImage = GraphImage(size: CGSizeMake( CGRectGetWidth(screenSize), 100.0), scale: scale, plots: result)
+            } else {
+                graphImage = GraphImage(size: CGSizeMake( CGRectGetWidth(screenSize), 100.0), scale: scale)
+            }
+        } else {
+            graphImage = GraphImage(size: CGSizeMake( CGRectGetWidth(screenSize), 100.0), scale: scale)
+        }
+
+        let image = graphImage.drawImage()
+        return UIImagePNGRepresentation(image)
     }
 
 
