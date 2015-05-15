@@ -190,10 +190,10 @@
                             <items>
                                 <group alignment="left" layout="vertical" spacing="0.0" id="cPI-yM-pqm">
                                     <items>
-                                        <label alignment="left" text="Beaufort" id="GTK-xa-ecI">
+                                        <label alignment="left" text="Beaufort:" id="GTK-xa-ecI">
                                             <fontDescription key="font" style="UICTFontTextStyleFootnote"/>
                                         </label>
-                                        <label alignment="left" text="Air temp" id="ToV-eP-uxn">
+                                        <label alignment="left" text="Air temp:" id="ToV-eP-uxn">
                                             <fontDescription key="font" style="UICTFontTextStyleFootnote"/>
                                         </label>
                                     </items>
