@@ -215,6 +215,15 @@
                             <fontDescription key="font" style="UICTFontTextStyleFootnote"/>
                         </label>
                     </items>
+                    <menu key="menu" id="0YF-30-kVQ">
+                        <items>
+                            <menuItem title="Graph" image="WatchButtonGraph" id="sS3-OE-dAE">
+                                <connections>
+                                    <action selector="graphButtonPressed" destination="m7g-vb-vvd" id="hOu-uu-kmQ"/>
+                                </connections>
+                            </menuItem>
+                        </items>
+                    </menu>
                     <connections>
                         <outlet property="airTempLabel" destination="vKG-Yz-WDV" id="rz4-a5-0Gg"/>
                         <outlet property="updatedAtLabel" destination="8df-jM-x00" id="6QE-Wi-Pxd"/>
@@ -229,6 +238,23 @@
                 </controller>
             </objects>
             <point key="canvasLocation" x="495" y="362"/>
+        </scene>
+        <!--Close-->
+        <scene sceneID="J3e-yB-ail">
+            <objects>
+                <controller identifier="graph" title="Close" id="TMe-m6-g1E" customClass="RHCGraphInterfaceController" customModule="VindsidenApp_WatchKit_Extension">
+                    <items>
+                        <label alignment="left" verticalAlignment="bottom" text="Unknown station" id="gcj-kQ-oD3"/>
+                        <imageView alignment="center" verticalAlignment="center" id="36J-93-YO8"/>
+                    </items>
+                    <edgeInsets key="margins" left="0.0" right="0.0" top="0.0" bottom="0.0"/>
+                    <connections>
+                        <outlet property="graphImage" destination="36J-93-YO8" id="Ubm-Xt-sBO"/>
+                        <outlet property="stationName" destination="gcj-kQ-oD3" id="PtG-0b-uHg"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="794" y="362"/>
         </scene>
     </scenes>
     <color key="tintColor" red="0.89019607840000003" green="0.23529411759999999" blue="0.050980392159999999" alpha="1" colorSpace="calibratedRGB"/>
