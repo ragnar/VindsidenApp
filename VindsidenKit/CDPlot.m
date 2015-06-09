@@ -146,6 +146,7 @@
 
 - (NSString *)windDirectionString
 {
+    NSBundle *bundle = [[AppConfig sharedConfiguration] frameworkBundle];
     CGFloat direction = [self.windDir floatValue];
 
     if ( direction > 360.0 || direction < 0 ) {
@@ -153,41 +154,40 @@
     }
     NSNumber *dir = @(direction);
 
-
     if ( [dir isBetween:0.0 and:11.25] || [dir isBetween:348.75 and:360.001]) {
-        return NSLocalizedString(@"DIRECTION_N", @"N");
+        return NSLocalizedStringFromTableInBundle(@"DIRECTION_N", nil, bundle, @"N");
     } else if ( [dir isBetween:11.25 and:33.35] ) {
-        return NSLocalizedString(@"DIRECTION_NNE", @"NNE");
+        return NSLocalizedStringFromTableInBundle(@"DIRECTION_NNE", nil, bundle, @"NNE");
     } else if ( [dir isBetween:33.75 and:56.25] ) {
-        return NSLocalizedString(@"DIRECTION_NE", @"NE");
+        return NSLocalizedStringFromTableInBundle(@"DIRECTION_NE", nil, bundle, @"NE");
     } else if ( [dir isBetween:56.25 and:78.75] ) {
-        return NSLocalizedString(@"DIRECTION_ENE", @"ENE");
+        return NSLocalizedStringFromTableInBundle(@"DIRECTION_ENE", nil, bundle, @"ENE");
     } else if ( [dir isBetween:78.75 and:101.25] ) {
-        return NSLocalizedString(@"DIRECTION_E", @"E");
+        return NSLocalizedStringFromTableInBundle(@"DIRECTION_E", nil, bundle, @"E");
     } else if ( [dir isBetween:101.25 and:123.75] ) {
-        return NSLocalizedString(@"DIRECTION_ESE", @"ESE");
+        return NSLocalizedStringFromTableInBundle(@"DIRECTION_ESE", nil, bundle, @"ESE");
     } else if ( [dir isBetween:123.75 and:146.25] ) {
-        return NSLocalizedString(@"DIRECTION_SE", @"SE");
+        return NSLocalizedStringFromTableInBundle(@"DIRECTION_SE", nil, bundle, @"SE");
     } else if ( [dir isBetween:146.25 and:168.75] ) {
-        return NSLocalizedString(@"DIRECTION_SSE", @"SSE");
+        return NSLocalizedStringFromTableInBundle(@"DIRECTION_SSE", nil, bundle, @"SSE");
     } else if ( [dir isBetween:168.75 and:191.25] ) {
-        return NSLocalizedString(@"DIRECTION_S", @"S");
+        return NSLocalizedStringFromTableInBundle(@"DIRECTION_S", nil, bundle, @"S");
     } else if ( [dir isBetween:191.25 and:213.75] ) {
-        return NSLocalizedString(@"DIRECTION_SSW", @"SSW");
+        return NSLocalizedStringFromTableInBundle(@"DIRECTION_SSW", nil, bundle, @"SSW");
     } else if ( [dir isBetween:213.75 and:236.25] ) {
-        return NSLocalizedString(@"DIRECTION_SW", @"SW");
+        return NSLocalizedStringFromTableInBundle(@"DIRECTION_SW", nil, bundle, @"SW");
     } else if ( [dir isBetween:236.25 and:258.75] ) {
-        return NSLocalizedString(@"DIRECTION_WSW", @"WSW");
+        return NSLocalizedStringFromTableInBundle(@"DIRECTION_WSW", nil, bundle, @"WSW");
     } else if ( [dir isBetween:258.75 and:281.25] ) {
-        return NSLocalizedString(@"DIRECTION_W", @"W");
+        return NSLocalizedStringFromTableInBundle(@"DIRECTION_W", nil, bundle, @"W");
     } else if ( [dir isBetween:281.25 and:303.75] ) {
-        return NSLocalizedString(@"DIRECTION_WNW", @"WNW");
+        return NSLocalizedStringFromTableInBundle(@"DIRECTION_WNW", nil, bundle, @"WNW");
     } else if ( [dir isBetween:303.75 and:326.25] ) {
-        return NSLocalizedString(@"DIRECTION_NW", @"NW");
+        return NSLocalizedStringFromTableInBundle(@"DIRECTION_NW", nil, bundle, @"NW");
     } else if ( [dir isBetween:326.25 and:348.75] ) {
-        return NSLocalizedString(@"DIRECTION_NNW", @"NNW");
+        return NSLocalizedStringFromTableInBundle(@"DIRECTION_NNW", nil, bundle, @"NNW");
     } else {
-        return NSLocalizedString(@"DIRECTION_UKN", @"UKN");
+        return NSLocalizedStringFromTableInBundle(@"DIRECTION_UKN", nil, bundle, @"UKN");
     }
 }
 

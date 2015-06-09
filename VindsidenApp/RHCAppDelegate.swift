@@ -136,9 +136,10 @@ class RHCAppDelegate: UIResponder, UIApplicationDelegate {
 
     func generateGraphImage( stationId: Int, screenSize: CGRect, scale: CGFloat ) -> NSData {
         let graphImage: GraphImage
+        let imageSize = CGSizeMake( CGRectGetWidth(screenSize), CGRectGetHeight(screenSize) - 40.0)
 
         if let gregorian = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian) {
-            let inDate = NSDate().dateByAddingTimeInterval(-1*5*3600)
+            let inDate = NSDate().dateByAddingTimeInterval(-1*4*3600)
             let inputComponents = gregorian.components(.CalendarUnitYear | .CalendarUnitMonth | .CalendarUnitDay | .CalendarUnitHour, fromDate: inDate)
             let outDate = gregorian.dateFromComponents(inputComponents)!
 
@@ -147,12 +148,12 @@ class RHCAppDelegate: UIResponder, UIApplicationDelegate {
             fetchRequest.sortDescriptors = [NSSortDescriptor(key: "plotTime", ascending: false)]
 
             if let result = Datamanager.sharedManager().managedObjectContext?.executeFetchRequest(fetchRequest, error: nil) as? [CDPlot] {
-                graphImage = GraphImage(size: CGSizeMake( CGRectGetWidth(screenSize), 100.0), scale: scale, plots: result)
+                graphImage = GraphImage(size: imageSize, scale: scale, plots: result)
             } else {
-                graphImage = GraphImage(size: CGSizeMake( CGRectGetWidth(screenSize), 100.0), scale: scale)
+                graphImage = GraphImage(size: imageSize, scale: scale)
             }
         } else {
-            graphImage = GraphImage(size: CGSizeMake( CGRectGetWidth(screenSize), 100.0), scale: scale)
+            graphImage = GraphImage(size: imageSize, scale: scale)
         }
 
         let image = graphImage.drawImage()
