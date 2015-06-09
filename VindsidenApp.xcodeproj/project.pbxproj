@@ -29,6 +29,7 @@
 		AD17EDC717312A5000943C33 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = AD17EDC517312A5000943C33 /* Localizable.strings */; };
 		AD17EDCC17312B2600943C33 /* DINMittelschriftStd.otf in Resources */ = {isa = PBXBuildFile; fileRef = AD17EDCA17312B2600943C33 /* DINMittelschriftStd.otf */; };
 		AD17EDF91736492500943C33 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD17EDF81736492200943C33 /* AdSupport.framework */; };
+		AD1812A81AF9E77F0040080D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = AD1812A61AF9E77F0040080D /* InfoPlist.strings */; };
 		AD2AB4F819C722320029C739 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = AD2AB4FA19C722320029C739 /* InfoPlist.strings */; };
 		AD2AB4FD19C722330029C739 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = AD2AB4FF19C722330029C739 /* InfoPlist.strings */; };
 		AD2AB50219C722330029C739 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = AD2AB50419C722330029C739 /* Localizable.strings */; };
@@ -37,6 +38,7 @@
 		AD30BC5219F024D9000CE40C /* RHCAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD30BC5119F024D9000CE40C /* RHCAppDelegate.swift */; };
 		AD32E38119BA2FC2008F00EB /* RHEStationPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD32E38019BA2FC2008F00EB /* RHEStationPickerViewController.swift */; };
 		AD32E38319BC5037008F00EB /* RHCUnitSelectorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD32E38219BC5037008F00EB /* RHCUnitSelectorViewController.swift */; };
+		AD48F80A1B01D47B0087E14C /* RHCGraphInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD48F8091B01D47B0087E14C /* RHCGraphInterfaceController.swift */; };
 		AD4DEA7719CB7528002A220B /* RHCNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD4DEA7619CB7528002A220B /* RHCNavigationViewController.swift */; };
 		AD539C841947B0F7002644BD /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD539C831947B0F6002644BD /* NotificationCenter.framework */; };
 		AD539C891947B0F7002644BD /* TodayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD539C881947B0F7002644BD /* TodayViewController.swift */; };
@@ -50,11 +52,10 @@
 		AD539CC71947B684002644BD /* Datamanager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD539CC61947B684002644BD /* Datamanager.swift */; };
 		AD6BD0ED1A9506C900E6686B /* Global.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD6BD0EC1A9506C900E6686B /* Global.swift */; };
 		AD6BD0F11A96797D00E6686B /* StationDetailsInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD6BD0EE1A96797D00E6686B /* StationDetailsInterfaceController.swift */; };
-		AD6BD0F21A96797D00E6686B /* StationDetailsRowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD6BD0EF1A96797D00E6686B /* StationDetailsRowController.swift */; };
 		AD6BD0F31A96797D00E6686B /* StationsRowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD6BD0F01A96797D00E6686B /* StationsRowController.swift */; };
 		AD6BD0F61A967AD800E6686B /* VindsidenKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD539C9D1947B5CA002644BD /* VindsidenKit.framework */; };
+		AD6E8F021AE8E3C700FA5C79 /* RHCNotConfiguredInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD6E8F011AE8E3C700FA5C79 /* RHCNotConfiguredInterfaceController.swift */; };
 		AD71965C19EED713006FA2BC /* RHCSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD71965B19EED713006FA2BC /* RHCSettingsViewController.swift */; };
-		AD7398D81AA4455A00236D52 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = AD17EDC517312A5000943C33 /* Localizable.strings */; };
 		AD7AA501196E46BA00B1518B /* CDPlot.h in Headers */ = {isa = PBXBuildFile; fileRef = AD7AA4FD196E46BA00B1518B /* CDPlot.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AD7AA502196E46BA00B1518B /* CDPlot.m in Sources */ = {isa = PBXBuildFile; fileRef = AD7AA4FE196E46BA00B1518B /* CDPlot.m */; };
 		AD7AA503196E46BA00B1518B /* CDStation.h in Headers */ = {isa = PBXBuildFile; fileRef = AD7AA4FF196E46BA00B1518B /* CDStation.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -77,13 +78,14 @@
 		ADB5A78A19DEC29A009AE4A5 /* DrawArrow.h in Headers */ = {isa = PBXBuildFile; fileRef = ADB5A78819DEC29A009AE4A5 /* DrawArrow.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		ADB5A78B19DEC29A009AE4A5 /* DrawArrow.m in Sources */ = {isa = PBXBuildFile; fileRef = ADB5A78919DEC29A009AE4A5 /* DrawArrow.m */; };
 		ADBEA4CF1A07ECF600B168BF /* UIColor+AppColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADBEA4CE1A07ECF600B168BF /* UIColor+AppColors.swift */; };
+		ADC161851B0218D8004F6DAE /* GraphImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADC161841B0218D8004F6DAE /* GraphImage.swift */; };
 		ADCB8A7C1A94F52D009225B1 /* InterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADCB8A7B1A94F52D009225B1 /* InterfaceController.swift */; };
-		ADCB8A7E1A94F52D009225B1 /* NotificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADCB8A7D1A94F52D009225B1 /* NotificationController.swift */; };
 		ADCB8A801A94F52D009225B1 /* GlanceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADCB8A7F1A94F52D009225B1 /* GlanceController.swift */; };
 		ADCB8A821A94F52D009225B1 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ADCB8A811A94F52D009225B1 /* Images.xcassets */; };
 		ADCB8A861A94F52D009225B1 /* VindsidenApp WatchKit App.app in Resources */ = {isa = PBXBuildFile; fileRef = ADCB8A851A94F52D009225B1 /* VindsidenApp WatchKit App.app */; };
 		ADCB8A8E1A94F52D009225B1 /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ADCB8A8C1A94F52D009225B1 /* Interface.storyboard */; };
 		ADCB8A901A94F52D009225B1 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ADCB8A8F1A94F52D009225B1 /* Images.xcassets */; };
+		ADCB8A931A94F52D009225B1 /* VindsidenApp WatchKit Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = ADCB8A761A94F52D009225B1 /* VindsidenApp WatchKit Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		ADCD424E196E4E42004973E9 /* NSNumber+Between.h in Headers */ = {isa = PBXBuildFile; fileRef = ADCD423C196E4E42004973E9 /* NSNumber+Between.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		ADCD424F196E4E42004973E9 /* NSNumber+Between.m in Sources */ = {isa = PBXBuildFile; fileRef = ADCD423D196E4E42004973E9 /* NSNumber+Between.m */; };
 		ADCD4250196E4E42004973E9 /* NSNumber+Convertion.h in Headers */ = {isa = PBXBuildFile; fileRef = ADCD423E196E4E42004973E9 /* NSNumber+Convertion.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -105,6 +107,7 @@
 		ADD211C119CF139300497DC1 /* RHCLandscapeGraphViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADD211C019CF139300497DC1 /* RHCLandscapeGraphViewController.swift */; };
 		ADD211C419CF1EC400497DC1 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = ADD211C619CF1EC400497DC1 /* InfoPlist.strings */; };
 		ADDB4F5019CB68F1005D5D38 /* RHCAlertManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADDB4F4F19CB68F1005D5D38 /* RHCAlertManager.swift */; };
+		ADDDB1881B0693C60091D4E8 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = ADDDB1861B0693C60091D4E8 /* Localizable.strings */; };
 		ADE9C4081AAB32840089EB19 /* WindManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADE9C4071AAB32840089EB19 /* WindManager.swift */; };
 		ADF8B2141AA47D9D000CF266 /* Pods_VindsidenApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ADF8B2131AA47D9D000CF266 /* Pods_VindsidenApp.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 /* End PBXBuildFile section */
@@ -201,6 +204,13 @@
 			remoteGlobalIDString = ADCB8A841A94F52D009225B1;
 			remoteInfo = "VindsidenApp WatchKit App";
 		};
+		ADCB8A911A94F52D009225B1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AD17ED3C1731012200943C33 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = ADCB8A751A94F52D009225B1;
+			remoteInfo = "VindsidenApp WatchKit Extension";
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -210,6 +220,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
+				ADCB8A931A94F52D009225B1 /* VindsidenApp WatchKit Extension.appex in Embed App Extensions */,
 				AD539C8E1947B0F7002644BD /* org.juniks.VindsidenApp.VindsidenToday.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
@@ -239,18 +250,21 @@
 		9E713D0A7C32B35097808D07 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AD00384E196E741800C3232A /* VindsidenApp-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "VindsidenApp-Bridging-Header.h"; path = "../VindsidenApp-Bridging-Header.h"; sourceTree = "<group>"; };
 		AD00384F196E7A6400C3232A /* RHCTodayCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RHCTodayCell.swift; sourceTree = "<group>"; };
+		AD0636131B069CB900EF7321 /* en */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		AD0636141B069CBB00EF7321 /* Base */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		AD0636151B069CE000EF7321 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		AD07B2C01779E90A004BC24C /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Media.xcassets; sourceTree = "<group>"; };
 		AD146F4C1741251E00205BB9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
-		AD146F4D1741255B00205BB9 /* nb */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nb; path = nb.lproj/Localizable.strings; sourceTree = "<group>"; };
-		AD146F4F1741255B00205BB9 /* nb */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nb; path = nb.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		AD146F4D1741255B00205BB9 /* nb */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = nb; path = nb.lproj/Localizable.strings; sourceTree = "<group>"; };
+		AD146F4F1741255B00205BB9 /* nb */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = nb; path = nb.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		AD146F52174126FF00205BB9 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/MainStoryboard.strings; sourceTree = "<group>"; };
-		AD146F541741270700205BB9 /* nb */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nb; path = nb.lproj/MainStoryboard.strings; sourceTree = "<group>"; };
+		AD146F541741270700205BB9 /* nb */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = nb; path = nb.lproj/MainStoryboard.strings; sourceTree = "<group>"; };
 		AD17ED441731012200943C33 /* VindsidenApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VindsidenApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AD17ED471731012200943C33 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		AD17ED491731012200943C33 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		AD17ED4B1731012200943C33 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		AD17ED4F1731012200943C33 /* VindsidenApp-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "VindsidenApp-Info.plist"; sourceTree = "<group>"; };
-		AD17ED511731012200943C33 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		AD17ED511731012200943C33 /* en */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		AD17ED551731012200943C33 /* VindsidenApp-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "VindsidenApp-Prefix.pch"; sourceTree = "<group>"; };
 		AD17ED621731012200943C33 /* RHCViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RHCViewController.h; sourceTree = "<group>"; };
 		AD17ED631731012200943C33 /* RHCViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RHCViewController.m; sourceTree = "<group>"; };
@@ -269,14 +283,20 @@
 		AD17EDBC17310E6A00943C33 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		AD17EDBE17310E7200943C33 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		AD17EDC017310E7A00943C33 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
-		AD17EDC617312A5000943C33 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		AD17EDC617312A5000943C33 /* en */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		AD17EDCA17312B2600943C33 /* DINMittelschriftStd.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = DINMittelschriftStd.otf; sourceTree = "<group>"; };
 		AD17EDF81736492200943C33 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
+		AD1812A71AF9E77F0040080D /* Base */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		AD1812A91AF9E7B40040080D /* Base */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		AD1812AA1AF9E7CE0040080D /* en */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		AD1812AB1AF9E7CE0040080D /* Base */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		AD1812AC1AF9E7E50040080D /* en */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		AD1812AD1AF9E7E60040080D /* nb */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = nb; path = nb.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		AD1B7EF119A7E82900D8B253 /* libPods.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libPods.a; path = "Pods/build/Debug-iphoneos/libPods.a"; sourceTree = "<group>"; };
-		AD2AB4F919C722320029C739 /* nb */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nb; path = nb.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		AD2AB4FE19C722330029C739 /* nb */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nb; path = nb.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		AD2AB50319C722330029C739 /* nb */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nb; path = nb.lproj/Localizable.strings; sourceTree = "<group>"; };
-		AD2AB50819C722340029C739 /* nb */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nb; path = nb.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		AD2AB4F919C722320029C739 /* nb */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = nb; path = nb.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		AD2AB4FE19C722330029C739 /* nb */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = nb; path = nb.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		AD2AB50319C722330029C739 /* nb */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = nb; path = nb.lproj/Localizable.strings; sourceTree = "<group>"; };
+		AD2AB50819C722340029C739 /* nb */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = nb; path = nb.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		AD2BB34A19C7718600349495 /* VindsidenAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VindsidenAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		AD2BB34D19C7718600349495 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AD2BB34E19C7718600349495 /* VindsidenAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VindsidenAppTests.swift; sourceTree = "<group>"; };
@@ -284,6 +304,7 @@
 		AD32E37F19BA2FC1008F00EB /* VindsidenApp-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "VindsidenApp-Bridging-Header.h"; sourceTree = "<group>"; };
 		AD32E38019BA2FC2008F00EB /* RHEStationPickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RHEStationPickerViewController.swift; sourceTree = "<group>"; };
 		AD32E38219BC5037008F00EB /* RHCUnitSelectorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RHCUnitSelectorViewController.swift; sourceTree = "<group>"; };
+		AD48F8091B01D47B0087E14C /* RHCGraphInterfaceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RHCGraphInterfaceController.swift; sourceTree = "<group>"; };
 		AD4DEA7619CB7528002A220B /* RHCNavigationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RHCNavigationViewController.swift; sourceTree = "<group>"; };
 		AD539C821947B0F6002644BD /* org.juniks.VindsidenApp.VindsidenToday.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = org.juniks.VindsidenApp.VindsidenToday.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		AD539C831947B0F6002644BD /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
@@ -301,10 +322,10 @@
 		AD674DA81962EB7100BF257B /* libPods.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libPods.a; path = "Pods/build/Debug-iphoneos/libPods.a"; sourceTree = "<group>"; };
 		AD6BD0EC1A9506C900E6686B /* Global.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Global.swift; sourceTree = "<group>"; };
 		AD6BD0EE1A96797D00E6686B /* StationDetailsInterfaceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StationDetailsInterfaceController.swift; sourceTree = "<group>"; };
-		AD6BD0EF1A96797D00E6686B /* StationDetailsRowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StationDetailsRowController.swift; sourceTree = "<group>"; };
 		AD6BD0F01A96797D00E6686B /* StationsRowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StationsRowController.swift; sourceTree = "<group>"; };
 		AD6BD0F41A967A8800E6686B /* libPods.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libPods.a; path = "Pods/build/Debug-iphoneos/libPods.a"; sourceTree = "<group>"; };
 		AD6BD0F71A967D7700E6686B /* VindsidenApp WatchKit Extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "VindsidenApp WatchKit Extension.entitlements"; sourceTree = "<group>"; };
+		AD6E8F011AE8E3C700FA5C79 /* RHCNotConfiguredInterfaceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RHCNotConfiguredInterfaceController.swift; sourceTree = "<group>"; };
 		AD71965B19EED713006FA2BC /* RHCSettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RHCSettingsViewController.swift; sourceTree = "<group>"; };
 		AD7AA4FD196E46BA00B1518B /* CDPlot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDPlot.h; sourceTree = "<group>"; };
 		AD7AA4FE196E46BA00B1518B /* CDPlot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDPlot.m; sourceTree = "<group>"; };
@@ -322,18 +343,18 @@
 		AD7BBB4A1A3F5A6800883770 /* RHEVindsidenAPIClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RHEVindsidenAPIClient.h; path = VindsidenKit/RHEVindsidenAPIClient.h; sourceTree = SOURCE_ROOT; };
 		AD7BBB4B1A3F5A6800883770 /* RHEVindsidenAPIClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RHEVindsidenAPIClient.m; path = VindsidenKit/RHEVindsidenAPIClient.m; sourceTree = SOURCE_ROOT; };
 		ADA0C64119C0EEBC00152005 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Today.storyboard; sourceTree = "<group>"; };
-		ADA0C64419C0EEC000152005 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Today.strings; sourceTree = "<group>"; };
-		ADA0C64619C0EEC200152005 /* nb */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nb; path = nb.lproj/Today.strings; sourceTree = "<group>"; };
+		ADA0C64419C0EEC000152005 /* en */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Today.strings; sourceTree = "<group>"; };
+		ADA0C64619C0EEC200152005 /* nb */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = nb; path = nb.lproj/Today.strings; sourceTree = "<group>"; };
 		ADA2351919FD69C6006A72D4 /* RHEStationDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RHEStationDetailsViewController.swift; sourceTree = "<group>"; };
 		ADA2351B1A040839006A72D4 /* RHCDStationDetailsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RHCDStationDetailsCell.swift; sourceTree = "<group>"; };
 		ADB5A78819DEC29A009AE4A5 /* DrawArrow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DrawArrow.h; sourceTree = "<group>"; };
 		ADB5A78919DEC29A009AE4A5 /* DrawArrow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DrawArrow.m; sourceTree = "<group>"; };
 		ADBEA4CE1A07ECF600B168BF /* UIColor+AppColors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+AppColors.swift"; sourceTree = "<group>"; };
+		ADC161841B0218D8004F6DAE /* GraphImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphImage.swift; sourceTree = "<group>"; };
 		ADCB8A761A94F52D009225B1 /* VindsidenApp WatchKit Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "VindsidenApp WatchKit Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		ADCB8A791A94F52D009225B1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		ADCB8A7A1A94F52D009225B1 /* PushNotificationPayload.apns */ = {isa = PBXFileReference; lastKnownFileType = text; path = PushNotificationPayload.apns; sourceTree = "<group>"; };
 		ADCB8A7B1A94F52D009225B1 /* InterfaceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterfaceController.swift; sourceTree = "<group>"; };
-		ADCB8A7D1A94F52D009225B1 /* NotificationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationController.swift; sourceTree = "<group>"; };
 		ADCB8A7F1A94F52D009225B1 /* GlanceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlanceController.swift; sourceTree = "<group>"; };
 		ADCB8A811A94F52D009225B1 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		ADCB8A851A94F52D009225B1 /* VindsidenApp WatchKit App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "VindsidenApp WatchKit App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -359,8 +380,15 @@
 		ADCD424C196E4E42004973E9 /* UIImage+ImageFromView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ImageFromView.h"; sourceTree = "<group>"; };
 		ADCD424D196E4E42004973E9 /* UIImage+ImageFromView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ImageFromView.m"; sourceTree = "<group>"; };
 		ADD211C019CF139300497DC1 /* RHCLandscapeGraphViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RHCLandscapeGraphViewController.swift; sourceTree = "<group>"; };
-		ADD211C519CF1EC400497DC1 /* nb */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nb; path = nb.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		ADD211C519CF1EC400497DC1 /* nb */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = nb; path = nb.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		ADDB4F4F19CB68F1005D5D38 /* RHCAlertManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RHCAlertManager.swift; sourceTree = "<group>"; };
+		ADDDB1831B0691E70091D4E8 /* en */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Interface.strings; sourceTree = "<group>"; };
+		ADDDB1851B0691EE0091D4E8 /* nb */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = nb; path = nb.lproj/Interface.strings; sourceTree = "<group>"; };
+		ADDDB1871B0693C60091D4E8 /* Base */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
+		ADDDB1891B0693D30091D4E8 /* en */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		ADDDB18A1B0693D40091D4E8 /* nb */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = nb; path = nb.lproj/Localizable.strings; sourceTree = "<group>"; };
+		ADDDB18B1B06966A0091D4E8 /* en */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		ADDDB18C1B06966B0091D4E8 /* Base */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		ADE9C4071AAB32840089EB19 /* WindManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WindManager.swift; sourceTree = "<group>"; };
 		ADF8B2131AA47D9D000CF266 /* Pods_VindsidenApp.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Pods_VindsidenApp.framework; path = "Pods/../build/Debug-iphoneos/Pods_VindsidenApp.framework"; sourceTree = "<group>"; };
 		D077413EC6AD6C77CEEEA239 /* Pods-VindsidenApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VindsidenApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-VindsidenApp/Pods-VindsidenApp.debug.xcconfig"; sourceTree = "<group>"; };
@@ -733,6 +761,7 @@
 			children = (
 				ADB5A78819DEC29A009AE4A5 /* DrawArrow.h */,
 				ADB5A78919DEC29A009AE4A5 /* DrawArrow.m */,
+				ADC161841B0218D8004F6DAE /* GraphImage.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -742,11 +771,11 @@
 			children = (
 				AD6BD0F71A967D7700E6686B /* VindsidenApp WatchKit Extension.entitlements */,
 				AD6BD0EE1A96797D00E6686B /* StationDetailsInterfaceController.swift */,
-				AD6BD0EF1A96797D00E6686B /* StationDetailsRowController.swift */,
 				AD6BD0F01A96797D00E6686B /* StationsRowController.swift */,
 				ADCB8A7B1A94F52D009225B1 /* InterfaceController.swift */,
-				ADCB8A7D1A94F52D009225B1 /* NotificationController.swift */,
+				AD48F8091B01D47B0087E14C /* RHCGraphInterfaceController.swift */,
 				ADCB8A7F1A94F52D009225B1 /* GlanceController.swift */,
+				AD6E8F011AE8E3C700FA5C79 /* RHCNotConfiguredInterfaceController.swift */,
 				ADCB8A811A94F52D009225B1 /* Images.xcassets */,
 				ADCB8A781A94F52D009225B1 /* Supporting Files */,
 			);
@@ -758,6 +787,7 @@
 			children = (
 				ADCB8A791A94F52D009225B1 /* Info.plist */,
 				ADCB8A7A1A94F52D009225B1 /* PushNotificationPayload.apns */,
+				ADDDB1861B0693C60091D4E8 /* Localizable.strings */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -776,6 +806,7 @@
 			isa = PBXGroup;
 			children = (
 				ADCB8A8B1A94F52D009225B1 /* Info.plist */,
+				AD1812A61AF9E77F0040080D /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -856,6 +887,7 @@
 				AD539C8D1947B0F7002644BD /* PBXTargetDependency */,
 				AD539C901947B0F7002644BD /* PBXTargetDependency */,
 				AD539CB51947B5CA002644BD /* PBXTargetDependency */,
+				ADCB8A921A94F52D009225B1 /* PBXTargetDependency */,
 			);
 			name = VindsidenApp;
 			productName = "Vindsiden-v2";
@@ -1108,8 +1140,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ADDDB1881B0693C60091D4E8 /* Localizable.strings in Resources */,
 				ADCB8A821A94F52D009225B1 /* Images.xcassets in Resources */,
-				AD7398D81AA4455A00236D52 /* Localizable.strings in Resources */,
 				ADCB8A861A94F52D009225B1 /* VindsidenApp WatchKit App.app in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1119,6 +1151,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				ADCB8A8E1A94F52D009225B1 /* Interface.storyboard in Resources */,
+				AD1812A81AF9E77F0040080D /* InfoPlist.strings in Resources */,
 				ADCB8A901A94F52D009225B1 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1235,6 +1268,7 @@
 				ADBEA4CF1A07ECF600B168BF /* UIColor+AppColors.swift in Sources */,
 				ADCD424F196E4E42004973E9 /* NSNumber+Between.m in Sources */,
 				ADCD4255196E4E42004973E9 /* NSSet+Sort.m in Sources */,
+				ADC161851B0218D8004F6DAE /* GraphImage.swift in Sources */,
 				AD7BBB411A3F539100883770 /* RHEVindsidenAPIClientPrivate.m in Sources */,
 				AD7BBB451A3F539100883770 /* VindsidenStationClient.m in Sources */,
 				ADCD4259196E4E42004973E9 /* NSString+isNumeric.m in Sources */,
@@ -1253,10 +1287,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				ADCB8A7E1A94F52D009225B1 /* NotificationController.swift in Sources */,
+				AD48F80A1B01D47B0087E14C /* RHCGraphInterfaceController.swift in Sources */,
 				ADCB8A7C1A94F52D009225B1 /* InterfaceController.swift in Sources */,
-				AD6BD0F21A96797D00E6686B /* StationDetailsRowController.swift in Sources */,
 				ADCB8A801A94F52D009225B1 /* GlanceController.swift in Sources */,
+				AD6E8F021AE8E3C700FA5C79 /* RHCNotConfiguredInterfaceController.swift in Sources */,
 				AD6BD0F11A96797D00E6686B /* StationDetailsInterfaceController.swift in Sources */,
 				AD6BD0F31A96797D00E6686B /* StationsRowController.swift in Sources */,
 			);
@@ -1330,6 +1364,11 @@
 			target = ADCB8A841A94F52D009225B1 /* VindsidenApp WatchKit App */;
 			targetProxy = ADCB8A871A94F52D009225B1 /* PBXContainerItemProxy */;
 		};
+		ADCB8A921A94F52D009225B1 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = ADCB8A751A94F52D009225B1 /* VindsidenApp WatchKit Extension */;
+			targetProxy = ADCB8A911A94F52D009225B1 /* PBXContainerItemProxy */;
+		};
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
@@ -1338,6 +1377,7 @@
 			children = (
 				AD17ED511731012200943C33 /* en */,
 				AD146F4F1741255B00205BB9 /* nb */,
+				AD1812A91AF9E7B40040080D /* Base */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -1357,14 +1397,27 @@
 			children = (
 				AD17EDC617312A5000943C33 /* en */,
 				AD146F4D1741255B00205BB9 /* nb */,
+				AD0636151B069CE000EF7321 /* Base */,
 			);
 			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		AD1812A61AF9E77F0040080D /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				AD1812A71AF9E77F0040080D /* Base */,
+				AD1812AC1AF9E7E50040080D /* en */,
+				AD1812AD1AF9E7E60040080D /* nb */,
+			);
+			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
 		AD2AB4FA19C722320029C739 /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
 				AD2AB4F919C722320029C739 /* nb */,
+				AD0636131B069CB900EF7321 /* en */,
+				AD0636141B069CBB00EF7321 /* Base */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -1381,6 +1434,8 @@
 			isa = PBXVariantGroup;
 			children = (
 				AD2AB50319C722330029C739 /* nb */,
+				ADDDB18B1B06966A0091D4E8 /* en */,
+				ADDDB18C1B06966B0091D4E8 /* Base */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -1389,6 +1444,8 @@
 			isa = PBXVariantGroup;
 			children = (
 				AD2AB50819C722340029C739 /* nb */,
+				AD1812AA1AF9E7CE0040080D /* en */,
+				AD1812AB1AF9E7CE0040080D /* Base */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -1407,6 +1464,8 @@
 			isa = PBXVariantGroup;
 			children = (
 				ADCB8A8D1A94F52D009225B1 /* Base */,
+				ADDDB1831B0691E70091D4E8 /* en */,
+				ADDDB1851B0691EE0091D4E8 /* nb */,
 			);
 			name = Interface.storyboard;
 			sourceTree = "<group>";
@@ -1417,6 +1476,16 @@
 				ADD211C519CF1EC400497DC1 /* nb */,
 			);
 			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		ADDDB1861B0693C60091D4E8 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				ADDDB1871B0693C60091D4E8 /* Base */,
+				ADDDB1891B0693D30091D4E8 /* en */,
+				ADDDB18A1B0693D40091D4E8 /* nb */,
+			);
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -1490,7 +1559,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = VindsidenApp/VindsidenApp.entitlements;
-				CURRENT_PROJECT_VERSION = 50;
+				CURRENT_PROJECT_VERSION = 54;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "VindsidenApp/VindsidenApp-Prefix.pch";
 				INFOPLIST_FILE = "VindsidenApp/VindsidenApp-Info.plist";
@@ -1512,7 +1582,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = VindsidenApp/VindsidenApp.entitlements;
-				CURRENT_PROJECT_VERSION = 50;
+				CURRENT_PROJECT_VERSION = 54;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "VindsidenApp/VindsidenApp-Prefix.pch";
 				INFOPLIST_FILE = "VindsidenApp/VindsidenApp-Info.plist";
@@ -1659,10 +1730,10 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 50;
+				CURRENT_PROJECT_VERSION = 54;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 50;
+				DYLIB_CURRENT_VERSION = 54;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1704,10 +1775,10 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 50;
+				CURRENT_PROJECT_VERSION = 54;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 50;
+				DYLIB_CURRENT_VERSION = 54;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;

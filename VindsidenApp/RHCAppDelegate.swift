@@ -98,9 +98,66 @@ class RHCAppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, performFetchWithCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
         WindManager.sharedManager.fetch { (result: UIBackgroundFetchResult) -> Void in
-            DLOG("Fetch finished")
             completionHandler(result)
         }
+    }
+
+
+    func application(application: UIApplication, handleWatchKitExtensionRequest userInfo: [NSObject : AnyObject]?, reply: (([NSObject : AnyObject]!) -> Void)!) {
+        let taskID = application.beginBackgroundTaskWithExpirationHandler({})
+
+        if  let unwrapped = userInfo, let interface = unwrapped["interface"] as? String {
+            switch (interface) {
+            case "glance":
+                WindManager.sharedManager.fetchForStationId(unwrapped["station"] as! Int) { (result: UIBackgroundFetchResult) -> Void in
+                    reply(["result": "updated"])
+                    application.endBackgroundTask(taskID)
+                }
+            case "main":
+                WindManager.sharedManager.fetch { (result: UIBackgroundFetchResult) -> Void in
+                    reply(["result": "updated"])
+                    application.endBackgroundTask(taskID)
+                }
+            case "graph":
+                let graph = [
+                    "result": "updated",
+                    "graph": generateGraphImage(unwrapped["station"] as! Int, screenSize: CGRectFromString(unwrapped["bounds"] as! String), scale: unwrapped["scale"] as! CGFloat)
+                    ] as [NSObject:AnyObject]
+
+                reply(graph)
+                application.endBackgroundTask(taskID)
+            default:
+                reply(["result": "not_updated"])
+                application.endBackgroundTask(taskID)
+            }
+        }
+    }
+
+
+    func generateGraphImage( stationId: Int, screenSize: CGRect, scale: CGFloat ) -> NSData {
+        let graphImage: GraphImage
+        let imageSize = CGSizeMake( CGRectGetWidth(screenSize), CGRectGetHeight(screenSize) - 40.0)
+
+        if let gregorian = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian) {
+            let inDate = NSDate().dateByAddingTimeInterval(-1*4*3600)
+            let inputComponents = gregorian.components(.CalendarUnitYear | .CalendarUnitMonth | .CalendarUnitDay | .CalendarUnitHour, fromDate: inDate)
+            let outDate = gregorian.dateFromComponents(inputComponents)!
+
+            let fetchRequest = NSFetchRequest(entityName: "CDPlot")
+            fetchRequest.predicate = NSPredicate(format: "station.stationId = %ld AND plotTime >= %@", stationId, outDate)
+            fetchRequest.sortDescriptors = [NSSortDescriptor(key: "plotTime", ascending: false)]
+
+            if let result = Datamanager.sharedManager().managedObjectContext?.executeFetchRequest(fetchRequest, error: nil) as? [CDPlot] {
+                graphImage = GraphImage(size: imageSize, scale: scale, plots: result)
+            } else {
+                graphImage = GraphImage(size: imageSize, scale: scale)
+            }
+        } else {
+            graphImage = GraphImage(size: imageSize, scale: scale)
+        }
+
+        let image = graphImage.drawImage()
+        return UIImagePNGRepresentation(image)
     }
 
 

@@ -19,19 +19,23 @@ class InterfaceController: WKInterfaceController {
 
     override func awakeWithContext(context: AnyObject!) {
         super.awakeWithContext(context)
+        fetchContent()
     }
 
 
     override func willActivate() {
-        DLOG("")
         super.willActivate()
         stations = populateData()
-        loadTableData()
+
+        if count(stations) == 0 {
+            pushControllerWithName("notConfigured", context: nil)
+        } else {
+            loadTableData()
+        }
     }
 
 
     override func didDeactivate() {
-        DLOG("")
         super.didDeactivate()
     }
 
@@ -39,7 +43,6 @@ class InterfaceController: WKInterfaceController {
     override func table(table: WKInterfaceTable, didSelectRowAtIndex rowIndex: Int) {
         pushControllerWithName("stationDetails", context: stations[rowIndex])
     }
-
 
 
     func populateData() -> [CDStation] {
@@ -59,14 +62,6 @@ class InterfaceController: WKInterfaceController {
             Datamanager.sharedManager().managedObjectContext?.refreshObject(station, mergeChanges: true)
 
             let elementRow = interfaceTable.rowControllerAtIndex(index) as! StationsRowController
-
-            // FIXME: Workaround for Beta 5
-            elementRow.elementText.setText("*")
-            elementRow.elementUpdated.setText("*")
-            elementRow.elementImage.setImage(nil)
-            //
-
-
             elementRow.elementText.setText(station.stationName)
 
             if let plot = station.lastRegisteredPlot() {
@@ -75,11 +70,28 @@ class InterfaceController: WKInterfaceController {
                 let image = DrawArrow.drawArrowAtAngle( winddir, forSpeed:windspeed, highlighted:false, color: UIColor.whiteColor(), hightlightedColor: UIColor.blackColor())
                 elementRow.elementImage.setImage(image)
                 elementRow.elementUpdated.setText( AppConfig.sharedConfiguration.relativeDate(plot.plotTime) as String)
-
             } else {
                 elementRow.elementUpdated.setText( NSLocalizedString("LABEL_NOT_UPDATED", tableName: nil, bundle: NSBundle.mainBundle(), value: "LABEL_NOT_UPDATED", comment: "Not updated"))
             }
         }
+    }
+
+
+    func fetchContent() -> Void {
+        let userInfo = [
+            "interface": "main",
+            "action": "update",
+        ]
+
+        WKInterfaceController.openParentApplication( userInfo, reply: { (reply: [NSObject : AnyObject]!, error: NSError!) -> Void in
+            self.stations = self.populateData()
+
+            if count(self.stations) == 0 {
+                self.pushControllerWithName("notConfigured", context: nil)
+            } else {
+                self.loadTableData()
+            }
+        })
     }
 
 

@@ -121,6 +121,17 @@ public class WindManager : NSObject {
     }
 
 
+    public func fetchForStationId( stationId: Int, completionHandler: ((UIBackgroundFetchResult) -> Void)? = nil ) -> Void {
+        RHEVindsidenAPIClient.defaultManager().fetchStationsPlotsForStation(stationId, completion: { (success:Bool, plots: [AnyObject]!) -> Void in
+            CDPlot.updatePlots(plots, completion: { () -> Void in
+                completionHandler?(.NewData)
+            })
+            }, error: { (cancelled: Bool, error: NSError!) -> Void in
+                completionHandler?(.NewData)
+        })
+    }
+
+
     // MARK: - Notifications
 
 
