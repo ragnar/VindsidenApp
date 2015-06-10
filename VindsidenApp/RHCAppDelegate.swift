@@ -42,7 +42,7 @@ class RHCAppDelegate: UIResponder, UIApplicationDelegate {
 
         if let options = launchOptions {
             if let url = options[UIApplicationLaunchOptionsURLKey] as? NSURL {
-                if let range = url.host?.rangeOfString("station", options: .CaseInsensitiveSearch) {
+                if let _ = url.host?.rangeOfString("station", options: .CaseInsensitiveSearch) {
                     return true
                 } else {
                     return false
@@ -54,9 +54,9 @@ class RHCAppDelegate: UIResponder, UIApplicationDelegate {
     }
 
 
-    func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject?) -> Bool {
+    func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject) -> Bool {
 
-        if let range = url.host?.rangeOfString("station", options: .CaseInsensitiveSearch) {
+        if let _ = url.host?.rangeOfString("station", options: .CaseInsensitiveSearch) {
             return openLaunchOptionsURL(url)
         }
 
@@ -64,11 +64,11 @@ class RHCAppDelegate: UIResponder, UIApplicationDelegate {
     }
 
 
-    func application(application: UIApplication, supportedInterfaceOrientationsForWindow window: UIWindow?) -> Int {
-        if let rootVC = self.window?.rootViewController as? RHCNavigationViewController {
-            return Int(UIInterfaceOrientationMask.AllButUpsideDown.rawValue)
+    func application(application: UIApplication, supportedInterfaceOrientationsForWindow window: UIWindow?) -> UIInterfaceOrientationMask {
+        if let _ = self.window?.rootViewController as? RHCNavigationViewController {
+            return .AllButUpsideDown
         } else {
-            return Int(UIInterfaceOrientationMask.Portrait.rawValue);
+            return .Portrait
         }
     }
 
@@ -103,7 +103,7 @@ class RHCAppDelegate: UIResponder, UIApplicationDelegate {
     }
 
 
-    func application(application: UIApplication, handleWatchKitExtensionRequest userInfo: [NSObject : AnyObject]?, reply: (([NSObject : AnyObject]!) -> Void)!) {
+    func application(application: UIApplication, handleWatchKitExtensionRequest userInfo: [NSObject : AnyObject]?, reply: ([NSObject : AnyObject]?) -> Void) {
         let taskID = application.beginBackgroundTaskWithExpirationHandler({})
 
         if  let unwrapped = userInfo, let interface = unwrapped["interface"] as? String {
@@ -140,16 +140,17 @@ class RHCAppDelegate: UIResponder, UIApplicationDelegate {
 
         if let gregorian = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian) {
             let inDate = NSDate().dateByAddingTimeInterval(-1*4*3600)
-            let inputComponents = gregorian.components(.CalendarUnitYear | .CalendarUnitMonth | .CalendarUnitDay | .CalendarUnitHour, fromDate: inDate)
+            let inputComponents = gregorian.components([.Year, .Month, .Day, .Hour], fromDate: inDate)
             let outDate = gregorian.dateFromComponents(inputComponents)!
 
             let fetchRequest = NSFetchRequest(entityName: "CDPlot")
             fetchRequest.predicate = NSPredicate(format: "station.stationId = %ld AND plotTime >= %@", stationId, outDate)
             fetchRequest.sortDescriptors = [NSSortDescriptor(key: "plotTime", ascending: false)]
 
-            if let result = Datamanager.sharedManager().managedObjectContext?.executeFetchRequest(fetchRequest, error: nil) as? [CDPlot] {
+            do {
+                let result = try Datamanager.sharedManager().managedObjectContext?.executeFetchRequest(fetchRequest) as! [CDPlot]
                 graphImage = GraphImage(size: imageSize, scale: scale, plots: result)
-            } else {
+            } catch {
                 graphImage = GraphImage(size: imageSize, scale: scale)
             }
         } else {
@@ -157,7 +158,7 @@ class RHCAppDelegate: UIResponder, UIApplicationDelegate {
         }
 
         let image = graphImage.drawImage()
-        return UIImagePNGRepresentation(image)
+        return UIImagePNGRepresentation(image)!
     }
 
 
@@ -165,10 +166,10 @@ class RHCAppDelegate: UIResponder, UIApplicationDelegate {
 
     
     func openLaunchOptionsURL( url: NSURL) -> Bool {
-        let ident = url.pathComponents?.last as! String
+        let ident = url.pathComponents?.last as String!
         var station: CDStation?
 
-        if let stationId = ident.toInt() {
+        if let stationId = Int(ident) {
             station = CDStation.existingStation(stationId, inManagedObjectContext: Datamanager.sharedManager().managedObjectContext)
         } else {
             station = CDStation.searchForStation(ident, inManagedObjectContext: Datamanager.sharedManager().managedObjectContext)
@@ -178,7 +179,11 @@ class RHCAppDelegate: UIResponder, UIApplicationDelegate {
             if found.isHidden.boolValue == true {
                 found.managedObjectContext?.performBlockAndWait({ () -> Void in
                     found.isHidden = false
-                    found.managedObjectContext?.save(nil)
+                    do {
+                        try found.managedObjectContext?.save()
+                    } catch {
+                        DLOG("Save failed")
+                    }
                 })
             }
         } else {
@@ -189,7 +194,7 @@ class RHCAppDelegate: UIResponder, UIApplicationDelegate {
         let nc = self.window?.rootViewController as? UINavigationController
         let controller = primaryViewController()
 
-        if let pc = nc?.presentedViewController {
+        if let _ = nc?.presentedViewController {
             nc?.dismissViewControllerAnimated(false, completion: { () -> Void in
                 controller!.scrollToStation(station!)
             })
@@ -221,7 +226,7 @@ class RHCAppDelegate: UIResponder, UIApplicationDelegate {
     }
 
 
-    func application(application: UIApplication, continueUserActivity userActivity: NSUserActivity, restorationHandler: ([AnyObject]!) -> Void) -> Bool {
+    func application(application: UIApplication, continueUserActivity userActivity: NSUserActivity, restorationHandler: ([AnyObject]?) -> Void) -> Bool {
         DLOG("Activity: \(userActivity.userInfo)")
 
         if let userInfo = userActivity.userInfo {

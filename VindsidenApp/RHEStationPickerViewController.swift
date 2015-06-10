@@ -86,7 +86,7 @@ class RHEStationPickerViewController : UITableViewController, NSFetchedResultsCo
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
         let sections = fetchedResultsController.sections as Array!
-        let sectionInfo = sections[section] as! NSFetchedResultsSectionInfo
+        let sectionInfo = sections[section] as NSFetchedResultsSectionInfo
 
         return sectionInfo.numberOfObjects
     }
@@ -94,7 +94,7 @@ class RHEStationPickerViewController : UITableViewController, NSFetchedResultsCo
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
     {
-        let cell = tableView.dequeueReusableCellWithIdentifier("StationCell", forIndexPath: indexPath) as! UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("StationCell", forIndexPath: indexPath) as UITableViewCell
 
         configureCell(cell, atIndexPath: indexPath)
 
@@ -146,10 +146,11 @@ class RHEStationPickerViewController : UITableViewController, NSFetchedResultsCo
         }
 
         let context = Datamanager.sharedManager().managedObjectContext!
-        var error: NSError?
 
-        if !context.save(&error) {
-            println("Save failed: \(error!.localizedDescription)")
+        do {
+            try context.save()
+        } catch let error as NSError {
+            print("Save failed: \(error.localizedDescription)")
         }
     }
 
@@ -170,10 +171,11 @@ class RHEStationPickerViewController : UITableViewController, NSFetchedResultsCo
         //configureCell(cell!, atIndexPath: indexPath)
 
         let context = Datamanager.sharedManager().managedObjectContext!
-        var error: NSError?
 
-        if !context.save(&error) {
-            println("Save failed: \(error!.localizedDescription)")
+        do {
+            try context.save()
+        } catch let error as NSError {
+            print("Save failed: \(error.localizedDescription)")
         }
 
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
@@ -193,8 +195,9 @@ class RHEStationPickerViewController : UITableViewController, NSFetchedResultsCo
         let controller = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: contxt, sectionNameKeyPath: nil, cacheName: "StationPicker")
         controller.delegate = self
 
-        let success = controller.performFetch(nil)
-        if success == false {
+        do {
+            try controller.performFetch()
+        } catch {
             NSLog("Fetching stations failed")
             abort()
         }
@@ -210,7 +213,7 @@ class RHEStationPickerViewController : UITableViewController, NSFetchedResultsCo
     }
 
 
-    func controller(controller: NSFetchedResultsController, didChangeObject anObject: AnyObject, atIndexPath indexPath: NSIndexPath?, forChangeType type: NSFetchedResultsChangeType, newIndexPath: NSIndexPath?)
+    func controller(controller: NSFetchedResultsController, didChangeObject anObject: NSManagedObject, atIndexPath indexPath: NSIndexPath?, forChangeType type: NSFetchedResultsChangeType, newIndexPath: NSIndexPath?)
     {
         if changeIsUserDriven {
             return

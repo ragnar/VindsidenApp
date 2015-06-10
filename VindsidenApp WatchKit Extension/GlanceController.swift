@@ -68,9 +68,12 @@ class GlanceController: WKInterfaceController {
         fetchRequest.predicate = NSPredicate(format: "isHidden = NO", argumentArray: nil)
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: "order", ascending: true)]
 
-        let stations = Datamanager.sharedManager().managedObjectContext?.executeFetchRequest(fetchRequest, error: nil) as! [CDStation]
-
-        return stations.first
+        do {
+            let stations = try Datamanager.sharedManager().managedObjectContext?.executeFetchRequest(fetchRequest) as! [CDStation]
+            return stations.first
+        } catch {
+            return nil
+        }
     }
 
 
@@ -82,7 +85,7 @@ class GlanceController: WKInterfaceController {
             "station": station.stationId
         ]
 
-        WKInterfaceController.openParentApplication( userInfo, reply: { (reply: [NSObject : AnyObject]!, error: NSError!) -> Void in
+        WKInterfaceController.openParentApplication( userInfo, reply: { (reply: [NSObject : AnyObject], error: NSError?) -> Void in
             if  let station = self.populateStation() {
                 self.updateUI(station)
             }

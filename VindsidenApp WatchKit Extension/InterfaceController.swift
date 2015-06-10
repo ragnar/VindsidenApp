@@ -27,7 +27,7 @@ class InterfaceController: WKInterfaceController {
         super.willActivate()
         stations = populateData()
 
-        if count(stations) == 0 {
+        if stations.count == 0 {
             pushControllerWithName("notConfigured", context: nil)
         } else {
             loadTableData()
@@ -51,14 +51,19 @@ class InterfaceController: WKInterfaceController {
         fetchRequest.predicate = NSPredicate(format: "isHidden = NO", argumentArray: nil)
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: "order", ascending: true)]
 
-        return Datamanager.sharedManager().managedObjectContext?.executeFetchRequest(fetchRequest, error: nil) as! [CDStation]
+        do {
+            let stations = try Datamanager.sharedManager().managedObjectContext?.executeFetchRequest(fetchRequest) as! [CDStation]
+            return stations
+        } catch {
+            return [CDStation]()
+        }
     }
 
 
     func loadTableData() -> Void {
         interfaceTable.setNumberOfRows(stations.count, withRowType: "default")
 
-        for (index, station) in enumerate(stations) {
+        for (index, station) in stations.enumerate() {
             Datamanager.sharedManager().managedObjectContext?.refreshObject(station, mergeChanges: true)
 
             let elementRow = interfaceTable.rowControllerAtIndex(index) as! StationsRowController
@@ -83,10 +88,10 @@ class InterfaceController: WKInterfaceController {
             "action": "update",
         ]
 
-        WKInterfaceController.openParentApplication( userInfo, reply: { (reply: [NSObject : AnyObject]!, error: NSError!) -> Void in
+        WKInterfaceController.openParentApplication( userInfo, reply: { (reply: [NSObject : AnyObject], error: NSError?) -> Void in
             self.stations = self.populateData()
 
-            if count(self.stations) == 0 {
+            if self.stations.count == 0 {
                 self.pushControllerWithName("notConfigured", context: nil)
             } else {
                 self.loadTableData()

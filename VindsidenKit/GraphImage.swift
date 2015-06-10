@@ -62,7 +62,7 @@ public final class GraphImage {
         let earliestDate: NSDate
         let latestDate: NSDate
 
-        if count(plots) > 0 {
+        if plots.count > 0 {
             earliestDate = plots.last?.valueForKeyPath("plotTime") as! NSDate
             latestDate = (plots.first?.valueForKeyPath("plotTime") as! NSDate).dateByAddingTimeInterval(3600)
         } else {
@@ -122,9 +122,6 @@ public final class GraphImage {
 
     final func drawSpeedLines( context: CGContext! ) -> Void {
         CGContextSaveGState(context);
-
-        let raw = AppConfig.sharedConfiguration.applicationUserDefaults.integerForKey("selectedUnit")
-        let unit = SpeedConvertion(rawValue: raw)!
 
         let plotMaxValue = self.plotMaxValue()
         var totSteps = min(5, plotMaxValue)
@@ -275,7 +272,7 @@ public final class GraphImage {
         var x = ceil(bounds.minX + (interval*self.stepX))
 
 
-        for (idx, plot) in enumerate(plots) {
+        for (idx, plot) in plots.enumerate() {
             if idx > 0 {
                 let interval = CGFloat(plot.plotTime.timeIntervalSinceDate(self.absoluteStartDate)/60.0)
                 x = ceil(bounds.minX + (interval*self.stepX))
@@ -320,7 +317,7 @@ public final class GraphImage {
         let interval = CGFloat(firstPlot.plotTime.timeIntervalSinceDate(self.absoluteStartDate)/60.0)
         var x = ceil(bounds.minX + (interval*self.stepX))
 
-        for (idx, plot) in enumerate(plots) {
+        for plot in plots {
             let interval = CGFloat(plot.plotTime.timeIntervalSinceDate(self.absoluteStartDate)/60.0)
             x = ceil(bounds.minX + (interval*self.stepX))
 
@@ -351,15 +348,15 @@ public final class GraphImage {
     final func quadCurvedPathWithPoints( points:[CGPoint]) -> UIBezierPath {
         let path = UIBezierPath()
 
-        if count(points) > 0 {
+        if points.count > 0 {
 
             var p1 = points.first!
             path.moveToPoint(p1)
 
-            if count(points) == 2 {
+            if points.count == 2 {
                 path.addLineToPoint(points.last!)
             } else {
-                for( var i = 1; i < count(points); i++ ) {
+                for( var i = 1; i < points.count; i++ ) {
                     let p2 = points[i]
                     let midPoint = midPointForPoints(p1, p2)
 
@@ -395,7 +392,7 @@ public final class GraphImage {
 
     final func hourComponentForDate( date:NSDate) -> Int {
         let gregorian = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)!
-        let hourComponents = gregorian.components(.CalendarUnitHour, fromDate: date)
+        let hourComponents = gregorian.components(.Hour, fromDate: date)
         return hourComponents.hour
     }
 
@@ -416,7 +413,7 @@ public final class GraphImage {
 
     class func absoluteDate( date: NSDate, isStart: Bool ) -> NSDate? {
         if  let gregorian = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian) {
-            let inputComponents = gregorian.components(.CalendarUnitYear | .CalendarUnitMonth | .CalendarUnitDay | .CalendarUnitHour, fromDate: date)
+            let inputComponents = gregorian.components([.Year, .Month, .Day, .Hour], fromDate: date)
 
             let components = NSDateComponents()
             components.year = inputComponents.year

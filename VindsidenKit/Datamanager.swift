@@ -43,10 +43,11 @@ public class Datamanager
 
 
     public func saveContext () {
-        if let moc = self.managedObjectContext {
-            var error: NSError? = nil
-            if moc.hasChanges && !moc.save(&error) {
-                NSLog("Unresolved error \(error), \(error!.userInfo)")
+        if let moc = self.managedObjectContext where moc.hasChanges {
+            do {
+                try moc.save()
+            } catch let error as NSError {
+                NSLog("Unresolved error \(error), \(error.userInfo)")
                 abort()
             }
         }
@@ -57,35 +58,39 @@ public class Datamanager
         childContext.parentContext = managedObjectContext
         childContext.mergePolicy = NSRollbackMergePolicy;
         childContext.undoManager = nil
-        var err: NSError?
 
-        childContext.performBlock {
+        childContext.performBlock { () -> Void in
             let fetchRequest = NSFetchRequest(entityName: "CDPlot")
             let interval: NSTimeInterval = -1.0*((1.0+AppConfig.Global.plotHistory)*3600.0)
             let time = NSDate(timeIntervalSinceNow: interval)
             fetchRequest.predicate = NSPredicate(format: "plotTime < %@", time)
 
-            let result = childContext.executeFetchRequest(fetchRequest, error: &err) as! [NSManagedObject]
+            do {
+                let result = try childContext.executeFetchRequest(fetchRequest) as! [NSManagedObject]
 
-            for object  in result {
-                childContext.deleteObject(object)
-            }
-
-            if childContext.save(&err) == false {
-                DLOG("Save failed: \(err)")
-            }
-
-            childContext.processPendingChanges()
-
-            if let moc = self.managedObjectContext {
-                moc.performBlock {
-                    if moc.save(&err) == false {
-                        DLOG("Save failed: \(err)")
-                    }
-                    moc.processPendingChanges()
-                    completionHandler?()
-                    return
+                for object in result {
+                    childContext.deleteObject(object)
                 }
+
+                try childContext.save()
+
+                childContext.processPendingChanges()
+
+                if let moc = self.managedObjectContext {
+                    moc.performBlock {
+                        do {
+                            try moc.save()
+                            moc.processPendingChanges()
+                            completionHandler?()
+                        } catch {
+                            DLOG("Save failed: \(error)")
+                            completionHandler?()
+                        }
+                    }
+                }
+            } catch {
+                DLOG("Save failed: \(error)")
+                completionHandler?()
             }
         }
     }
@@ -118,19 +123,24 @@ public class Datamanager
 
         self.addSkipBackupAttributeToItemAtURL(storeUrl)
 
-        if coordinator!.addPersistentStoreWithType(NSSQLiteStoreType, configuration: nil, URL: storeUrl, options: nil, error: &error) == nil {
+        do {
+            try coordinator!.addPersistentStoreWithType(NSSQLiteStoreType, configuration: nil, URL: storeUrl, options: nil)
+        } catch var error1 as NSError {
+            error = error1
             coordinator = nil
             // Report any error we got.
             var failureReason = "There was an error creating or loading the application's saved data."
-            let dict = NSMutableDictionary()
+            var dict = [String: AnyObject]()
             dict[NSLocalizedDescriptionKey] = "Failed to initialize the application's saved data"
             dict[NSLocalizedFailureReasonErrorKey] = failureReason
             dict[NSUnderlyingErrorKey] = error
-            error = NSError(domain: "org.juniks.VindsidenApp", code: 9999, userInfo: dict as [NSObject : AnyObject])
+            error = NSError(domain: "org.juniks.VindsidenApp", code: 9999, userInfo: dict)
             // Replace this with code to handle the error appropriately.
             // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
             NSLog("Unresolved error \(error), \(error!.userInfo)")
             abort()
+        } catch {
+            fatalError()
         }
 
         return coordinator
@@ -149,10 +159,9 @@ public class Datamanager
     {
         if let path = url.path {
             if NSFileManager.defaultManager().fileExistsAtPath(path) {
-                var error: NSError?
-                let success = url.setResourceValue(true, forKey: NSURLIsExcludedFromBackupKey, error: &error)
-
-                if success == false {
+                do {
+                    try url.setResourceValue(true, forKey: NSURLIsExcludedFromBackupKey)
+                } catch let error as NSError {
                     NSLog("Error excluding \(url.lastPathComponent) from backup \(error)");
                 }
             }

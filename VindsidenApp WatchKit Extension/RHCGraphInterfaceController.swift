@@ -33,7 +33,7 @@ class RHCGraphInterfaceController: WKInterfaceController {
                 "scale": scale
                 ] as [NSObject:AnyObject]
 
-            WKInterfaceController.openParentApplication( userInfo, reply: { (reply: [NSObject : AnyObject]!, error: NSError!) -> Void in
+            WKInterfaceController.openParentApplication( userInfo, reply: { (reply: [NSObject : AnyObject], error: NSError?) -> Void in
                 DLOG("error: \(error)")
 
                 if let data = reply["graph"] as? NSData {

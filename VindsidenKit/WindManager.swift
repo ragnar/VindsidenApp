@@ -41,7 +41,7 @@ public class WindManager : NSObject {
         stopUpdating()
 
         if refreshInterval > 0 {
-            var timer = NSTimer.scheduledTimerWithTimeInterval( refreshInterval, target: self, selector: Selector("updateTimerFired:"), userInfo: nil, repeats: true)
+            let timer = NSTimer.scheduledTimerWithTimeInterval( refreshInterval, target: self, selector: Selector("updateTimerFired:"), userInfo: nil, repeats: true)
             updateTimer = timer
         }
 
@@ -73,10 +73,16 @@ public class WindManager : NSObject {
         fetchRequest.predicate = NSPredicate(format: "isHidden == NO")
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: "order", ascending: true)]
 
-        let context = Datamanager.sharedManager().managedObjectContext
+        if let context = Datamanager.sharedManager().managedObjectContext {
+            do {
+                let stations = try context.executeFetchRequest(fetchRequest) as! [CDStation]
+                return stations
+            } catch {
+                return [CDStation]()
+            }
+        }
 
-        var stations = context?.executeFetchRequest(fetchRequest, error: nil) as! [CDStation]
-        return stations ?? [CDStation]()
+        return [CDStation]()
     }
 
 

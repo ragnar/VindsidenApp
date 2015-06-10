@@ -12,7 +12,7 @@ import UIKit
 @objc(RHCNavigationViewController)
 class RHCNavigationViewController : UINavigationController
 {
-    override func supportedInterfaceOrientations() -> Int {
-        return Int(UIInterfaceOrientationMask.Portrait.rawValue)
+    override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
+        return .Portrait
     }
 }

@@ -61,10 +61,10 @@ class TodayViewController: UITableViewController, NCWidgetProviding, NSFetchedRe
     }
 
 
-    func widgetPerformUpdateWithCompletionHandler(completionHandler: ((NCUpdateResult) -> Void)!) {
+    func widgetPerformUpdateWithCompletionHandler(completionHandler: ((NCUpdateResult) -> Void)) {
         DLOG("")
         completionHandler(.NewData)
-        updateContentWithCompletionHandler(completionHandler: completionHandler)
+        updateContentWithCompletionHandler(completionHandler)
     }
 
 
@@ -79,7 +79,7 @@ class TodayViewController: UITableViewController, NCWidgetProviding, NSFetchedRe
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let sections = fetchedResultsController.sections as Array!
-        let sectionInfo = sections[section] as! NSFetchedResultsSectionInfo
+        let sectionInfo = sections[section]
 
         let rows:Int = showingAll ? sectionInfo.numberOfObjects : min(sectionInfo.numberOfObjects, TableViewConstants.baseRowCount + 1)
         return rows
@@ -90,13 +90,13 @@ class TodayViewController: UITableViewController, NCWidgetProviding, NSFetchedRe
         let itemCount = (fetchedResultsController.fetchedObjects as Array!).count
 
         if !showingAll && indexPath.row == TableViewConstants.baseRowCount &&  itemCount != TableViewConstants.baseRowCount + 1 {
-            let cell = tableView.dequeueReusableCellWithIdentifier(TableViewConstants.CellIdentifiers.showall, forIndexPath: indexPath) as! UITableViewCell
+            let cell = tableView.dequeueReusableCellWithIdentifier(TableViewConstants.CellIdentifiers.showall, forIndexPath: indexPath) as UITableViewCell
             cell.textLabel?.text = NSLocalizedString("Show All...", tableName: nil, bundle: NSBundle.mainBundle(), value: "Show all...", comment: "Show all")
             return cell
         } else {
             let cell = tableView.dequeueReusableCellWithIdentifier(TableViewConstants.CellIdentifiers.message, forIndexPath: indexPath) as! RHCTodayCell
-            var stationInfo = self.fetchedResultsController.objectAtIndexPath(indexPath) as! CDStation
-            var tmpplot: CDPlot? = stationInfo.lastRegisteredPlot()
+            let stationInfo = self.fetchedResultsController.objectAtIndexPath(indexPath) as! CDStation
+            let tmpplot: CDPlot? = stationInfo.lastRegisteredPlot()
 
             if let plot = tmpplot {
                 let winddir = CGFloat(plot.windDir.floatValue)
@@ -195,8 +195,9 @@ class TodayViewController: UITableViewController, NCWidgetProviding, NSFetchedRe
         _fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: Datamanager.sharedManager().managedObjectContext!, sectionNameKeyPath: nil, cacheName: nil)
         _fetchedResultsController!.delegate = self
 
-        let success = _fetchedResultsController!.performFetch(nil)
-        if success == false {
+        do {
+            try _fetchedResultsController!.performFetch()
+        } catch {
             NSLog("Fetching stations failed")
             abort()
         }
@@ -266,7 +267,7 @@ class TodayViewController: UITableViewController, NCWidgetProviding, NSFetchedRe
 
 
     func showCellHeight() -> CGFloat {
-        let infoCell = tableView.dequeueReusableCellWithIdentifier(TableViewConstants.CellIdentifiers.showall) as! UITableViewCell
+        let infoCell = tableView.dequeueReusableCellWithIdentifier(TableViewConstants.CellIdentifiers.showall)!
         infoCell.textLabel?.text = "123"
         infoCell.layoutIfNeeded()
 

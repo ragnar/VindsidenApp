@@ -21,7 +21,12 @@ import JTSImageViewController
     var buttons = [NSLocalizedString("Go to yr.no", comment: ""), NSLocalizedString("View in Maps", comment: "")]
 
     lazy var regexRemoveHTMLTags: NSRegularExpression? = {
-        var _regexRemoveHTMLTags = NSRegularExpression(pattern: "(<[^>]+>)", options: .CaseInsensitive, error: nil)
+            var _regexRemoveHTMLTags: NSRegularExpression?
+            do {
+                _regexRemoveHTMLTags = try NSRegularExpression(pattern: "(<[^>]+>)", options: .CaseInsensitive)
+            } catch _ {
+                _regexRemoveHTMLTags = nil
+            }
         return _regexRemoveHTMLTags
         }()
 
@@ -82,10 +87,10 @@ import JTSImageViewController
         var cell :UITableViewCell
 
         if ( 0 == indexPath.section) {
-            cell = tableView.dequeueReusableCellWithIdentifier("StationDetailsCell", forIndexPath: indexPath) as! UITableViewCell
+            cell = tableView.dequeueReusableCellWithIdentifier("StationDetailsCell", forIndexPath: indexPath) as UITableViewCell
             configureCell(cell as! RHCDStationDetailsCell, atIndexPath: indexPath)
         } else {
-            cell = tableView.dequeueReusableCellWithIdentifier("ButtonCell", forIndexPath: indexPath) as! UITableViewCell
+            cell = tableView.dequeueReusableCellWithIdentifier("ButtonCell", forIndexPath: indexPath) as UITableViewCell
             cell.textLabel?.textColor = self.view.tintColor;
             cell.textLabel?.text = buttons[indexPath.row]
         }
@@ -156,13 +161,13 @@ import JTSImageViewController
                 cell.detailsLabel.text = current.copyright
             case 3:
                 cell.headerLabel.text = NSLocalizedString("Info", comment: "")
-                cell.detailsLabel.text = regexRemoveHTMLTags?.stringByReplacingMatchesInString(current.stationText, options: .allZeros, range: NSMakeRange(0, count(current.stationText.utf16)), withTemplate: "").stringByReplacingOccurrencesOfString("\n", withString: "")
+                cell.detailsLabel.text = regexRemoveHTMLTags?.stringByReplacingMatchesInString(current.stationText, options: NSMatchingOptions(), range: NSMakeRange(0, current.stationText.utf16.count), withTemplate: "").stringByReplacingOccurrencesOfString("\n", withString: "")
             case 4:
                 cell.headerLabel.text = NSLocalizedString("Status", comment: "")
-                cell.detailsLabel.text = regexRemoveHTMLTags?.stringByReplacingMatchesInString(current.statusMessage, options: .allZeros, range: NSMakeRange(0, count(current.statusMessage.utf16)), withTemplate: "").stringByReplacingOccurrencesOfString("\n", withString: "")
+                cell.detailsLabel.text = regexRemoveHTMLTags?.stringByReplacingMatchesInString(current.statusMessage, options: NSMatchingOptions(), range: NSMakeRange(0, current.statusMessage.utf16.count), withTemplate: "").stringByReplacingOccurrencesOfString("\n", withString: "")
             case 5:
                 cell.headerLabel.text = NSLocalizedString("Camera", comment: "")
-                cell.detailsLabel.text = regexRemoveHTMLTags?.stringByReplacingMatchesInString(current.webCamText, options: .allZeros, range: NSMakeRange(0, count(current.webCamText.utf16)), withTemplate: "").stringByReplacingOccurrencesOfString("\n", withString: "")
+                cell.detailsLabel.text = regexRemoveHTMLTags?.stringByReplacingMatchesInString(current.webCamText, options: NSMatchingOptions(), range: NSMakeRange(0, current.webCamText.utf16.count), withTemplate: "").stringByReplacingOccurrencesOfString("\n", withString: "")
             default:
                 cell.headerLabel.text = NSLocalizedString("Unknown", comment: "")
             }
@@ -232,7 +237,7 @@ import JTSImageViewController
 
             imageInfo.referenceView = self.view
 
-            let controller = JTSImageViewController(imageInfo: imageInfo, mode: .Image, backgroundStyle: .Blurred | .Scaled)
+            let controller = JTSImageViewController(imageInfo: imageInfo, mode: JTSImageViewControllerMode.Image, backgroundStyle: JTSImageViewControllerBackgroundOptions.Blurred.intersect(JTSImageViewControllerBackgroundOptions.Scaled))
             controller.showFromViewController(self, transition: ._FromOriginalPosition)
         }
         

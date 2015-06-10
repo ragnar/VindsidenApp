@@ -94,11 +94,11 @@ public class AppConfig {
     
     private func registerDefaults() {
         #if os(iOS)
-            let defaultOptions: [NSObject: AnyObject] = [
+            let defaultOptions: [String: AnyObject] = [
                 Defaults.firstLaunchKey: true,
             ]
             #elseif os(OSX)
-            let defaultOptions: [NSObject: AnyObject] = [
+            let defaultOptions: [String: AnyObject] = [
             Defaults.firstLaunchKey: true
             ]
         #endif
