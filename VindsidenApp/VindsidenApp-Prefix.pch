@@ -20,8 +20,6 @@
 
     #import "VindsidenApp-Swift.h"
 
-    #import "UIFont+textStyle.h"
-    #import "UIFontDescriptor+textStyle.h"
 #endif
 
 
