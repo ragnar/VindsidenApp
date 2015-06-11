@@ -161,13 +161,13 @@ import JTSImageViewController
                 cell.detailsLabel.text = current.copyright
             case 3:
                 cell.headerLabel.text = NSLocalizedString("Info", comment: "")
-                cell.detailsLabel.text = regexRemoveHTMLTags?.stringByReplacingMatchesInString(current.stationText, options: NSMatchingOptions(), range: NSMakeRange(0, current.stationText.utf16.count), withTemplate: "").stringByReplacingOccurrencesOfString("\n", withString: "")
+                cell.detailsLabel.text = regexRemoveHTMLTags?.stringByReplacingMatchesInString(current.stationText, options: [], range: NSMakeRange(0, current.stationText.utf16.count), withTemplate: "").stringByReplacingOccurrencesOfString("\n", withString: "")
             case 4:
                 cell.headerLabel.text = NSLocalizedString("Status", comment: "")
-                cell.detailsLabel.text = regexRemoveHTMLTags?.stringByReplacingMatchesInString(current.statusMessage, options: NSMatchingOptions(), range: NSMakeRange(0, current.statusMessage.utf16.count), withTemplate: "").stringByReplacingOccurrencesOfString("\n", withString: "")
+                cell.detailsLabel.text = regexRemoveHTMLTags?.stringByReplacingMatchesInString(current.statusMessage, options: [], range: NSMakeRange(0, current.statusMessage.utf16.count), withTemplate: "").stringByReplacingOccurrencesOfString("\n", withString: "")
             case 5:
                 cell.headerLabel.text = NSLocalizedString("Camera", comment: "")
-                cell.detailsLabel.text = regexRemoveHTMLTags?.stringByReplacingMatchesInString(current.webCamText, options: NSMatchingOptions(), range: NSMakeRange(0, current.webCamText.utf16.count), withTemplate: "").stringByReplacingOccurrencesOfString("\n", withString: "")
+                cell.detailsLabel.text = regexRemoveHTMLTags?.stringByReplacingMatchesInString(current.webCamText, options: [], range: NSMakeRange(0, current.webCamText.utf16.count), withTemplate: "").stringByReplacingOccurrencesOfString("\n", withString: "")
             default:
                 cell.headerLabel.text = NSLocalizedString("Unknown", comment: "")
             }
@@ -237,7 +237,7 @@ import JTSImageViewController
 
             imageInfo.referenceView = self.view
 
-            let controller = JTSImageViewController(imageInfo: imageInfo, mode: JTSImageViewControllerMode.Image, backgroundStyle: JTSImageViewControllerBackgroundOptions.Blurred.intersect(JTSImageViewControllerBackgroundOptions.Scaled))
+            let controller = JTSImageViewController(imageInfo: imageInfo, mode: JTSImageViewControllerMode.Image, backgroundStyle: [.Blurred, .Scaled])
             controller.showFromViewController(self, transition: ._FromOriginalPosition)
         }
         
