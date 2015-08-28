@@ -19,7 +19,9 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate {
         WCFetcher.sharedInstance.activate()
 
         Datamanager.sharedManager().cleanupPlots { () -> Void in
-            WindManager.sharedManager.updateNow()
+            WindManager.sharedManager.fetch({ (result: WindManagerResult) -> Void in
+                NSNotificationCenter.defaultCenter().postNotificationName(WCFetcherNotification.ReceivedPlots.rawValue, object: nil)
+            })
         }
     }
 
