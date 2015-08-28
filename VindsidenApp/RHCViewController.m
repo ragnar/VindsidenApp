@@ -11,7 +11,6 @@
 #import "RHCStationCell.h"
 #import "RHEGraphView.h"
 
-#import "RHEVindsidenAPIClient.h"
 #import <MotionJpegImageView/MotionJpegImageView.h>
 #import <JTSImageViewController/JTSImageViewController.h>
 
