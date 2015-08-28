@@ -6,5 +6,4 @@
 //  Copyright (c) 2014 RHC. All rights reserved.
 //
 
-#import "DrawArrow.h"
-#import <SORelativeDateTransformer/SORelativeDateTransformer.h>
+#import "VindsidenKit/DrawArrow.h"
