@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="AgC-eL-Hgc">
+<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="8187.4" systemVersion="14F27" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="AgC-eL-Hgc">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="3737"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8151.3"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="8092"/>
     </dependencies>
     <scenes>
         <!--Vindsiden-->
@@ -119,7 +119,7 @@
                     </connections>
                 </glanceController>
             </objects>
-            <point key="canvasLocation" x="239" y="983"/>
+            <point key="canvasLocation" x="64" y="721"/>
         </scene>
         <!--notConfigured-->
         <scene sceneID="LAt-uM-OSr">
@@ -222,6 +222,11 @@
                                     <action selector="graphButtonPressed" destination="m7g-vb-vvd" id="hOu-uu-kmQ"/>
                                 </connections>
                             </menuItem>
+                            <menuItem title="Map" icon="accept" id="zW4-V8-nlA">
+                                <connections>
+                                    <action selector="mapButtonPressed" destination="m7g-vb-vvd" id="nOK-KQ-MpQ"/>
+                                </connections>
+                            </menuItem>
                         </items>
                     </menu>
                     <connections>
@@ -238,6 +243,20 @@
                 </controller>
             </objects>
             <point key="canvasLocation" x="495" y="362"/>
+        </scene>
+        <!--showMap-->
+        <scene sceneID="Bgf-wA-vC7">
+            <objects>
+                <controller identifier="showMap" hidesWhenLoading="NO" id="mjo-dq-c8r" customClass="MapInterfaceController" customModule="VindsidenApp_WatchKit_Extension">
+                    <items>
+                        <map alignment="left" id="coB-Xt-zkd"/>
+                    </items>
+                    <connections>
+                        <outlet property="mapInterface" destination="coB-Xt-zkd" id="jIV-Nk-Slr"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="770" y="97"/>
         </scene>
         <!--Close-->
         <scene sceneID="J3e-yB-ail">

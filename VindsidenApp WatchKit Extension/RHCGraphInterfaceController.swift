@@ -7,8 +7,9 @@
 //
 
 import WatchKit
+import WatchConnectivity
 import Foundation
-
+import VindsidenWatchKit
 
 class RHCGraphInterfaceController: WKInterfaceController {
 
@@ -28,18 +29,18 @@ class RHCGraphInterfaceController: WKInterfaceController {
             let userInfo = [
                 "interface": "graph",
                 "action": "update",
-                "station": station.stationId,
+                "station": station.stationId!,
                 "bounds": bounds,
                 "scale": scale
                 ] as [NSObject:AnyObject]
 
-            WKInterfaceController.openParentApplication( userInfo, reply: { (reply: [NSObject : AnyObject], error: NSError?) -> Void in
-                DLOG("error: \(error)")
-
+            WCSession.defaultSession().sendMessage(["request":"graph","userInfo":userInfo], replyHandler: { (reply: [String : AnyObject]) -> Void in
                 if let data = reply["graph"] as? NSData {
                     let image = UIImage(data: data, scale:WKInterfaceDevice.currentDevice().screenScale)
                     self.graphImage.setImage(image)
                 }
+                }, errorHandler: { (error:NSError) -> Void in
+                    DLOG("\(error)")
             })
         }
     }

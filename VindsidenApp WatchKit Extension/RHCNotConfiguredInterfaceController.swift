@@ -8,6 +8,7 @@
 
 import WatchKit
 import Foundation
+import VindsidenWatchKit
 
 
 class RHCNotConfiguredInterfaceController: WKInterfaceController {
@@ -15,11 +16,28 @@ class RHCNotConfiguredInterfaceController: WKInterfaceController {
     @IBOutlet weak var infoLabel: WKInterfaceLabel!
     @IBOutlet weak var infoDetailsLabel: WKInterfaceLabel!
 
+
+    deinit {
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: WCFetcherNotification.ReceivedStations.rawValue, object: nil)
+    }
+
+    
     override func awakeWithContext(context: AnyObject?) {
         super.awakeWithContext(context)
 
-        setTitle("Vindsiden")
+        setTitle("")
         infoLabel.setText(NSLocalizedString("No stations configured", comment: "Not configured header text"))
         infoDetailsLabel.setText(NSLocalizedString("Open the main app to configure visible stations", comment: "Not configured text"))
+
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "receivedStations:", name: WCFetcherNotification.ReceivedStations.rawValue, object: nil)
+    }
+
+
+    func receivedStations( notification: NSNotification) -> Void {
+        let count = CDStation.numberOfVisibleStationsInManagedObjectContext(Datamanager.sharedManager().managedObjectContext)
+
+        if count > 0 {
+            dismissController()
+        }
     }
 }
