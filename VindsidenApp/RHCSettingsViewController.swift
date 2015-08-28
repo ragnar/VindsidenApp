@@ -19,15 +19,23 @@ import VindsidenKit
 
     var delegate: RHCSettingsDelegate?
 
-    required init(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
     }
+
+
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        self.tableView.reloadData()
+    }
+
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -49,7 +57,7 @@ import VindsidenKit
 
         if indexPath.row == 0 {
             cell.textLabel?.text = NSLocalizedString("Stations", comment: "")
-            cell.detailTextLabel?.text = "\(CDStation.numberOfVisibleStations())"
+            cell.detailTextLabel?.text = "\(CDStation.numberOfVisibleStationsInManagedObjectContext(Datamanager.sharedManager().managedObjectContext))"
         } else {
             let unit = SpeedConvertion(rawValue: AppConfig.sharedConfiguration.applicationUserDefaults.integerForKey("selectedUnit"))
 
