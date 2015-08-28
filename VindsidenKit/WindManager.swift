@@ -7,6 +7,15 @@
 //
 
 import Foundation
+import WatchConnectivity
+import CoreData
+
+#if os(iOS)
+    public typealias WindManagerResult = UIBackgroundFetchResult
+    #else
+    public typealias WindManagerResult = Void
+#endif
+
 
 @objc(WindManager)
 public class WindManager : NSObject {
@@ -26,9 +35,10 @@ public class WindManager : NSObject {
 
     override init() {
         super.init()
-
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("applicationDidEnterBackground:"), name: UIApplicationDidEnterBackgroundNotification, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("applicationWillEnterForeground:"), name: UIApplicationWillEnterForegroundNotification, object: nil)
+        #if os(iOS)
+            NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("applicationDidEnterBackground:"), name: UIApplicationDidEnterBackgroundNotification, object: nil)
+            NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("applicationWillEnterForeground:"), name: UIApplicationWillEnterForegroundNotification, object: nil)
+        #endif
     }
 
 
@@ -66,30 +76,29 @@ public class WindManager : NSObject {
     }
 
 
-
-
     func activeStations() -> [CDStation] {
         let fetchRequest = NSFetchRequest(entityName: "CDStation")
         fetchRequest.predicate = NSPredicate(format: "isHidden == NO")
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: "order", ascending: true)]
 
-        if let context = Datamanager.sharedManager().managedObjectContext {
-            do {
-                let stations = try context.executeFetchRequest(fetchRequest) as! [CDStation]
-                return stations
-            } catch {
-                return [CDStation]()
-            }
+        let context = Datamanager.sharedManager().managedObjectContext
+        do {
+            let stations = try context.executeFetchRequest(fetchRequest) as! [CDStation]
+            return stations
+        } catch {
+            return [CDStation]()
         }
-
-        return [CDStation]()
     }
 
 
-    public func fetch(completionHandler: ((UIBackgroundFetchResult) -> Void)? = nil) -> Void {
+    public func fetch(completionHandler: ((WindManagerResult) -> Void)? = nil) -> Void {
         if ( isUpdating ) {
             DLOG("Already updating")
-            completionHandler?(.NewData)
+            #if os(iOS)
+                completionHandler?(.NewData)
+            #else
+                completionHandler?()
+            #endif
             return;
         }
 
@@ -100,41 +109,55 @@ public class WindManager : NSObject {
 
         if remainingStations <= 0 {
             isUpdating = false
-            completionHandler?(.NoData)
+            #if os(iOS)
+                completionHandler?(.NoData)
+            #else
+                completionHandler?()
+            #endif
             return
         }
 
         for station in stations {
-            let complete = { (success:Bool, plots: [AnyObject]!) -> Void in
-                CDPlot.updatePlots(plots ?? [CDPlot](), completion: { () -> Void in
-                    remainingStations -= 1
+            if let stationId = station.stationId {
+                PlotFetcher().fetchForStationId(stationId.integerValue, completionHandler: { (plots: [[String : String]], error: NSError?) -> Void in
+                    if (error != nil) {
+                        DLOG("error: \(error)")
+                    } else {
+                        CDPlot.updatePlots(plots, completion: { () -> Void in
+                            remainingStations -= 1
 
-                    if remainingStations == 0 {
-                        DLOG("Finished")
+                            if remainingStations == 0 {
+                                DLOG("Finished")
 
-                        self.isUpdating = false
-                        completionHandler?(.NewData)
+                                self.isUpdating = false
+                                #if os(iOS)
+                                    completionHandler?(.NewData)
+                                    #else
+                                    completionHandler?()
+                                #endif
+                            }
+                        })
                     }
                 })
             }
-
-            let error = { (cancelled:Bool, error: NSError!) -> Void in
-                DLOG("error: \(error)")
-            }
-
-            RHEVindsidenAPIClient.defaultManager().fetchStationsPlotsForStation(station.stationId, completion: complete, error: error)
         }
     }
 
 
-    public func fetchForStationId( stationId: Int, completionHandler: ((UIBackgroundFetchResult) -> Void)? = nil ) -> Void {
-        RHEVindsidenAPIClient.defaultManager().fetchStationsPlotsForStation(stationId, completion: { (success:Bool, plots: [AnyObject]!) -> Void in
-            CDPlot.updatePlots(plots, completion: { () -> Void in
-                completionHandler?(.NewData)
-            })
-            }, error: { (cancelled: Bool, error: NSError!) -> Void in
-                completionHandler?(.NewData)
-        })
+    public func fetchForStationId( stationId: Int, completionHandler: ((WindManagerResult) -> Void)? = nil ) -> Void {
+        PlotFetcher().fetchForStationId(stationId) { (plots: [[String : String]], error: NSError?) -> Void in
+            if (error != nil) {
+                DLOG("error: \(error)")
+            } else {
+                CDPlot.updatePlots(plots, completion: { () -> Void in
+                    #if os(iOS)
+                        completionHandler?(.NewData)
+                        #else
+                        completionHandler?()
+                    #endif
+                })
+            }
+        }
     }
 
 
@@ -145,7 +168,7 @@ public class WindManager : NSObject {
         fetch()
     }
 
-
+    #if os(iOS)
     func applicationWillEnterForeground( application: UIApplication) -> Void {
         startUpdating()
     }
@@ -154,5 +177,6 @@ public class WindManager : NSObject {
     func applicationDidEnterBackground( application: UIApplication) -> Void {
         stopUpdating()
     }
+    #endif
 }
 
