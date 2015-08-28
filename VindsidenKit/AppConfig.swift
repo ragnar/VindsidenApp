@@ -7,10 +7,10 @@
 //
 
 import Foundation
-import SORelativeDateTransformer
+
 
 @objc(AppConfig)
-public class AppConfig {
+public class AppConfig : NSObject {
     private struct Defaults {
         static let firstLaunchKey = "Defaults.firstLaunchKey"
     }
@@ -26,7 +26,11 @@ public class AppConfig {
         static let appName = "VindsidenApp" // Could be done automatic by reading info.plist
         static let todayName = "VindsidenToday"
         static let watchName = "Watch"
+        #if os(iOS)
         public static let frameworkBundleIdentifier = "\(prefix).VindsidenKit"
+        #else
+        public static let frameworkBundleIdentifier = "\(prefix).VindsidenWatchKit"
+        #endif
     }
 
 
@@ -93,7 +97,11 @@ public class AppConfig {
 
     
     private func registerDefaults() {
-        #if os(iOS)
+        #if os(watchOS)
+            let defaultOptions: [String: AnyObject] = [
+            Defaults.firstLaunchKey: true,
+            ]
+        #elseif os(iOS)
             let defaultOptions: [String: AnyObject] = [
                 Defaults.firstLaunchKey: true,
             ]
@@ -123,12 +131,7 @@ public class AppConfig {
         } else {
             dateToUse = NSDate()
         }
-        return self.relativeDateTransformer.transformedValue(dateToUse) as! NSString
+
+        return dateToUse.releativeString()
     }
-
-
-    private lazy var relativeDateTransformer: SORelativeDateTransformer = {
-        var _relativeDateTransformer = SORelativeDateTransformer()
-        return _relativeDateTransformer
-        }()
 }
