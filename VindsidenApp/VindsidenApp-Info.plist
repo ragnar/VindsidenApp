@@ -60,10 +60,6 @@
 	<array>
 		<string>org.juniks.${PRODUCT_NAME:rfc1034identifier}</string>
 	</array>
-	<key>UIAppFonts</key>
-	<array>
-		<string>DINMittelschriftStd.otf</string>
-	</array>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>fetch</string>

@@ -27,7 +27,6 @@
 		AD17EDBD17310E6A00943C33 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD17EDBC17310E6A00943C33 /* MobileCoreServices.framework */; };
 		AD17EDC117310E7A00943C33 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD17EDC017310E7A00943C33 /* CoreLocation.framework */; };
 		AD17EDC717312A5000943C33 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = AD17EDC517312A5000943C33 /* Localizable.strings */; };
-		AD17EDCC17312B2600943C33 /* DINMittelschriftStd.otf in Resources */ = {isa = PBXBuildFile; fileRef = AD17EDCA17312B2600943C33 /* DINMittelschriftStd.otf */; };
 		AD17EDF91736492500943C33 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD17EDF81736492200943C33 /* AdSupport.framework */; };
 		AD1812A81AF9E77F0040080D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = AD1812A61AF9E77F0040080D /* InfoPlist.strings */; };
 		AD2AB4F819C722320029C739 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = AD2AB4FA19C722320029C739 /* InfoPlist.strings */; };
@@ -352,7 +351,6 @@
 		AD17EDBE17310E7200943C33 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		AD17EDC017310E7A00943C33 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		AD17EDC617312A5000943C33 /* en */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
-		AD17EDCA17312B2600943C33 /* DINMittelschriftStd.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = DINMittelschriftStd.otf; sourceTree = "<group>"; };
 		AD17EDF81736492200943C33 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		AD1812A71AF9E77F0040080D /* Base */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		AD1812A91AF9E7B40040080D /* Base */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -551,7 +549,6 @@
 		AD17ED3B1731012200943C33 = {
 			isa = PBXGroup;
 			children = (
-				AD17EDC817312B2500943C33 /* Fonts */,
 				AD17ED4D1731012200943C33 /* VindsidenApp */,
 				AD539C851947B0F7002644BD /* VindsidenToday */,
 				AD539C9E1947B5CA002644BD /* VindsidenKit */,
@@ -639,14 +636,6 @@
 				AD17ED551731012200943C33 /* VindsidenApp-Prefix.pch */,
 			);
 			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		AD17EDC817312B2500943C33 /* Fonts */ = {
-			isa = PBXGroup;
-			children = (
-				AD17EDCA17312B2600943C33 /* DINMittelschriftStd.otf */,
-			);
-			path = Fonts;
 			sourceTree = "<group>";
 		};
 		AD17EDDE173447CB00943C33 /* Graph View */ = {
@@ -1221,7 +1210,6 @@
 				AD17ED521731012200943C33 /* InfoPlist.strings in Resources */,
 				AD17ED611731012200943C33 /* MainStoryboard.storyboard in Resources */,
 				AD17EDC717312A5000943C33 /* Localizable.strings in Resources */,
-				AD17EDCC17312B2600943C33 /* DINMittelschriftStd.otf in Resources */,
 				AD07B2C11779E90A004BC24C /* Media.xcassets in Resources */,
 				3B5D05C719C3002F000AE4E0 /* Launch Screen.xib in Resources */,
 			);
