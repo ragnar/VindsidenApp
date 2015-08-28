@@ -8,6 +8,7 @@
 
 import UIKit
 import NotificationCenter
+import CoreData
 import VindsidenKit
 
 
@@ -30,7 +31,7 @@ class TodayViewController: UITableViewController, NCWidgetProviding, NSFetchedRe
     }
 
 
-    required init(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
 
@@ -96,20 +97,19 @@ class TodayViewController: UITableViewController, NCWidgetProviding, NSFetchedRe
         } else {
             let cell = tableView.dequeueReusableCellWithIdentifier(TableViewConstants.CellIdentifiers.message, forIndexPath: indexPath) as! RHCTodayCell
             let stationInfo = self.fetchedResultsController.objectAtIndexPath(indexPath) as! CDStation
-            let tmpplot: CDPlot? = stationInfo.lastRegisteredPlot()
 
-            if let plot = tmpplot {
-                let winddir = CGFloat(plot.windDir.floatValue)
-                let windspeed = CGFloat(plot.windAvg.floatValue)
+            if let plot = stationInfo.lastRegisteredPlot() {
+
+                let winddir = CGFloat(plot.windDir!.floatValue)
+                let windspeed = CGFloat(plot.windAvg!.floatValue)
                 let image = DrawArrow.drawArrowAtAngle( winddir, forSpeed:windspeed, highlighted:false, color: UIColor.whiteColor(), hightlightedColor: UIColor.blackColor())
 
                 let raw = AppConfig.sharedConfiguration.applicationUserDefaults.integerForKey("selectedUnit")
                 let unit = SpeedConvertion(rawValue: raw)
 
                 if let realUnit = unit {
-                    let speed = plot.windAvg.speedConvertionTo(realUnit)
+                    let speed = plot.windAvg!.speedConvertionTo(realUnit)
                     if let speedString = speedFormatter.stringFromNumber(speed) {
-                        cell.speedLabel.text = "\(speedString) \(NSNumber.shortUnitNameString(realUnit))"
                         cell.speedLabel.text = speedString
                         cell.unitLabel.text = NSNumber.shortUnitNameString(realUnit)
                     } else {
@@ -172,7 +172,7 @@ class TodayViewController: UITableViewController, NCWidgetProviding, NSFetchedRe
 
         let stationInfo = self.fetchedResultsController.objectAtIndexPath(indexPath) as! CDStation
 
-        let url = NSURL(string: "vindsiden://station/\(stationInfo.stationId)?todayView=1")
+        let url = NSURL(string: "vindsiden://station/\(stationInfo.stationId!)?todayView=1")
         if let actual = url {
             extensionContext?.openURL( actual, completionHandler:  nil)
         }
@@ -192,7 +192,7 @@ class TodayViewController: UITableViewController, NCWidgetProviding, NSFetchedRe
         fetchRequest.predicate = NSPredicate(format: "isHidden = NO", argumentArray: nil)
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: "order", ascending: true)]
 
-        _fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: Datamanager.sharedManager().managedObjectContext!, sectionNameKeyPath: nil, cacheName: nil)
+        _fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: Datamanager.sharedManager().managedObjectContext, sectionNameKeyPath: nil, cacheName: nil)
         _fetchedResultsController!.delegate = self
 
         do {
