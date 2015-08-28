@@ -7,6 +7,8 @@
 //
 
 import Foundation
+import CoreGraphics
+
 
 
 public final class GraphImage {
@@ -80,9 +82,14 @@ public final class GraphImage {
 
 
     public func drawImage() -> UIImage {
+        let ctx = UIGraphicsGetCurrentContext()
+        CGContextDrawPath(ctx, CGPathDrawingMode.Stroke)
+
 
         UIGraphicsBeginImageContextWithOptions( size, false, scale)
         let context = UIGraphicsGetCurrentContext()
+
+        CGContextDrawPath(context, CGPathDrawingMode.Stroke)
 
         drawSpeedLines(context)
         drawHourLines(context)
@@ -114,7 +121,7 @@ public final class GraphImage {
         CGContextMoveToPoint( context, bounds.minX, bounds.minY-5.0)
         CGContextAddLineToPoint( context, bounds.minX, bounds.maxY)
 
-        CGContextDrawPath( context, kCGPathStroke)
+        CGContextDrawPath(context, CGPathDrawingMode.Stroke)
 
         CGContextRestoreGState(context)
     }
@@ -140,7 +147,7 @@ public final class GraphImage {
         }
 
         CGContextClosePath(context)
-        CGContextDrawPath( context, kCGPathStroke)
+        CGContextDrawPath(context, CGPathDrawingMode.Stroke)
 
         CGContextBeginPath(context)
 
@@ -153,7 +160,7 @@ public final class GraphImage {
 
         let lengths = [2.0, 3.0] as [CGFloat]
         CGContextSetLineDash( context, 0.0, lengths, 2)
-        CGContextDrawPath( context, kCGPathStroke)
+        CGContextDrawPath(context, CGPathDrawingMode.Stroke)
 
         CGContextRestoreGState(context)
     }
@@ -177,7 +184,7 @@ public final class GraphImage {
         }
 
         CGContextClosePath(context)
-        CGContextDrawPath( context, kCGPathStroke)
+        CGContextDrawPath(context, CGPathDrawingMode.Stroke)
         CGContextRestoreGState(context)
     }
 
@@ -268,25 +275,25 @@ public final class GraphImage {
         var maxPoints = [CGPoint]()
 
         let plotMaxValue = self.plotMaxValue()
-        let interval = CGFloat(firstPlot.plotTime.timeIntervalSinceDate(self.absoluteStartDate)/60.0)
+        let interval = CGFloat(firstPlot.plotTime!.timeIntervalSinceDate(self.absoluteStartDate)/60.0)
         var x = ceil(bounds.minX + (interval*self.stepX))
 
 
         for (idx, plot) in plots.enumerate() {
             if idx > 0 {
-                let interval = CGFloat(plot.plotTime.timeIntervalSinceDate(self.absoluteStartDate)/60.0)
+                let interval = CGFloat(plot.plotTime!.timeIntervalSinceDate(self.absoluteStartDate)/60.0)
                 x = ceil(bounds.minX + (interval*self.stepX))
             }
 
-            let rMax = plot.windMax.speedConvertionTo(unit)
+            let rMax = plot.windMax!.speedConvertionTo(unit)
             let yMax = bounds.maxY - (rMax / plotMaxValue) * bounds.height
             maxPoints.append(CGPointMake(x, yMax))
 
-            let rMin = plot.windMin.speedConvertionTo(unit)
+            let rMin = plot.windMin!.speedConvertionTo(unit)
             let yMin = bounds.maxY - (rMin / plotMaxValue) * bounds.height
             minPoints.append(CGPointMake(x, yMin))
 
-            let rAvg = plot.windAvg.speedConvertionTo(unit)
+            let rAvg = plot.windAvg!.speedConvertionTo(unit)
             let yAvg = bounds.maxY - (rAvg / plotMaxValue) * bounds.height
             avgPoints.append(CGPointMake(x, yAvg))
         }
@@ -314,15 +321,15 @@ public final class GraphImage {
         CGContextSaveGState(context)
 
         let firstPlot = plots.first!
-        let interval = CGFloat(firstPlot.plotTime.timeIntervalSinceDate(self.absoluteStartDate)/60.0)
+        let interval = CGFloat(firstPlot.plotTime!.timeIntervalSinceDate(self.absoluteStartDate)/60.0)
         var x = ceil(bounds.minX + (interval*self.stepX))
 
         for plot in plots {
-            let interval = CGFloat(plot.plotTime.timeIntervalSinceDate(self.absoluteStartDate)/60.0)
+            let interval = CGFloat(plot.plotTime!.timeIntervalSinceDate(self.absoluteStartDate)/60.0)
             x = ceil(bounds.minX + (interval*self.stepX))
 
-            let winddir = CGFloat(plot.windDir.floatValue)
-            let windspeed = CGFloat(plot.windAvg.floatValue)
+            let winddir = CGFloat(plot.windDir!.floatValue)
+            let windspeed = CGFloat(plot.windAvg!.floatValue)
             let image = DrawArrow.drawArrowAtAngle( winddir, forSpeed:windspeed, highlighted:false, color: UIColor.whiteColor(), hightlightedColor: UIColor.blackColor())
 
             image.drawInRect(CGRectMake(x-8.0, bounds.maxY+10, 16.0, 16.0))
@@ -337,8 +344,8 @@ public final class GraphImage {
 
     func bezierPathWithPoints( points: [CGPoint] ) -> UIBezierPath {
         let bezierPath = self.quadCurvedPathWithPoints(points)
-        bezierPath.lineJoinStyle = kCGLineJoinRound
-        bezierPath.lineCapStyle = kCGLineCapRound
+        bezierPath.lineJoinStyle = CGLineJoin.Round
+        bezierPath.lineCapStyle = CGLineCap.Round
         bezierPath.lineWidth = 2.0/scale
 
         return bezierPath
