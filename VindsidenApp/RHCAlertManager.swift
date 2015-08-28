@@ -9,7 +9,7 @@
 import UIKit
 
 @objc(RHCAlertManager)
-class RHCAlertManager
+class RHCAlertManager : NSObject
 {
     var showingError = false
     var networkAlertController: UIAlertController? = nil
