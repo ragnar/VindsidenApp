@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="2061" systemVersion="12D78" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="8193.2" systemVersion="14F27" minimumToolsVersion="Automatic">
     <entity name="CDPlot" representedClassName="CDPlot" syncable="YES">
+        <attribute name="dataId" attributeType="Integer 64" defaultValueString="0" indexed="YES" syncable="YES"/>
         <attribute name="plotTime" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="tempAir" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
         <attribute name="tempWater" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
@@ -8,7 +9,7 @@
         <attribute name="windDir" optional="YES" attributeType="Float" defaultValueString="0" syncable="YES"/>
         <attribute name="windMax" optional="YES" attributeType="Float" defaultValueString="0" syncable="YES"/>
         <attribute name="windMin" optional="YES" attributeType="Float" defaultValueString="0" syncable="YES"/>
-        <relationship name="station" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="CDStation" inverseName="plots" inverseEntity="CDStation" indexed="YES" syncable="YES"/>
+        <relationship name="station" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="CDStation" inverseName="plots" inverseEntity="CDStation" indexed="YES" syncable="YES"/>
     </entity>
     <entity name="CDStation" representedClassName="CDStation" syncable="YES">
         <attribute name="city" optional="YES" attributeType="String" syncable="YES"/>
@@ -28,9 +29,14 @@
         <attribute name="webCamURL" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="yrURL" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="plots" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="CDPlot" inverseName="station" inverseEntity="CDPlot" indexed="YES" syncable="YES"/>
+        <uniquenessConstraints>
+            <uniquenessConstraint>
+                <constraint value="stationId"/>
+            </uniquenessConstraint>
+        </uniquenessConstraints>
     </entity>
     <elements>
-        <element name="CDPlot" positionX="0" positionY="0" width="128" height="165"/>
+        <element name="CDPlot" positionX="0" positionY="0" width="128" height="180"/>
         <element name="CDStation" positionX="-333" positionY="423" width="128" height="300"/>
     </elements>
 </model>
