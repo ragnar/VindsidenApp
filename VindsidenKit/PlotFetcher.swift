@@ -18,18 +18,30 @@ class PlotURLSession : NSObject, NSURLSessionDataDelegate {
         return Singleton.sharedAppSession
     }
 
+    private var privateSharedSession: NSURLSession?
+
     override init() {
         super.init()
     }
 
-    lazy var sharedSession: NSURLSession = {
-        var _sharedSession = NSURLSession(configuration: NSURLSessionConfiguration.ephemeralSessionConfiguration(), delegate: self, delegateQueue: nil)
-        return _sharedSession
-        }()
+    func sharedSession() -> NSURLSession {
+
+        if let _sharedSession = privateSharedSession {
+            return _sharedSession
+        } else {
+            privateSharedSession = NSURLSession(configuration: NSURLSessionConfiguration.ephemeralSessionConfiguration(), delegate: self, delegateQueue: nil)
+            return privateSharedSession!
+        }
+    }
 
     func URLSession(session: NSURLSession, dataTask: NSURLSessionDataTask, willCacheResponse proposedResponse: NSCachedURLResponse, completionHandler: (NSCachedURLResponse?) -> Void) {
         DLOG("")
         completionHandler(nil)
+    }
+
+    func URLSession(session: NSURLSession, didBecomeInvalidWithError error: NSError?) {
+        DLOG("Error: \(error?.localizedDescription)")
+        self.privateSharedSession = nil
     }
 }
 
@@ -45,7 +57,7 @@ public class PlotFetcher : NSObject {
         let request = NSURLRequest(URL: NSURL(string: "http://vindsiden.no//xml.aspx?id=\(stationId)&hours=\(Int(AppConfig.Global.plotHistory-1))")!)
         DLOG("\(request)")
 
-        let task = PlotURLSession.sharedPlotSession.sharedSession.dataTaskWithRequest(request) { (data: NSData?, response: NSURLResponse?, error: NSError?) -> Void in
+        let task = PlotURLSession.sharedPlotSession.sharedSession().dataTaskWithRequest(request) { (data: NSData?, response: NSURLResponse?, error: NSError?) -> Void in
             guard let data = data else {
                 DLOG("Error: \(error)")
                 completionHandler( [[String:String]](), error)
@@ -62,6 +74,11 @@ public class PlotFetcher : NSObject {
         }
 
         task.resume()
+    }
+
+
+    public class func invalidate() -> Void {
+        PlotURLSession.sharedPlotSession.sharedSession().invalidateAndCancel()
     }
 }
 
