@@ -321,6 +321,7 @@
 		AD0636141B069CBB00EF7321 /* Base */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		AD0636151B069CE000EF7321 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		AD07B2C01779E90A004BC24C /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Media.xcassets; sourceTree = "<group>"; };
+		AD1379791B94B912008A4FFB /* Vindsiden 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Vindsiden 2.xcdatamodel"; sourceTree = "<group>"; };
 		AD146F4C1741251E00205BB9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
 		AD146F4D1741255B00205BB9 /* nb */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = nb; path = nb.lproj/Localizable.strings; sourceTree = "<group>"; };
 		AD146F4F1741255B00205BB9 /* nb */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = nb; path = nb.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -2345,9 +2346,10 @@
 		AD7AA505196E46D800B1518B /* Vindsiden.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				AD1379791B94B912008A4FFB /* Vindsiden 2.xcdatamodel */,
 				AD7AA506196E46D800B1518B /* Vindsiden.xcdatamodel */,
 			);
-			currentVersion = AD7AA506196E46D800B1518B /* Vindsiden.xcdatamodel */;
+			currentVersion = AD1379791B94B912008A4FFB /* Vindsiden 2.xcdatamodel */;
 			path = Vindsiden.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
