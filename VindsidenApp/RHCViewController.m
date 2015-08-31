@@ -104,15 +104,6 @@ static NSString *kCellID = @"stationCellID";
 }
 
 
-- (void)viewDidLayoutSubviews
-{
-    if ( self.pendingScrollToStation ) {
-        [self scrollToStation:self.pendingScrollToStation];
-        self.pendingScrollToStation = nil;
-    }
-}
-
-
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
@@ -158,9 +149,29 @@ static NSString *kCellID = @"stationCellID";
 }
 
 
-- (void)viewWillLayoutSubviews
+- (void)viewDidLayoutSubviews
 {
-    [super viewWillLayoutSubviews];
+    if ( self.pendingScrollToStation ) {
+        [self scrollToStation:self.pendingScrollToStation];
+        self.pendingScrollToStation = nil;
+    }
+}
+
+
+- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator
+{
+    RHCStationCell *cell =  nil;
+
+    if ( [self.collectionView.visibleCells count] ) {
+        cell = [self.collectionView visibleCells].firstObject;
+    }
+
+    [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
+
+    if ( cell ) {
+        self.pendingScrollToStation = cell.currentStation;
+    }
+
     [self.collectionView.collectionViewLayout invalidateLayout];
 }
 
@@ -529,7 +540,7 @@ static NSString *kCellID = @"stationCellID";
 {
     if ( self.collectionView ) {
         NSIndexPath *indexPath = [self.fetchedResultsController indexPathForObject:station];
-        [self.collectionView scrollToItemAtIndexPath:indexPath atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:NO];
+        [self.collectionView scrollToItemAtIndexPath:indexPath atScrollPosition:UICollectionViewScrollPositionLeft /* UICollectionViewScrollPositionCenteredHorizontally*/ animated:NO];
         self.pageControl.currentPage = indexPath.row;
     } else {
         self.pendingScrollToStation = station;
