@@ -117,27 +117,30 @@ public class WindManager : NSObject {
             return
         }
 
+        var numErrors = 0
+
         for station in stations {
             if let stationId = station.stationId {
                 PlotFetcher().fetchForStationId(stationId.integerValue, completionHandler: { (plots: [[String : String]], error: NSError?) -> Void in
                     if (error != nil) {
                         DLOG("error: \(error)")
-                    } else {
-                        CDPlot.updatePlots(plots, completion: { () -> Void in
-                            remainingStations -= 1
-
-                            if remainingStations == 0 {
-                                DLOG("Finished")
-
-                                self.isUpdating = false
-                                #if os(iOS)
-                                    completionHandler?(.NewData)
-                                    #else
-                                    completionHandler?()
-                                #endif
-                            }
-                        })
+                        numErrors += 1
                     }
+
+                    CDPlot.updatePlots(plots, completion: { () -> Void in
+                        remainingStations -= 1
+
+                        if remainingStations == 0 {
+                            DLOG("Finished with \(numErrors) errors.")
+
+                            self.isUpdating = false
+                            #if os(iOS)
+                                completionHandler?(.NewData)
+                                #else
+                                completionHandler?()
+                            #endif
+                        }
+                    })
                 })
             }
         }
@@ -179,4 +182,3 @@ public class WindManager : NSObject {
     }
     #endif
 }
-
