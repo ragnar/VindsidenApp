@@ -569,15 +569,21 @@ static NSString *kCellID = @"stationCellID";
         if ( self.presentedViewController ) {
             return;
         }
-        _isShowingLandscapeView = YES;
-        [self performSegueWithIdentifier:@"PresentGraphLandscape" sender:self];
+
+        dispatch_async(dispatch_get_main_queue(), ^{
+            _isShowingLandscapeView = YES;
+            [self performSegueWithIdentifier:@"PresentGraphLandscape" sender:self];
+        });
     }
     else if (UIDeviceOrientationIsPortrait(deviceOrientation) && _isShowingLandscapeView) {
         if ( NO == [self.presentedViewController isKindOfClass:[RHCRotatingNavigationController class]] ) {
             return;
         }
-        [self dismissViewControllerAnimated:YES completion:nil];
-        _isShowingLandscapeView = NO;
+
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self dismissViewControllerAnimated:YES completion:nil];
+            _isShowingLandscapeView = NO;
+        });
     }
 }
 
