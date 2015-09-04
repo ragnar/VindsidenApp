@@ -33,6 +33,8 @@ static NSString *kCellID = @"stationCellID";
 @property (assign, nonatomic) BOOL wasVisible;
 @property (strong, nonatomic) NSMutableSet *transformedCells;
 
+@property (strong, nonatomic) NSIndexPath *currentIndexPath;
+@property (assign, nonatomic) CGSize cellSize;
 
 @end
 
@@ -131,9 +133,33 @@ static NSString *kCellID = @"stationCellID";
 }
 
 
-- (BOOL)shouldAutorotate
+- (void)viewWillLayoutSubviews
 {
-    return NO;
+    [super viewWillLayoutSubviews];
+
+    if ( CGSizeEqualToSize(self.cellSize, CGSizeZero) == NO ) {
+        self.cellSize = self.collectionView.bounds.size;
+    }
+
+    [self.collectionView.collectionViewLayout invalidateLayout];
+}
+
+
+- (void)viewDidLayoutSubviews
+{
+    [super viewDidLayoutSubviews];
+
+    if ( CGSizeEqualToSize(self.cellSize, CGSizeZero) == NO ) {
+        self.cellSize = self.collectionView.bounds.size;
+    }
+
+    if ( self.currentIndexPath != nil ) {
+        [self.collectionView scrollToItemAtIndexPath:self.currentIndexPath atScrollPosition:UICollectionViewScrollPositionLeft animated:NO];
+    }
+//    if ( self.pendingScrollToStation ) {
+//        [self scrollToStation:self.pendingScrollToStation];
+//        self.pendingScrollToStation = nil;
+//    }
 }
 
 
@@ -149,30 +175,9 @@ static NSString *kCellID = @"stationCellID";
 }
 
 
-- (void)viewDidLayoutSubviews
+- (BOOL)shouldAutorotate
 {
-    if ( self.pendingScrollToStation ) {
-        [self scrollToStation:self.pendingScrollToStation];
-        self.pendingScrollToStation = nil;
-    }
-}
-
-
-- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator
-{
-    RHCStationCell *cell =  nil;
-
-    if ( [self.collectionView.visibleCells count] ) {
-        cell = [self.collectionView visibleCells].firstObject;
-    }
-
-    [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
-
-    if ( cell ) {
-        self.pendingScrollToStation = cell.currentStation;
-    }
-
-    [self.collectionView.collectionViewLayout invalidateLayout];
+    return NO;
 }
 
 
@@ -186,15 +191,17 @@ static NSString *kCellID = @"stationCellID";
 
     if ( [segue.identifier isEqualToString:@"ShowSettings"] ) {
         UINavigationController *navCon = segue.destinationViewController;
-        RHCSettingsViewController *controller = navCon.viewControllers[0];
+        RHCSettingsViewController *controller = navCon.viewControllers.firstObject;
         controller.delegate = self;
     } else if ( [segue.identifier isEqualToString:@"ShowStationDetails"] ) {
         UINavigationController *navCon = segue.destinationViewController;
-        RHEStationDetailsViewController *controller = navCon.viewControllers[0];
+        RHEStationDetailsViewController *controller = navCon.viewControllers.firstObject;
         controller.delegate = self;
         controller.station = cell.currentStation;
     } else if ( [segue.identifier isEqualToString:@"PresentGraphLandscape"] ) {
-        RHCLandscapeGraphViewController *controller = segue.destinationViewController;
+        UINavigationController *navCon = segue.destinationViewController;
+
+        RHCLandscapeGraphViewController *controller = navCon.viewControllers.firstObject;
         controller.plots = cell.graphView.plots;
         controller.station = cell.currentStation;
     }
@@ -243,6 +250,10 @@ static NSString *kCellID = @"stationCellID";
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
+    if ( CGSizeEqualToSize(self.cellSize, CGSizeZero) ) {
+        self.cellSize = self.collectionView.bounds.size;
+    }
+
     return self.collectionView.bounds.size;
 }
 
@@ -275,6 +286,9 @@ static NSString *kCellID = @"stationCellID";
         return;
     }
 
+    self.currentIndexPath = [self.collectionView indexPathsForVisibleItems].firstObject;
+
+
     for ( RHCStationCell *cell in _transformedCells ) {
         [UIView animateWithDuration:0.10
                          animations:^(void) {
@@ -283,7 +297,7 @@ static NSString *kCellID = @"stationCellID";
                          completion:^(BOOL finished) {
                              [_transformedCells removeObject:cell];
 
-                             NSIndexPath *indexPath = [self.collectionView indexPathsForVisibleItems][0];
+                             NSIndexPath *indexPath = [self.collectionView indexPathsForVisibleItems].firstObject;
                              [[AppConfig sharedConfiguration].applicationUserDefaults setObject:@(indexPath.row) forKey:@"selectedIndexPath"];
                              [[AppConfig sharedConfiguration].applicationUserDefaults synchronize];
                              [self updateCameraButton:YES];
@@ -559,7 +573,7 @@ static NSString *kCellID = @"stationCellID";
         [self performSegueWithIdentifier:@"PresentGraphLandscape" sender:self];
     }
     else if (UIDeviceOrientationIsPortrait(deviceOrientation) && _isShowingLandscapeView) {
-        if ( NO == [self.presentedViewController isKindOfClass:[RHCLandscapeGraphViewController class]] ) {
+        if ( NO == [self.presentedViewController isKindOfClass:[RHCRotatingNavigationController class]] ) {
             return;
         }
         [self dismissViewControllerAnimated:YES completion:nil];
@@ -717,7 +731,7 @@ static NSString *kCellID = @"stationCellID";
     NSError *error = nil;
 
     if ( [session updateApplicationContext:context error: &error] == NO ) {
-        DLOG(@"Failed: %@", error.localizedMessage);
+        DLOG(@"Failed: %@", error.localizedDescription);
     }
 }
 
