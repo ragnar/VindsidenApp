@@ -222,7 +222,7 @@
                                     <action selector="graphButtonPressed" destination="m7g-vb-vvd" id="hOu-uu-kmQ"/>
                                 </connections>
                             </menuItem>
-                            <menuItem title="Map" icon="accept" id="zW4-V8-nlA">
+                            <menuItem title="Map" image="WatchButtonMap" id="zW4-V8-nlA">
                                 <connections>
                                     <action selector="mapButtonPressed" destination="m7g-vb-vvd" id="nOK-KQ-MpQ"/>
                                 </connections>
