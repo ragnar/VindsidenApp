@@ -108,6 +108,7 @@
 		ADA2351C1A040839006A72D4 /* RHCDStationDetailsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADA2351B1A040839006A72D4 /* RHCDStationDetailsCell.swift */; };
 		ADB5A78A19DEC29A009AE4A5 /* DrawArrow.h in Headers */ = {isa = PBXBuildFile; fileRef = ADB5A78819DEC29A009AE4A5 /* DrawArrow.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		ADB5A78B19DEC29A009AE4A5 /* DrawArrow.m in Sources */ = {isa = PBXBuildFile; fileRef = ADB5A78919DEC29A009AE4A5 /* DrawArrow.m */; };
+		ADB6D6671B9CAF4500244CDE /* NetworkIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB6D6641B9CA80600244CDE /* NetworkIndicator.swift */; settings = {ASSET_TAGS = (); }; };
 		ADB7BA421B3A98E9000921E0 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ADB7BA411B3A98E9000921E0 /* CoreGraphics.framework */; };
 		ADBEA4CF1A07ECF600B168BF /* UIColor+AppColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADBEA4CE1A07ECF600B168BF /* UIColor+AppColors.swift */; };
 		ADC161851B0218D8004F6DAE /* GraphImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADC161841B0218D8004F6DAE /* GraphImage.swift */; };
@@ -419,6 +420,7 @@
 		ADA2351B1A040839006A72D4 /* RHCDStationDetailsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RHCDStationDetailsCell.swift; sourceTree = "<group>"; };
 		ADB5A78819DEC29A009AE4A5 /* DrawArrow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DrawArrow.h; sourceTree = "<group>"; };
 		ADB5A78919DEC29A009AE4A5 /* DrawArrow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DrawArrow.m; sourceTree = "<group>"; };
+		ADB6D6641B9CA80600244CDE /* NetworkIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkIndicator.swift; sourceTree = "<group>"; };
 		ADB7BA411B3A98E9000921E0 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = Platforms/WatchOS.platform/Developer/SDKs/WatchOS2.0.sdk/System/Library/Frameworks/CoreGraphics.framework; sourceTree = DEVELOPER_DIR; };
 		ADBEA4CE1A07ECF600B168BF /* UIColor+AppColors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+AppColors.swift"; sourceTree = "<group>"; };
 		ADC161841B0218D8004F6DAE /* GraphImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphImage.swift; sourceTree = "<group>"; };
@@ -622,6 +624,7 @@
 				AD4DEA7619CB7528002A220B /* RHCNavigationViewController.swift */,
 				ADE1863C1B9887AF0081EBEA /* RHCRotatingNavigationController.swift */,
 				ADDB4F4F19CB68F1005D5D38 /* RHCAlertManager.swift */,
+				ADB6D6641B9CA80600244CDE /* NetworkIndicator.swift */,
 			);
 			path = VindsidenApp;
 			sourceTree = "<group>";
@@ -1343,6 +1346,7 @@
 				ADD211C119CF139300497DC1 /* RHCLandscapeGraphViewController.swift in Sources */,
 				ADE1863D1B9887AF0081EBEA /* RHCRotatingNavigationController.swift in Sources */,
 				ADA2351C1A040839006A72D4 /* RHCDStationDetailsCell.swift in Sources */,
+				ADB6D6671B9CAF4500244CDE /* NetworkIndicator.swift in Sources */,
 				AD32E38319BC5037008F00EB /* RHCUnitSelectorViewController.swift in Sources */,
 				AD17EDAA1731066F00943C33 /* RHEGraphMarker.m in Sources */,
 				AD17EDAB1731066F00943C33 /* RHEGraphView.m in Sources */,

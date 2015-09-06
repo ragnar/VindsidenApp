@@ -21,6 +21,12 @@ public class AppConfig : NSObject {
     }
 
 
+    public struct Notification {
+        public static let networkRequestStart = Bundle.prefix + "." + Bundle.appName + ".NetworkRequestStart"
+        public static let networkRequestEnd = Bundle.prefix + "." + Bundle.appName + ".NetworkRequestEnd"
+    }
+
+
     public struct Bundle {
         static var prefix = "org.juniks" // Could be done automatic by reading info.plist
         static let appName = "VindsidenApp" // Could be done automatic by reading info.plist

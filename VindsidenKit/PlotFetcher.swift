@@ -54,6 +54,8 @@ public class PlotFetcher : NSObject {
 
     public func fetchForStationId( stationId: Int, completionHandler:(([[String:String]], NSError?) -> Void)) {
 
+        NSNotificationCenter.defaultCenter().postNotificationName(AppConfig.Notification.networkRequestStart, object: nil)
+
         let request = NSURLRequest(URL: NSURL(string: "http://vindsiden.no//xml.aspx?id=\(stationId)&hours=\(Int(AppConfig.Global.plotHistory-1))")!)
         DLOG("\(request)")
 
@@ -61,6 +63,7 @@ public class PlotFetcher : NSObject {
             guard let data = data else {
                 DLOG("Error: \(error)")
                 completionHandler( [[String:String]](), error)
+                NSNotificationCenter.defaultCenter().postNotificationName(AppConfig.Notification.networkRequestEnd, object: nil)
                 return;
             }
 
@@ -70,6 +73,7 @@ public class PlotFetcher : NSObject {
 
             dispatch_async(dispatch_get_main_queue(), { () -> Void in
                 completionHandler(self.result, error)
+                NSNotificationCenter.defaultCenter().postNotificationName(AppConfig.Notification.networkRequestEnd, object: nil)
             })
         }
 
