@@ -256,24 +256,35 @@ class TodayViewController: UITableViewController, NCWidgetProviding, NSFetchedRe
 
 
     func infoCellHeight() -> CGFloat {
-        let infoCell = tableView.dequeueReusableCellWithIdentifier(TableViewConstants.CellIdentifiers.message) as! RHCTodayCell
-        infoCell.nameLabel?.text = "123"
-        infoCell.updatedLabel?.text = "123"
-        infoCell.layoutIfNeeded()
+        let cell = infoCell
+        cell.nameLabel?.text = "123"
+        cell.updatedLabel?.text = "123"
+        cell.layoutIfNeeded()
 
-        let infoSize = infoCell.contentView.systemLayoutSizeFittingSize(UILayoutFittingCompressedSize)
+        let infoSize = cell.contentView.systemLayoutSizeFittingSize(UILayoutFittingCompressedSize)
         return infoSize.height
     }
 
 
     func showCellHeight() -> CGFloat {
-        let infoCell = tableView.dequeueReusableCellWithIdentifier(TableViewConstants.CellIdentifiers.showall)!
-        infoCell.textLabel?.text = "123"
-        infoCell.layoutIfNeeded()
 
-        let infoSize = infoCell.contentView.systemLayoutSizeFittingSize(UILayoutFittingCompressedSize)
+        let cell = showCell
+        cell.textLabel?.text = "123"
+        cell.layoutIfNeeded()
+
+        let infoSize = cell.contentView.systemLayoutSizeFittingSize(UILayoutFittingCompressedSize)
         return infoSize.height
     }
+
+
+    lazy var infoCell: RHCTodayCell = {
+        return self.tableView.dequeueReusableCellWithIdentifier(TableViewConstants.CellIdentifiers.message) as! RHCTodayCell
+    }()
+
+
+    lazy var showCell: UITableViewCell = {
+        return self.tableView.dequeueReusableCellWithIdentifier(TableViewConstants.CellIdentifiers.showall)!
+    }()
 
 
     // MARK: - Fetch
