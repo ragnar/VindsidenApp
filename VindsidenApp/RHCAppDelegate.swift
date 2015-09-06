@@ -121,6 +121,19 @@ class RHCAppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate {
     }
 
 
+    func application(application: UIApplication, supportedInterfaceOrientationsForWindow window: UIWindow?) -> UIInterfaceOrientationMask {
+        guard let window = window else {
+            return .AllButUpsideDown
+        }
+
+        if  window.traitCollection.userInterfaceIdiom == .Pad  {
+            return .All
+        }
+
+        return .AllButUpsideDown
+    }
+
+
     // MARK: -
 
     
