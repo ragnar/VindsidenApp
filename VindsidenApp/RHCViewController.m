@@ -555,6 +555,7 @@ static NSString *kCellID = @"stationCellID";
 {
     if ( self.collectionView ) {
         NSIndexPath *indexPath = [self.fetchedResultsController indexPathForObject:station];
+        [self.collectionView scrollToItemAtIndexPath:indexPath atScrollPosition:UICollectionViewScrollPositionLeft animated:YES];
         self.currentIndexPath = indexPath;
         self.pageControl.currentPage = indexPath.row;
     } else {
