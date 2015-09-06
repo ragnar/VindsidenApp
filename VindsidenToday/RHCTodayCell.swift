@@ -29,4 +29,23 @@ class RHCTodayCell: UITableViewCell
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var updatedLabel: UILabel!
     @IBOutlet weak var unitLabel: UILabel!
+
+
+    func clearCell() {
+        self.arrowImageView.image = nil
+        self.speedLabel.text = " "
+        self.nameLabel.text = " "
+        self.updatedLabel.text = " "
+        self.unitLabel.text = " "
+    }
+
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        clearCell()
+    }
+
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        clearCell()
+    }
 }
