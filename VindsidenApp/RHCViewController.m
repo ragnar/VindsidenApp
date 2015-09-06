@@ -55,6 +55,8 @@ static NSString *kCellID = @"stationCellID";
 {
     [super viewDidLoad];
 
+    [self beginObservingOrientation];
+
     self.automaticallyAdjustsScrollViewInsets = NO;
 
     UIButton *button = nil;
@@ -114,8 +116,6 @@ static NSString *kCellID = @"stationCellID";
         _wasVisible = NO;
         [self updateCameraButton:YES];
     }
-
-    [self beginObservingOrientation];
 }
 
 
