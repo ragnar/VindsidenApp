@@ -44,13 +44,13 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Larkollen" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8mw-VB-p9g">
-                                            <rect key="frame" x="50" y="5" width="69.5" height="20"/>
+                                            <rect key="frame" x="50" y="5" width="421.5" height="20"/>
                                             <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="updated" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xcL-tw-nBm">
-                                            <rect key="frame" x="50" y="28" width="54" height="17"/>
+                                            <rect key="frame" x="50" y="28" width="421.5" height="17"/>
                                             <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                                             <color key="textColor" cocoaTouchSystemColor="lightTextColor"/>
                                             <nil key="highlightedColor"/>
@@ -67,12 +67,12 @@
                                         <constraint firstItem="xcL-tw-nBm" firstAttribute="leading" secondItem="8mw-VB-p9g" secondAttribute="leading" id="75k-tC-bUA"/>
                                         <constraint firstItem="8mw-VB-p9g" firstAttribute="leading" secondItem="OUk-Np-mOd" secondAttribute="leading" constant="50" id="84h-s3-PUf"/>
                                         <constraint firstAttribute="bottom" secondItem="2Vy-Ub-dTY" secondAttribute="bottom" id="9hB-ib-1YO"/>
-                                        <constraint firstItem="tVJ-95-IMx" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="xcL-tw-nBm" secondAttribute="trailing" id="APu-8O-z0T"/>
+                                        <constraint firstItem="tVJ-95-IMx" firstAttribute="leading" secondItem="xcL-tw-nBm" secondAttribute="trailing" id="APu-8O-z0T"/>
                                         <constraint firstAttribute="bottom" secondItem="xcL-tw-nBm" secondAttribute="bottom" constant="4" id="C27-9f-Uyh"/>
                                         <constraint firstItem="tVJ-95-IMx" firstAttribute="centerY" secondItem="2Vy-Ub-dTY" secondAttribute="centerY" id="Ge9-2H-aCR"/>
                                         <constraint firstItem="FjW-GD-rO9" firstAttribute="leading" secondItem="2Vy-Ub-dTY" secondAttribute="trailing" id="KsU-4E-4fx"/>
                                         <constraint firstItem="8mw-VB-p9g" firstAttribute="top" secondItem="OUk-Np-mOd" secondAttribute="top" constant="5" id="Tna-La-aEO"/>
-                                        <constraint firstItem="tVJ-95-IMx" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="8mw-VB-p9g" secondAttribute="trailing" id="WUn-ua-4ZS"/>
+                                        <constraint firstItem="tVJ-95-IMx" firstAttribute="leading" secondItem="8mw-VB-p9g" secondAttribute="trailing" id="WUn-ua-4ZS"/>
                                         <constraint firstItem="2Vy-Ub-dTY" firstAttribute="leading" secondItem="tVJ-95-IMx" secondAttribute="trailing" id="aan-gJ-01s"/>
                                         <constraint firstItem="2Vy-Ub-dTY" firstAttribute="top" secondItem="OUk-Np-mOd" secondAttribute="top" id="bcG-7D-dq6"/>
                                         <constraint firstAttribute="trailingMargin" secondItem="FjW-GD-rO9" secondAttribute="trailing" id="wI1-i1-KJ5"/>
