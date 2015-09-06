@@ -153,6 +153,11 @@ static NSString *kCellID = @"stationCellID";
         self.cellSize = self.collectionView.bounds.size;
     }
 
+    if ( self.pendingScrollToStation && self.currentIndexPath == nil ) {
+        [self scrollToStation:self.pendingScrollToStation];
+        self.pendingScrollToStation = nil;
+    }
+
     if ( self.currentIndexPath != nil ) {
         [self.collectionView scrollToItemAtIndexPath:self.currentIndexPath atScrollPosition:UICollectionViewScrollPositionLeft animated:NO];
     }
@@ -550,7 +555,7 @@ static NSString *kCellID = @"stationCellID";
 {
     if ( self.collectionView ) {
         NSIndexPath *indexPath = [self.fetchedResultsController indexPathForObject:station];
-        [self.collectionView scrollToItemAtIndexPath:indexPath atScrollPosition:UICollectionViewScrollPositionLeft /* UICollectionViewScrollPositionCenteredHorizontally*/ animated:NO];
+        self.currentIndexPath = indexPath;
         self.pageControl.currentPage = indexPath.row;
     } else {
         self.pendingScrollToStation = station;
@@ -589,6 +594,7 @@ static NSString *kCellID = @"stationCellID";
     if ( self.traitCollection.userInterfaceIdiom == UIUserInterfaceIdiomPad ) {
         return;
     }
+
     _isShowingLandscapeView = NO;
     [[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
     [[NSNotificationCenter defaultCenter] addObserver:self
@@ -667,6 +673,7 @@ static NSString *kCellID = @"stationCellID";
 {
     [super decodeRestorableStateWithCoder:coder];
     self.pageControl.currentPage = [coder decodeIntegerForKey:@"currentPage"];
+    self.currentIndexPath = [NSIndexPath indexPathForRow:self.pageControl.currentPage inSection:0];
 }
 
 
