@@ -178,6 +178,9 @@ public class CDStation: NSManagedObject, MKAnnotation {
                 order = 200
             }
 
+            let stationIds = content.map { return Int($0["StationID"]!)! }
+            Datamanager.sharedManager().removeStaleStationsIds(stationIds, inManagedObjectContext: childContext)
+
             for stationContent in content {
                 guard let stationIdString = stationContent["StationID"] else {
                     DLOG("No stationId")
@@ -284,7 +287,7 @@ public class CDStation: NSManagedObject, MKAnnotation {
             }
 
             let stationIds: [Int] = content.map { return $0["stationId"] as! Int }
-            Datamanager.sharedManager().removeStaleStationsFromWatch(stationIds, inManagedObjectContext: childContext)
+            Datamanager.sharedManager().removeStaleStationsIds(stationIds, inManagedObjectContext: childContext)
 
             do {
                 try childContext.save()

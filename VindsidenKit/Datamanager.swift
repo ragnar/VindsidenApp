@@ -100,7 +100,7 @@ public class Datamanager : NSObject
     }
 
 
-    public func removeStaleStationsFromWatch( stations: [Int], inManagedObjectContext managedObjectContext: NSManagedObjectContext) -> Void {
+    public func removeStaleStationsIds( stations: [Int], inManagedObjectContext managedObjectContext: NSManagedObjectContext) -> Void {
         let fetchRequest = NSFetchRequest(entityName: "CDStation")
         fetchRequest.predicate = NSPredicate(format: "NOT stationId IN (%@)", stations)
 
