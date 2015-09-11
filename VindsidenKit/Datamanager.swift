@@ -118,6 +118,9 @@ public class Datamanager : NSObject
 
     #if os(iOS)
     public func indexActiveStations() -> Void {
+        DLOG("Trying new indexing method")
+        return
+
         let stations = CDStation.visibleStationsInManagedObjectContext(Datamanager.sharedManager().managedObjectContext)
         var items = [CSSearchableItem]()
 
@@ -153,6 +156,46 @@ public class Datamanager : NSObject
 
         index.endIndexBatchWithClientState(NSData()) { (error: NSError?) -> Void in
             DLOG("Index completed: \(error?.localizedDescription)")
+        }
+    }
+
+    public func addStationToIndex( station: CDStation ) {
+
+        if CSSearchableIndex.isIndexingAvailable() == false {
+            DLOG("Indexing not available")
+            return
+        }
+
+        let search = CSSearchableItemAttributeSet(itemContentType: kUTTypeContent as String)
+        search.city = station.city
+        search.latitude = station.coordinateLat
+        search.longitude = station.coordinateLon
+        search.namedLocation = station.city
+        search.displayName = station.stationName
+        search.copyright = station.copyright
+        search.keywords = ["kite", "surf", "wind", "fluid", "naish", "ozone", "f-one"]
+        search.title = station.stationName
+        search.contentDescription = station.city
+
+        let url = "vindsiden://station/\(station.stationId!)"
+        let item = CSSearchableItem(uniqueIdentifier: url, domainIdentifier: AppConfig.Bundle.appName, attributeSet: search)
+
+        CSSearchableIndex.defaultSearchableIndex().indexSearchableItems( [item], completionHandler: { (error: NSError?) -> Void in
+            DLOG("Added station: \(station.stationName) with error: \(error?.localizedDescription)")
+        })
+    }
+
+
+    public func removeStationFromIndex( station: CDStation ) {
+
+        if CSSearchableIndex.isIndexingAvailable() == false {
+            DLOG("Indexing not available")
+            return
+        }
+
+        let url = "vindsiden://station/\(station.stationId!)"
+        CSSearchableIndex.defaultSearchableIndex().deleteSearchableItemsWithIdentifiers([url]) { (error: NSError?) -> Void in
+            DLOG("Removed station: \(station.stationName) with error: \(error?.localizedDescription)")
         }
     }
     #endif

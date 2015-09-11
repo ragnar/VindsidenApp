@@ -150,6 +150,13 @@ class RHEStationPickerViewController : UITableViewController, NSFetchedResultsCo
             station.isHidden = NSNumber(bool: !hidden.boolValue)
         }
 
+        if let hidden = station.isHidden where hidden.boolValue == false {
+            Datamanager.sharedManager().addStationToIndex(station)
+        } else {
+            Datamanager.sharedManager().removeStationFromIndex(station)
+        }
+
+
         let context = Datamanager.sharedManager().managedObjectContext
 
         do {
