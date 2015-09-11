@@ -27,7 +27,6 @@
 		AD17EDBD17310E6A00943C33 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD17EDBC17310E6A00943C33 /* MobileCoreServices.framework */; };
 		AD17EDC117310E7A00943C33 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD17EDC017310E7A00943C33 /* CoreLocation.framework */; };
 		AD17EDC717312A5000943C33 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = AD17EDC517312A5000943C33 /* Localizable.strings */; };
-		AD17EDCC17312B2600943C33 /* DINMittelschriftStd.otf in Resources */ = {isa = PBXBuildFile; fileRef = AD17EDCA17312B2600943C33 /* DINMittelschriftStd.otf */; };
 		AD17EDF91736492500943C33 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD17EDF81736492200943C33 /* AdSupport.framework */; };
 		AD1812A81AF9E77F0040080D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = AD1812A61AF9E77F0040080D /* InfoPlist.strings */; };
 		AD2AB4F819C722320029C739 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = AD2AB4FA19C722320029C739 /* InfoPlist.strings */; };
@@ -35,6 +34,34 @@
 		AD2AB50219C722330029C739 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = AD2AB50419C722330029C739 /* Localizable.strings */; };
 		AD2AB50719C722340029C739 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = AD2AB50919C722340029C739 /* InfoPlist.strings */; };
 		AD2BB34F19C7718600349495 /* VindsidenAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD2BB34E19C7718600349495 /* VindsidenAppTests.swift */; };
+		AD303C1D1B282C6100C4B999 /* VindsidenApp WatchKit Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = ADCB8A761A94F52D009225B1 /* VindsidenApp WatchKit Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		AD303C201B282C6100C4B999 /* VindsidenApp WatchKit App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = ADCB8A851A94F52D009225B1 /* VindsidenApp WatchKit App.app */; };
+		AD303C2B1B282DC800C4B999 /* VindsidenWatchKit.h in Headers */ = {isa = PBXBuildFile; fileRef = AD303C2A1B282DC800C4B999 /* VindsidenWatchKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AD303C301B282FB100C4B999 /* Datamanager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD539CC61947B684002644BD /* Datamanager.swift */; };
+		AD303C311B282FB100C4B999 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD7BBB461A3F53F400883770 /* Logger.swift */; };
+		AD303C321B282FB100C4B999 /* AppConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD7BBB481A3F55A100883770 /* AppConfig.swift */; };
+		AD303C331B282FB100C4B999 /* WindManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADE9C4071AAB32840089EB19 /* WindManager.swift */; };
+		AD303C341B282FC100C4B999 /* DrawArrow.h in Headers */ = {isa = PBXBuildFile; fileRef = ADB5A78819DEC29A009AE4A5 /* DrawArrow.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AD303C351B282FC100C4B999 /* DrawArrow.m in Sources */ = {isa = PBXBuildFile; fileRef = ADB5A78919DEC29A009AE4A5 /* DrawArrow.m */; };
+		AD303C361B282FC100C4B999 /* GraphImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADC161841B0218D8004F6DAE /* GraphImage.swift */; };
+		AD303C371B28301F00C4B999 /* VindsidenWatchKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD303C281B282DC800C4B999 /* VindsidenWatchKit.framework */; };
+		AD303C401B28484F00C4B999 /* Vindsiden.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = AD7AA505196E46D800B1518B /* Vindsiden.xcdatamodeld */; };
+		AD303C411B2848B900C4B999 /* Global.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD6BD0EC1A9506C900E6686B /* Global.swift */; };
+		AD303C421B2848EF00C4B999 /* UIColor+AppColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADBEA4CE1A07ECF600B168BF /* UIColor+AppColors.swift */; };
+		AD303C431B28490600C4B999 /* NSNumber+Between.h in Headers */ = {isa = PBXBuildFile; fileRef = ADCD423C196E4E42004973E9 /* NSNumber+Between.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AD303C441B28490600C4B999 /* NSNumber+Convertion.h in Headers */ = {isa = PBXBuildFile; fileRef = ADCD423E196E4E42004973E9 /* NSNumber+Convertion.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AD303C451B28490600C4B999 /* NSObject+performBlockCancel.h in Headers */ = {isa = PBXBuildFile; fileRef = ADCD4240196E4E42004973E9 /* NSObject+performBlockCancel.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AD303C461B28490600C4B999 /* NSSet+Sort.h in Headers */ = {isa = PBXBuildFile; fileRef = ADCD4242196E4E42004973E9 /* NSSet+Sort.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AD303C471B28490600C4B999 /* NSString+fixDateString.h in Headers */ = {isa = PBXBuildFile; fileRef = ADCD4244196E4E42004973E9 /* NSString+fixDateString.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AD303C481B28490600C4B999 /* NSString+isNumeric.h in Headers */ = {isa = PBXBuildFile; fileRef = ADCD4246196E4E42004973E9 /* NSString+isNumeric.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AD303C4A1B28491600C4B999 /* NSNumber+Between.m in Sources */ = {isa = PBXBuildFile; fileRef = ADCD423D196E4E42004973E9 /* NSNumber+Between.m */; };
+		AD303C4B1B28491600C4B999 /* NSNumber+Convertion.m in Sources */ = {isa = PBXBuildFile; fileRef = ADCD423F196E4E42004973E9 /* NSNumber+Convertion.m */; };
+		AD303C4C1B28491600C4B999 /* NSObject+performBlockCancel.m in Sources */ = {isa = PBXBuildFile; fileRef = ADCD4241196E4E42004973E9 /* NSObject+performBlockCancel.m */; };
+		AD303C4D1B28491600C4B999 /* NSSet+Sort.m in Sources */ = {isa = PBXBuildFile; fileRef = ADCD4243196E4E42004973E9 /* NSSet+Sort.m */; };
+		AD303C4E1B28491600C4B999 /* NSString+fixDateString.m in Sources */ = {isa = PBXBuildFile; fileRef = ADCD4245196E4E42004973E9 /* NSString+fixDateString.m */; };
+		AD303C4F1B28491600C4B999 /* NSString+isNumeric.m in Sources */ = {isa = PBXBuildFile; fileRef = ADCD4247196E4E42004973E9 /* NSString+isNumeric.m */; };
+		AD303C511B2851D400C4B999 /* VindsidenWatchKit.framework in RHE Embed Framework */ = {isa = PBXBuildFile; fileRef = AD303C281B282DC800C4B999 /* VindsidenWatchKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		AD303C541B285BEE00C4B999 /* ExtensionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD303C531B285BEE00C4B999 /* ExtensionDelegate.swift */; };
 		AD30BC5219F024D9000CE40C /* RHCAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD30BC5119F024D9000CE40C /* RHCAppDelegate.swift */; };
 		AD32E38119BA2FC2008F00EB /* RHEStationPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD32E38019BA2FC2008F00EB /* RHEStationPickerViewController.swift */; };
 		AD32E38319BC5037008F00EB /* RHCUnitSelectorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD32E38219BC5037008F00EB /* RHCUnitSelectorViewController.swift */; };
@@ -53,39 +80,43 @@
 		AD6BD0ED1A9506C900E6686B /* Global.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD6BD0EC1A9506C900E6686B /* Global.swift */; };
 		AD6BD0F11A96797D00E6686B /* StationDetailsInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD6BD0EE1A96797D00E6686B /* StationDetailsInterfaceController.swift */; };
 		AD6BD0F31A96797D00E6686B /* StationsRowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD6BD0F01A96797D00E6686B /* StationsRowController.swift */; };
-		AD6BD0F61A967AD800E6686B /* VindsidenKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD539C9D1947B5CA002644BD /* VindsidenKit.framework */; };
 		AD6E8F021AE8E3C700FA5C79 /* RHCNotConfiguredInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD6E8F011AE8E3C700FA5C79 /* RHCNotConfiguredInterfaceController.swift */; };
 		AD71965C19EED713006FA2BC /* RHCSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD71965B19EED713006FA2BC /* RHCSettingsViewController.swift */; };
-		AD7AA501196E46BA00B1518B /* CDPlot.h in Headers */ = {isa = PBXBuildFile; fileRef = AD7AA4FD196E46BA00B1518B /* CDPlot.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		AD7AA502196E46BA00B1518B /* CDPlot.m in Sources */ = {isa = PBXBuildFile; fileRef = AD7AA4FE196E46BA00B1518B /* CDPlot.m */; };
-		AD7AA503196E46BA00B1518B /* CDStation.h in Headers */ = {isa = PBXBuildFile; fileRef = AD7AA4FF196E46BA00B1518B /* CDStation.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		AD7AA504196E46BA00B1518B /* CDStation.m in Sources */ = {isa = PBXBuildFile; fileRef = AD7AA500196E46BA00B1518B /* CDStation.m */; };
 		AD7AA507196E46D800B1518B /* Vindsiden.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = AD7AA505196E46D800B1518B /* Vindsiden.xcdatamodeld */; };
-		AD7BBB401A3F539100883770 /* RHEVindsidenAPIClientPrivate.h in Headers */ = {isa = PBXBuildFile; fileRef = AD7BBB3A1A3F539100883770 /* RHEVindsidenAPIClientPrivate.h */; };
-		AD7BBB411A3F539100883770 /* RHEVindsidenAPIClientPrivate.m in Sources */ = {isa = PBXBuildFile; fileRef = AD7BBB3B1A3F539100883770 /* RHEVindsidenAPIClientPrivate.m */; };
-		AD7BBB421A3F539100883770 /* VindsidenPlotClient.h in Headers */ = {isa = PBXBuildFile; fileRef = AD7BBB3C1A3F539100883770 /* VindsidenPlotClient.h */; };
-		AD7BBB431A3F539100883770 /* VindsidenPlotClient.m in Sources */ = {isa = PBXBuildFile; fileRef = AD7BBB3D1A3F539100883770 /* VindsidenPlotClient.m */; };
-		AD7BBB441A3F539100883770 /* VindsidenStationClient.h in Headers */ = {isa = PBXBuildFile; fileRef = AD7BBB3E1A3F539100883770 /* VindsidenStationClient.h */; };
-		AD7BBB451A3F539100883770 /* VindsidenStationClient.m in Sources */ = {isa = PBXBuildFile; fileRef = AD7BBB3F1A3F539100883770 /* VindsidenStationClient.m */; };
 		AD7BBB471A3F53F400883770 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD7BBB461A3F53F400883770 /* Logger.swift */; };
 		AD7BBB491A3F55A100883770 /* AppConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD7BBB481A3F55A100883770 /* AppConfig.swift */; };
-		AD7BBB4C1A3F5A6800883770 /* RHEVindsidenAPIClient.h in Headers */ = {isa = PBXBuildFile; fileRef = AD7BBB4A1A3F5A6800883770 /* RHEVindsidenAPIClient.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		AD7BBB4D1A3F5A6800883770 /* RHEVindsidenAPIClient.m in Sources */ = {isa = PBXBuildFile; fileRef = AD7BBB4B1A3F5A6800883770 /* RHEVindsidenAPIClient.m */; };
+		AD9E40651B8C9C1700FABCF5 /* CDStation.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD9E40631B8C9C1700FABCF5 /* CDStation.swift */; settings = {ASSET_TAGS = (); }; };
+		AD9E40671B8C9C1700FABCF5 /* CDStation+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD9E40641B8C9C1700FABCF5 /* CDStation+CoreDataProperties.swift */; settings = {ASSET_TAGS = (); }; };
+		AD9E40691B8C9CC400FABCF5 /* CDStation+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD9E40641B8C9C1700FABCF5 /* CDStation+CoreDataProperties.swift */; settings = {ASSET_TAGS = (); }; };
+		AD9E406A1B8C9CC900FABCF5 /* CDStation.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD9E40631B8C9C1700FABCF5 /* CDStation.swift */; settings = {ASSET_TAGS = (); }; };
+		AD9E406C1B8D8A6900FABCF5 /* StationFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD9E406B1B8D8A6900FABCF5 /* StationFetcher.swift */; settings = {ASSET_TAGS = (); }; };
+		AD9E406D1B8D8A6900FABCF5 /* StationFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD9E406B1B8D8A6900FABCF5 /* StationFetcher.swift */; settings = {ASSET_TAGS = (); }; };
+		AD9E40731B8D9BCD00FABCF5 /* PlotFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD9E40721B8D9BCD00FABCF5 /* PlotFetcher.swift */; settings = {ASSET_TAGS = (); }; };
+		AD9E40741B8D9BCD00FABCF5 /* PlotFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD9E40721B8D9BCD00FABCF5 /* PlotFetcher.swift */; settings = {ASSET_TAGS = (); }; };
+		AD9E40771B8DA11B00FABCF5 /* CDPlot.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD9E40751B8DA11B00FABCF5 /* CDPlot.swift */; settings = {ASSET_TAGS = (); }; };
+		AD9E40781B8DA11B00FABCF5 /* CDPlot.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD9E40751B8DA11B00FABCF5 /* CDPlot.swift */; settings = {ASSET_TAGS = (); }; };
+		AD9E40791B8DA11B00FABCF5 /* CDPlot+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD9E40761B8DA11B00FABCF5 /* CDPlot+CoreDataProperties.swift */; settings = {ASSET_TAGS = (); }; };
+		AD9E407A1B8DA11B00FABCF5 /* CDPlot+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD9E40761B8DA11B00FABCF5 /* CDPlot+CoreDataProperties.swift */; settings = {ASSET_TAGS = (); }; };
+		AD9E409E1B8ED4CE00FABCF5 /* WCFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD9E409D1B8ED4CE00FABCF5 /* WCFetcher.swift */; settings = {ASSET_TAGS = (); }; };
+		AD9E40A01B8EF43400FABCF5 /* MapInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD9E409F1B8EF43400FABCF5 /* MapInterfaceController.swift */; settings = {ASSET_TAGS = (); }; };
+		AD9EA2B81B8F1A6400F653FE /* NSDate+RelativeDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD9EA2B71B8F1A6400F653FE /* NSDate+RelativeDate.swift */; settings = {ASSET_TAGS = (); }; };
+		AD9EA2B91B8F1A6400F653FE /* NSDate+RelativeDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD9EA2B71B8F1A6400F653FE /* NSDate+RelativeDate.swift */; settings = {ASSET_TAGS = (); }; };
+		AD9EA2BB1B8F228000F653FE /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = AD2AB50419C722330029C739 /* Localizable.strings */; settings = {ASSET_TAGS = (); }; };
 		ADA0C64019C0EEBC00152005 /* Today.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ADA0C64219C0EEBC00152005 /* Today.storyboard */; };
 		ADA0C64719C0EF1A00152005 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = AD17EDC517312A5000943C33 /* Localizable.strings */; };
 		ADA2351A19FD69C6006A72D4 /* RHEStationDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADA2351919FD69C6006A72D4 /* RHEStationDetailsViewController.swift */; };
 		ADA2351C1A040839006A72D4 /* RHCDStationDetailsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADA2351B1A040839006A72D4 /* RHCDStationDetailsCell.swift */; };
 		ADB5A78A19DEC29A009AE4A5 /* DrawArrow.h in Headers */ = {isa = PBXBuildFile; fileRef = ADB5A78819DEC29A009AE4A5 /* DrawArrow.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		ADB5A78B19DEC29A009AE4A5 /* DrawArrow.m in Sources */ = {isa = PBXBuildFile; fileRef = ADB5A78919DEC29A009AE4A5 /* DrawArrow.m */; };
+		ADB6D6671B9CAF4500244CDE /* NetworkIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB6D6641B9CA80600244CDE /* NetworkIndicator.swift */; settings = {ASSET_TAGS = (); }; };
+		ADB7BA421B3A98E9000921E0 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ADB7BA411B3A98E9000921E0 /* CoreGraphics.framework */; };
 		ADBEA4CF1A07ECF600B168BF /* UIColor+AppColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADBEA4CE1A07ECF600B168BF /* UIColor+AppColors.swift */; };
 		ADC161851B0218D8004F6DAE /* GraphImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADC161841B0218D8004F6DAE /* GraphImage.swift */; };
 		ADCB8A7C1A94F52D009225B1 /* InterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADCB8A7B1A94F52D009225B1 /* InterfaceController.swift */; };
 		ADCB8A801A94F52D009225B1 /* GlanceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADCB8A7F1A94F52D009225B1 /* GlanceController.swift */; };
 		ADCB8A821A94F52D009225B1 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ADCB8A811A94F52D009225B1 /* Images.xcassets */; };
-		ADCB8A861A94F52D009225B1 /* VindsidenApp WatchKit App.app in Resources */ = {isa = PBXBuildFile; fileRef = ADCB8A851A94F52D009225B1 /* VindsidenApp WatchKit App.app */; };
 		ADCB8A8E1A94F52D009225B1 /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ADCB8A8C1A94F52D009225B1 /* Interface.storyboard */; };
 		ADCB8A901A94F52D009225B1 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ADCB8A8F1A94F52D009225B1 /* Images.xcassets */; };
-		ADCB8A931A94F52D009225B1 /* VindsidenApp WatchKit Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = ADCB8A761A94F52D009225B1 /* VindsidenApp WatchKit Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		ADCD424E196E4E42004973E9 /* NSNumber+Between.h in Headers */ = {isa = PBXBuildFile; fileRef = ADCD423C196E4E42004973E9 /* NSNumber+Between.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		ADCD424F196E4E42004973E9 /* NSNumber+Between.m in Sources */ = {isa = PBXBuildFile; fileRef = ADCD423D196E4E42004973E9 /* NSNumber+Between.m */; };
 		ADCD4250196E4E42004973E9 /* NSNumber+Convertion.h in Headers */ = {isa = PBXBuildFile; fileRef = ADCD423E196E4E42004973E9 /* NSNumber+Convertion.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -108,6 +139,7 @@
 		ADD211C419CF1EC400497DC1 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = ADD211C619CF1EC400497DC1 /* InfoPlist.strings */; };
 		ADDB4F5019CB68F1005D5D38 /* RHCAlertManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADDB4F4F19CB68F1005D5D38 /* RHCAlertManager.swift */; };
 		ADDDB1881B0693C60091D4E8 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = ADDDB1861B0693C60091D4E8 /* Localizable.strings */; };
+		ADE1863D1B9887AF0081EBEA /* RHCRotatingNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADE1863C1B9887AF0081EBEA /* RHCRotatingNavigationController.swift */; settings = {ASSET_TAGS = (); }; };
 		ADE9C4081AAB32840089EB19 /* WindManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADE9C4071AAB32840089EB19 /* WindManager.swift */; };
 		ADF8B2141AA47D9D000CF266 /* Pods_VindsidenApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ADF8B2131AA47D9D000CF266 /* Pods_VindsidenApp.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 /* End PBXBuildFile section */
@@ -119,6 +151,27 @@
 			proxyType = 1;
 			remoteGlobalIDString = AD17ED431731012200943C33;
 			remoteInfo = VindsidenApp;
+		};
+		AD303C1B1B282C6100C4B999 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AD17ED3C1731012200943C33 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = ADCB8A751A94F52D009225B1;
+			remoteInfo = "VindsidenApp WatchKit Extension";
+		};
+		AD303C1E1B282C6100C4B999 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AD17ED3C1731012200943C33 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = ADCB8A841A94F52D009225B1;
+			remoteInfo = "VindsidenApp WatchKit App";
+		};
+		AD303C381B28304100C4B999 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AD17ED3C1731012200943C33 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = AD303C271B282DC800C4B999;
+			remoteInfo = VindsidenWatchKit;
 		};
 		AD539C8C1947B0F7002644BD /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -197,30 +250,48 @@
 			remoteGlobalIDString = AD539C9C1947B5CA002644BD;
 			remoteInfo = VindsidenKit;
 		};
-		ADCB8A871A94F52D009225B1 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = AD17ED3C1731012200943C33 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = ADCB8A841A94F52D009225B1;
-			remoteInfo = "VindsidenApp WatchKit App";
-		};
-		ADCB8A911A94F52D009225B1 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = AD17ED3C1731012200943C33 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = ADCB8A751A94F52D009225B1;
-			remoteInfo = "VindsidenApp WatchKit Extension";
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		AD303C211B282C6100C4B999 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				AD303C1D1B282C6100C4B999 /* VindsidenApp WatchKit Extension.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AD303C221B282C6100C4B999 /* Embed Watch Content */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
+			dstSubfolderSpec = 16;
+			files = (
+				AD303C201B282C6100C4B999 /* VindsidenApp WatchKit App.app in Embed Watch Content */,
+			);
+			name = "Embed Watch Content";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AD303C501B2851B700C4B999 /* RHE Embed Framework */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				AD303C511B2851D400C4B999 /* VindsidenWatchKit.framework in RHE Embed Framework */,
+			);
+			name = "RHE Embed Framework";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		AD539C941947B0F7002644BD /* Embed App Extensions */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				ADCB8A931A94F52D009225B1 /* VindsidenApp WatchKit Extension.appex in Embed App Extensions */,
 				AD539C8E1947B0F7002644BD /* org.juniks.VindsidenApp.VindsidenToday.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
@@ -242,11 +313,9 @@
 /* Begin PBXFileReference section */
 		1773D1A53059031A48563071 /* Pods-VindsidenApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VindsidenApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-VindsidenApp/Pods-VindsidenApp.release.xcconfig"; sourceTree = "<group>"; };
 		3B5D05C619C3002F000AE4E0 /* Launch Screen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "Launch Screen.xib"; sourceTree = "<group>"; };
+		3C54CAE3A8FFABD15B6D7663 /* Pods-VindsidenApp WatchKit Extension.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VindsidenApp WatchKit Extension.debug.xcconfig"; path = "Pods/Target Support Files/Pods-VindsidenApp WatchKit Extension/Pods-VindsidenApp WatchKit Extension.debug.xcconfig"; sourceTree = "<group>"; };
 		556918A4909ABAB4F47389F9 /* Pods_VindsidenApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VindsidenApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5E0B34ABC6A25BCBC2F05463 /* Pods_VindsidenKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VindsidenKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		778910FA383396B42DE27BB3 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
-		7DDFABE97274FA60DD561456 /* Pods-VindsidenKit.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VindsidenKit.debug.xcconfig"; path = "Pods/Target Support Files/Pods-VindsidenKit/Pods-VindsidenKit.debug.xcconfig"; sourceTree = "<group>"; };
-		894C1F9FB9552BC57DF5FE34 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		9E713D0A7C32B35097808D07 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AD00384E196E741800C3232A /* VindsidenApp-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "VindsidenApp-Bridging-Header.h"; path = "../VindsidenApp-Bridging-Header.h"; sourceTree = "<group>"; };
 		AD00384F196E7A6400C3232A /* RHCTodayCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RHCTodayCell.swift; sourceTree = "<group>"; };
@@ -254,6 +323,7 @@
 		AD0636141B069CBB00EF7321 /* Base */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		AD0636151B069CE000EF7321 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		AD07B2C01779E90A004BC24C /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Media.xcassets; sourceTree = "<group>"; };
+		AD1379791B94B912008A4FFB /* Vindsiden 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Vindsiden 2.xcdatamodel"; sourceTree = "<group>"; };
 		AD146F4C1741251E00205BB9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
 		AD146F4D1741255B00205BB9 /* nb */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = nb; path = nb.lproj/Localizable.strings; sourceTree = "<group>"; };
 		AD146F4F1741255B00205BB9 /* nb */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = nb; path = nb.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -284,7 +354,6 @@
 		AD17EDBE17310E7200943C33 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		AD17EDC017310E7A00943C33 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		AD17EDC617312A5000943C33 /* en */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
-		AD17EDCA17312B2600943C33 /* DINMittelschriftStd.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = DINMittelschriftStd.otf; sourceTree = "<group>"; };
 		AD17EDF81736492200943C33 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		AD1812A71AF9E77F0040080D /* Base */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		AD1812A91AF9E7B40040080D /* Base */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -300,6 +369,12 @@
 		AD2BB34A19C7718600349495 /* VindsidenAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VindsidenAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		AD2BB34D19C7718600349495 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AD2BB34E19C7718600349495 /* VindsidenAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VindsidenAppTests.swift; sourceTree = "<group>"; };
+		AD303C281B282DC800C4B999 /* VindsidenWatchKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = VindsidenWatchKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		AD303C2A1B282DC800C4B999 /* VindsidenWatchKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VindsidenWatchKit.h; sourceTree = "<group>"; };
+		AD303C2C1B282DC800C4B999 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		AD303C3A1B2831CD00C4B999 /* Pods_VindsidenApp_WatchKit_Extension.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Pods_VindsidenApp_WatchKit_Extension.framework; path = "Pods/../build/Debug-watchos/Pods_VindsidenApp_WatchKit_Extension.framework"; sourceTree = "<group>"; };
+		AD303C531B285BEE00C4B999 /* ExtensionDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtensionDelegate.swift; sourceTree = "<group>"; };
+		AD30995D1BA2DBFB0063B2BC /* VindsidenApp WatchKit App.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "VindsidenApp WatchKit App.entitlements"; sourceTree = "<group>"; };
 		AD30BC5119F024D9000CE40C /* RHCAppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RHCAppDelegate.swift; sourceTree = "<group>"; };
 		AD32E37F19BA2FC1008F00EB /* VindsidenApp-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "VindsidenApp-Bridging-Header.h"; sourceTree = "<group>"; };
 		AD32E38019BA2FC2008F00EB /* RHEStationPickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RHEStationPickerViewController.swift; sourceTree = "<group>"; };
@@ -327,21 +402,18 @@
 		AD6BD0F71A967D7700E6686B /* VindsidenApp WatchKit Extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "VindsidenApp WatchKit Extension.entitlements"; sourceTree = "<group>"; };
 		AD6E8F011AE8E3C700FA5C79 /* RHCNotConfiguredInterfaceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RHCNotConfiguredInterfaceController.swift; sourceTree = "<group>"; };
 		AD71965B19EED713006FA2BC /* RHCSettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RHCSettingsViewController.swift; sourceTree = "<group>"; };
-		AD7AA4FD196E46BA00B1518B /* CDPlot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDPlot.h; sourceTree = "<group>"; };
-		AD7AA4FE196E46BA00B1518B /* CDPlot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDPlot.m; sourceTree = "<group>"; };
-		AD7AA4FF196E46BA00B1518B /* CDStation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDStation.h; sourceTree = "<group>"; };
-		AD7AA500196E46BA00B1518B /* CDStation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDStation.m; sourceTree = "<group>"; };
 		AD7AA506196E46D800B1518B /* Vindsiden.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Vindsiden.xcdatamodel; sourceTree = "<group>"; };
-		AD7BBB3A1A3F539100883770 /* RHEVindsidenAPIClientPrivate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RHEVindsidenAPIClientPrivate.h; path = VindsidenKit/RHEVindsidenAPIClientPrivate.h; sourceTree = SOURCE_ROOT; };
-		AD7BBB3B1A3F539100883770 /* RHEVindsidenAPIClientPrivate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RHEVindsidenAPIClientPrivate.m; path = VindsidenKit/RHEVindsidenAPIClientPrivate.m; sourceTree = SOURCE_ROOT; };
-		AD7BBB3C1A3F539100883770 /* VindsidenPlotClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VindsidenPlotClient.h; path = VindsidenKit/VindsidenPlotClient.h; sourceTree = SOURCE_ROOT; };
-		AD7BBB3D1A3F539100883770 /* VindsidenPlotClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VindsidenPlotClient.m; path = VindsidenKit/VindsidenPlotClient.m; sourceTree = SOURCE_ROOT; };
-		AD7BBB3E1A3F539100883770 /* VindsidenStationClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VindsidenStationClient.h; path = VindsidenKit/VindsidenStationClient.h; sourceTree = SOURCE_ROOT; };
-		AD7BBB3F1A3F539100883770 /* VindsidenStationClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VindsidenStationClient.m; path = VindsidenKit/VindsidenStationClient.m; sourceTree = SOURCE_ROOT; };
 		AD7BBB461A3F53F400883770 /* Logger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		AD7BBB481A3F55A100883770 /* AppConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppConfig.swift; sourceTree = "<group>"; };
-		AD7BBB4A1A3F5A6800883770 /* RHEVindsidenAPIClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RHEVindsidenAPIClient.h; path = VindsidenKit/RHEVindsidenAPIClient.h; sourceTree = SOURCE_ROOT; };
-		AD7BBB4B1A3F5A6800883770 /* RHEVindsidenAPIClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RHEVindsidenAPIClient.m; path = VindsidenKit/RHEVindsidenAPIClient.m; sourceTree = SOURCE_ROOT; };
+		AD9E40631B8C9C1700FABCF5 /* CDStation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CDStation.swift; sourceTree = "<group>"; };
+		AD9E40641B8C9C1700FABCF5 /* CDStation+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CDStation+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		AD9E406B1B8D8A6900FABCF5 /* StationFetcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StationFetcher.swift; path = VindsidenKit/StationFetcher.swift; sourceTree = SOURCE_ROOT; };
+		AD9E40721B8D9BCD00FABCF5 /* PlotFetcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlotFetcher.swift; path = VindsidenKit/PlotFetcher.swift; sourceTree = SOURCE_ROOT; };
+		AD9E40751B8DA11B00FABCF5 /* CDPlot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CDPlot.swift; sourceTree = "<group>"; };
+		AD9E40761B8DA11B00FABCF5 /* CDPlot+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CDPlot+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		AD9E409D1B8ED4CE00FABCF5 /* WCFetcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WCFetcher.swift; sourceTree = "<group>"; };
+		AD9E409F1B8EF43400FABCF5 /* MapInterfaceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapInterfaceController.swift; sourceTree = "<group>"; };
+		AD9EA2B71B8F1A6400F653FE /* NSDate+RelativeDate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSDate+RelativeDate.swift"; sourceTree = "<group>"; };
 		ADA0C64119C0EEBC00152005 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Today.storyboard; sourceTree = "<group>"; };
 		ADA0C64419C0EEC000152005 /* en */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Today.strings; sourceTree = "<group>"; };
 		ADA0C64619C0EEC200152005 /* nb */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = nb; path = nb.lproj/Today.strings; sourceTree = "<group>"; };
@@ -349,6 +421,8 @@
 		ADA2351B1A040839006A72D4 /* RHCDStationDetailsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RHCDStationDetailsCell.swift; sourceTree = "<group>"; };
 		ADB5A78819DEC29A009AE4A5 /* DrawArrow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DrawArrow.h; sourceTree = "<group>"; };
 		ADB5A78919DEC29A009AE4A5 /* DrawArrow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DrawArrow.m; sourceTree = "<group>"; };
+		ADB6D6641B9CA80600244CDE /* NetworkIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkIndicator.swift; sourceTree = "<group>"; };
+		ADB7BA411B3A98E9000921E0 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = Platforms/WatchOS.platform/Developer/SDKs/WatchOS2.0.sdk/System/Library/Frameworks/CoreGraphics.framework; sourceTree = DEVELOPER_DIR; };
 		ADBEA4CE1A07ECF600B168BF /* UIColor+AppColors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+AppColors.swift"; sourceTree = "<group>"; };
 		ADC161841B0218D8004F6DAE /* GraphImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphImage.swift; sourceTree = "<group>"; };
 		ADCB8A761A94F52D009225B1 /* VindsidenApp WatchKit Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "VindsidenApp WatchKit Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -389,10 +463,12 @@
 		ADDDB18A1B0693D40091D4E8 /* nb */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = nb; path = nb.lproj/Localizable.strings; sourceTree = "<group>"; };
 		ADDDB18B1B06966A0091D4E8 /* en */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		ADDDB18C1B06966B0091D4E8 /* Base */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
+		ADE1863C1B9887AF0081EBEA /* RHCRotatingNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RHCRotatingNavigationController.swift; sourceTree = "<group>"; };
 		ADE9C4071AAB32840089EB19 /* WindManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WindManager.swift; sourceTree = "<group>"; };
 		ADF8B2131AA47D9D000CF266 /* Pods_VindsidenApp.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Pods_VindsidenApp.framework; path = "Pods/../build/Debug-iphoneos/Pods_VindsidenApp.framework"; sourceTree = "<group>"; };
+		B1C2CCB74DE7178C02FC0848 /* Pods_VindsidenApp_WatchKit_Extension.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VindsidenApp_WatchKit_Extension.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D077413EC6AD6C77CEEEA239 /* Pods-VindsidenApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VindsidenApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-VindsidenApp/Pods-VindsidenApp.debug.xcconfig"; sourceTree = "<group>"; };
-		F150CA815D480C45F556EE53 /* Pods-VindsidenKit.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VindsidenKit.release.xcconfig"; path = "Pods/Target Support Files/Pods-VindsidenKit/Pods-VindsidenKit.release.xcconfig"; sourceTree = "<group>"; };
+		F09401EED7EB7506A103D958 /* Pods-VindsidenApp WatchKit Extension.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VindsidenApp WatchKit Extension.release.xcconfig"; path = "Pods/Target Support Files/Pods-VindsidenApp WatchKit Extension/Pods-VindsidenApp WatchKit Extension.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -418,6 +494,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AD303C241B282DC800C4B999 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ADB7BA421B3A98E9000921E0 /* CoreGraphics.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -450,7 +534,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AD6BD0F61A967AD800E6686B /* VindsidenKit.framework in Frameworks */,
+				AD303C371B28301F00C4B999 /* VindsidenWatchKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -460,12 +544,10 @@
 		4F37DDAD128422127628247E /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				894C1F9FB9552BC57DF5FE34 /* Pods.debug.xcconfig */,
-				778910FA383396B42DE27BB3 /* Pods.release.xcconfig */,
-				7DDFABE97274FA60DD561456 /* Pods-VindsidenKit.debug.xcconfig */,
-				F150CA815D480C45F556EE53 /* Pods-VindsidenKit.release.xcconfig */,
 				D077413EC6AD6C77CEEEA239 /* Pods-VindsidenApp.debug.xcconfig */,
 				1773D1A53059031A48563071 /* Pods-VindsidenApp.release.xcconfig */,
+				3C54CAE3A8FFABD15B6D7663 /* Pods-VindsidenApp WatchKit Extension.debug.xcconfig */,
+				F09401EED7EB7506A103D958 /* Pods-VindsidenApp WatchKit Extension.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -473,7 +555,6 @@
 		AD17ED3B1731012200943C33 = {
 			isa = PBXGroup;
 			children = (
-				AD17EDC817312B2500943C33 /* Fonts */,
 				AD17ED4D1731012200943C33 /* VindsidenApp */,
 				AD539C851947B0F7002644BD /* VindsidenToday */,
 				AD539C9E1947B5CA002644BD /* VindsidenKit */,
@@ -481,6 +562,7 @@
 				AD2BB34B19C7718600349495 /* VindsidenAppTests */,
 				ADCB8A771A94F52D009225B1 /* VindsidenApp WatchKit Extension */,
 				ADCB8A891A94F52D009225B1 /* VindsidenApp WatchKit App */,
+				AD303C291B282DC800C4B999 /* VindsidenWatchKit */,
 				AD17ED461731012200943C33 /* Frameworks */,
 				AD17ED451731012200943C33 /* Products */,
 				4F37DDAD128422127628247E /* Pods */,
@@ -497,6 +579,7 @@
 				AD2BB34A19C7718600349495 /* VindsidenAppTests.xctest */,
 				ADCB8A761A94F52D009225B1 /* VindsidenApp WatchKit Extension.appex */,
 				ADCB8A851A94F52D009225B1 /* VindsidenApp WatchKit App.app */,
+				AD303C281B282DC800C4B999 /* VindsidenWatchKit.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -504,6 +587,8 @@
 		AD17ED461731012200943C33 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				ADB7BA411B3A98E9000921E0 /* CoreGraphics.framework */,
+				AD303C3A1B2831CD00C4B999 /* Pods_VindsidenApp_WatchKit_Extension.framework */,
 				ADF8B2131AA47D9D000CF266 /* Pods_VindsidenApp.framework */,
 				AD6BD0F41A967A8800E6686B /* libPods.a */,
 				AD1B7EF119A7E82900D8B253 /* libPods.a */,
@@ -523,6 +608,7 @@
 				9E713D0A7C32B35097808D07 /* Pods.framework */,
 				5E0B34ABC6A25BCBC2F05463 /* Pods_VindsidenKit.framework */,
 				556918A4909ABAB4F47389F9 /* Pods_VindsidenApp.framework */,
+				B1C2CCB74DE7178C02FC0848 /* Pods_VindsidenApp_WatchKit_Extension.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -537,7 +623,9 @@
 				AD17EDE51734487F00943C33 /* Settings */,
 				AD17ED4E1731012200943C33 /* Supporting Files */,
 				AD4DEA7619CB7528002A220B /* RHCNavigationViewController.swift */,
+				ADE1863C1B9887AF0081EBEA /* RHCRotatingNavigationController.swift */,
 				ADDB4F4F19CB68F1005D5D38 /* RHCAlertManager.swift */,
+				ADB6D6641B9CA80600244CDE /* NetworkIndicator.swift */,
 			);
 			path = VindsidenApp;
 			sourceTree = "<group>";
@@ -558,14 +646,6 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		AD17EDC817312B2500943C33 /* Fonts */ = {
-			isa = PBXGroup;
-			children = (
-				AD17EDCA17312B2600943C33 /* DINMittelschriftStd.otf */,
-			);
-			path = Fonts;
-			sourceTree = "<group>";
-		};
 		AD17EDDE173447CB00943C33 /* Graph View */ = {
 			isa = PBXGroup;
 			children = (
@@ -580,14 +660,8 @@
 		AD17EDDF173447EC00943C33 /* Communication */ = {
 			isa = PBXGroup;
 			children = (
-				AD7BBB4A1A3F5A6800883770 /* RHEVindsidenAPIClient.h */,
-				AD7BBB4B1A3F5A6800883770 /* RHEVindsidenAPIClient.m */,
-				AD7BBB3A1A3F539100883770 /* RHEVindsidenAPIClientPrivate.h */,
-				AD7BBB3B1A3F539100883770 /* RHEVindsidenAPIClientPrivate.m */,
-				AD7BBB3C1A3F539100883770 /* VindsidenPlotClient.h */,
-				AD7BBB3D1A3F539100883770 /* VindsidenPlotClient.m */,
-				AD7BBB3E1A3F539100883770 /* VindsidenStationClient.h */,
-				AD7BBB3F1A3F539100883770 /* VindsidenStationClient.m */,
+				AD9E406B1B8D8A6900FABCF5 /* StationFetcher.swift */,
+				AD9E40721B8D9BCD00FABCF5 /* PlotFetcher.swift */,
 			);
 			name = Communication;
 			path = ../VindsidenApp;
@@ -668,6 +742,15 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		AD303C291B282DC800C4B999 /* VindsidenWatchKit */ = {
+			isa = PBXGroup;
+			children = (
+				AD303C2A1B282DC800C4B999 /* VindsidenWatchKit.h */,
+				AD303C2C1B282DC800C4B999 /* Info.plist */,
+			);
+			path = VindsidenWatchKit;
+			sourceTree = "<group>";
+		};
 		AD539C851947B0F7002644BD /* VindsidenToday */ = {
 			isa = PBXGroup;
 			children = (
@@ -737,10 +820,10 @@
 			isa = PBXGroup;
 			children = (
 				AD7AA505196E46D800B1518B /* Vindsiden.xcdatamodeld */,
-				AD7AA4FD196E46BA00B1518B /* CDPlot.h */,
-				AD7AA4FE196E46BA00B1518B /* CDPlot.m */,
-				AD7AA4FF196E46BA00B1518B /* CDStation.h */,
-				AD7AA500196E46BA00B1518B /* CDStation.m */,
+				AD9E40751B8DA11B00FABCF5 /* CDPlot.swift */,
+				AD9E40761B8DA11B00FABCF5 /* CDPlot+CoreDataProperties.swift */,
+				AD9E40631B8C9C1700FABCF5 /* CDStation.swift */,
+				AD9E40641B8C9C1700FABCF5 /* CDStation+CoreDataProperties.swift */,
 			);
 			name = "Data Model";
 			sourceTree = "<group>";
@@ -769,13 +852,16 @@
 		ADCB8A771A94F52D009225B1 /* VindsidenApp WatchKit Extension */ = {
 			isa = PBXGroup;
 			children = (
+				AD9E409D1B8ED4CE00FABCF5 /* WCFetcher.swift */,
 				AD6BD0F71A967D7700E6686B /* VindsidenApp WatchKit Extension.entitlements */,
+				AD303C531B285BEE00C4B999 /* ExtensionDelegate.swift */,
 				AD6BD0EE1A96797D00E6686B /* StationDetailsInterfaceController.swift */,
 				AD6BD0F01A96797D00E6686B /* StationsRowController.swift */,
 				ADCB8A7B1A94F52D009225B1 /* InterfaceController.swift */,
 				AD48F8091B01D47B0087E14C /* RHCGraphInterfaceController.swift */,
 				ADCB8A7F1A94F52D009225B1 /* GlanceController.swift */,
 				AD6E8F011AE8E3C700FA5C79 /* RHCNotConfiguredInterfaceController.swift */,
+				AD9E409F1B8EF43400FABCF5 /* MapInterfaceController.swift */,
 				ADCB8A811A94F52D009225B1 /* Images.xcassets */,
 				ADCB8A781A94F52D009225B1 /* Supporting Files */,
 			);
@@ -795,6 +881,7 @@
 		ADCB8A891A94F52D009225B1 /* VindsidenApp WatchKit App */ = {
 			isa = PBXGroup;
 			children = (
+				AD30995D1BA2DBFB0063B2BC /* VindsidenApp WatchKit App.entitlements */,
 				ADCB8A8C1A94F52D009225B1 /* Interface.storyboard */,
 				ADCB8A8F1A94F52D009225B1 /* Images.xcassets */,
 				ADCB8A8A1A94F52D009225B1 /* Supporting Files */,
@@ -833,6 +920,7 @@
 				ADCD424B196E4E42004973E9 /* UIFontDescriptor+textStyle.m */,
 				ADCD424C196E4E42004973E9 /* UIImage+ImageFromView.h */,
 				ADCD424D196E4E42004973E9 /* UIImage+ImageFromView.m */,
+				AD9EA2B71B8F1A6400F653FE /* NSDate+RelativeDate.swift */,
 			);
 			name = Categories;
 			sourceTree = "<group>";
@@ -840,25 +928,34 @@
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
+		AD303C251B282DC800C4B999 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AD303C341B282FC100C4B999 /* DrawArrow.h in Headers */,
+				AD303C2B1B282DC800C4B999 /* VindsidenWatchKit.h in Headers */,
+				AD303C461B28490600C4B999 /* NSSet+Sort.h in Headers */,
+				AD303C481B28490600C4B999 /* NSString+isNumeric.h in Headers */,
+				AD303C431B28490600C4B999 /* NSNumber+Between.h in Headers */,
+				AD303C451B28490600C4B999 /* NSObject+performBlockCancel.h in Headers */,
+				AD303C441B28490600C4B999 /* NSNumber+Convertion.h in Headers */,
+				AD303C471B28490600C4B999 /* NSString+fixDateString.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		AD539C9A1947B5CA002644BD /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AD7BBB421A3F539100883770 /* VindsidenPlotClient.h in Headers */,
 				ADB5A78A19DEC29A009AE4A5 /* DrawArrow.h in Headers */,
-				AD7AA501196E46BA00B1518B /* CDPlot.h in Headers */,
-				AD7BBB441A3F539100883770 /* VindsidenStationClient.h in Headers */,
 				AD539CA21947B5CA002644BD /* VindsidenKit.h in Headers */,
 				ADCD4250196E4E42004973E9 /* NSNumber+Convertion.h in Headers */,
 				ADCD425E196E4E42004973E9 /* UIImage+ImageFromView.h in Headers */,
 				ADCD425C196E4E42004973E9 /* UIFontDescriptor+textStyle.h in Headers */,
-				AD7AA503196E46BA00B1518B /* CDStation.h in Headers */,
 				ADCD4252196E4E42004973E9 /* NSObject+performBlockCancel.h in Headers */,
-				AD7BBB4C1A3F5A6800883770 /* RHEVindsidenAPIClient.h in Headers */,
 				ADCD4256196E4E42004973E9 /* NSString+fixDateString.h in Headers */,
 				ADCD424E196E4E42004973E9 /* NSNumber+Between.h in Headers */,
 				ADCD4254196E4E42004973E9 /* NSSet+Sort.h in Headers */,
-				AD7BBB401A3F539100883770 /* RHEVindsidenAPIClientPrivate.h in Headers */,
 				ADCD425A196E4E42004973E9 /* UIFont+textStyle.h in Headers */,
 				ADCD4258196E4E42004973E9 /* NSString+isNumeric.h in Headers */,
 			);
@@ -879,6 +976,7 @@
 				AD539C941947B0F7002644BD /* Embed App Extensions */,
 				AD539CB91947B5CA002644BD /* Embed Frameworks */,
 				7960BE503D02208159053E3A /* Embed Pods Frameworks */,
+				AD303C221B282C6100C4B999 /* Embed Watch Content */,
 			);
 			buildRules = (
 			);
@@ -887,7 +985,7 @@
 				AD539C8D1947B0F7002644BD /* PBXTargetDependency */,
 				AD539C901947B0F7002644BD /* PBXTargetDependency */,
 				AD539CB51947B5CA002644BD /* PBXTargetDependency */,
-				ADCB8A921A94F52D009225B1 /* PBXTargetDependency */,
+				AD303C1F1B282C6100C4B999 /* PBXTargetDependency */,
 			);
 			name = VindsidenApp;
 			productName = "Vindsiden-v2";
@@ -911,6 +1009,24 @@
 			productName = VindsidenAppTests;
 			productReference = AD2BB34A19C7718600349495 /* VindsidenAppTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		AD303C271B282DC800C4B999 /* VindsidenWatchKit */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AD303C2D1B282DC800C4B999 /* Build configuration list for PBXNativeTarget "VindsidenWatchKit" */;
+			buildPhases = (
+				AD303C231B282DC800C4B999 /* Sources */,
+				AD303C241B282DC800C4B999 /* Frameworks */,
+				AD303C251B282DC800C4B999 /* Headers */,
+				AD303C261B282DC800C4B999 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = VindsidenWatchKit;
+			productName = VindsidenWatchKit;
+			productReference = AD303C281B282DC800C4B999 /* VindsidenWatchKit.framework */;
+			productType = "com.apple.product-type.framework";
 		};
 		AD539C811947B0F6002644BD /* VindsidenToday */ = {
 			isa = PBXNativeTarget;
@@ -978,31 +1094,34 @@
 				ADCB8A721A94F52D009225B1 /* Sources */,
 				ADCB8A731A94F52D009225B1 /* Frameworks */,
 				ADCB8A741A94F52D009225B1 /* Resources */,
+				AD303C501B2851B700C4B999 /* RHE Embed Framework */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				ADCB8A881A94F52D009225B1 /* PBXTargetDependency */,
+				AD303C391B28304100C4B999 /* PBXTargetDependency */,
 			);
 			name = "VindsidenApp WatchKit Extension";
 			productName = "VindsidenApp WatchKit Extension";
 			productReference = ADCB8A761A94F52D009225B1 /* VindsidenApp WatchKit Extension.appex */;
-			productType = "com.apple.product-type.watchkit-extension";
+			productType = "com.apple.product-type.watchkit2-extension";
 		};
 		ADCB8A841A94F52D009225B1 /* VindsidenApp WatchKit App */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = ADCB8A981A94F52D009225B1 /* Build configuration list for PBXNativeTarget "VindsidenApp WatchKit App" */;
 			buildPhases = (
 				ADCB8A831A94F52D009225B1 /* Resources */,
+				AD303C211B282C6100C4B999 /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				AD303C1C1B282C6100C4B999 /* PBXTargetDependency */,
 			);
 			name = "VindsidenApp WatchKit App";
 			productName = "VindsidenApp WatchKit App";
 			productReference = ADCB8A851A94F52D009225B1 /* VindsidenApp WatchKit App.app */;
-			productType = "com.apple.product-type.application.watchapp";
+			productType = "com.apple.product-type.application.watchapp2";
 		};
 /* End PBXNativeTarget section */
 
@@ -1011,8 +1130,9 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = RHC;
+				LastSwiftUpdateCheck = 0700;
 				LastTestingUpgradeCheck = 0600;
-				LastUpgradeCheck = 0510;
+				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = RHC;
 				TargetAttributes = {
 					AD17ED431731012200943C33 = {
@@ -1029,6 +1149,9 @@
 					AD2BB34919C7718600349495 = {
 						CreatedOnToolsVersion = 6.0;
 						TestTargetID = AD17ED431731012200943C33;
+					};
+					AD303C271B282DC800C4B999 = {
+						CreatedOnToolsVersion = 7.0;
 					};
 					AD539C811947B0F6002644BD = {
 						CreatedOnToolsVersion = 6.0;
@@ -1059,6 +1182,11 @@
 					ADCB8A841A94F52D009225B1 = {
 						CreatedOnToolsVersion = 6.2;
 						DevelopmentTeam = U69P77X647;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -1083,6 +1211,7 @@
 				AD2BB34919C7718600349495 /* VindsidenAppTests */,
 				ADCB8A751A94F52D009225B1 /* VindsidenApp WatchKit Extension */,
 				ADCB8A841A94F52D009225B1 /* VindsidenApp WatchKit App */,
+				AD303C271B282DC800C4B999 /* VindsidenWatchKit */,
 			);
 		};
 /* End PBXProject section */
@@ -1095,7 +1224,6 @@
 				AD17ED521731012200943C33 /* InfoPlist.strings in Resources */,
 				AD17ED611731012200943C33 /* MainStoryboard.storyboard in Resources */,
 				AD17EDC717312A5000943C33 /* Localizable.strings in Resources */,
-				AD17EDCC17312B2600943C33 /* DINMittelschriftStd.otf in Resources */,
 				AD07B2C11779E90A004BC24C /* Media.xcassets in Resources */,
 				3B5D05C719C3002F000AE4E0 /* Launch Screen.xib in Resources */,
 			);
@@ -1106,6 +1234,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				ADD211C419CF1EC400497DC1 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AD303C261B282DC800C4B999 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AD9EA2BB1B8F228000F653FE /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1142,7 +1278,6 @@
 			files = (
 				ADDDB1881B0693C60091D4E8 /* Localizable.strings in Resources */,
 				ADCB8A821A94F52D009225B1 /* Images.xcassets in Resources */,
-				ADCB8A861A94F52D009225B1 /* VindsidenApp WatchKit App.app in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1216,7 +1351,9 @@
 				AD17ED881731058400943C33 /* RHCStationCell.m in Sources */,
 				AD17ED891731058400943C33 /* RHCStationInfo.m in Sources */,
 				ADD211C119CF139300497DC1 /* RHCLandscapeGraphViewController.swift in Sources */,
+				ADE1863D1B9887AF0081EBEA /* RHCRotatingNavigationController.swift in Sources */,
 				ADA2351C1A040839006A72D4 /* RHCDStationDetailsCell.swift in Sources */,
+				ADB6D6671B9CAF4500244CDE /* NetworkIndicator.swift in Sources */,
 				AD32E38319BC5037008F00EB /* RHCUnitSelectorViewController.swift in Sources */,
 				AD17EDAA1731066F00943C33 /* RHEGraphMarker.m in Sources */,
 				AD17EDAB1731066F00943C33 /* RHEGraphView.m in Sources */,
@@ -1232,6 +1369,35 @@
 			buildActionMask = 2147483647;
 			files = (
 				AD2BB34F19C7718600349495 /* VindsidenAppTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AD303C231B282DC800C4B999 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AD303C4A1B28491600C4B999 /* NSNumber+Between.m in Sources */,
+				AD303C351B282FC100C4B999 /* DrawArrow.m in Sources */,
+				AD9EA2B91B8F1A6400F653FE /* NSDate+RelativeDate.swift in Sources */,
+				AD9E406D1B8D8A6900FABCF5 /* StationFetcher.swift in Sources */,
+				AD9E407A1B8DA11B00FABCF5 /* CDPlot+CoreDataProperties.swift in Sources */,
+				AD303C4F1B28491600C4B999 /* NSString+isNumeric.m in Sources */,
+				AD9E40741B8D9BCD00FABCF5 /* PlotFetcher.swift in Sources */,
+				AD9E406A1B8C9CC900FABCF5 /* CDStation.swift in Sources */,
+				AD9E40781B8DA11B00FABCF5 /* CDPlot.swift in Sources */,
+				AD303C4E1B28491600C4B999 /* NSString+fixDateString.m in Sources */,
+				AD303C321B282FB100C4B999 /* AppConfig.swift in Sources */,
+				AD303C401B28484F00C4B999 /* Vindsiden.xcdatamodeld in Sources */,
+				AD303C421B2848EF00C4B999 /* UIColor+AppColors.swift in Sources */,
+				AD303C361B282FC100C4B999 /* GraphImage.swift in Sources */,
+				AD303C331B282FB100C4B999 /* WindManager.swift in Sources */,
+				AD303C301B282FB100C4B999 /* Datamanager.swift in Sources */,
+				AD9E40691B8C9CC400FABCF5 /* CDStation+CoreDataProperties.swift in Sources */,
+				AD303C4D1B28491600C4B999 /* NSSet+Sort.m in Sources */,
+				AD303C4C1B28491600C4B999 /* NSObject+performBlockCancel.m in Sources */,
+				AD303C4B1B28491600C4B999 /* NSNumber+Convertion.m in Sources */,
+				AD303C311B282FB100C4B999 /* Logger.swift in Sources */,
+				AD303C411B2848B900C4B999 /* Global.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1252,25 +1418,26 @@
 				AD7BBB491A3F55A100883770 /* AppConfig.swift in Sources */,
 				ADCD425D196E4E42004973E9 /* UIFontDescriptor+textStyle.m in Sources */,
 				ADCD4257196E4E42004973E9 /* NSString+fixDateString.m in Sources */,
-				AD7AA502196E46BA00B1518B /* CDPlot.m in Sources */,
 				AD7AA507196E46D800B1518B /* Vindsiden.xcdatamodeld in Sources */,
 				AD6BD0ED1A9506C900E6686B /* Global.swift in Sources */,
 				ADE9C4081AAB32840089EB19 /* WindManager.swift in Sources */,
 				ADCD425F196E4E42004973E9 /* UIImage+ImageFromView.m in Sources */,
 				ADCD4253196E4E42004973E9 /* NSObject+performBlockCancel.m in Sources */,
+				AD9E40731B8D9BCD00FABCF5 /* PlotFetcher.swift in Sources */,
+				AD9E406C1B8D8A6900FABCF5 /* StationFetcher.swift in Sources */,
 				ADCD425B196E4E42004973E9 /* UIFont+textStyle.m in Sources */,
+				AD9E40671B8C9C1700FABCF5 /* CDStation+CoreDataProperties.swift in Sources */,
+				AD9EA2B81B8F1A6400F653FE /* NSDate+RelativeDate.swift in Sources */,
 				ADCD4251196E4E42004973E9 /* NSNumber+Convertion.m in Sources */,
 				AD539CC71947B684002644BD /* Datamanager.swift in Sources */,
-				AD7BBB4D1A3F5A6800883770 /* RHEVindsidenAPIClient.m in Sources */,
 				ADB5A78B19DEC29A009AE4A5 /* DrawArrow.m in Sources */,
-				AD7AA504196E46BA00B1518B /* CDStation.m in Sources */,
-				AD7BBB431A3F539100883770 /* VindsidenPlotClient.m in Sources */,
 				ADBEA4CF1A07ECF600B168BF /* UIColor+AppColors.swift in Sources */,
 				ADCD424F196E4E42004973E9 /* NSNumber+Between.m in Sources */,
+				AD9E40791B8DA11B00FABCF5 /* CDPlot+CoreDataProperties.swift in Sources */,
 				ADCD4255196E4E42004973E9 /* NSSet+Sort.m in Sources */,
 				ADC161851B0218D8004F6DAE /* GraphImage.swift in Sources */,
-				AD7BBB411A3F539100883770 /* RHEVindsidenAPIClientPrivate.m in Sources */,
-				AD7BBB451A3F539100883770 /* VindsidenStationClient.m in Sources */,
+				AD9E40771B8DA11B00FABCF5 /* CDPlot.swift in Sources */,
+				AD9E40651B8C9C1700FABCF5 /* CDStation.swift in Sources */,
 				ADCD4259196E4E42004973E9 /* NSString+isNumeric.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1288,8 +1455,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				AD48F80A1B01D47B0087E14C /* RHCGraphInterfaceController.swift in Sources */,
+				AD303C541B285BEE00C4B999 /* ExtensionDelegate.swift in Sources */,
 				ADCB8A7C1A94F52D009225B1 /* InterfaceController.swift in Sources */,
+				AD9E40A01B8EF43400FABCF5 /* MapInterfaceController.swift in Sources */,
 				ADCB8A801A94F52D009225B1 /* GlanceController.swift in Sources */,
+				AD9E409E1B8ED4CE00FABCF5 /* WCFetcher.swift in Sources */,
 				AD6E8F021AE8E3C700FA5C79 /* RHCNotConfiguredInterfaceController.swift in Sources */,
 				AD6BD0F11A96797D00E6686B /* StationDetailsInterfaceController.swift in Sources */,
 				AD6BD0F31A96797D00E6686B /* StationsRowController.swift in Sources */,
@@ -1303,6 +1473,21 @@
 			isa = PBXTargetDependency;
 			target = AD17ED431731012200943C33 /* VindsidenApp */;
 			targetProxy = AD2BB35019C7718600349495 /* PBXContainerItemProxy */;
+		};
+		AD303C1C1B282C6100C4B999 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = ADCB8A751A94F52D009225B1 /* VindsidenApp WatchKit Extension */;
+			targetProxy = AD303C1B1B282C6100C4B999 /* PBXContainerItemProxy */;
+		};
+		AD303C1F1B282C6100C4B999 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = ADCB8A841A94F52D009225B1 /* VindsidenApp WatchKit App */;
+			targetProxy = AD303C1E1B282C6100C4B999 /* PBXContainerItemProxy */;
+		};
+		AD303C391B28304100C4B999 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = AD303C271B282DC800C4B999 /* VindsidenWatchKit */;
+			targetProxy = AD303C381B28304100C4B999 /* PBXContainerItemProxy */;
 		};
 		AD539C8D1947B0F7002644BD /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -1358,16 +1543,6 @@
 			isa = PBXTargetDependency;
 			target = AD539C9C1947B5CA002644BD /* VindsidenKit */;
 			targetProxy = AD674DA01962E94900BF257B /* PBXContainerItemProxy */;
-		};
-		ADCB8A881A94F52D009225B1 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = ADCB8A841A94F52D009225B1 /* VindsidenApp WatchKit App */;
-			targetProxy = ADCB8A871A94F52D009225B1 /* PBXContainerItemProxy */;
-		};
-		ADCB8A921A94F52D009225B1 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = ADCB8A751A94F52D009225B1 /* VindsidenApp WatchKit Extension */;
-			targetProxy = ADCB8A911A94F52D009225B1 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -1506,6 +1681,8 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
+				ENABLE_BITCODE = NO;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -1517,7 +1694,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_SWIFT_FLAGS = "-DDebug";
 				SDKROOT = iphoneos;
@@ -1540,11 +1717,12 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				COPY_PHASE_STRIP = YES;
+				ENABLE_BITCODE = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
@@ -1559,13 +1737,14 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = VindsidenApp/VindsidenApp.entitlements;
-				CURRENT_PROJECT_VERSION = 54;
+				CURRENT_PROJECT_VERSION = 60;
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				ENABLE_BITCODE = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "VindsidenApp/VindsidenApp-Prefix.pch";
 				INFOPLIST_FILE = "VindsidenApp/VindsidenApp-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.juniks.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = VindsidenApp;
 				SWIFT_OBJC_BRIDGING_HEADER = "VindsidenApp/VindsidenApp-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -1582,13 +1761,14 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = VindsidenApp/VindsidenApp.entitlements;
-				CURRENT_PROJECT_VERSION = 54;
+				CURRENT_PROJECT_VERSION = 60;
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				ENABLE_BITCODE = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "VindsidenApp/VindsidenApp-Prefix.pch";
 				INFOPLIST_FILE = "VindsidenApp/VindsidenApp-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.juniks.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = VindsidenApp;
 				SWIFT_OBJC_BRIDGING_HEADER = "VindsidenApp/VindsidenApp-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1599,12 +1779,12 @@
 		};
 		AD2BB35319C7718600349495 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D077413EC6AD6C77CEEEA239 /* Pods-VindsidenApp.debug.xcconfig */;
 			buildSettings = {
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
@@ -1622,6 +1802,7 @@
 				INFOPLIST_FILE = VindsidenAppTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "org.juniks.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/VindsidenApp.app/VindsidenApp";
@@ -1630,6 +1811,7 @@
 		};
 		AD2BB35419C7718600349495 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1773D1A53059031A48563071 /* Pods-VindsidenApp.release.xcconfig */;
 			buildSettings = {
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
@@ -1649,8 +1831,84 @@
 				INFOPLIST_FILE = VindsidenAppTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = "org.juniks.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/VindsidenApp.app/VindsidenApp";
+			};
+			name = Release;
+		};
+		AD303C2E1B282DC800C4B999 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CURRENT_PROJECT_VERSION = 60;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 60;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_BITCODE = YES;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				INFOPLIST_FILE = VindsidenWatchKit/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = org.juniks.VindsidenWatchKit;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = 4;
+				VERSION_INFO_PREFIX = "";
+				WATCHOS_DEPLOYMENT_TARGET = 2.0;
+			};
+			name = Debug;
+		};
+		AD303C2F1B282DC800C4B999 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 60;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 60;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_BITCODE = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				INFOPLIST_FILE = VindsidenWatchKit/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = org.juniks.VindsidenWatchKit;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 4;
+				VERSION_INFO_PREFIX = "";
+				WATCHOS_DEPLOYMENT_TARGET = 2.0;
 			};
 			name = Release;
 		};
@@ -1663,6 +1921,7 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CODE_SIGN_ENTITLEMENTS = VindsidenToday/org.juniks.VindsidenApp.VindsidenToday.entitlements;
+				ENABLE_BITCODE = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -1680,6 +1939,7 @@
 					"$(PROJECT_DIR)/Pods/build/Debug-iphoneos",
 				);
 				METAL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "$(PRODUCT_NAME)";
 				PRODUCT_NAME = "org.juniks.VindsidenApp.$(TARGET_NAME:rfc1034identifier)";
 				SKIP_INSTALL = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "VindsidenApp-Bridging-Header.h";
@@ -1697,6 +1957,7 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CODE_SIGN_ENTITLEMENTS = VindsidenToday/org.juniks.VindsidenApp.VindsidenToday.entitlements;
+				ENABLE_BITCODE = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -1711,6 +1972,7 @@
 					"$(PROJECT_DIR)/Pods/build/Debug-iphoneos",
 				);
 				METAL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = "$(PRODUCT_NAME)";
 				PRODUCT_NAME = "org.juniks.VindsidenApp.$(TARGET_NAME:rfc1034identifier)";
 				SKIP_INSTALL = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "VindsidenApp-Bridging-Header.h";
@@ -1728,13 +1990,12 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 54;
+				CURRENT_PROJECT_VERSION = 60;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 54;
+				DYLIB_CURRENT_VERSION = 60;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_BITCODE = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1753,6 +2014,7 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				METAL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "org.juniks.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_MODULE_NAME = VindsidenKit;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -1760,6 +2022,7 @@
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
+				WATCHOS_DEPLOYMENT_TARGET = 2.0;
 			};
 			name = Debug;
 		};
@@ -1773,13 +2036,12 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 54;
+				CURRENT_PROJECT_VERSION = 60;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 54;
+				DYLIB_CURRENT_VERSION = 60;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_BITCODE = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1795,23 +2057,25 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				METAL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = "org.juniks.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_MODULE_NAME = VindsidenKit;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
+				WATCHOS_DEPLOYMENT_TARGET = 2.0;
 			};
 			name = Release;
 		};
 		AD539CBB1947B5CA002644BD /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D077413EC6AD6C77CEEEA239 /* Pods-VindsidenApp.debug.xcconfig */;
 			buildSettings = {
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
@@ -1829,6 +2093,7 @@
 				INFOPLIST_FILE = VindsidenKitTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				METAL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "org.juniks.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -1836,6 +2101,7 @@
 		};
 		AD539CBC1947B5CA002644BD /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1773D1A53059031A48563071 /* Pods-VindsidenApp.release.xcconfig */;
 			buildSettings = {
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
@@ -1855,19 +2121,20 @@
 				INFOPLIST_FILE = VindsidenKitTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				METAL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = "org.juniks.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
 		};
 		ADCB8A941A94F52D009225B1 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D077413EC6AD6C77CEEEA239 /* Pods-VindsidenApp.debug.xcconfig */;
 			buildSettings = {
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CODE_SIGN_ENTITLEMENTS = "VindsidenApp WatchKit Extension/VindsidenApp WatchKit Extension.entitlements";
+				ENABLE_BITCODE = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -1886,16 +2153,19 @@
 					"$(PROJECT_DIR)/Pods/build/Debug-iphoneos",
 				);
 				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = org.juniks.VindsidenApp.watchkitapp.watchkitextension;
 				PRODUCT_NAME = "${TARGET_NAME}";
+				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "VindsidenApp-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 2.0;
 			};
 			name = Debug;
 		};
 		ADCB8A951A94F52D009225B1 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1773D1A53059031A48563071 /* Pods-VindsidenApp.release.xcconfig */;
 			buildSettings = {
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
@@ -1903,6 +2173,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CODE_SIGN_ENTITLEMENTS = "VindsidenApp WatchKit Extension/VindsidenApp WatchKit Extension.entitlements";
 				COPY_PHASE_STRIP = NO;
+				ENABLE_BITCODE = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -1918,21 +2189,27 @@
 					"$(PROJECT_DIR)/Pods/build/Debug-iphoneos",
 				);
 				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = org.juniks.VindsidenApp.watchkitapp.watchkitextension;
 				PRODUCT_NAME = "${TARGET_NAME}";
+				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "VindsidenApp-Bridging-Header.h";
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 2.0;
 			};
 			name = Release;
 		};
 		ADCB8A961A94F52D009225B1 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D077413EC6AD6C77CEEEA239 /* Pods-VindsidenApp.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CODE_SIGN_ENTITLEMENTS = "VindsidenApp WatchKit App/VindsidenApp WatchKit App.entitlements";
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				ENABLE_BITCODE = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -1945,26 +2222,28 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				IBSC_MODULE = VindsidenApp_WatchKit_Extension;
 				INFOPLIST_FILE = "VindsidenApp WatchKit App/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = org.juniks.VindsidenApp.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = 4;
-				"TARGETED_DEVICE_FAMILY[sdk=iphonesimulator*]" = "1,4";
+				WATCHOS_DEPLOYMENT_TARGET = 2.0;
 			};
 			name = Debug;
 		};
 		ADCB8A971A94F52D009225B1 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1773D1A53059031A48563071 /* Pods-VindsidenApp.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CODE_SIGN_ENTITLEMENTS = "VindsidenApp WatchKit App/VindsidenApp WatchKit App.entitlements";
 				COPY_PHASE_STRIP = NO;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				ENABLE_BITCODE = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -1974,13 +2253,13 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				IBSC_MODULE = VindsidenApp_WatchKit_Extension;
 				INFOPLIST_FILE = "VindsidenApp WatchKit App/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = org.juniks.VindsidenApp.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = 4;
-				"TARGETED_DEVICE_FAMILY[sdk=iphonesimulator*]" = "1,4";
+				WATCHOS_DEPLOYMENT_TARGET = 2.0;
 			};
 			name = Release;
 		};
@@ -2010,6 +2289,15 @@
 			buildConfigurations = (
 				AD2BB35319C7718600349495 /* Debug */,
 				AD2BB35419C7718600349495 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		AD303C2D1B282DC800C4B999 /* Build configuration list for PBXNativeTarget "VindsidenWatchKit" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AD303C2E1B282DC800C4B999 /* Debug */,
+				AD303C2F1B282DC800C4B999 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -2065,9 +2353,10 @@
 		AD7AA505196E46D800B1518B /* Vindsiden.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				AD1379791B94B912008A4FFB /* Vindsiden 2.xcdatamodel */,
 				AD7AA506196E46D800B1518B /* Vindsiden.xcdatamodel */,
 			);
-			currentVersion = AD7AA506196E46D800B1518B /* Vindsiden.xcdatamodel */;
+			currentVersion = AD1379791B94B912008A4FFB /* Vindsiden 2.xcdatamodel */;
 			path = Vindsiden.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

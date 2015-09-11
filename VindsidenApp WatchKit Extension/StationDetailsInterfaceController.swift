@@ -7,7 +7,7 @@
 //
 
 import WatchKit
-import VindsidenKit
+import VindsidenWatchKit
 
 class StationDetailsInterfaceController: WKInterfaceController {
 
@@ -32,21 +32,21 @@ class StationDetailsInterfaceController: WKInterfaceController {
 
             self.station = station
 
-            Datamanager.sharedManager().managedObjectContext?.processPendingChanges()
-            let oldStaleness = Datamanager.sharedManager().managedObjectContext?.stalenessInterval
-            Datamanager.sharedManager().managedObjectContext?.stalenessInterval = 0.0
-            Datamanager.sharedManager().managedObjectContext?.refreshObject(station, mergeChanges: false)
+            Datamanager.sharedManager().managedObjectContext.processPendingChanges()
+            let oldStaleness = Datamanager.sharedManager().managedObjectContext.stalenessInterval
+            Datamanager.sharedManager().managedObjectContext.stalenessInterval = 0.0
+            Datamanager.sharedManager().managedObjectContext.refreshObject(station, mergeChanges: false)
             setTitle(station.stationName)
             updateUI(station)
-            Datamanager.sharedManager().managedObjectContext?.stalenessInterval = oldStaleness!
-
+            Datamanager.sharedManager().managedObjectContext.stalenessInterval = oldStaleness
+            let stationId = station.stationId! as Int
             let userInfo = [
-                "station": station.stationId,
-                "urlToActivate": "vindsiden://station/\(station.stationId)"
+                "station": stationId,
+                "urlToActivate": "vindsiden://station/\(stationId)"
 
-            ]
+            ] as [String:AnyObject]
 
-            let url = NSURL(string: "http://vindsiden.no/default.aspx?id=\(station.stationId)")
+            let url = NSURL(string: "http://vindsiden.no/default.aspx?id=\(stationId)")
 
             self.updateUserActivity("org.juniks.VindsidenApp", userInfo: userInfo, webpageURL: url)
         }
@@ -67,6 +67,11 @@ class StationDetailsInterfaceController: WKInterfaceController {
     }
 
 
+    @IBAction func mapButtonPressed() {
+        presentControllerWithName("showMap", context: station)
+    }
+
+
     // MARK: - Convenience
 
 
@@ -79,21 +84,22 @@ class StationDetailsInterfaceController: WKInterfaceController {
         }
 
         if let plot = station.lastRegisteredPlot() {
-            let winddir = CGFloat(plot.windDir.floatValue)
-            let windspeed = CGFloat(plot.windAvg.floatValue)
+
+            let winddir = CGFloat(plot.windDir!.floatValue)
+            let windspeed = CGFloat(plot.windAvg!.floatValue)
             let image = DrawArrow.drawArrowAtAngle( winddir, forSpeed:windspeed, highlighted:false, color: UIColor.whiteColor(), hightlightedColor: UIColor.blackColor())
             windDirectionImage.setImage(image)
-            updatedAtLabel.setText( AppConfig.sharedConfiguration.relativeDate(plot.plotTime) as String)
+            updatedAtLabel.setText( AppConfig.sharedConfiguration.relativeDate(plot.plotTime!) as String)
 
             if let realUnit = unit {
                 let unitString = NSNumber.shortUnitNameString(realUnit)
 
-                windSpeedLabel.setText(convertWindToString(plot.windAvg, toUnit: realUnit))
-                windDirectionLabel.setText("\(Int(plot.windDir))° (\(plot.windDirectionString()))")
-                windGustLabel.setText("\(convertWindToString(plot.windMax, toUnit: realUnit)) \(unitString)")
-                windLull.setText("\(convertWindToString(plot.windMin, toUnit: realUnit)) \(unitString)")
-                windBeaufortLabel.setText("\(Int(plot.windMin.speedInBeaufort()))")
-                airTempLabel.setText("\(convertNumberToString(plot.tempAir))℃")
+                windSpeedLabel.setText(convertWindToString(plot.windAvg!, toUnit: realUnit))
+                windDirectionLabel.setText("\(Int(plot.windDir!))° (\(plot.windDirectionString()))")
+                windGustLabel.setText("\(convertWindToString(plot.windMax!, toUnit: realUnit)) \(unitString)")
+                windLull.setText("\(convertWindToString(plot.windMin!, toUnit: realUnit)) \(unitString)")
+                windBeaufortLabel.setText("\(Int(plot.windMin!.speedInBeaufort()))")
+                airTempLabel.setText("\(convertNumberToString(plot.tempAir!))℃")
             }
         } else {
             if let realUnit = unit {

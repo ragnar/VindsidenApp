@@ -7,7 +7,7 @@ enum ExitCodes : Int32 {
 }
 
 
-func runAgvtool( #arguments: [String]! ) -> (Bool, Int32) {
+func runAgvtool( arguments arguments: [String]! ) -> (Bool, Int32) {
     let task = NSTask()
     task.launchPath = "/usr/bin/agvtool"
     task.arguments = arguments
@@ -23,21 +23,21 @@ func runAgvtool( #arguments: [String]! ) -> (Bool, Int32) {
 }
 
 
-func showHelp( _ errorMessage: String = "" ) -> Void {
-    let name = (Process.arguments.first! as String).lastPathComponent
+func showHelp( errorMessage: String = "" ) -> Void {
+    let name = (Process.arguments.first! as String)
 
     if errorMessage.isEmpty == false {
-        println("\(errorMessage)")
+        print("\(errorMessage)")
     }
 
-    println("\n\(name) - Convenience program to simplify setting version and bumping build numbers")
-    println("\n  usage:")
-    println("\t\(name) help")
-    println("\t\(name) bump-build")
-    println("\t\(name) set-build <build number>")
-    println("\t\(name) set-version <version>")
-    println("\t\(name) print-current")
-    println("\n")
+    print("\n\(name) - Convenience program to simplify setting version and bumping build numbers")
+    print("\n  usage:")
+    print("\t\(name) help")
+    print("\t\(name) bump-build")
+    print("\t\(name) set-build <build number>")
+    print("\t\(name) set-version <version>")
+    print("\t\(name) print-current")
+    print("\n")
 }
 
 

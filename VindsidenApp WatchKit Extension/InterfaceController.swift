@@ -8,8 +8,8 @@
 
 import WatchKit
 import Foundation
-import VindsidenKit
-
+import VindsidenWatchKit
+import CoreData
 
 class InterfaceController: WKInterfaceController {
 
@@ -17,20 +17,29 @@ class InterfaceController: WKInterfaceController {
 
     var stations = [CDStation]()
 
+
+    deinit {
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: WCFetcherNotification.ReceivedStations.rawValue, object: nil)
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: WCFetcherNotification.ReceivedPlots.rawValue, object: nil)
+    }
+
+    
     override func awakeWithContext(context: AnyObject!) {
         super.awakeWithContext(context)
-        fetchContent()
+        stations = populateData()
+
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "receivedStations:", name: WCFetcherNotification.ReceivedStations.rawValue, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "receivedStations:", name: WCFetcherNotification.ReceivedPlots.rawValue, object: nil)
     }
 
 
     override func willActivate() {
         super.willActivate()
         stations = populateData()
+        loadTableData()
 
-        if count(stations) == 0 {
-            pushControllerWithName("notConfigured", context: nil)
-        } else {
-            loadTableData()
+        if stations.count == 0 {
+            presentControllerWithName("notConfigured", context: nil)
         }
     }
 
@@ -40,8 +49,23 @@ class InterfaceController: WKInterfaceController {
     }
 
 
+    @IBAction func settingsButtonPressed() {
+        presentControllerWithName("stationConfig", context: nil)
+    }
+
+
     override func table(table: WKInterfaceTable, didSelectRowAtIndex rowIndex: Int) {
         pushControllerWithName("stationDetails", context: stations[rowIndex])
+    }
+
+
+    func receivedStations( notification: NSNotification) -> Void {
+        stations = populateData()
+        loadTableData()
+
+        if stations.count == 0 {
+            presentControllerWithName("notConfigured", context: nil)
+        }
     }
 
 
@@ -51,47 +75,34 @@ class InterfaceController: WKInterfaceController {
         fetchRequest.predicate = NSPredicate(format: "isHidden = NO", argumentArray: nil)
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: "order", ascending: true)]
 
-        return Datamanager.sharedManager().managedObjectContext?.executeFetchRequest(fetchRequest, error: nil) as! [CDStation]
+        do {
+            let stations = try Datamanager.sharedManager().managedObjectContext.executeFetchRequest(fetchRequest) as! [CDStation]
+            return stations
+        } catch {
+            return [CDStation]()
+        }
     }
 
 
     func loadTableData() -> Void {
         interfaceTable.setNumberOfRows(stations.count, withRowType: "default")
 
-        for (index, station) in enumerate(stations) {
-            Datamanager.sharedManager().managedObjectContext?.refreshObject(station, mergeChanges: true)
+        for (index, station) in stations.enumerate() {
+            Datamanager.sharedManager().managedObjectContext.refreshObject(station, mergeChanges: true)
 
             let elementRow = interfaceTable.rowControllerAtIndex(index) as! StationsRowController
             elementRow.elementText.setText(station.stationName)
 
             if let plot = station.lastRegisteredPlot() {
-                let winddir = CGFloat(plot.windDir.floatValue)
-                let windspeed = CGFloat(plot.windAvg.floatValue)
+                let winddir = CGFloat(plot.windDir!.floatValue)
+                let windspeed = CGFloat(plot.windAvg!.floatValue)
                 let image = DrawArrow.drawArrowAtAngle( winddir, forSpeed:windspeed, highlighted:false, color: UIColor.whiteColor(), hightlightedColor: UIColor.blackColor())
                 elementRow.elementImage.setImage(image)
-                elementRow.elementUpdated.setText( AppConfig.sharedConfiguration.relativeDate(plot.plotTime) as String)
+                elementRow.elementUpdated.setText( AppConfig.sharedConfiguration.relativeDate(plot.plotTime!) as String)
             } else {
                 elementRow.elementUpdated.setText( NSLocalizedString("LABEL_NOT_UPDATED", tableName: nil, bundle: NSBundle.mainBundle(), value: "LABEL_NOT_UPDATED", comment: "Not updated"))
             }
         }
-    }
-
-
-    func fetchContent() -> Void {
-        let userInfo = [
-            "interface": "main",
-            "action": "update",
-        ]
-
-        WKInterfaceController.openParentApplication( userInfo, reply: { (reply: [NSObject : AnyObject]!, error: NSError!) -> Void in
-            self.stations = self.populateData()
-
-            if count(self.stations) == 0 {
-                self.pushControllerWithName("notConfigured", context: nil)
-            } else {
-                self.loadTableData()
-            }
-        })
     }
 
 
@@ -105,7 +116,7 @@ class InterfaceController: WKInterfaceController {
         stations = populateData()
 
         for station in stations {
-            if station.stationId.isEqualToNumber(stationId!) {
+            if station.stationId!.isEqualToNumber(stationId!) {
                 pushControllerWithName("stationDetails", context: station)
                 break
             }

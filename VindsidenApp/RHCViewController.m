@@ -11,11 +11,13 @@
 #import "RHCStationCell.h"
 #import "RHEGraphView.h"
 
-#import "RHEVindsidenAPIClient.h"
 #import <MotionJpegImageView/MotionJpegImageView.h>
 #import <JTSImageViewController/JTSImageViewController.h>
 
+@import WatchConnectivity;
+@import CoreSpotlight;
 @import VindsidenKit;
+
 
 static NSString *kCellID = @"stationCellID";
 
@@ -31,6 +33,8 @@ static NSString *kCellID = @"stationCellID";
 @property (assign, nonatomic) BOOL wasVisible;
 @property (strong, nonatomic) NSMutableSet *transformedCells;
 
+@property (strong, nonatomic) NSIndexPath *currentIndexPath;
+@property (assign, nonatomic) CGSize cellSize;
 
 @end
 
@@ -50,6 +54,8 @@ static NSString *kCellID = @"stationCellID";
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+
+    [self beginObservingOrientation];
 
     self.automaticallyAdjustsScrollViewInsets = NO;
 
@@ -81,33 +87,24 @@ static NSString *kCellID = @"stationCellID";
 
     self.pageControl.pageIndicatorTintColor = [UIColor lightGrayColor];
     self.pageControl.currentPageIndicatorTintColor = [UIColor darkGrayColor];
-    self.pageControl.numberOfPages = [CDStation numberOfVisibleStations];
+    self.pageControl.numberOfPages = [CDStation numberOfVisibleStationsInManagedObjectContext:[[Datamanager sharedManager] managedObjectContext]];
 
     _transformedCells = [NSMutableSet set];
 
-    [[RHEVindsidenAPIClient defaultManager] fetchStations:^(BOOL success, NSArray *stations) {
-        if ( success ) {
+    StationFetcher *fetcher = [[StationFetcher alloc] init];
+    [fetcher fetch:^( NSArray *stations, NSError * __nullable error) {
+
+        if ( error ) {
+            [[RHCAlertManager defaultManager] showNetworkError:error];
+        } else {
             [self updateStations:stations];
             [self updateCameraButton:YES];
             [self saveActivity];
         }
-    }
-                                                    error:^(NSError *error) {
-                                                        [[RHCAlertManager defaultManager] showNetworkError:error];
-                                                    }
-     ];
+    }];
 
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationDidBecomeActive:) name:UIApplicationDidBecomeActiveNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationWillResignActive:) name:UIApplicationWillResignActiveNotification object:nil];
-}
-
-
-- (void)viewDidLayoutSubviews
-{
-    if ( self.pendingScrollToStation ) {
-        [self scrollToStation:self.pendingScrollToStation];
-        self.pendingScrollToStation = nil;
-    }
 }
 
 
@@ -119,8 +116,6 @@ static NSString *kCellID = @"stationCellID";
         _wasVisible = NO;
         [self updateCameraButton:YES];
     }
-
-    [self beginObservingOrientation];
 }
 
 
@@ -138,13 +133,38 @@ static NSString *kCellID = @"stationCellID";
 }
 
 
-- (BOOL)shouldAutorotate
+- (void)viewWillLayoutSubviews
 {
-    return NO;
+    [super viewWillLayoutSubviews];
+
+    if ( CGSizeEqualToSize(self.cellSize, CGSizeZero) == NO ) {
+        self.cellSize = self.collectionView.bounds.size;
+    }
+
+    [self.collectionView.collectionViewLayout invalidateLayout];
 }
 
 
-- (NSUInteger)supportedInterfaceOrientations
+- (void)viewDidLayoutSubviews
+{
+    [super viewDidLayoutSubviews];
+
+    if ( CGSizeEqualToSize(self.cellSize, CGSizeZero) == NO ) {
+        self.cellSize = self.collectionView.bounds.size;
+    }
+
+    if ( self.pendingScrollToStation && self.currentIndexPath == nil ) {
+        [self scrollToStation:self.pendingScrollToStation];
+        self.pendingScrollToStation = nil;
+    }
+
+    if ( self.currentIndexPath != nil ) {
+        [self.collectionView scrollToItemAtIndexPath:self.currentIndexPath atScrollPosition:UICollectionViewScrollPositionLeft animated:NO];
+    }
+}
+
+
+- (UIInterfaceOrientationMask)supportedInterfaceOrientations
 {
     return UIInterfaceOrientationMaskPortrait;
 }
@@ -156,10 +176,9 @@ static NSString *kCellID = @"stationCellID";
 }
 
 
-- (void)viewWillLayoutSubviews
+- (BOOL)shouldAutorotate
 {
-    [super viewWillLayoutSubviews];
-    [self.collectionView.collectionViewLayout invalidateLayout];
+    return NO;
 }
 
 
@@ -173,15 +192,17 @@ static NSString *kCellID = @"stationCellID";
 
     if ( [segue.identifier isEqualToString:@"ShowSettings"] ) {
         UINavigationController *navCon = segue.destinationViewController;
-        RHCSettingsViewController *controller = navCon.viewControllers[0];
+        RHCSettingsViewController *controller = navCon.viewControllers.firstObject;
         controller.delegate = self;
     } else if ( [segue.identifier isEqualToString:@"ShowStationDetails"] ) {
         UINavigationController *navCon = segue.destinationViewController;
-        RHEStationDetailsViewController *controller = navCon.viewControllers[0];
+        RHEStationDetailsViewController *controller = navCon.viewControllers.firstObject;
         controller.delegate = self;
         controller.station = cell.currentStation;
     } else if ( [segue.identifier isEqualToString:@"PresentGraphLandscape"] ) {
-        RHCLandscapeGraphViewController *controller = segue.destinationViewController;
+        UINavigationController *navCon = segue.destinationViewController;
+
+        RHCLandscapeGraphViewController *controller = navCon.viewControllers.firstObject;
         controller.plots = cell.graphView.plots;
         controller.station = cell.currentStation;
     }
@@ -230,6 +251,10 @@ static NSString *kCellID = @"stationCellID";
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
+    if ( CGSizeEqualToSize(self.cellSize, CGSizeZero) ) {
+        self.cellSize = self.collectionView.bounds.size;
+    }
+
     return self.collectionView.bounds.size;
 }
 
@@ -262,6 +287,9 @@ static NSString *kCellID = @"stationCellID";
         return;
     }
 
+    self.currentIndexPath = [self.collectionView indexPathsForVisibleItems].firstObject;
+
+
     for ( RHCStationCell *cell in _transformedCells ) {
         [UIView animateWithDuration:0.10
                          animations:^(void) {
@@ -270,7 +298,7 @@ static NSString *kCellID = @"stationCellID";
                          completion:^(BOOL finished) {
                              [_transformedCells removeObject:cell];
 
-                             NSIndexPath *indexPath = [self.collectionView indexPathsForVisibleItems][0];
+                             NSIndexPath *indexPath = [self.collectionView indexPathsForVisibleItems].firstObject;
                              [[AppConfig sharedConfiguration].applicationUserDefaults setObject:@(indexPath.row) forKey:@"selectedIndexPath"];
                              [[AppConfig sharedConfiguration].applicationUserDefaults synchronize];
                              [self updateCameraButton:YES];
@@ -332,7 +360,7 @@ static NSString *kCellID = @"stationCellID";
         case NSFetchedResultsChangeDelete:
         case NSFetchedResultsChangeMove:
             [self.collectionView reloadData];
-            self.pageControl.numberOfPages = [CDStation numberOfVisibleStations];
+            self.pageControl.numberOfPages = [CDStation numberOfVisibleStationsInManagedObjectContext:[[Datamanager sharedManager] managedObjectContext]];
             [self saveActivity];
             break;
         case NSFetchedResultsChangeUpdate:
@@ -347,21 +375,27 @@ static NSString *kCellID = @"stationCellID";
 
 - (void)updateStations:(NSArray *)stations
 {
-    [CDStation updateStations:stations completion:^(BOOL newStations) {
-        if ( newStations ) {
-            [[WindManager sharedManager] updateNow];
+    [CDStation updateWithFetchedContent: stations inManagedObjectContext:[[Datamanager sharedManager] managedObjectContext] completionHandler:^(BOOL newStations) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if ( newStations ) {
 
-            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@""
-                                                                           message:NSLocalizedString(@"ALERT_NEW_STATIONS_FOUND", @"New stations found. Go to settings to view them")
-                                                                    preferredStyle:UIAlertControllerStyleAlert];
-            UIAlertController* __weak weakAlert = alert;
-            UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault
-                                                                  handler:^(UIAlertAction * action) {
-                                                                      [weakAlert dismissViewControllerAnimated:YES completion:nil];
-                                                                  }];
-            [alert addAction:defaultAction];
-            [self presentViewController:alert animated:YES completion:nil];
-        }
+                [[WindManager sharedManager] updateNow];
+
+                UIAlertController *alert = [UIAlertController alertControllerWithTitle:@""
+                                                                               message:NSLocalizedString(@"ALERT_NEW_STATIONS_FOUND", @"New stations found. Go to settings to view them")
+                                                                        preferredStyle:UIAlertControllerStyleAlert];
+                UIAlertController* __weak weakAlert = alert;
+                UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault
+                                                                      handler:^(UIAlertAction * action) {
+                                                                          [weakAlert dismissViewControllerAnimated:YES completion:nil];
+                                                                      }];
+                [alert addAction:defaultAction];
+                [self presentViewController:alert animated:YES completion:nil];
+            }
+
+            [self updateApplicationContextToWatch];
+            
+        });
     }];
 
     if ( [stations count] > 0 ) {
@@ -485,7 +519,9 @@ static NSString *kCellID = @"stationCellID";
 
 - (void)rhcSettingsDidFinish:(RHCSettingsViewController *)controller
 {
+    [self updateApplicationContextToWatch];
     [[WindManager sharedManager] updateNow];
+    [[Datamanager sharedManager] indexActiveStations];
 
     if ( [[self.collectionView visibleCells] count] ) {
         RHCStationCell *cell = [self.collectionView visibleCells][0];
@@ -519,7 +555,8 @@ static NSString *kCellID = @"stationCellID";
 {
     if ( self.collectionView ) {
         NSIndexPath *indexPath = [self.fetchedResultsController indexPathForObject:station];
-        [self.collectionView scrollToItemAtIndexPath:indexPath atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:NO];
+        [self.collectionView scrollToItemAtIndexPath:indexPath atScrollPosition:UICollectionViewScrollPositionLeft animated:YES];
+        self.currentIndexPath = indexPath;
         self.pageControl.currentPage = indexPath.row;
     } else {
         self.pendingScrollToStation = station;
@@ -534,21 +571,31 @@ static NSString *kCellID = @"stationCellID";
         if ( self.presentedViewController ) {
             return;
         }
-        _isShowingLandscapeView = YES;
-        [self performSegueWithIdentifier:@"PresentGraphLandscape" sender:self];
+
+        dispatch_async(dispatch_get_main_queue(), ^{
+            _isShowingLandscapeView = YES;
+            [self performSegueWithIdentifier:@"PresentGraphLandscape" sender:self];
+        });
     }
     else if (UIDeviceOrientationIsPortrait(deviceOrientation) && _isShowingLandscapeView) {
-        if ( NO == [self.presentedViewController isKindOfClass:[RHCLandscapeGraphViewController class]] ) {
+        if ( NO == [self.presentedViewController isKindOfClass:[RHCRotatingNavigationController class]] ) {
             return;
         }
-        [self dismissViewControllerAnimated:YES completion:nil];
-        _isShowingLandscapeView = NO;
+
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self dismissViewControllerAnimated:YES completion:nil];
+            _isShowingLandscapeView = NO;
+        });
     }
 }
 
 
 - (void)beginObservingOrientation
 {
+    if ( self.traitCollection.userInterfaceIdiom == UIUserInterfaceIdiomPad ) {
+        return;
+    }
+
     _isShowingLandscapeView = NO;
     [[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
     [[NSNotificationCenter defaultCenter] addObserver:self
@@ -560,6 +607,9 @@ static NSString *kCellID = @"stationCellID";
 
 - (void)endObservingOrientation
 {
+    if ( self.traitCollection.userInterfaceIdiom == UIUserInterfaceIdiomPad ) {
+        return;
+    }
     [[UIDevice currentDevice] endGeneratingDeviceOrientationNotifications];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIDeviceOrientationDidChangeNotification object:nil];
 }
@@ -586,6 +636,7 @@ static NSString *kCellID = @"stationCellID";
         userActivity.title = cell.currentStation.stationName;
         userActivity.webpageURL = [NSURL URLWithString:[NSString stringWithFormat:@"http://vindsiden.no/default.aspx?id=%@", cell.currentStation.stationId]];
         [userActivity addUserInfoEntriesFromDictionary:userInfo];
+        [userActivity becomeCurrent];
     }
 }
 
@@ -599,7 +650,12 @@ static NSString *kCellID = @"stationCellID";
         userActivity.delegate = self;
     }
 
+    //[userActivity resignCurrent];
+
     userActivity.needsSave = YES;
+    userActivity.eligibleForSearch = NO;
+    userActivity.eligibleForHandoff = YES;
+    userActivity.eligibleForPublicIndexing = NO;
     self.userActivity = userActivity;
 }
 
@@ -618,6 +674,7 @@ static NSString *kCellID = @"stationCellID";
 {
     [super decodeRestorableStateWithCoder:coder];
     self.pageControl.currentPage = [coder decodeIntegerForKey:@"currentPage"];
+    self.currentIndexPath = [NSIndexPath indexPathForRow:self.pageControl.currentPage inSection:0];
 }
 
 
@@ -639,13 +696,54 @@ static NSString *kCellID = @"stationCellID";
     NSIndexPath *indexPath = nil;
 
     if ( identifier && view ) {
-        NSNumber *stationId = @([identifier integerValue]);
-        CDStation *station = [CDStation existingStation:stationId inManagedObjectContext:[self fetchedResultsController].managedObjectContext];
+        NSInteger stationId = [identifier integerValue];
+
+        CDStation *station = [CDStation existingStationWithId:stationId inManagedObjectContext:[self fetchedResultsController].managedObjectContext error:nil];
         if ( station ) {
             indexPath = [[self fetchedResultsController] indexPathForObject:station];
         }
     }
     return indexPath;
 }
+
+
+
+#pragma mark - WCSession update application context
+
+- (void)updateApplicationContextToWatch
+{
+    WCSession *session = [WCSession defaultSession];
+
+    if ( session.isPaired == NO || session.isWatchAppInstalled == NO ) {
+        DLOG(@"Watch is not present: %d - %d", session.isPaired, session.isWatchAppInstalled);
+        return;
+    }
+
+
+
+    NSArray *result = [CDStation visibleStationsInManagedObjectContext:[[Datamanager sharedManager] managedObjectContext]];
+    NSMutableArray *stations = [NSMutableArray array];
+
+    for ( CDStation *station in result ) {
+        NSDictionary *info = @{
+                               @"stationId": station.stationId,
+                               @"stationName": station.stationName,
+                               @"order": station.order,
+                               @"hidden": station.isHidden,
+                               @"latitude": station.coordinateLat,
+                               @"longitude": station.coordinateLon
+                               };
+        [stations addObject:info];
+    }
+
+
+    NSDictionary *context = @{@"activeStations": stations};
+    NSError *error = nil;
+
+    if ( [session updateApplicationContext:context error: &error] == NO ) {
+        DLOG(@"Failed: %@", error.localizedDescription);
+    }
+}
+
 
 @end

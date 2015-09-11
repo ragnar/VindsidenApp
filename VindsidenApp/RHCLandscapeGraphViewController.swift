@@ -19,7 +19,7 @@ class RHCLandscapeGraphViewController: UIViewController
     var station: CDStation?
     var plots: [CDPlot]?
 
-    required init(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
 

@@ -15,18 +15,18 @@ func RGBCOLOR( red: CGFloat, green: CGFloat, blue: CGFloat, alpha: CGFloat = 1.0
 public extension UIColor
 {
     class func vindsidenGloablTintColor() -> UIColor {
-        return RGBCOLOR( 227.0, 60.0, 13.0)
+        return RGBCOLOR( 227.0, green: 60.0, blue: 13.0)
     }
 
     class func vindsidenMinColor() -> UIColor {
-        return RGBCOLOR( 208.0, 221.0, 0.0)
+        return RGBCOLOR( 208.0, green: 221.0, blue: 0.0)
     }
 
     class func vindsidenAvgColor() -> UIColor {
-        return RGBCOLOR( 58.0, 217.0, 255.0)
+        return RGBCOLOR( 58.0, green: 217.0, blue: 255.0)
     }
 
     class func vindsidenMaxColor() -> UIColor {
-        return RGBCOLOR( 255.0, 73.0, 62.0)
+        return RGBCOLOR( 255.0, green: 73.0, blue: 62.0)
     }
 }

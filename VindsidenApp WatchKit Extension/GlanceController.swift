@@ -8,7 +8,8 @@
 
 import WatchKit
 import Foundation
-import VindsidenKit
+import CoreData
+import VindsidenWatchKit
 
 
 class GlanceController: WKInterfaceController {
@@ -35,13 +36,13 @@ class GlanceController: WKInterfaceController {
             updateUI(station)
             updatePlotInfo(station)
 
+            let stationId = station.stationId! as Int
             let userInfo = [
-                "station": station.stationId,
-                "urlToActivate": "vindsiden://station/\(station.stationId)"
+                "station": stationId,
+                "urlToActivate": "vindsiden://station/\(stationId)"
+            ] as [String:AnyObject]
 
-            ]
-
-            let url = NSURL(string: "http://vindsiden.no/default.aspx?id=\(station.stationId)")
+            let url = NSURL(string: "http://vindsiden.no/default.aspx?id=\(stationId)")
 
             self.updateUserActivity("org.juniks.VindsidenApp", userInfo: userInfo, webpageURL: url)
         } else {
@@ -60,7 +61,6 @@ class GlanceController: WKInterfaceController {
 
     // MARK: - Convenience
 
-
     func populateStation() -> CDStation? {
         let fetchRequest = NSFetchRequest(entityName: "CDStation")
         fetchRequest.fetchBatchSize = 1
@@ -68,25 +68,22 @@ class GlanceController: WKInterfaceController {
         fetchRequest.predicate = NSPredicate(format: "isHidden = NO", argumentArray: nil)
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: "order", ascending: true)]
 
-        let stations = Datamanager.sharedManager().managedObjectContext?.executeFetchRequest(fetchRequest, error: nil) as! [CDStation]
-
-        return stations.first
+        do {
+            let stations = try Datamanager.sharedManager().managedObjectContext.executeFetchRequest(fetchRequest) as! [CDStation]
+            return stations.first
+        } catch {
+            return nil
+        }
     }
 
 
     func updatePlotInfo( station: CDStation ) {
 
-        let userInfo = [
-            "interface": "glance",
-            "action": "update",
-            "station": station.stationId
-        ]
+        let stationId = station.stationId! as Int
 
-        WKInterfaceController.openParentApplication( userInfo, reply: { (reply: [NSObject : AnyObject]!, error: NSError!) -> Void in
-            if  let station = self.populateStation() {
-                self.updateUI(station)
-            }
-        })
+        WindManager.sharedManager.fetchForStationId(stationId) { (result: WindManagerResult) -> Void in
+            self.updateUI(station)
+        }
     }
 
 
@@ -100,15 +97,15 @@ class GlanceController: WKInterfaceController {
         self.glanceWindUnitLabel.setText(unitString)
 
         if let plot = station.lastRegisteredPlot() {
-            let winddir = CGFloat(plot.windDir.floatValue)
-            let windspeed = CGFloat(plot.windAvg.floatValue)
+            let winddir = CGFloat(plot.windDir!.floatValue)
+            let windspeed = CGFloat(plot.windAvg!.floatValue)
             let image = DrawArrow.drawArrowAtAngle( winddir, forSpeed:windspeed, highlighted:false, color: UIColor.whiteColor(), hightlightedColor: UIColor.blackColor())
             self.glanceWindDirectionImage.setImage(image)
-            self.glanceWindDirectionLabel.setText("\(Int(plot.windDir))° (\(plot.windDirectionString()))")
-            self.glanceWindCurrentLabel.setText(convertWindToString(plot.windAvg, toUnit: unit))
-            self.glanceWindGustLabel.setText("\(convertWindToString(plot.windMax, toUnit: unit)) \(unitString)")
-            self.glanceWindLullLabel.setText("\(convertWindToString(plot.windMin, toUnit: unit)) \(unitString)")
-            self.glanceWindUpdatedAtLabel.setText( AppConfig.sharedConfiguration.relativeDate(plot.plotTime) as String)
+            self.glanceWindDirectionLabel.setText("\(Int(plot.windDir!))° (\(plot.windDirectionString()))")
+            self.glanceWindCurrentLabel.setText(convertWindToString(plot.windAvg!, toUnit: unit))
+            self.glanceWindGustLabel.setText("\(convertWindToString(plot.windMax!, toUnit: unit)) \(unitString)")
+            self.glanceWindLullLabel.setText("\(convertWindToString(plot.windMin!, toUnit: unit)) \(unitString)")
+            self.glanceWindUpdatedAtLabel.setText( AppConfig.sharedConfiguration.relativeDate(plot.plotTime!) as String)
         } else {
             updateEmptyUI()
         }
@@ -119,6 +116,9 @@ class GlanceController: WKInterfaceController {
         let raw = AppConfig.sharedConfiguration.applicationUserDefaults.integerForKey("selectedUnit")
         let unit = SpeedConvertion(rawValue: raw)!
         let unitString = NSNumber.shortUnitNameString(unit)
+
+        self.glanceHeadingLabel.setText(NSLocalizedString("Not configured", tableName: nil, bundle: NSBundle.mainBundle(), value: "Not configured", comment: "Not configured"))
+        self.glanceHeadingLabel.setTextColor(UIColor.vindsidenGloablTintColor())
 
         self.glanceWindDirectionImage.setImage(nil)
         self.glanceWindDirectionLabel.setText("—° (—)")

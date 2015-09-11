@@ -19,15 +19,23 @@ import VindsidenKit
 
     var delegate: RHCSettingsDelegate?
 
-    required init(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
     }
+
+
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        self.tableView.reloadData()
+    }
+
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -45,11 +53,11 @@ import VindsidenKit
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
 
-        let cell = tableView.dequeueReusableCellWithIdentifier("SettingsCell", forIndexPath: indexPath) as! UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("SettingsCell", forIndexPath: indexPath) as UITableViewCell
 
         if indexPath.row == 0 {
             cell.textLabel?.text = NSLocalizedString("Stations", comment: "")
-            cell.detailTextLabel?.text = "\(CDStation.numberOfVisibleStations())"
+            cell.detailTextLabel?.text = "\(CDStation.numberOfVisibleStationsInManagedObjectContext(Datamanager.sharedManager().managedObjectContext))"
         } else {
             let unit = SpeedConvertion(rawValue: AppConfig.sharedConfiguration.applicationUserDefaults.integerForKey("selectedUnit"))
 
@@ -75,7 +83,7 @@ import VindsidenKit
         let appName = NSBundle.mainBundle().objectForInfoDictionaryKey("CFBundleDisplayName") as! String
         let appVersion = NSBundle.mainBundle().objectForInfoDictionaryKey("CFBundleShortVersionString") as! String
         let appBuild = NSBundle.mainBundle().objectForInfoDictionaryKey("CFBundleVersion") as! String
-        var version = NSString(format: NSLocalizedString("%@ version %@.%@", comment: "Version string in settings view"), appName, appVersion, appBuild)
+        let version = NSString(format: NSLocalizedString("%@ version %@.%@", comment: "Version string in settings view"), appName, appVersion, appBuild)
         tv.text = NSLocalizedString("LABEL_PERMIT", comment: "Værdata hentet med tillatelse fra\nhttp://vindsiden.no\n\n").stringByAppendingString(version as String)
 
         tv.editable = false
