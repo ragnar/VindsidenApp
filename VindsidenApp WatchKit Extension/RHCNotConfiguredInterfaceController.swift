@@ -18,7 +18,7 @@ class RHCNotConfiguredInterfaceController: WKInterfaceController {
 
 
     deinit {
-        NSNotificationCenter.defaultCenter().removeObserver(self, name: WCFetcherNotification.ReceivedStations.rawValue, object: nil)
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: WCFetcherNotification.ReceivedStations, object: nil)
     }
 
     
@@ -29,7 +29,7 @@ class RHCNotConfiguredInterfaceController: WKInterfaceController {
         infoLabel.setText(NSLocalizedString("No stations configured", comment: "Not configured header text"))
         infoDetailsLabel.setText(NSLocalizedString("Open the main app to configure visible stations", comment: "Not configured text"))
 
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "receivedStations:", name: WCFetcherNotification.ReceivedStations.rawValue, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "receivedStations:", name: WCFetcherNotification.ReceivedStations, object: nil)
     }
 
 

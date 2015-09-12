@@ -11,9 +11,10 @@ import WatchConnectivity
 import VindsidenWatchKit
 
 
-enum WCFetcherNotification : String {
-    case ReceivedStations = "ReceivedStations"
-    case ReceivedPlots = "ReceivedPlots"
+struct WCFetcherNotification {
+    static let ReceivedStations = "ReceivedStations"
+    static let ReceivedPlots = "ReceivedPlots"
+    static let FetchingPlots = "FetchingPlots"
 }
 
 
@@ -63,9 +64,9 @@ class WCFetcher: NSObject, WCSessionDelegate {
             CDStation.updateWithWatchContent(stations, inManagedObjectContext: Datamanager.sharedManager().managedObjectContext, completionHandler: { (visible: Bool) -> Void in
                 dispatch_async(dispatch_get_main_queue(), { () -> Void in
                     WindManager.sharedManager.fetch({ (result: WindManagerResult) -> Void in
-                        NSNotificationCenter.defaultCenter().postNotificationName( WCFetcherNotification.ReceivedPlots.rawValue, object: nil)
+                        NSNotificationCenter.defaultCenter().postNotificationName( WCFetcherNotification.ReceivedPlots, object: nil)
                     })
-                    NSNotificationCenter.defaultCenter().postNotificationName( WCFetcherNotification.ReceivedStations.rawValue, object: nil)
+                    NSNotificationCenter.defaultCenter().postNotificationName( WCFetcherNotification.ReceivedStations, object: nil)
                 })
             })
         } else {

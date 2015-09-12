@@ -16,11 +16,13 @@ class InterfaceController: WKInterfaceController {
     @IBOutlet weak var interfaceTable: WKInterfaceTable!
 
     var stations = [CDStation]()
+    var fetchingPlots = false
 
 
     deinit {
-        NSNotificationCenter.defaultCenter().removeObserver(self, name: WCFetcherNotification.ReceivedStations.rawValue, object: nil)
-        NSNotificationCenter.defaultCenter().removeObserver(self, name: WCFetcherNotification.ReceivedPlots.rawValue, object: nil)
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: WCFetcherNotification.ReceivedStations, object: nil)
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: WCFetcherNotification.ReceivedPlots, object: nil)
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: WCFetcherNotification.FetchingPlots, object: nil)
     }
 
     
@@ -28,8 +30,9 @@ class InterfaceController: WKInterfaceController {
         super.awakeWithContext(context)
         stations = populateData()
 
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "receivedStations:", name: WCFetcherNotification.ReceivedStations.rawValue, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "receivedStations:", name: WCFetcherNotification.ReceivedPlots.rawValue, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "receivedStations:", name: WCFetcherNotification.ReceivedStations, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "receivedStations:", name: WCFetcherNotification.ReceivedPlots, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "updatingPlots:", name: WCFetcherNotification.FetchingPlots, object: nil)
     }
 
 
@@ -60,6 +63,20 @@ class InterfaceController: WKInterfaceController {
 
 
     func receivedStations( notification: NSNotification) -> Void {
+        if fetchingPlots && notification.name == WCFetcherNotification.ReceivedPlots {
+            fetchingPlots = false
+        }
+        configureView()
+    }
+
+
+    func updatingPlots( notification: NSNotification) -> Void {
+        fetchingPlots = true
+        configureView()
+    }
+
+
+    func configureView() {
         stations = populateData()
         loadTableData()
 
@@ -101,6 +118,10 @@ class InterfaceController: WKInterfaceController {
                 elementRow.elementUpdated.setText( AppConfig.sharedConfiguration.relativeDate(plot.plotTime!) as String)
             } else {
                 elementRow.elementUpdated.setText( NSLocalizedString("LABEL_NOT_UPDATED", tableName: nil, bundle: NSBundle.mainBundle(), value: "LABEL_NOT_UPDATED", comment: "Not updated"))
+            }
+
+            if fetchingPlots {
+                elementRow.elementUpdated.setText( NSLocalizedString("Updating", tableName: nil, bundle: NSBundle.mainBundle(), value: "Updating", comment: "Updating"))
             }
         }
     }
