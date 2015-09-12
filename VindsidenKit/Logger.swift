@@ -9,10 +9,10 @@
 import Foundation
 
 @objc(Logger)
-public class Logger {
+public class Logger : NSObject {
     public class func DLOG( message: String, file: String = __FILE__, function: String = __FUNCTION__, line: Int = __LINE__ ) {
         #if Debug
-            NSLog("([\(file.lastPathComponent) \(function)] line: \(line)) \(message)")
+            NSLog("([\((file as NSString).lastPathComponent) \(function)] line: \(line)) \(message)")
         #endif
     }
 
@@ -25,6 +25,6 @@ public class Logger {
 
 
     public class func WARNING( message: String, file: String = __FILE__, function: String = __FUNCTION__, line: Int = __LINE__ ) {
-        NSLog("([\(file.lastPathComponent) \(function)] line: \(line)) \(message)")
+        NSLog("([\((file as NSString).lastPathComponent) \(function)] line: \(line)) \(message)")
     }
 }
