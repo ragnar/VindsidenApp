@@ -191,9 +191,11 @@ public class CDStation: NSManagedObject, MKAnnotation {
                 let station = CDStation.newOrExistingStationWithId(stationId, inManagedObectContext: childContext)
                 station.updateWithContent(stationContent)
 
-                if station.stationId == 1 {
-                    station.webCamImage = "http://www.tasken.no/webcam/capture1000M.jpg"
-                }
+                #if Debug
+                    if station.stationId == 1 {
+                        station.webCamImage = "http://www.tasken.no/webcam/capture1000M.jpg"
+                    }
+                #endif
 
                 if station.inserted {
                     newStations = true
