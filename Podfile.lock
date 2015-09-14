@@ -1,39 +1,13 @@
 PODS:
-  - AFNetworking (2.5.4):
-    - AFNetworking/NSURLConnection (= 2.5.4)
-    - AFNetworking/NSURLSession (= 2.5.4)
-    - AFNetworking/Reachability (= 2.5.4)
-    - AFNetworking/Security (= 2.5.4)
-    - AFNetworking/Serialization (= 2.5.4)
-    - AFNetworking/UIKit (= 2.5.4)
-  - AFNetworking/NSURLConnection (2.5.4):
-    - AFNetworking/Reachability
-    - AFNetworking/Security
-    - AFNetworking/Serialization
-  - AFNetworking/NSURLSession (2.5.4):
-    - AFNetworking/Reachability
-    - AFNetworking/Security
-    - AFNetworking/Serialization
-  - AFNetworking/Reachability (2.5.4)
-  - AFNetworking/Security (2.5.4)
-  - AFNetworking/Serialization (2.5.4)
-  - AFNetworking/UIKit (2.5.4):
-    - AFNetworking/NSURLConnection
-    - AFNetworking/NSURLSession
   - JTSImageViewController (1.4)
   - MotionJpegImageView (0.0.1)
-  - SORelativeDateTransformer (1.1.10)
 
 DEPENDENCIES:
-  - AFNetworking (~> 2.5.1)
   - JTSImageViewController
   - MotionJpegImageView
-  - SORelativeDateTransformer
 
 SPEC CHECKSUMS:
-  AFNetworking: 05edc0ac4c4c8cf57bcf4b84be5b0744b6d8e71e
   JTSImageViewController: 6a367b144e257db02cdfacdba78d684377d3777b
   MotionJpegImageView: f79da61c7ed19203fb3b01c067a57e356954741a
-  SORelativeDateTransformer: 307489386df4697780902bc16e99881d69a629b3
 
-COCOAPODS: 0.37.1
+COCOAPODS: 0.38.2

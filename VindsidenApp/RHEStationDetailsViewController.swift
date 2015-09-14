@@ -21,13 +21,18 @@ import JTSImageViewController
     var buttons = [NSLocalizedString("Go to yr.no", comment: ""), NSLocalizedString("View in Maps", comment: "")]
 
     lazy var regexRemoveHTMLTags: NSRegularExpression? = {
-        var _regexRemoveHTMLTags = NSRegularExpression(pattern: "(<[^>]+>)", options: .CaseInsensitive, error: nil)
+            var _regexRemoveHTMLTags: NSRegularExpression?
+            do {
+                _regexRemoveHTMLTags = try NSRegularExpression(pattern: "(<[^>]+>)", options: .CaseInsensitive)
+            } catch _ {
+                _regexRemoveHTMLTags = nil
+            }
         return _regexRemoveHTMLTags
         }()
 
 
 
-    required init(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
 
@@ -43,7 +48,8 @@ import JTSImageViewController
 
         if let current = station {
             self.navigationItem.title = current.stationName
-            if !current.webCamImage.isEmpty {
+
+            if let image = current.webCamImage where !image.isEmpty {
                 buttons.append(NSLocalizedString("Show Camera", comment: ""))
             }
         }
@@ -82,10 +88,10 @@ import JTSImageViewController
         var cell :UITableViewCell
 
         if ( 0 == indexPath.section) {
-            cell = tableView.dequeueReusableCellWithIdentifier("StationDetailsCell", forIndexPath: indexPath) as! UITableViewCell
+            cell = tableView.dequeueReusableCellWithIdentifier("StationDetailsCell", forIndexPath: indexPath) as UITableViewCell
             configureCell(cell as! RHCDStationDetailsCell, atIndexPath: indexPath)
         } else {
-            cell = tableView.dequeueReusableCellWithIdentifier("ButtonCell", forIndexPath: indexPath) as! UITableViewCell
+            cell = tableView.dequeueReusableCellWithIdentifier("ButtonCell", forIndexPath: indexPath) as UITableViewCell
             cell.textLabel?.textColor = self.view.tintColor;
             cell.textLabel?.text = buttons[indexPath.row]
         }
@@ -133,6 +139,7 @@ import JTSImageViewController
             default: showCamera(nil)
             }
         }
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
     }
 
 
@@ -141,6 +148,7 @@ import JTSImageViewController
     func configureCell( cell: RHCDStationDetailsCell, atIndexPath indexPath:NSIndexPath) -> Void {
         cell.headerLabel.textColor = self.view.tintColor;
         cell.detailsLabel.preferredMaxLayoutWidth = CGRectGetWidth(view.bounds) - 30.0
+        cell.detailsLabel.text = ""
 
         if let current = station {
             switch ( indexPath.row )
@@ -156,13 +164,19 @@ import JTSImageViewController
                 cell.detailsLabel.text = current.copyright
             case 3:
                 cell.headerLabel.text = NSLocalizedString("Info", comment: "")
-                cell.detailsLabel.text = regexRemoveHTMLTags?.stringByReplacingMatchesInString(current.stationText, options: .allZeros, range: NSMakeRange(0, count(current.stationText.utf16)), withTemplate: "").stringByReplacingOccurrencesOfString("\n", withString: "")
+                if let stationText = current.stationText {
+                    cell.detailsLabel.text = regexRemoveHTMLTags?.stringByReplacingMatchesInString(stationText, options: [], range: NSMakeRange(0, stationText.utf16.count), withTemplate: "").stringByReplacingOccurrencesOfString("\n", withString: "")
+                }
             case 4:
                 cell.headerLabel.text = NSLocalizedString("Status", comment: "")
-                cell.detailsLabel.text = regexRemoveHTMLTags?.stringByReplacingMatchesInString(current.statusMessage, options: .allZeros, range: NSMakeRange(0, count(current.statusMessage.utf16)), withTemplate: "").stringByReplacingOccurrencesOfString("\n", withString: "")
+                if let statusMessage = current.statusMessage {
+                    cell.detailsLabel.text = regexRemoveHTMLTags?.stringByReplacingMatchesInString(statusMessage, options: [], range: NSMakeRange(0, statusMessage.utf16.count), withTemplate: "").stringByReplacingOccurrencesOfString("\n", withString: "")
+                }
             case 5:
                 cell.headerLabel.text = NSLocalizedString("Camera", comment: "")
-                cell.detailsLabel.text = regexRemoveHTMLTags?.stringByReplacingMatchesInString(current.webCamText, options: .allZeros, range: NSMakeRange(0, count(current.webCamText.utf16)), withTemplate: "").stringByReplacingOccurrencesOfString("\n", withString: "")
+                if let webCamText = current.webCamText {
+                    cell.detailsLabel.text = regexRemoveHTMLTags?.stringByReplacingMatchesInString(webCamText, options: [], range: NSMakeRange(0, webCamText.utf16.count), withTemplate: "").stringByReplacingOccurrencesOfString("\n", withString: "")
+                }
             default:
                 cell.headerLabel.text = NSLocalizedString("Unknown", comment: "")
             }
@@ -188,7 +202,7 @@ import JTSImageViewController
     @IBAction func gotoYR( sender: AnyObject? ) {
 
         if let current = station {
-            if let yrurl = current.yrURL.stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding) {
+            if let unwrapped = current.yrURL, let yrurl = unwrapped.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet()) {
                 let url = NSURL(string: yrurl)
                 UIApplication.sharedApplication().openURL(url!)
             }
@@ -199,7 +213,7 @@ import JTSImageViewController
     @IBAction func showMap( sender: AnyObject? ) {
 
         if let current = station {
-            let spotCord = CLLocationCoordinate2D(latitude: current.coordinateLat as CLLocationDegrees, longitude: current.coordinateLon as CLLocationDegrees)
+            let spotCord = current.coordinate
 
             var query = "http://maps.apple.com/?t=h&z=10"
 
@@ -207,13 +221,13 @@ import JTSImageViewController
                 query += "&ll=\(spotCord.latitude),\(spotCord.longitude)"
             }
 
-            if !current.city.isEmpty {
-                query += "&q=\(current.city)"
-            } else {
-                query += "&q=\(current.stationName)"
+            if let city = current.city where !city.isEmpty {
+                query += "&q=\(city)"
+            } else if let stationName = current.stationName {
+                query += "&q=\(stationName)"
             }
 
-            if let mapurl = query.stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding) {
+            if let mapurl = query.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet()) {
                 let url = NSURL(string: mapurl)
                 UIApplication.sharedApplication().openURL(url!)
             }
@@ -224,7 +238,12 @@ import JTSImageViewController
     @IBAction func showCamera( sender: AnyObject? ) {
         if let current = station {
             let imageInfo = JTSImageInfo()
-            imageInfo.imageURL = NSURL(string: current.webCamImage)
+
+            guard let webCamImage = current.webCamImage else {
+                return;
+            }
+
+            imageInfo.imageURL = NSURL(string: webCamImage)
 
             if let view = sender as? UIView {
                 imageInfo.referenceRect = view.frame
@@ -232,9 +251,8 @@ import JTSImageViewController
 
             imageInfo.referenceView = self.view
 
-            let controller = JTSImageViewController(imageInfo: imageInfo, mode: .Image, backgroundStyle: .Blurred | .Scaled)
-            controller.showFromViewController(self, transition: ._FromOriginalPosition)
+            let controller = JTSImageViewController(imageInfo: imageInfo, mode: JTSImageViewControllerMode.Image, backgroundStyle: [.Blurred, .Scaled])
+            controller.showFromViewController(self, transition: .FromOriginalPosition)
         }
-        
     }
 }

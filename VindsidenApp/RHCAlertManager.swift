@@ -9,7 +9,7 @@
 import UIKit
 
 @objc(RHCAlertManager)
-class RHCAlertManager
+class RHCAlertManager : NSObject
 {
     var showingError = false
     var networkAlertController: UIAlertController? = nil
@@ -32,7 +32,7 @@ class RHCAlertManager
 
         dispatch_async(dispatch_get_main_queue(), { () -> Void in
             var message: NSString? = nil
-            let valueOrNil: AnyObject? = error.userInfo?[NSLocalizedDescriptionKey]
+            let valueOrNil: AnyObject? = error.userInfo[NSLocalizedDescriptionKey]
 
             if let value = valueOrNil as? NSString {
                 message = value

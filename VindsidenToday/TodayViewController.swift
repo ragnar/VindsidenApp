@@ -8,6 +8,7 @@
 
 import UIKit
 import NotificationCenter
+import CoreData
 import VindsidenKit
 
 
@@ -30,7 +31,7 @@ class TodayViewController: UITableViewController, NCWidgetProviding, NSFetchedRe
     }
 
 
-    required init(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
 
@@ -61,10 +62,10 @@ class TodayViewController: UITableViewController, NCWidgetProviding, NSFetchedRe
     }
 
 
-    func widgetPerformUpdateWithCompletionHandler(completionHandler: ((NCUpdateResult) -> Void)!) {
+    func widgetPerformUpdateWithCompletionHandler(completionHandler: ((NCUpdateResult) -> Void)) {
         DLOG("")
         completionHandler(.NewData)
-        updateContentWithCompletionHandler(completionHandler: completionHandler)
+        updateContentWithCompletionHandler(completionHandler)
     }
 
 
@@ -79,7 +80,7 @@ class TodayViewController: UITableViewController, NCWidgetProviding, NSFetchedRe
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let sections = fetchedResultsController.sections as Array!
-        let sectionInfo = sections[section] as! NSFetchedResultsSectionInfo
+        let sectionInfo = sections[section]
 
         let rows:Int = showingAll ? sectionInfo.numberOfObjects : min(sectionInfo.numberOfObjects, TableViewConstants.baseRowCount + 1)
         return rows
@@ -90,26 +91,25 @@ class TodayViewController: UITableViewController, NCWidgetProviding, NSFetchedRe
         let itemCount = (fetchedResultsController.fetchedObjects as Array!).count
 
         if !showingAll && indexPath.row == TableViewConstants.baseRowCount &&  itemCount != TableViewConstants.baseRowCount + 1 {
-            let cell = tableView.dequeueReusableCellWithIdentifier(TableViewConstants.CellIdentifiers.showall, forIndexPath: indexPath) as! UITableViewCell
+            let cell = tableView.dequeueReusableCellWithIdentifier(TableViewConstants.CellIdentifiers.showall, forIndexPath: indexPath) as UITableViewCell
             cell.textLabel?.text = NSLocalizedString("Show All...", tableName: nil, bundle: NSBundle.mainBundle(), value: "Show all...", comment: "Show all")
             return cell
         } else {
             let cell = tableView.dequeueReusableCellWithIdentifier(TableViewConstants.CellIdentifiers.message, forIndexPath: indexPath) as! RHCTodayCell
-            var stationInfo = self.fetchedResultsController.objectAtIndexPath(indexPath) as! CDStation
-            var tmpplot: CDPlot? = stationInfo.lastRegisteredPlot()
+            let stationInfo = self.fetchedResultsController.objectAtIndexPath(indexPath) as! CDStation
 
-            if let plot = tmpplot {
-                let winddir = CGFloat(plot.windDir.floatValue)
-                let windspeed = CGFloat(plot.windAvg.floatValue)
+            if let plot = stationInfo.lastRegisteredPlot() {
+
+                let winddir = CGFloat(plot.windDir!.floatValue)
+                let windspeed = CGFloat(plot.windAvg!.floatValue)
                 let image = DrawArrow.drawArrowAtAngle( winddir, forSpeed:windspeed, highlighted:false, color: UIColor.whiteColor(), hightlightedColor: UIColor.blackColor())
 
                 let raw = AppConfig.sharedConfiguration.applicationUserDefaults.integerForKey("selectedUnit")
                 let unit = SpeedConvertion(rawValue: raw)
 
                 if let realUnit = unit {
-                    let speed = plot.windAvg.speedConvertionTo(realUnit)
+                    let speed = plot.windAvg!.speedConvertionTo(realUnit)
                     if let speedString = speedFormatter.stringFromNumber(speed) {
-                        cell.speedLabel.text = "\(speedString) \(NSNumber.shortUnitNameString(realUnit))"
                         cell.speedLabel.text = speedString
                         cell.unitLabel.text = NSNumber.shortUnitNameString(realUnit)
                     } else {
@@ -172,7 +172,7 @@ class TodayViewController: UITableViewController, NCWidgetProviding, NSFetchedRe
 
         let stationInfo = self.fetchedResultsController.objectAtIndexPath(indexPath) as! CDStation
 
-        let url = NSURL(string: "vindsiden://station/\(stationInfo.stationId)?todayView=1")
+        let url = NSURL(string: "vindsiden://station/\(stationInfo.stationId!)?todayView=1")
         if let actual = url {
             extensionContext?.openURL( actual, completionHandler:  nil)
         }
@@ -192,11 +192,12 @@ class TodayViewController: UITableViewController, NCWidgetProviding, NSFetchedRe
         fetchRequest.predicate = NSPredicate(format: "isHidden = NO", argumentArray: nil)
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: "order", ascending: true)]
 
-        _fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: Datamanager.sharedManager().managedObjectContext!, sectionNameKeyPath: nil, cacheName: nil)
+        _fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: Datamanager.sharedManager().managedObjectContext, sectionNameKeyPath: nil, cacheName: nil)
         _fetchedResultsController!.delegate = self
 
-        let success = _fetchedResultsController!.performFetch(nil)
-        if success == false {
+        do {
+            try _fetchedResultsController!.performFetch()
+        } catch {
             NSLog("Fetching stations failed")
             abort()
         }
@@ -255,24 +256,35 @@ class TodayViewController: UITableViewController, NCWidgetProviding, NSFetchedRe
 
 
     func infoCellHeight() -> CGFloat {
-        let infoCell = tableView.dequeueReusableCellWithIdentifier(TableViewConstants.CellIdentifiers.message) as! RHCTodayCell
-        infoCell.nameLabel?.text = "123"
-        infoCell.updatedLabel?.text = "123"
-        infoCell.layoutIfNeeded()
+        let cell = infoCell
+        cell.nameLabel?.text = "123"
+        cell.updatedLabel?.text = "123"
+        cell.layoutIfNeeded()
 
-        let infoSize = infoCell.contentView.systemLayoutSizeFittingSize(UILayoutFittingCompressedSize)
+        let infoSize = cell.contentView.systemLayoutSizeFittingSize(UILayoutFittingCompressedSize)
         return infoSize.height
     }
 
 
     func showCellHeight() -> CGFloat {
-        let infoCell = tableView.dequeueReusableCellWithIdentifier(TableViewConstants.CellIdentifiers.showall) as! UITableViewCell
-        infoCell.textLabel?.text = "123"
-        infoCell.layoutIfNeeded()
 
-        let infoSize = infoCell.contentView.systemLayoutSizeFittingSize(UILayoutFittingCompressedSize)
+        let cell = showCell
+        cell.textLabel?.text = "123"
+        cell.layoutIfNeeded()
+
+        let infoSize = cell.contentView.systemLayoutSizeFittingSize(UILayoutFittingCompressedSize)
         return infoSize.height
     }
+
+
+    lazy var infoCell: RHCTodayCell = {
+        return self.tableView.dequeueReusableCellWithIdentifier(TableViewConstants.CellIdentifiers.message) as! RHCTodayCell
+    }()
+
+
+    lazy var showCell: UITableViewCell = {
+        return self.tableView.dequeueReusableCellWithIdentifier(TableViewConstants.CellIdentifiers.showall)!
+    }()
 
 
     // MARK: - Fetch

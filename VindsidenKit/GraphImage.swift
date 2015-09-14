@@ -7,6 +7,8 @@
 //
 
 import Foundation
+import CoreGraphics
+
 
 
 public final class GraphImage {
@@ -62,7 +64,7 @@ public final class GraphImage {
         let earliestDate: NSDate
         let latestDate: NSDate
 
-        if count(plots) > 0 {
+        if plots.count > 0 {
             earliestDate = plots.last?.valueForKeyPath("plotTime") as! NSDate
             latestDate = (plots.first?.valueForKeyPath("plotTime") as! NSDate).dateByAddingTimeInterval(3600)
         } else {
@@ -80,9 +82,14 @@ public final class GraphImage {
 
 
     public func drawImage() -> UIImage {
+        let ctx = UIGraphicsGetCurrentContext()
+        CGContextDrawPath(ctx, CGPathDrawingMode.Stroke)
+
 
         UIGraphicsBeginImageContextWithOptions( size, false, scale)
         let context = UIGraphicsGetCurrentContext()
+
+        CGContextDrawPath(context, CGPathDrawingMode.Stroke)
 
         drawSpeedLines(context)
         drawHourLines(context)
@@ -114,7 +121,7 @@ public final class GraphImage {
         CGContextMoveToPoint( context, bounds.minX, bounds.minY-5.0)
         CGContextAddLineToPoint( context, bounds.minX, bounds.maxY)
 
-        CGContextDrawPath( context, kCGPathStroke)
+        CGContextDrawPath(context, CGPathDrawingMode.Stroke)
 
         CGContextRestoreGState(context)
     }
@@ -122,9 +129,6 @@ public final class GraphImage {
 
     final func drawSpeedLines( context: CGContext! ) -> Void {
         CGContextSaveGState(context);
-
-        let raw = AppConfig.sharedConfiguration.applicationUserDefaults.integerForKey("selectedUnit")
-        let unit = SpeedConvertion(rawValue: raw)!
 
         let plotMaxValue = self.plotMaxValue()
         var totSteps = min(5, plotMaxValue)
@@ -143,7 +147,7 @@ public final class GraphImage {
         }
 
         CGContextClosePath(context)
-        CGContextDrawPath( context, kCGPathStroke)
+        CGContextDrawPath(context, CGPathDrawingMode.Stroke)
 
         CGContextBeginPath(context)
 
@@ -156,7 +160,7 @@ public final class GraphImage {
 
         let lengths = [2.0, 3.0] as [CGFloat]
         CGContextSetLineDash( context, 0.0, lengths, 2)
-        CGContextDrawPath( context, kCGPathStroke)
+        CGContextDrawPath(context, CGPathDrawingMode.Stroke)
 
         CGContextRestoreGState(context)
     }
@@ -180,7 +184,7 @@ public final class GraphImage {
         }
 
         CGContextClosePath(context)
-        CGContextDrawPath( context, kCGPathStroke)
+        CGContextDrawPath(context, CGPathDrawingMode.Stroke)
         CGContextRestoreGState(context)
     }
 
@@ -271,25 +275,25 @@ public final class GraphImage {
         var maxPoints = [CGPoint]()
 
         let plotMaxValue = self.plotMaxValue()
-        let interval = CGFloat(firstPlot.plotTime.timeIntervalSinceDate(self.absoluteStartDate)/60.0)
+        let interval = CGFloat(firstPlot.plotTime!.timeIntervalSinceDate(self.absoluteStartDate)/60.0)
         var x = ceil(bounds.minX + (interval*self.stepX))
 
 
-        for (idx, plot) in enumerate(plots) {
+        for (idx, plot) in plots.enumerate() {
             if idx > 0 {
-                let interval = CGFloat(plot.plotTime.timeIntervalSinceDate(self.absoluteStartDate)/60.0)
+                let interval = CGFloat(plot.plotTime!.timeIntervalSinceDate(self.absoluteStartDate)/60.0)
                 x = ceil(bounds.minX + (interval*self.stepX))
             }
 
-            let rMax = plot.windMax.speedConvertionTo(unit)
+            let rMax = plot.windMax!.speedConvertionTo(unit)
             let yMax = bounds.maxY - (rMax / plotMaxValue) * bounds.height
             maxPoints.append(CGPointMake(x, yMax))
 
-            let rMin = plot.windMin.speedConvertionTo(unit)
+            let rMin = plot.windMin!.speedConvertionTo(unit)
             let yMin = bounds.maxY - (rMin / plotMaxValue) * bounds.height
             minPoints.append(CGPointMake(x, yMin))
 
-            let rAvg = plot.windAvg.speedConvertionTo(unit)
+            let rAvg = plot.windAvg!.speedConvertionTo(unit)
             let yAvg = bounds.maxY - (rAvg / plotMaxValue) * bounds.height
             avgPoints.append(CGPointMake(x, yAvg))
         }
@@ -317,15 +321,15 @@ public final class GraphImage {
         CGContextSaveGState(context)
 
         let firstPlot = plots.first!
-        let interval = CGFloat(firstPlot.plotTime.timeIntervalSinceDate(self.absoluteStartDate)/60.0)
+        let interval = CGFloat(firstPlot.plotTime!.timeIntervalSinceDate(self.absoluteStartDate)/60.0)
         var x = ceil(bounds.minX + (interval*self.stepX))
 
-        for (idx, plot) in enumerate(plots) {
-            let interval = CGFloat(plot.plotTime.timeIntervalSinceDate(self.absoluteStartDate)/60.0)
+        for plot in plots {
+            let interval = CGFloat(plot.plotTime!.timeIntervalSinceDate(self.absoluteStartDate)/60.0)
             x = ceil(bounds.minX + (interval*self.stepX))
 
-            let winddir = CGFloat(plot.windDir.floatValue)
-            let windspeed = CGFloat(plot.windAvg.floatValue)
+            let winddir = CGFloat(plot.windDir!.floatValue)
+            let windspeed = CGFloat(plot.windAvg!.floatValue)
             let image = DrawArrow.drawArrowAtAngle( winddir, forSpeed:windspeed, highlighted:false, color: UIColor.whiteColor(), hightlightedColor: UIColor.blackColor())
 
             image.drawInRect(CGRectMake(x-8.0, bounds.maxY+10, 16.0, 16.0))
@@ -340,8 +344,8 @@ public final class GraphImage {
 
     func bezierPathWithPoints( points: [CGPoint] ) -> UIBezierPath {
         let bezierPath = self.quadCurvedPathWithPoints(points)
-        bezierPath.lineJoinStyle = kCGLineJoinRound
-        bezierPath.lineCapStyle = kCGLineCapRound
+        bezierPath.lineJoinStyle = CGLineJoin.Round
+        bezierPath.lineCapStyle = CGLineCap.Round
         bezierPath.lineWidth = 2.0/scale
 
         return bezierPath
@@ -351,15 +355,15 @@ public final class GraphImage {
     final func quadCurvedPathWithPoints( points:[CGPoint]) -> UIBezierPath {
         let path = UIBezierPath()
 
-        if count(points) > 0 {
+        if points.count > 0 {
 
             var p1 = points.first!
             path.moveToPoint(p1)
 
-            if count(points) == 2 {
+            if points.count == 2 {
                 path.addLineToPoint(points.last!)
             } else {
-                for( var i = 1; i < count(points); i++ ) {
+                for( var i = 1; i < points.count; i++ ) {
                     let p2 = points[i]
                     let midPoint = midPointForPoints(p1, p2)
 
@@ -395,7 +399,7 @@ public final class GraphImage {
 
     final func hourComponentForDate( date:NSDate) -> Int {
         let gregorian = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)!
-        let hourComponents = gregorian.components(.CalendarUnitHour, fromDate: date)
+        let hourComponents = gregorian.components(.Hour, fromDate: date)
         return hourComponents.hour
     }
 
@@ -416,7 +420,7 @@ public final class GraphImage {
 
     class func absoluteDate( date: NSDate, isStart: Bool ) -> NSDate? {
         if  let gregorian = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian) {
-            let inputComponents = gregorian.components(.CalendarUnitYear | .CalendarUnitMonth | .CalendarUnitDay | .CalendarUnitHour, fromDate: date)
+            let inputComponents = gregorian.components([.Year, .Month, .Day, .Hour], fromDate: date)
 
             let components = NSDateComponents()
             components.year = inputComponents.year

@@ -7,10 +7,10 @@
 //
 
 import Foundation
-import SORelativeDateTransformer
+
 
 @objc(AppConfig)
-public class AppConfig {
+public class AppConfig : NSObject {
     private struct Defaults {
         static let firstLaunchKey = "Defaults.firstLaunchKey"
     }
@@ -21,12 +21,22 @@ public class AppConfig {
     }
 
 
+    public struct Notification {
+        public static let networkRequestStart = Bundle.prefix + "." + Bundle.appName + ".NetworkRequestStart"
+        public static let networkRequestEnd = Bundle.prefix + "." + Bundle.appName + ".NetworkRequestEnd"
+    }
+
+
     public struct Bundle {
         static var prefix = "org.juniks" // Could be done automatic by reading info.plist
         static let appName = "VindsidenApp" // Could be done automatic by reading info.plist
         static let todayName = "VindsidenToday"
         static let watchName = "Watch"
+        #if os(iOS)
         public static let frameworkBundleIdentifier = "\(prefix).VindsidenKit"
+        #else
+        public static let frameworkBundleIdentifier = "\(prefix).VindsidenWatchKit"
+        #endif
     }
 
 
@@ -93,12 +103,16 @@ public class AppConfig {
 
     
     private func registerDefaults() {
-        #if os(iOS)
-            let defaultOptions: [NSObject: AnyObject] = [
+        #if os(watchOS)
+            let defaultOptions: [String: AnyObject] = [
+            Defaults.firstLaunchKey: true,
+            ]
+        #elseif os(iOS)
+            let defaultOptions: [String: AnyObject] = [
                 Defaults.firstLaunchKey: true,
             ]
             #elseif os(OSX)
-            let defaultOptions: [NSObject: AnyObject] = [
+            let defaultOptions: [String: AnyObject] = [
             Defaults.firstLaunchKey: true
             ]
         #endif
@@ -123,12 +137,7 @@ public class AppConfig {
         } else {
             dateToUse = NSDate()
         }
-        return self.relativeDateTransformer.transformedValue(dateToUse) as! NSString
+
+        return dateToUse.releativeString()
     }
-
-
-    private lazy var relativeDateTransformer: SORelativeDateTransformer = {
-        var _relativeDateTransformer = SORelativeDateTransformer()
-        return _relativeDateTransformer
-        }()
 }

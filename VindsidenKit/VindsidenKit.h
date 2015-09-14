@@ -26,7 +26,4 @@ FOUNDATION_EXPORT const unsigned char VindsidenKitVersionString[];
 #import <VindsidenKit/UIFontDescriptor+textStyle.h>
 #import <VindsidenKit/UIImage+ImageFromView.h>
 
-#import <VindsidenKit/CDPlot.h>
-#import <VindsidenKit/CDStation.h>
 #import <VindsidenKit/DrawArrow.h>
-#import <VindsidenKit/RHEVindsidenAPIClient.h>
