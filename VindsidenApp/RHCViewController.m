@@ -158,7 +158,7 @@ static NSString *kCellID = @"stationCellID";
         self.pendingScrollToStation = nil;
     }
 
-    if ( self.currentIndexPath != nil ) {
+    if ( self.currentIndexPath != nil && self.fetchedResultsController.fetchedObjects.count > 0 ) {
         [self.collectionView scrollToItemAtIndexPath:self.currentIndexPath atScrollPosition:UICollectionViewScrollPositionLeft animated:NO];
     }
 }
