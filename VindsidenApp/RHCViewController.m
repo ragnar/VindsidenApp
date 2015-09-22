@@ -394,7 +394,7 @@ static NSString *kCellID = @"stationCellID";
             }
 
             [self updateApplicationContextToWatch];
-            
+            [[Datamanager sharedManager] indexVisibleStations];
         });
     }];
 
