@@ -54,7 +54,7 @@ extern CGFloat RadiansToDegrees(CGFloat radians);
         self.label.backgroundColor = RGBCOLOR( 71.0, 63.0, 58.0); //[UIColor blackColor];
         self.label.clipsToBounds = NO;
         self.label.textColor = [UIColor whiteColor];
-        self.label.font = [UIFont fontWithName:@"HelveticaNeue" size:14.0];
+        self.label.font = [UIFont systemFontOfSize:14.0];
         self.label.textAlignment = NSTextAlignmentCenter;
 
         [self addSubview:self.label];

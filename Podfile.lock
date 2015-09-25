@@ -1,5 +1,5 @@
 PODS:
-  - JTSImageViewController (1.4)
+  - JTSImageViewController (1.5.1)
   - MotionJpegImageView (0.0.1)
 
 DEPENDENCIES:
@@ -7,7 +7,7 @@ DEPENDENCIES:
   - MotionJpegImageView
 
 SPEC CHECKSUMS:
-  JTSImageViewController: 6a367b144e257db02cdfacdba78d684377d3777b
+  JTSImageViewController: 1f8ce1cc93dab0d0af8e53badeea7528560cfec9
   MotionJpegImageView: f79da61c7ed19203fb3b01c067a57e356954741a
 
 COCOAPODS: 0.38.2

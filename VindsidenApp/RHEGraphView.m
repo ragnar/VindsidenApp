@@ -293,7 +293,7 @@ const NSInteger kMinSpeedLines = 3;
 
     CGContextSetAllowsAntialiasing( context, YES);
 
-    NSDictionary *drawAttr = @{ NSFontAttributeName : [UIFont fontWithName:@"HelveticaNeue-Light" size:10.0]};
+    NSDictionary *drawAttr = @{ NSFontAttributeName : [UIFont systemFontOfSize:10.0 weight:UIFontWeightLight]};
     CGRect labelBounds = CGRectZero;
 
     NSInteger i = 0;
@@ -314,7 +314,7 @@ const NSInteger kMinSpeedLines = 3;
     [paragraphStyle setAlignment:NSTextAlignmentLeft];
 
     drawAttr = @{
-                 NSFontAttributeName : [UIFont fontWithName:@"HelveticaNeue-Bold" size:10.0],
+                 NSFontAttributeName : [UIFont boldSystemFontOfSize:10.0],
                  NSParagraphStyleAttributeName : paragraphStyle
                  };
     labelBounds = [unitName boundingRectWithSize:CGSizeMake( 40.0, 21.0)
@@ -331,7 +331,7 @@ const NSInteger kMinSpeedLines = 3;
     [paragraphStyle setAlignment:NSTextAlignmentRight];
 
     drawAttr = @{
-                 NSFontAttributeName : [UIFont fontWithName:@"HelveticaNeue-Light" size:12.0],
+                 NSFontAttributeName : [UIFont systemFontOfSize:12.0 weight:UIFontWeightLight],
                  NSParagraphStyleAttributeName : paragraphStyle,
                  NSForegroundColorAttributeName : [UIColor lightGrayColor]
                  };

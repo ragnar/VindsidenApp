@@ -394,7 +394,7 @@ static NSString *kCellID = @"stationCellID";
             }
 
             [self updateApplicationContextToWatch];
-            
+            [[Datamanager sharedManager] indexVisibleStations];
         });
     }];
 
@@ -521,7 +521,6 @@ static NSString *kCellID = @"stationCellID";
 {
     [self updateApplicationContextToWatch];
     [[WindManager sharedManager] updateNow];
-    [[Datamanager sharedManager] indexActiveStations];
 
     if ( [[self.collectionView visibleCells] count] ) {
         RHCStationCell *cell = [self.collectionView visibleCells][0];

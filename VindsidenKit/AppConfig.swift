@@ -13,6 +13,7 @@ import Foundation
 public class AppConfig : NSObject {
     private struct Defaults {
         static let firstLaunchKey = "Defaults.firstLaunchKey"
+        private static let spotlightIndexed = "Defaults.spotlightIndexed"
     }
 
 
@@ -101,7 +102,17 @@ public class AppConfig : NSObject {
         }
     }
 
-    
+
+    public private(set) var isSpotlightIndexed: Bool {
+        get {
+            return applicationUserDefaults.boolForKey(Defaults.spotlightIndexed)
+        }
+        set {
+            applicationUserDefaults.setBool(newValue, forKey: Defaults.spotlightIndexed)
+        }
+    }
+
+
     private func registerDefaults() {
         #if os(watchOS)
             let defaultOptions: [String: AnyObject] = [
@@ -128,6 +139,15 @@ public class AppConfig : NSObject {
             firstLaunchHandler()
         }
     }
+
+
+    public func shouldIndexForFirstTime( completionHandler: Void -> Void) {
+        if isSpotlightIndexed == false {
+            isSpotlightIndexed = true
+            completionHandler()
+        }
+    }
+
 
     public func relativeDate( dateOrNil: NSDate?) -> NSString {
         var dateToUse: NSDate

@@ -117,47 +117,15 @@ public class Datamanager : NSObject
 
 
     #if os(iOS)
-    public func indexActiveStations() -> Void {
-        DLOG("Trying new indexing method")
-        return
 
-        let stations = CDStation.visibleStationsInManagedObjectContext(Datamanager.sharedManager().managedObjectContext)
-        var items = [CSSearchableItem]()
-
-        for station in stations {
-            let search = CSSearchableItemAttributeSet(itemContentType: kUTTypeContent as String)
-            search.city = station.city
-            search.latitude = station.coordinateLat
-            search.longitude = station.coordinateLon
-            search.namedLocation = station.city
-            search.displayName = station.stationName
-            search.copyright = station.copyright
-            search.keywords = ["kite", "surf", "wind", "fluid", "naish", "ozone", "f-one"]
-            search.title = station.stationName
-            search.contentDescription = station.city
-
-            let url = "vindsiden://station/\(station.stationId!)"
-            let item = CSSearchableItem(uniqueIdentifier: url, domainIdentifier: AppConfig.Bundle.appName, attributeSet: search)
-            items.append(item)
-        }
-
-        let index = CSSearchableIndex()
-        index.beginIndexBatch()
-
-        index.deleteAllSearchableItemsWithCompletionHandler { (error: NSError?) -> Void in
-            DLOG("Removed all indexed entries: \(error?.localizedDescription)")
-
-            if items.count > 0 {
-                CSSearchableIndex.defaultSearchableIndex().indexSearchableItems(items, completionHandler: { (error: NSError?) -> Void in
-                    DLOG("Index completed: \(error?.localizedDescription)")
-                })
+    public func indexVisibleStations() {
+        AppConfig.sharedConfiguration.shouldIndexForFirstTime() {
+            for station in CDStation.visibleStationsInManagedObjectContext(self.managedObjectContext) {
+                self.addStationToIndex(station)
             }
         }
-
-        index.endIndexBatchWithClientState(NSData()) { (error: NSError?) -> Void in
-            DLOG("Index completed: \(error?.localizedDescription)")
-        }
     }
+
 
     public func addStationToIndex( station: CDStation ) {
 

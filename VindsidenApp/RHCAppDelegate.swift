@@ -43,8 +43,6 @@ class RHCAppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate {
             WindManager.sharedManager.startUpdating()
         }
 
-        Datamanager.sharedManager().indexActiveStations()
-
         application.setMinimumBackgroundFetchInterval(UIApplicationBackgroundFetchIntervalMinimum)
 
         return true
