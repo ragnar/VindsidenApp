@@ -36,8 +36,8 @@ public class WindManager : NSObject {
     override init() {
         super.init()
         #if os(iOS)
-            NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("applicationDidEnterBackground:"), name: UIApplicationDidEnterBackgroundNotification, object: nil)
-            NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("applicationWillEnterForeground:"), name: UIApplicationWillEnterForegroundNotification, object: nil)
+            NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(UIApplicationDelegate.applicationDidEnterBackground(_:)), name: UIApplicationDidEnterBackgroundNotification, object: nil)
+            NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(UIApplicationDelegate.applicationWillEnterForeground(_:)), name: UIApplicationWillEnterForegroundNotification, object: nil)
         #endif
     }
 
@@ -51,7 +51,7 @@ public class WindManager : NSObject {
         stopUpdating()
 
         if refreshInterval > 0 {
-            let timer = NSTimer.scheduledTimerWithTimeInterval( refreshInterval, target: self, selector: Selector("updateTimerFired:"), userInfo: nil, repeats: true)
+            let timer = NSTimer.scheduledTimerWithTimeInterval( refreshInterval, target: self, selector: #selector(WindManager.updateTimerFired(_:)), userInfo: nil, repeats: true)
             updateTimer = timer
         }
 

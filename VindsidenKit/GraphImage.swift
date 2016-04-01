@@ -141,9 +141,12 @@ public final class GraphImage {
 
         CGContextBeginPath(context)
 
-        for ( var y = bounds.maxY; y >= bounds.minY; y=ceil(y-plotStep)) {
+        var y = bounds.maxY
+
+        while ( y >= bounds.minY) {
             CGContextMoveToPoint( context, bounds.minX - (2.0/scale), y)
             CGContextAddLineToPoint( context, bounds.minX, y)
+            y = ceil(y-plotStep)
         }
 
         CGContextClosePath(context)
@@ -151,9 +154,12 @@ public final class GraphImage {
 
         CGContextBeginPath(context)
 
-        for ( var y = ceil(bounds.maxY-plotStep); y >= bounds.minY; y=ceil(y-plotStep)) {
+        y = ceil(bounds.maxY-plotStep)
+
+        while ( y >= bounds.minY) {
             CGContextMoveToPoint( context, bounds.minX, y)
             CGContextAddLineToPoint( context, bounds.maxX, y)
+            y = ceil(y-plotStep)
         }
 
         UIColor.lightGrayColor().set()
@@ -175,7 +181,8 @@ public final class GraphImage {
 
         let hours = self.hours()
 
-        for ( var i = 0.0; i <= hours; i+=0.25 ) {
+
+        for i in 0.stride(through: hours, by: 0.25) {
             let lineLength = CGFloat( 0 == fmod(i, 1) ? (4.0/scale) : (2.0/scale))
             let x = CGFloat(ceil(Double(bounds.minX) + (i*(Double(bounds.width)/hours))))
 
@@ -199,7 +206,7 @@ public final class GraphImage {
             NSForegroundColorAttributeName : UIColor.whiteColor()
         ]
 
-        for ( var i = 0.0; i <= hours; i++ ) {
+        for i in 0.stride(through: hours, by: 1) {
             let x = CGFloat(ceil(Double(bounds.minX) + (i*(Double(bounds.width)/hours))))
             let hs = String(format: "%02ld", hourComponentForDate(self.earliestDate.dateByAddingTimeInterval((3600*i)))) as NSString
             let labelBounds = hs.boundingRectWithSize(CGSizeMake( 40.0, 21.0), options: .UsesLineFragmentOrigin, attributes: drawAttr, context: nil)
@@ -232,13 +239,16 @@ public final class GraphImage {
         var labelBounds = CGRectZero
 
         var i: CGFloat = 0.0
-        for ( var y = bounds.maxY; y >= bounds.minY; y=ceil(y-plotStep)) {
+        var y = bounds.maxY
+
+        while ( y >= bounds.minY) {
             if let hs = speedFormatter.stringFromNumber(i*(plotMaxValue/totSteps)) {
                 labelBounds = hs.boundingRectWithSize(CGSizeMake( 40.0, 21.0), options: .UsesLineFragmentOrigin, attributes: drawAttr, context: nil)
                 let point = CGPointMake( ceil(bounds.minX-CGRectGetWidth(labelBounds)-5), ceil(y-(CGRectGetHeight(labelBounds)/2)-(2/scale)) )
                 hs.drawAtPoint( point, withAttributes: drawAttr)
             }
-            i++;
+            i += 1
+            y = ceil(y-plotStep)
         }
 
         let unitString = NSNumber.shortUnitNameString(unit)
@@ -363,7 +373,7 @@ public final class GraphImage {
             if points.count == 2 {
                 path.addLineToPoint(points.last!)
             } else {
-                for( var i = 1; i < points.count; i++ ) {
+                for i in 1..<points.count {
                     let p2 = points[i]
                     let midPoint = midPointForPoints(p1, p2)
 

@@ -37,7 +37,7 @@ public class Datamanager : NSObject
 
     public required override init() {
         super.init()
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("mainManagedObjectContextDidSave:"), name: NSManagedObjectContextDidSaveNotification, object: managedObjectContext)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(Datamanager.mainManagedObjectContextDidSave(_:)), name: NSManagedObjectContextDidSaveNotification, object: managedObjectContext)
     }
 
 

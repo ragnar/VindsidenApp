@@ -22,7 +22,7 @@ class RHCUnitSelectorViewController : UITableViewController
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("preferredContentSizeDidChange:"), name: UIContentSizeCategoryDidChangeNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(RHCUnitSelectorViewController.preferredContentSizeDidChange(_:)), name: UIContentSizeCategoryDidChangeNotification, object: nil)
     }
 
 

@@ -46,7 +46,7 @@ class RHCAlertManager : NSObject
 
             weak var weakAlert = self.networkAlertController
 
-            let defaultAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: { (action : UIAlertAction!) -> Void in
+            let defaultAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: { (action : UIAlertAction) -> Void in
                 weakAlert?.dismissViewControllerAnimated(true, completion: nil)
                 self.showingError = false
             })
