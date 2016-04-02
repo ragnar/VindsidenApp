@@ -118,16 +118,18 @@ public class Datamanager : NSObject
 
     #if os(iOS)
 
-    public func indexVisibleStations() {
+    public func indexVisibleStations( ) {
         AppConfig.sharedConfiguration.shouldIndexForFirstTime() {
+            let index: CSSearchableIndex = CSSearchableIndex.defaultSearchableIndex()
+
             for station in CDStation.visibleStationsInManagedObjectContext(self.managedObjectContext) {
-                self.addStationToIndex(station)
+                self.addStationToIndex(station, index: index)
             }
         }
     }
 
 
-    public func addStationToIndex( station: CDStation ) {
+    public func addStationToIndex( station: CDStation, index: CSSearchableIndex = CSSearchableIndex.defaultSearchableIndex() ) {
 
         if CSSearchableIndex.isIndexingAvailable() == false {
             DLOG("Indexing not available")
@@ -154,7 +156,7 @@ public class Datamanager : NSObject
     }
 
 
-    public func removeStationFromIndex( station: CDStation ) {
+    public func removeStationFromIndex( station: CDStation, index: CSSearchableIndex = CSSearchableIndex.defaultSearchableIndex() ) {
 
         if CSSearchableIndex.isIndexingAvailable() == false {
             DLOG("Indexing not available")

@@ -29,6 +29,7 @@
 		AD17EDC717312A5000943C33 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = AD17EDC517312A5000943C33 /* Localizable.strings */; };
 		AD17EDF91736492500943C33 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD17EDF81736492200943C33 /* AdSupport.framework */; };
 		AD1812A81AF9E77F0040080D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = AD1812A61AF9E77F0040080D /* InfoPlist.strings */; };
+		AD1B45881CAEE9F200F171DB /* IndexRequestHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD66F5641CAEBA8B001A2755 /* IndexRequestHandler.swift */; };
 		AD2AB4F819C722320029C739 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = AD2AB4FA19C722320029C739 /* InfoPlist.strings */; };
 		AD2AB4FD19C722330029C739 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = AD2AB4FF19C722330029C739 /* InfoPlist.strings */; };
 		AD2AB50219C722330029C739 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = AD2AB50419C722330029C739 /* Localizable.strings */; };
@@ -77,6 +78,9 @@
 		AD539CB31947B5CA002644BD /* VindsidenKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = AD539C9D1947B5CA002644BD /* VindsidenKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		AD539CC51947B61E002644BD /* VindsidenKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD539C9D1947B5CA002644BD /* VindsidenKit.framework */; };
 		AD539CC71947B684002644BD /* Datamanager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD539CC61947B684002644BD /* Datamanager.swift */; };
+		AD66F5651CAEBA8B001A2755 /* IndexRequestHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD66F5641CAEBA8B001A2755 /* IndexRequestHandler.swift */; };
+		AD66F5691CAEBA8B001A2755 /* VindSidenSpotlight.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = AD66F5621CAEBA8B001A2755 /* VindSidenSpotlight.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		AD66F56D1CAEBBC0001A2755 /* VindsidenKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD539C9D1947B5CA002644BD /* VindsidenKit.framework */; };
 		AD6BD0ED1A9506C900E6686B /* Global.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD6BD0EC1A9506C900E6686B /* Global.swift */; };
 		AD6BD0F11A96797D00E6686B /* StationDetailsInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD6BD0EE1A96797D00E6686B /* StationDetailsInterfaceController.swift */; };
 		AD6BD0F31A96797D00E6686B /* StationsRowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD6BD0F01A96797D00E6686B /* StationsRowController.swift */; };
@@ -236,6 +240,13 @@
 			remoteGlobalIDString = AD539C9C1947B5CA002644BD;
 			remoteInfo = VindsidenKit;
 		};
+		AD66F5671CAEBA8B001A2755 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AD17ED3C1731012200943C33 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = AD66F5611CAEBA8B001A2755;
+			remoteInfo = VindSidenSpotlight;
+		};
 		AD674D9E1962E94900BF257B /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = AD17ED3C1731012200943C33 /* Project object */;
@@ -292,6 +303,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
+				AD66F5691CAEBA8B001A2755 /* VindSidenSpotlight.appex in Embed App Extensions */,
 				AD539C8E1947B0F7002644BD /* org.juniks.VindsidenApp.VindsidenToday.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
@@ -394,6 +406,10 @@
 		AD539CAD1947B5CA002644BD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AD539CAE1947B5CA002644BD /* VindsidenKitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VindsidenKitTests.swift; sourceTree = "<group>"; };
 		AD539CC61947B684002644BD /* Datamanager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Datamanager.swift; sourceTree = "<group>"; };
+		AD66F5621CAEBA8B001A2755 /* VindSidenSpotlight.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = VindSidenSpotlight.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		AD66F5641CAEBA8B001A2755 /* IndexRequestHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndexRequestHandler.swift; sourceTree = "<group>"; };
+		AD66F5661CAEBA8B001A2755 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		AD66F56E1CAEBEE7001A2755 /* VindSidenSpotlight.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = VindSidenSpotlight.entitlements; sourceTree = "<group>"; };
 		AD674DA81962EB7100BF257B /* libPods.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libPods.a; path = "Pods/build/Debug-iphoneos/libPods.a"; sourceTree = "<group>"; };
 		AD6BD0EC1A9506C900E6686B /* Global.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Global.swift; sourceTree = "<group>"; };
 		AD6BD0EE1A96797D00E6686B /* StationDetailsInterfaceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StationDetailsInterfaceController.swift; sourceTree = "<group>"; };
@@ -530,6 +546,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		AD66F55F1CAEBA8B001A2755 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AD66F56D1CAEBBC0001A2755 /* VindsidenKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		ADCB8A731A94F52D009225B1 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -563,6 +587,7 @@
 				ADCB8A771A94F52D009225B1 /* VindsidenApp WatchKit Extension */,
 				ADCB8A891A94F52D009225B1 /* VindsidenApp WatchKit App */,
 				AD303C291B282DC800C4B999 /* VindsidenWatchKit */,
+				AD66F5631CAEBA8B001A2755 /* VindSidenSpotlight */,
 				AD17ED461731012200943C33 /* Frameworks */,
 				AD17ED451731012200943C33 /* Products */,
 				4F37DDAD128422127628247E /* Pods */,
@@ -580,6 +605,7 @@
 				ADCB8A761A94F52D009225B1 /* VindsidenApp WatchKit Extension.appex */,
 				ADCB8A851A94F52D009225B1 /* VindsidenApp WatchKit App.app */,
 				AD303C281B282DC800C4B999 /* VindsidenWatchKit.framework */,
+				AD66F5621CAEBA8B001A2755 /* VindSidenSpotlight.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -816,6 +842,16 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		AD66F5631CAEBA8B001A2755 /* VindSidenSpotlight */ = {
+			isa = PBXGroup;
+			children = (
+				AD66F56E1CAEBEE7001A2755 /* VindSidenSpotlight.entitlements */,
+				AD66F5641CAEBA8B001A2755 /* IndexRequestHandler.swift */,
+				AD66F5661CAEBA8B001A2755 /* Info.plist */,
+			);
+			path = VindSidenSpotlight;
+			sourceTree = "<group>";
+		};
 		AD7BBB4E1A409FF000883770 /* Data Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -986,6 +1022,7 @@
 				AD539C901947B0F7002644BD /* PBXTargetDependency */,
 				AD539CB51947B5CA002644BD /* PBXTargetDependency */,
 				AD303C1F1B282C6100C4B999 /* PBXTargetDependency */,
+				AD66F5681CAEBA8B001A2755 /* PBXTargetDependency */,
 			);
 			name = VindsidenApp;
 			productName = "Vindsiden-v2";
@@ -1087,6 +1124,23 @@
 			productReference = AD539CA71947B5CA002644BD /* VindsidenKitTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		AD66F5611CAEBA8B001A2755 /* VindSidenSpotlight */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AD66F56A1CAEBA8C001A2755 /* Build configuration list for PBXNativeTarget "VindSidenSpotlight" */;
+			buildPhases = (
+				AD66F55E1CAEBA8B001A2755 /* Sources */,
+				AD66F55F1CAEBA8B001A2755 /* Frameworks */,
+				AD66F5601CAEBA8B001A2755 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = VindSidenSpotlight;
+			productName = VindSidenSpotlight;
+			productReference = AD66F5621CAEBA8B001A2755 /* VindSidenSpotlight.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 		ADCB8A751A94F52D009225B1 /* VindsidenApp WatchKit Extension */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = ADCB8A991A94F52D009225B1 /* Build configuration list for PBXNativeTarget "VindsidenApp WatchKit Extension" */;
@@ -1131,7 +1185,7 @@
 			attributes = {
 				CLASSPREFIX = RHC;
 				LastSwiftMigration = 0730;
-				LastSwiftUpdateCheck = 0700;
+				LastSwiftUpdateCheck = 0730;
 				LastTestingUpgradeCheck = 0600;
 				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = RHC;
@@ -1171,6 +1225,15 @@
 						CreatedOnToolsVersion = 6.0;
 						TestTargetID = AD539C9C1947B5CA002644BD;
 					};
+					AD66F5611CAEBA8B001A2755 = {
+						CreatedOnToolsVersion = 7.3;
+						DevelopmentTeam = U69P77X647;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
+						};
+					};
 					ADCB8A751A94F52D009225B1 = {
 						CreatedOnToolsVersion = 6.2;
 						DevelopmentTeam = U69P77X647;
@@ -1185,7 +1248,7 @@
 						DevelopmentTeam = U69P77X647;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
-								enabled = 1;
+								enabled = 0;
 							};
 						};
 					};
@@ -1213,6 +1276,7 @@
 				ADCB8A751A94F52D009225B1 /* VindsidenApp WatchKit Extension */,
 				ADCB8A841A94F52D009225B1 /* VindsidenApp WatchKit App */,
 				AD303C271B282DC800C4B999 /* VindsidenWatchKit */,
+				AD66F5611CAEBA8B001A2755 /* VindSidenSpotlight */,
 			);
 		};
 /* End PBXProject section */
@@ -1270,6 +1334,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				AD2AB4FD19C722330029C739 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AD66F5601CAEBA8B001A2755 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1359,6 +1430,7 @@
 				AD17EDAA1731066F00943C33 /* RHEGraphMarker.m in Sources */,
 				AD17EDAB1731066F00943C33 /* RHEGraphView.m in Sources */,
 				AD4DEA7719CB7528002A220B /* RHCNavigationViewController.swift in Sources */,
+				AD1B45881CAEE9F200F171DB /* IndexRequestHandler.swift in Sources */,
 				AD32E38119BA2FC2008F00EB /* RHEStationPickerViewController.swift in Sources */,
 				ADDB4F5019CB68F1005D5D38 /* RHCAlertManager.swift in Sources */,
 				AD71965C19EED713006FA2BC /* RHCSettingsViewController.swift in Sources */,
@@ -1451,6 +1523,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		AD66F55E1CAEBA8B001A2755 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AD66F5651CAEBA8B001A2755 /* IndexRequestHandler.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		ADCB8A721A94F52D009225B1 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1534,6 +1614,11 @@
 			isa = PBXTargetDependency;
 			target = AD539C9C1947B5CA002644BD /* VindsidenKit */;
 			targetProxy = AD539CC31947B5CC002644BD /* PBXContainerItemProxy */;
+		};
+		AD66F5681CAEBA8B001A2755 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = AD66F5611CAEBA8B001A2755 /* VindSidenSpotlight */;
+			targetProxy = AD66F5671CAEBA8B001A2755 /* PBXContainerItemProxy */;
 		};
 		AD674D9F1962E94900BF257B /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -2127,6 +2212,63 @@
 			};
 			name = Release;
 		};
+		AD66F56B1CAEBA8C001A2755 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CODE_SIGN_ENTITLEMENTS = VindSidenSpotlight/VindSidenSpotlight.entitlements;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				INFOPLIST_FILE = VindSidenSpotlight/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = org.juniks.VindsidenApp.VindSidenSpotlight;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		AD66F56C1CAEBA8C001A2755 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CODE_SIGN_ENTITLEMENTS = VindSidenSpotlight/VindSidenSpotlight.entitlements;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				INFOPLIST_FILE = VindSidenSpotlight/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = org.juniks.VindsidenApp.VindSidenSpotlight;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
 		ADCB8A941A94F52D009225B1 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -2192,7 +2334,6 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = org.juniks.VindsidenApp.watchkitapp.watchkitextension;
 				PRODUCT_NAME = "${TARGET_NAME}";
-				PROVISIONING_PROFILE = "8676bab2-61f3-48b3-b300-d06cf018803a";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "VindsidenApp-Bridging-Header.h";
@@ -2209,7 +2350,6 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
-				CODE_SIGN_ENTITLEMENTS = "VindsidenApp WatchKit App/VindsidenApp WatchKit App.entitlements";
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				ENABLE_BITCODE = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -2242,7 +2382,6 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
-				CODE_SIGN_ENTITLEMENTS = "VindsidenApp WatchKit App/VindsidenApp WatchKit App.entitlements";
 				COPY_PHASE_STRIP = NO;
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				ENABLE_BITCODE = YES;
@@ -2327,6 +2466,15 @@
 			buildConfigurations = (
 				AD539CBB1947B5CA002644BD /* Debug */,
 				AD539CBC1947B5CA002644BD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		AD66F56A1CAEBA8C001A2755 /* Build configuration list for PBXNativeTarget "VindSidenSpotlight" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AD66F56B1CAEBA8C001A2755 /* Debug */,
+				AD66F56C1CAEBA8C001A2755 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
