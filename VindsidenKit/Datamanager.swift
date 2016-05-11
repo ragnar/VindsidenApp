@@ -259,6 +259,6 @@ public class Datamanager : NSObject
             date = self.dateFormatter.dateFromString(string)
         };
 
-        return date!;
+        return date ?? NSDate.init(timeIntervalSince1970: 0)
     }
 }

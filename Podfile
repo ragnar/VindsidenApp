@@ -1,16 +1,15 @@
 source 'https://github.com/CocoaPods/Specs.git'
 
-target:"VindsidenApp", exclusive: true do
-    platform :ios, "9.0"
-    use_frameworks!
-    link_with "VindsidenApp"
+abstract_target 'VindsidenAppCommon' do
+  use_frameworks!
 
+  target 'VindsidenApp' do
+    platform :ios, "9.0"
     pod "MotionJpegImageView"
     pod "JTSImageViewController"
-end
+  end
 
-target:"VindsidenApp WatchKit Extension", exclusive: true do
+  target "VindsidenApp WatchKit Extension" do
     platform :watchos, "9.0"
-    use_frameworks!
-    link_with "VindsidenApp WatchKit Extension"
+  end
 end
