@@ -7,8 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		01C359AAAB54CE4659EA0A4A /* Pods_VindsidenApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 556918A4909ABAB4F47389F9 /* Pods_VindsidenApp.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		2BA95CBF900AAE495D190976 /* Pods_VindsidenApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 295AF8FC54CEB03D179399C6 /* Pods_VindsidenApp.framework */; };
 		3B5D05C719C3002F000AE4E0 /* Launch Screen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3B5D05C619C3002F000AE4E0 /* Launch Screen.xib */; };
+		8F5C2CE1272FC9BE3E036F6B /* Pods_VindsidenApp_WatchKit_Extension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D7B5EC2BCA5BB91B89E72507 /* Pods_VindsidenApp_WatchKit_Extension.framework */; };
 		AD003850196E7A6400C3232A /* RHCTodayCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD00384F196E7A6400C3232A /* RHCTodayCell.swift */; };
 		AD07B2C11779E90A004BC24C /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AD07B2C01779E90A004BC24C /* Media.xcassets */; };
 		AD17ED481731012200943C33 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD17ED471731012200943C33 /* UIKit.framework */; };
@@ -145,7 +146,6 @@
 		ADDDB1881B0693C60091D4E8 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = ADDDB1861B0693C60091D4E8 /* Localizable.strings */; };
 		ADE1863D1B9887AF0081EBEA /* RHCRotatingNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADE1863C1B9887AF0081EBEA /* RHCRotatingNavigationController.swift */; };
 		ADE9C4081AAB32840089EB19 /* WindManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADE9C4071AAB32840089EB19 /* WindManager.swift */; };
-		ADF8B2141AA47D9D000CF266 /* Pods_VindsidenApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ADF8B2131AA47D9D000CF266 /* Pods_VindsidenApp.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -323,11 +323,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		1773D1A53059031A48563071 /* Pods-VindsidenApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VindsidenApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-VindsidenApp/Pods-VindsidenApp.release.xcconfig"; sourceTree = "<group>"; };
+		295AF8FC54CEB03D179399C6 /* Pods_VindsidenApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VindsidenApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3B5D05C619C3002F000AE4E0 /* Launch Screen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "Launch Screen.xib"; sourceTree = "<group>"; };
-		3C54CAE3A8FFABD15B6D7663 /* Pods-VindsidenApp WatchKit Extension.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VindsidenApp WatchKit Extension.debug.xcconfig"; path = "Pods/Target Support Files/Pods-VindsidenApp WatchKit Extension/Pods-VindsidenApp WatchKit Extension.debug.xcconfig"; sourceTree = "<group>"; };
-		556918A4909ABAB4F47389F9 /* Pods_VindsidenApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VindsidenApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		5E0B34ABC6A25BCBC2F05463 /* Pods_VindsidenKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VindsidenKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8C9D881489F696686F42BD92 /* Pods-VindsidenApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VindsidenApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-VindsidenApp/Pods-VindsidenApp.debug.xcconfig"; sourceTree = "<group>"; };
+		9D800C36C5EEE810626E4C92 /* Pods-VindsidenApp WatchKit Extension.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VindsidenApp WatchKit Extension.debug.xcconfig"; path = "Pods/Target Support Files/Pods-VindsidenApp WatchKit Extension/Pods-VindsidenApp WatchKit Extension.debug.xcconfig"; sourceTree = "<group>"; };
 		9E713D0A7C32B35097808D07 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AD00384E196E741800C3232A /* VindsidenApp-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "VindsidenApp-Bridging-Header.h"; path = "../VindsidenApp-Bridging-Header.h"; sourceTree = "<group>"; };
 		AD00384F196E7A6400C3232A /* RHCTodayCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RHCTodayCell.swift; sourceTree = "<group>"; };
@@ -384,7 +383,6 @@
 		AD303C281B282DC800C4B999 /* VindsidenWatchKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = VindsidenWatchKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AD303C2A1B282DC800C4B999 /* VindsidenWatchKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VindsidenWatchKit.h; sourceTree = "<group>"; };
 		AD303C2C1B282DC800C4B999 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		AD303C3A1B2831CD00C4B999 /* Pods_VindsidenApp_WatchKit_Extension.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Pods_VindsidenApp_WatchKit_Extension.framework; path = "Pods/../build/Debug-watchos/Pods_VindsidenApp_WatchKit_Extension.framework"; sourceTree = "<group>"; };
 		AD303C531B285BEE00C4B999 /* ExtensionDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtensionDelegate.swift; sourceTree = "<group>"; };
 		AD30995D1BA2DBFB0063B2BC /* VindsidenApp WatchKit App.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "VindsidenApp WatchKit App.entitlements"; sourceTree = "<group>"; };
 		AD30BC5119F024D9000CE40C /* RHCAppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RHCAppDelegate.swift; sourceTree = "<group>"; };
@@ -481,13 +479,19 @@
 		ADDDB18C1B06966B0091D4E8 /* Base */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		ADE1863C1B9887AF0081EBEA /* RHCRotatingNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RHCRotatingNavigationController.swift; sourceTree = "<group>"; };
 		ADE9C4071AAB32840089EB19 /* WindManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WindManager.swift; sourceTree = "<group>"; };
-		ADF8B2131AA47D9D000CF266 /* Pods_VindsidenApp.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Pods_VindsidenApp.framework; path = "Pods/../build/Debug-iphoneos/Pods_VindsidenApp.framework"; sourceTree = "<group>"; };
-		B1C2CCB74DE7178C02FC0848 /* Pods_VindsidenApp_WatchKit_Extension.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VindsidenApp_WatchKit_Extension.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		D077413EC6AD6C77CEEEA239 /* Pods-VindsidenApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VindsidenApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-VindsidenApp/Pods-VindsidenApp.debug.xcconfig"; sourceTree = "<group>"; };
-		F09401EED7EB7506A103D958 /* Pods-VindsidenApp WatchKit Extension.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VindsidenApp WatchKit Extension.release.xcconfig"; path = "Pods/Target Support Files/Pods-VindsidenApp WatchKit Extension/Pods-VindsidenApp WatchKit Extension.release.xcconfig"; sourceTree = "<group>"; };
+		D7B5EC2BCA5BB91B89E72507 /* Pods_VindsidenApp_WatchKit_Extension.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VindsidenApp_WatchKit_Extension.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		DCB5DA17B7909A99F80590F5 /* Pods-VindsidenApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VindsidenApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-VindsidenApp/Pods-VindsidenApp.release.xcconfig"; sourceTree = "<group>"; };
+		F09A6F0E17E90D8099F749D4 /* Pods-VindsidenApp WatchKit Extension.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VindsidenApp WatchKit Extension.release.xcconfig"; path = "Pods/Target Support Files/Pods-VindsidenApp WatchKit Extension/Pods-VindsidenApp WatchKit Extension.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		38D110E36F2E05C83997D748 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		AD17ED411731012200943C33 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -502,7 +506,7 @@
 				AD17ED481731012200943C33 /* UIKit.framework in Frameworks */,
 				AD17ED4A1731012200943C33 /* Foundation.framework in Frameworks */,
 				AD17ED4C1731012200943C33 /* CoreGraphics.framework in Frameworks */,
-				01C359AAAB54CE4659EA0A4A /* Pods_VindsidenApp.framework in Frameworks */,
+				2BA95CBF900AAE495D190976 /* Pods_VindsidenApp.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -534,7 +538,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				ADF8B2141AA47D9D000CF266 /* Pods_VindsidenApp.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -559,19 +562,20 @@
 			buildActionMask = 2147483647;
 			files = (
 				AD303C371B28301F00C4B999 /* VindsidenWatchKit.framework in Frameworks */,
+				8F5C2CE1272FC9BE3E036F6B /* Pods_VindsidenApp_WatchKit_Extension.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		4F37DDAD128422127628247E /* Pods */ = {
+		5959176514C5EBBDCBDEC4CE /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				D077413EC6AD6C77CEEEA239 /* Pods-VindsidenApp.debug.xcconfig */,
-				1773D1A53059031A48563071 /* Pods-VindsidenApp.release.xcconfig */,
-				3C54CAE3A8FFABD15B6D7663 /* Pods-VindsidenApp WatchKit Extension.debug.xcconfig */,
-				F09401EED7EB7506A103D958 /* Pods-VindsidenApp WatchKit Extension.release.xcconfig */,
+				8C9D881489F696686F42BD92 /* Pods-VindsidenApp.debug.xcconfig */,
+				DCB5DA17B7909A99F80590F5 /* Pods-VindsidenApp.release.xcconfig */,
+				9D800C36C5EEE810626E4C92 /* Pods-VindsidenApp WatchKit Extension.debug.xcconfig */,
+				F09A6F0E17E90D8099F749D4 /* Pods-VindsidenApp WatchKit Extension.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -590,7 +594,7 @@
 				AD66F5631CAEBA8B001A2755 /* VindSidenSpotlight */,
 				AD17ED461731012200943C33 /* Frameworks */,
 				AD17ED451731012200943C33 /* Products */,
-				4F37DDAD128422127628247E /* Pods */,
+				5959176514C5EBBDCBDEC4CE /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -614,8 +618,6 @@
 			isa = PBXGroup;
 			children = (
 				ADB7BA411B3A98E9000921E0 /* CoreGraphics.framework */,
-				AD303C3A1B2831CD00C4B999 /* Pods_VindsidenApp_WatchKit_Extension.framework */,
-				ADF8B2131AA47D9D000CF266 /* Pods_VindsidenApp.framework */,
 				AD6BD0F41A967A8800E6686B /* libPods.a */,
 				AD1B7EF119A7E82900D8B253 /* libPods.a */,
 				AD674DA81962EB7100BF257B /* libPods.a */,
@@ -632,9 +634,8 @@
 				AD17ED6B1731012200943C33 /* SenTestingKit.framework */,
 				AD539C831947B0F6002644BD /* NotificationCenter.framework */,
 				9E713D0A7C32B35097808D07 /* Pods.framework */,
-				5E0B34ABC6A25BCBC2F05463 /* Pods_VindsidenKit.framework */,
-				556918A4909ABAB4F47389F9 /* Pods_VindsidenApp.framework */,
-				B1C2CCB74DE7178C02FC0848 /* Pods_VindsidenApp_WatchKit_Extension.framework */,
+				295AF8FC54CEB03D179399C6 /* Pods_VindsidenApp.framework */,
+				D7B5EC2BCA5BB91B89E72507 /* Pods_VindsidenApp_WatchKit_Extension.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -1004,15 +1005,15 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = AD17ED7C1731012200943C33 /* Build configuration list for PBXNativeTarget "VindsidenApp" */;
 			buildPhases = (
-				C241475BBB04408D897C0220 /* Check Pods Manifest.lock */,
+				B79F4F59512F4B2908739667 /* 📦 Check Pods Manifest.lock */,
 				AD17ED401731012200943C33 /* Sources */,
 				AD17ED411731012200943C33 /* Frameworks */,
 				AD17ED421731012200943C33 /* Resources */,
-				A142F9E3FC9E43748F035C84 /* Copy Pods Resources */,
 				AD539C941947B0F7002644BD /* Embed App Extensions */,
 				AD539CB91947B5CA002644BD /* Embed Frameworks */,
-				7960BE503D02208159053E3A /* Embed Pods Frameworks */,
 				AD303C221B282C6100C4B999 /* Embed Watch Content */,
+				B8BC4B595CE4742DF687D534 /* 📦 Embed Pods Frameworks */,
+				D6C4174BF0CB7DBE2DE8331D /* 📦 Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1145,10 +1146,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = ADCB8A991A94F52D009225B1 /* Build configuration list for PBXNativeTarget "VindsidenApp WatchKit Extension" */;
 			buildPhases = (
+				0257F72273108547FC9E66C3 /* 📦 Check Pods Manifest.lock */,
 				ADCB8A721A94F52D009225B1 /* Sources */,
 				ADCB8A731A94F52D009225B1 /* Frameworks */,
 				ADCB8A741A94F52D009225B1 /* Resources */,
 				AD303C501B2851B700C4B999 /* RHE Embed Framework */,
+				E5495818304197F0CDD3DCCE /* 📦 Embed Pods Frameworks */,
+				29E96C431CCCC22A9CE077F9 /* 📦 Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1166,6 +1170,7 @@
 			buildPhases = (
 				ADCB8A831A94F52D009225B1 /* Resources */,
 				AD303C211B282C6100C4B999 /* Embed App Extensions */,
+				38D110E36F2E05C83997D748 /* Frameworks */,
 			);
 			buildRules = (
 			);
@@ -1366,14 +1371,59 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		7960BE503D02208159053E3A /* Embed Pods Frameworks */ = {
+		0257F72273108547FC9E66C3 /* 📦 Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Embed Pods Frameworks";
+			name = "📦 Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		29E96C431CCCC22A9CE077F9 /* 📦 Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-VindsidenApp WatchKit Extension/Pods-VindsidenApp WatchKit Extension-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B79F4F59512F4B2908739667 /* 📦 Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		B8BC4B595CE4742DF687D534 /* 📦 Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Embed Pods Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1381,14 +1431,14 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-VindsidenApp/Pods-VindsidenApp-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		A142F9E3FC9E43748F035C84 /* Copy Pods Resources */ = {
+		D6C4174BF0CB7DBE2DE8331D /* 📦 Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Copy Pods Resources";
+			name = "📦 Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1396,19 +1446,20 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-VindsidenApp/Pods-VindsidenApp-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		C241475BBB04408D897C0220 /* Check Pods Manifest.lock */ = {
+		E5495818304197F0CDD3DCCE /* 📦 Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Check Pods Manifest.lock";
+			name = "📦 Embed Pods Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sanbox is not in sync with the Podfile.lock. Run 'pod install'.\nEOM\n    exit 1\nfi\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-VindsidenApp WatchKit Extension/Pods-VindsidenApp WatchKit Extension-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -1818,7 +1869,7 @@
 		};
 		AD17ED7D1731012200943C33 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D077413EC6AD6C77CEEEA239 /* Pods-VindsidenApp.debug.xcconfig */;
+			baseConfigurationReference = 8C9D881489F696686F42BD92 /* Pods-VindsidenApp.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -1842,7 +1893,7 @@
 		};
 		AD17ED7E1731012200943C33 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1773D1A53059031A48563071 /* Pods-VindsidenApp.release.xcconfig */;
+			baseConfigurationReference = DCB5DA17B7909A99F80590F5 /* Pods-VindsidenApp.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -1865,7 +1916,6 @@
 		};
 		AD2BB35319C7718600349495 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D077413EC6AD6C77CEEEA239 /* Pods-VindsidenApp.debug.xcconfig */;
 			buildSettings = {
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
@@ -1897,7 +1947,6 @@
 		};
 		AD2BB35419C7718600349495 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1773D1A53059031A48563071 /* Pods-VindsidenApp.release.xcconfig */;
 			buildSettings = {
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
@@ -2000,7 +2049,6 @@
 		};
 		AD539C921947B0F7002644BD /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D077413EC6AD6C77CEEEA239 /* Pods-VindsidenApp.debug.xcconfig */;
 			buildSettings = {
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
@@ -2036,7 +2084,6 @@
 		};
 		AD539C931947B0F7002644BD /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1773D1A53059031A48563071 /* Pods-VindsidenApp.release.xcconfig */;
 			buildSettings = {
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
@@ -2068,7 +2115,6 @@
 		};
 		AD539CB71947B5CA002644BD /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D077413EC6AD6C77CEEEA239 /* Pods-VindsidenApp.debug.xcconfig */;
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = YES;
 				CLANG_ENABLE_MODULES = YES;
@@ -2114,7 +2160,6 @@
 		};
 		AD539CB81947B5CA002644BD /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1773D1A53059031A48563071 /* Pods-VindsidenApp.release.xcconfig */;
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = YES;
 				CLANG_ENABLE_MODULES = YES;
@@ -2156,7 +2201,6 @@
 		};
 		AD539CBB1947B5CA002644BD /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D077413EC6AD6C77CEEEA239 /* Pods-VindsidenApp.debug.xcconfig */;
 			buildSettings = {
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
@@ -2187,7 +2231,6 @@
 		};
 		AD539CBC1947B5CA002644BD /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1773D1A53059031A48563071 /* Pods-VindsidenApp.release.xcconfig */;
 			buildSettings = {
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
@@ -2271,6 +2314,7 @@
 		};
 		ADCB8A941A94F52D009225B1 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9D800C36C5EEE810626E4C92 /* Pods-VindsidenApp WatchKit Extension.debug.xcconfig */;
 			buildSettings = {
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
@@ -2309,6 +2353,7 @@
 		};
 		ADCB8A951A94F52D009225B1 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F09A6F0E17E90D8099F749D4 /* Pods-VindsidenApp WatchKit Extension.release.xcconfig */;
 			buildSettings = {
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
