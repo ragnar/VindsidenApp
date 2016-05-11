@@ -30,9 +30,9 @@ class InterfaceController: WKInterfaceController {
         super.awakeWithContext(context)
         stations = populateData()
 
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "receivedStations:", name: WCFetcherNotification.ReceivedStations, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "receivedStations:", name: WCFetcherNotification.ReceivedPlots, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "updatingPlots:", name: WCFetcherNotification.FetchingPlots, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(InterfaceController.receivedStations(_:)), name: WCFetcherNotification.ReceivedStations, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(InterfaceController.receivedStations(_:)), name: WCFetcherNotification.ReceivedPlots, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(InterfaceController.updatingPlots(_:)), name: WCFetcherNotification.FetchingPlots, object: nil)
     }
 
 

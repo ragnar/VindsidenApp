@@ -25,8 +25,8 @@ class NetworkIndicator : NSObject {
 
 
     func startListening() {
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "incrementIndicator:", name: AppConfig.Notification.networkRequestStart, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("decrementIndicator:"), name: AppConfig.Notification.networkRequestEnd, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(NetworkIndicator.incrementIndicator(_:)), name: AppConfig.Notification.networkRequestStart, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(NetworkIndicator.decrementIndicator(_:)), name: AppConfig.Notification.networkRequestEnd, object: nil)
     }
 
 

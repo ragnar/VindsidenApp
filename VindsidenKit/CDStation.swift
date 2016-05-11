@@ -206,7 +206,7 @@ public class CDStation: NSManagedObject, MKAnnotation {
                             Datamanager.sharedManager().addStationToIndex(station)
                         #endif
                     } else {
-                        order++;
+                        order += 1
                         station.order = order
                         station.isHidden = true
                     }

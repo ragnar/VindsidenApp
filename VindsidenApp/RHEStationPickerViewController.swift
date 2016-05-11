@@ -26,7 +26,7 @@ class RHEStationPickerViewController : UITableViewController, NSFetchedResultsCo
         super.viewDidLoad()
 
         navigationItem.rightBarButtonItem = self.editButtonItem()
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("preferredContentSizeDidChange:"), name: UIContentSizeCategoryDidChangeNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(RHEStationPickerViewController.preferredContentSizeDidChange(_:)), name: UIContentSizeCategoryDidChangeNotification, object: nil)
     }
 
 

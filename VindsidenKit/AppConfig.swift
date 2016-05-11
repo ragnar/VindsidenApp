@@ -103,12 +103,12 @@ public class AppConfig : NSObject {
     }
 
 
-    public private(set) var isSpotlightIndexed: Bool {
+    public private(set) var isSpotlightIndexed: Int {
         get {
-            return applicationUserDefaults.boolForKey(Defaults.spotlightIndexed)
+            return applicationUserDefaults.integerForKey(Defaults.spotlightIndexed)
         }
         set {
-            applicationUserDefaults.setBool(newValue, forKey: Defaults.spotlightIndexed)
+            applicationUserDefaults.setInteger(newValue, forKey: Defaults.spotlightIndexed)
         }
     }
 
@@ -142,8 +142,8 @@ public class AppConfig : NSObject {
 
 
     public func shouldIndexForFirstTime( completionHandler: Void -> Void) {
-        if isSpotlightIndexed == false {
-            isSpotlightIndexed = true
+        if isSpotlightIndexed < 2 {
+            isSpotlightIndexed = 2
             completionHandler()
         }
     }

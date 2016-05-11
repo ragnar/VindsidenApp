@@ -56,7 +56,7 @@ import JTSImageViewController
 
         self.tableView.rowHeight = UITableViewAutomaticDimension
 
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("preferredContentSizeDidChange:"), name: UIContentSizeCategoryDidChangeNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(RHEStationDetailsViewController.preferredContentSizeDidChange(_:)), name: UIContentSizeCategoryDidChangeNotification, object: nil)
     }
 
 
