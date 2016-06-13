@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="8187.4" systemVersion="14F27" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="AgC-eL-Hgc">
+<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="AgC-eL-Hgc">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8151.3"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="8092"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="10032"/>
     </dependencies>
     <scenes>
         <!--Vindsiden-->
         <scene sceneID="aou-V4-d1y">
             <objects>
-                <controller title="Vindsiden" id="AgC-eL-Hgc" customClass="InterfaceController" customModule="VindsidenApp_WatchKit_App" customModuleProvider="target">
+                <controller title="Vindsiden" id="AgC-eL-Hgc" customClass="InterfaceController" customModule="watchkitapp_Extension">
                     <items>
                         <table alignment="left" id="FPB-Ne-vez">
                             <items>
-                                <tableRow identifier="default" id="4w2-ds-0Le" customClass="StationsRowController" customModule="VindsidenApp_WatchKit_Extension">
+                                <tableRow identifier="default" id="4w2-ds-0Le" customClass="StationsRowController" customModule="watchkitapp_Extension">
                                     <group key="rootItem" width="1" alignment="left" id="lYN-Nh-gPy">
                                         <items>
                                             <imageView width="32" height="32" alignment="left" verticalAlignment="center" id="tXJ-KC-TeQ"/>
@@ -49,7 +49,7 @@
         <!--Glance Interface Controller-->
         <scene sceneID="cdw-Is-882">
             <objects>
-                <glanceController bottomTemplateType="groupBody1Footer" id="L6K-VF-iYx" customClass="GlanceController" customModule="VindsidenApp_WatchKit_Extension">
+                <glanceController bottomTemplateType="groupBody1Footer" id="L6K-VF-iYx" customClass="GlanceController" customModule="watchkitapp_Extension">
                     <items>
                         <group alignment="left" id="ZKv-XM-6bb">
                             <items>
@@ -124,7 +124,7 @@
         <!--notConfigured-->
         <scene sceneID="LAt-uM-OSr">
             <objects>
-                <controller identifier="notConfigured" id="5RU-z5-GmT" customClass="RHCNotConfiguredInterfaceController" customModule="VindsidenApp_WatchKit_Extension">
+                <controller identifier="notConfigured" id="5RU-z5-GmT" customClass="RHCNotConfiguredInterfaceController" customModule="watchkitapp_Extension">
                     <items>
                         <label alignment="center" text="No stations configured" textAlignment="center" numberOfLines="0" id="CbE-HM-XmP">
                             <fontDescription key="font" style="UICTFontTextStyleHeadline"/>
@@ -142,7 +142,7 @@
         <!--stationDetails-->
         <scene sceneID="AWu-yB-euV">
             <objects>
-                <controller identifier="stationDetails" id="m7g-vb-vvd" customClass="StationDetailsInterfaceController" customModule="VindsidenApp_WatchKit_Extension">
+                <controller identifier="stationDetails" id="m7g-vb-vvd" customClass="StationDetailsInterfaceController" customModule="watchkitapp_Extension">
                     <items>
                         <group width="1" alignment="left" id="HfH-Vj-rtq">
                             <items>
@@ -247,7 +247,7 @@
         <!--showMap-->
         <scene sceneID="Bgf-wA-vC7">
             <objects>
-                <controller identifier="showMap" hidesWhenLoading="NO" id="mjo-dq-c8r" customClass="MapInterfaceController" customModule="VindsidenApp_WatchKit_Extension">
+                <controller identifier="showMap" hidesWhenLoading="NO" id="mjo-dq-c8r" customClass="MapInterfaceController" customModule="watchkitapp_Extension">
                     <items>
                         <map alignment="left" id="coB-Xt-zkd"/>
                     </items>
@@ -261,7 +261,7 @@
         <!--Close-->
         <scene sceneID="J3e-yB-ail">
             <objects>
-                <controller identifier="graph" title="Close" id="TMe-m6-g1E" customClass="RHCGraphInterfaceController" customModule="VindsidenApp_WatchKit_Extension">
+                <controller identifier="graph" title="Close" id="TMe-m6-g1E" customClass="RHCGraphInterfaceController" customModule="watchkitapp_Extension">
                     <items>
                         <label alignment="left" verticalAlignment="bottom" text="Unknown station" id="gcj-kQ-oD3"/>
                         <imageView alignment="center" verticalAlignment="center" id="36J-93-YO8"/>
