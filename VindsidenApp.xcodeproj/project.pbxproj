@@ -78,7 +78,6 @@
 		AD6142E91D0F06C60008C5E8 /* StationsRowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADBF8B9C1D0F068B0005C0C9 /* StationsRowController.swift */; };
 		AD6142EA1D0F06E70008C5E8 /* VindsidenWatchKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD303C281B282DC800C4B999 /* VindsidenWatchKit.framework */; };
 		AD6142EF1D0F079E0008C5E8 /* WCFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD6142ED1D0F07980008C5E8 /* WCFetcher.swift */; };
-		AD6143031D0F10E20008C5E8 /* VindsidenWatchKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = AD303C281B282DC800C4B999 /* VindsidenWatchKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		AD66F5651CAEBA8B001A2755 /* IndexRequestHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD66F5641CAEBA8B001A2755 /* IndexRequestHandler.swift */; };
 		AD66F5691CAEBA8B001A2755 /* VindSidenSpotlight.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = AD66F5621CAEBA8B001A2755 /* VindSidenSpotlight.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		AD66F56D1CAEBBC0001A2755 /* VindsidenKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD539C9D1947B5CA002644BD /* VindsidenKit.framework */; };
@@ -291,7 +290,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				AD6143031D0F10E20008C5E8 /* VindsidenWatchKit.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
