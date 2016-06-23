@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		05984053FC18D372E27341D1 /* Pods_VindsidenAppCommon_VindsidenApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9485737CF1F19280990E8775 /* Pods_VindsidenAppCommon_VindsidenApp.framework */; };
 		2BA95CBF900AAE495D190976 /* Pods_VindsidenApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 295AF8FC54CEB03D179399C6 /* Pods_VindsidenApp.framework */; };
 		3B5D05C719C3002F000AE4E0 /* Launch Screen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3B5D05C619C3002F000AE4E0 /* Launch Screen.xib */; };
 		AD003850196E7A6400C3232A /* RHCTodayCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD00384F196E7A6400C3232A /* RHCTodayCell.swift */; };
@@ -323,9 +324,12 @@
 /* Begin PBXFileReference section */
 		295AF8FC54CEB03D179399C6 /* Pods_VindsidenApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VindsidenApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3B5D05C619C3002F000AE4E0 /* Launch Screen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "Launch Screen.xib"; sourceTree = "<group>"; };
+		45F46F89BD0ADC31AECD2296 /* Pods-VindsidenAppCommon-VindsidenApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VindsidenAppCommon-VindsidenApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-VindsidenAppCommon-VindsidenApp/Pods-VindsidenAppCommon-VindsidenApp.debug.xcconfig"; sourceTree = "<group>"; };
 		8C9D881489F696686F42BD92 /* Pods-VindsidenApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VindsidenApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-VindsidenApp/Pods-VindsidenApp.debug.xcconfig"; sourceTree = "<group>"; };
+		9485737CF1F19280990E8775 /* Pods_VindsidenAppCommon_VindsidenApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VindsidenAppCommon_VindsidenApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9D800C36C5EEE810626E4C92 /* Pods-VindsidenApp WatchKit Extension.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VindsidenApp WatchKit Extension.debug.xcconfig"; path = "Pods/Target Support Files/Pods-VindsidenApp WatchKit Extension/Pods-VindsidenApp WatchKit Extension.debug.xcconfig"; sourceTree = "<group>"; };
 		9E713D0A7C32B35097808D07 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A1FBD23D9E497B923F5DED6C /* Pods-VindsidenAppCommon-VindsidenApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VindsidenAppCommon-VindsidenApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-VindsidenAppCommon-VindsidenApp/Pods-VindsidenAppCommon-VindsidenApp.release.xcconfig"; sourceTree = "<group>"; };
 		AD00384E196E741800C3232A /* VindsidenApp-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "VindsidenApp-Bridging-Header.h"; path = "../VindsidenApp-Bridging-Header.h"; sourceTree = "<group>"; };
 		AD00384F196E7A6400C3232A /* RHCTodayCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RHCTodayCell.swift; sourceTree = "<group>"; };
 		AD0636131B069CB900EF7321 /* en */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -477,6 +481,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		14DA33BFBDA496BF4B2EBA47 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		AD17ED411731012200943C33 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -492,6 +503,7 @@
 				AD17ED4A1731012200943C33 /* Foundation.framework in Frameworks */,
 				AD17ED4C1731012200943C33 /* CoreGraphics.framework in Frameworks */,
 				2BA95CBF900AAE495D190976 /* Pods_VindsidenApp.framework in Frameworks */,
+				05984053FC18D372E27341D1 /* Pods_VindsidenAppCommon_VindsidenApp.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -560,6 +572,8 @@
 				DCB5DA17B7909A99F80590F5 /* Pods-VindsidenApp.release.xcconfig */,
 				9D800C36C5EEE810626E4C92 /* Pods-VindsidenApp WatchKit Extension.debug.xcconfig */,
 				F09A6F0E17E90D8099F749D4 /* Pods-VindsidenApp WatchKit Extension.release.xcconfig */,
+				45F46F89BD0ADC31AECD2296 /* Pods-VindsidenAppCommon-VindsidenApp.debug.xcconfig */,
+				A1FBD23D9E497B923F5DED6C /* Pods-VindsidenAppCommon-VindsidenApp.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -621,6 +635,7 @@
 				9E713D0A7C32B35097808D07 /* Pods.framework */,
 				295AF8FC54CEB03D179399C6 /* Pods_VindsidenApp.framework */,
 				D7B5EC2BCA5BB91B89E72507 /* Pods_VindsidenApp_WatchKit_Extension.framework */,
+				9485737CF1F19280990E8775 /* Pods_VindsidenAppCommon_VindsidenApp.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -1122,6 +1137,7 @@
 			buildPhases = (
 				ADBF8B721D0F03BE0005C0C9 /* Resources */,
 				ADBF8B941D0F03BE0005C0C9 /* Embed App Extensions */,
+				14DA33BFBDA496BF4B2EBA47 /* Frameworks */,
 			);
 			buildRules = (
 			);
@@ -1366,7 +1382,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-VindsidenApp/Pods-VindsidenApp-frameworks.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-VindsidenAppCommon-VindsidenApp/Pods-VindsidenAppCommon-VindsidenApp-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		D6C4174BF0CB7DBE2DE8331D /* 📦 Copy Pods Resources */ = {
@@ -1381,7 +1397,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-VindsidenApp/Pods-VindsidenApp-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-VindsidenAppCommon-VindsidenApp/Pods-VindsidenAppCommon-VindsidenApp-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -1778,7 +1794,7 @@
 		};
 		AD17ED7D1731012200943C33 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 8C9D881489F696686F42BD92 /* Pods-VindsidenApp.debug.xcconfig */;
+			baseConfigurationReference = 45F46F89BD0ADC31AECD2296 /* Pods-VindsidenAppCommon-VindsidenApp.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -1802,7 +1818,7 @@
 		};
 		AD17ED7E1731012200943C33 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = DCB5DA17B7909A99F80590F5 /* Pods-VindsidenApp.release.xcconfig */;
+			baseConfigurationReference = A1FBD23D9E497B923F5DED6C /* Pods-VindsidenAppCommon-VindsidenApp.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
