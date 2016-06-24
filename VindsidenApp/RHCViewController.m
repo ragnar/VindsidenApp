@@ -720,7 +720,7 @@ static NSString *kCellID = @"stationCellID";
 
 
 
-    NSArray *result = [CDStation visibleStationsInManagedObjectContext:[[Datamanager sharedManager] managedObjectContext]];
+    NSArray *result = [CDStation visibleStationsInManagedObjectContext:[[Datamanager sharedManager] managedObjectContext] limit:0];
     NSMutableArray *stations = [NSMutableArray array];
 
     for ( CDStation *station in result ) {
