@@ -37,6 +37,11 @@ class RHCTodayCell: UITableViewCell
         self.nameLabel.text = " "
         self.updatedLabel.text = " "
         self.unitLabel.text = " "
+
+        self.speedLabel.textColor = UIColor.vindsidenTodayTextColor()
+        self.nameLabel.textColor = UIColor.vindsidenTodayTextColor()
+        self.updatedLabel.textColor = UIColor.vindsidenTodayTextColor()
+        self.unitLabel.textColor = UIColor.vindsidenTodayTextColor()
     }
 
     override func awakeFromNib() {
