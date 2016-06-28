@@ -520,6 +520,7 @@ static NSString *kCellID = @"stationCellID";
 - (void)rhcSettingsDidFinish:(RHCSettingsViewController *)controller
 {
     [self updateApplicationContextToWatch];
+    [(RHCAppDelegate *)[[UIApplication sharedApplication] delegate] updateShortcutItems];
     [[WindManager sharedManager] updateNow];
 
     if ( [[self.collectionView visibleCells] count] ) {

@@ -281,4 +281,9 @@ class RHCAppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate {
         let controller = nc?.viewControllers.first as? RHCViewController
         return controller
     }
+
+
+    func updateShortcutItems() {
+        ShortcutItemHandler.updateDynamicShortcutItems(for: UIApplication.sharedApplication())
+    }
 }
