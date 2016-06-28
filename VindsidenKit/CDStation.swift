@@ -115,11 +115,15 @@ public class CDStation: NSManagedObject, MKAnnotation {
     }
 
 
-    public class func visibleStationsInManagedObjectContext( managedObjectContext: NSManagedObjectContext) -> [CDStation] {
+    public class func visibleStationsInManagedObjectContext( managedObjectContext: NSManagedObjectContext, limit: Int = 0) -> [CDStation] {
         let request = NSFetchRequest(entityName: "CDStation")
         request.fetchBatchSize = 20
         request.predicate = NSPredicate(format: "isHidden == NO")
         request.sortDescriptors = [NSSortDescriptor(key: "order", ascending: true)]
+
+        if limit > 0 {
+            request.fetchLimit = limit
+        }
 
         do {
             let result = try managedObjectContext.executeFetchRequest(request) as! [CDStation]

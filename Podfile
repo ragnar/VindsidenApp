@@ -8,8 +8,4 @@ abstract_target 'VindsidenAppCommon' do
     pod "MotionJpegImageView"
     pod "JTSImageViewController"
   end
-
-  target "VindsidenApp WatchKit Extension" do
-    platform :watchos, "9.0"
-  end
 end

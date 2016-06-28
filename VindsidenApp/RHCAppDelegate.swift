@@ -45,7 +45,16 @@ class RHCAppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate {
 
         application.setMinimumBackgroundFetchInterval(UIApplicationBackgroundFetchIntervalMinimum)
 
-        return true
+        var performAdditionalHandling = true
+
+        if let shortcutItem = launchOptions?[UIApplicationLaunchOptionsShortcutItemKey] as? UIApplicationShortcutItem, rootViewController = primaryViewController() {
+            let didHandleShortcutItem = ShortcutItemHandler.handle(shortcutItem, with: rootViewController)
+            performAdditionalHandling = !didHandleShortcutItem
+        }
+
+        ShortcutItemHandler.updateDynamicShortcutItems(for: application)
+
+        return performAdditionalHandling
     }
 
 
@@ -132,6 +141,24 @@ class RHCAppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate {
         }
 
         return .AllButUpsideDown
+    }
+
+
+    func application(application: UIApplication, performActionForShortcutItem shortcutItem: UIApplicationShortcutItem, completionHandler: (Bool) -> Void) {
+        var didHandleShortcutItem = false
+
+        let nc = self.window?.rootViewController as? UINavigationController
+        let controller = primaryViewController()
+
+        if let _ = nc?.presentedViewController {
+            nc?.dismissViewControllerAnimated(false, completion: { () -> Void in
+                didHandleShortcutItem = ShortcutItemHandler.handle(shortcutItem, with: controller!)
+            })
+        } else {
+            didHandleShortcutItem = ShortcutItemHandler.handle(shortcutItem, with: controller!)
+        }
+
+        completionHandler(didHandleShortcutItem)
     }
 
 
@@ -253,5 +280,10 @@ class RHCAppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate {
         let nc = self.window?.rootViewController as? UINavigationController
         let controller = nc?.viewControllers.first as? RHCViewController
         return controller
+    }
+
+
+    func updateShortcutItems() {
+        ShortcutItemHandler.updateDynamicShortcutItems(for: UIApplication.sharedApplication())
     }
 }

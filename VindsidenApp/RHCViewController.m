@@ -520,6 +520,7 @@ static NSString *kCellID = @"stationCellID";
 - (void)rhcSettingsDidFinish:(RHCSettingsViewController *)controller
 {
     [self updateApplicationContextToWatch];
+    [(RHCAppDelegate *)[[UIApplication sharedApplication] delegate] updateShortcutItems];
     [[WindManager sharedManager] updateNow];
 
     if ( [[self.collectionView visibleCells] count] ) {
@@ -720,7 +721,7 @@ static NSString *kCellID = @"stationCellID";
 
 
 
-    NSArray *result = [CDStation visibleStationsInManagedObjectContext:[[Datamanager sharedManager] managedObjectContext]];
+    NSArray *result = [CDStation visibleStationsInManagedObjectContext:[[Datamanager sharedManager] managedObjectContext] limit:0];
     NSMutableArray *stations = [NSMutableArray array];
 
     for ( CDStation *station in result ) {
