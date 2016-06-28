@@ -15,12 +15,9 @@ import VindsidenKit
 class TodayViewController: UITableViewController, NCWidgetProviding, NSFetchedResultsControllerDelegate
 {
     struct TableViewConstants {
-        static let baseRowCount = 3
-        static let todayRowHeight :CGFloat = 44.0
-        static let todayRowPadding :CGFloat = 20.0
+        static let todayRowHeight :CGFloat = 50.0
         struct CellIdentifiers {
             static let message = "Cell"
-            static let showall = "ShowAll"
         }
     }
 
@@ -36,15 +33,10 @@ class TodayViewController: UITableViewController, NCWidgetProviding, NSFetchedRe
     }
 
 
-    var showingAll: Bool = false {
-        didSet {
-            resetContentSize()
-        }
-    }
-
-
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        extensionContext?.widgetLargestAvailableDisplayMode = .Expanded
 
         tableView.tableFooterView = UIView()
 
@@ -57,17 +49,29 @@ class TodayViewController: UITableViewController, NCWidgetProviding, NSFetchedRe
     // MARK: - NotificationCenter
 
 
-    func widgetMarginInsetsForProposedMarginInsets( defaultMarginInsets: UIEdgeInsets) -> UIEdgeInsets {
-        return UIEdgeInsetsZero;
-    }
-
-
     func widgetPerformUpdateWithCompletionHandler(completionHandler: ((NCUpdateResult) -> Void)) {
         DLOG("")
         completionHandler(.NewData)
         updateContentWithCompletionHandler(completionHandler)
     }
 
+
+    func widgetActiveDisplayModeDidChange(activeDisplayMode: NCWidgetDisplayMode, withMaximumSize maxSize: CGSize) {
+        DLOG("mode: \(activeDisplayMode), size: \(maxSize)")
+
+        let cellHeight = infoCellHeight()
+
+        var adjustedHeight = preferredViewHeight
+
+        while ( adjustedHeight > maxSize.height) {
+            adjustedHeight -= cellHeight
+        }
+
+        tableView.reloadData()
+
+        let size = CGSize(width: maxSize.width, height: min(maxSize.height, adjustedHeight))
+        preferredContentSize = size
+    }
 
     // MARK: - TableView
 
@@ -82,60 +86,48 @@ class TodayViewController: UITableViewController, NCWidgetProviding, NSFetchedRe
         let sections = fetchedResultsController.sections as Array!
         let sectionInfo = sections[section]
 
-        let rows:Int = showingAll ? sectionInfo.numberOfObjects : min(sectionInfo.numberOfObjects, TableViewConstants.baseRowCount + 1)
-        return rows
+        if extensionContext?.widgetActiveDisplayMode == .Compact {
+            return min(sectionInfo.numberOfObjects, 2)
+        }
+        return sectionInfo.numberOfObjects
     }
 
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let itemCount = (fetchedResultsController.fetchedObjects as Array!).count
+        let cell = tableView.dequeueReusableCellWithIdentifier(TableViewConstants.CellIdentifiers.message, forIndexPath: indexPath) as! RHCTodayCell
+        let stationInfo = self.fetchedResultsController.objectAtIndexPath(indexPath) as! CDStation
 
-        if !showingAll && indexPath.row == TableViewConstants.baseRowCount &&  itemCount != TableViewConstants.baseRowCount + 1 {
-            let cell = tableView.dequeueReusableCellWithIdentifier(TableViewConstants.CellIdentifiers.showall, forIndexPath: indexPath) as UITableViewCell
-            cell.textLabel?.text = NSLocalizedString("Show All...", tableName: nil, bundle: NSBundle.mainBundle(), value: "Show all...", comment: "Show all")
-            return cell
-        } else {
-            let cell = tableView.dequeueReusableCellWithIdentifier(TableViewConstants.CellIdentifiers.message, forIndexPath: indexPath) as! RHCTodayCell
-            let stationInfo = self.fetchedResultsController.objectAtIndexPath(indexPath) as! CDStation
+        if let plot = stationInfo.lastRegisteredPlot() {
 
-            if let plot = stationInfo.lastRegisteredPlot() {
+            let winddir = CGFloat(plot.windDir!.floatValue)
+            let windspeed = CGFloat(plot.windAvg!.floatValue)
+            let image = DrawArrow.drawArrowAtAngle( winddir, forSpeed:windspeed, highlighted:false, color: UIColor.vindsidenTodayTextColor(), hightlightedColor: UIColor.blackColor())
 
-                let winddir = CGFloat(plot.windDir!.floatValue)
-                let windspeed = CGFloat(plot.windAvg!.floatValue)
-                let image = DrawArrow.drawArrowAtAngle( winddir, forSpeed:windspeed, highlighted:false, color: UIColor.whiteColor(), hightlightedColor: UIColor.blackColor())
+            let raw = AppConfig.sharedConfiguration.applicationUserDefaults.integerForKey("selectedUnit")
+            let unit = SpeedConvertion(rawValue: raw)
 
-                let raw = AppConfig.sharedConfiguration.applicationUserDefaults.integerForKey("selectedUnit")
-                let unit = SpeedConvertion(rawValue: raw)
-
-                if let realUnit = unit {
-                    let speed = plot.windAvg!.speedConvertionTo(realUnit)
-                    if let speedString = speedFormatter.stringFromNumber(speed) {
-                        cell.speedLabel.text = speedString
-                        cell.unitLabel.text = NSNumber.shortUnitNameString(realUnit)
-                    } else {
-                        cell.speedLabel.text = "—.—"
-                    }
+            if let realUnit = unit {
+                let speed = plot.windAvg!.speedConvertionTo(realUnit)
+                if let speedString = speedFormatter.stringFromNumber(speed) {
+                    cell.speedLabel.text = speedString
+                    cell.unitLabel.text = NSNumber.shortUnitNameString(realUnit)
+                } else {
+                    cell.speedLabel.text = "—.—"
                 }
-                cell.arrowImageView.image = image
-                cell.updatedLabel.text = AppConfig.sharedConfiguration.relativeDate(plot.plotTime) as String
-            } else {
-                cell.speedLabel.text = "—.—"
-                cell.updatedLabel.text = NSLocalizedString("LABEL_NOT_UPDATED", tableName: nil, bundle: NSBundle.mainBundle(), value: "LABEL_NOT_UPDATED", comment: "Not updated")
             }
-            cell.nameLabel.text = stationInfo.stationName
-            return cell
+            cell.arrowImageView.image = image
+            cell.updatedLabel.text = AppConfig.sharedConfiguration.relativeDate(plot.plotTime) as String
+        } else {
+            cell.speedLabel.text = "—.—"
+            cell.updatedLabel.text = NSLocalizedString("LABEL_NOT_UPDATED", tableName: nil, bundle: NSBundle.mainBundle(), value: "LABEL_NOT_UPDATED", comment: "Not updated")
         }
+        cell.nameLabel.text = stationInfo.stationName
+        return cell
     }
 
 
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        let itemCount = (fetchedResultsController.fetchedObjects as Array!).count
-
-        if !showingAll && indexPath.row == TableViewConstants.baseRowCount &&  itemCount != TableViewConstants.baseRowCount + 1 {
-            return showCellHeight()
-        } else {
-            return infoCellHeight()
-        }
+        return infoCellHeight()
     }
 
 
@@ -147,28 +139,6 @@ class TodayViewController: UITableViewController, NCWidgetProviding, NSFetchedRe
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
-
-        if !showingAll && indexPath.row == TableViewConstants.baseRowCount {
-            showingAll = true
-            let itemCount = (fetchedResultsController.fetchedObjects as Array!).count
-
-            tableView.beginUpdates()
-
-            let indexPathForRemoval = NSIndexPath(forRow: TableViewConstants.baseRowCount, inSection: 0)
-            tableView.deleteRowsAtIndexPaths([indexPathForRemoval], withRowAnimation: .Fade)
-
-            var insertedIndexPaths = Array<NSIndexPath>()
-
-            for idx in TableViewConstants.baseRowCount..<itemCount {
-                insertedIndexPaths.append(NSIndexPath(forRow: idx, inSection: 0))
-            }
-
-            tableView.insertRowsAtIndexPaths(insertedIndexPaths, withRowAnimation: .Fade)
-
-            tableView.endUpdates()
-            
-            return
-        }
 
         let stationInfo = self.fetchedResultsController.objectAtIndexPath(indexPath) as! CDStation
 
@@ -239,51 +209,29 @@ class TodayViewController: UITableViewController, NCWidgetProviding, NSFetchedRe
 
     var preferredViewHeight: CGFloat {
         let infoHeight = infoCellHeight()
-        let showHeight = showCellHeight()
         let itemCount = (fetchedResultsController.fetchedObjects as Array!).count
-        let rowCount = showingAll ? itemCount : min(itemCount, TableViewConstants.baseRowCount + 1)
+        let rowCount = itemCount
 
-        if !showingAll {
-            if itemCount > TableViewConstants.baseRowCount {
-                return infoHeight*CGFloat(rowCount-1) + showHeight - 1.0
-            } else {
-                return infoHeight*CGFloat(rowCount) - 1.0
-            }
-        } else {
-            return infoHeight*CGFloat(rowCount) - 1.0
-        }
+        return (infoHeight*CGFloat(rowCount)) - 1.0
     }
 
 
     func infoCellHeight() -> CGFloat {
-        let cell = infoCell
-        cell.nameLabel?.text = "123"
-        cell.updatedLabel?.text = "123"
-        cell.layoutIfNeeded()
+        return TableViewConstants.todayRowHeight
 
-        let infoSize = cell.contentView.systemLayoutSizeFittingSize(UILayoutFittingCompressedSize)
-        return infoSize.height
-    }
-
-
-    func showCellHeight() -> CGFloat {
-
-        let cell = showCell
-        cell.textLabel?.text = "123"
-        cell.layoutIfNeeded()
-
-        let infoSize = cell.contentView.systemLayoutSizeFittingSize(UILayoutFittingCompressedSize)
-        return infoSize.height
+        // Gives autolayout error
+//        let cell = infoCell
+//        cell.nameLabel?.text = "123"
+//        cell.updatedLabel?.text = "123"
+//        cell.layoutIfNeeded()
+//
+//        let infoSize = cell.systemLayoutSizeFittingSize(UILayoutFittingCompressedSize)
+//        return max(infoSize.height, 50)
     }
 
 
     lazy var infoCell: RHCTodayCell = {
         return self.tableView.dequeueReusableCellWithIdentifier(TableViewConstants.CellIdentifiers.message) as! RHCTodayCell
-    }()
-
-
-    lazy var showCell: UITableViewCell = {
-        return self.tableView.dequeueReusableCellWithIdentifier(TableViewConstants.CellIdentifiers.showall)!
     }()
 
 
