@@ -12,7 +12,7 @@ extension UITableViewCell {
 
     func configureSelectedBackgroundView() -> Void
     {
-        let vibrancyView = UIVisualEffectView(effect: UIVibrancyEffect.notificationCenterVibrancyEffect())
+        let vibrancyView = UIVisualEffectView(effect: UIVibrancyEffect.widgetPrimaryVibrancyEffect())
         vibrancyView.frame = self.contentView.bounds
 
         let view = UIView(frame: vibrancyView.bounds)

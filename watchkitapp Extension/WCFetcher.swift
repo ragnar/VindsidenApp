@@ -42,7 +42,9 @@ class WCFetcher: NSObject, WCSessionDelegate {
 
 
     // MARK: - WCSession
+    func session(session: WCSession, activationDidCompleteWithState activationState: WCSessionActivationState, error: NSError?) {
 
+    }
 
     func sessionWatchStateDidChange(session: WCSession) {
         DLOG("Session: \(session)")

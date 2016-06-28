@@ -204,7 +204,7 @@ import JTSImageViewController
         if let current = station {
             if let unwrapped = current.yrURL, let yrurl = unwrapped.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet()) {
                 let url = NSURL(string: yrurl)
-                UIApplication.sharedApplication().openURL(url!)
+                UIApplication.sharedApplication().openURL(url!, options: [:], completionHandler: nil)
             }
         }
     }
@@ -229,7 +229,7 @@ import JTSImageViewController
 
             if let mapurl = query.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet()) {
                 let url = NSURL(string: mapurl)
-                UIApplication.sharedApplication().openURL(url!)
+                UIApplication.sharedApplication().openURL(url!, options: [:], completionHandler: nil)
             }
         }
     }

@@ -111,7 +111,12 @@ public class CDStation: NSManagedObject, MKAnnotation {
         let request = NSFetchRequest(entityName: "CDStation")
         request.predicate = NSPredicate(format: "isHidden == NO")
 
-        return managedObjectContext.countForFetchRequest(request, error: nil)
+        do {
+            let count = try managedObjectContext.countForFetchRequest(request)
+            return count
+        } catch {
+            return 0
+        }
     }
 
 
