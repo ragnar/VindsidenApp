@@ -38,8 +38,8 @@ class RHCTodayCell: UITableViewCell
         self.updatedLabel.text = " "
         self.unitLabel.text = " "
 
-        self.speedLabel.textColor = UIColor.vindsidenTodayTextColor()
-        self.nameLabel.textColor = UIColor.vindsidenTodayTextColor()
+        self.speedLabel.textColor = UIColor.blackColor()
+        self.nameLabel.textColor = UIColor.blackColor()
         self.updatedLabel.textColor = UIColor.vindsidenTodayTextColor()
         self.unitLabel.textColor = UIColor.vindsidenTodayTextColor()
     }

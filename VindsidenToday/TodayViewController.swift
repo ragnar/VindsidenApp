@@ -15,7 +15,7 @@ import VindsidenKit
 class TodayViewController: UITableViewController, NCWidgetProviding, NSFetchedResultsControllerDelegate
 {
     struct TableViewConstants {
-        static let todayRowHeight :CGFloat = 50.0
+        static let todayRowHeight :CGFloat = 46.0
         struct CellIdentifiers {
             static let message = "Cell"
         }
@@ -208,10 +208,11 @@ class TodayViewController: UITableViewController, NCWidgetProviding, NSFetchedRe
 
 
     var preferredViewHeight: CGFloat {
-        let infoHeight = infoCellHeight()
+        var infoHeight = infoCellHeight()
         let itemCount = (fetchedResultsController.fetchedObjects as Array!).count
         let rowCount = itemCount
 
+        infoHeight = TableViewConstants.todayRowHeight
         return (infoHeight*CGFloat(rowCount)) - 1.0
     }
 
