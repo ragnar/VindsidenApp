@@ -82,10 +82,6 @@ public final class GraphImage {
 
 
     public func drawImage() -> UIImage {
-        let ctx = UIGraphicsGetCurrentContext()
-        CGContextDrawPath(ctx!, CGPathDrawingMode.Stroke)
-
-
         UIGraphicsBeginImageContextWithOptions( size, false, scale)
         let context = UIGraphicsGetCurrentContext()
 
