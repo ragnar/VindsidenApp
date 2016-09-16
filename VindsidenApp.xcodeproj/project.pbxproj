@@ -118,7 +118,6 @@
 		ADBF8B811D0F03BE0005C0C9 /* watchkitapp Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = ADBF8B801D0F03BE0005C0C9 /* watchkitapp Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		ADBF8B861D0F03BE0005C0C9 /* InterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADBF8B851D0F03BE0005C0C9 /* InterfaceController.swift */; };
 		ADBF8B881D0F03BE0005C0C9 /* ExtensionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADBF8B871D0F03BE0005C0C9 /* ExtensionDelegate.swift */; };
-		ADBF8B8A1D0F03BE0005C0C9 /* GlanceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADBF8B891D0F03BE0005C0C9 /* GlanceController.swift */; };
 		ADBF8B8C1D0F03BE0005C0C9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ADBF8B8B1D0F03BE0005C0C9 /* Assets.xcassets */; };
 		ADBF8B901D0F03BE0005C0C9 /* watchkitapp.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = ADBF8B741D0F03BE0005C0C9 /* watchkitapp.app */; };
 		ADC161851B0218D8004F6DAE /* GraphImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADC161841B0218D8004F6DAE /* GraphImage.swift */; };
@@ -411,6 +410,8 @@
 		AD66F5661CAEBA8B001A2755 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AD66F56E1CAEBEE7001A2755 /* VindSidenSpotlight.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = VindSidenSpotlight.entitlements; sourceTree = "<group>"; };
 		AD674DA81962EB7100BF257B /* libPods.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libPods.a; path = "Pods/build/Debug-iphoneos/libPods.a"; sourceTree = "<group>"; };
+		AD6B004F1D8C6035006B4EA3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Interface.strings; sourceTree = "<group>"; };
+		AD6B00501D8C6038006B4EA3 /* nb */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nb; path = nb.lproj/Interface.strings; sourceTree = "<group>"; };
 		AD6BD0EC1A9506C900E6686B /* Global.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Global.swift; sourceTree = "<group>"; };
 		AD6BD0F41A967A8800E6686B /* libPods.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libPods.a; path = "Pods/build/Debug-iphoneos/libPods.a"; sourceTree = "<group>"; };
 		AD71965B19EED713006FA2BC /* RHCSettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RHCSettingsViewController.swift; sourceTree = "<group>"; };
@@ -442,7 +443,6 @@
 		ADBF8B801D0F03BE0005C0C9 /* watchkitapp Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "watchkitapp Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		ADBF8B851D0F03BE0005C0C9 /* InterfaceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterfaceController.swift; sourceTree = "<group>"; };
 		ADBF8B871D0F03BE0005C0C9 /* ExtensionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionDelegate.swift; sourceTree = "<group>"; };
-		ADBF8B891D0F03BE0005C0C9 /* GlanceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlanceController.swift; sourceTree = "<group>"; };
 		ADBF8B8B1D0F03BE0005C0C9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		ADBF8B8D1D0F03BE0005C0C9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		ADBF8B981D0F068B0005C0C9 /* MapInterfaceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapInterfaceController.swift; sourceTree = "<group>"; };
@@ -917,7 +917,6 @@
 				ADBF8B9C1D0F068B0005C0C9 /* StationsRowController.swift */,
 				ADBF8B851D0F03BE0005C0C9 /* InterfaceController.swift */,
 				ADBF8B871D0F03BE0005C0C9 /* ExtensionDelegate.swift */,
-				ADBF8B891D0F03BE0005C0C9 /* GlanceController.swift */,
 				ADBF8B8B1D0F03BE0005C0C9 /* Assets.xcassets */,
 				ADBF8B8D1D0F03BE0005C0C9 /* Info.plist */,
 				AD6142FD1D0F0D1B0008C5E8 /* Localizable.strings */,
@@ -1243,6 +1242,9 @@
 							com.apple.ApplicationGroups.iOS = {
 								enabled = 0;
 							};
+							com.apple.BackgroundModes.watchos.app = {
+								enabled = 0;
+							};
 						};
 					};
 					ADBF8B7F1D0F03BE0005C0C9 = {
@@ -1545,7 +1547,6 @@
 				AD6142E51D0F06C60008C5E8 /* MapInterfaceController.swift in Sources */,
 				AD6142E71D0F06C60008C5E8 /* RHCNotConfiguredInterfaceController.swift in Sources */,
 				AD6142E61D0F06C60008C5E8 /* RHCGraphInterfaceController.swift in Sources */,
-				ADBF8B8A1D0F03BE0005C0C9 /* GlanceController.swift in Sources */,
 				AD6142EF1D0F079E0008C5E8 /* WCFetcher.swift in Sources */,
 				AD6142E91D0F06C60008C5E8 /* StationsRowController.swift in Sources */,
 			);
@@ -1729,6 +1730,8 @@
 			isa = PBXVariantGroup;
 			children = (
 				ADBF8B771D0F03BE0005C0C9 /* Base */,
+				AD6B004F1D8C6035006B4EA3 /* en */,
+				AD6B00501D8C6038006B4EA3 /* nb */,
 			);
 			name = Interface.storyboard;
 			sourceTree = "<group>";
@@ -2314,7 +2317,6 @@
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 2.3;
 				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 2.2;
 			};
 			name = Debug;
 		};
@@ -2348,7 +2350,6 @@
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_VERSION = 2.3;
 				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 2.2;
 			};
 			name = Release;
 		};
@@ -2381,7 +2382,6 @@
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 2.3;
 				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 2.2;
 			};
 			name = Debug;
 		};
@@ -2415,7 +2415,6 @@
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 2.3;
 				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 2.2;
 			};
 			name = Release;
 		};

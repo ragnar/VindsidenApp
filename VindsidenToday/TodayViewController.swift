@@ -208,11 +208,10 @@ class TodayViewController: UITableViewController, NCWidgetProviding, NSFetchedRe
 
 
     var preferredViewHeight: CGFloat {
-        var infoHeight = infoCellHeight()
         let itemCount = (fetchedResultsController.fetchedObjects as Array!).count
         let rowCount = itemCount
 
-        infoHeight = TableViewConstants.todayRowHeight
+        let infoHeight = TableViewConstants.todayRowHeight
         return (infoHeight*CGFloat(rowCount)) - 1.0
     }
 
