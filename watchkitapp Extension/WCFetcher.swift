@@ -62,6 +62,7 @@ class WCFetcher: NSObject, WCSessionDelegate {
 
 
     func session(session: WCSession, didReceiveApplicationContext applicationContext: [String : AnyObject]) {
+
         if let stations = applicationContext["activeStations"] as? [[String:AnyObject]] {
             CDStation.updateWithWatchContent(stations, inManagedObjectContext: Datamanager.sharedManager().managedObjectContext, completionHandler: { (visible: Bool) -> Void in
                 dispatch_async(dispatch_get_main_queue(), { () -> Void in
@@ -71,8 +72,13 @@ class WCFetcher: NSObject, WCSessionDelegate {
                     NSNotificationCenter.defaultCenter().postNotificationName( WCFetcherNotification.ReceivedStations, object: nil)
                 })
             })
-        } else {
-            DLOG("\(applicationContext)")
         }
+
+        if let unit = applicationContext["unit"] as? Int {
+            AppConfig.sharedConfiguration.applicationUserDefaults.setInteger(unit, forKey: "selectedUnit")
+            AppConfig.sharedConfiguration.applicationUserDefaults.synchronize()
+        }
+
+        DLOG("\(applicationContext)")
     }
 }
