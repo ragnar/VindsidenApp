@@ -22,6 +22,7 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate {
     func applicationDidBecomeActive() {
 
         WCFetcher.sharedInstance.activate()
+        scheduleRefresh()
 
         if NSDate().timeIntervalSinceReferenceDate < timestamp + 60 {
             return
@@ -52,9 +53,15 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate {
             switch task {
             case let backgroundTask as WKApplicationRefreshBackgroundTask:
                 // Be sure to complete the background task once you’re done.
+                if (WKExtension.sharedExtension().applicationState != .Background) {
+                    task.setTaskCompleted()
+                    return
+                }
+
                 WindManager.sharedManager.fetch({ (result: WindManagerResult) -> Void in
                     NSNotificationCenter.defaultCenter().postNotificationName(WCFetcherNotification.ReceivedPlots, object: nil)
                     backgroundTask.setTaskCompleted()
+                    self.scheduleRefresh()
                 })
 
 //            case let snapshotTask as WKSnapshotRefreshBackgroundTask:
@@ -69,6 +76,18 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate {
             default:
                 // make sure to complete unhandled task types
                 task.setTaskCompleted()
+            }
+        }
+    }
+
+
+    func scheduleRefresh() {
+        let fireDate = NSDate(timeIntervalSinceNow: 60.0*30.0)
+        let userInfo = ["reason" : "background update"] as NSDictionary
+
+        WKExtension.sharedExtension().scheduleBackgroundRefreshWithPreferredDate(fireDate, userInfo: userInfo) { (error) in
+            if error != nil {
+                DLOG("Schedule background failed: \(error)")
             }
         }
     }
