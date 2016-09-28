@@ -7,8 +7,8 @@ enum ExitCodes : Int32 {
 }
 
 
-func runAgvtool( arguments arguments: [String]! ) -> (Bool, Int32) {
-    let task = NSTask()
+func runAgvtool( arguments: [String]! ) -> (Bool, Int32) {
+    let task = Process()
     task.launchPath = "/usr/bin/agvtool"
     task.arguments = arguments
     task.launch()
@@ -24,7 +24,7 @@ func runAgvtool( arguments arguments: [String]! ) -> (Bool, Int32) {
 
 
 func showHelp( errorMessage: String = "" ) -> Void {
-    let name = (Process.arguments.first! as String)
+    let name = (CommandLine.arguments.first! as String)
 
     if errorMessage.isEmpty == false {
         print("\(errorMessage)")
@@ -41,42 +41,42 @@ func showHelp( errorMessage: String = "" ) -> Void {
 }
 
 
-if Process.arguments.count <= 1 {
+if CommandLine.arguments.count <= 1 {
     showHelp()
     exit(ExitCodes.Failure.rawValue)
 }
 
-let command = Process.arguments[1]
+let command = CommandLine.arguments[1]
 var arguments: [String]
 
-switch ( command.lowercaseString ) {
+switch ( command.lowercased() ) {
 case "bump-build":
     arguments = ["bump", "-all"]
 case "set-build":
-    if Process.arguments.count >= 3 {
-        let buildNumber = Process.arguments[2]
+    if CommandLine.arguments.count >= 3 {
+        let buildNumber = CommandLine.arguments[2]
         arguments = ["new-version", "-all", buildNumber]
     } else {
-        showHelp("Missing <build number> parameter.")
+        showHelp(errorMessage: "Missing <build number> parameter.")
         exit(ExitCodes.Failure.rawValue)
     }
 case "set-version":
-    if Process.arguments.count >= 3 {
-        let version = Process.arguments[2]
+    if CommandLine.arguments.count >= 3 {
+        let version = CommandLine.arguments[2]
         arguments = ["new-marketing-version", version]
     } else {
-        showHelp("Missing <version> parameter.")
+        showHelp(errorMessage: "Missing <version> parameter.")
         exit(ExitCodes.Failure.rawValue)
     }
 case "print-current":
-    runAgvtool( arguments: ["mvers"] )
-    runAgvtool( arguments: ["vers"] )
+    let _ = runAgvtool( arguments: ["mvers"] )
+    let _ = runAgvtool( arguments: ["vers"] )
     exit(ExitCodes.Success.rawValue)
 case "help":
     showHelp()
     exit(ExitCodes.Failure.rawValue)
 default:
-    showHelp("Unrecognized operation specifier \"\(command)\".")
+    showHelp(errorMessage: "Unrecognized operation specifier \"\(command)\".")
     exit(ExitCodes.Failure.rawValue)
 }
 
