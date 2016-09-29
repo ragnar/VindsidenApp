@@ -12,7 +12,7 @@ extension UITableViewCell {
 
     func configureSelectedBackgroundView() -> Void
     {
-        let vibrancyView = UIVisualEffectView(effect: UIVibrancyEffect.notificationCenterVibrancyEffect())
+        let vibrancyView = UIVisualEffectView(effect: UIVibrancyEffect.widgetPrimaryVibrancyEffect())
         vibrancyView.frame = self.contentView.bounds
 
         let view = UIView(frame: vibrancyView.bounds)
@@ -37,6 +37,11 @@ class RHCTodayCell: UITableViewCell
         self.nameLabel.text = " "
         self.updatedLabel.text = " "
         self.unitLabel.text = " "
+
+        self.speedLabel.textColor = UIColor.blackColor()
+        self.nameLabel.textColor = UIColor.blackColor()
+        self.updatedLabel.textColor = UIColor.vindsidenTodayTextColor()
+        self.unitLabel.textColor = UIColor.vindsidenTodayTextColor()
     }
 
     override func awakeFromNib() {

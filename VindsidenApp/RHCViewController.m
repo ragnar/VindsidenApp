@@ -737,7 +737,10 @@ static NSString *kCellID = @"stationCellID";
     }
 
 
-    NSDictionary *context = @{@"activeStations": stations};
+    NSDictionary *context = @{
+                              @"activeStations": stations,
+                              @"unit": @([[AppConfig sharedConfiguration].applicationUserDefaults integerForKey:@"selectedUnit"])
+                              };
     NSError *error = nil;
 
     if ( [session updateApplicationContext:context error: &error] == NO ) {
