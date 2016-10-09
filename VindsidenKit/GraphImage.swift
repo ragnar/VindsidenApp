@@ -82,14 +82,10 @@ public final class GraphImage {
 
 
     public func drawImage() -> UIImage {
-        let ctx = UIGraphicsGetCurrentContext()
-        CGContextDrawPath(ctx, CGPathDrawingMode.Stroke)
-
-
         UIGraphicsBeginImageContextWithOptions( size, false, scale)
         let context = UIGraphicsGetCurrentContext()
 
-        CGContextDrawPath(context, CGPathDrawingMode.Stroke)
+        CGContextDrawPath(context!, CGPathDrawingMode.Stroke)
 
         drawSpeedLines(context)
         drawHourLines(context)
@@ -102,7 +98,7 @@ public final class GraphImage {
         let image = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
 
-        return image
+        return image!
     }
 
 

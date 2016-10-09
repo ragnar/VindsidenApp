@@ -225,9 +225,25 @@ class RHCAppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate {
     // MARK: - WC Session
 
 
+    func session(session: WCSession, activationDidCompleteWithState activationState: WCSessionActivationState, error: NSError?) {
+        DLOG("Session: \(session)")
+    }
+
+
+    func sessionDidBecomeInactive(session: WCSession) {
+        DLOG("Session: \(session)")
+    }
+
+
+    func sessionDidDeactivate(session: WCSession) {
+        DLOG("Session: \(session)")
+    }
+
+
     func sessionWatchStateDidChange(session: WCSession) {
         DLOG("Session: \(session)")
     }
+
 
     func sessionReachabilityDidChange(session: WCSession) {
         DLOG("Session: \(session)")

@@ -192,7 +192,7 @@ public class Datamanager : NSObject
         let coordinator = NSPersistentStoreCoordinator(managedObjectModel: self.managedObjectModel)
         let url = self.applicationDocumentsDirectory.URLByAppendingPathComponent(AppConfig.CoreData.sqliteName)
 
-        self.addSkipBackupAttributeToItemAtURL(url)
+        self.addSkipBackupAttributeToItemAtURL(url!)
 
         var failureReason = "There was an error creating or loading the application's saved data."
         do {

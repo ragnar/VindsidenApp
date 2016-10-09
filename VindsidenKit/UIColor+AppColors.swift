@@ -29,4 +29,8 @@ public extension UIColor
     class func vindsidenMaxColor() -> UIColor {
         return RGBCOLOR( 255.0, green: 73.0, blue: 62.0)
     }
+
+    class func vindsidenTodayTextColor() -> UIColor {
+        return RGBCOLOR( 92.0, green: 92.0, blue: 92.0)
+    }
 }
