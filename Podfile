@@ -4,7 +4,7 @@ abstract_target 'VindsidenAppCommon' do
   use_frameworks!
 
   target 'VindsidenApp' do
-    platform :ios, "9.0"
+    platform :ios, "10.0"
     pod "MotionJpegImageView"
     pod "JTSImageViewController"
   end

@@ -994,14 +994,14 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = AD17ED7C1731012200943C33 /* Build configuration list for PBXNativeTarget "VindsidenApp" */;
 			buildPhases = (
-				B79F4F59512F4B2908739667 /* 📦 Check Pods Manifest.lock */,
+				B79F4F59512F4B2908739667 /* [CP] Check Pods Manifest.lock */,
 				AD17ED401731012200943C33 /* Sources */,
 				AD17ED411731012200943C33 /* Frameworks */,
 				AD17ED421731012200943C33 /* Resources */,
 				AD539C941947B0F7002644BD /* Embed App Extensions */,
 				AD539CB91947B5CA002644BD /* Embed Frameworks */,
-				B8BC4B595CE4742DF687D534 /* 📦 Embed Pods Frameworks */,
-				D6C4174BF0CB7DBE2DE8331D /* 📦 Copy Pods Resources */,
+				B8BC4B595CE4742DF687D534 /* [CP] Embed Pods Frameworks */,
+				D6C4174BF0CB7DBE2DE8331D /* [CP] Copy Pods Resources */,
 				ADBF8B6E1D0F00020005C0C9 /* Embed Watch Content */,
 			);
 			buildRules = (
@@ -1370,44 +1370,52 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		B79F4F59512F4B2908739667 /* 📦 Check Pods Manifest.lock */ = {
+		B79F4F59512F4B2908739667 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
 			);
-			name = "📦 Check Pods Manifest.lock";
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-VindsidenAppCommon-VindsidenApp-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		B8BC4B595CE4742DF687D534 /* 📦 Embed Pods Frameworks */ = {
+		B8BC4B595CE4742DF687D534 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-VindsidenAppCommon-VindsidenApp/Pods-VindsidenAppCommon-VindsidenApp-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/JTSImageViewController/JTSImageViewController.framework",
+				"${BUILT_PRODUCTS_DIR}/MotionJpegImageView/MotionJpegImageView.framework",
 			);
-			name = "📦 Embed Pods Frameworks";
+			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JTSImageViewController.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MotionJpegImageView.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-VindsidenAppCommon-VindsidenApp/Pods-VindsidenAppCommon-VindsidenApp-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		D6C4174BF0CB7DBE2DE8331D /* 📦 Copy Pods Resources */ = {
+		D6C4174BF0CB7DBE2DE8331D /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Copy Pods Resources";
+			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
