@@ -25,28 +25,28 @@ class StationDetailsInterfaceController: WKInterfaceController {
 
     var station: CDStation?
 
-    override func awakeWithContext(context: AnyObject!) {
-        super.awakeWithContext(context)
+    override func awake(withContext context: Any!) {
+        super.awake(withContext: context)
 
         if let station = context as? CDStation {
 
             self.station = station
 
-            Datamanager.sharedManager().managedObjectContext.processPendingChanges()
-            let oldStaleness = Datamanager.sharedManager().managedObjectContext.stalenessInterval
-            Datamanager.sharedManager().managedObjectContext.stalenessInterval = 0.0
-            Datamanager.sharedManager().managedObjectContext.refreshObject(station, mergeChanges: false)
+            Datamanager.sharedManager.managedObjectContext.processPendingChanges()
+            let oldStaleness = Datamanager.sharedManager.managedObjectContext.stalenessInterval
+            Datamanager.sharedManager.managedObjectContext.stalenessInterval = 0.0
+            Datamanager.sharedManager.managedObjectContext.refresh(station, mergeChanges: false)
             setTitle(station.stationName)
             updateUI(station)
-            Datamanager.sharedManager().managedObjectContext.stalenessInterval = oldStaleness
-            let stationId = station.stationId! as Int
+            Datamanager.sharedManager.managedObjectContext.stalenessInterval = oldStaleness
+            let stationId = station.stationId! as! Int
             let userInfo = [
                 "station": stationId,
                 "urlToActivate": "vindsiden://station/\(stationId)"
 
-            ] as [String:AnyObject]
+            ] as [String:Any]
 
-            let url = NSURL(string: "http://vindsiden.no/default.aspx?id=\(stationId)")
+            let url = URL(string: "http://vindsiden.no/default.aspx?id=\(stationId)")
 
             self.updateUserActivity("org.juniks.VindsidenApp", userInfo: userInfo, webpageURL: url)
         }
@@ -63,20 +63,20 @@ class StationDetailsInterfaceController: WKInterfaceController {
 
 
     @IBAction func graphButtonPressed() {
-        presentControllerWithName("graph", context: station)
+        presentController(withName: "graph", context: station)
     }
 
 
     @IBAction func mapButtonPressed() {
-        presentControllerWithName("showMap", context: station)
+        presentController(withName: "showMap", context: station)
     }
 
 
     // MARK: - Convenience
 
 
-    func updateUI( station: CDStation ) -> Void {
-        let raw = AppConfig.sharedConfiguration.applicationUserDefaults.integerForKey("selectedUnit")
+    func updateUI( _ station: CDStation ) -> Void {
+        let raw = AppConfig.sharedConfiguration.applicationUserDefaults.integer(forKey: "selectedUnit")
         let unit = SpeedConvertion(rawValue: raw)
 
         if let realUnit = unit {
@@ -87,7 +87,7 @@ class StationDetailsInterfaceController: WKInterfaceController {
 
             let winddir = CGFloat(plot.windDir!.floatValue)
             let windspeed = CGFloat(plot.windAvg!.floatValue)
-            let image = DrawArrow.drawArrowAtAngle( winddir, forSpeed:windspeed, highlighted:false, color: UIColor.whiteColor(), hightlightedColor: UIColor.blackColor())
+            let image = DrawArrow.drawArrow( atAngle: winddir, forSpeed:windspeed, highlighted:false, color: UIColor.white, hightlightedColor: UIColor.black)
             windDirectionImage.setImage(image)
             updatedAtLabel.setText( AppConfig.sharedConfiguration.relativeDate(plot.plotTime!) as String)
 
@@ -96,8 +96,8 @@ class StationDetailsInterfaceController: WKInterfaceController {
 
                 windSpeedLabel.setText(convertWindToString(plot.windAvg!, toUnit: realUnit))
                 windDirectionLabel.setText("\(Int(plot.windDir!))° (\(plot.windDirectionString()))")
-                windGustLabel.setText("\(convertWindToString(plot.windMax!, toUnit: realUnit)) \(unitString)")
-                windLull.setText("\(convertWindToString(plot.windMin!, toUnit: realUnit)) \(unitString)")
+                windGustLabel.setText("\(convertWindToString(plot.windMax!, toUnit: realUnit)) \(unitString!)")
+                windLull.setText("\(convertWindToString(plot.windMin!, toUnit: realUnit)) \(unitString!)")
                 windBeaufortLabel.setText("\(Int(plot.windMin!.speedInBeaufort()))")
                 airTempLabel.setText("\(convertNumberToString(plot.tempAir!))℃")
             }
@@ -108,18 +108,18 @@ class StationDetailsInterfaceController: WKInterfaceController {
                 windDirectionImage.setImage(nil)
                 windDirectionLabel.setText("—° (—)")
                 windSpeedLabel.setText("–.–")
-                windGustLabel.setText("-.- \(unitString)")
-                windLull.setText("-.- \(unitString)")
+                windGustLabel.setText("-.- \(unitString!)")
+                windLull.setText("-.- \(unitString!)")
                 windBeaufortLabel.setText("-")
                 airTempLabel.setText("-.-℃")
-                updatedAtLabel.setText( NSLocalizedString("LABEL_NOT_UPDATED", tableName: nil, bundle: NSBundle.mainBundle(), value: "LABEL_NOT_UPDATED", comment: "Not updated"))
+                updatedAtLabel.setText( NSLocalizedString("LABEL_NOT_UPDATED", tableName: nil, bundle: Bundle.main, value: "LABEL_NOT_UPDATED", comment: "Not updated"))
             }
         }
     }
 
 
-    func convertWindToString( wind: NSNumber, toUnit unit: SpeedConvertion) -> String {
-        if let speedString = speedFormatter.stringFromNumber(wind.speedConvertionTo(unit)) {
+    func convertWindToString( _ wind: NSNumber, toUnit unit: SpeedConvertion) -> String {
+        if let speedString = speedFormatter.string(from: NSNumber(value: Float(wind.speedConvertion(to: unit)))) {
             return speedString
         } else {
             return "—.—"
@@ -127,8 +127,8 @@ class StationDetailsInterfaceController: WKInterfaceController {
     }
 
 
-    func convertNumberToString( number: NSNumber) -> String {
-        if let numberString = speedFormatter.stringFromNumber(number) {
+    func convertNumberToString( _ number: NSNumber) -> String {
+        if let numberString = speedFormatter.string(from: number) {
             return numberString
         } else {
             return "—.—"
@@ -136,9 +136,9 @@ class StationDetailsInterfaceController: WKInterfaceController {
     }
 
 
-    lazy var speedFormatter : NSNumberFormatter = {
-        let _speedFormatter = NSNumberFormatter()
-        _speedFormatter.numberStyle = NSNumberFormatterStyle.DecimalStyle
+    lazy var speedFormatter : NumberFormatter = {
+        let _speedFormatter = NumberFormatter()
+        _speedFormatter.numberStyle = NumberFormatter.Style.decimal
         _speedFormatter.maximumFractionDigits = 1
         _speedFormatter.minimumFractionDigits = 1
         _speedFormatter.notANumberSymbol = "—.—"

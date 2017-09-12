@@ -14,7 +14,7 @@ import CoreData
 
 public extension CDPlot {
 
-    @NSManaged var plotTime: NSDate?
+    @NSManaged var plotTime: Date?
     @NSManaged var tempAir: NSNumber?
     @NSManaged var tempWater: NSNumber?
     @NSManaged var windAvg: NSNumber?

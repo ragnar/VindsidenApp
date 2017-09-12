@@ -10,17 +10,17 @@ import Foundation
 import CoreData
 
 @objc(CDPlot)
-public class CDPlot: NSManagedObject {
+open class CDPlot: NSManagedObject {
 
 
-    public class func newOrExistingPlot( content: [String:String], forStation station:CDStation, inManagedObjectContext managedObjectContext: NSManagedObjectContext) -> CDPlot {
+    open class func newOrExistingPlot( _ content: [String:String], forStation station:CDStation, inManagedObjectContext managedObjectContext: NSManagedObjectContext) -> CDPlot {
         if let unwrapped = content["DataID"], let dataId = Int(unwrapped) {
-            let request = NSFetchRequest(entityName: "CDPlot")
+            let request = NSFetchRequest<NSFetchRequestResult>(entityName: "CDPlot")
             request.predicate = NSPredicate(format: "dataId == %@ and station == %@", argumentArray: [dataId, station])
             request.fetchLimit = 1
 
             do {
-                let result = try managedObjectContext.executeFetchRequest(request) as! [CDPlot]
+                let result = try managedObjectContext.fetch(request) as! [CDPlot]
                 if let plot = result.first {
                     return plot
                 }
@@ -28,26 +28,26 @@ public class CDPlot: NSManagedObject {
             }
         }
 
-        let plot = NSEntityDescription.insertNewObjectForEntityForName("CDPlot", inManagedObjectContext: managedObjectContext) as! CDPlot
+        let plot = NSEntityDescription.insertNewObject(forEntityName: "CDPlot", into: managedObjectContext) as! CDPlot
         plot.updateWithContent(content)
 
         return plot
     }
 
 
-    public class func updatePlots( plots: [[String:String]], completion: ((Void) -> Void)? = nil) -> Void {
+    open class func updatePlots( _ plots: [[String:String]], completion: (() -> Void)? = nil) -> Void {
         if plots.isEmpty {
             completion?()
             return
         }
 
-        let context = Datamanager.sharedManager().managedObjectContext
-        let childContext = NSManagedObjectContext(concurrencyType: .PrivateQueueConcurrencyType)
-        childContext.parentContext = context
+        let context = Datamanager.sharedManager.managedObjectContext
+        let childContext = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
+        childContext.parent = context
         childContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
         childContext.undoManager = nil
 
-        childContext.performBlock { () -> Void in
+        childContext.perform { () -> Void in
             if let unwrapped = plots.first, let stationString = unwrapped["StationID"], let stationId = Int(stationString) {
                 do {
                     let station = try CDStation.existingStationWithId(stationId, inManagedObjectContext: childContext)
@@ -55,21 +55,21 @@ public class CDPlot: NSManagedObject {
 
                     for plot in plots {
                         let managedObject = CDPlot.newOrExistingPlot(plot, forStation: station, inManagedObjectContext: childContext)
-                        if managedObject.inserted {
-                            insertedPlots.addObject(managedObject)
+                        if managedObject.isInserted {
+                            insertedPlots.add(managedObject)
                         }
                     }
 
                     if insertedPlots.count > 0 {
-                        station.willChangeValueForKey("plots")
+                        station.willChangeValue(forKey: "plots")
                         station.addPlots(insertedPlots)
-                        station.didChangeValueForKey("plots")
+                        station.didChangeValue(forKey: "plots")
                     }
 
                     do {
                         try childContext.save()
 
-                        context.performBlock {
+                        context.perform {
                             do {
                                 try context.save()
                             } catch let error as NSError {
@@ -98,38 +98,38 @@ public class CDPlot: NSManagedObject {
     }
 
 
-    func updateWithContent( content: [String:String] ) {
+    func updateWithContent( _ content: [String:String] ) {
         if let unwrapped = content["Time"] {
-            self.plotTime = Datamanager.sharedManager().dateFromString(unwrapped)
+            self.plotTime = Datamanager.sharedManager.dateFromString(unwrapped)
         }
 
         if let unwrapped = content["WindAvg"], let avg = Double(unwrapped) {
-            self.windAvg = avg
+            self.windAvg = avg as NSNumber?
         }
 
         if let unwrapped = content["WindMax"], let max = Double(unwrapped) {
-            self.windMax = max
+            self.windMax = max as NSNumber?
         }
 
         if let unwrapped = content["WindMin"], let min = Double(unwrapped) {
-            self.windMin = min
+            self.windMin = min as NSNumber?
         }
 
         if let unwrapped = content["DirectionAvg"], let dir = Double(unwrapped) {
-            self.windDir = dir
+            self.windDir = dir as NSNumber?
         }
 
         if let unwrapped = content["Temperature1"], let temp = Double(unwrapped) {
-            self.tempAir = temp
+            self.tempAir = temp as NSNumber?
         }
 
         if let unwrapped = content["DataID"], let dataId = Int(unwrapped) {
-            self.dataId = dataId
+            self.dataId = dataId as NSNumber?
         }
     }
 
 
-    public func windDirectionString() -> String {
+    open func windDirectionString() -> String {
         let bundle = AppConfig.sharedConfiguration.frameworkBundle
         var direction = self.windDir!.floatValue
 

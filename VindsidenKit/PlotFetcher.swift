@@ -9,7 +9,7 @@
 import Foundation
 
 
-class PlotURLSession : NSObject, NSURLSessionDataDelegate {
+class PlotURLSession : NSObject, URLSessionDataDelegate {
     class var sharedPlotSession: PlotURLSession {
         struct Singleton {
             static let sharedAppSession = PlotURLSession()
@@ -18,77 +18,77 @@ class PlotURLSession : NSObject, NSURLSessionDataDelegate {
         return Singleton.sharedAppSession
     }
 
-    private var privateSharedSession: NSURLSession?
+    fileprivate var privateSharedSession: Foundation.URLSession?
 
     override init() {
         super.init()
     }
 
-    func sharedSession() -> NSURLSession {
+    func sharedSession() -> Foundation.URLSession {
 
         if let _sharedSession = privateSharedSession {
             return _sharedSession
         } else {
-            privateSharedSession = NSURLSession(configuration: NSURLSessionConfiguration.ephemeralSessionConfiguration(), delegate: self, delegateQueue: nil)
+            privateSharedSession = Foundation.URLSession(configuration: URLSessionConfiguration.ephemeral, delegate: self, delegateQueue: nil)
             return privateSharedSession!
         }
     }
 
-    func URLSession(session: NSURLSession, dataTask: NSURLSessionDataTask, willCacheResponse proposedResponse: NSCachedURLResponse, completionHandler: (NSCachedURLResponse?) -> Void) {
+    func urlSession(_ session: URLSession, dataTask: URLSessionDataTask, willCacheResponse proposedResponse: CachedURLResponse, completionHandler: @escaping (CachedURLResponse?) -> Void) {
         DLOG("")
         completionHandler(nil)
     }
 
-    func URLSession(session: NSURLSession, didBecomeInvalidWithError error: NSError?) {
-        DLOG("Error: \(error?.localizedDescription)")
+    func urlSession(_ session: URLSession, didBecomeInvalidWithError error: Error?) {
+        DLOG("Error: \(String(describing: error?.localizedDescription))")
         self.privateSharedSession = nil
     }
 }
 
 
-public class PlotFetcher : NSObject {
+open class PlotFetcher : NSObject {
 
     var characters:String = ""
     var result = [[String:String]]()
     var currentPlot = [String:String]()
 
-    public func fetchForStationId( stationId: Int, completionHandler:(([[String:String]], NSError?) -> Void)) {
+    open func fetchForStationId( _ stationId: Int, completionHandler:@escaping (([[String:String]], Error?) -> Void)) {
 
-        NSNotificationCenter.defaultCenter().postNotificationName(AppConfig.Notification.networkRequestStart, object: nil)
+        NotificationCenter.default.post(name: AppConfig.Notifications.networkRequestStart, object: nil)
 
-        let request = NSURLRequest(URL: NSURL(string: "http://vindsiden.no//xml.aspx?id=\(stationId)&hours=\(Int(AppConfig.Global.plotHistory-1))")!)
+        let request = URLRequest(url: URL(string: "http://vindsiden.no//xml.aspx?id=\(stationId)&hours=\(Int(AppConfig.Global.plotHistory-1))")!)
         DLOG("\(request)")
 
-        let task = PlotURLSession.sharedPlotSession.sharedSession().dataTaskWithRequest(request) { (data: NSData?, response: NSURLResponse?, error: NSError?) -> Void in
+        let task = PlotURLSession.sharedPlotSession.sharedSession().dataTask(with: request, completionHandler: { (data: Data?, response: URLResponse?, error: Error?) -> Void in
             guard let data = data else {
-                DLOG("Error: \(error)")
+                DLOG("Error: \(String(describing: error))")
                 completionHandler( [[String:String]](), error)
-                NSNotificationCenter.defaultCenter().postNotificationName(AppConfig.Notification.networkRequestEnd, object: nil)
+                NotificationCenter.default.post(name: AppConfig.Notifications.networkRequestEnd, object: nil)
                 return;
             }
 
-            let parser = NSXMLParser(data: data)
+            let parser = XMLParser(data: data)
             parser.delegate = self
             parser.parse()
 
-            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+            DispatchQueue.main.async(execute: { () -> Void in
                 completionHandler(self.result, error)
-                NSNotificationCenter.defaultCenter().postNotificationName(AppConfig.Notification.networkRequestEnd, object: nil)
+                NotificationCenter.default.post(name: AppConfig.Notifications.networkRequestEnd, object: nil)
             })
-        }
+        })
 
         task.resume()
     }
 
 
-    public class func invalidate() -> Void {
+    open class func invalidate() -> Void {
         PlotURLSession.sharedPlotSession.sharedSession().invalidateAndCancel()
     }
 }
 
 
-extension PlotFetcher: NSXMLParserDelegate {
-    public func parser(parser: NSXMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [String : String]) {
+extension PlotFetcher: XMLParserDelegate {
+    public func parser(_ parser: XMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [String : String]) {
         if elementName == "Measurement" {
             currentPlot = [String:String]()
         }
@@ -96,7 +96,7 @@ extension PlotFetcher: NSXMLParserDelegate {
     }
 
 
-    public func parser(parser: NSXMLParser, didEndElement elementName: String, namespaceURI: String?, qualifiedName qName: String?) {
+    public func parser(_ parser: XMLParser, didEndElement elementName: String, namespaceURI: String?, qualifiedName qName: String?) {
         if elementName == "Measurement" {
             result.append(currentPlot)
         } else {
@@ -104,7 +104,7 @@ extension PlotFetcher: NSXMLParserDelegate {
         }
     }
 
-    public func parser(parser: NSXMLParser, foundCharacters string: String) {
+    public func parser(_ parser: XMLParser, foundCharacters string: String) {
         characters += string
     }
 }

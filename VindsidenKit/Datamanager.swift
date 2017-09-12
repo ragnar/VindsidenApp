@@ -16,38 +16,26 @@ import CoreSpotlight
 
 
 @objc(Datamanager)
-public class Datamanager : NSObject
+open class Datamanager : NSObject
 {
-    let _formatterQueue: dispatch_queue_t = dispatch_queue_create("formatter queue", nil)
+    let _formatterQueue: DispatchQueue = DispatchQueue(label: "formatter queue", attributes: [])
 
-
-    public class func sharedManager() -> Datamanager! {
-        struct Static {
-            static var instance: Datamanager? = nil
-            static var onceToken: dispatch_once_t = 0
-        }
-
-        dispatch_once(&Static.onceToken) {
-            Static.instance = self.init()
-        }
-
-        return Static.instance!
-    }
+    open static let sharedManager = Datamanager()
 
 
     public required override init() {
         super.init()
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(Datamanager.mainManagedObjectContextDidSave(_:)), name: NSManagedObjectContextDidSaveNotification, object: managedObjectContext)
+        NotificationCenter.default.addObserver(self, selector: #selector(Datamanager.mainManagedObjectContextDidSave(_:)), name: NSNotification.Name.NSManagedObjectContextDidSave, object: managedObjectContext)
     }
 
 
-    func mainManagedObjectContextDidSave(notification: NSNotification) -> Void {
+    func mainManagedObjectContextDidSave(_ notification: Notification) -> Void {
         DLOG("Saving MOC based on notification")
-        managedObjectContext.mergeChangesFromContextDidSaveNotification(notification)
+        managedObjectContext.mergeChanges(fromContextDidSave: notification)
     }
 
 
-    public func saveContext () {
+    open func saveContext () {
         if self.managedObjectContext.hasChanges {
             do {
                 try self.managedObjectContext.save()
@@ -59,30 +47,30 @@ public class Datamanager : NSObject
     }
 
 
-    public func cleanupPlots(completionHandler: ((Void) -> Void)? = nil) -> Void {
+    open func cleanupPlots(_ completionHandler: (() -> Void)? = nil) -> Void {
 
-        let childContext = NSManagedObjectContext(concurrencyType: .PrivateQueueConcurrencyType)
-        childContext.parentContext = managedObjectContext
+        let childContext = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
+        childContext.parent = managedObjectContext
         childContext.mergePolicy = NSRollbackMergePolicy;
         childContext.undoManager = nil
 
-        childContext.performBlock { () -> Void in
-            let fetchRequest = NSFetchRequest(entityName: "CDPlot")
-            let interval: NSTimeInterval = -1.0*((1.0+AppConfig.Global.plotHistory)*3600.0)
-            let time = NSDate(timeIntervalSinceNow: interval)
-            fetchRequest.predicate = NSPredicate(format: "plotTime < %@", time)
+        childContext.perform { () -> Void in
+            let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "CDPlot")
+            let interval: TimeInterval = -1.0*((1.0+AppConfig.Global.plotHistory)*3600.0)
+            let time = Date(timeIntervalSinceNow: interval)
+            fetchRequest.predicate = NSPredicate(format: "plotTime < %@", time as CVarArg)
 
             let request = NSBatchDeleteRequest(fetchRequest: fetchRequest)
-            request.resultType = .ResultTypeCount
+            request.resultType = .resultTypeCount
             do {
-                let result = try childContext.executeRequest(request) as! NSBatchDeleteResult
+                let result = try childContext.execute(request) as! NSBatchDeleteResult
                 DLOG("Deleted \(result.result!) plots")
 
                 try childContext.save()
 
                 childContext.processPendingChanges()
 
-                self.managedObjectContext.performBlock {
+                self.managedObjectContext.perform {
                     do {
                         try self.managedObjectContext.save()
                         self.managedObjectContext.processPendingChanges()
@@ -100,15 +88,15 @@ public class Datamanager : NSObject
     }
 
 
-    public func removeStaleStationsIds( stations: [Int], inManagedObjectContext managedObjectContext: NSManagedObjectContext) -> Void {
-        let fetchRequest = NSFetchRequest(entityName: "CDStation")
+    open func removeStaleStationsIds( _ stations: [Int], inManagedObjectContext managedObjectContext: NSManagedObjectContext) -> Void {
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "CDStation")
         fetchRequest.predicate = NSPredicate(format: "NOT stationId IN (%@)", stations)
 
         let request = NSBatchDeleteRequest(fetchRequest: fetchRequest)
-        request.resultType = .ResultTypeCount
+        request.resultType = .resultTypeCount
 
         do {
-            let result = try managedObjectContext.executeRequest(request) as! NSBatchDeleteResult
+            let result = try managedObjectContext.execute(request) as! NSBatchDeleteResult
             DLOG("Deleted \(result.result!) station(s)")
         } catch {
             DLOG("Delete failed: \(error)")
@@ -118,9 +106,9 @@ public class Datamanager : NSObject
 
     #if os(iOS)
 
-    public func indexVisibleStations( ) {
+    open func indexVisibleStations( ) {
         AppConfig.sharedConfiguration.shouldIndexForFirstTime() {
-            let index: CSSearchableIndex = CSSearchableIndex.defaultSearchableIndex()
+            let index: CSSearchableIndex = CSSearchableIndex.default()
 
             for station in CDStation.visibleStationsInManagedObjectContext(self.managedObjectContext) {
                 self.addStationToIndex(station, index: index)
@@ -129,7 +117,7 @@ public class Datamanager : NSObject
     }
 
 
-    public func addStationToIndex( station: CDStation, index: CSSearchableIndex = CSSearchableIndex.defaultSearchableIndex() ) {
+    open func addStationToIndex( _ station: CDStation, index: CSSearchableIndex = CSSearchableIndex.default() ) {
 
         if CSSearchableIndex.isIndexingAvailable() == false {
             DLOG("Indexing not available")
@@ -150,13 +138,13 @@ public class Datamanager : NSObject
         let url = "vindsiden://station/\(station.stationId!)"
         let item = CSSearchableItem(uniqueIdentifier: url, domainIdentifier: AppConfig.Bundle.appName, attributeSet: search)
 
-        CSSearchableIndex.defaultSearchableIndex().indexSearchableItems( [item], completionHandler: { (error: NSError?) -> Void in
-            DLOG("Added station: \(station.stationName) with error: \(error?.localizedDescription)")
+        CSSearchableIndex.default().indexSearchableItems( [item], completionHandler: { (error: Error?) -> Void in
+            DLOG("Added station: \(String(describing: station.stationName)) with error: \(String(describing: error?.localizedDescription))")
         })
     }
 
 
-    public func removeStationFromIndex( station: CDStation, index: CSSearchableIndex = CSSearchableIndex.defaultSearchableIndex() ) {
+    open func removeStationFromIndex( _ station: CDStation, index: CSSearchableIndex = CSSearchableIndex.default() ) {
 
         if CSSearchableIndex.isIndexingAvailable() == false {
             DLOG("Indexing not available")
@@ -164,16 +152,16 @@ public class Datamanager : NSObject
         }
 
         let url = "vindsiden://station/\(station.stationId!)"
-        CSSearchableIndex.defaultSearchableIndex().deleteSearchableItemsWithIdentifiers([url]) { (error: NSError?) -> Void in
-            DLOG("Removed station: \(station.stationName) with error: \(error?.localizedDescription)")
+        CSSearchableIndex.default().deleteSearchableItems(withIdentifiers: [url]) { (error: Error?) -> Void in
+            DLOG("Removed station: \(String(describing: station.stationName)) with error: \(String(describing: error?.localizedDescription))")
         }
     }
     #endif
 
 
-    lazy public var managedObjectContext: NSManagedObjectContext = {
+    lazy open var managedObjectContext: NSManagedObjectContext = {
         let coordinator = self.persistentStoreCoordinator
-        var managedObjectContext = NSManagedObjectContext(concurrencyType: .MainQueueConcurrencyType)
+        var managedObjectContext = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
         managedObjectContext.persistentStoreCoordinator = coordinator
         managedObjectContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
 
@@ -182,26 +170,26 @@ public class Datamanager : NSObject
 
 
     lazy var managedObjectModel: NSManagedObjectModel = {
-        let modelURL = NSBundle(identifier: AppConfig.Bundle.frameworkBundleIdentifier)?.URLForResource(AppConfig.CoreData.datamodelName, withExtension: "momd")
-        return NSManagedObjectModel(contentsOfURL: modelURL!)!
+        let modelURL = Bundle(identifier: AppConfig.Bundle.frameworkBundleIdentifier)?.url(forResource: AppConfig.CoreData.datamodelName, withExtension: "momd")
+        return NSManagedObjectModel(contentsOf: modelURL!)!
         }()
 
 
 
     lazy var persistentStoreCoordinator: NSPersistentStoreCoordinator = {
         let coordinator = NSPersistentStoreCoordinator(managedObjectModel: self.managedObjectModel)
-        let url = self.applicationDocumentsDirectory.URLByAppendingPathComponent(AppConfig.CoreData.sqliteName)
+        let url = self.applicationDocumentsDirectory.appendingPathComponent(AppConfig.CoreData.sqliteName)
 
-        self.addSkipBackupAttributeToItemAtURL(url!)
+        self.addSkipBackupAttributeToItemAtURL(url)
 
         var failureReason = "There was an error creating or loading the application's saved data."
         do {
-            try coordinator.addPersistentStoreWithType(NSSQLiteStoreType, configuration: nil, URL: url, options: [NSMigratePersistentStoresAutomaticallyOption: true, NSInferMappingModelAutomaticallyOption: true])
+            try coordinator.addPersistentStore(ofType: NSSQLiteStoreType, configurationName: nil, at: url, options: [NSMigratePersistentStoresAutomaticallyOption: true, NSInferMappingModelAutomaticallyOption: true])
         } catch {
             // Report any error we got.
             var dict = [String: AnyObject]()
-            dict[NSLocalizedDescriptionKey] = "Failed to initialize the application's saved data"
-            dict[NSLocalizedFailureReasonErrorKey] = failureReason
+            dict[NSLocalizedDescriptionKey] = "Failed to initialize the application's saved data" as AnyObject?
+            dict[NSLocalizedFailureReasonErrorKey] = failureReason as AnyObject?
 
             dict[NSUnderlyingErrorKey] = error as NSError
             let wrappedError = NSError(domain: AppConfig.Bundle.appName, code: 9999, userInfo: dict)
@@ -215,50 +203,47 @@ public class Datamanager : NSObject
         }()
 
 
-    var applicationDocumentsDirectory: NSURL {
-        let url = NSFileManager.defaultManager().containerURLForSecurityApplicationGroupIdentifier(AppConfig.ApplicationGroups.primary)
+    var applicationDocumentsDirectory: URL {
+        let url = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: AppConfig.ApplicationGroups.primary)
         if let actualurl = url {
-            return actualurl as NSURL
+            return actualurl as URL
         } else {
-            return NSURL()
+            return URL(string: "FIXME")!
         }
     }
 
 
-    func addSkipBackupAttributeToItemAtURL( url: NSURL) -> Void
-    {
-        if let path = url.path {
-            if NSFileManager.defaultManager().fileExistsAtPath(path) {
-                do {
-                    try url.setResourceValue(true, forKey: NSURLIsExcludedFromBackupKey)
-                } catch let error as NSError {
-                    NSLog("Error excluding \(url.lastPathComponent) from backup \(error)");
-                }
+    func addSkipBackupAttributeToItemAtURL( _ url: URL) -> Void {
+        if FileManager.default.fileExists(atPath: url.path) {
+            do {
+                try (url as NSURL).setResourceValue(true, forKey: URLResourceKey.isExcludedFromBackupKey)
+            } catch let error as NSError {
+                NSLog("Error excluding \(url.lastPathComponent) from backup \(error)");
             }
         }
     }
 
 
-    var dateFormatter: NSDateFormatter {
+    var dateFormatter: DateFormatter {
         if let actdate = _dateFormatter {
             return actdate
         }
 
-        _dateFormatter = NSDateFormatter()
+        _dateFormatter = DateFormatter()
         _dateFormatter!.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZZZ"
-        _dateFormatter!.timeZone = NSTimeZone(name: "UTC")
+        _dateFormatter!.timeZone = TimeZone(identifier: "UTC")
         return _dateFormatter!
     }
-    var _dateFormatter: NSDateFormatter? = nil
+    var _dateFormatter: DateFormatter? = nil
 
 
-    public func dateFromString(string: String) -> NSDate!
+    open func dateFromString(_ string: String) -> Date!
     {
-        var date: NSDate? = nil
-        dispatch_sync(_formatterQueue) {
-            date = self.dateFormatter.dateFromString(string)
+        var date: Date? = nil
+        _formatterQueue.sync {
+            date = self.dateFormatter.date(from: string)
         };
 
-        return date ?? NSDate.init(timeIntervalSince1970: 0)
+        return date ?? Date.init(timeIntervalSince1970: 0)
     }
 }

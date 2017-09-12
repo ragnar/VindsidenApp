@@ -12,7 +12,7 @@ import VindsidenWatchKit
 
 class ExtensionDelegate: NSObject, WKExtensionDelegate {
 
-    var timestamp: NSTimeInterval = 0
+    var timestamp: TimeInterval = 0
 
     func applicationDidFinishLaunching() {
         // Perform any final initialization of your application.
@@ -24,16 +24,16 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate {
         WCFetcher.sharedInstance.activate()
         scheduleRefresh()
 
-        if NSDate().timeIntervalSinceReferenceDate < timestamp + 60 {
+        if Date().timeIntervalSinceReferenceDate < timestamp + 60 {
             return
         }
 
-        timestamp = NSDate().timeIntervalSinceReferenceDate
+        timestamp = Date().timeIntervalSinceReferenceDate
 
-        Datamanager.sharedManager().cleanupPlots { () -> Void in
-            NSNotificationCenter.defaultCenter().postNotificationName(WCFetcherNotification.FetchingPlots, object: nil)
+        Datamanager.sharedManager.cleanupPlots { () -> Void in
+            NotificationCenter.default.post(name: Notification.Name.FetchingPlots, object: nil)
             WindManager.sharedManager.fetch({ (result: WindManagerResult) -> Void in
-                NSNotificationCenter.defaultCenter().postNotificationName(WCFetcherNotification.ReceivedPlots, object: nil)
+                NotificationCenter.default.post(name: Notification.Name.ReceivedPlots, object: nil)
             })
         }
     }
@@ -45,7 +45,7 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate {
     }
 
 
-    func handleBackgroundTasks(backgroundTasks: Set<WKRefreshBackgroundTask>) {
+    func handle(_ backgroundTasks: Set<WKRefreshBackgroundTask>) {
 
         // Sent when the system needs to launch the application in the background to process tasks. Tasks arrive in a set, so loop through and process each one.
         for task in backgroundTasks {
@@ -53,14 +53,14 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate {
             switch task {
             case let backgroundTask as WKApplicationRefreshBackgroundTask:
                 // Be sure to complete the background task once you’re done.
-                if (WKExtension.sharedExtension().applicationState != .Background) {
-                    task.setTaskCompleted()
+                if (WKExtension.shared().applicationState != .background) {
+                    task.setTaskCompletedWithSnapshot(false)
                     return
                 }
 
                 WindManager.sharedManager.fetch({ (result: WindManagerResult) -> Void in
-                    NSNotificationCenter.defaultCenter().postNotificationName(WCFetcherNotification.ReceivedPlots, object: nil)
-                    backgroundTask.setTaskCompleted()
+                    NotificationCenter.default.post(name: Notification.Name.ReceivedPlots, object: nil)
+                    backgroundTask.setTaskCompletedWithSnapshot(false)
                     self.scheduleRefresh()
                 })
 
@@ -75,19 +75,19 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate {
 //                urlSessionTask.setTaskCompleted()
             default:
                 // make sure to complete unhandled task types
-                task.setTaskCompleted()
+                task.setTaskCompletedWithSnapshot(false)
             }
         }
     }
 
 
     func scheduleRefresh() {
-        let fireDate = NSDate(timeIntervalSinceNow: 60.0*30.0)
+        let fireDate = Date(timeIntervalSinceNow: 60.0*30.0)
         let userInfo = ["reason" : "background update"] as NSDictionary
 
-        WKExtension.sharedExtension().scheduleBackgroundRefreshWithPreferredDate(fireDate, userInfo: userInfo) { (error) in
+        WKExtension.shared().scheduleBackgroundRefresh(withPreferredDate: fireDate, userInfo: userInfo) { (error) in
             if error != nil {
-                DLOG("Schedule background failed: \(error)")
+                DLOG("Schedule background failed: \(String(describing: error))")
             }
         }
     }

@@ -9,22 +9,22 @@
 import Foundation
 
 @objc(Logger)
-public class Logger : NSObject {
-    public class func DLOG( message: String, file: String = #file, function: String = #function, line: Int = #line ) {
+open class Logger : NSObject {
+    open class func DLOG( _ message: String, file: String = #file, function: String = #function, line: Int = #line ) {
         #if Debug
             NSLog("([\((file as NSString).lastPathComponent) \(function)] line: \(line)) \(message)")
         #endif
     }
 
 
-    public class func LOG( message: String) {
+    open class func LOG( _ message: String) {
         #if Debug
             NSLog("\(message)")
         #endif
     }
 
 
-    public class func WARNING( message: String, file: String = #file, function: String = #function, line: Int = #line ) {
+    open class func WARNING( _ message: String, file: String = #file, function: String = #function, line: Int = #line ) {
         NSLog("([\((file as NSString).lastPathComponent) \(function)] line: \(line)) \(message)")
     }
 }

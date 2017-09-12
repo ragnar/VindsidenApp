@@ -10,17 +10,17 @@ import UIKit
 
 class RHCRotatingNavigationController: UINavigationController {
 
-    override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
-        return .Landscape
+    override var supportedInterfaceOrientations : UIInterfaceOrientationMask {
+        return .landscape
     }
 
 
-    override func shouldAutorotate() -> Bool {
+    override var shouldAutorotate : Bool {
         return true
     }
 
 
-    override func preferredInterfaceOrientationForPresentation() -> UIInterfaceOrientation {
-        return .LandscapeLeft
+    override var preferredInterfaceOrientationForPresentation : UIInterfaceOrientation {
+        return .landscapeLeft
     }
 }

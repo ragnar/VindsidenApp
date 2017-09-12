@@ -10,10 +10,10 @@ import Foundation
 
 
 @objc(AppConfig)
-public class AppConfig : NSObject {
-    private struct Defaults {
+open class AppConfig : NSObject {
+    fileprivate struct Defaults {
         static let firstLaunchKey = "Defaults.firstLaunchKey"
-        private static let spotlightIndexed = "Defaults.spotlightIndexed"
+        fileprivate static let spotlightIndexed = "Defaults.spotlightIndexed"
     }
 
 
@@ -22,9 +22,9 @@ public class AppConfig : NSObject {
     }
 
 
-    public struct Notification {
-        public static let networkRequestStart = Bundle.prefix + "." + Bundle.appName + ".NetworkRequestStart"
-        public static let networkRequestEnd = Bundle.prefix + "." + Bundle.appName + ".NetworkRequestEnd"
+    public struct Notifications {
+        public static let networkRequestStart = Notification.Name(Bundle.prefix + "." + Bundle.appName + ".NetworkRequestStart")
+        public static let networkRequestEnd = Notification.Name(Bundle.prefix + "." + Bundle.appName + ".NetworkRequestEnd")
     }
 
 
@@ -63,7 +63,7 @@ public class AppConfig : NSObject {
     }
 
     
-    public class var sharedConfiguration: AppConfig {
+    open class var sharedConfiguration: AppConfig {
         struct Singleton {
             static let sharedAppConfiguration = AppConfig()
         }
@@ -72,55 +72,55 @@ public class AppConfig : NSObject {
     }
 
 
-    public var applicationUserDefaults: NSUserDefaults {
-        return NSUserDefaults(suiteName: ApplicationGroups.primary)!
+    open var applicationUserDefaults: UserDefaults {
+        return UserDefaults(suiteName: ApplicationGroups.primary)!
     }
 
 
-    public lazy var frameworkBundle: NSBundle! = {
-        return NSBundle(identifier: Bundle.frameworkBundleIdentifier)
+    open lazy var frameworkBundle: Foundation.Bundle = {
+        return Foundation.Bundle(identifier: Bundle.frameworkBundleIdentifier)!
     }()
 
 
-    public lazy var applicationDocumentsDirectory: NSURL? = {
-        let urlOrNil = NSFileManager.defaultManager().containerURLForSecurityApplicationGroupIdentifier(ApplicationGroups.primary)
+    open lazy var applicationDocumentsDirectory: URL? = {
+        let urlOrNil = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: ApplicationGroups.primary)
         if let url = urlOrNil {
-            return url as NSURL
+            return url as URL
         } else {
-            return NSURL()
+            return nil
         }
     }()
 
 
-    public private(set) var isFirstLaunch: Bool {
+    open fileprivate(set) var isFirstLaunch: Bool {
         get {
             registerDefaults()
-            return applicationUserDefaults.boolForKey(Defaults.firstLaunchKey)
+            return applicationUserDefaults.bool(forKey: Defaults.firstLaunchKey)
         }
         set {
-            applicationUserDefaults.setBool(newValue, forKey: Defaults.firstLaunchKey)
+            applicationUserDefaults.set(newValue, forKey: Defaults.firstLaunchKey)
         }
     }
 
 
-    public private(set) var isSpotlightIndexed: Int {
+    open fileprivate(set) var isSpotlightIndexed: Int {
         get {
-            return applicationUserDefaults.integerForKey(Defaults.spotlightIndexed)
+            return applicationUserDefaults.integer(forKey: Defaults.spotlightIndexed)
         }
         set {
-            applicationUserDefaults.setInteger(newValue, forKey: Defaults.spotlightIndexed)
+            applicationUserDefaults.set(newValue, forKey: Defaults.spotlightIndexed)
         }
     }
 
 
-    private func registerDefaults() {
+    fileprivate func registerDefaults() {
         #if os(watchOS)
             let defaultOptions: [String: AnyObject] = [
-            Defaults.firstLaunchKey: true,
+            Defaults.firstLaunchKey: true as AnyObject,
             ]
         #elseif os(iOS)
             let defaultOptions: [String: AnyObject] = [
-                Defaults.firstLaunchKey: true,
+                Defaults.firstLaunchKey: true as AnyObject,
             ]
             #elseif os(OSX)
             let defaultOptions: [String: AnyObject] = [
@@ -128,11 +128,11 @@ public class AppConfig : NSObject {
             ]
         #endif
 
-        applicationUserDefaults.registerDefaults(defaultOptions)
+        applicationUserDefaults.register(defaults: defaultOptions)
     }
 
 
-    public func runHandlerOnFirstLaunch(firstLaunchHandler: Void -> Void) {
+    open func runHandlerOnFirstLaunch(_ firstLaunchHandler: () -> Void) {
         if isFirstLaunch {
             isFirstLaunch = false
 
@@ -141,7 +141,7 @@ public class AppConfig : NSObject {
     }
 
 
-    public func shouldIndexForFirstTime( completionHandler: Void -> Void) {
+    open func shouldIndexForFirstTime( _ completionHandler: () -> Void) {
         if isSpotlightIndexed < 2 {
             isSpotlightIndexed = 2
             completionHandler()
@@ -149,13 +149,13 @@ public class AppConfig : NSObject {
     }
 
 
-    public func relativeDate( dateOrNil: NSDate?) -> NSString {
-        var dateToUse: NSDate
+    open func relativeDate( _ dateOrNil: Date?) -> String {
+        var dateToUse: Date
 
         if let date = dateOrNil {
-            dateToUse = date.earlierDate(NSDate())
+            dateToUse = (date as NSDate).earlierDate(Date())
         } else {
-            dateToUse = NSDate()
+            dateToUse = Date()
         }
 
         return dateToUse.releativeString()

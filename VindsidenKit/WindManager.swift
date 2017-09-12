@@ -18,13 +18,13 @@ import CoreData
 
 
 @objc(WindManager)
-public class WindManager : NSObject {
+open class WindManager : NSObject {
 
-    public var refreshInterval: NSTimeInterval = 0.0
-    var updateTimer: NSTimer?
+    open var refreshInterval: TimeInterval = 0.0
+    var updateTimer: Timer?
     var isUpdating:Bool = false
 
-    public class var sharedManager: WindManager {
+    open class var sharedManager: WindManager {
         struct Singleton {
             static let sharedManager = WindManager()
         }
@@ -36,22 +36,22 @@ public class WindManager : NSObject {
     override init() {
         super.init()
         #if os(iOS)
-            NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(UIApplicationDelegate.applicationDidEnterBackground(_:)), name: UIApplicationDidEnterBackgroundNotification, object: nil)
-            NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(UIApplicationDelegate.applicationWillEnterForeground(_:)), name: UIApplicationWillEnterForegroundNotification, object: nil)
+            NotificationCenter.default.addObserver(self, selector: #selector(UIApplicationDelegate.applicationDidEnterBackground(_:)), name: NSNotification.Name.UIApplicationDidEnterBackground, object: nil)
+            NotificationCenter.default.addObserver(self, selector: #selector(UIApplicationDelegate.applicationWillEnterForeground(_:)), name: NSNotification.Name.UIApplicationWillEnterForeground, object: nil)
         #endif
     }
 
 
     deinit {
-        NSNotificationCenter.defaultCenter().removeObserver(self)
+        NotificationCenter.default.removeObserver(self)
     }
 
 
-    public func startUpdating() -> Void {
+    open func startUpdating() -> Void {
         stopUpdating()
 
         if refreshInterval > 0 {
-            let timer = NSTimer.scheduledTimerWithTimeInterval( refreshInterval, target: self, selector: #selector(WindManager.updateTimerFired(_:)), userInfo: nil, repeats: true)
+            let timer = Timer.scheduledTimer( timeInterval: refreshInterval, target: self, selector: #selector(WindManager.updateTimerFired(_:)), userInfo: nil, repeats: true)
             updateTimer = timer
         }
 
@@ -59,7 +59,7 @@ public class WindManager : NSObject {
     }
 
 
-    public func stopUpdating() -> Void {
+    open func stopUpdating() -> Void {
         if let unwrappedTimer = updateTimer {
             unwrappedTimer.invalidate()
             updateTimer = nil
@@ -67,23 +67,23 @@ public class WindManager : NSObject {
     }
 
 
-    public func updateNow() -> Void {
+    open func updateNow() -> Void {
         if let unwrappedTimer = updateTimer {
             unwrappedTimer.fire()
         } else {
-            updateTimerFired(NSTimer())
+            updateTimerFired(Timer())
         }
     }
 
 
     func activeStations() -> [CDStation] {
-        let fetchRequest = NSFetchRequest(entityName: "CDStation")
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "CDStation")
         fetchRequest.predicate = NSPredicate(format: "isHidden == NO")
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: "order", ascending: true)]
 
-        let context = Datamanager.sharedManager().managedObjectContext
+        let context = Datamanager.sharedManager.managedObjectContext
         do {
-            let stations = try context.executeFetchRequest(fetchRequest) as! [CDStation]
+            let stations = try context.fetch(fetchRequest) as! [CDStation]
             return stations
         } catch {
             return [CDStation]()
@@ -91,11 +91,11 @@ public class WindManager : NSObject {
     }
 
 
-    public func fetch(completionHandler: ((WindManagerResult) -> Void)? = nil) -> Void {
+    open func fetch(_ completionHandler: ((WindManagerResult) -> Void)? = nil) -> Void {
         if ( isUpdating ) {
             DLOG("Already updating")
             #if os(iOS)
-                completionHandler?(.NewData)
+                completionHandler?(.newData)
             #else
                 completionHandler?()
             #endif
@@ -110,7 +110,7 @@ public class WindManager : NSObject {
         if remainingStations <= 0 {
             isUpdating = false
             #if os(iOS)
-                completionHandler?(.NoData)
+                completionHandler?(.noData)
             #else
                 completionHandler?()
             #endif
@@ -121,9 +121,9 @@ public class WindManager : NSObject {
 
         for station in stations {
             if let stationId = station.stationId {
-                PlotFetcher().fetchForStationId(stationId.integerValue, completionHandler: { (plots: [[String : String]], error: NSError?) -> Void in
+                PlotFetcher().fetchForStationId(stationId.intValue, completionHandler: { (plots: [[String : String]], error: Error?) -> Void in
                     if (error != nil) {
-                        DLOG("error: \(error)")
+                        DLOG("error: \(String(describing: error))")
                         numErrors += 1
                     }
 
@@ -135,7 +135,7 @@ public class WindManager : NSObject {
 
                             self.isUpdating = false
                             #if os(iOS)
-                                completionHandler?(.NewData)
+                                completionHandler?(.newData)
                                 #else
                                 completionHandler?()
                             #endif
@@ -147,14 +147,14 @@ public class WindManager : NSObject {
     }
 
 
-    public func fetchForStationId( stationId: Int, completionHandler: ((WindManagerResult) -> Void)? = nil ) -> Void {
-        PlotFetcher().fetchForStationId(stationId) { (plots: [[String : String]], error: NSError?) -> Void in
+    open func fetchForStationId( _ stationId: Int, completionHandler: ((WindManagerResult) -> Void)? = nil ) -> Void {
+        PlotFetcher().fetchForStationId(stationId) { (plots: [[String : String]], error: Error?) -> Void in
             if (error != nil) {
-                DLOG("error: \(error)")
+                DLOG("error: \(String(describing: error))")
             } else {
                 CDPlot.updatePlots(plots, completion: { () -> Void in
                     #if os(iOS)
-                        completionHandler?(.NewData)
+                        completionHandler?(.newData)
                         #else
                         completionHandler?()
                     #endif
@@ -167,17 +167,17 @@ public class WindManager : NSObject {
     // MARK: - Notifications
 
 
-    func updateTimerFired(timer: NSTimer) -> Void {
+    func updateTimerFired(_ timer: Timer) -> Void {
         fetch()
     }
 
     #if os(iOS)
-    func applicationWillEnterForeground( application: UIApplication) -> Void {
+    func applicationWillEnterForeground( _ application: UIApplication) -> Void {
         startUpdating()
     }
 
 
-    func applicationDidEnterBackground( application: UIApplication) -> Void {
+    func applicationDidEnterBackground( _ application: UIApplication) -> Void {
         stopUpdating()
     }
     #endif

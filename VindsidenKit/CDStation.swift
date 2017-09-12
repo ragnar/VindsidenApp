@@ -11,36 +11,36 @@ import CoreData
 import MapKit
 
 @objc(CDStation)
-public class CDStation: NSManagedObject, MKAnnotation {
+open class CDStation: NSManagedObject, MKAnnotation {
 
-    @NSManaged func addPlotsObject( value: CDPlot)
-    @NSManaged func removePlotsObject( value: CDPlot)
-    @NSManaged func addPlots( value: NSSet)
-    @NSManaged func removePlots( value: NSSet)
+    @NSManaged func addPlotsObject( _ value: CDPlot)
+    @NSManaged func removePlotsObject( _ value: CDPlot)
+    @NSManaged func addPlots( _ value: NSSet)
+    @NSManaged func removePlots( _ value: NSSet)
 
     // MARK: - MKAnnotation
 
 
-    public var coordinate: CLLocationCoordinate2D {
+    open var coordinate: CLLocationCoordinate2D {
         return CLLocationCoordinate2D(latitude: (self.coordinateLat?.doubleValue)!, longitude: (self.coordinateLon?.doubleValue)!)
     }
 
 
-    public var title: String? {
+    open var title: String? {
         return self.stationName
     }
 
 
-    public var subtitle: String? {
+    open var subtitle: String? {
         return self.city
     }
 
-    public class func existingStationWithId( stationId:Int, inManagedObjectContext managedObjectContext: NSManagedObjectContext) throws -> CDStation {
-        let request = NSFetchRequest(entityName: "CDStation")
+    open class func existingStationWithId( _ stationId:Int, inManagedObjectContext managedObjectContext: NSManagedObjectContext) throws -> CDStation {
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "CDStation")
         request.predicate = NSPredicate(format: "stationId == \(stationId)")
         request.fetchLimit = 1
 
-        let result = try managedObjectContext.executeFetchRequest(request) as! [CDStation]
+        let result = try managedObjectContext.fetch(request) as! [CDStation]
 
         if result.count > 0 {
             return result.first!
@@ -50,25 +50,25 @@ public class CDStation: NSManagedObject, MKAnnotation {
     }
 
 
-    public class func newOrExistingStationWithId( stationId: Int, inManagedObectContext managedObjectContext: NSManagedObjectContext) -> CDStation {
+    open class func newOrExistingStationWithId( _ stationId: Int, inManagedObectContext managedObjectContext: NSManagedObjectContext) -> CDStation {
         do {
             let existing = try CDStation.existingStationWithId(stationId, inManagedObjectContext: managedObjectContext)
             return existing
         } catch {
-            let entity = NSEntityDescription.entityForName("CDStation", inManagedObjectContext: managedObjectContext)!
-            let station = CDStation(entity: entity, insertIntoManagedObjectContext: managedObjectContext)
+            let entity = NSEntityDescription.entity(forEntityName: "CDStation", in: managedObjectContext)!
+            let station = CDStation(entity: entity, insertInto: managedObjectContext)
             return station
         }
     }
 
 
-    public class func searchForStationName( stationName: String, inManagedObjectContext managedObjectContext: NSManagedObjectContext) -> CDStation? {
-        let request = NSFetchRequest(entityName: "CDStation")
+    open class func searchForStationName( _ stationName: String, inManagedObjectContext managedObjectContext: NSManagedObjectContext) -> CDStation? {
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "CDStation")
         request.predicate = NSPredicate(format: "stationName contains[cd] %@", argumentArray: [stationName])
         request.fetchLimit = 1
 
         do {
-            let result = try managedObjectContext.executeFetchRequest(request) as! [CDStation]
+            let result = try managedObjectContext.fetch(request) as! [CDStation]
             if result.count > 0 {
                 return result.first!
             }
@@ -80,23 +80,23 @@ public class CDStation: NSManagedObject, MKAnnotation {
     }
 
 
-    public class func maxOrderForStationsInManagedObjectContext( managedObjectContext: NSManagedObjectContext) -> Int {
-        let request = NSFetchRequest(entityName: "CDStation")
+    open class func maxOrderForStationsInManagedObjectContext( _ managedObjectContext: NSManagedObjectContext) -> Int {
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "CDStation")
         request.fetchLimit = 1
 
 
         let expression = NSExpression(forFunction: "max:", arguments: [NSExpression(forKeyPath: "order")])
         let expressionDescription = NSExpressionDescription()
         expressionDescription.expression = expression
-        expressionDescription.expressionResultType = .Integer16AttributeType
+        expressionDescription.expressionResultType = .integer16AttributeType
         expressionDescription.name = "nextNumber"
 
         request.propertiesToFetch = [expressionDescription]
-        request.resultType = .DictionaryResultType
+        request.resultType = .dictionaryResultType
 
         do {
-            let result = try managedObjectContext.executeFetchRequest(request)
-            if let first = result.first, let max = first["nextNumber"] as? Int {
+            let result = try managedObjectContext.fetch(request)
+            if let first = result.first as? [String:Any], let max = first["nextNumber"] as? Int {
                 return max
             }
         } catch {
@@ -107,12 +107,12 @@ public class CDStation: NSManagedObject, MKAnnotation {
     }
 
 
-    public class func numberOfVisibleStationsInManagedObjectContext( managedObjectContext: NSManagedObjectContext) -> Int {
-        let request = NSFetchRequest(entityName: "CDStation")
+    open class func numberOfVisibleStationsInManagedObjectContext( _ managedObjectContext: NSManagedObjectContext) -> Int {
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "CDStation")
         request.predicate = NSPredicate(format: "isHidden == NO")
 
         do {
-            let count = try managedObjectContext.countForFetchRequest(request)
+            let count = try managedObjectContext.count(for: request)
             return count
         } catch {
             return 0
@@ -120,8 +120,8 @@ public class CDStation: NSManagedObject, MKAnnotation {
     }
 
 
-    public class func visibleStationsInManagedObjectContext( managedObjectContext: NSManagedObjectContext, limit: Int = 0) -> [CDStation] {
-        let request = NSFetchRequest(entityName: "CDStation")
+    open class func visibleStationsInManagedObjectContext( _ managedObjectContext: NSManagedObjectContext, limit: Int = 0) -> [CDStation] {
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "CDStation")
         request.fetchBatchSize = 20
         request.predicate = NSPredicate(format: "isHidden == NO")
         request.sortDescriptors = [NSSortDescriptor(key: "order", ascending: true)]
@@ -131,35 +131,31 @@ public class CDStation: NSManagedObject, MKAnnotation {
         }
 
         do {
-            let result = try managedObjectContext.executeFetchRequest(request) as! [CDStation]
+            let result = try managedObjectContext.fetch(request) as! [CDStation]
             return result
         } catch {
             return []
         }
     }
 
-    public func lastRegisteredPlot() -> CDPlot? {
-        let inDate = NSDate().dateByAddingTimeInterval(-1*(AppConfig.Global.plotHistory-1)*3600)
+    open func lastRegisteredPlot() -> CDPlot? {
+        let inDate = Date().addingTimeInterval(-1*(AppConfig.Global.plotHistory-1)*3600)
 
-        guard let gregorian = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian) else {
-            DLOG("Unable to create calendar")
-            return nil
-        }
+        let gregorian = Calendar(identifier: Calendar.Identifier.gregorian)
+        let inputComponents = (gregorian as NSCalendar).components([.year, .month, .day, .hour], from: inDate)
 
-        let inputComponents = gregorian.components([.Year, .Month, .Day, .Hour], fromDate: inDate)
-
-        guard let outDate = gregorian.dateFromComponents(inputComponents) else {
+        guard let outDate = gregorian.date(from: inputComponents) else {
             DLOG("Outdate missing")
             return nil
         }
 
-        let request = NSFetchRequest(entityName: "CDPlot")
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "CDPlot")
         request.fetchLimit = 1
         request.predicate = NSPredicate(format: "station == %@ AND plotTime >= %@", argumentArray: [self, outDate] )
         request.sortDescriptors = [NSSortDescriptor(key: "plotTime", ascending: false)]
 
         do {
-            let result = try self.managedObjectContext!.executeFetchRequest(request)
+            let result = try self.managedObjectContext!.fetch(request)
             if let first = result.first as? CDPlot {
                 return first
             }
@@ -171,14 +167,14 @@ public class CDStation: NSManagedObject, MKAnnotation {
     }
 
 
-    public class func updateWithFetchedContent( content: [[String:String]], inManagedObjectContext managedObjectContext: NSManagedObjectContext, completionHandler: ((Bool) -> Void)? = nil) {
+    open class func updateWithFetchedContent( _ content: [[String:String]], inManagedObjectContext managedObjectContext: NSManagedObjectContext, completionHandler: ((Bool) -> Void)? = nil) {
 
-        let childContext = NSManagedObjectContext(concurrencyType: .PrivateQueueConcurrencyType)
-        childContext.parentContext = managedObjectContext
+        let childContext = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
+        childContext.parent = managedObjectContext
         childContext.undoManager = nil
         childContext.mergePolicy = NSOverwriteMergePolicy
 
-        childContext.performBlock { () -> Void in
+        childContext.perform { () -> Void in
 
             var order = CDStation.maxOrderForStationsInManagedObjectContext(childContext)
             var newStations = false
@@ -188,7 +184,7 @@ public class CDStation: NSManagedObject, MKAnnotation {
             }
 
             let stationIds = content.map { return Int($0["StationID"]!)! }
-            Datamanager.sharedManager().removeStaleStationsIds(stationIds, inManagedObjectContext: childContext)
+            Datamanager.sharedManager.removeStaleStationsIds(stationIds, inManagedObjectContext: childContext)
 
             for stationContent in content {
                 guard let stationIdString = stationContent["StationID"] else {
@@ -206,17 +202,17 @@ public class CDStation: NSManagedObject, MKAnnotation {
                     }
                 #endif
 
-                if station.inserted {
+                if station.isInserted {
                     newStations = true
                     if station.stationId == 1 {
                         station.order = 101
                         station.isHidden = false
                         #if os(iOS)
-                            Datamanager.sharedManager().addStationToIndex(station)
+                            Datamanager.sharedManager.addStationToIndex(station)
                         #endif
                     } else {
                         order += 1
-                        station.order = order
+                        station.order = order as NSNumber?
                         station.isHidden = true
                     }
                 }
@@ -255,7 +251,7 @@ public class CDStation: NSManagedObject, MKAnnotation {
             do {
                 try childContext.save()
 
-                managedObjectContext.performBlock {
+                managedObjectContext.perform {
                     do {
                         try managedObjectContext.save()
                     } catch let error as NSError {
@@ -280,13 +276,13 @@ public class CDStation: NSManagedObject, MKAnnotation {
 
 
 
-    public class func updateWithWatchContent( content: [[String:AnyObject]], inManagedObjectContext managedObjectContext: NSManagedObjectContext, completionHandler: ((Bool) -> Void)? = nil) {
-        let childContext = NSManagedObjectContext(concurrencyType: .PrivateQueueConcurrencyType)
-        childContext.parentContext = managedObjectContext
+    open class func updateWithWatchContent( _ content: [[String:AnyObject]], inManagedObjectContext managedObjectContext: NSManagedObjectContext, completionHandler: ((Bool) -> Void)? = nil) {
+        let childContext = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
+        childContext.parent = managedObjectContext
         childContext.undoManager = nil
         childContext.mergePolicy = NSOverwriteMergePolicy
 
-        childContext.performBlock { () -> Void in
+        childContext.perform { () -> Void in
             for stationContent in content {
                 guard let stationId = stationContent["stationId"] as? Int else {
                     DLOG("No stationId")
@@ -298,12 +294,12 @@ public class CDStation: NSManagedObject, MKAnnotation {
             }
 
             let stationIds: [Int] = content.map { return $0["stationId"] as! Int }
-            Datamanager.sharedManager().removeStaleStationsIds(stationIds, inManagedObjectContext: childContext)
+            Datamanager.sharedManager.removeStaleStationsIds(stationIds, inManagedObjectContext: childContext)
 
             do {
                 try childContext.save()
 
-                managedObjectContext.performBlock {
+                managedObjectContext.perform {
                     do {
                         try managedObjectContext.save()
                     } catch let error as NSError {
@@ -327,72 +323,72 @@ public class CDStation: NSManagedObject, MKAnnotation {
     }
 
 
-    func updateWithContent( content: [String:String] ) {
+    func updateWithContent( _ content: [String:String] ) {
         if let unwrapped = content["StationID"], let stationId = Int(unwrapped) {
-            self.stationId = stationId
+            self.stationId = stationId as NSNumber?
         }
 
         if let name = content["Name"] {
-            self.stationName = name.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
+            self.stationName = name.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
         }
 
         if let text = content["Text"] {
-            self.stationText = text.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
+            self.stationText = text.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
         }
 
         if let city = content["City"] {
-            self.city = city.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
+            self.city = city.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
         }
 
         if let copyright = content["Copyright"] {
-            self.copyright = copyright.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
+            self.copyright = copyright.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
         }
 
         if let statusMessage = content["StatusMessage"] {
-            self.statusMessage = statusMessage.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
+            self.statusMessage = statusMessage.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
         }
 
         if let coordinate = content["Latitude"], let lat = Double(coordinate) {
-            self.coordinateLat = lat
+            self.coordinateLat = lat as NSNumber?
         }
 
         if let coordinate = content["Longitude"], let lng = Double(coordinate) {
-            self.coordinateLon = lng
+            self.coordinateLon = lng as NSNumber?
         }
 
         if let yrURL = content["MeteogramUrl"] {
-            self.yrURL = yrURL.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
+            self.yrURL = yrURL.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
         }
 
         if let webCamImage = content["WebcamImage"] {
-            self.webCamImage = webCamImage.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
+            self.webCamImage = webCamImage.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
         }
 
         if let webCamText = content["WebcamText"] {
-            self.webCamText = webCamText.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
+            self.webCamText = webCamText.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
         }
 
         if let webCamURL = content["WebcamUrl"] {
-            self.webCamURL = webCamURL.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
+            self.webCamURL = webCamURL.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
         }
 
         if let lastMeasurement = content["LastMeasurementTime"] {
-            self.lastMeasurement = Datamanager.sharedManager().dateFromString(lastMeasurement)
+            self.lastMeasurement = Datamanager.sharedManager.dateFromString(lastMeasurement)
         }
     }
 
 
-    func updateWithWatchContent( content: [String:AnyObject] ) {
+    func updateWithWatchContent( _ content: [String:AnyObject] ) {
         if let hidden = content["hidden"] as? Int {
-            self.isHidden = hidden
+            self.isHidden = hidden as NSNumber?
         }
 
         if let order = content["order"] as? Int {
-            self.order = order
+            self.order = order as NSNumber?
         }
 
         if let stationId = content["stationId"] as? Int {
-            self.stationId = stationId
+            self.stationId = stationId as NSNumber?
         }
 
         if let stationName = content["stationName"] as? String {
@@ -400,11 +396,11 @@ public class CDStation: NSManagedObject, MKAnnotation {
         }
 
         if let lat = content["latitude"] as? Double {
-            self.coordinateLat = lat
+            self.coordinateLat = lat as NSNumber?
         }
 
         if let lon = content["longitude"] as? Double {
-            self.coordinateLon = lon
+            self.coordinateLon = lon as NSNumber?
         }
     }
 }

@@ -32,19 +32,19 @@ public final class GraphImage {
 
     let size: CGSize
     let stepX: CGFloat
-    let totalMinutes: NSTimeInterval
+    let totalMinutes: TimeInterval
     let scale: CGFloat
 
-    let earliestDate: NSDate
-    let absoluteStartDate: NSDate
-    let absoluteEndDate: NSDate
+    let earliestDate: Date
+    let absoluteStartDate: Date
+    let absoluteEndDate: Date
     let bounds: GraphBounds
 
     var plots = [CDPlot]()
 
-    lazy var speedFormatter : NSNumberFormatter = {
-        let _speedFormatter = NSNumberFormatter()
-        _speedFormatter.numberStyle = NSNumberFormatterStyle.DecimalStyle
+    lazy var speedFormatter : NumberFormatter = {
+        let _speedFormatter = NumberFormatter()
+        _speedFormatter.numberStyle = NumberFormatter.Style.decimal
         _speedFormatter.maximumFractionDigits = 1
         _speedFormatter.minimumFractionDigits = 1
         _speedFormatter.notANumberSymbol = "—.—"
@@ -61,21 +61,21 @@ public final class GraphImage {
 
         bounds = GraphBounds(minX: 20.0, minY: 20.0, maxX: size.width-6.0, maxY: size.height-30.0)
 
-        let earliestDate: NSDate
-        let latestDate: NSDate
+        let earliestDate: Date
+        let latestDate: Date
 
         if plots.count > 0 {
-            earliestDate = plots.last?.valueForKeyPath("plotTime") as! NSDate
-            latestDate = (plots.first?.valueForKeyPath("plotTime") as! NSDate).dateByAddingTimeInterval(3600)
+            earliestDate = plots.last?.value(forKeyPath: "plotTime") as! Date
+            latestDate = (plots.first?.value(forKeyPath: "plotTime") as! Date).addingTimeInterval(3600)
         } else {
-            earliestDate = NSDate()
-            latestDate = NSDate()
+            earliestDate = Date()
+            latestDate = Date()
         }
 
         self.earliestDate = earliestDate
         absoluteStartDate = GraphImage.absoluteDate(earliestDate, isStart: true)!
         absoluteEndDate = GraphImage.absoluteDate(latestDate, isStart: false)!
-        totalMinutes = self.absoluteEndDate.timeIntervalSinceDate(self.absoluteStartDate)/60.0
+        totalMinutes = self.absoluteEndDate.timeIntervalSince(self.absoluteStartDate)/60.0
 
         stepX = bounds.width/CGFloat(totalMinutes)
     }
@@ -85,7 +85,7 @@ public final class GraphImage {
         UIGraphicsBeginImageContextWithOptions( size, false, scale)
         let context = UIGraphicsGetCurrentContext()
 
-        CGContextDrawPath(context!, CGPathDrawingMode.Stroke)
+        context!.drawPath(using: CGPathDrawingMode.stroke)
 
         drawSpeedLines(context)
         drawHourLines(context)
@@ -102,177 +102,180 @@ public final class GraphImage {
     }
 
 
-    final func drawGrid( context: CGContext! ) -> Void {
-        CGContextSaveGState(context)
-        CGContextBeginPath(context)
+    final func drawGrid( _ context: CGContext! ) -> Void {
+        context.saveGState()
+        context.beginPath()
 
-        UIColor.whiteColor().set()
-        CGContextSetAllowsAntialiasing( context, false)
-        CGContextSetLineWidth( context, 1.0/scale)
+        UIColor.white.set()
+        context.setAllowsAntialiasing(false)
+        context.setLineWidth(1.0/scale)
 
 
-        CGContextMoveToPoint( context, bounds.minX, bounds.maxY)
-        CGContextAddLineToPoint( context, bounds.maxX, bounds.maxY)
+        context.move(to: CGPoint(x: bounds.minX, y: bounds.maxY))
+        context.addLine(to: CGPoint(x: bounds.maxX, y: bounds.maxY))
 
-        CGContextMoveToPoint( context, bounds.minX, bounds.minY-5.0)
-        CGContextAddLineToPoint( context, bounds.minX, bounds.maxY)
+        context.move(to: CGPoint(x: bounds.minX, y: bounds.minY-5.0))
+        context.addLine(to: CGPoint(x: bounds.minX, y: bounds.maxY))
 
-        CGContextDrawPath(context, CGPathDrawingMode.Stroke)
+        context.drawPath(using: CGPathDrawingMode.stroke)
 
-        CGContextRestoreGState(context)
+        context.restoreGState()
     }
 
 
-    final func drawSpeedLines( context: CGContext! ) -> Void {
-        CGContextSaveGState(context);
+    final func drawSpeedLines( _ context: CGContext! ) -> Void {
+        context.saveGState();
 
         let plotMaxValue = self.plotMaxValue()
         var totSteps = min(5, plotMaxValue)
         totSteps = max( 5, totSteps)
         let plotStep = bounds.height/totSteps
 
-        CGContextSetAllowsAntialiasing( context, false)
-        CGContextSetLineWidth( context, 1.0/scale)
-        UIColor.whiteColor().set()
+        context.setAllowsAntialiasing(false)
+        context.setLineWidth(1.0/scale)
+        UIColor.white.set()
 
-        CGContextBeginPath(context)
+        context.beginPath()
 
         var y = bounds.maxY
 
         while ( y >= bounds.minY) {
-            CGContextMoveToPoint( context, bounds.minX - (2.0/scale), y)
-            CGContextAddLineToPoint( context, bounds.minX, y)
+            context.move(to: CGPoint(x: bounds.minX - (2.0/scale), y: y))
+            context.addLine(to: CGPoint(x: bounds.minX, y: y))
             y = ceil(y-plotStep)
         }
 
-        CGContextClosePath(context)
-        CGContextDrawPath(context, CGPathDrawingMode.Stroke)
+        context.closePath()
+        context.drawPath(using: CGPathDrawingMode.stroke)
 
-        CGContextBeginPath(context)
+        context.beginPath()
 
         y = ceil(bounds.maxY-plotStep)
 
         while ( y >= bounds.minY) {
-            CGContextMoveToPoint( context, bounds.minX, y)
-            CGContextAddLineToPoint( context, bounds.maxX, y)
+            context.move(to: CGPoint(x: bounds.minX, y: y))
+            context.addLine(to: CGPoint(x: bounds.maxX, y: y))
             y = ceil(y-plotStep)
         }
 
-        UIColor.lightGrayColor().set()
+        UIColor.lightGray.set()
 
-        let lengths = [2.0, 3.0] as [CGFloat]
-        CGContextSetLineDash( context, 0.0, lengths, 2)
-        CGContextDrawPath(context, CGPathDrawingMode.Stroke)
+//        let lengths = [2.0, 3.0] as [CGFloat]
+//        CGContextSetLineDash( context, 0.0, lengths, 2)
+        context.setLineDash(phase: 0.0, lengths: [2.0, 3.0])
+        context.drawPath(using: CGPathDrawingMode.stroke)
 
-        CGContextRestoreGState(context)
+        context.restoreGState()
     }
 
 
-    final func drawHourLines( context: CGContext! ) -> Void {
-        CGContextSaveGState(context);
-        CGContextSetLineWidth( context, 1.0/scale);
-        CGContextSetAllowsAntialiasing( context, false);
-        CGContextBeginPath(context);
-        UIColor.whiteColor().set()
+    final func drawHourLines( _ context: CGContext! ) -> Void {
+        context.saveGState();
+        context.setLineWidth(1.0/scale);
+        context.setAllowsAntialiasing(false);
+        context.beginPath();
+        UIColor.white.set()
 
         let hours = self.hours()
 
 
-        for i in 0.stride(through: hours, by: 0.25) {
+        for i in stride(from: 0, through: hours, by: 0.25) {
             let lineLength = CGFloat( 0 == fmod(i, 1) ? (4.0/scale) : (2.0/scale))
             let x = CGFloat(ceil(Double(bounds.minX) + (i*(Double(bounds.width)/hours))))
 
-            CGContextMoveToPoint( context, x, bounds.maxY)
-            CGContextAddLineToPoint( context, x, bounds.maxY+lineLength)
+            context.move(to: CGPoint(x: x, y: bounds.maxY))
+            context.addLine(to: CGPoint(x: x, y: bounds.maxY+lineLength))
         }
 
-        CGContextClosePath(context)
-        CGContextDrawPath(context, CGPathDrawingMode.Stroke)
-        CGContextRestoreGState(context)
+        context.closePath()
+        context.drawPath(using: CGPathDrawingMode.stroke)
+        context.restoreGState()
     }
 
 
-    final func drawHourText( context: CGContext! ) {
-        CGContextSaveGState(context);
-        CGContextSetAllowsAntialiasing( context, true);
+    final func drawHourText( _ context: CGContext! ) {
+        context.saveGState();
+        context.setAllowsAntialiasing(true);
 
         let hours = self.hours()
         let drawAttr = [
-            NSFontAttributeName : UIFont.systemFontOfSize(12.0/scale),
-            NSForegroundColorAttributeName : UIColor.whiteColor()
+            NSFontAttributeName : UIFont.systemFont(ofSize: 12.0/scale),
+            NSForegroundColorAttributeName : UIColor.white
         ]
 
-        for i in 0.stride(through: hours, by: 1) {
+        for i in stride(from: 0, through: hours, by: 1) {
             let x = CGFloat(ceil(Double(bounds.minX) + (i*(Double(bounds.width)/hours))))
-            let hs = String(format: "%02ld", hourComponentForDate(self.earliestDate.dateByAddingTimeInterval((3600*i)))) as NSString
-            let labelBounds = hs.boundingRectWithSize(CGSizeMake( 40.0, 21.0), options: .UsesLineFragmentOrigin, attributes: drawAttr, context: nil)
-            let point = CGPointMake( x-ceil(CGRectGetWidth(labelBounds)/2), bounds.maxY+(6.0/scale))
+            let hs = String(format: "%02ld", hourComponentForDate(self.earliestDate.addingTimeInterval((3600*i)))) as NSString
+            let labelBounds = hs.boundingRect(with: CGSize( width: 40.0, height: 21.0), options: .usesLineFragmentOrigin, attributes: drawAttr, context: nil)
+            let point = CGPoint( x: x-ceil(labelBounds.width/2), y: bounds.maxY+(6.0/scale))
 
-            hs.drawAtPoint(point, withAttributes: drawAttr)
+            hs.draw(at: point, withAttributes: drawAttr)
         }
 
-        CGContextRestoreGState(context)
+        context.restoreGState()
     }
 
 
-    func drawSpeedText( context: CGContext! ) {
-        CGContextSaveGState(context);
-        CGContextSetAllowsAntialiasing( context, true)
+    func drawSpeedText( _ context: CGContext! ) {
+        context.saveGState();
+        context.setAllowsAntialiasing(true)
 
-        let raw = AppConfig.sharedConfiguration.applicationUserDefaults.integerForKey("selectedUnit")
+        let raw = AppConfig.sharedConfiguration.applicationUserDefaults.integer(forKey: "selectedUnit")
         let unit = SpeedConvertion(rawValue: raw)!
 
-        let plotMaxValue = ceil(((plots as NSArray).valueForKeyPath("@max.windMax") as! NSNumber).speedConvertionTo(unit)+1)
+        let plotMaxValue = ceil(((plots as NSArray).value(forKeyPath: "@max.windMax") as! NSNumber).speedConvertion(to: unit)+1)
         var totSteps = min(5, plotMaxValue)
         totSteps = max( 5, totSteps)
         let plotStep = bounds.height/totSteps
 
         var drawAttr = [
-            NSFontAttributeName : UIFont.systemFontOfSize(12.0/scale),
-            NSForegroundColorAttributeName : UIColor.whiteColor()
+            NSFontAttributeName : UIFont.systemFont(ofSize: 12.0/scale),
+            NSForegroundColorAttributeName : UIColor.white
         ]
 
-        var labelBounds = CGRectZero
+        var labelBounds = CGRect.zero
 
         var i: CGFloat = 0.0
         var y = bounds.maxY
 
         while ( y >= bounds.minY) {
-            if let hs = speedFormatter.stringFromNumber(i*(plotMaxValue/totSteps)) {
-                labelBounds = hs.boundingRectWithSize(CGSizeMake( 40.0, 21.0), options: .UsesLineFragmentOrigin, attributes: drawAttr, context: nil)
-                let point = CGPointMake( ceil(bounds.minX-CGRectGetWidth(labelBounds)-5), ceil(y-(CGRectGetHeight(labelBounds)/2)-(2/scale)) )
-                hs.drawAtPoint( point, withAttributes: drawAttr)
+            let hhs = NSNumber( value:Float(i*(plotMaxValue/totSteps)))
+
+            if let hs = speedFormatter.string(from: hhs) {
+                labelBounds = hs.boundingRect(with: CGSize( width: 40.0, height: 21.0), options: .usesLineFragmentOrigin, attributes: drawAttr, context: nil)
+                let point = CGPoint( x: ceil(bounds.minX-labelBounds.width-5), y: ceil(y-(labelBounds.height/2)-(2/scale)) )
+                hs.draw( at: point, withAttributes: drawAttr)
             }
             i += 1
             y = ceil(y-plotStep)
         }
 
-        let unitString = NSNumber.shortUnitNameString(unit)
+        let unitString = NSNumber.shortUnitNameString(unit)!
         let paragraphStyle = NSMutableParagraphStyle()
-        paragraphStyle.alignment = .Left
+        paragraphStyle.alignment = .left
 
         drawAttr = [
-            NSFontAttributeName : UIFont.boldSystemFontOfSize(12.0/scale),
-            NSForegroundColorAttributeName : UIColor.whiteColor(),
+            NSFontAttributeName : UIFont.boldSystemFont(ofSize: 12.0/scale),
+            NSForegroundColorAttributeName : UIColor.white,
             NSParagraphStyleAttributeName : paragraphStyle
         ]
 
-        labelBounds = unitString.boundingRectWithSize(CGSizeMake( 40.0, 21.0), options: .UsesLineFragmentOrigin, attributes: drawAttr, context: nil)
+        labelBounds = unitString.boundingRect(with: CGSize( width: 40.0, height: 21.0), options: .usesLineFragmentOrigin, attributes: drawAttr, context: nil)
         labelBounds.origin.x = bounds.minX
         labelBounds.origin.y = bounds.minY - 18.0
-        unitString.drawInRect( labelBounds, withAttributes:drawAttr)
+        unitString.draw( in: labelBounds, withAttributes:drawAttr)
 
-        CGContextRestoreGState(context);
+        context.restoreGState();
     }
 
 
-    func drawGraphLines( context: CGContext!) {
-        CGContextSaveGState(context)
-        CGContextSetAllowsAntialiasing( context, true)
-        CGContextBeginPath(context)
+    func drawGraphLines( _ context: CGContext!) {
+        context.saveGState()
+        context.setAllowsAntialiasing(true)
+        context.beginPath()
         //CGContextSetShadowWithColor( context, CGSizeMake(0.0, 2.0), 2.0, UIColor(white: 0.0, alpha: 0.35).CGColor)
 
-        let raw = AppConfig.sharedConfiguration.applicationUserDefaults.integerForKey("selectedUnit")
+        let raw = AppConfig.sharedConfiguration.applicationUserDefaults.integer(forKey: "selectedUnit")
         let unit = SpeedConvertion(rawValue: raw)!
 
         let firstPlot = plots.first!
@@ -281,27 +284,27 @@ public final class GraphImage {
         var maxPoints = [CGPoint]()
 
         let plotMaxValue = self.plotMaxValue()
-        let interval = CGFloat(firstPlot.plotTime!.timeIntervalSinceDate(self.absoluteStartDate)/60.0)
+        let interval = CGFloat(firstPlot.plotTime!.timeIntervalSince(self.absoluteStartDate)/60.0)
         var x = ceil(bounds.minX + (interval*self.stepX))
 
 
-        for (idx, plot) in plots.enumerate() {
+        for (idx, plot) in plots.enumerated() {
             if idx > 0 {
-                let interval = CGFloat(plot.plotTime!.timeIntervalSinceDate(self.absoluteStartDate)/60.0)
+                let interval = CGFloat(plot.plotTime!.timeIntervalSince(self.absoluteStartDate)/60.0)
                 x = ceil(bounds.minX + (interval*self.stepX))
             }
 
-            let rMax = plot.windMax!.speedConvertionTo(unit)
+            let rMax = plot.windMax!.speedConvertion(to: unit)
             let yMax = bounds.maxY - (rMax / plotMaxValue) * bounds.height
-            maxPoints.append(CGPointMake(x, yMax))
+            maxPoints.append(CGPoint(x: x, y: yMax))
 
-            let rMin = plot.windMin!.speedConvertionTo(unit)
+            let rMin = plot.windMin!.speedConvertion(to: unit)
             let yMin = bounds.maxY - (rMin / plotMaxValue) * bounds.height
-            minPoints.append(CGPointMake(x, yMin))
+            minPoints.append(CGPoint(x: x, y: yMin))
 
-            let rAvg = plot.windAvg!.speedConvertionTo(unit)
+            let rAvg = plot.windAvg!.speedConvertion(to: unit)
             let yAvg = bounds.maxY - (rAvg / plotMaxValue) * bounds.height
-            avgPoints.append(CGPointMake(x, yAvg))
+            avgPoints.append(CGPoint(x: x, y: yAvg))
         }
 
         UIColor.vindsidenMinColor().set()
@@ -319,62 +322,62 @@ public final class GraphImage {
         let maxBezier = self.bezierPathWithPoints(maxPoints)
         maxBezier.stroke()
 
-        CGContextRestoreGState(context);
+        context.restoreGState();
     }
 
 
-    func drawWindArrows( context: CGContext!) {
-        CGContextSaveGState(context)
+    func drawWindArrows( _ context: CGContext!) {
+        context.saveGState()
 
         let firstPlot = plots.first!
-        let interval = CGFloat(firstPlot.plotTime!.timeIntervalSinceDate(self.absoluteStartDate)/60.0)
+        let interval = CGFloat(firstPlot.plotTime!.timeIntervalSince(self.absoluteStartDate)/60.0)
         var x = ceil(bounds.minX + (interval*self.stepX))
 
         for plot in plots {
-            let interval = CGFloat(plot.plotTime!.timeIntervalSinceDate(self.absoluteStartDate)/60.0)
+            let interval = CGFloat(plot.plotTime!.timeIntervalSince(self.absoluteStartDate)/60.0)
             x = ceil(bounds.minX + (interval*self.stepX))
 
             let winddir = CGFloat(plot.windDir!.floatValue)
             let windspeed = CGFloat(plot.windAvg!.floatValue)
-            let image = DrawArrow.drawArrowAtAngle( winddir, forSpeed:windspeed, highlighted:false, color: UIColor.whiteColor(), hightlightedColor: UIColor.blackColor())
+            let image = DrawArrow.drawArrow( atAngle: winddir, forSpeed:windspeed, highlighted:false, color: UIColor.white, hightlightedColor: UIColor.black)
 
-            image.drawInRect(CGRectMake(x-8.0, bounds.maxY+10, 16.0, 16.0))
+            image?.draw(in: CGRect(x: x-8.0, y: bounds.maxY+10, width: 16.0, height: 16.0))
         }
 
-        CGContextRestoreGState(context);
+        context.restoreGState();
     }
 
 
     // MARK: -
 
 
-    func bezierPathWithPoints( points: [CGPoint] ) -> UIBezierPath {
+    func bezierPathWithPoints( _ points: [CGPoint] ) -> UIBezierPath {
         let bezierPath = self.quadCurvedPathWithPoints(points)
-        bezierPath.lineJoinStyle = CGLineJoin.Round
-        bezierPath.lineCapStyle = CGLineCap.Round
+        bezierPath.lineJoinStyle = CGLineJoin.round
+        bezierPath.lineCapStyle = CGLineCap.round
         bezierPath.lineWidth = 2.0/scale
 
         return bezierPath
     }
 
 
-    final func quadCurvedPathWithPoints( points:[CGPoint]) -> UIBezierPath {
+    final func quadCurvedPathWithPoints( _ points:[CGPoint]) -> UIBezierPath {
         let path = UIBezierPath()
 
         if points.count > 0 {
 
             var p1 = points.first!
-            path.moveToPoint(p1)
+            path.move(to: p1)
 
             if points.count == 2 {
-                path.addLineToPoint(points.last!)
+                path.addLine(to: points.last!)
             } else {
                 for i in 1..<points.count {
                     let p2 = points[i]
                     let midPoint = midPointForPoints(p1, p2)
 
-                    path.addQuadCurveToPoint(midPoint, controlPoint: p1)
-                    path.addQuadCurveToPoint(p2, controlPoint: controlPointForPoints(midPoint, p2))
+                    path.addQuadCurve(to: midPoint, controlPoint: p1)
+                    path.addQuadCurve(to: p2, controlPoint: controlPointForPoints(midPoint, p2))
 
                     p1 = p2
                 }
@@ -384,12 +387,12 @@ public final class GraphImage {
     }
 
 
-    final func midPointForPoints( p1:CGPoint, _ p2:CGPoint) -> CGPoint {
-        return CGPointMake((p1.x + p2.x) / 2, (p1.y + p2.y) / 2)
+    final func midPointForPoints( _ p1:CGPoint, _ p2:CGPoint) -> CGPoint {
+        return CGPoint(x: (p1.x + p2.x) / 2, y: (p1.y + p2.y) / 2)
     }
 
 
-    final func controlPointForPoints( p1:CGPoint, _ p2:CGPoint) -> CGPoint {
+    final func controlPointForPoints( _ p1:CGPoint, _ p2:CGPoint) -> CGPoint {
         var controlPoint = midPointForPoints(p1, p2)
         let diffY = fabs(p2.y - controlPoint.y)
 
@@ -403,39 +406,37 @@ public final class GraphImage {
     }
 
 
-    final func hourComponentForDate( date:NSDate) -> Int {
-        let gregorian = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)!
-        let hourComponents = gregorian.components(.Hour, fromDate: date)
-        return hourComponents.hour
+    final func hourComponentForDate( _ date:Date) -> Int {
+        let gregorian = Calendar(identifier: Calendar.Identifier.gregorian)
+        let hourComponents = (gregorian as NSCalendar).components(.hour, from: date)
+        return hourComponents.hour!
     }
 
 
     final func hours() -> Double {
-        return Double(Int(self.absoluteEndDate.timeIntervalSinceDate(self.absoluteStartDate)/3600))
+        return Double(Int(self.absoluteEndDate.timeIntervalSince(self.absoluteStartDate)/3600))
     }
 
 
     func plotMaxValue() -> CGFloat {
-        let raw = AppConfig.sharedConfiguration.applicationUserDefaults.integerForKey("selectedUnit")
+        let raw = AppConfig.sharedConfiguration.applicationUserDefaults.integer(forKey: "selectedUnit")
         let unit = SpeedConvertion(rawValue: raw)!
-        let plotMaxValue = ceil(((plots as NSArray).valueForKeyPath("@max.windMax") as! NSNumber).speedConvertionTo(unit)+1)
+        let plotMaxValue = ceil(((plots as NSArray).value(forKeyPath: "@max.windMax") as! NSNumber).speedConvertion(to: unit)+1)
 
         return plotMaxValue
     }
 
 
-    class func absoluteDate( date: NSDate, isStart: Bool ) -> NSDate? {
-        if  let gregorian = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian) {
-            let inputComponents = gregorian.components([.Year, .Month, .Day, .Hour], fromDate: date)
+    class func absoluteDate( _ date: Date, isStart: Bool ) -> Date? {
+        let gregorian = Calendar(identifier: Calendar.Identifier.gregorian)
+        let inputComponents = (gregorian as NSCalendar).components([.year, .month, .day, .hour], from: date)
 
-            let components = NSDateComponents()
-            components.year = inputComponents.year
-            components.month = inputComponents.month
-            components.day = inputComponents.day
-            components.hour = inputComponents.hour
+        var components = DateComponents()
+        components.year = inputComponents.year
+        components.month = inputComponents.month
+        components.day = inputComponents.day
+        components.hour = inputComponents.hour
 
-            return gregorian.dateFromComponents(components)!
-        }
-        return nil
+        return gregorian.date(from: components)!
     }
 }

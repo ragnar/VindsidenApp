@@ -36,7 +36,7 @@ class TodayViewController: UITableViewController, NCWidgetProviding, NSFetchedRe
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        extensionContext?.widgetLargestAvailableDisplayMode = .Expanded
+        extensionContext?.widgetLargestAvailableDisplayMode = .expanded
 
         tableView.tableFooterView = UIView()
 
@@ -49,14 +49,14 @@ class TodayViewController: UITableViewController, NCWidgetProviding, NSFetchedRe
     // MARK: - NotificationCenter
 
 
-    func widgetPerformUpdateWithCompletionHandler(completionHandler: ((NCUpdateResult) -> Void)) {
+    func widgetPerformUpdate(completionHandler: (@escaping (NCUpdateResult) -> Void)) {
         DLOG("")
-        completionHandler(.NewData)
+        completionHandler(.newData)
         updateContentWithCompletionHandler(completionHandler)
     }
 
 
-    func widgetActiveDisplayModeDidChange(activeDisplayMode: NCWidgetDisplayMode, withMaximumSize maxSize: CGSize) {
+    func widgetActiveDisplayModeDidChange(_ activeDisplayMode: NCWidgetDisplayMode, withMaximumSize maxSize: CGSize) {
         DLOG("mode: \(activeDisplayMode), size: \(maxSize)")
 
         let cellHeight = infoCellHeight()
@@ -76,39 +76,45 @@ class TodayViewController: UITableViewController, NCWidgetProviding, NSFetchedRe
     // MARK: - TableView
 
 
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        let sections = fetchedResultsController.sections as Array!
-        return sections.count;
-    }
-
-
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let sections = fetchedResultsController.sections as Array!
-        let sectionInfo = sections[section]
-
-        if extensionContext?.widgetActiveDisplayMode == .Compact {
-            return min(sectionInfo.numberOfObjects, 2)
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        if let sections = fetchedResultsController.sections {
+            return sections.count
         }
-        return sectionInfo.numberOfObjects
+
+        return 0
     }
 
 
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(TableViewConstants.CellIdentifiers.message, forIndexPath: indexPath) as! RHCTodayCell
-        let stationInfo = self.fetchedResultsController.objectAtIndexPath(indexPath) as! CDStation
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if let sections = fetchedResultsController.sections {
+            let sectionInfo = sections[section]
+
+            if extensionContext?.widgetActiveDisplayMode == .compact {
+                return min(sectionInfo.numberOfObjects, 2)
+            }
+            return sectionInfo.numberOfObjects
+        }
+
+        return 0
+    }
+
+
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: TableViewConstants.CellIdentifiers.message, for: indexPath) as! RHCTodayCell
+        let stationInfo = self.fetchedResultsController.object(at: indexPath) as! CDStation
 
         if let plot = stationInfo.lastRegisteredPlot() {
 
             let winddir = CGFloat(plot.windDir!.floatValue)
             let windspeed = CGFloat(plot.windAvg!.floatValue)
-            let image = DrawArrow.drawArrowAtAngle( winddir, forSpeed:windspeed, highlighted:false, color: UIColor.vindsidenTodayTextColor(), hightlightedColor: UIColor.blackColor())
+            let image = DrawArrow.drawArrow( atAngle: winddir, forSpeed:windspeed, highlighted:false, color: UIColor.vindsidenTodayTextColor(), hightlightedColor: UIColor.black)
 
-            let raw = AppConfig.sharedConfiguration.applicationUserDefaults.integerForKey("selectedUnit")
+            let raw = AppConfig.sharedConfiguration.applicationUserDefaults.integer(forKey: "selectedUnit")
             let unit = SpeedConvertion(rawValue: raw)
 
             if let realUnit = unit {
-                let speed = plot.windAvg!.speedConvertionTo(realUnit)
-                if let speedString = speedFormatter.stringFromNumber(speed) {
+                let speed = plot.windAvg!.speedConvertion(to: realUnit)
+                if let speedString = speedFormatter.string(from: NSNumber(value: Float(speed))) {
                     cell.speedLabel.text = speedString
                     cell.unitLabel.text = NSNumber.shortUnitNameString(realUnit)
                 } else {
@@ -119,32 +125,32 @@ class TodayViewController: UITableViewController, NCWidgetProviding, NSFetchedRe
             cell.updatedLabel.text = AppConfig.sharedConfiguration.relativeDate(plot.plotTime) as String
         } else {
             cell.speedLabel.text = "—.—"
-            cell.updatedLabel.text = NSLocalizedString("LABEL_NOT_UPDATED", tableName: nil, bundle: NSBundle.mainBundle(), value: "LABEL_NOT_UPDATED", comment: "Not updated")
+            cell.updatedLabel.text = NSLocalizedString("LABEL_NOT_UPDATED", tableName: nil, bundle: Bundle.main, value: "LABEL_NOT_UPDATED", comment: "Not updated")
         }
         cell.nameLabel.text = stationInfo.stationName
         return cell
     }
 
 
-    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return infoCellHeight()
     }
 
 
-    override func tableView(_: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
-        cell.layer.backgroundColor = UIColor.clearColor().CGColor
+    override func tableView(_: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        cell.layer.backgroundColor = UIColor.clear.cgColor
         cell.configureSelectedBackgroundView()
     }
 
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
 
-        let stationInfo = self.fetchedResultsController.objectAtIndexPath(indexPath) as! CDStation
+        let stationInfo = self.fetchedResultsController.object(at: indexPath) as! CDStation
 
-        let url = NSURL(string: "vindsiden://station/\(stationInfo.stationId!)?todayView=1")
+        let url = URL(string: "vindsiden://station/\(stationInfo.stationId!)?todayView=1")
         if let actual = url {
-            extensionContext?.openURL( actual, completionHandler:  nil)
+            extensionContext?.open( actual, completionHandler:  nil)
         }
     }
 
@@ -152,17 +158,17 @@ class TodayViewController: UITableViewController, NCWidgetProviding, NSFetchedRe
     // MARK: - NSFetchedResultsController
 
 
-    var fetchedResultsController: NSFetchedResultsController {
+    var fetchedResultsController: NSFetchedResultsController<NSFetchRequestResult> {
         if let actual = _fetchedResultsController {
             return actual
         }
 
-        let fetchRequest = NSFetchRequest(entityName: "CDStation")
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "CDStation")
         fetchRequest.fetchBatchSize = 3
         fetchRequest.predicate = NSPredicate(format: "isHidden = NO", argumentArray: nil)
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: "order", ascending: true)]
 
-        _fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: Datamanager.sharedManager().managedObjectContext, sectionNameKeyPath: nil, cacheName: nil)
+        _fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: Datamanager.sharedManager.managedObjectContext, sectionNameKeyPath: nil, cacheName: nil)
         _fetchedResultsController!.delegate = self
 
         do {
@@ -174,11 +180,11 @@ class TodayViewController: UITableViewController, NCWidgetProviding, NSFetchedRe
 
         return _fetchedResultsController!
     }
-    var _fetchedResultsController: NSFetchedResultsController? = nil;
+    var _fetchedResultsController: NSFetchedResultsController<NSFetchRequestResult>? = nil
 
 
-    func controllerDidChangeContent(controller: NSFetchedResultsController) {
-        if tableView.editing == false {
+    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        if tableView.isEditing == false {
             tableView.reloadData()
         }
     }
@@ -187,9 +193,9 @@ class TodayViewController: UITableViewController, NCWidgetProviding, NSFetchedRe
     // MARK: -
 
 
-    lazy var speedFormatter : NSNumberFormatter = {
-        let _speedFormatter = NSNumberFormatter()
-        _speedFormatter.numberStyle = NSNumberFormatterStyle.DecimalStyle
+    lazy var speedFormatter : NumberFormatter = {
+        let _speedFormatter = NumberFormatter()
+        _speedFormatter.numberStyle = NumberFormatter.Style.decimal
         _speedFormatter.maximumFractionDigits = 1
         _speedFormatter.minimumFractionDigits = 1
         _speedFormatter.notANumberSymbol = "—.—"
@@ -231,19 +237,19 @@ class TodayViewController: UITableViewController, NCWidgetProviding, NSFetchedRe
 
 
     lazy var infoCell: RHCTodayCell = {
-        return self.tableView.dequeueReusableCellWithIdentifier(TableViewConstants.CellIdentifiers.message) as! RHCTodayCell
+        return self.tableView.dequeueReusableCell(withIdentifier: TableViewConstants.CellIdentifiers.message) as! RHCTodayCell
     }()
 
 
     // MARK: - Fetch
 
 
-    func updateContentWithCompletionHandler(completionHandler: ((NCUpdateResult) -> Void)? = nil) {
+    func updateContentWithCompletionHandler(_ completionHandler: ((NCUpdateResult) -> Void)? = nil) {
         DLOG("Updating content")
         WindManager.sharedManager.fetch { (fetchResult: UIBackgroundFetchResult) -> Void in
-            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+            DispatchQueue.main.async(execute: { () -> Void in
                 self.tableView.reloadData()
-                completionHandler?(.NewData)
+                completionHandler?(.newData)
                 return
             })
         }
