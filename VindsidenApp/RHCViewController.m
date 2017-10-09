@@ -36,6 +36,8 @@ static NSString *kCellID = @"stationCellID";
 @property (strong, nonatomic) NSIndexPath *currentIndexPath;
 @property (assign, nonatomic) CGSize cellSize;
 
+@property (strong, nonatomic) NSArray<NSLayoutConstraint *> *cameraViewConstraints;
+
 @end
 
 
@@ -137,11 +139,26 @@ static NSString *kCellID = @"stationCellID";
 {
     [super viewWillLayoutSubviews];
 
+    if (@available(iOS 11, *)) {
+        if ( _cameraViewConstraints == nil) {
+            _cameraView.translatesAutoresizingMaskIntoConstraints = NO;
+
+            NSLayoutConstraint *heightConstraint = [_cameraView.heightAnchor constraintEqualToConstant:32];
+            NSLayoutConstraint *widthConstraint = [_cameraView.widthAnchor constraintEqualToConstant:140];
+
+            _cameraViewConstraints = @[heightConstraint, widthConstraint];
+
+            [heightConstraint setActive:YES];
+            [widthConstraint setActive:YES];
+        }
+    }
+
     if ( CGSizeEqualToSize(self.cellSize, CGSizeZero) == NO ) {
         self.cellSize = self.collectionView.bounds.size;
     }
 
     [self.collectionView.collectionViewLayout invalidateLayout];
+
 }
 
 
