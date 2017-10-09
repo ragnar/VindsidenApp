@@ -58,6 +58,8 @@
 			</dict>
 		</dict>
 	</dict>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>Vindsiden need access to be able to store wind information images.</string>
 	<key>NSUserActivityTypes</key>
 	<array>
 		<string>org.juniks.${PRODUCT_NAME:rfc1034identifier}</string>
