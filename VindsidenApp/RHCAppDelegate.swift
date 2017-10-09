@@ -30,7 +30,7 @@ class RHCAppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate {
         }
 
         if WCSession.isSupported() {
-            let connectionSession = WCSession.default()
+            let connectionSession = WCSession.default
 
             //if connectionSession.paired && connectionSession.watchAppInstalled {
                 connectionSession.delegate = self
@@ -100,7 +100,7 @@ class RHCAppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate {
 
     func applicationDidBecomeActive(_ application: UIApplication) {
         if WCSession.isSupported() {
-            let connectionSession = WCSession.default()
+            let connectionSession = WCSession.default
 
 //            if connectionSession.paired && connectionSession.watchAppInstalled {
             connectionSession.delegate = self
@@ -299,7 +299,7 @@ class RHCAppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate {
     }
 
 
-    func updateShortcutItems() {
+    @objc func updateShortcutItems() {
         ShortcutItemHandler.updateDynamicShortcutItems(for: UIApplication.shared)
     }
 }

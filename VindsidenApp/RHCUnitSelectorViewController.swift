@@ -26,7 +26,7 @@ class RHCUnitSelectorViewController : UITableViewController
     }
 
 
-    func preferredContentSizeDidChange( _ notification: Notification )
+    @objc func preferredContentSizeDidChange( _ notification: Notification )
     {
         tableView.reloadData()
     }
@@ -61,7 +61,7 @@ class RHCUnitSelectorViewController : UITableViewController
 
     override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath)
     {
-        cell.textLabel?.font = UIFont.preferredFont(forTextStyle: (UIFontTextStyle(rawValue: cell.textLabel?.font.fontDescriptor.object(forKey: "NSCTFontUIUsageAttribute") as! String)))
+        cell.textLabel?.font = UIFont.preferredFont(forTextStyle: (UIFontTextStyle(rawValue: cell.textLabel?.font.fontDescriptor.object(forKey: UIFontDescriptor.AttributeName(rawValue: "NSCTFontUIUsageAttribute")) as! String)))
     }
 
 

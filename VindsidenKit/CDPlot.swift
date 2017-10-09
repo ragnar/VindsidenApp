@@ -129,7 +129,7 @@ open class CDPlot: NSManagedObject {
     }
 
 
-    open func windDirectionString() -> String {
+    @objc open func windDirectionString() -> String {
         let bundle = AppConfig.sharedConfiguration.frameworkBundle
         var direction = self.windDir!.floatValue
 

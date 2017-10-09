@@ -17,7 +17,7 @@ import VindsidenKit
 
 @objc class RHCSettingsViewController: UITableViewController {
 
-    var delegate: RHCSettingsDelegate?
+    @objc var delegate: RHCSettingsDelegate?
 
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)

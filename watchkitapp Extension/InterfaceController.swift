@@ -62,7 +62,7 @@ class InterfaceController: WKInterfaceController {
     }
 
 
-    func receivedStations( _ notification: Notification) -> Void {
+    @objc func receivedStations( _ notification: Notification) -> Void {
         if fetchingPlots && notification.name == .ReceivedPlots {
             fetchingPlots = false
         }
@@ -70,7 +70,7 @@ class InterfaceController: WKInterfaceController {
     }
 
 
-    func updatingPlots( _ notification: Notification) -> Void {
+    @objc func updatingPlots( _ notification: Notification) -> Void {
         fetchingPlots = true
         configureView()
     }

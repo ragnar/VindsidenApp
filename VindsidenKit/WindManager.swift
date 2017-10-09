@@ -12,7 +12,7 @@ import CoreData
 
 #if os(iOS)
     public typealias WindManagerResult = UIBackgroundFetchResult
-    #else
+#else
     public typealias WindManagerResult = Void
 #endif
 
@@ -24,13 +24,7 @@ open class WindManager : NSObject {
     var updateTimer: Timer?
     var isUpdating:Bool = false
 
-    open class var sharedManager: WindManager {
-        struct Singleton {
-            static let sharedManager = WindManager()
-        }
-
-        return Singleton.sharedManager
-    }
+    @objc open static let sharedManager = WindManager()
 
 
     override init() {
@@ -67,7 +61,7 @@ open class WindManager : NSObject {
     }
 
 
-    open func updateNow() -> Void {
+    @objc open func updateNow() -> Void {
         if let unwrappedTimer = updateTimer {
             unwrappedTimer.fire()
         } else {
@@ -97,7 +91,7 @@ open class WindManager : NSObject {
             #if os(iOS)
                 completionHandler?(.newData)
             #else
-                completionHandler?()
+                completionHandler?(())
             #endif
             return;
         }
@@ -112,7 +106,7 @@ open class WindManager : NSObject {
             #if os(iOS)
                 completionHandler?(.noData)
             #else
-                completionHandler?()
+                completionHandler?(())
             #endif
             return
         }
@@ -137,7 +131,7 @@ open class WindManager : NSObject {
                             #if os(iOS)
                                 completionHandler?(.newData)
                                 #else
-                                completionHandler?()
+                                completionHandler?(())
                             #endif
                         }
                     })
@@ -156,7 +150,7 @@ open class WindManager : NSObject {
                     #if os(iOS)
                         completionHandler?(.newData)
                         #else
-                        completionHandler?()
+                        completionHandler?(())
                     #endif
                 })
             }
@@ -167,7 +161,7 @@ open class WindManager : NSObject {
     // MARK: - Notifications
 
 
-    func updateTimerFired(_ timer: Timer) -> Void {
+    @objc func updateTimerFired(_ timer: Timer) -> Void {
         fetch()
     }
 

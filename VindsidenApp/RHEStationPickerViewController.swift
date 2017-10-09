@@ -46,7 +46,7 @@ class RHEStationPickerViewController : UITableViewController, NSFetchedResultsCo
     }
 
 
-    func preferredContentSizeDidChange( _ notification: Notification ) {
+    @objc func preferredContentSizeDidChange( _ notification: Notification ) {
         tableView.reloadData()
     }
 
@@ -144,8 +144,8 @@ class RHEStationPickerViewController : UITableViewController, NSFetchedResultsCo
 
 
     override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        cell.textLabel?.font = UIFont.preferredFont(forTextStyle: (UIFontTextStyle(rawValue: cell.textLabel?.font.fontDescriptor.object(forKey: "NSCTFontUIUsageAttribute") as! String)))
-        cell.detailTextLabel?.font = UIFont.preferredFont(forTextStyle: (UIFontTextStyle(rawValue: cell.detailTextLabel?.font.fontDescriptor.object(forKey: "NSCTFontUIUsageAttribute") as! String)))
+        cell.textLabel?.font = UIFont.preferredFont(forTextStyle: (UIFontTextStyle(rawValue: cell.textLabel?.font.fontDescriptor.object(forKey: UIFontDescriptor.AttributeName(rawValue: "NSCTFontUIUsageAttribute")) as! String)))
+        cell.detailTextLabel?.font = UIFont.preferredFont(forTextStyle: (UIFontTextStyle(rawValue: cell.detailTextLabel?.font.fontDescriptor.object(forKey: UIFontDescriptor.AttributeName(rawValue: "NSCTFontUIUsageAttribute")) as! String)))
     }
 
 

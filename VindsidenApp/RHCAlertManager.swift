@@ -14,15 +14,9 @@ class RHCAlertManager : NSObject
     var showingError = false
     var networkAlertController: UIAlertController? = nil
 
-    class var defaultManager: RHCAlertManager {
-    struct Singleton {
-        static let defaultManager = RHCAlertManager()
-        }
+    @objc static let defaultManager = RHCAlertManager()
 
-        return Singleton.defaultManager
-    }
-
-    func showNetworkError( _ error: NSError) -> Void
+    @objc func showNetworkError( _ error: NSError) -> Void
     {
         if showingError {
             return

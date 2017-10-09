@@ -63,7 +63,7 @@ open class AppConfig : NSObject {
     }
 
     
-    open class var sharedConfiguration: AppConfig {
+    @objc open class var sharedConfiguration: AppConfig {
         struct Singleton {
             static let sharedAppConfiguration = AppConfig()
         }
@@ -72,7 +72,7 @@ open class AppConfig : NSObject {
     }
 
 
-    open var applicationUserDefaults: UserDefaults {
+    @objc open var applicationUserDefaults: UserDefaults {
         return UserDefaults(suiteName: ApplicationGroups.primary)!
     }
 
@@ -149,7 +149,7 @@ open class AppConfig : NSObject {
     }
 
 
-    open func relativeDate( _ dateOrNil: Date?) -> String {
+    @objc open func relativeDate( _ dateOrNil: Date?) -> String {
         var dateToUse: Date
 
         if let date = dateOrNil {

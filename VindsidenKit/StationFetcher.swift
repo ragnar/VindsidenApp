@@ -57,7 +57,7 @@ open class StationFetcher : NSObject {
     var result = [[String:String]]()
     var currentStation = [String:String]()
 
-    open func fetch(_ completionHandler:@escaping (([[String:String]], Error?) -> Void)) {
+    @objc open func fetch(_ completionHandler:@escaping (([[String:String]], Error?) -> Void)) {
 
         NotificationCenter.default.post(name: AppConfig.Notifications.networkRequestStart, object: nil)
 

@@ -31,7 +31,7 @@ class WCFetcher: NSObject, WCSessionDelegate {
 
     func activate() -> Void {
         if WCSession.isSupported() {
-            connectSession = WCSession.default()
+            connectSession = WCSession.default
             connectSession?.delegate = self
             connectSession?.activate()
             DLOG("Session: \(String(describing: connectSession))")

@@ -16,8 +16,8 @@ import JTSImageViewController
 
 
 @objc(RHEStationDetailsViewController) class RHEStationDetailsViewController: UITableViewController {
-    weak var delegate: RHEStationDetailsDelegate?
-    var station: CDStation?
+    @objc weak var delegate: RHEStationDetailsDelegate?
+    @objc var station: CDStation?
     var buttons = [NSLocalizedString("Go to yr.no", comment: ""), NSLocalizedString("View in Maps", comment: "")]
 
     lazy var regexRemoveHTMLTags: NSRegularExpression? = {
@@ -60,7 +60,7 @@ import JTSImageViewController
     }
 
 
-    func preferredContentSizeDidChange( _ notification: Notification )
+    @objc func preferredContentSizeDidChange( _ notification: Notification )
     {
         tableView.reloadData()
         tableView.beginUpdates()
@@ -104,8 +104,8 @@ import JTSImageViewController
     {
         if indexPath.section == 0 {
             if let actual = cell as? RHCDStationDetailsCell {
-                actual.headerLabel.font = UIFont.preferredFont(forTextStyle: (UIFontTextStyle(rawValue: actual.headerLabel.font.fontDescriptor.object(forKey: "NSCTFontUIUsageAttribute") as! String)))
-                actual.detailsLabel.font = UIFont.preferredFont(forTextStyle: (UIFontTextStyle(rawValue: actual.detailsLabel.font.fontDescriptor.object(forKey: "NSCTFontUIUsageAttribute") as! String)))
+                actual.headerLabel.font = UIFont.preferredFont(forTextStyle: (UIFontTextStyle(rawValue: actual.headerLabel.font.fontDescriptor.object(forKey: UIFontDescriptor.AttributeName(rawValue: "NSCTFontUIUsageAttribute")) as! String)))
+                actual.detailsLabel.font = UIFont.preferredFont(forTextStyle: (UIFontTextStyle(rawValue: actual.detailsLabel.font.fontDescriptor.object(forKey: UIFontDescriptor.AttributeName(rawValue: "NSCTFontUIUsageAttribute")) as! String)))
             }
         }
     }

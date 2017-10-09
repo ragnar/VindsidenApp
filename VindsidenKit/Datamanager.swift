@@ -20,7 +20,7 @@ open class Datamanager : NSObject
 {
     let _formatterQueue: DispatchQueue = DispatchQueue(label: "formatter queue", attributes: [])
 
-    open static let sharedManager = Datamanager()
+    @objc open static let sharedManager = Datamanager()
 
 
     public required override init() {
@@ -29,7 +29,7 @@ open class Datamanager : NSObject
     }
 
 
-    func mainManagedObjectContextDidSave(_ notification: Notification) -> Void {
+    @objc func mainManagedObjectContextDidSave(_ notification: Notification) -> Void {
         DLOG("Saving MOC based on notification")
         managedObjectContext.mergeChanges(fromContextDidSave: notification)
     }
@@ -106,7 +106,7 @@ open class Datamanager : NSObject
 
     #if os(iOS)
 
-    open func indexVisibleStations( ) {
+    @objc open func indexVisibleStations( ) {
         AppConfig.sharedConfiguration.shouldIndexForFirstTime() {
             let index: CSSearchableIndex = CSSearchableIndex.default()
 
@@ -159,7 +159,7 @@ open class Datamanager : NSObject
     #endif
 
 
-    lazy open var managedObjectContext: NSManagedObjectContext = {
+    @objc lazy open var managedObjectContext: NSManagedObjectContext = {
         let coordinator = self.persistentStoreCoordinator
         var managedObjectContext = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
         managedObjectContext.persistentStoreCoordinator = coordinator

@@ -199,8 +199,8 @@ public final class GraphImage {
 
         let hours = self.hours()
         let drawAttr = [
-            NSFontAttributeName : UIFont.systemFont(ofSize: 12.0/scale),
-            NSForegroundColorAttributeName : UIColor.white
+            NSAttributedStringKey.font : UIFont.systemFont(ofSize: 12.0/scale),
+            NSAttributedStringKey.foregroundColor : UIColor.white
         ]
 
         for i in stride(from: 0, through: hours, by: 1) {
@@ -229,8 +229,8 @@ public final class GraphImage {
         let plotStep = bounds.height/totSteps
 
         var drawAttr = [
-            NSFontAttributeName : UIFont.systemFont(ofSize: 12.0/scale),
-            NSForegroundColorAttributeName : UIColor.white
+            NSAttributedStringKey.font : UIFont.systemFont(ofSize: 12.0/scale),
+            NSAttributedStringKey.foregroundColor : UIColor.white
         ]
 
         var labelBounds = CGRect.zero
@@ -255,9 +255,9 @@ public final class GraphImage {
         paragraphStyle.alignment = .left
 
         drawAttr = [
-            NSFontAttributeName : UIFont.boldSystemFont(ofSize: 12.0/scale),
-            NSForegroundColorAttributeName : UIColor.white,
-            NSParagraphStyleAttributeName : paragraphStyle
+            NSAttributedStringKey.font : UIFont.boldSystemFont(ofSize: 12.0/scale),
+            NSAttributedStringKey.foregroundColor : UIColor.white,
+            NSAttributedStringKey.paragraphStyle : paragraphStyle
         ]
 
         labelBounds = unitString.boundingRect(with: CGSize( width: 40.0, height: 21.0), options: .usesLineFragmentOrigin, attributes: drawAttr, context: nil)

@@ -95,7 +95,7 @@ class StationDetailsInterfaceController: WKInterfaceController {
                 let unitString = NSNumber.shortUnitNameString(realUnit)
 
                 windSpeedLabel.setText(convertWindToString(plot.windAvg!, toUnit: realUnit))
-                windDirectionLabel.setText("\(Int(plot.windDir!))° (\(plot.windDirectionString()))")
+                windDirectionLabel.setText("\(Int(truncating: plot.windDir!))° (\(plot.windDirectionString()))")
                 windGustLabel.setText("\(convertWindToString(plot.windMax!, toUnit: realUnit)) \(unitString!)")
                 windLull.setText("\(convertWindToString(plot.windMin!, toUnit: realUnit)) \(unitString!)")
                 windBeaufortLabel.setText("\(Int(plot.windMin!.speedInBeaufort()))")

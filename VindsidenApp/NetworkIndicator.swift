@@ -40,19 +40,24 @@ class NetworkIndicator : NSObject {
     }
 
 
-    func incrementIndicator( _ notification: Notification ) -> Void {
+    @objc func incrementIndicator( _ notification: Notification ) -> Void {
         lockQueue.sync {
             self.numberOfActiveRequests = self.numberOfActiveRequests + 1
-            UIApplication.shared.isNetworkActivityIndicatorVisible = self.isNetworkActivityIndicatorVisible()
+
+            DispatchQueue.main.async {
+                UIApplication.shared.isNetworkActivityIndicatorVisible = self.isNetworkActivityIndicatorVisible()
+            }
         }
     }
 
 
-    func decrementIndicator( _ notification: Notification ) -> Void {
+    @objc func decrementIndicator( _ notification: Notification ) -> Void {
         lockQueue.sync {
             self.numberOfActiveRequests = max(0, self.numberOfActiveRequests - 1)
 
-            UIApplication.shared.isNetworkActivityIndicatorVisible = self.isNetworkActivityIndicatorVisible()
+            DispatchQueue.main.async {
+                UIApplication.shared.isNetworkActivityIndicatorVisible = self.isNetworkActivityIndicatorVisible()
+            }
         }
     }
 }

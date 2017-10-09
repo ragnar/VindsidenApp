@@ -33,7 +33,7 @@ class RHCNotConfiguredInterfaceController: WKInterfaceController {
     }
 
 
-    func receivedStations( _ notification: Notification) -> Void {
+    @objc func receivedStations( _ notification: Notification) -> Void {
         let count = CDStation.numberOfVisibleStationsInManagedObjectContext(Datamanager.sharedManager.managedObjectContext)
 
         if count > 0 {

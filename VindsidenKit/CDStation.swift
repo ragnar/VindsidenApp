@@ -35,7 +35,8 @@ open class CDStation: NSManagedObject, MKAnnotation {
         return self.city
     }
 
-    open class func existingStationWithId( _ stationId:Int, inManagedObjectContext managedObjectContext: NSManagedObjectContext) throws -> CDStation {
+
+    @objc open class func existingStationWithId( _ stationId:Int, inManagedObjectContext managedObjectContext: NSManagedObjectContext) throws -> CDStation {
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: "CDStation")
         request.predicate = NSPredicate(format: "stationId == \(stationId)")
         request.fetchLimit = 1
@@ -107,7 +108,7 @@ open class CDStation: NSManagedObject, MKAnnotation {
     }
 
 
-    open class func numberOfVisibleStationsInManagedObjectContext( _ managedObjectContext: NSManagedObjectContext) -> Int {
+    @objc open class func numberOfVisibleStationsInManagedObjectContext( _ managedObjectContext: NSManagedObjectContext) -> Int {
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: "CDStation")
         request.predicate = NSPredicate(format: "isHidden == NO")
 
@@ -120,7 +121,7 @@ open class CDStation: NSManagedObject, MKAnnotation {
     }
 
 
-    open class func visibleStationsInManagedObjectContext( _ managedObjectContext: NSManagedObjectContext, limit: Int = 0) -> [CDStation] {
+    @objc open class func visibleStationsInManagedObjectContext( _ managedObjectContext: NSManagedObjectContext, limit: Int = 0) -> [CDStation] {
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: "CDStation")
         request.fetchBatchSize = 20
         request.predicate = NSPredicate(format: "isHidden == NO")
@@ -138,7 +139,7 @@ open class CDStation: NSManagedObject, MKAnnotation {
         }
     }
 
-    open func lastRegisteredPlot() -> CDPlot? {
+    @objc open func lastRegisteredPlot() -> CDPlot? {
         let inDate = Date().addingTimeInterval(-1*(AppConfig.Global.plotHistory-1)*3600)
 
         let gregorian = Calendar(identifier: Calendar.Identifier.gregorian)
@@ -167,7 +168,7 @@ open class CDStation: NSManagedObject, MKAnnotation {
     }
 
 
-    open class func updateWithFetchedContent( _ content: [[String:String]], inManagedObjectContext managedObjectContext: NSManagedObjectContext, completionHandler: ((Bool) -> Void)? = nil) {
+    @objc open class func updateWithFetchedContent( _ content: [[String:String]], inManagedObjectContext managedObjectContext: NSManagedObjectContext, completionHandler: ((Bool) -> Void)? = nil) {
 
         let childContext = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
         childContext.parent = managedObjectContext
