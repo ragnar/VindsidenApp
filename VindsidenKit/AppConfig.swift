@@ -8,12 +8,17 @@
 
 import Foundation
 
+#if os(iOS)
+    import StoreKit
+#endif
+
 
 @objc(AppConfig)
 open class AppConfig : NSObject {
     fileprivate struct Defaults {
         static let firstLaunchKey = "Defaults.firstLaunchKey"
         fileprivate static let spotlightIndexed = "Defaults.spotlightIndexed"
+        fileprivate static let bootCount = "Defaults.bootCount"
     }
 
 
@@ -159,5 +164,40 @@ open class AppConfig : NSObject {
         }
 
         return dateToUse.releativeString()
+    }
+
+
+    // MARK: - Review
+
+
+    open func presentReviewControllerIfCriteriaIsMet() {
+        defer {
+            applicationUserDefaults.synchronize()
+        }
+
+        let version = (Foundation.Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as! String)
+
+        guard let bootCount = applicationUserDefaults.dictionary(forKey: Defaults.bootCount) as? [String:Int] else {
+            applicationUserDefaults.set([version: 1], forKey: Defaults.bootCount)
+            return
+        }
+
+        guard let count = bootCount[version] else {
+            applicationUserDefaults.set([version: 1], forKey: Defaults.bootCount)
+            return
+        }
+
+        applicationUserDefaults.set([version: count + 1], forKey: Defaults.bootCount)
+
+        if count % 7 == 0 {
+            applicationUserDefaults.set([version: 1], forKey: Defaults.bootCount)
+            #if os(iOS)
+                if #available(iOS 10.3, *) {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: {
+                        SKStoreReviewController.requestReview()
+                    })
+                }
+            #endif
+        }
     }
 }
