@@ -71,11 +71,11 @@ open class WindManager : NSObject {
 
 
     func activeStations() -> [CDStation] {
-        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "CDStation")
+        let fetchRequest = CDStation.fetchRequest()
         fetchRequest.predicate = NSPredicate(format: "isHidden == NO")
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: "order", ascending: true)]
 
-        let context = Datamanager.sharedManager.managedObjectContext
+        let context = DataManager.shared.viewContext()
         do {
             let stations = try context.fetch(fetchRequest) as! [CDStation]
             return stations
@@ -166,12 +166,12 @@ open class WindManager : NSObject {
     }
 
     #if os(iOS)
-    func applicationWillEnterForeground( _ application: UIApplication) -> Void {
+    @objc func applicationWillEnterForeground( _ application: UIApplication) -> Void {
         startUpdating()
     }
 
 
-    func applicationDidEnterBackground( _ application: UIApplication) -> Void {
+    @objc func applicationDidEnterBackground( _ application: UIApplication) -> Void {
         stopUpdating()
     }
     #endif

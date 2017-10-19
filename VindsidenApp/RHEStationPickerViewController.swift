@@ -133,7 +133,7 @@ class RHEStationPickerViewController : UITableViewController, NSFetchedResultsCo
             index += 1
         }
 
-        let context = Datamanager.sharedManager.managedObjectContext
+        let context = DataManager.shared.viewContext()
 
         do {
             try context.save()
@@ -157,13 +157,13 @@ class RHEStationPickerViewController : UITableViewController, NSFetchedResultsCo
         }
 
         if let hidden = station.isHidden, hidden.boolValue == false {
-            Datamanager.sharedManager.addStationToIndex(station)
+            DataManager.shared.addStationToIndex(station)
         } else {
-            Datamanager.sharedManager.removeStationFromIndex(station)
+            DataManager.shared.removeStationFromIndex(station)
         }
 
 
-        let context = Datamanager.sharedManager.managedObjectContext
+        let context = DataManager.shared.viewContext()
 
         do {
             try context.save()
@@ -181,9 +181,9 @@ class RHEStationPickerViewController : UITableViewController, NSFetchedResultsCo
     lazy var fetchedResultsController : NSFetchedResultsController<NSFetchRequestResult> = {
         NSFetchedResultsController<NSFetchRequestResult>.deleteCache(withName: "StationPicker")
 
-        let contxt = Datamanager.sharedManager.managedObjectContext
+        let contxt = DataManager.shared.viewContext()
 
-        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "CDStation")
+        let fetchRequest = CDStation.fetchRequest()
         fetchRequest.fetchBatchSize = 20
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: "order", ascending: true)]
 

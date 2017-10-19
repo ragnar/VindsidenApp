@@ -14,48 +14,84 @@ import MobileCoreServices
 import CoreSpotlight
 #endif
 
+@objc
+open class DataManager: NSObject {
 
-@objc(Datamanager)
-open class Datamanager : NSObject
-{
+    @objc open static let shared = DataManager()
+
     let _formatterQueue: DispatchQueue = DispatchQueue(label: "formatter queue", attributes: [])
 
-    @objc open static let sharedManager = Datamanager()
 
-
-    public required override init() {
+    override init() {
         super.init()
-        NotificationCenter.default.addObserver(self, selector: #selector(Datamanager.mainManagedObjectContextDidSave(_:)), name: NSNotification.Name.NSManagedObjectContextDidSave, object: managedObjectContext)
+        viewContext().automaticallyMergesChangesFromParent = true
     }
 
 
-    @objc func mainManagedObjectContextDidSave(_ notification: Notification) -> Void {
-        DLOG("Saving MOC based on notification")
-        managedObjectContext.mergeChanges(fromContextDidSave: notification)
+    @objc open func viewContext() -> NSManagedObjectContext {
+        return persistentContainer.viewContext
     }
 
 
-    open func saveContext () {
-        if self.managedObjectContext.hasChanges {
+    open func performForegroundTask(_ block: @escaping (NSManagedObjectContext) -> Void) {
+        persistentContainer.viewContext.perform {
+            block(self.persistentContainer.viewContext)
+        }
+    }
+
+
+    open func performBackgroundTask(_ block: @escaping (NSManagedObjectContext) -> Void) {
+        persistentContainer.performBackgroundTask(block)
+    }
+
+
+    // MARK: - Core Data Saving support
+
+
+    open func saveContext() {
+        let context = persistentContainer.viewContext
+        if context.hasChanges {
             do {
-                try self.managedObjectContext.save()
-            } catch let error as NSError {
-                NSLog("Unresolved error \(error), \(error.userInfo)")
-                abort()
+                try context.save()
+            } catch {
+                let nserror = error as NSError
+                fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
             }
         }
     }
 
 
+    // MARK: - Core Data stack
+
+
+    fileprivate lazy var persistentContainer: NSPersistentContainer = {
+        /*
+         Need to manually set up the model, since it is placed inside a framework
+         */
+        let modelURL = Bundle(for: DataManager.self).url(forResource: AppConfig.CoreData.datamodelName, withExtension: "momd")
+        let model = NSManagedObjectModel(contentsOf: modelURL!)!
+        let container = NSPersistentContainer(name: AppConfig.CoreData.datamodelName, managedObjectModel: model)
+        let url = self.applicationDocumentsDirectory.appendingPathComponent(AppConfig.CoreData.sqliteName)
+        let description = NSPersistentStoreDescription(url: url)
+        description.shouldInferMappingModelAutomatically = true
+        description.shouldMigrateStoreAutomatically = true
+        container.persistentStoreDescriptions = [description]
+
+        self.addSkipBackupAttributeToItemAtURL(url)
+
+
+        container.loadPersistentStores(completionHandler: { (storeDescription, error) in
+            if let error = error as NSError? {
+                fatalError("Unresolved error \(error), \(error.userInfo)")
+            }
+        })
+        return container
+    }()
+
+
     open func cleanupPlots(_ completionHandler: (() -> Void)? = nil) -> Void {
-
-        let childContext = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
-        childContext.parent = managedObjectContext
-        childContext.mergePolicy = NSRollbackMergePolicy;
-        childContext.undoManager = nil
-
-        childContext.perform { () -> Void in
-            let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "CDPlot")
+        performBackgroundTask { (context) in
+            let fetchRequest = CDPlot.fetchRequest()
             let interval: TimeInterval = -1.0*((1.0+AppConfig.Global.plotHistory)*3600.0)
             let time = Date(timeIntervalSinceNow: interval)
             fetchRequest.predicate = NSPredicate(format: "plotTime < %@", time as CVarArg)
@@ -63,23 +99,11 @@ open class Datamanager : NSObject
             let request = NSBatchDeleteRequest(fetchRequest: fetchRequest)
             request.resultType = .resultTypeCount
             do {
-                let result = try childContext.execute(request) as! NSBatchDeleteResult
+                let result = try context.execute(request) as! NSBatchDeleteResult
                 DLOG("Deleted \(result.result!) plots")
 
-                try childContext.save()
-
-                childContext.processPendingChanges()
-
-                self.managedObjectContext.perform {
-                    do {
-                        try self.managedObjectContext.save()
-                        self.managedObjectContext.processPendingChanges()
-                        completionHandler?()
-                    } catch {
-                        DLOG("Save failed: \(error)")
-                        completionHandler?()
-                    }
-                }
+                try context.save()
+                completionHandler?()
             } catch {
                 DLOG("Save failed: \(error)")
                 completionHandler?()
@@ -89,19 +113,25 @@ open class Datamanager : NSObject
 
 
     open func removeStaleStationsIds( _ stations: [Int], inManagedObjectContext managedObjectContext: NSManagedObjectContext) -> Void {
-        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "CDStation")
-        fetchRequest.predicate = NSPredicate(format: "NOT stationId IN (%@)", stations)
+        performBackgroundTask { (context) in
+            let fetchRequest = CDStation.fetchRequest()
+            fetchRequest.predicate = NSPredicate(format: "NOT stationId IN (%@)", stations)
 
-        let request = NSBatchDeleteRequest(fetchRequest: fetchRequest)
-        request.resultType = .resultTypeCount
+            let request = NSBatchDeleteRequest(fetchRequest: fetchRequest)
+            request.resultType = .resultTypeCount
 
-        do {
-            let result = try managedObjectContext.execute(request) as! NSBatchDeleteResult
-            DLOG("Deleted \(result.result!) station(s)")
-        } catch {
-            DLOG("Delete failed: \(error)")
+            do {
+                let result = try managedObjectContext.execute(request) as! NSBatchDeleteResult
+                DLOG("Deleted \(result.result!) station(s)")
+                try context.save()
+            } catch {
+                DLOG("Delete failed: \(error)")
+            }
         }
     }
+
+
+    // MARK: - Spotlight
 
 
     #if os(iOS)
@@ -110,15 +140,16 @@ open class Datamanager : NSObject
         AppConfig.sharedConfiguration.shouldIndexForFirstTime() {
             let index: CSSearchableIndex = CSSearchableIndex.default()
 
-            for station in CDStation.visibleStationsInManagedObjectContext(self.managedObjectContext) {
-                self.addStationToIndex(station, index: index)
+            performBackgroundTask { (context) in
+                for station in CDStation.visibleStationsInManagedObjectContext(context) {
+                    self.addStationToIndex(station, index: index)
+                }
             }
         }
     }
 
 
     open func addStationToIndex( _ station: CDStation, index: CSSearchableIndex = CSSearchableIndex.default() ) {
-
         if CSSearchableIndex.isIndexingAvailable() == false {
             DLOG("Indexing not available")
             return
@@ -145,7 +176,6 @@ open class Datamanager : NSObject
 
 
     open func removeStationFromIndex( _ station: CDStation, index: CSSearchableIndex = CSSearchableIndex.default() ) {
-
         if CSSearchableIndex.isIndexingAvailable() == false {
             DLOG("Indexing not available")
             return
@@ -159,48 +189,7 @@ open class Datamanager : NSObject
     #endif
 
 
-    @objc lazy open var managedObjectContext: NSManagedObjectContext = {
-        let coordinator = self.persistentStoreCoordinator
-        var managedObjectContext = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
-        managedObjectContext.persistentStoreCoordinator = coordinator
-        managedObjectContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
-
-        return managedObjectContext
-        }()
-
-
-    lazy var managedObjectModel: NSManagedObjectModel = {
-        let modelURL = Bundle(identifier: AppConfig.Bundle.frameworkBundleIdentifier)?.url(forResource: AppConfig.CoreData.datamodelName, withExtension: "momd")
-        return NSManagedObjectModel(contentsOf: modelURL!)!
-        }()
-
-
-
-    lazy var persistentStoreCoordinator: NSPersistentStoreCoordinator = {
-        let coordinator = NSPersistentStoreCoordinator(managedObjectModel: self.managedObjectModel)
-        let url = self.applicationDocumentsDirectory.appendingPathComponent(AppConfig.CoreData.sqliteName)
-
-        self.addSkipBackupAttributeToItemAtURL(url)
-
-        var failureReason = "There was an error creating or loading the application's saved data."
-        do {
-            try coordinator.addPersistentStore(ofType: NSSQLiteStoreType, configurationName: nil, at: url, options: [NSMigratePersistentStoresAutomaticallyOption: true, NSInferMappingModelAutomaticallyOption: true])
-        } catch {
-            // Report any error we got.
-            var dict = [String: AnyObject]()
-            dict[NSLocalizedDescriptionKey] = "Failed to initialize the application's saved data" as AnyObject?
-            dict[NSLocalizedFailureReasonErrorKey] = failureReason as AnyObject?
-
-            dict[NSUnderlyingErrorKey] = error as NSError
-            let wrappedError = NSError(domain: AppConfig.Bundle.appName, code: 9999, userInfo: dict)
-            // Replace this with code to handle the error appropriately.
-            // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-            NSLog("Unresolved error \(wrappedError), \(wrappedError.userInfo)")
-            abort()
-        }
-
-        return coordinator
-        }()
+    // MARK: - File
 
 
     var applicationDocumentsDirectory: URL {
@@ -222,6 +211,9 @@ open class Datamanager : NSObject
             }
         }
     }
+
+
+    // MARK: - Date Formatting
 
 
     var dateFormatter: DateFormatter {

@@ -32,13 +32,13 @@ class StationDetailsInterfaceController: WKInterfaceController {
 
             self.station = station
 
-            Datamanager.sharedManager.managedObjectContext.processPendingChanges()
-            let oldStaleness = Datamanager.sharedManager.managedObjectContext.stalenessInterval
-            Datamanager.sharedManager.managedObjectContext.stalenessInterval = 0.0
-            Datamanager.sharedManager.managedObjectContext.refresh(station, mergeChanges: false)
+//            Datamanager.sharedManager.managedObjectContext.processPendingChanges()
+//            let oldStaleness = Datamanager.sharedManager.managedObjectContext.stalenessInterval
+//            Datamanager.sharedManager.managedObjectContext.stalenessInterval = 0.0
+//            Datamanager.sharedManager.managedObjectContext.refresh(station, mergeChanges: false)
             setTitle(station.stationName)
             updateUI(station)
-            Datamanager.sharedManager.managedObjectContext.stalenessInterval = oldStaleness
+//            Datamanager.sharedManager.managedObjectContext.stalenessInterval = oldStaleness
             let stationId = station.stationId! as! Int
             let userInfo = [
                 "station": stationId,

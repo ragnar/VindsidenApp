@@ -13,23 +13,18 @@ import VindsidenKit
 class IndexRequestHandler: CSIndexExtensionRequestHandler {
 
     override func searchableIndex(_ searchableIndex: CSSearchableIndex, reindexAllSearchableItemsWithAcknowledgementHandler acknowledgementHandler: @escaping () -> Void) {
-
-        DLOG("")
-
-        let managedObjectContext = Datamanager.sharedManager.managedObjectContext
+        let managedObjectContext = DataManager.shared.viewContext()
 
         for station in CDStation.visibleStationsInManagedObjectContext(managedObjectContext) {
-            Datamanager.sharedManager.addStationToIndex(station, index: searchableIndex)
+            DataManager.shared.addStationToIndex(station, index: searchableIndex)
         }
 
         acknowledgementHandler()
     }
 
+
     override func searchableIndex(_ searchableIndex: CSSearchableIndex, reindexSearchableItemsWithIdentifiers identifiers: [String], acknowledgementHandler: @escaping () -> Void) {
-
-        DLOG("")
-
-        let managedObjectContext = Datamanager.sharedManager.managedObjectContext
+        let managedObjectContext = DataManager.shared.viewContext()
 
         for identifier in identifiers {
             do {
@@ -39,9 +34,9 @@ class IndexRequestHandler: CSIndexExtensionRequestHandler {
                     let station = try CDStation.existingStationWithId(stationID, inManagedObjectContext: managedObjectContext)
 
                     if let hidden = station.isHidden, hidden.boolValue == false {
-                        Datamanager.sharedManager.addStationToIndex(station, index: searchableIndex)
+                        DataManager.shared.addStationToIndex(station, index: searchableIndex)
                     } else {
-                        Datamanager.sharedManager.removeStationFromIndex(station, index: searchableIndex)
+                        DataManager.shared.removeStationFromIndex(station, index: searchableIndex)
                     }
                 }
             } catch {

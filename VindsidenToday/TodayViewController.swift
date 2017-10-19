@@ -36,6 +36,8 @@ class TodayViewController: UITableViewController, NCWidgetProviding, NSFetchedRe
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        DataManager.shared.cleanupPlots()
+
         extensionContext?.widgetLargestAvailableDisplayMode = .expanded
 
         tableView.tableFooterView = UIView()
@@ -163,12 +165,12 @@ class TodayViewController: UITableViewController, NCWidgetProviding, NSFetchedRe
             return actual
         }
 
-        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "CDStation")
+        let fetchRequest = CDStation.fetchRequest()
         fetchRequest.fetchBatchSize = 3
         fetchRequest.predicate = NSPredicate(format: "isHidden = NO", argumentArray: nil)
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: "order", ascending: true)]
 
-        _fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: Datamanager.sharedManager.managedObjectContext, sectionNameKeyPath: nil, cacheName: nil)
+        _fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: DataManager.shared.viewContext(), sectionNameKeyPath: nil, cacheName: nil)
         _fetchedResultsController!.delegate = self
 
         do {

@@ -18,7 +18,7 @@ open class AppConfig : NSObject {
 
 
     public struct Global {
-        static let plotHistory = 5.0
+        static let plotHistory = 6.0
     }
 
 

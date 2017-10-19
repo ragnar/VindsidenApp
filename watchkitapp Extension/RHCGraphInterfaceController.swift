@@ -58,12 +58,12 @@ class RHCGraphInterfaceController: WKInterfaceController {
         let inputComponents = (gregorian as NSCalendar).components([.year, .month, .day, .hour], from: inDate)
         let outDate = gregorian.date(from: inputComponents)!
 
-        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "CDPlot")
+        let fetchRequest = CDPlot.fetchRequest()
         fetchRequest.predicate = NSPredicate(format: "station.stationId = %ld AND plotTime >= %@", stationId, outDate as NSDate)
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: "plotTime", ascending: false)]
 
         do {
-            let result = try Datamanager.sharedManager.managedObjectContext.fetch(fetchRequest) as! [CDPlot]
+            let result = try DataManager.shared.viewContext().fetch(fetchRequest) as! [CDPlot]
             graphImage = GraphImage(size: imageSize, scale: scale, plots: result)
         } catch {
             graphImage = GraphImage(size: imageSize, scale: scale)

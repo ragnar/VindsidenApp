@@ -60,7 +60,7 @@ class WCFetcher: NSObject, WCSessionDelegate {
     func session(_ session: WCSession, didReceiveApplicationContext applicationContext: [String : Any]) {
 
         if let stations = applicationContext["activeStations"] as? [[String:AnyObject]] {
-            CDStation.updateWithWatchContent(stations, inManagedObjectContext: Datamanager.sharedManager.managedObjectContext, completionHandler: { (visible: Bool) -> Void in
+            CDStation.updateWithWatchContent(stations, inManagedObjectContext: DataManager.shared.viewContext(), completionHandler: { (visible: Bool) -> Void in
                 DispatchQueue.main.async(execute: { () -> Void in
                     WindManager.sharedManager.fetch({ (result: WindManagerResult) -> Void in
                         NotificationCenter.default.post( name: Notification.Name.ReceivedPlots, object: nil)

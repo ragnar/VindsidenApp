@@ -87,13 +87,13 @@ class InterfaceController: WKInterfaceController {
 
 
     func populateData() -> [CDStation] {
-        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "CDStation")
+        let fetchRequest = CDStation.fetchRequest()
         fetchRequest.fetchBatchSize = 3
         fetchRequest.predicate = NSPredicate(format: "isHidden = NO", argumentArray: nil)
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: "order", ascending: true)]
 
         do {
-            let stations = try Datamanager.sharedManager.managedObjectContext.fetch(fetchRequest) as! [CDStation]
+            let stations = try DataManager.shared.viewContext().fetch(fetchRequest) as! [CDStation]
             return stations
         } catch {
             return [CDStation]()
@@ -105,7 +105,7 @@ class InterfaceController: WKInterfaceController {
         interfaceTable.setNumberOfRows(stations.count, withRowType: "default")
 
         for (index, station) in stations.enumerated() {
-            Datamanager.sharedManager.managedObjectContext.refresh(station, mergeChanges: true)
+            DataManager.shared.viewContext().refresh(station, mergeChanges: true)
 
             let elementRow = interfaceTable.rowController(at: index) as! StationsRowController
             elementRow.elementText.setText(station.stationName)

@@ -59,7 +59,7 @@ struct ShortcutItemHandler {
     static func updateDynamicShortcutItems(for application: UIApplication) {
         var shortcutItems = [UIApplicationShortcutItem]()
 
-        let stations = CDStation.visibleStationsInManagedObjectContext(Datamanager.sharedManager.managedObjectContext, limit: 4)
+        let stations = CDStation.visibleStationsInManagedObjectContext(DataManager.shared.viewContext(), limit: 4)
 
         for station in stations {
             let type = ShortcutItemType.goToStation
@@ -86,12 +86,10 @@ struct ShortcutItemHandler {
         case .goToStation:
             let userInfo = ShortcutItemUserInfo(dictionaryRepresentation: shortcutItem.userInfo)
             if let stationIdentifier = userInfo.stationIdentifier, let stationId = Int(stationIdentifier)  {
-                station = try? CDStation.existingStationWithId(stationId, inManagedObjectContext: Datamanager.sharedManager.managedObjectContext)
-            }
-            else {
+                station = try? CDStation.existingStationWithId(stationId, inManagedObjectContext: DataManager.shared.viewContext())
+            } else {
                 station = nil
             }
-
         }
 
         if let station = station {

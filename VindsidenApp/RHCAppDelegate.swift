@@ -38,7 +38,7 @@ class RHCAppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate {
             //}
         }
 
-        Datamanager.sharedManager.cleanupPlots { () -> Void in
+        DataManager.shared.cleanupPlots {
             WindManager.sharedManager.refreshInterval = 60
             WindManager.sharedManager.startUpdating()
         }
@@ -111,7 +111,7 @@ class RHCAppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate {
 
 
     func applicationWillTerminate(_ application: UIApplication) {
-        Datamanager.sharedManager.saveContext()
+        DataManager.shared.saveContext()
         NetworkIndicator.defaultManager().stopListening()
     }
 
@@ -171,11 +171,11 @@ class RHCAppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate {
 
         if let stationId = Int(ident!) {
             do {
-                station = try CDStation.existingStationWithId(stationId, inManagedObjectContext: Datamanager.sharedManager.managedObjectContext)
+                station = try CDStation.existingStationWithId(stationId, inManagedObjectContext: DataManager.shared.viewContext())
             } catch {
             }
         } else {
-            station = CDStation.searchForStationName(ident!, inManagedObjectContext: Datamanager.sharedManager.managedObjectContext)
+            station = CDStation.searchForStationName(ident!, inManagedObjectContext: DataManager.shared.viewContext())
         }
 
         if  let found = station {

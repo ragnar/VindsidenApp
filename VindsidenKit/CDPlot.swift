@@ -15,7 +15,7 @@ open class CDPlot: NSManagedObject {
 
     open class func newOrExistingPlot( _ content: [String:String], forStation station:CDStation, inManagedObjectContext managedObjectContext: NSManagedObjectContext) -> CDPlot {
         if let unwrapped = content["DataID"], let dataId = Int(unwrapped) {
-            let request = NSFetchRequest<NSFetchRequestResult>(entityName: "CDPlot")
+            let request = CDPlot.fetchRequest()
             request.predicate = NSPredicate(format: "dataId == %@ and station == %@", argumentArray: [dataId, station])
             request.fetchLimit = 1
 
@@ -28,7 +28,9 @@ open class CDPlot: NSManagedObject {
             }
         }
 
-        let plot = NSEntityDescription.insertNewObject(forEntityName: "CDPlot", into: managedObjectContext) as! CDPlot
+        let entity = CDPlot.entity()
+        let plot = CDPlot(entity: entity, insertInto: managedObjectContext)
+
         plot.updateWithContent(content)
 
         return plot
@@ -41,20 +43,14 @@ open class CDPlot: NSManagedObject {
             return
         }
 
-        let context = Datamanager.sharedManager.managedObjectContext
-        let childContext = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
-        childContext.parent = context
-        childContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
-        childContext.undoManager = nil
-
-        childContext.perform { () -> Void in
+        DataManager.shared.performBackgroundTask { (context) in
             if let unwrapped = plots.first, let stationString = unwrapped["StationID"], let stationId = Int(stationString) {
                 do {
-                    let station = try CDStation.existingStationWithId(stationId, inManagedObjectContext: childContext)
+                    let station = try CDStation.existingStationWithId(stationId, inManagedObjectContext: context)
                     let insertedPlots = NSMutableSet()
 
                     for plot in plots {
-                        let managedObject = CDPlot.newOrExistingPlot(plot, forStation: station, inManagedObjectContext: childContext)
+                        let managedObject = CDPlot.newOrExistingPlot(plot, forStation: station, inManagedObjectContext: context)
                         if managedObject.isInserted {
                             insertedPlots.add(managedObject)
                         }
@@ -67,32 +63,21 @@ open class CDPlot: NSManagedObject {
                     }
 
                     do {
-                        try childContext.save()
+                        try context.save()
 
-                        context.perform {
-                            do {
-                                try context.save()
-                            } catch let error as NSError {
-                                DLOG("Save failed: \(error)")
-                                DLOG("Save failed: \(error.localizedDescription)")
-                            } catch {
-                                DLOG("Save failed: \(error)")
-                            }
-                            completion?()
-                            return
-                        }
+                        completion?()
                     } catch let error as NSError {
                         DLOG("Error: \(error.userInfo.keys)")
+                        completion?()
                     } catch {
                         DLOG("Error: \(error)")
-                        
+                        completion?()
                     }
                 } catch {
                     DLOG("Station not found for stationId: \(stationId)")
                     completion?()
                     return
                 }
-
             }
         }
     }
@@ -100,7 +85,7 @@ open class CDPlot: NSManagedObject {
 
     func updateWithContent( _ content: [String:String] ) {
         if let unwrapped = content["Time"] {
-            self.plotTime = Datamanager.sharedManager.dateFromString(unwrapped)
+            self.plotTime = DataManager.shared.dateFromString(unwrapped)
         }
 
         if let unwrapped = content["WindAvg"], let avg = Double(unwrapped) {

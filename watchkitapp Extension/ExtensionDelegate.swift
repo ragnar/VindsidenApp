@@ -30,7 +30,7 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate {
 
         timestamp = Date().timeIntervalSinceReferenceDate
 
-        Datamanager.sharedManager.cleanupPlots { () -> Void in
+        DataManager.shared.cleanupPlots { () -> Void in
             NotificationCenter.default.post(name: Notification.Name.FetchingPlots, object: nil)
             WindManager.sharedManager.fetch({ (result: WindManagerResult) -> Void in
                 NotificationCenter.default.post(name: Notification.Name.ReceivedPlots, object: nil)
@@ -54,13 +54,21 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate {
             case let backgroundTask as WKApplicationRefreshBackgroundTask:
                 // Be sure to complete the background task once you’re done.
                 if (WKExtension.shared().applicationState != .background) {
-                    task.setTaskCompletedWithSnapshot(false)
+                    if #available(watchOSApplicationExtension 4.0, *) {
+                        backgroundTask.setTaskCompletedWithSnapshot(false)
+                    } else {
+                        backgroundTask.setTaskCompleted()
+                    }
                     return
                 }
 
                 WindManager.sharedManager.fetch({ (result: WindManagerResult) -> Void in
                     NotificationCenter.default.post(name: Notification.Name.ReceivedPlots, object: nil)
-                    backgroundTask.setTaskCompletedWithSnapshot(false)
+                    if #available(watchOSApplicationExtension 4.0, *) {
+                        backgroundTask.setTaskCompletedWithSnapshot(false)
+                    } else {
+                        backgroundTask.setTaskCompleted()
+                    }
                     self.scheduleRefresh()
                 })
 
@@ -75,7 +83,11 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate {
 //                urlSessionTask.setTaskCompleted()
             default:
                 // make sure to complete unhandled task types
-                task.setTaskCompletedWithSnapshot(false)
+                if #available(watchOSApplicationExtension 4.0, *) {
+                    task.setTaskCompletedWithSnapshot(false)
+                } else {
+                    task.setTaskCompleted()
+                }
             }
         }
     }
