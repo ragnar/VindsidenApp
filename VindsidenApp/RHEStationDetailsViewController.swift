@@ -11,19 +11,19 @@ import VindsidenKit
 import JTSImageViewController
 
 @objc(RHEStationDetailsDelegate) protocol RHEStationDetailsDelegate {
-    func rheStationDetailsViewControllerDidFinish( controller: RHEStationDetailsViewController )
+    func rheStationDetailsViewControllerDidFinish( _ controller: RHEStationDetailsViewController )
 }
 
 
 @objc(RHEStationDetailsViewController) class RHEStationDetailsViewController: UITableViewController {
-    weak var delegate: RHEStationDetailsDelegate?
-    var station: CDStation?
+    @objc weak var delegate: RHEStationDetailsDelegate?
+    @objc var station: CDStation?
     var buttons = [NSLocalizedString("Go to yr.no", comment: ""), NSLocalizedString("View in Maps", comment: "")]
 
     lazy var regexRemoveHTMLTags: NSRegularExpression? = {
             var _regexRemoveHTMLTags: NSRegularExpression?
             do {
-                _regexRemoveHTMLTags = try NSRegularExpression(pattern: "(<[^>]+>)", options: .CaseInsensitive)
+                _regexRemoveHTMLTags = try NSRegularExpression(pattern: "(<[^>]+>)", options: .caseInsensitive)
             } catch _ {
                 _regexRemoveHTMLTags = nil
             }
@@ -38,7 +38,7 @@ import JTSImageViewController
 
 
     deinit {
-        NSNotificationCenter.defaultCenter().removeObserver(self)
+        NotificationCenter.default.removeObserver(self)
     }
 
 
@@ -49,18 +49,18 @@ import JTSImageViewController
         if let current = station {
             self.navigationItem.title = current.stationName
 
-            if let image = current.webCamImage where !image.isEmpty {
+            if let image = current.webCamImage, !image.isEmpty {
                 buttons.append(NSLocalizedString("Show Camera", comment: ""))
             }
         }
 
         self.tableView.rowHeight = UITableViewAutomaticDimension
 
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(RHEStationDetailsViewController.preferredContentSizeDidChange(_:)), name: UIContentSizeCategoryDidChangeNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(RHEStationDetailsViewController.preferredContentSizeDidChange(_:)), name: NSNotification.Name.UIContentSizeCategoryDidChange, object: nil)
     }
 
 
-    func preferredContentSizeDidChange( notification: NSNotification )
+    @objc func preferredContentSizeDidChange( _ notification: Notification )
     {
         tableView.reloadData()
         tableView.beginUpdates()
@@ -70,12 +70,12 @@ import JTSImageViewController
 
     // MARK: - TableView
 
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         return 2
     }
 
 
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if 0 == section {
             return 6
         } else {
@@ -84,14 +84,14 @@ import JTSImageViewController
     }
 
 
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         var cell :UITableViewCell
 
         if ( 0 == indexPath.section) {
-            cell = tableView.dequeueReusableCellWithIdentifier("StationDetailsCell", forIndexPath: indexPath) as UITableViewCell
+            cell = tableView.dequeueReusableCell(withIdentifier: "StationDetailsCell", for: indexPath) as UITableViewCell
             configureCell(cell as! RHCDStationDetailsCell, atIndexPath: indexPath)
         } else {
-            cell = tableView.dequeueReusableCellWithIdentifier("ButtonCell", forIndexPath: indexPath) as UITableViewCell
+            cell = tableView.dequeueReusableCell(withIdentifier: "ButtonCell", for: indexPath) as UITableViewCell
             cell.textLabel?.textColor = self.view.tintColor;
             cell.textLabel?.text = buttons[indexPath.row]
         }
@@ -100,34 +100,34 @@ import JTSImageViewController
     }
 
 
-    override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath)
+    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath)
     {
         if indexPath.section == 0 {
             if let actual = cell as? RHCDStationDetailsCell {
-                actual.headerLabel.font = UIFont.preferredFontForTextStyle((actual.headerLabel.font.fontDescriptor().objectForKey("NSCTFontUIUsageAttribute") as! String))
-                actual.detailsLabel.font = UIFont.preferredFontForTextStyle((actual.detailsLabel.font.fontDescriptor().objectForKey("NSCTFontUIUsageAttribute") as! String))
+                actual.headerLabel.font = UIFont.preferredFont(forTextStyle: (UIFontTextStyle(rawValue: actual.headerLabel.font.fontDescriptor.object(forKey: UIFontDescriptor.AttributeName(rawValue: "NSCTFontUIUsageAttribute")) as! String)))
+                actual.detailsLabel.font = UIFont.preferredFont(forTextStyle: (UIFontTextStyle(rawValue: actual.detailsLabel.font.fontDescriptor.object(forKey: UIFontDescriptor.AttributeName(rawValue: "NSCTFontUIUsageAttribute")) as! String)))
             }
         }
     }
 
 
-    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.section == 0 {
-            let cell = tableView.dequeueReusableCellWithIdentifier("StationDetailsCell") as! RHCDStationDetailsCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: "StationDetailsCell") as! RHCDStationDetailsCell
             configureCell(cell, atIndexPath: indexPath)
-            return cell.systemLayoutSizeFittingSize(UILayoutFittingCompressedSize).height
+            return cell.systemLayoutSizeFitting(UILayoutFittingCompressedSize).height
         }
 
         return UITableViewAutomaticDimension
     }
 
 
-    override func tableView(tableView: UITableView, shouldHighlightRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+    override func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {
         return (indexPath.section == 1)
     }
 
 
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.section == 0 {
             if indexPath.row == 1 {
                 self.showMap(nil)
@@ -139,15 +139,15 @@ import JTSImageViewController
             default: showCamera(nil)
             }
         }
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        tableView.deselectRow(at: indexPath, animated: true)
     }
 
 
     // MARK: -
 
-    func configureCell( cell: RHCDStationDetailsCell, atIndexPath indexPath:NSIndexPath) -> Void {
+    func configureCell( _ cell: RHCDStationDetailsCell, atIndexPath indexPath:IndexPath) -> Void {
         cell.headerLabel.textColor = self.view.tintColor;
-        cell.detailsLabel.preferredMaxLayoutWidth = CGRectGetWidth(view.bounds) - 30.0
+        cell.detailsLabel.preferredMaxLayoutWidth = view.bounds.width - 30.0
         cell.detailsLabel.text = ""
 
         if let current = station {
@@ -165,17 +165,17 @@ import JTSImageViewController
             case 3:
                 cell.headerLabel.text = NSLocalizedString("Info", comment: "")
                 if let stationText = current.stationText {
-                    cell.detailsLabel.text = regexRemoveHTMLTags?.stringByReplacingMatchesInString(stationText, options: [], range: NSMakeRange(0, stationText.utf16.count), withTemplate: "").stringByReplacingOccurrencesOfString("\n", withString: "")
+                    cell.detailsLabel.text = regexRemoveHTMLTags?.stringByReplacingMatches(in: stationText, options: [], range: NSMakeRange(0, stationText.utf16.count), withTemplate: "").replacingOccurrences(of: "\n", with: "")
                 }
             case 4:
                 cell.headerLabel.text = NSLocalizedString("Status", comment: "")
                 if let statusMessage = current.statusMessage {
-                    cell.detailsLabel.text = regexRemoveHTMLTags?.stringByReplacingMatchesInString(statusMessage, options: [], range: NSMakeRange(0, statusMessage.utf16.count), withTemplate: "").stringByReplacingOccurrencesOfString("\n", withString: "")
+                    cell.detailsLabel.text = regexRemoveHTMLTags?.stringByReplacingMatches(in: statusMessage, options: [], range: NSMakeRange(0, statusMessage.utf16.count), withTemplate: "").replacingOccurrences(of: "\n", with: "")
                 }
             case 5:
                 cell.headerLabel.text = NSLocalizedString("Camera", comment: "")
                 if let webCamText = current.webCamText {
-                    cell.detailsLabel.text = regexRemoveHTMLTags?.stringByReplacingMatchesInString(webCamText, options: [], range: NSMakeRange(0, webCamText.utf16.count), withTemplate: "").stringByReplacingOccurrencesOfString("\n", withString: "")
+                    cell.detailsLabel.text = regexRemoveHTMLTags?.stringByReplacingMatches(in: webCamText, options: [], range: NSMakeRange(0, webCamText.utf16.count), withTemplate: "").replacingOccurrences(of: "\n", with: "")
                 }
             default:
                 cell.headerLabel.text = NSLocalizedString("Unknown", comment: "")
@@ -195,22 +195,22 @@ import JTSImageViewController
     // MARK: - Actions
 
 
-    @IBAction func done( sender: AnyObject?) {
+    @IBAction func done( _ sender: AnyObject?) {
         delegate?.rheStationDetailsViewControllerDidFinish(self)
     }
 
-    @IBAction func gotoYR( sender: AnyObject? ) {
+    @IBAction func gotoYR( _ sender: AnyObject? ) {
 
         if let current = station {
-            if let unwrapped = current.yrURL, let yrurl = unwrapped.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet()) {
-                let url = NSURL(string: yrurl)
-                UIApplication.sharedApplication().openURL(url!, options: [:], completionHandler: nil)
+            if let unwrapped = current.yrURL, let yrurl = unwrapped.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed) {
+                let url = URL(string: yrurl)
+                UIApplication.shared.open(url!, options: [:], completionHandler: nil)
             }
         }
     }
 
 
-    @IBAction func showMap( sender: AnyObject? ) {
+    @IBAction func showMap( _ sender: AnyObject? ) {
 
         if let current = station {
             let spotCord = current.coordinate
@@ -221,21 +221,21 @@ import JTSImageViewController
                 query += "&ll=\(spotCord.latitude),\(spotCord.longitude)"
             }
 
-            if let city = current.city where !city.isEmpty {
+            if let city = current.city, !city.isEmpty {
                 query += "&q=\(city)"
             } else if let stationName = current.stationName {
                 query += "&q=\(stationName)"
             }
 
-            if let mapurl = query.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet()) {
-                let url = NSURL(string: mapurl)
-                UIApplication.sharedApplication().openURL(url!, options: [:], completionHandler: nil)
+            if let mapurl = query.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed) {
+                let url = URL(string: mapurl)
+                UIApplication.shared.open(url!, options: [:], completionHandler: nil)
             }
         }
     }
 
 
-    @IBAction func showCamera( sender: AnyObject? ) {
+    @IBAction func showCamera( _ sender: AnyObject? ) {
         if let current = station {
             let imageInfo = JTSImageInfo()
 
@@ -243,7 +243,7 @@ import JTSImageViewController
                 return;
             }
 
-            imageInfo.imageURL = NSURL(string: webCamImage)
+            imageInfo.imageURL = URL(string: webCamImage)
 
             if let view = sender as? UIView {
                 imageInfo.referenceRect = view.frame
@@ -251,8 +251,8 @@ import JTSImageViewController
 
             imageInfo.referenceView = self.view
 
-            let controller = JTSImageViewController(imageInfo: imageInfo, mode: JTSImageViewControllerMode.Image, backgroundStyle: [.Blurred, .Scaled])
-            controller.showFromViewController(self, transition: .FromOriginalPosition)
+            let controller = JTSImageViewController(imageInfo: imageInfo, mode: JTSImageViewControllerMode.image, backgroundStyle: [.blurred, .scaled])
+            controller?.show(from: self, transition: .fromOriginalPosition)
         }
     }
 }

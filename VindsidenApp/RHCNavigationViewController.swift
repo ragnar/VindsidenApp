@@ -13,17 +13,17 @@ import UIKit
 class RHCNavigationViewController : UINavigationController
 {
 
-    override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
-        return .Portrait
+    override var supportedInterfaceOrientations : UIInterfaceOrientationMask {
+        return .portrait
     }
 
 
-    override func shouldAutorotate() -> Bool {
+    override var shouldAutorotate : Bool {
         return false
     }
 
 
-    override func preferredInterfaceOrientationForPresentation() -> UIInterfaceOrientation {
-        return .Portrait
+    override var preferredInterfaceOrientationForPresentation : UIInterfaceOrientation {
+        return .portrait
     }
 }

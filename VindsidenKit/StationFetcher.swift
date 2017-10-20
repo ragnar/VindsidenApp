@@ -9,7 +9,7 @@
 import Foundation
 
 
-class StationURLSession : NSObject, NSURLSessionDataDelegate {
+class StationURLSession : NSObject, URLSessionDataDelegate {
     class var sharedStationSession: StationURLSession {
         struct Singleton {
             static let sharedAppSession = StationURLSession()
@@ -19,7 +19,7 @@ class StationURLSession : NSObject, NSURLSessionDataDelegate {
     }
 
 
-    private var privateSharedSession: NSURLSession?
+    fileprivate var privateSharedSession: Foundation.URLSession?
 
 
     override init() {
@@ -27,73 +27,73 @@ class StationURLSession : NSObject, NSURLSessionDataDelegate {
     }
 
 
-    func sharedSession() -> NSURLSession {
+    func sharedSession() -> Foundation.URLSession {
 
         if let _sharedSession = privateSharedSession {
             return _sharedSession
         } else {
-            privateSharedSession = NSURLSession(configuration: NSURLSessionConfiguration.ephemeralSessionConfiguration(), delegate: self, delegateQueue: nil)
+            privateSharedSession = Foundation.URLSession(configuration: URLSessionConfiguration.ephemeral, delegate: self, delegateQueue: nil)
             return privateSharedSession!
         }
     }
 
 
-    func URLSession(session: NSURLSession, dataTask: NSURLSessionDataTask, willCacheResponse proposedResponse: NSCachedURLResponse, completionHandler: (NSCachedURLResponse?) -> Void) {
+    func urlSession(_ session: URLSession, dataTask: URLSessionDataTask, willCacheResponse proposedResponse: CachedURLResponse, completionHandler: @escaping (CachedURLResponse?) -> Void) {
         DLOG("")
         completionHandler(nil)
     }
 
 
-    func URLSession(session: NSURLSession, didBecomeInvalidWithError error: NSError?) {
-        DLOG("Error: \(error?.localizedDescription)")
+    func urlSession(_ session: URLSession, didBecomeInvalidWithError error: Error?) {
+        DLOG("Error: \(String(describing: error?.localizedDescription))")
         self.privateSharedSession = nil
     }
 }
 
 
-public class StationFetcher : NSObject {
+open class StationFetcher : NSObject {
 
     var characters:String = ""
     var result = [[String:String]]()
     var currentStation = [String:String]()
 
-    public func fetch(completionHandler:(([[String:String]], NSError?) -> Void)) {
+    @objc open func fetch(_ completionHandler:@escaping (([[String:String]], Error?) -> Void)) {
 
-        NSNotificationCenter.defaultCenter().postNotificationName(AppConfig.Notification.networkRequestStart, object: nil)
+        NotificationCenter.default.post(name: AppConfig.Notifications.networkRequestStart, object: nil)
 
-        let request = NSURLRequest(URL: NSURL(string: "http://vindsiden.no//xml.aspx")!)
-        let task = StationURLSession.sharedStationSession.sharedSession().dataTaskWithRequest(request) { (data: NSData?, response: NSURLResponse?, error: NSError?) -> Void in
+        let request = URLRequest(url: URL(string: "http://vindsiden.no//xml.aspx")!)
+        let task = StationURLSession.sharedStationSession.sharedSession().dataTask(with: request, completionHandler: { (data: Data?, response: URLResponse?, error: Error?) -> Void in
             guard let data = data else {
-                DLOG("Error: \(error)")
-                dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                DLOG("Error: \(String(describing: error))")
+                DispatchQueue.main.async(execute: { () -> Void in
                     completionHandler( [[String:String]](), error)
-                    NSNotificationCenter.defaultCenter().postNotificationName(AppConfig.Notification.networkRequestEnd, object: nil)
+                    NotificationCenter.default.post(name: AppConfig.Notifications.networkRequestEnd, object: nil)
                 })
                 return;
             }
 
-            let parser = NSXMLParser(data: data)
+            let parser = XMLParser(data: data)
             parser.delegate = self
             parser.parse()
 
-            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+            DispatchQueue.main.async(execute: { () -> Void in
                 completionHandler(self.result, error)
-                NSNotificationCenter.defaultCenter().postNotificationName(AppConfig.Notification.networkRequestEnd, object: nil)
+                NotificationCenter.default.post(name: AppConfig.Notifications.networkRequestEnd, object: nil)
             })
-        }
+        }) //as! (Data?, URLResponse?, Error?) -> Void)
 
         task.resume()
     }
 
 
-    public class func invalidate() -> Void {
+    open class func invalidate() -> Void {
         StationURLSession.sharedStationSession.sharedSession().invalidateAndCancel()
     }
 }
 
 
-extension StationFetcher: NSXMLParserDelegate {
-     public func parser(parser: NSXMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [String : String]) {
+extension StationFetcher: XMLParserDelegate {
+     public func parser(_ parser: XMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [String : String]) {
         if elementName == "Station" {
             currentStation = [String:String]()
         }
@@ -101,7 +101,7 @@ extension StationFetcher: NSXMLParserDelegate {
     }
 
 
-    public func parser(parser: NSXMLParser, didEndElement elementName: String, namespaceURI: String?, qualifiedName qName: String?) {
+    public func parser(_ parser: XMLParser, didEndElement elementName: String, namespaceURI: String?, qualifiedName qName: String?) {
         if elementName == "Station" {
             result.append(currentStation)
         } else {
@@ -109,7 +109,7 @@ extension StationFetcher: NSXMLParserDelegate {
         }
     }
 
-    public func parser(parser: NSXMLParser, foundCharacters string: String) {
+    public func parser(_ parser: XMLParser, foundCharacters string: String) {
         characters += string
     }
 }

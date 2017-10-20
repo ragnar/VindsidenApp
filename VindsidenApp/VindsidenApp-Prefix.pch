@@ -18,7 +18,7 @@
     #import <SystemConfiguration/SystemConfiguration.h>
     #import <MobileCoreServices/MobileCoreServices.h>
 
-    #import "VindsidenApp-Swift.h"
+//    #import "VindsidenApp-Swift.h"
 
 #endif
 

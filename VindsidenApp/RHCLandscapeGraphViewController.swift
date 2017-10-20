@@ -16,8 +16,8 @@ class RHCLandscapeGraphViewController: UIViewController
     @IBOutlet weak var graphView: RHEGraphView?
     @IBOutlet weak var stationName: UILabel?
 
-    var station: CDStation?
-    var plots: [CDPlot]?
+    @objc var station: CDStation?
+    @objc var plots: [CDPlot]?
 
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)

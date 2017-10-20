@@ -14,15 +14,9 @@ class RHCAlertManager : NSObject
     var showingError = false
     var networkAlertController: UIAlertController? = nil
 
-    class var defaultManager: RHCAlertManager {
-    struct Singleton {
-        static let defaultManager = RHCAlertManager()
-        }
+    @objc static let defaultManager = RHCAlertManager()
 
-        return Singleton.defaultManager
-    }
-
-    func showNetworkError( error: NSError) -> Void
+    @objc func showNetworkError( _ error: NSError) -> Void
     {
         if showingError {
             return
@@ -30,33 +24,33 @@ class RHCAlertManager : NSObject
 
         showingError = true
 
-        dispatch_async(dispatch_get_main_queue(), { () -> Void in
+        DispatchQueue.main.async(execute: { () -> Void in
             var message: NSString? = nil
-            let valueOrNil: AnyObject? = error.userInfo[NSLocalizedDescriptionKey]
+            let valueOrNil: AnyObject? = error.userInfo[NSLocalizedDescriptionKey] as AnyObject?
 
             if let value = valueOrNil as? NSString {
                 message = value
             }
 
-            if error.domain == (kCFErrorDomainCFNetwork as NSString) || error.domain == NSURLErrorDomain {
-                message = NSLocalizedString("NETWORK_ERROR_UNABLE_TO_LOAD", comment: "Unable to fetch data at this point.")
+            if error.domain == (kCFErrorDomainCFNetwork as NSString) as String || error.domain == NSURLErrorDomain {
+                message = NSLocalizedString("NETWORK_ERROR_UNABLE_TO_LOAD", comment: "Unable to fetch data at this point.") as NSString?
             }
 
-            self.networkAlertController = UIAlertController(title: "", message: message as? String, preferredStyle: UIAlertControllerStyle.Alert)
+            self.networkAlertController = UIAlertController(title: "", message: message as String?, preferredStyle: UIAlertControllerStyle.alert)
 
             weak var weakAlert = self.networkAlertController
 
-            let defaultAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: { (action : UIAlertAction) -> Void in
-                weakAlert?.dismissViewControllerAnimated(true, completion: nil)
+            let defaultAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: { (action : UIAlertAction) -> Void in
+                weakAlert?.dismiss(animated: true, completion: nil)
                 self.showingError = false
             })
 
             self.networkAlertController?.addAction(defaultAction)
 
-            let appDelegate = UIApplication.sharedApplication().delegate as! RHCAppDelegate
+            let appDelegate = UIApplication.shared.delegate as! RHCAppDelegate
             let controller = appDelegate.window?.rootViewController
 
-            controller?.presentViewController(self.networkAlertController!, animated: true, completion: nil)
+            controller?.present(self.networkAlertController!, animated: true, completion: nil)
         })
     }
 }

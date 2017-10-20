@@ -11,10 +11,10 @@ import WatchConnectivity
 import VindsidenWatchKit
 
 
-struct WCFetcherNotification {
-    static let ReceivedStations = "ReceivedStations"
-    static let ReceivedPlots = "ReceivedPlots"
-    static let FetchingPlots = "FetchingPlots"
+public extension Notification.Name {
+    static let ReceivedStations = Notification.Name("ReceivedStations")
+    static let ReceivedPlots = Notification.Name("ReceivedPlots")
+    static let FetchingPlots = Notification.Name("FetchingPlots")
 }
 
 
@@ -31,10 +31,10 @@ class WCFetcher: NSObject, WCSessionDelegate {
 
     func activate() -> Void {
         if WCSession.isSupported() {
-            connectSession = WCSession.defaultSession()
+            connectSession = WCSession.default
             connectSession?.delegate = self
-            connectSession?.activateSession()
-            DLOG("Session: \(connectSession)")
+            connectSession?.activate()
+            DLOG("Session: \(String(describing: connectSession))")
         } else {
             DLOG("WCSession is not supported")
         }
@@ -42,40 +42,36 @@ class WCFetcher: NSObject, WCSessionDelegate {
 
 
     // MARK: - WCSession
-    func session(session: WCSession, activationDidCompleteWithState activationState: WCSessionActivationState, error: NSError?) {
+    func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
 
     }
 
-    func sessionWatchStateDidChange(session: WCSession) {
-        DLOG("Session: \(session)")
+
+    func sessionReachabilityDidChange(_ session: WCSession) {
+        DLOG("Session: \(session) - \(session.isReachable)")
     }
 
 
-    func sessionReachabilityDidChange(session: WCSession) {
-        DLOG("Session: \(session) - \(session.reachable)")
-    }
-
-
-    func session(session: WCSession, didReceiveMessage message: [String : AnyObject]) {
+    func session(_ session: WCSession, didReceiveMessage message: [String : Any]) {
         DLOG("Message: \(message)")
     }
 
 
-    func session(session: WCSession, didReceiveApplicationContext applicationContext: [String : AnyObject]) {
+    func session(_ session: WCSession, didReceiveApplicationContext applicationContext: [String : Any]) {
 
         if let stations = applicationContext["activeStations"] as? [[String:AnyObject]] {
-            CDStation.updateWithWatchContent(stations, inManagedObjectContext: Datamanager.sharedManager().managedObjectContext, completionHandler: { (visible: Bool) -> Void in
-                dispatch_async(dispatch_get_main_queue(), { () -> Void in
+            CDStation.updateWithWatchContent(stations, inManagedObjectContext: DataManager.shared.viewContext(), completionHandler: { (visible: Bool) -> Void in
+                DispatchQueue.main.async(execute: { () -> Void in
                     WindManager.sharedManager.fetch({ (result: WindManagerResult) -> Void in
-                        NSNotificationCenter.defaultCenter().postNotificationName( WCFetcherNotification.ReceivedPlots, object: nil)
+                        NotificationCenter.default.post( name: Notification.Name.ReceivedPlots, object: nil)
                     })
-                    NSNotificationCenter.defaultCenter().postNotificationName( WCFetcherNotification.ReceivedStations, object: nil)
+                    NotificationCenter.default.post( name: Notification.Name.ReceivedStations, object: nil)
                 })
             })
         }
 
         if let unit = applicationContext["unit"] as? Int {
-            AppConfig.sharedConfiguration.applicationUserDefaults.setInteger(unit, forKey: "selectedUnit")
+            AppConfig.sharedConfiguration.applicationUserDefaults.set(unit, forKey: "selectedUnit")
             AppConfig.sharedConfiguration.applicationUserDefaults.synchronize()
         }
 

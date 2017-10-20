@@ -10,14 +10,14 @@ import UIKit
 import VindsidenKit
 
 @objc(RHCSettingsDelegate) protocol RHCSettingsDelegate {
-    func rhcSettingsDidFinish( controller : RHCSettingsViewController) -> Void
+    func rhcSettingsDidFinish( _ controller : RHCSettingsViewController) -> Void
 }
 
 
 
 @objc class RHCSettingsViewController: UITableViewController {
 
-    var delegate: RHCSettingsDelegate?
+    @objc var delegate: RHCSettingsDelegate?
 
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -31,7 +31,7 @@ import VindsidenKit
     }
 
 
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.tableView.reloadData()
     }
@@ -43,23 +43,23 @@ import VindsidenKit
     }
     
 
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
 
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 2
     }
 
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
-        let cell = tableView.dequeueReusableCellWithIdentifier("SettingsCell", forIndexPath: indexPath) as UITableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "SettingsCell", for: indexPath) as UITableViewCell
 
         if indexPath.row == 0 {
             cell.textLabel?.text = NSLocalizedString("Stations", comment: "")
-            cell.detailTextLabel?.text = "\(CDStation.numberOfVisibleStationsInManagedObjectContext(Datamanager.sharedManager().managedObjectContext))"
+            cell.detailTextLabel?.text = "\(CDStation.numberOfVisibleStationsInManagedObjectContext(DataManager.shared.viewContext()))"
         } else {
-            let unit = SpeedConvertion(rawValue: AppConfig.sharedConfiguration.applicationUserDefaults.integerForKey("selectedUnit"))
+            let unit = SpeedConvertion(rawValue: AppConfig.sharedConfiguration.applicationUserDefaults.integer(forKey: "selectedUnit"))
 
             cell.textLabel?.text = NSLocalizedString("Units", comment: "")
             cell.detailTextLabel?.text = NSNumber.shortUnitNameString(unit!)
@@ -69,53 +69,53 @@ import VindsidenKit
     }
 
 
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.row == 0 {
-            performSegueWithIdentifier("ShowStationPicker", sender: self)
+            performSegue(withIdentifier: "ShowStationPicker", sender: self)
         } else {
-            performSegueWithIdentifier("ShowUnitSelector", sender: self)
+            performSegue(withIdentifier: "ShowUnitSelector", sender: self)
         }
     }
 
-    override func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        let tv = UITextView(frame: CGRectZero)
+    override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        let tv = UITextView(frame: CGRect.zero)
 
-        let appName = NSBundle.mainBundle().objectForInfoDictionaryKey("CFBundleDisplayName") as! String
-        let appVersion = NSBundle.mainBundle().objectForInfoDictionaryKey("CFBundleShortVersionString") as! String
-        let appBuild = NSBundle.mainBundle().objectForInfoDictionaryKey("CFBundleVersion") as! String
-        let version = NSString(format: NSLocalizedString("%@ version %@.%@", comment: "Version string in settings view"), appName, appVersion, appBuild)
-        tv.text = NSLocalizedString("LABEL_PERMIT", comment: "Værdata hentet med tillatelse fra\nhttp://vindsiden.no\n\n").stringByAppendingString(version as String)
+        let appName = Bundle.main.object(forInfoDictionaryKey: "CFBundleDisplayName") as! String
+        let appVersion = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as! String
+        let appBuild = Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as! String
+        let version = NSString(format: NSLocalizedString("%@ version %@.%@", comment: "Version string in settings view") as NSString, appName, appVersion, appBuild)
+        tv.text = NSLocalizedString("LABEL_PERMIT", comment: "Værdata hentet med tillatelse fra\nhttp://vindsiden.no\n\n") + (version as String)
 
-        tv.editable = false
-        tv.textAlignment = .Center
-        tv.backgroundColor = UIColor.clearColor()
-        tv.dataDetectorTypes = .Link
-        tv.font = UIFont.preferredFontForTextStyle(UIFontTextStyleBody)
+        tv.isEditable = false
+        tv.textAlignment = .center
+        tv.backgroundColor = UIColor.clear
+        tv.dataDetectorTypes = .link
+        tv.font = UIFont.preferredFont(forTextStyle: UIFontTextStyle.body)
         tv.textColor = UIColor(red: 0.298039, green:0.337255, blue:0.423529, alpha:1.0)
-        tv.layer.shadowColor = UIColor.whiteColor().CGColor
-        tv.layer.shadowOffset = CGSizeMake(0.0, 1.0)
+        tv.layer.shadowColor = UIColor.white.cgColor
+        tv.layer.shadowOffset = CGSize(width: 0.0, height: 1.0)
         tv.layer.shadowOpacity = 1.0
         tv.layer.shadowRadius = 1.0
         tv.sizeToFit()
         return tv
     }
 
-    override func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+    override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         let tv = self.tableView(tableView, viewForFooterInSection: section)
 
-        let height = tv?.systemLayoutSizeFittingSize(UILayoutFittingCompressedSize).height
+        let height = tv?.systemLayoutSizeFitting(UILayoutFittingCompressedSize).height
         return height!
     }
 
     //MARK: - Actions
 
 
-    @IBAction func done( sender: AnyObject ) {
+    @IBAction func done( _ sender: AnyObject ) {
 
         if let delegate = self.delegate {
             delegate.rhcSettingsDidFinish(self)
         } else {
-            self.dismissViewControllerAnimated( true, completion: nil)
+            self.dismiss( animated: true, completion: nil)
         }
     }
 }

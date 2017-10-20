@@ -12,7 +12,7 @@ extension UITableViewCell {
 
     func configureSelectedBackgroundView() -> Void
     {
-        let vibrancyView = UIVisualEffectView(effect: UIVibrancyEffect.widgetPrimaryVibrancyEffect())
+        let vibrancyView = UIVisualEffectView(effect: UIVibrancyEffect.widgetPrimary())
         vibrancyView.frame = self.contentView.bounds
 
         let view = UIView(frame: vibrancyView.bounds)
@@ -38,8 +38,8 @@ class RHCTodayCell: UITableViewCell
         self.updatedLabel.text = " "
         self.unitLabel.text = " "
 
-        self.speedLabel.textColor = UIColor.blackColor()
-        self.nameLabel.textColor = UIColor.blackColor()
+        self.speedLabel.textColor = UIColor.black
+        self.nameLabel.textColor = UIColor.black
         self.updatedLabel.textColor = UIColor.vindsidenTodayTextColor()
         self.unitLabel.textColor = UIColor.vindsidenTodayTextColor()
     }

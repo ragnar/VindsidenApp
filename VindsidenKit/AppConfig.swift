@@ -8,23 +8,28 @@
 
 import Foundation
 
+#if os(iOS)
+    import StoreKit
+#endif
+
 
 @objc(AppConfig)
-public class AppConfig : NSObject {
-    private struct Defaults {
+open class AppConfig : NSObject {
+    fileprivate struct Defaults {
         static let firstLaunchKey = "Defaults.firstLaunchKey"
-        private static let spotlightIndexed = "Defaults.spotlightIndexed"
+        fileprivate static let spotlightIndexed = "Defaults.spotlightIndexed"
+        fileprivate static let bootCount = "Defaults.bootCount"
     }
 
 
     public struct Global {
-        static let plotHistory = 5.0
+        static let plotHistory = 6.0
     }
 
 
-    public struct Notification {
-        public static let networkRequestStart = Bundle.prefix + "." + Bundle.appName + ".NetworkRequestStart"
-        public static let networkRequestEnd = Bundle.prefix + "." + Bundle.appName + ".NetworkRequestEnd"
+    public struct Notifications {
+        public static let networkRequestStart = Notification.Name(Bundle.prefix + "." + Bundle.appName + ".NetworkRequestStart")
+        public static let networkRequestEnd = Notification.Name(Bundle.prefix + "." + Bundle.appName + ".NetworkRequestEnd")
     }
 
 
@@ -63,7 +68,7 @@ public class AppConfig : NSObject {
     }
 
     
-    public class var sharedConfiguration: AppConfig {
+    @objc open class var sharedConfiguration: AppConfig {
         struct Singleton {
             static let sharedAppConfiguration = AppConfig()
         }
@@ -72,55 +77,55 @@ public class AppConfig : NSObject {
     }
 
 
-    public var applicationUserDefaults: NSUserDefaults {
-        return NSUserDefaults(suiteName: ApplicationGroups.primary)!
+    @objc open var applicationUserDefaults: UserDefaults {
+        return UserDefaults(suiteName: ApplicationGroups.primary)!
     }
 
 
-    public lazy var frameworkBundle: NSBundle! = {
-        return NSBundle(identifier: Bundle.frameworkBundleIdentifier)
+    open lazy var frameworkBundle: Foundation.Bundle = {
+        return Foundation.Bundle(identifier: Bundle.frameworkBundleIdentifier)!
     }()
 
 
-    public lazy var applicationDocumentsDirectory: NSURL? = {
-        let urlOrNil = NSFileManager.defaultManager().containerURLForSecurityApplicationGroupIdentifier(ApplicationGroups.primary)
+    open lazy var applicationDocumentsDirectory: URL? = {
+        let urlOrNil = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: ApplicationGroups.primary)
         if let url = urlOrNil {
-            return url as NSURL
+            return url as URL
         } else {
-            return NSURL()
+            return nil
         }
     }()
 
 
-    public private(set) var isFirstLaunch: Bool {
+    open fileprivate(set) var isFirstLaunch: Bool {
         get {
             registerDefaults()
-            return applicationUserDefaults.boolForKey(Defaults.firstLaunchKey)
+            return applicationUserDefaults.bool(forKey: Defaults.firstLaunchKey)
         }
         set {
-            applicationUserDefaults.setBool(newValue, forKey: Defaults.firstLaunchKey)
+            applicationUserDefaults.set(newValue, forKey: Defaults.firstLaunchKey)
         }
     }
 
 
-    public private(set) var isSpotlightIndexed: Int {
+    open fileprivate(set) var isSpotlightIndexed: Int {
         get {
-            return applicationUserDefaults.integerForKey(Defaults.spotlightIndexed)
+            return applicationUserDefaults.integer(forKey: Defaults.spotlightIndexed)
         }
         set {
-            applicationUserDefaults.setInteger(newValue, forKey: Defaults.spotlightIndexed)
+            applicationUserDefaults.set(newValue, forKey: Defaults.spotlightIndexed)
         }
     }
 
 
-    private func registerDefaults() {
+    fileprivate func registerDefaults() {
         #if os(watchOS)
             let defaultOptions: [String: AnyObject] = [
-            Defaults.firstLaunchKey: true,
+            Defaults.firstLaunchKey: true as AnyObject,
             ]
         #elseif os(iOS)
             let defaultOptions: [String: AnyObject] = [
-                Defaults.firstLaunchKey: true,
+                Defaults.firstLaunchKey: true as AnyObject,
             ]
             #elseif os(OSX)
             let defaultOptions: [String: AnyObject] = [
@@ -128,11 +133,11 @@ public class AppConfig : NSObject {
             ]
         #endif
 
-        applicationUserDefaults.registerDefaults(defaultOptions)
+        applicationUserDefaults.register(defaults: defaultOptions)
     }
 
 
-    public func runHandlerOnFirstLaunch(firstLaunchHandler: Void -> Void) {
+    open func runHandlerOnFirstLaunch(_ firstLaunchHandler: () -> Void) {
         if isFirstLaunch {
             isFirstLaunch = false
 
@@ -141,7 +146,7 @@ public class AppConfig : NSObject {
     }
 
 
-    public func shouldIndexForFirstTime( completionHandler: Void -> Void) {
+    open func shouldIndexForFirstTime( _ completionHandler: () -> Void) {
         if isSpotlightIndexed < 2 {
             isSpotlightIndexed = 2
             completionHandler()
@@ -149,15 +154,50 @@ public class AppConfig : NSObject {
     }
 
 
-    public func relativeDate( dateOrNil: NSDate?) -> NSString {
-        var dateToUse: NSDate
+    @objc open func relativeDate( _ dateOrNil: Date?) -> String {
+        var dateToUse: Date
 
         if let date = dateOrNil {
-            dateToUse = date.earlierDate(NSDate())
+            dateToUse = (date as NSDate).earlierDate(Date())
         } else {
-            dateToUse = NSDate()
+            dateToUse = Date()
         }
 
         return dateToUse.releativeString()
+    }
+
+
+    // MARK: - Review
+
+
+    open func presentReviewControllerIfCriteriaIsMet() {
+        defer {
+            applicationUserDefaults.synchronize()
+        }
+
+        let version = (Foundation.Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as! String)
+
+        guard let bootCount = applicationUserDefaults.dictionary(forKey: Defaults.bootCount) as? [String:Int] else {
+            applicationUserDefaults.set([version: 1], forKey: Defaults.bootCount)
+            return
+        }
+
+        guard let count = bootCount[version] else {
+            applicationUserDefaults.set([version: 1], forKey: Defaults.bootCount)
+            return
+        }
+
+        applicationUserDefaults.set([version: count + 1], forKey: Defaults.bootCount)
+
+        if count % 7 == 0 {
+            applicationUserDefaults.set([version: 1], forKey: Defaults.bootCount)
+            #if os(iOS)
+                if #available(iOS 10.3, *) {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: {
+                        SKStoreReviewController.requestReview()
+                    })
+                }
+            #endif
+        }
     }
 }

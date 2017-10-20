@@ -8,20 +8,20 @@
 
 import Foundation
 
-public func DLOG( message: String, file: String = #file, function: String = #function, line: Int = #line ) {
+public func DLOG( _ message: String, file: String = #file, function: String = #function, line: Int = #line ) {
     #if Debug
         NSLog("([\((file as NSString).lastPathComponent) \(function)] line: \(line)) %@", message)
     #endif
 }
 
 
-public func LOG( message: String) {
+public func LOG( _ message: String) {
     #if Debug
         NSLog("%@", message)
     #endif
 }
 
 
-public func WARNING( message: String, file: String = #file, function: String = #function, line: Int = #line ) {
+public func WARNING( _ message: String, file: String = #file, function: String = #function, line: Int = #line ) {
     NSLog("([\((file as NSString).lastPathComponent) \(function)] line: \(line)) %@", message)
 }

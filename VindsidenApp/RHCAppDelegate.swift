@@ -18,27 +18,27 @@ class RHCAppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate {
     var window: UIWindow?
     var connectionSession: WCSession?
 
-    func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
 
         NetworkIndicator.defaultManager().startListening()
 
         self.window?.tintColor = UIColor.vindsidenGloablTintColor()
 
-        if AppConfig.sharedConfiguration.applicationUserDefaults.integerForKey("selectedUnit") == 0 {
-            AppConfig.sharedConfiguration.applicationUserDefaults.setInteger(SpeedConvertion.ToMetersPerSecond.rawValue, forKey: "selectedUnit")
+        if AppConfig.sharedConfiguration.applicationUserDefaults.integer(forKey: "selectedUnit") == 0 {
+            AppConfig.sharedConfiguration.applicationUserDefaults.set(SpeedConvertion.toMetersPerSecond.rawValue, forKey: "selectedUnit")
             AppConfig.sharedConfiguration.applicationUserDefaults.synchronize()
         }
 
         if WCSession.isSupported() {
-            let connectionSession = WCSession.defaultSession()
+            let connectionSession = WCSession.default
 
             //if connectionSession.paired && connectionSession.watchAppInstalled {
                 connectionSession.delegate = self
-                connectionSession.activateSession()
+                connectionSession.activate()
             //}
         }
 
-        Datamanager.sharedManager().cleanupPlots { () -> Void in
+        DataManager.shared.cleanupPlots {
             WindManager.sharedManager.refreshInterval = 60
             WindManager.sharedManager.startUpdating()
         }
@@ -47,7 +47,7 @@ class RHCAppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate {
 
         var performAdditionalHandling = true
 
-        if let shortcutItem = launchOptions?[UIApplicationLaunchOptionsShortcutItemKey] as? UIApplicationShortcutItem, rootViewController = primaryViewController() {
+        if let shortcutItem = launchOptions?[UIApplicationLaunchOptionsKey.shortcutItem] as? UIApplicationShortcutItem, let rootViewController = primaryViewController() {
             let didHandleShortcutItem = ShortcutItemHandler.handle(shortcutItem, with: rootViewController)
             performAdditionalHandling = !didHandleShortcutItem
         }
@@ -58,11 +58,11 @@ class RHCAppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate {
     }
 
 
-    func application(application: UIApplication, willFinishLaunchingWithOptions launchOptions: [NSObject : AnyObject]?) -> Bool {
+    func application(_ application: UIApplication, willFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
 
         if let options = launchOptions {
-            if let url = options[UIApplicationLaunchOptionsURLKey] as? NSURL {
-                if let _ = url.host?.rangeOfString("station", options: .CaseInsensitiveSearch) {
+            if let url = options[UIApplicationLaunchOptionsKey.url] as? URL {
+                if let _ = url.host?.range(of: "station", options: .caseInsensitive) {
                     return true
                 } else {
                     return false
@@ -74,9 +74,9 @@ class RHCAppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate {
     }
 
 
-    func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject) -> Bool {
+    func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
 
-        if let _ = url.host?.rangeOfString("station", options: .CaseInsensitiveSearch) {
+        if let _ = url.host?.range(of: "station", options: .caseInsensitive) {
             return openLaunchOptionsURL(url)
         }
 
@@ -84,74 +84,75 @@ class RHCAppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate {
     }
 
 
-    func applicationWillResignActive(application: UIApplication) {
+    func applicationWillResignActive(_ application: UIApplication) {
     }
 
 
-    func applicationDidEnterBackground(application: UIApplication) {
+    func applicationDidEnterBackground(_ application: UIApplication) {
         PlotFetcher.invalidate()
         StationFetcher.invalidate()
     }
 
 
-    func applicationWillEnterForeground(application: UIApplication) {
+    func applicationWillEnterForeground(_ application: UIApplication) {
+        AppConfig.sharedConfiguration.presentReviewControllerIfCriteriaIsMet()
     }
 
 
-    func applicationDidBecomeActive(application: UIApplication) {
+    func applicationDidBecomeActive(_ application: UIApplication) {
         if WCSession.isSupported() {
-            let connectionSession = WCSession.defaultSession()
+            let connectionSession = WCSession.default
 
 //            if connectionSession.paired && connectionSession.watchAppInstalled {
             connectionSession.delegate = self
-            connectionSession.activateSession()
+            connectionSession.activate()
 //            }
         }
     }
 
 
-    func applicationWillTerminate(application: UIApplication) {
-        Datamanager.sharedManager().saveContext()
+    func applicationWillTerminate(_ application: UIApplication) {
+        DataManager.shared.saveContext()
         NetworkIndicator.defaultManager().stopListening()
     }
 
 
-    func application(application: UIApplication, performFetchWithCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
+    func application(_ application: UIApplication, performFetchWithCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
         WindManager.sharedManager.fetch { (result: UIBackgroundFetchResult) -> Void in
             completionHandler(result)
         }
     }
 
 
-    func application(application: UIApplication, handleWatchKitExtensionRequest userInfo: [NSObject : AnyObject]?, reply: ([NSObject : AnyObject]?) -> Void) {
-        let taskID = application.beginBackgroundTaskWithExpirationHandler({})
+    func application(_ application: UIApplication, handleWatchKitExtensionRequest userInfo: [AnyHashable: Any]?, reply: @escaping ([AnyHashable: Any]?) -> Void) {
+        let taskID = application.beginBackgroundTask(expirationHandler: {})
 
         reply(["result": "not_updated"])
         application.endBackgroundTask(taskID)
     }
 
 
-    func application(application: UIApplication, supportedInterfaceOrientationsForWindow window: UIWindow?) -> UIInterfaceOrientationMask {
+    func application(_ application: UIApplication, supportedInterfaceOrientationsFor window: UIWindow?) -> UIInterfaceOrientationMask {
         guard let window = window else {
-            return .AllButUpsideDown
+            return .allButUpsideDown
         }
 
-        if  window.traitCollection.userInterfaceIdiom == .Pad  {
-            return .All
+        if  window.traitCollection.userInterfaceIdiom == .pad  {
+            return .all
         }
 
-        return .AllButUpsideDown
+        return .allButUpsideDown
     }
 
 
-    func application(application: UIApplication, performActionForShortcutItem shortcutItem: UIApplicationShortcutItem, completionHandler: (Bool) -> Void) {
+    func application(_ application: UIApplication, performActionFor shortcutItem: UIApplicationShortcutItem, completionHandler: @escaping (Bool) -> Void) {
         var didHandleShortcutItem = false
 
         let nc = self.window?.rootViewController as? UINavigationController
         let controller = primaryViewController()
 
         if let _ = nc?.presentedViewController {
-            nc?.dismissViewControllerAnimated(false, completion: { () -> Void in
+            nc?.dismiss(animated: false, completion: { () -> Void in
                 didHandleShortcutItem = ShortcutItemHandler.handle(shortcutItem, with: controller!)
             })
         } else {
@@ -165,22 +166,22 @@ class RHCAppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate {
     // MARK: -
 
     
-    func openLaunchOptionsURL( url: NSURL) -> Bool {
-        let ident = url.pathComponents?.last as String!
+    func openLaunchOptionsURL( _ url: URL) -> Bool {
+        let ident = url.pathComponents.last as String!
         var station: CDStation?
 
-        if let stationId = Int(ident) {
+        if let stationId = Int(ident!) {
             do {
-                station = try CDStation.existingStationWithId(stationId, inManagedObjectContext: Datamanager.sharedManager().managedObjectContext)
+                station = try CDStation.existingStationWithId(stationId, inManagedObjectContext: DataManager.shared.viewContext())
             } catch {
             }
         } else {
-            station = CDStation.searchForStationName(ident, inManagedObjectContext: Datamanager.sharedManager().managedObjectContext)
+            station = CDStation.searchForStationName(ident!, inManagedObjectContext: DataManager.shared.viewContext())
         }
 
         if  let found = station {
-            if let hidden = found.isHidden where hidden.boolValue == true {
-                found.managedObjectContext?.performBlockAndWait({ () -> Void in
+            if let hidden = found.isHidden, hidden.boolValue == true {
+                found.managedObjectContext?.performAndWait({ () -> Void in
                     found.isHidden = false
                     do {
                         try found.managedObjectContext?.save()
@@ -198,11 +199,11 @@ class RHCAppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate {
         let controller = primaryViewController()
 
         if let _ = nc?.presentedViewController {
-            nc?.dismissViewControllerAnimated(false, completion: { () -> Void in
-                controller!.scrollToStation(station!)
+            nc?.dismiss(animated: false, completion: { () -> Void in
+                controller!.scroll(to: station!)
             })
         } else {
-            controller!.scrollToStation(station!)
+            controller!.scroll(to: station!)
         }
 
         return true
@@ -212,12 +213,12 @@ class RHCAppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate {
     // MARK: - Restoration
 
 
-    func application(application: UIApplication, shouldRestoreApplicationState coder: NSCoder) -> Bool {
+    func application(_ application: UIApplication, shouldRestoreApplicationState coder: NSCoder) -> Bool {
         return true
     }
 
 
-    func application(application: UIApplication, shouldSaveApplicationState coder: NSCoder) -> Bool {
+    func application(_ application: UIApplication, shouldSaveApplicationState coder: NSCoder) -> Bool {
         return true
     }
 
@@ -225,31 +226,31 @@ class RHCAppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate {
     // MARK: - WC Session
 
 
-    func session(session: WCSession, activationDidCompleteWithState activationState: WCSessionActivationState, error: NSError?) {
+    func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
         DLOG("Session: \(session)")
     }
 
 
-    func sessionDidBecomeInactive(session: WCSession) {
+    func sessionDidBecomeInactive(_ session: WCSession) {
         DLOG("Session: \(session)")
     }
 
 
-    func sessionDidDeactivate(session: WCSession) {
+    func sessionDidDeactivate(_ session: WCSession) {
         DLOG("Session: \(session)")
     }
 
 
-    func sessionWatchStateDidChange(session: WCSession) {
+    func sessionWatchStateDidChange(_ session: WCSession) {
         DLOG("Session: \(session)")
     }
 
 
-    func sessionReachabilityDidChange(session: WCSession) {
+    func sessionReachabilityDidChange(_ session: WCSession) {
         DLOG("Session: \(session)")
     }
 
-    func session(session: WCSession, didReceiveMessage message: [String : AnyObject], replyHandler: ([String : AnyObject]) -> Void) {
+    func session(_ session: WCSession, didReceiveMessage message: [String : Any], replyHandler: @escaping ([String : Any]) -> Void) {
         DLOG("Session: \(message)")
         replyHandler(["result": "not_updated"])
     }
@@ -257,27 +258,27 @@ class RHCAppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate {
 
     // MARK: - NSUserActivity
 
-    override func updateUserActivityState(activity: NSUserActivity) {
+    override func updateUserActivityState(_ activity: NSUserActivity) {
         DLOG("\(activity)")
     }
 
-    func application(application: UIApplication, willContinueUserActivityWithType userActivityType: String) -> Bool {
+    func application(_ application: UIApplication, willContinueUserActivityWithType userActivityType: String) -> Bool {
         return true
     }
 
 
-    func application(application: UIApplication, continueUserActivity userActivity: NSUserActivity, restorationHandler: ([AnyObject]?) -> Void) -> Bool {
-        DLOG("Activity: \(userActivity.activityType) - \(userActivity.userInfo)")
+    func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([Any]?) -> Void) -> Bool {
+        DLOG("Activity: \(userActivity.activityType) - \(String(describing: userActivity.userInfo))")
 
 
         if userActivity.activityType == CSSearchableItemActionType, let userInfo = userActivity.userInfo, let urlString = userInfo[CSSearchableItemActivityIdentifier] as? String {
             DLOG("URL STRING: \(urlString)")
-            let url = NSURL(string: urlString)
+            let url = URL(string: urlString)
             let success = openLaunchOptionsURL(url!)
 
             return success
         } else if let userInfo = userActivity.userInfo, let urlString = userInfo["urlToActivate"] as? String {
-            let url = NSURL(string: urlString)
+            let url = URL(string: urlString)
             let success = openLaunchOptionsURL(url!)
 
             return success
@@ -287,7 +288,7 @@ class RHCAppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate {
     }
 
     
-    func application(application: UIApplication, didFailToContinueUserActivityWithType userActivityType: String, error: NSError) {
+    func application(_ application: UIApplication, didFailToContinueUserActivityWithType userActivityType: String, error: Error) {
         DLOG("did fail to continue: \(userActivityType), \(error)")
     }
 
@@ -299,7 +300,7 @@ class RHCAppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate {
     }
 
 
-    func updateShortcutItems() {
-        ShortcutItemHandler.updateDynamicShortcutItems(for: UIApplication.sharedApplication())
+    @objc func updateShortcutItems() {
+        ShortcutItemHandler.updateDynamicShortcutItems(for: UIApplication.shared)
     }
 }

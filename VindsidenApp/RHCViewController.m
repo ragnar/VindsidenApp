@@ -36,6 +36,8 @@ static NSString *kCellID = @"stationCellID";
 @property (strong, nonatomic) NSIndexPath *currentIndexPath;
 @property (assign, nonatomic) CGSize cellSize;
 
+@property (strong, nonatomic) NSArray<NSLayoutConstraint *> *cameraViewConstraints;
+
 @end
 
 
@@ -87,7 +89,8 @@ static NSString *kCellID = @"stationCellID";
 
     self.pageControl.pageIndicatorTintColor = [UIColor lightGrayColor];
     self.pageControl.currentPageIndicatorTintColor = [UIColor darkGrayColor];
-    self.pageControl.numberOfPages = [CDStation numberOfVisibleStationsInManagedObjectContext:[[Datamanager sharedManager] managedObjectContext]];
+    self.pageControl.numberOfPages = [CDStation numberOfVisibleStationsInManagedObjectContext:[DataManager shared].viewContext];
+
 
     _transformedCells = [NSMutableSet set];
 
@@ -137,11 +140,26 @@ static NSString *kCellID = @"stationCellID";
 {
     [super viewWillLayoutSubviews];
 
+    if (@available(iOS 11, *)) {
+        if ( _cameraViewConstraints == nil) {
+            _cameraView.translatesAutoresizingMaskIntoConstraints = NO;
+
+            NSLayoutConstraint *heightConstraint = [_cameraView.heightAnchor constraintEqualToConstant:32];
+            NSLayoutConstraint *widthConstraint = [_cameraView.widthAnchor constraintEqualToConstant:140];
+
+            _cameraViewConstraints = @[heightConstraint, widthConstraint];
+
+            [heightConstraint setActive:YES];
+            [widthConstraint setActive:YES];
+        }
+    }
+
     if ( CGSizeEqualToSize(self.cellSize, CGSizeZero) == NO ) {
         self.cellSize = self.collectionView.bounds.size;
     }
 
     [self.collectionView.collectionViewLayout invalidateLayout];
+
 }
 
 
@@ -325,8 +343,8 @@ static NSString *kCellID = @"stationCellID";
         return _fetchedResultsController;
     }
 
-    NSManagedObjectContext *context = [[Datamanager sharedManager] managedObjectContext];
-    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"CDStation"];
+    NSManagedObjectContext *context = [DataManager shared].viewContext;
+    NSFetchRequest *fetchRequest = CDStation.fetchRequest;
     [fetchRequest setFetchBatchSize:20];
 
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"isHidden == NO"];
@@ -360,7 +378,7 @@ static NSString *kCellID = @"stationCellID";
         case NSFetchedResultsChangeDelete:
         case NSFetchedResultsChangeMove:
             [self.collectionView reloadData];
-            self.pageControl.numberOfPages = [CDStation numberOfVisibleStationsInManagedObjectContext:[[Datamanager sharedManager] managedObjectContext]];
+            self.pageControl.numberOfPages = [CDStation numberOfVisibleStationsInManagedObjectContext:[DataManager shared].viewContext];
             [self saveActivity];
             break;
         case NSFetchedResultsChangeUpdate:
@@ -375,7 +393,7 @@ static NSString *kCellID = @"stationCellID";
 
 - (void)updateStations:(NSArray *)stations
 {
-    [CDStation updateWithFetchedContent: stations inManagedObjectContext:[[Datamanager sharedManager] managedObjectContext] completionHandler:^(BOOL newStations) {
+    [CDStation updateWithFetchedContent: stations inManagedObjectContext:[DataManager shared].viewContext completionHandler:^(BOOL newStations) {
         dispatch_async(dispatch_get_main_queue(), ^{
             if ( newStations ) {
 
@@ -394,7 +412,7 @@ static NSString *kCellID = @"stationCellID";
             }
 
             [self updateApplicationContextToWatch];
-            [[Datamanager sharedManager] indexVisibleStations];
+            [[DataManager shared] indexVisibleStations];
         });
     }];
 
@@ -719,9 +737,7 @@ static NSString *kCellID = @"stationCellID";
         return;
     }
 
-
-
-    NSArray *result = [CDStation visibleStationsInManagedObjectContext:[[Datamanager sharedManager] managedObjectContext] limit:0];
+    NSArray *result = [CDStation visibleStationsInManagedObjectContext:[DataManager shared].viewContext limit:0];
     NSMutableArray *stations = [NSMutableArray array];
 
     for ( CDStation *station in result ) {

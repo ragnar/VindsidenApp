@@ -12,23 +12,23 @@ import VindsidenKit
 enum ShortcutItemType: String {
     case goToStation
 
-    private static let prefix: String = {
-        let bundleIdentifier = NSBundle.mainBundle().bundleIdentifier!
+    fileprivate static let prefix: String = {
+        let bundleIdentifier = Bundle.main.bundleIdentifier!
         return bundleIdentifier + "."
     }()
 
     init?(prefixedString: String) {
-        guard let prefixRange = prefixedString.rangeOfString(ShortcutItemType.prefix) else {
+        guard let prefixRange = prefixedString.range(of: ShortcutItemType.prefix) else {
             return nil
         }
 
         var rawTypeString = prefixedString
-        rawTypeString.removeRange(prefixRange)
+        rawTypeString.removeSubrange(prefixRange)
         self.init(rawValue: rawTypeString)
     }
 
     var prefixedString: String {
-        return self.dynamicType.prefix + self.rawValue
+        return type(of: self).prefix + self.rawValue
     }
 }
 
@@ -48,7 +48,7 @@ struct ShortcutItemUserInfo {
     var dictionaryRepresentation: [String : NSSecureCoding] {
         var dictionary: [String : NSSecureCoding] = [:]
         if let stationIdentifier = stationIdentifier {
-            dictionary[ShortcutItemUserInfo.stationIdentifierKey] = stationIdentifier
+            dictionary[ShortcutItemUserInfo.stationIdentifierKey] = stationIdentifier as NSSecureCoding?
         }
         return dictionary
     }
@@ -59,7 +59,7 @@ struct ShortcutItemHandler {
     static func updateDynamicShortcutItems(for application: UIApplication) {
         var shortcutItems = [UIApplicationShortcutItem]()
 
-        let stations = CDStation.visibleStationsInManagedObjectContext(Datamanager.sharedManager().managedObjectContext, limit: 4)
+        let stations = CDStation.visibleStationsInManagedObjectContext(DataManager.shared.viewContext(), limit: 4)
 
         for station in stations {
             let type = ShortcutItemType.goToStation
@@ -74,7 +74,7 @@ struct ShortcutItemHandler {
         application.shortcutItems = shortcutItems
     }
 
-    static func handle(shortcutItem: UIApplicationShortcutItem, with rootViewController: RHCViewController) -> Bool {
+    static func handle(_ shortcutItem: UIApplicationShortcutItem, with rootViewController: RHCViewController) -> Bool {
 
         guard let shortcutItemType = ShortcutItemType(prefixedString: shortcutItem.type) else {
             return false
@@ -86,16 +86,14 @@ struct ShortcutItemHandler {
         case .goToStation:
             let userInfo = ShortcutItemUserInfo(dictionaryRepresentation: shortcutItem.userInfo)
             if let stationIdentifier = userInfo.stationIdentifier, let stationId = Int(stationIdentifier)  {
-                station = try? CDStation.existingStationWithId(stationId, inManagedObjectContext: Datamanager.sharedManager().managedObjectContext)
-            }
-            else {
+                station = try? CDStation.existingStationWithId(stationId, inManagedObjectContext: DataManager.shared.viewContext())
+            } else {
                 station = nil
             }
-
         }
 
         if let station = station {
-            rootViewController.scrollToStation(station)
+            rootViewController.scroll(to: station)
             return true
         }
         return false

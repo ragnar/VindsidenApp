@@ -15,8 +15,8 @@ class MapInterfaceController: WKInterfaceController {
 
     @IBOutlet var mapInterface: WKInterfaceMap!
 
-    override func awakeWithContext(context: AnyObject?) {
-        super.awakeWithContext(context)
+    override func awake(withContext context: Any?) {
+        super.awake(withContext: context)
         
         // Configure interface objects here.
         if let station = context as? CDStation {
@@ -27,7 +27,7 @@ class MapInterfaceController: WKInterfaceController {
 
             mapInterface.setVisibleMapRect(MKMapRect(origin: MKMapPointForCoordinate(station.coordinate), size: MKMapSize(width: 0.5, height: 0.5)))
             mapInterface.setRegion(MKCoordinateRegion(center: station.coordinate, span: coordinateSpan))
-            mapInterface.addAnnotation(station.coordinate, withPinColor: .Red)
+            mapInterface.addAnnotation(station.coordinate, with: .red)
         }
     }
 

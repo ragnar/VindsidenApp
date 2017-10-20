@@ -19,8 +19,8 @@ public extension CDStation {
     @NSManaged var coordinateLon: NSNumber?
     @NSManaged var copyright: String?
     @NSManaged var isHidden: NSNumber?
-    @NSManaged var lastMeasurement: NSDate?
-    @NSManaged var lastRefreshed: NSDate?
+    @NSManaged var lastMeasurement: Date?
+    @NSManaged var lastRefreshed: Date?
     @NSManaged var order: NSNumber?
     @NSManaged var stationId: NSNumber?
     @NSManaged var stationName: String?

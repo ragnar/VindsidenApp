@@ -98,7 +98,7 @@
     NSDateComponents *inputComponents = [gregorian components:(NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay | NSCalendarUnitHour) fromDate:inDate];
     NSDate *outDate = [gregorian dateFromComponents:inputComponents];
     NSManagedObjectContext *context = self.currentStation.managedObjectContext;
-    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"CDPlot"];
+    NSFetchRequest *fetchRequest = CDPlot.fetchRequest;
 
     fetchRequest.predicate = [NSPredicate predicateWithFormat:@"station == %@ AND plotTime >= %@", self.currentStation, outDate];
     fetchRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"plotTime" ascending:NO]];

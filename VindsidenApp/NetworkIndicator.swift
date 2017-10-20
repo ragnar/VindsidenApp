@@ -13,7 +13,7 @@ import Foundation
 class NetworkIndicator : NSObject {
 
     var numberOfActiveRequests = 0
-    let lockQueue = dispatch_queue_create("org.juniks.VindsidenApp.lockQueue", nil)
+    let lockQueue = DispatchQueue(label: "org.juniks.VindsidenApp.lockQueue", attributes: [])
 
     class func defaultManager() -> NetworkIndicator {
         struct Singleton {
@@ -25,13 +25,13 @@ class NetworkIndicator : NSObject {
 
 
     func startListening() {
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(NetworkIndicator.incrementIndicator(_:)), name: AppConfig.Notification.networkRequestStart, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(NetworkIndicator.decrementIndicator(_:)), name: AppConfig.Notification.networkRequestEnd, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(NetworkIndicator.incrementIndicator(_:)), name: AppConfig.Notifications.networkRequestStart, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(NetworkIndicator.decrementIndicator(_:)), name: AppConfig.Notifications.networkRequestEnd, object: nil)
     }
 
 
     func stopListening() {
-        NSNotificationCenter.defaultCenter().removeObserver(self)
+        NotificationCenter.default.removeObserver(self)
     }
 
 
@@ -40,19 +40,24 @@ class NetworkIndicator : NSObject {
     }
 
 
-    func incrementIndicator( notification: NSNotification ) -> Void {
-        dispatch_sync(lockQueue) {
+    @objc func incrementIndicator( _ notification: Notification ) -> Void {
+        lockQueue.sync {
             self.numberOfActiveRequests = self.numberOfActiveRequests + 1
-            UIApplication.sharedApplication().networkActivityIndicatorVisible = self.isNetworkActivityIndicatorVisible()
+
+            DispatchQueue.main.async {
+                UIApplication.shared.isNetworkActivityIndicatorVisible = self.isNetworkActivityIndicatorVisible()
+            }
         }
     }
 
 
-    func decrementIndicator( notification: NSNotification ) -> Void {
-        dispatch_sync(lockQueue) {
+    @objc func decrementIndicator( _ notification: Notification ) -> Void {
+        lockQueue.sync {
             self.numberOfActiveRequests = max(0, self.numberOfActiveRequests - 1)
 
-            UIApplication.sharedApplication().networkActivityIndicatorVisible = self.isNetworkActivityIndicatorVisible()
+            DispatchQueue.main.async {
+                UIApplication.shared.isNetworkActivityIndicatorVisible = self.isNetworkActivityIndicatorVisible()
+            }
         }
     }
 }

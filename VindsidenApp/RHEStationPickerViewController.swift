@@ -18,48 +18,48 @@ class RHEStationPickerViewController : UITableViewController, NSFetchedResultsCo
 
 
     deinit {
-        NSNotificationCenter.defaultCenter().removeObserver(self)
+        NotificationCenter.default.removeObserver(self)
     }
 
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        navigationItem.rightBarButtonItem = self.editButtonItem()
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(RHEStationPickerViewController.preferredContentSizeDidChange(_:)), name: UIContentSizeCategoryDidChangeNotification, object: nil)
+        navigationItem.rightBarButtonItem = self.editButtonItem
+        NotificationCenter.default.addObserver(self, selector: #selector(RHEStationPickerViewController.preferredContentSizeDidChange(_:)), name: NSNotification.Name.UIContentSizeCategoryDidChange, object: nil)
     }
 
 
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
     }
 
 
-    override func viewWillDisappear(animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
     }
 
 
-    override func setEditing(editing: Bool, animated: Bool) {
+    override func setEditing(_ editing: Bool, animated: Bool) {
         super.setEditing(editing, animated: animated)
-        navigationItem.leftBarButtonItem?.enabled = !editing
+        navigationItem.leftBarButtonItem?.isEnabled = !editing
     }
 
 
-    func preferredContentSizeDidChange( notification: NSNotification ) {
+    @objc func preferredContentSizeDidChange( _ notification: Notification ) {
         tableView.reloadData()
     }
 
 
-    func configureCell( cell: UITableViewCell, atIndexPath indexPath: NSIndexPath) {
-        let station = fetchedResultsController.objectAtIndexPath(indexPath) as! CDStation
+    func configureCell( _ cell: UITableViewCell, atIndexPath indexPath: IndexPath) {
+        let station = fetchedResultsController.object(at: indexPath) as! CDStation
         cell.textLabel?.text = station.stationName;
         cell.detailTextLabel?.text = station.city;
 
-        if let hidden = station.isHidden where hidden == true {
-            cell.imageView?.image = UIImage(named: "uncheckmark_icon", inBundle: nil, compatibleWithTraitCollection: self.traitCollection)
+        if let hidden = station.isHidden, hidden == true {
+            cell.imageView?.image = UIImage(named: "uncheckmark_icon", in: nil, compatibleWith: self.traitCollection)
         } else {
-            cell.imageView?.image = UIImage(named: "checkmark_icon", inBundle: nil, compatibleWithTraitCollection: self.traitCollection)
+            cell.imageView?.image = UIImage(named: "checkmark_icon", in: nil, compatibleWith: self.traitCollection)
         }
     }
 
@@ -67,21 +67,27 @@ class RHEStationPickerViewController : UITableViewController, NSFetchedResultsCo
     // MARK: UITableView
 
 
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        let sections = fetchedResultsController.sections as Array!
-        return sections.count;
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        if let sections = fetchedResultsController.sections {
+            return sections.count
+        }
+
+        return 0
     }
 
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let sections = fetchedResultsController.sections as Array!
-        let sectionInfo = sections[section] as NSFetchedResultsSectionInfo
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if let sections = fetchedResultsController.sections {
+            let sectionInfo = sections[section] as NSFetchedResultsSectionInfo
 
-        return sectionInfo.numberOfObjects
+            return sectionInfo.numberOfObjects
+        }
+
+        return 0
     }
 
 
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("StationCell", forIndexPath: indexPath) as UITableViewCell
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "StationCell", for: indexPath) as UITableViewCell
 
         configureCell(cell, atIndexPath: indexPath)
 
@@ -89,27 +95,27 @@ class RHEStationPickerViewController : UITableViewController, NSFetchedResultsCo
     }
 
 
-    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return true
     }
 
 
-    override func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
         return true
     }
 
 
-    override func tableView(tableView: UITableView, editingStyleForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCellEditingStyle {
-        return .None
+    override func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle {
+        return .none
     }
 
 
-    override func tableView(tableView: UITableView, shouldIndentWhileEditingRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+    override func tableView(_ tableView: UITableView, shouldIndentWhileEditingRowAt indexPath: IndexPath) -> Bool {
         return false
     }
 
 
-    override func tableView(tableView: UITableView, moveRowAtIndexPath sourceIndexPath: NSIndexPath, toIndexPath destinationIndexPath: NSIndexPath) {
+    override func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
         if sourceIndexPath == destinationIndexPath {
             return
         }
@@ -117,17 +123,17 @@ class RHEStationPickerViewController : UITableViewController, NSFetchedResultsCo
         changeIsUserDriven = true
 
         var array = fetchedResultsController.fetchedObjects as! [CDStation]
-        let objectToMove = fetchedResultsController.objectAtIndexPath(sourceIndexPath) as! CDStation
-        array.removeAtIndex(sourceIndexPath.row)
-        array.insert(objectToMove, atIndex: destinationIndexPath.row)
+        let objectToMove = fetchedResultsController.object(at: sourceIndexPath) as! CDStation
+        array.remove(at: sourceIndexPath.row)
+        array.insert(objectToMove, at: destinationIndexPath.row)
 
         var index = 0
         for object in array {
-            object.order = index
+            object.order = NSNumber(value: index)
             index += 1
         }
 
-        let context = Datamanager.sharedManager().managedObjectContext
+        let context = DataManager.shared.viewContext()
 
         do {
             try context.save()
@@ -137,27 +143,27 @@ class RHEStationPickerViewController : UITableViewController, NSFetchedResultsCo
     }
 
 
-    override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
-        cell.textLabel?.font = UIFont.preferredFontForTextStyle((cell.textLabel?.font.fontDescriptor().objectForKey("NSCTFontUIUsageAttribute") as! String))
-        cell.detailTextLabel?.font = UIFont.preferredFontForTextStyle((cell.detailTextLabel?.font.fontDescriptor().objectForKey("NSCTFontUIUsageAttribute") as! String))
+    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        cell.textLabel?.font = UIFont.preferredFont(forTextStyle: (UIFontTextStyle(rawValue: cell.textLabel?.font.fontDescriptor.object(forKey: UIFontDescriptor.AttributeName(rawValue: "NSCTFontUIUsageAttribute")) as! String)))
+        cell.detailTextLabel?.font = UIFont.preferredFont(forTextStyle: (UIFontTextStyle(rawValue: cell.detailTextLabel?.font.fontDescriptor.object(forKey: UIFontDescriptor.AttributeName(rawValue: "NSCTFontUIUsageAttribute")) as! String)))
     }
 
 
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let station = fetchedResultsController.objectAtIndexPath(indexPath) as! CDStation
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let station = fetchedResultsController.object(at: indexPath) as! CDStation
 
         if let hidden = station.isHidden {
-            station.isHidden = NSNumber(bool: !hidden.boolValue)
+            station.isHidden = NSNumber(value: !hidden.boolValue as Bool)
         }
 
-        if let hidden = station.isHidden where hidden.boolValue == false {
-            Datamanager.sharedManager().addStationToIndex(station)
+        if let hidden = station.isHidden, hidden.boolValue == false {
+            DataManager.shared.addStationToIndex(station)
         } else {
-            Datamanager.sharedManager().removeStationFromIndex(station)
+            DataManager.shared.removeStationFromIndex(station)
         }
 
 
-        let context = Datamanager.sharedManager().managedObjectContext
+        let context = DataManager.shared.viewContext()
 
         do {
             try context.save()
@@ -165,19 +171,19 @@ class RHEStationPickerViewController : UITableViewController, NSFetchedResultsCo
             print("Save failed: \(error.localizedDescription)")
         }
 
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        tableView.deselectRow(at: indexPath, animated: true)
     }
 
 
     // MARK: NSFetchedResultsController
 
 
-    lazy var fetchedResultsController : NSFetchedResultsController = {
-        NSFetchedResultsController.deleteCacheWithName("StationPicker")
+    lazy var fetchedResultsController : NSFetchedResultsController<NSFetchRequestResult> = {
+        NSFetchedResultsController<NSFetchRequestResult>.deleteCache(withName: "StationPicker")
 
-        let contxt = Datamanager.sharedManager().managedObjectContext
+        let contxt = DataManager.shared.viewContext()
 
-        let fetchRequest = NSFetchRequest(entityName: "CDStation")
+        let fetchRequest = CDStation.fetchRequest()
         fetchRequest.fetchBatchSize = 20
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: "order", ascending: true)]
 
@@ -195,34 +201,34 @@ class RHEStationPickerViewController : UITableViewController, NSFetchedResultsCo
     }()
 
 
-    func controllerWillChangeContent(controller: NSFetchedResultsController) {
+    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         if !changeIsUserDriven {
             tableView.beginUpdates()
         }
     }
 
-    func controller(controller: NSFetchedResultsController, didChangeObject anObject: AnyObject, atIndexPath indexPath: NSIndexPath?, forChangeType type: NSFetchedResultsChangeType, newIndexPath: NSIndexPath?) {
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
         if changeIsUserDriven {
             return
         }
 
         switch (type) {
-        case .Insert:
-            tableView.insertRowsAtIndexPaths([newIndexPath!], withRowAnimation: .Top)
-        case .Delete:
-            tableView.deleteRowsAtIndexPaths([indexPath!], withRowAnimation: .Top)
-        case .Update:
-            if let cell = tableView.cellForRowAtIndexPath(indexPath!) {
+        case .insert:
+            tableView.insertRows(at: [newIndexPath!], with: .top)
+        case .delete:
+            tableView.deleteRows(at: [indexPath!], with: .top)
+        case .update:
+            if let cell = tableView.cellForRow(at: indexPath!) {
                 configureCell(cell, atIndexPath: indexPath!)
             }
-        case .Move:
-            tableView.deleteRowsAtIndexPaths([indexPath!], withRowAnimation: .Fade)
-            tableView.insertRowsAtIndexPaths([newIndexPath!], withRowAnimation: .Fade)
+        case .move:
+            tableView.deleteRows(at: [indexPath!], with: .fade)
+            tableView.insertRows(at: [newIndexPath!], with: .fade)
         }
     }
 
 
-    func controllerDidChangeContent(controller: NSFetchedResultsController) {
+    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         if !changeIsUserDriven {
             tableView.endUpdates()
         } else {

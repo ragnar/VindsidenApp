@@ -1,6 +1,6 @@
 #Vindsiden.app
 
-Vindsiden.app allows iOS users to view wind informations provided by [http://vindsiden.no](Vindsiden).
+Vindsiden.app allows iOS users to view wind informations provided by [vindsiden.no](http://vindsiden.no/).
 
 #Features
 - [x] Today Extension

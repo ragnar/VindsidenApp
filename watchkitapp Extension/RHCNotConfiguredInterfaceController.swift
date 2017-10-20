@@ -18,26 +18,26 @@ class RHCNotConfiguredInterfaceController: WKInterfaceController {
 
 
     deinit {
-        NSNotificationCenter.defaultCenter().removeObserver(self, name: WCFetcherNotification.ReceivedStations, object: nil)
+        NotificationCenter.default.removeObserver(self, name: .ReceivedStations, object: nil)
     }
 
     
-    override func awakeWithContext(context: AnyObject?) {
-        super.awakeWithContext(context)
+    override func awake(withContext context: Any?) {
+        super.awake(withContext: context)
 
         setTitle("")
         infoLabel.setText(NSLocalizedString("No stations configured", comment: "Not configured header text"))
         infoDetailsLabel.setText(NSLocalizedString("Open the main app to configure visible stations", comment: "Not configured text"))
 
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(RHCNotConfiguredInterfaceController.receivedStations(_:)), name: WCFetcherNotification.ReceivedStations, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(receivedStations(_:)), name: .ReceivedStations, object: nil)
     }
 
 
-    func receivedStations( notification: NSNotification) -> Void {
-        let count = CDStation.numberOfVisibleStationsInManagedObjectContext(Datamanager.sharedManager().managedObjectContext)
+    @objc func receivedStations( _ notification: Notification) -> Void {
+        let count = CDStation.numberOfVisibleStationsInManagedObjectContext(DataManager.shared.viewContext())
 
         if count > 0 {
-            dismissController()
+            dismiss()
         }
     }
 }
