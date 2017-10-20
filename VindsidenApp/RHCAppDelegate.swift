@@ -95,6 +95,7 @@ class RHCAppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate {
 
 
     func applicationWillEnterForeground(_ application: UIApplication) {
+        AppConfig.sharedConfiguration.presentReviewControllerIfCriteriaIsMet()
     }
 
 

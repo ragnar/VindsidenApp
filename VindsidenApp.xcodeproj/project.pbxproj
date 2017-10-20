@@ -70,7 +70,6 @@
 		AD539CAF1947B5CA002644BD /* VindsidenKitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD539CAE1947B5CA002644BD /* VindsidenKitTests.swift */; };
 		AD539CB21947B5CA002644BD /* VindsidenKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD539C9D1947B5CA002644BD /* VindsidenKit.framework */; };
 		AD539CB31947B5CA002644BD /* VindsidenKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = AD539C9D1947B5CA002644BD /* VindsidenKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		AD539CC51947B61E002644BD /* VindsidenKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD539C9D1947B5CA002644BD /* VindsidenKit.framework */; };
 		AD539CC71947B684002644BD /* Datamanager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD539CC61947B684002644BD /* Datamanager.swift */; };
 		AD6142E51D0F06C60008C5E8 /* MapInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADBF8B981D0F068B0005C0C9 /* MapInterfaceController.swift */; };
 		AD6142E61D0F06C60008C5E8 /* RHCGraphInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADBF8B991D0F068B0005C0C9 /* RHCGraphInterfaceController.swift */; };
@@ -82,7 +81,6 @@
 		AD6143031D0F10E20008C5E8 /* VindsidenWatchKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = AD303C281B282DC800C4B999 /* VindsidenWatchKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		AD66F5651CAEBA8B001A2755 /* IndexRequestHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD66F5641CAEBA8B001A2755 /* IndexRequestHandler.swift */; };
 		AD66F5691CAEBA8B001A2755 /* VindSidenSpotlight.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = AD66F5621CAEBA8B001A2755 /* VindSidenSpotlight.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		AD66F56D1CAEBBC0001A2755 /* VindsidenKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD539C9D1947B5CA002644BD /* VindsidenKit.framework */; };
 		AD6BD0ED1A9506C900E6686B /* Global.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD6BD0EC1A9506C900E6686B /* Global.swift */; };
 		AD712AE41D0F4D19006AA2A8 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = AD6142FD1D0F0D1B0008C5E8 /* Localizable.strings */; };
 		AD71965C19EED713006FA2BC /* RHCSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD71965B19EED713006FA2BC /* RHCSettingsViewController.swift */; };
@@ -239,6 +237,20 @@
 			remoteInfo = VindsidenKit;
 		};
 		AD674DA01962E94900BF257B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AD17ED3C1731012200943C33 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = AD539C9C1947B5CA002644BD;
+			remoteInfo = VindsidenKit;
+		};
+		AD7F46691F98BFF600AFAAB7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AD17ED3C1731012200943C33 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = AD539C9C1947B5CA002644BD;
+			remoteInfo = VindsidenKit;
+		};
+		AD7F466B1F98C00500AFAAB7 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = AD17ED3C1731012200943C33 /* Project object */;
 			proxyType = 1;
@@ -526,7 +538,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AD539CC51947B61E002644BD /* VindsidenKit.framework in Frameworks */,
 				AD539C841947B0F7002644BD /* NotificationCenter.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -550,7 +561,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AD66F56D1CAEBBC0001A2755 /* VindsidenKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1066,6 +1076,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				AD7F466A1F98BFF600AFAAB7 /* PBXTargetDependency */,
 			);
 			name = VindsidenToday;
 			productName = VindsidenToday;
@@ -1125,6 +1136,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				AD7F466C1F98C00500AFAAB7 /* PBXTargetDependency */,
 			);
 			name = VindSidenSpotlight;
 			productName = VindSidenSpotlight;
@@ -1635,6 +1647,16 @@
 			target = AD539C9C1947B5CA002644BD /* VindsidenKit */;
 			targetProxy = AD674DA01962E94900BF257B /* PBXContainerItemProxy */;
 		};
+		AD7F466A1F98BFF600AFAAB7 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = AD539C9C1947B5CA002644BD /* VindsidenKit */;
+			targetProxy = AD7F46691F98BFF600AFAAB7 /* PBXContainerItemProxy */;
+		};
+		AD7F466C1F98C00500AFAAB7 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = AD539C9C1947B5CA002644BD /* VindsidenKit */;
+			targetProxy = AD7F466B1F98C00500AFAAB7 /* PBXContainerItemProxy */;
+		};
 		ADBF8B831D0F03BE0005C0C9 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = ADBF8B7F1D0F03BE0005C0C9 /* watchkitapp Extension */;
@@ -1835,7 +1857,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				COPY_PHASE_STRIP = YES;
+				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -1864,7 +1886,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = VindsidenApp/VindsidenApp.entitlements;
-				CURRENT_PROJECT_VERSION = 75;
+				CURRENT_PROJECT_VERSION = 78;
 				ENABLE_BITCODE = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "VindsidenApp/VindsidenApp-Prefix.pch";
@@ -1889,7 +1911,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = VindsidenApp/VindsidenApp.entitlements;
-				CURRENT_PROJECT_VERSION = 75;
+				CURRENT_PROJECT_VERSION = 78;
 				ENABLE_BITCODE = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "VindsidenApp/VindsidenApp-Prefix.pch";
@@ -1969,12 +1991,12 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 75;
+				CURRENT_PROJECT_VERSION = 78;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = "";
 				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 75;
+				DYLIB_CURRENT_VERSION = 78;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				ENABLE_BITCODE = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -2011,13 +2033,12 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 75;
+				CURRENT_PROJECT_VERSION = 78;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = "";
 				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 75;
+				DYLIB_CURRENT_VERSION = 78;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				ENABLE_BITCODE = YES;
 				ENABLE_NS_ASSERTIONS = NO;
@@ -2117,11 +2138,11 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 75;
+				CURRENT_PROJECT_VERSION = 78;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = "";
 				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 75;
+				DYLIB_CURRENT_VERSION = 78;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				ENABLE_BITCODE = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -2163,11 +2184,11 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 75;
+				CURRENT_PROJECT_VERSION = 78;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = "";
 				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 75;
+				DYLIB_CURRENT_VERSION = 78;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				ENABLE_BITCODE = YES;
 				ENABLE_NS_ASSERTIONS = NO;
@@ -2283,7 +2304,6 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CODE_SIGN_ENTITLEMENTS = VindSidenSpotlight/VindSidenSpotlight.entitlements;
-				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -2346,7 +2366,6 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CODE_SIGN_ENTITLEMENTS = "watchkitapp Extension/watchkitapp Extension.entitlements";
-				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -2414,7 +2433,6 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CODE_SIGN_ENTITLEMENTS = watchkitapp/watchkitapp.entitlements;
-				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
