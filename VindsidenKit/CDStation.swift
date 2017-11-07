@@ -169,6 +169,11 @@ open class CDStation: NSManagedObject, MKAnnotation {
 
 
     @objc open class func updateWithFetchedContent( _ content: [[String:String]], inManagedObjectContext managedObjectContext: NSManagedObjectContext, completionHandler: ((Bool) -> Void)? = nil) {
+        if content.count == 0 {
+            completionHandler?(false)
+            return
+        }
+
         DataManager.shared.performBackgroundTask { (context) in
             var order = CDStation.maxOrderForStationsInManagedObjectContext(context)
             var newStations = false
