@@ -63,10 +63,13 @@ struct ShortcutItemHandler {
 
         for station in stations {
             let type = ShortcutItemType.goToStation
-            let title = station.stationName!
-            let subtitle = station.city!
+            guard let stationId = station.stationId,
+                let title = station.stationName,
+                let subtitle = station.city else {
+                    continue
+            }
 
-            let userInfo = ShortcutItemUserInfo(stationIdentifier: "\(station.stationId!)")
+            let userInfo = ShortcutItemUserInfo(stationIdentifier: "\(stationId)")
             let shortcutItem = UIApplicationShortcutItem(type: type.prefixedString, localizedTitle: title, localizedSubtitle: subtitle, icon: nil, userInfo:userInfo.dictionaryRepresentation)
             shortcutItems.append(shortcutItem)
         }
