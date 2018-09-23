@@ -13,11 +13,6 @@ import MapKit
 @objc(CDStation)
 open class CDStation: NSManagedObject, MKAnnotation {
 
-    @NSManaged func addPlotsObject( _ value: CDPlot)
-    @NSManaged func removePlotsObject( _ value: CDPlot)
-    @NSManaged func addPlots( _ value: NSSet)
-    @NSManaged func removePlots( _ value: NSSet)
-
     // MARK: - MKAnnotation
 
 
@@ -37,11 +32,11 @@ open class CDStation: NSManagedObject, MKAnnotation {
 
 
     @objc open class func existingStationWithId( _ stationId:Int, inManagedObjectContext managedObjectContext: NSManagedObjectContext) throws -> CDStation {
-        let request = CDStation.fetchRequest()
+        let request: NSFetchRequest<CDStation> = CDStation.fetchRequest()
         request.predicate = NSPredicate(format: "stationId == \(stationId)")
         request.fetchLimit = 1
 
-        let result = try managedObjectContext.fetch(request) as! [CDStation]
+        let result = try managedObjectContext.fetch(request)
 
         if result.count > 0 {
             return result.first!
@@ -64,12 +59,12 @@ open class CDStation: NSManagedObject, MKAnnotation {
 
 
     open class func searchForStationName( _ stationName: String, inManagedObjectContext managedObjectContext: NSManagedObjectContext) -> CDStation? {
-        let request = CDStation.fetchRequest()
+        let request: NSFetchRequest<CDStation> = CDStation.fetchRequest()
         request.predicate = NSPredicate(format: "stationName contains[cd] %@", argumentArray: [stationName])
         request.fetchLimit = 1
 
         do {
-            let result = try managedObjectContext.fetch(request) as! [CDStation]
+            let result = try managedObjectContext.fetch(request)
             if result.count > 0 {
                 return result.first!
             }
@@ -82,9 +77,8 @@ open class CDStation: NSManagedObject, MKAnnotation {
 
 
     open class func maxOrderForStationsInManagedObjectContext( _ managedObjectContext: NSManagedObjectContext) -> Int {
-        let request = CDStation.fetchRequest()
+        let request: NSFetchRequest<NSFetchRequestResult> = CDStation.fetchRequest()
         request.fetchLimit = 1
-
 
         let expression = NSExpression(forFunction: "max:", arguments: [NSExpression(forKeyPath: "order")])
         let expressionDescription = NSExpressionDescription()
@@ -109,7 +103,7 @@ open class CDStation: NSManagedObject, MKAnnotation {
 
 
     @objc open class func numberOfVisibleStationsInManagedObjectContext( _ managedObjectContext: NSManagedObjectContext) -> Int {
-        let request = CDStation.fetchRequest()
+        let request: NSFetchRequest<CDStation> = CDStation.fetchRequest()
         request.predicate = NSPredicate(format: "isHidden == NO")
 
         do {
@@ -122,7 +116,7 @@ open class CDStation: NSManagedObject, MKAnnotation {
 
 
     @objc open class func visibleStationsInManagedObjectContext( _ managedObjectContext: NSManagedObjectContext, limit: Int = 0) -> [CDStation] {
-        let request = CDStation.fetchRequest()
+        let request: NSFetchRequest<CDStation> = CDStation.fetchRequest()
         request.fetchBatchSize = 20
         request.predicate = NSPredicate(format: "isHidden == NO")
         request.sortDescriptors = [NSSortDescriptor(key: "order", ascending: true)]
@@ -132,7 +126,7 @@ open class CDStation: NSManagedObject, MKAnnotation {
         }
 
         do {
-            let result = try managedObjectContext.fetch(request) as! [CDStation]
+            let result = try managedObjectContext.fetch(request)
             return result
         } catch {
             return []
@@ -150,14 +144,14 @@ open class CDStation: NSManagedObject, MKAnnotation {
             return nil
         }
 
-        let request = CDPlot.fetchRequest()
+        let request: NSFetchRequest<CDPlot> = CDPlot.fetchRequest()
         request.fetchLimit = 1
         request.predicate = NSPredicate(format: "station == %@ AND plotTime >= %@", argumentArray: [self, outDate] )
         request.sortDescriptors = [NSSortDescriptor(key: "plotTime", ascending: false)]
 
         do {
             let result = try self.managedObjectContext!.fetch(request)
-            if let first = result.first as? CDPlot {
+            if let first = result.first {
                 return first
             }
         } catch {

@@ -165,7 +165,7 @@ class TodayViewController: UITableViewController, NCWidgetProviding, NSFetchedRe
             return actual
         }
 
-        let fetchRequest = CDStation.fetchRequest()
+        let fetchRequest: NSFetchRequest<NSFetchRequestResult> = CDStation.fetchRequest()
         fetchRequest.fetchBatchSize = 3
         fetchRequest.predicate = NSPredicate(format: "isHidden = NO", argumentArray: nil)
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: "order", ascending: true)]

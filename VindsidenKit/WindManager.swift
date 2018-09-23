@@ -71,13 +71,13 @@ open class WindManager : NSObject {
 
 
     func activeStations() -> [CDStation] {
-        let fetchRequest = CDStation.fetchRequest()
+        let fetchRequest: NSFetchRequest<CDStation> = CDStation.fetchRequest()
         fetchRequest.predicate = NSPredicate(format: "isHidden == NO")
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: "order", ascending: true)]
 
         let context = DataManager.shared.viewContext()
         do {
-            let stations = try context.fetch(fetchRequest) as! [CDStation]
+            let stations = try context.fetch(fetchRequest)
             return stations
         } catch {
             return [CDStation]()

@@ -183,7 +183,7 @@ class RHEStationPickerViewController : UITableViewController, NSFetchedResultsCo
 
         let contxt = DataManager.shared.viewContext()
 
-        let fetchRequest = CDStation.fetchRequest()
+        let fetchRequest: NSFetchRequest<NSFetchRequestResult> = CDStation.fetchRequest()
         fetchRequest.fetchBatchSize = 20
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: "order", ascending: true)]
 

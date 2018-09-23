@@ -15,12 +15,12 @@ open class CDPlot: NSManagedObject {
 
     open class func newOrExistingPlot( _ content: [String:String], forStation station:CDStation, inManagedObjectContext managedObjectContext: NSManagedObjectContext) -> CDPlot {
         if let unwrapped = content["DataID"], let dataId = Int(unwrapped) {
-            let request = CDPlot.fetchRequest()
+            let request: NSFetchRequest<CDPlot> = CDPlot.fetchRequest()
             request.predicate = NSPredicate(format: "dataId == %@ and station == %@", argumentArray: [dataId, station])
             request.fetchLimit = 1
 
             do {
-                let result = try managedObjectContext.fetch(request) as! [CDPlot]
+                let result = try managedObjectContext.fetch(request)
                 if let plot = result.first {
                     return plot
                 }
@@ -58,7 +58,7 @@ open class CDPlot: NSManagedObject {
 
                     if insertedPlots.count > 0 {
                         station.willChangeValue(forKey: "plots")
-                        station.addPlots(insertedPlots)
+                        station.addToPlots(insertedPlots)
                         station.didChangeValue(forKey: "plots")
                     }
 

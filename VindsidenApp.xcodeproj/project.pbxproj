@@ -88,8 +88,6 @@
 		AD7BBB471A3F53F400883770 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD7BBB461A3F53F400883770 /* Logger.swift */; };
 		AD7BBB491A3F55A100883770 /* AppConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD7BBB481A3F55A100883770 /* AppConfig.swift */; };
 		AD9E40651B8C9C1700FABCF5 /* CDStation.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD9E40631B8C9C1700FABCF5 /* CDStation.swift */; };
-		AD9E40671B8C9C1700FABCF5 /* CDStation+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD9E40641B8C9C1700FABCF5 /* CDStation+CoreDataProperties.swift */; };
-		AD9E40691B8C9CC400FABCF5 /* CDStation+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD9E40641B8C9C1700FABCF5 /* CDStation+CoreDataProperties.swift */; };
 		AD9E406A1B8C9CC900FABCF5 /* CDStation.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD9E40631B8C9C1700FABCF5 /* CDStation.swift */; };
 		AD9E406C1B8D8A6900FABCF5 /* StationFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD9E406B1B8D8A6900FABCF5 /* StationFetcher.swift */; };
 		AD9E406D1B8D8A6900FABCF5 /* StationFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD9E406B1B8D8A6900FABCF5 /* StationFetcher.swift */; };
@@ -97,8 +95,6 @@
 		AD9E40741B8D9BCD00FABCF5 /* PlotFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD9E40721B8D9BCD00FABCF5 /* PlotFetcher.swift */; };
 		AD9E40771B8DA11B00FABCF5 /* CDPlot.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD9E40751B8DA11B00FABCF5 /* CDPlot.swift */; };
 		AD9E40781B8DA11B00FABCF5 /* CDPlot.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD9E40751B8DA11B00FABCF5 /* CDPlot.swift */; };
-		AD9E40791B8DA11B00FABCF5 /* CDPlot+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD9E40761B8DA11B00FABCF5 /* CDPlot+CoreDataProperties.swift */; };
-		AD9E407A1B8DA11B00FABCF5 /* CDPlot+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD9E40761B8DA11B00FABCF5 /* CDPlot+CoreDataProperties.swift */; };
 		AD9EA2B81B8F1A6400F653FE /* NSDate+RelativeDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD9EA2B71B8F1A6400F653FE /* NSDate+RelativeDate.swift */; };
 		AD9EA2B91B8F1A6400F653FE /* NSDate+RelativeDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD9EA2B71B8F1A6400F653FE /* NSDate+RelativeDate.swift */; };
 		AD9EA2BB1B8F228000F653FE /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = AD2AB50419C722330029C739 /* Localizable.strings */; };
@@ -431,11 +427,9 @@
 		AD7BBB461A3F53F400883770 /* Logger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		AD7BBB481A3F55A100883770 /* AppConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppConfig.swift; sourceTree = "<group>"; };
 		AD9E40631B8C9C1700FABCF5 /* CDStation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CDStation.swift; sourceTree = "<group>"; };
-		AD9E40641B8C9C1700FABCF5 /* CDStation+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CDStation+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		AD9E406B1B8D8A6900FABCF5 /* StationFetcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StationFetcher.swift; path = VindsidenKit/StationFetcher.swift; sourceTree = SOURCE_ROOT; };
 		AD9E40721B8D9BCD00FABCF5 /* PlotFetcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlotFetcher.swift; path = VindsidenKit/PlotFetcher.swift; sourceTree = SOURCE_ROOT; };
 		AD9E40751B8DA11B00FABCF5 /* CDPlot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CDPlot.swift; sourceTree = "<group>"; };
-		AD9E40761B8DA11B00FABCF5 /* CDPlot+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CDPlot+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		AD9EA2B71B8F1A6400F653FE /* NSDate+RelativeDate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSDate+RelativeDate.swift"; sourceTree = "<group>"; };
 		ADA0C64119C0EEBC00152005 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Today.storyboard; sourceTree = "<group>"; };
 		ADA0C64419C0EEC000152005 /* en */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Today.strings; sourceTree = "<group>"; };
@@ -869,9 +863,7 @@
 			children = (
 				AD7AA505196E46D800B1518B /* Vindsiden.xcdatamodeld */,
 				AD9E40751B8DA11B00FABCF5 /* CDPlot.swift */,
-				AD9E40761B8DA11B00FABCF5 /* CDPlot+CoreDataProperties.swift */,
 				AD9E40631B8C9C1700FABCF5 /* CDStation.swift */,
-				AD9E40641B8C9C1700FABCF5 /* CDStation+CoreDataProperties.swift */,
 			);
 			name = "Data Model";
 			sourceTree = "<group>";
@@ -1481,7 +1473,6 @@
 				AD303C351B282FC100C4B999 /* DrawArrow.m in Sources */,
 				AD9EA2B91B8F1A6400F653FE /* NSDate+RelativeDate.swift in Sources */,
 				AD9E406D1B8D8A6900FABCF5 /* StationFetcher.swift in Sources */,
-				AD9E407A1B8DA11B00FABCF5 /* CDPlot+CoreDataProperties.swift in Sources */,
 				AD303C4F1B28491600C4B999 /* NSString+isNumeric.m in Sources */,
 				AD9E40741B8D9BCD00FABCF5 /* PlotFetcher.swift in Sources */,
 				AD9E406A1B8C9CC900FABCF5 /* CDStation.swift in Sources */,
@@ -1493,7 +1484,6 @@
 				AD303C361B282FC100C4B999 /* GraphImage.swift in Sources */,
 				AD303C331B282FB100C4B999 /* WindManager.swift in Sources */,
 				AD303C301B282FB100C4B999 /* Datamanager.swift in Sources */,
-				AD9E40691B8C9CC400FABCF5 /* CDStation+CoreDataProperties.swift in Sources */,
 				AD303C4D1B28491600C4B999 /* NSSet+Sort.m in Sources */,
 				AD303C4C1B28491600C4B999 /* NSObject+performBlockCancel.m in Sources */,
 				AD303C4B1B28491600C4B999 /* NSNumber+Convertion.m in Sources */,
@@ -1527,14 +1517,12 @@
 				AD9E40731B8D9BCD00FABCF5 /* PlotFetcher.swift in Sources */,
 				AD9E406C1B8D8A6900FABCF5 /* StationFetcher.swift in Sources */,
 				ADCD425B196E4E42004973E9 /* UIFont+textStyle.m in Sources */,
-				AD9E40671B8C9C1700FABCF5 /* CDStation+CoreDataProperties.swift in Sources */,
 				AD9EA2B81B8F1A6400F653FE /* NSDate+RelativeDate.swift in Sources */,
 				ADCD4251196E4E42004973E9 /* NSNumber+Convertion.m in Sources */,
 				AD539CC71947B684002644BD /* Datamanager.swift in Sources */,
 				ADB5A78B19DEC29A009AE4A5 /* DrawArrow.m in Sources */,
 				ADBEA4CF1A07ECF600B168BF /* UIColor+AppColors.swift in Sources */,
 				ADCD424F196E4E42004973E9 /* NSNumber+Between.m in Sources */,
-				AD9E40791B8DA11B00FABCF5 /* CDPlot+CoreDataProperties.swift in Sources */,
 				ADCD4255196E4E42004973E9 /* NSSet+Sort.m in Sources */,
 				ADC161851B0218D8004F6DAE /* GraphImage.swift in Sources */,
 				AD9E40771B8DA11B00FABCF5 /* CDPlot.swift in Sources */,
