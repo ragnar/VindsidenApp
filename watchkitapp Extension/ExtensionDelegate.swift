@@ -94,13 +94,13 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate {
 
 
     func scheduleRefresh() {
-        let fireDate = Date(timeIntervalSinceNow: 60.0*30.0)
-        let userInfo = ["reason" : "background update"] as NSDictionary
-
-        WKExtension.shared().scheduleBackgroundRefresh(withPreferredDate: fireDate, userInfo: userInfo) { (error) in
-            if error != nil {
-                DLOG("Schedule background failed: \(String(describing: error))")
-            }
-        }
+//        let fireDate = Date(timeIntervalSinceNow: 60.0*30.0)
+//        let userInfo = ["reason" : "background update"] as NSDictionary
+//
+//        WKExtension.shared().scheduleBackgroundRefresh(withPreferredDate: fireDate, userInfo: userInfo) { (error) in
+//            if error != nil {
+//                DLOG("Schedule background failed: \(String(describing: error))")
+//            }
+//        }
     }
 }

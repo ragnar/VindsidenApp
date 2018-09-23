@@ -176,8 +176,7 @@ class TodayViewController: UITableViewController, NCWidgetProviding, NSFetchedRe
         do {
             try _fetchedResultsController!.performFetch()
         } catch {
-            NSLog("Fetching stations failed")
-            abort()
+            fatalError("Fetching stations failed")
         }
 
         return _fetchedResultsController!

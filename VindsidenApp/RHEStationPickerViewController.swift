@@ -193,8 +193,7 @@ class RHEStationPickerViewController : UITableViewController, NSFetchedResultsCo
         do {
             try controller.performFetch()
         } catch {
-            NSLog("Fetching stations failed")
-            abort()
+            fatalError("Fetching stations failed")
         }
 
         return controller
