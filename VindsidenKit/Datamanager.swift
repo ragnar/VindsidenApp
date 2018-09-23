@@ -17,7 +17,7 @@ import CoreSpotlight
 @objc
 open class DataManager: NSObject {
 
-    @objc open static let shared = DataManager()
+    @objc public static let shared = DataManager()
 
     let _formatterQueue: DispatchQueue = DispatchQueue(label: "formatter queue", attributes: [])
 

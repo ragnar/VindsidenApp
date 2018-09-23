@@ -314,7 +314,7 @@ static NSString *kCellID = @"stationCellID";
                              cell.transform = CGAffineTransformIdentity;
                          }
                          completion:^(BOOL finished) {
-                             [_transformedCells removeObject:cell];
+                             [self->_transformedCells removeObject:cell];
 
                              NSIndexPath *indexPath = [self.collectionView indexPathsForVisibleItems].firstObject;
                              [[AppConfig sharedConfiguration].applicationUserDefaults setObject:@(indexPath.row) forKey:@"selectedIndexPath"];
@@ -591,7 +591,7 @@ static NSString *kCellID = @"stationCellID";
         }
 
         dispatch_async(dispatch_get_main_queue(), ^{
-            _isShowingLandscapeView = YES;
+            self->_isShowingLandscapeView = YES;
             [self performSegueWithIdentifier:@"PresentGraphLandscape" sender:self];
         });
     }
@@ -602,7 +602,7 @@ static NSString *kCellID = @"stationCellID";
 
         dispatch_async(dispatch_get_main_queue(), ^{
             [self dismissViewControllerAnimated:YES completion:nil];
-            _isShowingLandscapeView = NO;
+            self->_isShowingLandscapeView = NO;
         });
     }
 }

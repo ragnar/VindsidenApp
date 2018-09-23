@@ -231,8 +231,6 @@ open class CDStation: NSManagedObject, MKAnnotation {
                 completionHandler?(newStations)
                 return
             }
-
-            completionHandler?(newStations)
         }
     }
 
@@ -266,8 +264,6 @@ open class CDStation: NSManagedObject, MKAnnotation {
                 completionHandler?(false)
                 return
             }
-
-            completionHandler?(false)
         }
     }
 

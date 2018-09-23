@@ -74,7 +74,9 @@ struct ShortcutItemHandler {
                 shortcutItems.append(shortcutItem)
             }
 
-            application.shortcutItems = shortcutItems
+            DispatchQueue.main.async {
+                application.shortcutItems = shortcutItems
+            }
         }
     }
 

@@ -24,7 +24,7 @@ open class WindManager : NSObject {
     var updateTimer: Timer?
     var isUpdating:Bool = false
 
-    @objc open static let sharedManager = WindManager()
+    @objc public static let sharedManager = WindManager()
 
 
     override init() {
