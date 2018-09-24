@@ -197,7 +197,7 @@ open class CDStation: NSManagedObject, MKAnnotation {
 
                 if station.isInserted {
                     newStations = true
-                    if station.stationId == 1 {
+                    if station.stationId == 3 {
                         station.order = 101
                         station.isHidden = false
                         #if os(iOS)
