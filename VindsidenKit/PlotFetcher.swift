@@ -56,7 +56,7 @@ open class PlotFetcher : NSObject {
 
         NotificationCenter.default.post(name: AppConfig.Notifications.networkRequestStart, object: nil)
 
-        let request = URLRequest(url: URL(string: "http://vindsiden.no//xml.aspx?id=\(stationId)&hours=\(Int(AppConfig.Global.plotHistory-1))")!)
+        let request = URLRequest(url: URL(string: "http://vindsiden.no/xml.aspx?id=\(stationId)&hours=\(Int(AppConfig.Global.plotHistory-1))")!)
         DLOG("\(request)")
 
         let task = PlotURLSession.sharedPlotSession.sharedSession().dataTask(with: request, completionHandler: { (data: Data?, response: URLResponse?, error: Error?) -> Void in
