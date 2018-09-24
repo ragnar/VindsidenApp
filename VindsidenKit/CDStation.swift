@@ -214,15 +214,21 @@ open class CDStation: NSManagedObject, MKAnnotation {
 
             do {
                 try context.save()
-                completionHandler?(newStations)
+                DispatchQueue.main.async {
+                    completionHandler?(newStations)
+                }
                 return
             } catch let error as NSError {
                 DLOG("Error: \(error.userInfo.keys)")
-                completionHandler?(newStations)
+                DispatchQueue.main.async {
+                    completionHandler?(newStations)
+                }
                 return
             } catch {
                 DLOG("Error: \(error)")
-                completionHandler?(newStations)
+                DispatchQueue.main.async {
+                    completionHandler?(newStations)
+                }
                 return
             }
         }
@@ -247,15 +253,21 @@ open class CDStation: NSManagedObject, MKAnnotation {
 
             do {
                 try context.save()
-                completionHandler?(false)
+                DispatchQueue.main.async {
+                    completionHandler?(false)
+                }
                 return
             } catch let error as NSError {
                 DLOG("Error: \(error.userInfo.keys)")
-                completionHandler?(false)
+                DispatchQueue.main.async {
+                    completionHandler?(false)
+                }
                 return
             } catch {
                 DLOG("Error: \(error)")
-                completionHandler?(false)
+                DispatchQueue.main.async {
+                    completionHandler?(false)
+                }
                 return
             }
         }

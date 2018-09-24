@@ -104,10 +104,14 @@ open class DataManager: NSObject {
                 DLOG("Deleted \(result.result!) plots")
 
                 try context.save()
-                completionHandler?()
+                DispatchQueue.main.async {
+                    completionHandler?()
+                }
             } catch {
                 DLOG("Save failed: \(error)")
-                completionHandler?()
+                DispatchQueue.main.async {
+                    completionHandler?()
+                }
             }
         }
     }

@@ -65,17 +65,25 @@ open class CDPlot: NSManagedObject {
                     do {
                         try context.save()
 
-                        completion?()
+                        DispatchQueue.main.async {
+                            completion?()
+                        }
                     } catch let error as NSError {
                         DLOG("Error: \(error.userInfo.keys)")
-                        completion?()
+                        DispatchQueue.main.async {
+                            completion?()
+                        }
                     } catch {
                         DLOG("Error: \(error)")
-                        completion?()
+                        DispatchQueue.main.async {
+                            completion?()
+                        }
                     }
                 } catch {
                     DLOG("Station not found for stationId: \(stationId)")
-                    completion?()
+                    DispatchQueue.main.async {
+                        completion?()
+                    }
                     return
                 }
             }
