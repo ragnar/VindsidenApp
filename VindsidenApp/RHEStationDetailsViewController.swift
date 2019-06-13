@@ -54,9 +54,9 @@ import JTSImageViewController
             }
         }
 
-        self.tableView.rowHeight = UITableViewAutomaticDimension
+        self.tableView.rowHeight = UITableView.automaticDimension
 
-        NotificationCenter.default.addObserver(self, selector: #selector(RHEStationDetailsViewController.preferredContentSizeDidChange(_:)), name: NSNotification.Name.UIContentSizeCategoryDidChange, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(RHEStationDetailsViewController.preferredContentSizeDidChange(_:)), name: UIContentSizeCategory.didChangeNotification, object: nil)
     }
 
 
@@ -104,8 +104,8 @@ import JTSImageViewController
     {
         if indexPath.section == 0 {
             if let actual = cell as? RHCDStationDetailsCell {
-                actual.headerLabel.font = UIFont.preferredFont(forTextStyle: (UIFontTextStyle(rawValue: actual.headerLabel.font.fontDescriptor.object(forKey: UIFontDescriptor.AttributeName(rawValue: "NSCTFontUIUsageAttribute")) as! String)))
-                actual.detailsLabel.font = UIFont.preferredFont(forTextStyle: (UIFontTextStyle(rawValue: actual.detailsLabel.font.fontDescriptor.object(forKey: UIFontDescriptor.AttributeName(rawValue: "NSCTFontUIUsageAttribute")) as! String)))
+                actual.headerLabel.font = UIFont.preferredFont(forTextStyle: (UIFont.TextStyle(rawValue: actual.headerLabel.font.fontDescriptor.object(forKey: UIFontDescriptor.AttributeName(rawValue: "NSCTFontUIUsageAttribute")) as! String)))
+                actual.detailsLabel.font = UIFont.preferredFont(forTextStyle: (UIFont.TextStyle(rawValue: actual.detailsLabel.font.fontDescriptor.object(forKey: UIFontDescriptor.AttributeName(rawValue: "NSCTFontUIUsageAttribute")) as! String)))
             }
         }
     }
@@ -115,10 +115,10 @@ import JTSImageViewController
         if indexPath.section == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "StationDetailsCell") as! RHCDStationDetailsCell
             configureCell(cell, atIndexPath: indexPath)
-            return cell.systemLayoutSizeFitting(UILayoutFittingCompressedSize).height
+            return cell.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize).height
         }
 
-        return UITableViewAutomaticDimension
+        return UITableView.automaticDimension
     }
 
 
@@ -204,7 +204,7 @@ import JTSImageViewController
         if let current = station {
             if let unwrapped = current.yrURL, let yrurl = unwrapped.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed) {
                 let url = URL(string: yrurl)
-                UIApplication.shared.open(url!, options: [:], completionHandler: nil)
+                UIApplication.shared.open(url!, options: convertToUIApplicationOpenExternalURLOptionsKeyDictionary([:]), completionHandler: nil)
             }
         }
     }
@@ -229,7 +229,7 @@ import JTSImageViewController
 
             if let mapurl = query.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed) {
                 let url = URL(string: mapurl)
-                UIApplication.shared.open(url!, options: [:], completionHandler: nil)
+                UIApplication.shared.open(url!, options: convertToUIApplicationOpenExternalURLOptionsKeyDictionary([:]), completionHandler: nil)
             }
         }
     }
@@ -255,4 +255,9 @@ import JTSImageViewController
             controller?.show(from: self, transition: .fromOriginalPosition)
         }
     }
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertToUIApplicationOpenExternalURLOptionsKeyDictionary(_ input: [String: Any]) -> [UIApplication.OpenExternalURLOptionsKey: Any] {
+	return Dictionary(uniqueKeysWithValues: input.map { key, value in (UIApplication.OpenExternalURLOptionsKey(rawValue: key), value)})
 }

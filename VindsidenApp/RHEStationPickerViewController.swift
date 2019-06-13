@@ -26,7 +26,7 @@ class RHEStationPickerViewController : UITableViewController, NSFetchedResultsCo
         super.viewDidLoad()
 
         navigationItem.rightBarButtonItem = self.editButtonItem
-        NotificationCenter.default.addObserver(self, selector: #selector(RHEStationPickerViewController.preferredContentSizeDidChange(_:)), name: NSNotification.Name.UIContentSizeCategoryDidChange, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(RHEStationPickerViewController.preferredContentSizeDidChange(_:)), name: UIContentSizeCategory.didChangeNotification, object: nil)
     }
 
 
@@ -105,7 +105,7 @@ class RHEStationPickerViewController : UITableViewController, NSFetchedResultsCo
     }
 
 
-    override func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle {
+    override func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
         return .none
     }
 
@@ -144,8 +144,8 @@ class RHEStationPickerViewController : UITableViewController, NSFetchedResultsCo
 
 
     override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        cell.textLabel?.font = UIFont.preferredFont(forTextStyle: (UIFontTextStyle(rawValue: cell.textLabel?.font.fontDescriptor.object(forKey: UIFontDescriptor.AttributeName(rawValue: "NSCTFontUIUsageAttribute")) as! String)))
-        cell.detailTextLabel?.font = UIFont.preferredFont(forTextStyle: (UIFontTextStyle(rawValue: cell.detailTextLabel?.font.fontDescriptor.object(forKey: UIFontDescriptor.AttributeName(rawValue: "NSCTFontUIUsageAttribute")) as! String)))
+        cell.textLabel?.font = UIFont.preferredFont(forTextStyle: (UIFont.TextStyle(rawValue: cell.textLabel?.font.fontDescriptor.object(forKey: UIFontDescriptor.AttributeName(rawValue: "NSCTFontUIUsageAttribute")) as! String)))
+        cell.detailTextLabel?.font = UIFont.preferredFont(forTextStyle: (UIFont.TextStyle(rawValue: cell.detailTextLabel?.font.fontDescriptor.object(forKey: UIFontDescriptor.AttributeName(rawValue: "NSCTFontUIUsageAttribute")) as! String)))
     }
 
 
@@ -223,6 +223,8 @@ class RHEStationPickerViewController : UITableViewController, NSFetchedResultsCo
         case .move:
             tableView.deleteRows(at: [indexPath!], with: .fade)
             tableView.insertRows(at: [newIndexPath!], with: .fade)
+        @unknown default:
+            fatalError("Enum changed")
         }
     }
 

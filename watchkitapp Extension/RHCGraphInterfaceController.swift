@@ -70,6 +70,6 @@ class RHCGraphInterfaceController: WKInterfaceController {
         }
 
         let image = graphImage.drawImage()
-        return UIImagePNGRepresentation(image)!
+        return image.pngData()!
     }
 }

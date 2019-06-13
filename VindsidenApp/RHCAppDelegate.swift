@@ -18,7 +18,7 @@ class RHCAppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate {
     var window: UIWindow?
     var connectionSession: WCSession?
 
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 
         NetworkIndicator.defaultManager().startListening()
 
@@ -43,11 +43,11 @@ class RHCAppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate {
             WindManager.sharedManager.startUpdating()
         }
 
-        application.setMinimumBackgroundFetchInterval(UIApplicationBackgroundFetchIntervalMinimum)
+        application.setMinimumBackgroundFetchInterval(UIApplication.backgroundFetchIntervalMinimum)
 
         var performAdditionalHandling = true
 
-        if let shortcutItem = launchOptions?[UIApplicationLaunchOptionsKey.shortcutItem] as? UIApplicationShortcutItem, let rootViewController = primaryViewController() {
+        if let shortcutItem = launchOptions?[UIApplication.LaunchOptionsKey.shortcutItem] as? UIApplicationShortcutItem, let rootViewController = primaryViewController() {
             let didHandleShortcutItem = ShortcutItemHandler.handle(shortcutItem, with: rootViewController)
             performAdditionalHandling = !didHandleShortcutItem
         }
@@ -58,10 +58,10 @@ class RHCAppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate {
     }
 
 
-    func application(_ application: UIApplication, willFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+    func application(_ application: UIApplication, willFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 
         if let options = launchOptions {
-            if let url = options[UIApplicationLaunchOptionsKey.url] as? URL {
+            if let url = options[UIApplication.LaunchOptionsKey.url] as? URL {
                 if let _ = url.host?.range(of: "station", options: .caseInsensitive) {
                     return true
                 } else {
@@ -270,7 +270,7 @@ class RHCAppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate {
     }
 
 
-    func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([Any]?) -> Void) -> Bool {
+    func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
         DLOG("Activity: \(userActivity.activityType) - \(String(describing: userActivity.userInfo))")
 
 

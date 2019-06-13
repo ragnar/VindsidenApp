@@ -90,7 +90,7 @@ import VindsidenKit
         tv.textAlignment = .center
         tv.backgroundColor = UIColor.clear
         tv.dataDetectorTypes = .link
-        tv.font = UIFont.preferredFont(forTextStyle: UIFontTextStyle.body)
+        tv.font = UIFont.preferredFont(forTextStyle: UIFont.TextStyle.body)
         tv.textColor = UIColor(red: 0.298039, green:0.337255, blue:0.423529, alpha:1.0)
         tv.layer.shadowColor = UIColor.white.cgColor
         tv.layer.shadowOffset = CGSize(width: 0.0, height: 1.0)
@@ -103,7 +103,7 @@ import VindsidenKit
     override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         let tv = self.tableView(tableView, viewForFooterInSection: section)
 
-        let height = tv?.systemLayoutSizeFitting(UILayoutFittingCompressedSize).height
+        let height = tv?.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize).height
         return height!
     }
 

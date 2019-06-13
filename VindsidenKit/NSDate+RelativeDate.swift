@@ -9,7 +9,7 @@
 import Foundation
 
 
-public extension Date {
+extension Date {
 
     public func releativeString() -> String {
         let bundle = AppConfig.sharedConfiguration.frameworkBundle
