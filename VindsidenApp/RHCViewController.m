@@ -59,7 +59,7 @@ static NSString *kCellID = @"stationCellID";
 
     [self beginObservingOrientation];
 
-    self.automaticallyAdjustsScrollViewInsets = NO;
+    [[self collectionView] setContentInsetAdjustmentBehavior: UIScrollViewContentInsetAdjustmentNever];
 
     UIButton *button = nil;
     UIBarButtonItem *bb = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"settings"]
