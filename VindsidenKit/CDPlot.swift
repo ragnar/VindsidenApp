@@ -15,12 +15,12 @@ open class CDPlot: NSManagedObject {
 
     open class func newOrExistingPlot( _ content: [String:String], forStation station:CDStation, inManagedObjectContext managedObjectContext: NSManagedObjectContext) -> CDPlot {
         if let unwrapped = content["DataID"], let dataId = Int(unwrapped) {
-            let request = CDPlot.fetchRequest()
+            let request: NSFetchRequest<CDPlot> = CDPlot.fetchRequest()
             request.predicate = NSPredicate(format: "dataId == %@ and station == %@", argumentArray: [dataId, station])
             request.fetchLimit = 1
 
             do {
-                let result = try managedObjectContext.fetch(request) as! [CDPlot]
+                let result = try managedObjectContext.fetch(request)
                 if let plot = result.first {
                     return plot
                 }
@@ -58,24 +58,32 @@ open class CDPlot: NSManagedObject {
 
                     if insertedPlots.count > 0 {
                         station.willChangeValue(forKey: "plots")
-                        station.addPlots(insertedPlots)
+                        station.addToPlots(insertedPlots)
                         station.didChangeValue(forKey: "plots")
                     }
 
                     do {
                         try context.save()
 
-                        completion?()
+                        DispatchQueue.main.async {
+                            completion?()
+                        }
                     } catch let error as NSError {
                         DLOG("Error: \(error.userInfo.keys)")
-                        completion?()
+                        DispatchQueue.main.async {
+                            completion?()
+                        }
                     } catch {
                         DLOG("Error: \(error)")
-                        completion?()
+                        DispatchQueue.main.async {
+                            completion?()
+                        }
                     }
                 } catch {
                     DLOG("Station not found for stationId: \(stationId)")
-                    completion?()
+                    DispatchQueue.main.async {
+                        completion?()
+                    }
                     return
                 }
             }

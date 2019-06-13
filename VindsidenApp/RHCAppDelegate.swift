@@ -167,16 +167,19 @@ class RHCAppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate {
 
     
     func openLaunchOptionsURL( _ url: URL) -> Bool {
-        let ident = url.pathComponents.last as String!
+        guard let ident = url.pathComponents.last else {
+            return false
+        }
+
         var station: CDStation?
 
-        if let stationId = Int(ident!) {
+        if let stationId = Int(ident) {
             do {
                 station = try CDStation.existingStationWithId(stationId, inManagedObjectContext: DataManager.shared.viewContext())
             } catch {
             }
         } else {
-            station = CDStation.searchForStationName(ident!, inManagedObjectContext: DataManager.shared.viewContext())
+            station = CDStation.searchForStationName(ident, inManagedObjectContext: DataManager.shared.viewContext())
         }
 
         if  let found = station {

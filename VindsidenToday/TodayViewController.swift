@@ -165,7 +165,7 @@ class TodayViewController: UITableViewController, NCWidgetProviding, NSFetchedRe
             return actual
         }
 
-        let fetchRequest = CDStation.fetchRequest()
+        let fetchRequest: NSFetchRequest<NSFetchRequestResult> = CDStation.fetchRequest()
         fetchRequest.fetchBatchSize = 3
         fetchRequest.predicate = NSPredicate(format: "isHidden = NO", argumentArray: nil)
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: "order", ascending: true)]
@@ -176,8 +176,7 @@ class TodayViewController: UITableViewController, NCWidgetProviding, NSFetchedRe
         do {
             try _fetchedResultsController!.performFetch()
         } catch {
-            NSLog("Fetching stations failed")
-            abort()
+            fatalError("Fetching stations failed")
         }
 
         return _fetchedResultsController!
@@ -216,7 +215,7 @@ class TodayViewController: UITableViewController, NCWidgetProviding, NSFetchedRe
 
 
     var preferredViewHeight: CGFloat {
-        let itemCount = (fetchedResultsController.fetchedObjects as Array!).count
+        let itemCount = fetchedResultsController.fetchedObjects?.count ?? 0
         let rowCount = itemCount
 
         let infoHeight = TableViewConstants.todayRowHeight

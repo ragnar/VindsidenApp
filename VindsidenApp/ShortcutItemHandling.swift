@@ -57,24 +57,27 @@ struct ShortcutItemUserInfo {
 struct ShortcutItemHandler {
 
     static func updateDynamicShortcutItems(for application: UIApplication) {
-        var shortcutItems = [UIApplicationShortcutItem]()
+        DataManager.shared.performBackgroundTask { (context) in
+            let stations = CDStation.visibleStationsInManagedObjectContext(context, limit: 4)
+            var shortcutItems = [UIApplicationShortcutItem]()
 
-        let stations = CDStation.visibleStationsInManagedObjectContext(DataManager.shared.viewContext(), limit: 4)
-
-        for station in stations {
-            let type = ShortcutItemType.goToStation
-            guard let stationId = station.stationId,
-                let title = station.stationName,
-                let subtitle = station.city else {
+            for station in stations {
+                let type = ShortcutItemType.goToStation
+                guard let stationId = station.stationId,
+                    let title = station.stationName,
+                    let subtitle = station.city else {
                     continue
+                }
+
+                let userInfo = ShortcutItemUserInfo(stationIdentifier: "\(stationId)")
+                let shortcutItem = UIApplicationShortcutItem(type: type.prefixedString, localizedTitle: title, localizedSubtitle: subtitle, icon: nil, userInfo:userInfo.dictionaryRepresentation)
+                shortcutItems.append(shortcutItem)
             }
 
-            let userInfo = ShortcutItemUserInfo(stationIdentifier: "\(stationId)")
-            let shortcutItem = UIApplicationShortcutItem(type: type.prefixedString, localizedTitle: title, localizedSubtitle: subtitle, icon: nil, userInfo:userInfo.dictionaryRepresentation)
-            shortcutItems.append(shortcutItem)
+            DispatchQueue.main.async {
+                application.shortcutItems = shortcutItems
+            }
         }
-
-        application.shortcutItems = shortcutItems
     }
 
     static func handle(_ shortcutItem: UIApplicationShortcutItem, with rootViewController: RHCViewController) -> Bool {

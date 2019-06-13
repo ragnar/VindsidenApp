@@ -87,16 +87,16 @@ class InterfaceController: WKInterfaceController {
 
 
     func populateData() -> [CDStation] {
-        let fetchRequest = CDStation.fetchRequest()
+        let fetchRequest: NSFetchRequest<CDStation> = CDStation.fetchRequest()
         fetchRequest.fetchBatchSize = 3
         fetchRequest.predicate = NSPredicate(format: "isHidden = NO", argumentArray: nil)
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: "order", ascending: true)]
 
         do {
-            let stations = try DataManager.shared.viewContext().fetch(fetchRequest) as! [CDStation]
+            let stations = try DataManager.shared.viewContext().fetch(fetchRequest)
             return stations
         } catch {
-            return [CDStation]()
+            return []
         }
     }
 

@@ -17,7 +17,7 @@ import CoreSpotlight
 @objc
 open class DataManager: NSObject {
 
-    @objc open static let shared = DataManager()
+    @objc public static let shared = DataManager()
 
     let _formatterQueue: DispatchQueue = DispatchQueue(label: "formatter queue", attributes: [])
 
@@ -91,22 +91,27 @@ open class DataManager: NSObject {
 
     open func cleanupPlots(_ completionHandler: (() -> Void)? = nil) -> Void {
         performBackgroundTask { (context) in
-            let fetchRequest = CDPlot.fetchRequest()
+            let fetchRequest: NSFetchRequest<NSFetchRequestResult> = CDPlot.fetchRequest()
             let interval: TimeInterval = -1.0*((1.0+AppConfig.Global.plotHistory)*3600.0)
             let time = Date(timeIntervalSinceNow: interval)
             fetchRequest.predicate = NSPredicate(format: "plotTime < %@", time as CVarArg)
 
             let request = NSBatchDeleteRequest(fetchRequest: fetchRequest)
             request.resultType = .resultTypeCount
+
             do {
                 let result = try context.execute(request) as! NSBatchDeleteResult
                 DLOG("Deleted \(result.result!) plots")
 
                 try context.save()
-                completionHandler?()
+                DispatchQueue.main.async {
+                    completionHandler?()
+                }
             } catch {
                 DLOG("Save failed: \(error)")
-                completionHandler?()
+                DispatchQueue.main.async {
+                    completionHandler?()
+                }
             }
         }
     }
@@ -114,7 +119,7 @@ open class DataManager: NSObject {
 
     open func removeStaleStationsIds( _ stations: [Int], inManagedObjectContext managedObjectContext: NSManagedObjectContext) -> Void {
         performBackgroundTask { (context) in
-            let fetchRequest = CDStation.fetchRequest()
+            let fetchRequest: NSFetchRequest<NSFetchRequestResult> = CDStation.fetchRequest()
             fetchRequest.predicate = NSPredicate(format: "NOT stationId IN (%@)", stations)
 
             let request = NSBatchDeleteRequest(fetchRequest: fetchRequest)
