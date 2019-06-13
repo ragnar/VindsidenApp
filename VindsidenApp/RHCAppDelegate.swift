@@ -20,8 +20,6 @@ class RHCAppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 
-        NetworkIndicator.defaultManager().startListening()
-
         self.window?.tintColor = UIColor.vindsidenGloablTintColor()
 
         if AppConfig.sharedConfiguration.applicationUserDefaults.integer(forKey: "selectedUnit") == 0 {
@@ -113,7 +111,6 @@ class RHCAppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate {
 
     func applicationWillTerminate(_ application: UIApplication) {
         DataManager.shared.saveContext()
-        NetworkIndicator.defaultManager().stopListening()
     }
 
 

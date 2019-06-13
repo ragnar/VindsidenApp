@@ -26,13 +26,6 @@ open class AppConfig : NSObject {
         static let plotHistory = 6.0
     }
 
-
-    public struct Notifications {
-        public static let networkRequestStart = Notification.Name(Bundle.prefix + "." + Bundle.appName + ".NetworkRequestStart")
-        public static let networkRequestEnd = Notification.Name(Bundle.prefix + "." + Bundle.appName + ".NetworkRequestEnd")
-    }
-
-
     public struct Bundle {
         static var prefix = "org.juniks" // Could be done automatic by reading info.plist
         static let appName = "VindsidenApp" // Could be done automatic by reading info.plist

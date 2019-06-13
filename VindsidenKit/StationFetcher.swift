@@ -59,15 +59,12 @@ open class StationFetcher : NSObject {
 
     @objc open func fetch(_ completionHandler:@escaping (([[String:String]], Error?) -> Void)) {
 
-        NotificationCenter.default.post(name: AppConfig.Notifications.networkRequestStart, object: nil)
-
         let request = URLRequest(url: URL(string: "http://vindsiden.no//xml.aspx")!)
         let task = StationURLSession.sharedStationSession.sharedSession().dataTask(with: request, completionHandler: { (data: Data?, response: URLResponse?, error: Error?) -> Void in
             guard let data = data else {
                 DLOG("Error: \(String(describing: error))")
                 DispatchQueue.main.async(execute: { () -> Void in
                     completionHandler( [[String:String]](), error)
-                    NotificationCenter.default.post(name: AppConfig.Notifications.networkRequestEnd, object: nil)
                 })
                 return;
             }
@@ -78,7 +75,6 @@ open class StationFetcher : NSObject {
 
             DispatchQueue.main.async(execute: { () -> Void in
                 completionHandler(self.result, error)
-                NotificationCenter.default.post(name: AppConfig.Notifications.networkRequestEnd, object: nil)
             })
         }) //as! (Data?, URLResponse?, Error?) -> Void)
 
