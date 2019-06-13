@@ -88,7 +88,7 @@ const NSInteger kMinSpeedLines = 3;
 {
     self = [super initWithCoder:aDecoder];
     if ( self ) {
-        self.backgroundColor = [UIColor whiteColor];
+        self.backgroundColor = [UIColor systemBackgroundColor];
         _minX = 30.0;
         _minY = 20.0;
         _maxX = 280.0;
@@ -181,6 +181,8 @@ const NSInteger kMinSpeedLines = 3;
     CGContextSaveGState(context);
     CGContextBeginPath(context);
 
+    [[UIColor labelColor] set];
+
     CGContextSetLineWidth( context, 1.0);
     CGContextSetAllowsAntialiasing( context, NO);
 
@@ -203,6 +205,8 @@ const NSInteger kMinSpeedLines = 3;
     CGContextSetAllowsAntialiasing( context, NO);
     CGContextBeginPath(context);
 
+    [[UIColor labelColor] set];
+
     for ( CGFloat i = 0; i <= hours; i+=0.25 ) {
         NSInteger lineLenght = ( 0 == fmod(i, 1) ? 5 : 3);
         CGFloat x = ceil(_minX + (i*((_maxX-_minX)/hours)));
@@ -222,7 +226,10 @@ const NSInteger kMinSpeedLines = 3;
 
     CGContextSetAllowsAntialiasing( context, YES);
 
-    NSDictionary *drawAttr = @{ NSFontAttributeName : [UIFont systemFontOfSize:10.0]};
+    NSDictionary *drawAttr = @{
+                               NSFontAttributeName : [UIFont systemFontOfSize:10.0],
+                               NSForegroundColorAttributeName : [UIColor labelColor]
+                               };
     CGRect labelBounds = CGRectZero;
 
     for ( NSInteger i = 0; i <= hours; i++ ) {
@@ -253,6 +260,8 @@ const NSInteger kMinSpeedLines = 3;
     CGContextSetAllowsAntialiasing( context, NO);
     CGContextSetLineWidth( context, 1.0);
 
+    [[UIColor labelColor] set];
+
     CGContextBeginPath(context);
 
     for ( CGFloat y = _maxY; y >= _minY; y=ceil(y-plotStep)) {
@@ -270,7 +279,7 @@ const NSInteger kMinSpeedLines = 3;
         CGContextAddLineToPoint( context, _maxX, y);
     }
 
-    [[UIColor lightGrayColor] set];
+    [[UIColor separatorColor] set];
 
     CGFloat lengths[] = {2.0, 3.0};
     CGContextSetLineDash( context, 0.0, lengths, 2);
@@ -293,7 +302,10 @@ const NSInteger kMinSpeedLines = 3;
 
     CGContextSetAllowsAntialiasing( context, YES);
 
-    NSDictionary *drawAttr = @{ NSFontAttributeName : [UIFont systemFontOfSize:10.0 weight:UIFontWeightLight]};
+    NSDictionary *drawAttr = @{
+                               NSFontAttributeName : [UIFont systemFontOfSize:10.0 weight:UIFontWeightLight],
+                               NSForegroundColorAttributeName : [UIColor labelColor]
+                               };
     CGRect labelBounds = CGRectZero;
 
     NSInteger i = 0;
@@ -333,7 +345,7 @@ const NSInteger kMinSpeedLines = 3;
     drawAttr = @{
                  NSFontAttributeName : [UIFont systemFontOfSize:12.0 weight:UIFontWeightLight],
                  NSParagraphStyleAttributeName : paragraphStyle,
-                 NSForegroundColorAttributeName : [UIColor lightGrayColor]
+                 NSForegroundColorAttributeName : [UIColor secondaryLabelColor]
                  };
     labelBounds = [unitName boundingRectWithSize:CGSizeMake( 140.0, 21.0)
                                          options:NSStringDrawingUsesLineFragmentOrigin
@@ -360,7 +372,7 @@ const NSInteger kMinSpeedLines = 3;
 
     CGContextSetAllowsAntialiasing( context, YES);
     CGContextBeginPath(context);
-    CGContextSetShadowWithColor( context, CGSizeMake(0.0, 2.0), 2.0, [UIColor colorWithWhite:0.0 alpha:0.25].CGColor);
+    CGContextSetShadowWithColor( context, CGSizeMake(0.0, 2.0), 2.0, [UIColor separatorColor].CGColor);
 
     NSMutableArray *minPoints = [NSMutableArray array];
     NSMutableArray *avgPoints = [NSMutableArray array];
@@ -446,7 +458,10 @@ const NSInteger kMinSpeedLines = 3;
 
         [[DrawArrow drawArrowAtAngle:[plot.windDir floatValue]
                             forSpeed:[plot.windAvg floatValue]
-                         highlighted:0] drawAtPoint:CGPointMake(x-16, _maxY+10)];
+                         highlighted:0
+                               color: [UIColor secondaryLabelColor]
+                   hightlightedColor: [UIColor labelColor]
+          ] drawAtPoint:CGPointMake(x-16, _maxY+10)];
     }
 
     CGContextRestoreGState(context);

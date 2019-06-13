@@ -91,12 +91,9 @@ import VindsidenKit
         tv.backgroundColor = UIColor.clear
         tv.dataDetectorTypes = .link
         tv.font = UIFont.preferredFont(forTextStyle: UIFont.TextStyle.body)
-        tv.textColor = UIColor(red: 0.298039, green:0.337255, blue:0.423529, alpha:1.0)
-        tv.layer.shadowColor = UIColor.white.cgColor
-        tv.layer.shadowOffset = CGSize(width: 0.0, height: 1.0)
-        tv.layer.shadowOpacity = 1.0
-        tv.layer.shadowRadius = 1.0
+        tv.textColor = .secondaryLabel
         tv.sizeToFit()
+
         return tv
     }
 

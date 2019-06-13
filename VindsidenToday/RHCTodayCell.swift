@@ -10,20 +10,18 @@ import UIKit
 
 extension UITableViewCell {
 
-    func configureSelectedBackgroundView() -> Void
-    {
-        let vibrancyView = UIVisualEffectView(effect: UIVibrancyEffect.widgetPrimary())
+    func configureSelectedBackgroundView() -> Void {
+        let vibrancyView = UIVisualEffectView(effect: UIVibrancyEffect.widgetEffect(forVibrancyStyle: .fill))
         vibrancyView.frame = self.contentView.bounds
 
         let view = UIView(frame: vibrancyView.bounds)
-        view.backgroundColor = UIColor(white: 1.0, alpha: 0.5)
+//        view.backgroundColor = UIColor(white: 1.0, alpha: 0.5)
         vibrancyView.contentView.addSubview(view)
         self.selectedBackgroundView = vibrancyView
     }
 }
 
-class RHCTodayCell: UITableViewCell
-{
+class RHCTodayCell: UITableViewCell {
     @IBOutlet weak var arrowImageView: UIImageView!
     @IBOutlet weak var speedLabel: UILabel!
     @IBOutlet weak var nameLabel: UILabel!
@@ -38,10 +36,10 @@ class RHCTodayCell: UITableViewCell
         self.updatedLabel.text = " "
         self.unitLabel.text = " "
 
-        self.speedLabel.textColor = UIColor.black
-        self.nameLabel.textColor = UIColor.black
-        self.updatedLabel.textColor = UIColor.vindsidenTodayTextColor()
-        self.unitLabel.textColor = UIColor.vindsidenTodayTextColor()
+        self.speedLabel.textColor = .label
+        self.nameLabel.textColor = .label
+        self.updatedLabel.textColor = .secondaryLabel
+        self.unitLabel.textColor = .secondaryLabel
     }
 
     override func awakeFromNib() {
