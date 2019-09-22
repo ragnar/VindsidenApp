@@ -10,7 +10,7 @@ import UIKit
 import VindsidenKit
 
 @objc(RHCSettingsDelegate) protocol RHCSettingsDelegate {
-    func rhcSettingsDidFinish( _ controller : RHCSettingsViewController) -> Void
+    func rhcSettingsDidFinish( _ controller : RHCSettingsViewController, shouldDismiss: Bool) -> Void
 }
 
 
@@ -23,25 +23,10 @@ import VindsidenKit
         super.init(coder: aDecoder)
     }
 
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-    }
-
-
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.tableView.reloadData()
     }
-
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
@@ -67,7 +52,6 @@ import VindsidenKit
 
         return cell
     }
-
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.row == 0 {
@@ -104,15 +88,26 @@ import VindsidenKit
         return height!
     }
 
+
     //MARK: - Actions
 
-
     @IBAction func done( _ sender: AnyObject ) {
-
         if let delegate = self.delegate {
-            delegate.rhcSettingsDidFinish(self)
+            delegate.rhcSettingsDidFinish(self, shouldDismiss: true)
         } else {
             self.dismiss( animated: true, completion: nil)
         }
+    }
+}
+
+
+extension RHCSettingsViewController: UIAdaptivePresentationControllerDelegate {
+
+    func presentationControllerDidDismiss(_ presentationController: UIPresentationController) {
+        guard let delegate = self.delegate else {
+            return
+        }
+
+        delegate.rhcSettingsDidFinish(self, shouldDismiss: false)
     }
 }

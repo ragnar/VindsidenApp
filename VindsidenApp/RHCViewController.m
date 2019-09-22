@@ -212,6 +212,7 @@ static NSString *kCellID = @"stationCellID";
         UINavigationController *navCon = segue.destinationViewController;
         RHCSettingsViewController *controller = navCon.viewControllers.firstObject;
         controller.delegate = self;
+        navCon.presentationController.delegate = controller;
     } else if ( [segue.identifier isEqualToString:@"ShowStationDetails"] ) {
         UINavigationController *navCon = segue.destinationViewController;
         RHEStationDetailsViewController *controller = navCon.viewControllers.firstObject;
@@ -534,8 +535,7 @@ static NSString *kCellID = @"stationCellID";
 
 #pragma mark - Settings Delegate
 
-
-- (void)rhcSettingsDidFinish:(RHCSettingsViewController *)controller
+- (void)rhcSettingsDidFinish:(RHCSettingsViewController *)controller shouldDismiss:(BOOL)shouldDismiss
 {
     [self updateApplicationContextToWatch];
     [(RHCAppDelegate *)[[UIApplication sharedApplication] delegate] updateShortcutItems];
@@ -546,7 +546,9 @@ static NSString *kCellID = @"stationCellID";
         [cell displayPlots];
     }
 
-    [self dismissViewControllerAnimated:YES completion:nil];
+    if (shouldDismiss) {
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }
 }
 
 
