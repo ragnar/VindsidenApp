@@ -199,8 +199,8 @@ public final class GraphImage {
 
         let hours = self.hours()
         let drawAttr = [
-            NSAttributedStringKey.font : UIFont.systemFont(ofSize: 12.0/scale),
-            NSAttributedStringKey.foregroundColor : UIColor.white
+            NSAttributedString.Key.font : UIFont.systemFont(ofSize: 12.0/scale),
+            NSAttributedString.Key.foregroundColor : UIColor.white
         ]
 
         for i in stride(from: 0, through: hours, by: 1) {
@@ -229,8 +229,8 @@ public final class GraphImage {
         let plotStep = bounds.height/totSteps
 
         var drawAttr = [
-            NSAttributedStringKey.font : UIFont.systemFont(ofSize: 12.0/scale),
-            NSAttributedStringKey.foregroundColor : UIColor.white
+            NSAttributedString.Key.font : UIFont.systemFont(ofSize: 12.0/scale),
+            NSAttributedString.Key.foregroundColor : UIColor.white
         ]
 
         var labelBounds = CGRect.zero
@@ -255,9 +255,9 @@ public final class GraphImage {
         paragraphStyle.alignment = .left
 
         drawAttr = [
-            NSAttributedStringKey.font : UIFont.boldSystemFont(ofSize: 12.0/scale),
-            NSAttributedStringKey.foregroundColor : UIColor.white,
-            NSAttributedStringKey.paragraphStyle : paragraphStyle
+            NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 12.0/scale),
+            NSAttributedString.Key.foregroundColor : UIColor.white,
+            NSAttributedString.Key.paragraphStyle : paragraphStyle
         ]
 
         labelBounds = unitString.boundingRect(with: CGSize( width: 40.0, height: 21.0), options: .usesLineFragmentOrigin, attributes: drawAttr, context: nil)
@@ -394,7 +394,7 @@ public final class GraphImage {
 
     final func controlPointForPoints( _ p1:CGPoint, _ p2:CGPoint) -> CGPoint {
         var controlPoint = midPointForPoints(p1, p2)
-        let diffY = fabs(p2.y - controlPoint.y)
+        let diffY = abs(p2.y - controlPoint.y)
 
         if p1.y < p2.y {
             controlPoint.y += diffY

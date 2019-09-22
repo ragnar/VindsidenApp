@@ -80,7 +80,7 @@ extern CGFloat RadiansToDegrees(CGFloat radians);
     CGContextSetAllowsAntialiasing( context, true);
     CGContextSetShadowWithColor( context, CGSizeMake(0.0, 2.0), 2.0, [UIColor colorWithWhite:0.0 alpha:0.25].CGColor);
 
-    [[UIColor blackColor] set];
+    [[UIColor labelColor] set];
     CGContextSetLineWidth( context, 1);
 
     CGContextBeginPath(context);
