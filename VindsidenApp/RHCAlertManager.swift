@@ -36,11 +36,11 @@ class RHCAlertManager : NSObject
                 message = NSLocalizedString("NETWORK_ERROR_UNABLE_TO_LOAD", comment: "Unable to fetch data at this point.") as NSString?
             }
 
-            self.networkAlertController = UIAlertController(title: "", message: message as String?, preferredStyle: UIAlertControllerStyle.alert)
+            self.networkAlertController = UIAlertController(title: "", message: message as String?, preferredStyle: UIAlertController.Style.alert)
 
             weak var weakAlert = self.networkAlertController
 
-            let defaultAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: { (action : UIAlertAction) -> Void in
+            let defaultAction = UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: { (action : UIAlertAction) -> Void in
                 weakAlert?.dismiss(animated: true, completion: nil)
                 self.showingError = false
             })

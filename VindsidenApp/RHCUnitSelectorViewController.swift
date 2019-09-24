@@ -22,7 +22,7 @@ class RHCUnitSelectorViewController : UITableViewController
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        NotificationCenter.default.addObserver(self, selector: #selector(RHCUnitSelectorViewController.preferredContentSizeDidChange(_:)), name: NSNotification.Name.UIContentSizeCategoryDidChange, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(RHCUnitSelectorViewController.preferredContentSizeDidChange(_:)), name: UIContentSizeCategory.didChangeNotification, object: nil)
     }
 
 
@@ -61,7 +61,7 @@ class RHCUnitSelectorViewController : UITableViewController
 
     override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath)
     {
-        cell.textLabel?.font = UIFont.preferredFont(forTextStyle: (UIFontTextStyle(rawValue: cell.textLabel?.font.fontDescriptor.object(forKey: UIFontDescriptor.AttributeName(rawValue: "NSCTFontUIUsageAttribute")) as! String)))
+        cell.textLabel?.font = UIFont.preferredFont(forTextStyle: (UIFont.TextStyle(rawValue: cell.textLabel?.font.fontDescriptor.object(forKey: UIFontDescriptor.AttributeName(rawValue: "NSCTFontUIUsageAttribute")) as! String)))
     }
 
 

@@ -109,7 +109,7 @@ class TodayViewController: UITableViewController, NCWidgetProviding, NSFetchedRe
 
             let winddir = CGFloat(plot.windDir!.floatValue)
             let windspeed = CGFloat(plot.windAvg!.floatValue)
-            let image = DrawArrow.drawArrow( atAngle: winddir, forSpeed:windspeed, highlighted:false, color: UIColor.vindsidenTodayTextColor(), hightlightedColor: UIColor.black)
+            let image = DrawArrow.drawArrow( atAngle: winddir, forSpeed:windspeed, highlighted:false, color: .secondaryLabel, hightlightedColor: UIColor.label)
 
             let raw = AppConfig.sharedConfiguration.applicationUserDefaults.integer(forKey: "selectedUnit")
             let unit = SpeedConvertion(rawValue: raw)

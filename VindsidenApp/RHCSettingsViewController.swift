@@ -10,7 +10,7 @@ import UIKit
 import VindsidenKit
 
 @objc(RHCSettingsDelegate) protocol RHCSettingsDelegate {
-    func rhcSettingsDidFinish( _ controller : RHCSettingsViewController) -> Void
+    func rhcSettingsDidFinish( _ controller : RHCSettingsViewController, shouldDismiss: Bool) -> Void
 }
 
 
@@ -23,25 +23,10 @@ import VindsidenKit
         super.init(coder: aDecoder)
     }
 
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-    }
-
-
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.tableView.reloadData()
     }
-
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
@@ -68,7 +53,6 @@ import VindsidenKit
         return cell
     }
 
-
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.row == 0 {
             performSegue(withIdentifier: "ShowStationPicker", sender: self)
@@ -90,32 +74,40 @@ import VindsidenKit
         tv.textAlignment = .center
         tv.backgroundColor = UIColor.clear
         tv.dataDetectorTypes = .link
-        tv.font = UIFont.preferredFont(forTextStyle: UIFontTextStyle.body)
-        tv.textColor = UIColor(red: 0.298039, green:0.337255, blue:0.423529, alpha:1.0)
-        tv.layer.shadowColor = UIColor.white.cgColor
-        tv.layer.shadowOffset = CGSize(width: 0.0, height: 1.0)
-        tv.layer.shadowOpacity = 1.0
-        tv.layer.shadowRadius = 1.0
+        tv.font = UIFont.preferredFont(forTextStyle: UIFont.TextStyle.body)
+        tv.textColor = .secondaryLabel
         tv.sizeToFit()
+
         return tv
     }
 
     override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         let tv = self.tableView(tableView, viewForFooterInSection: section)
 
-        let height = tv?.systemLayoutSizeFitting(UILayoutFittingCompressedSize).height
+        let height = tv?.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize).height
         return height!
     }
 
+
     //MARK: - Actions
 
-
     @IBAction func done( _ sender: AnyObject ) {
-
         if let delegate = self.delegate {
-            delegate.rhcSettingsDidFinish(self)
+            delegate.rhcSettingsDidFinish(self, shouldDismiss: true)
         } else {
             self.dismiss( animated: true, completion: nil)
         }
+    }
+}
+
+
+extension RHCSettingsViewController: UIAdaptivePresentationControllerDelegate {
+
+    func presentationControllerDidDismiss(_ presentationController: UIPresentationController) {
+        guard let delegate = self.delegate else {
+            return
+        }
+
+        delegate.rhcSettingsDidFinish(self, shouldDismiss: false)
     }
 }

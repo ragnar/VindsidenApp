@@ -25,7 +25,7 @@ class MapInterfaceController: WKInterfaceController {
 
             let coordinateSpan = MKCoordinateSpan(latitudeDelta: 0.005, longitudeDelta: 0.005)
 
-            mapInterface.setVisibleMapRect(MKMapRect(origin: MKMapPointForCoordinate(station.coordinate), size: MKMapSize(width: 0.5, height: 0.5)))
+            mapInterface.setVisibleMapRect(MKMapRect(origin: MKMapPoint.init(station.coordinate), size: MKMapSize(width: 0.5, height: 0.5)))
             mapInterface.setRegion(MKCoordinateRegion(center: station.coordinate, span: coordinateSpan))
             mapInterface.addAnnotation(station.coordinate, with: .red)
         }
