@@ -71,6 +71,7 @@
 		AD539CB21947B5CA002644BD /* VindsidenKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD539C9D1947B5CA002644BD /* VindsidenKit.framework */; };
 		AD539CB31947B5CA002644BD /* VindsidenKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = AD539C9D1947B5CA002644BD /* VindsidenKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		AD539CC71947B684002644BD /* Datamanager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD539CC61947B684002644BD /* Datamanager.swift */; };
+		AD55F5B7233AAB2F00757CBD /* RHCViewController+Swift.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD55F5B6233AAB2F00757CBD /* RHCViewController+Swift.swift */; };
 		AD6142E51D0F06C60008C5E8 /* MapInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADBF8B981D0F068B0005C0C9 /* MapInterfaceController.swift */; };
 		AD6142E61D0F06C60008C5E8 /* RHCGraphInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADBF8B991D0F068B0005C0C9 /* RHCGraphInterfaceController.swift */; };
 		AD6142E71D0F06C60008C5E8 /* RHCNotConfiguredInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADBF8B9A1D0F068B0005C0C9 /* RHCNotConfiguredInterfaceController.swift */; };
@@ -407,6 +408,7 @@
 		AD539CAD1947B5CA002644BD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AD539CAE1947B5CA002644BD /* VindsidenKitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VindsidenKitTests.swift; sourceTree = "<group>"; };
 		AD539CC61947B684002644BD /* Datamanager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Datamanager.swift; sourceTree = "<group>"; };
+		AD55F5B6233AAB2F00757CBD /* RHCViewController+Swift.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RHCViewController+Swift.swift"; sourceTree = "<group>"; };
 		AD6142ED1D0F07980008C5E8 /* WCFetcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WCFetcher.swift; sourceTree = "<group>"; };
 		AD6142F01D0F088D0008C5E8 /* watchkitapp Extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = "watchkitapp Extension.entitlements"; path = "watchkitapp Extension/watchkitapp Extension.entitlements"; sourceTree = "<group>"; };
 		AD6142FE1D0F0D1B0008C5E8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -727,6 +729,7 @@
 			children = (
 				AD17ED621731012200943C33 /* RHCViewController.h */,
 				AD17ED631731012200943C33 /* RHCViewController.m */,
+				AD55F5B6233AAB2F00757CBD /* RHCViewController+Swift.swift */,
 				AD17ED841731058400943C33 /* RHCStationCell.h */,
 				AD17ED851731058400943C33 /* RHCStationCell.m */,
 				ADD211C019CF139300497DC1 /* RHCLandscapeGraphViewController.swift */,
@@ -1439,6 +1442,7 @@
 				AD17ED881731058400943C33 /* RHCStationCell.m in Sources */,
 				AD17ED891731058400943C33 /* RHCStationInfo.m in Sources */,
 				AD35C66C1D1C408A00E894CC /* ShortcutItemHandling.swift in Sources */,
+				AD55F5B7233AAB2F00757CBD /* RHCViewController+Swift.swift in Sources */,
 				ADD211C119CF139300497DC1 /* RHCLandscapeGraphViewController.swift in Sources */,
 				ADE1863D1B9887AF0081EBEA /* RHCRotatingNavigationController.swift in Sources */,
 				ADA2351C1A040839006A72D4 /* RHCDStationDetailsCell.swift in Sources */,
@@ -1874,7 +1878,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = VindsidenApp/VindsidenApp.entitlements;
-				CURRENT_PROJECT_VERSION = 91;
+				CURRENT_PROJECT_VERSION = 92;
 				ENABLE_BITCODE = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "VindsidenApp/VindsidenApp-Prefix.pch";
@@ -1899,7 +1903,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = VindsidenApp/VindsidenApp.entitlements;
-				CURRENT_PROJECT_VERSION = 91;
+				CURRENT_PROJECT_VERSION = 92;
 				ENABLE_BITCODE = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "VindsidenApp/VindsidenApp-Prefix.pch";
@@ -1979,12 +1983,12 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 91;
+				CURRENT_PROJECT_VERSION = 92;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = "";
 				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 91;
+				DYLIB_CURRENT_VERSION = 92;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				ENABLE_BITCODE = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -2021,12 +2025,12 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 91;
+				CURRENT_PROJECT_VERSION = 92;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = "";
 				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 91;
+				DYLIB_CURRENT_VERSION = 92;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				ENABLE_BITCODE = YES;
 				ENABLE_NS_ASSERTIONS = NO;
@@ -2126,11 +2130,11 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 91;
+				CURRENT_PROJECT_VERSION = 92;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = "";
 				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 91;
+				DYLIB_CURRENT_VERSION = 92;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				ENABLE_BITCODE = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -2172,11 +2176,11 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 91;
+				CURRENT_PROJECT_VERSION = 92;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = "";
 				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 91;
+				DYLIB_CURRENT_VERSION = 92;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				ENABLE_BITCODE = YES;
 				ENABLE_NS_ASSERTIONS = NO;

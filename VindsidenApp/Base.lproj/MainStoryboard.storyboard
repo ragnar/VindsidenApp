@@ -313,7 +313,7 @@
                         <outlet property="collectionView" destination="rXy-H8-dyL" id="YH5-uU-8kg"/>
                         <outlet property="pageControl" destination="Dp6-Nd-Eki" id="JCL-33-VWT"/>
                         <outlet property="toolbar" destination="EdT-XP-BFV" id="Rsv-s5-zFY"/>
-                        <segue destination="KWr-m7-T9q" kind="presentation" identifier="ShowStationDetails" modalTransitionStyle="coverVertical" id="gZG-1Q-BfR"/>
+                        <segue destination="KWr-m7-T9q" kind="presentation" identifier="ShowStationDetails" modalPresentationStyle="automatic" id="gZG-1Q-BfR"/>
                         <segue destination="Cgk-DP-Q6C" kind="presentation" identifier="ShowSettings" modalTransitionStyle="coverVertical" id="3GC-Jp-jHf"/>
                         <segue destination="JMx-zR-j3n" kind="presentation" identifier="PresentGraphLandscape" modalPresentationStyle="overFullScreen" modalTransitionStyle="crossDissolve" id="UBO-jo-R7X"/>
                     </connections>
@@ -606,7 +606,7 @@
         <!--Navigation Controller-->
         <scene sceneID="coP-8m-qSA">
             <objects>
-                <navigationController definesPresentationContext="YES" id="KWr-m7-T9q" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="infoViewPresenter" definesPresentationContext="YES" id="KWr-m7-T9q" sceneMemberID="viewController">
                     <extendedEdge key="edgesForExtendedLayout" top="YES"/>
                     <navigationBar key="navigationBar" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" largeTitles="YES" id="qHK-BC-iJs">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="108"/>
