@@ -26,7 +26,6 @@ static NSString *kCellID = @"stationCellID";
 @property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
 @property (weak, nonatomic) MotionJpegImageView *cameraView;
 @property (weak, nonatomic) IBOutlet UIPageControl *pageControl;
-@property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 @property (weak, nonatomic) IBOutlet UIToolbar *toolbar;
 @property (strong, nonatomic) CDStation *pendingScrollToStation;
 @property (assign, nonatomic) BOOL isShowingLandscapeView;
@@ -62,17 +61,23 @@ static NSString *kCellID = @"stationCellID";
     [[self collectionView] setContentInsetAdjustmentBehavior: UIScrollViewContentInsetAdjustmentNever];
 
     UIButton *button = nil;
-    UIBarButtonItem *bb = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"settings"]
-                                                           style:UIBarButtonItemStylePlain
-                                                          target:self
-                                                          action:@selector(settings:)];
+
+    button = [UIButton systemButtonWithImage:[UIImage systemImageNamed:@"gear"] target:self action:@selector(settings:)];
+    UIBarButtonItem *bb = [[UIBarButtonItem alloc] initWithCustomView:button];
+
+//    UIBarButtonItem *bb = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"settings"]
+//                                                           style:UIBarButtonItemStylePlain
+//                                                          target:self
+//                                                          action:@selector(settings:)];
 
     UIBarButtonItem *bd = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction
                                                                         target:self
                                                                         action:@selector(share:)];
 
-    button = [UIButton buttonWithType:UIButtonTypeInfoLight];
-    [button addTarget:self action:@selector(info:) forControlEvents:UIControlEventTouchUpInside];
+    button = [UIButton systemButtonWithImage:[UIImage systemImageNamed:@"info.circle"] target:self action:@selector(info:)];
+
+    UIContextMenuInteraction *interaction = [[UIContextMenuInteraction alloc] initWithDelegate:self];
+    [button addInteraction: interaction];
     UIBarButtonItem *bc = [[UIBarButtonItem alloc] initWithCustomView:button];
 
     MotionJpegImageView *imageView = [[MotionJpegImageView alloc] initWithFrame:CGRectMake( 0.0, 0.0, 44.0, 33.0)];
@@ -218,6 +223,7 @@ static NSString *kCellID = @"stationCellID";
         RHEStationDetailsViewController *controller = navCon.viewControllers.firstObject;
         controller.delegate = self;
         controller.station = cell.currentStation;
+        controller.showButtons = true;
     } else if ( [segue.identifier isEqualToString:@"PresentGraphLandscape"] ) {
         UINavigationController *navCon = segue.destinationViewController;
 

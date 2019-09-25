@@ -11,7 +11,8 @@ import VindsidenKit
 import JTSImageViewController
 
 @objc(RHEStationDetailsDelegate) protocol RHEStationDetailsDelegate {
-    func rheStationDetailsViewControllerDidFinish( _ controller: RHEStationDetailsViewController )
+    func rheStationDetailsViewControllerDidFinish( _ controller: RHEStationDetailsViewController)
+    var station: CDStation? { set get }
 }
 
 
@@ -19,6 +20,8 @@ import JTSImageViewController
     @objc weak var delegate: RHEStationDetailsDelegate?
     @objc var station: CDStation?
     var buttons = [NSLocalizedString("Go to yr.no", comment: ""), NSLocalizedString("View in Maps", comment: "")]
+
+    @objc var showButtons = false
 
     lazy var regexRemoveHTMLTags: NSRegularExpression? = {
             var _regexRemoveHTMLTags: NSRegularExpression?
@@ -71,7 +74,7 @@ import JTSImageViewController
     // MARK: - TableView
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+        return showButtons ? 2 : 1
     }
 
 

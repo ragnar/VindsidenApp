@@ -14,6 +14,8 @@
 
 @interface RHCViewController : UIViewController
 
+@property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
+
 - (void)scrollToStation:(CDStation *)station;
 
 @end
