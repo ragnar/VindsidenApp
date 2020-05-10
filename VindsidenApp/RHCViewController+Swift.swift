@@ -22,7 +22,7 @@ extension RHCViewController: UIContextMenuInteractionDelegate {
             var actions = [UIAction]()
 
             if let yrURL = station.yrURL?.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) {
-                let yr = UIAction(title: NSLocalizedString("Go to yr.no", comment: ""), image: UIImage(systemName: "info.circle"), identifier: nil) { handler in
+                let yr = UIAction(title: NSLocalizedString("Go to yr.no", comment: ""), image: UIImage(systemName: "wind"), identifier: nil) { handler in
                     guard let url = URL(string: yrURL) else {
                         return
                     }
@@ -35,7 +35,7 @@ extension RHCViewController: UIContextMenuInteractionDelegate {
                 actions.append(yr)
             }
 
-            let maps = UIAction(title: NSLocalizedString("View in Maps", comment: ""), image: UIImage(systemName: "info.circle"), identifier: nil) { handler in
+            let maps = UIAction(title: NSLocalizedString("View in Maps", comment: ""), image: UIImage(systemName: "mappin.and.ellipse"), identifier: nil) { handler in
                 let spotCord = station.coordinate
 
                 var query = "http://maps.apple.com/?t=h&z=10"

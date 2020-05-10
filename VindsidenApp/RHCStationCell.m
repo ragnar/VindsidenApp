@@ -48,6 +48,7 @@
     self.updatedAtLabel.text = NSLocalizedString(@"LABEL_UPDATING", @"Updating");
 
     self.cameraButton.alpha = 0.0;
+    self.graphView.copyright = nil;
     self.graphView.plots = nil;
     [self.stationView resetInfoLabels];
 }
@@ -106,8 +107,10 @@
     NSArray *cdplots = [context executeFetchRequest:fetchRequest error:nil];
 
     if ( [cdplots count] ) {
+        self.graphView.copyright = self.currentStation.copyright;
         self.graphView.plots = cdplots;
         [self.stationView updateWithPlot:cdplots.firstObject];
+
         if ( [[cdplots[0] plotTime] compare:[NSDate date]] == NSOrderedAscending ) {
             self.updatedAtLabel.text = [[AppConfig sharedConfiguration] relativeDate:[cdplots.firstObject plotTime]];
         } else {
@@ -127,6 +130,7 @@
     _currentStation = currentStation;
 
     self.stationNameLabel.text = self.currentStation.stationName;
+    self.graphView.copyright = self.currentStation.copyright;
     [self displayPlots];
 
     [self.updatedTimer invalidate];

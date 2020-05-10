@@ -26,6 +26,7 @@ class RHCLandscapeGraphViewController: UIViewController
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        graphView?.copyright = station?.copyright
         graphView?.plots = plots
         stationName?.text = station?.stationName
     }

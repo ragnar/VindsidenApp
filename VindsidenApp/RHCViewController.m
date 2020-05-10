@@ -773,4 +773,6 @@ static NSString *kCellID = @"stationCellID";
 }
 
 
+@synthesize station;
+
 @end
