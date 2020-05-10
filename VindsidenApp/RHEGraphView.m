@@ -58,6 +58,7 @@ const NSInteger kMinSpeedLines = 3;
 @implementation RHEGraphView
 
 @synthesize plots = _plots;
+@synthesize copyright = _copyright;
 @synthesize minX = _minX;
 @synthesize maxX = _maxX;
 @synthesize minY = _minY;
@@ -338,22 +339,28 @@ const NSInteger kMinSpeedLines = 3;
     labelBounds.origin.y = _minY - 18;
     [unitName drawInRect:labelBounds withAttributes:drawAttr];
 
-    unitName = @"vindsiden.no";
+    if (_copyright != nil) {
+        unitName = [NSString stringWithFormat: @"%@\nvindsiden.no", _copyright];
+    } else {
+        unitName = @" \nvindsiden.no";
+    }
     paragraphStyle = [[NSMutableParagraphStyle alloc] init];
     [paragraphStyle setAlignment:NSTextAlignmentRight];
+    [paragraphStyle setLineBreakMode: NSLineBreakByWordWrapping];
+    [paragraphStyle setLineSpacing:5];
 
     drawAttr = @{
                  NSFontAttributeName : [UIFont systemFontOfSize:12.0 weight:UIFontWeightLight],
                  NSParagraphStyleAttributeName : paragraphStyle,
                  NSForegroundColorAttributeName : [UIColor secondaryLabelColor]
                  };
-    labelBounds = [unitName boundingRectWithSize:CGSizeMake( 140.0, 21.0)
+    labelBounds = [unitName boundingRectWithSize:CGSizeMake( 140.0, 40.0)
                                          options:NSStringDrawingUsesLineFragmentOrigin
                                       attributes:drawAttr
                                          context:nil];
 
     labelBounds.origin.x = _maxX - CGRectGetWidth(labelBounds);
-    labelBounds.origin.y = _minY - 18;
+    labelBounds.origin.y = _minY - 17;
     [unitName drawInRect:labelBounds withAttributes:drawAttr];
 
     CGContextRestoreGState(context);

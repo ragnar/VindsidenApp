@@ -11,6 +11,7 @@
 @interface RHEGraphView : UIView
 
 @property (copy, nonatomic) NSArray *plots;
+@property (copy, nonatomic) NSString *copyright;
 
 - (void) viewIsUpdated;
 
