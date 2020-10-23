@@ -517,6 +517,7 @@ static NSString *kCellID = @"stationCellID";
                                                                                           mode:JTSImageViewControllerMode_Image
                                                                                backgroundStyle:JTSImageViewControllerBackgroundOption_Blurred|JTSImageViewControllerBackgroundOption_Scaled];
 
+        [controller setModalPresentationStyle:UIModalPresentationFullScreen];
         [controller showFromViewController:self transition:JTSImageViewControllerTransition_FromOriginalPosition];
     }
 }

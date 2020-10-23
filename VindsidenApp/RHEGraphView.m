@@ -354,7 +354,7 @@ const NSInteger kMinSpeedLines = 3;
                  NSParagraphStyleAttributeName : paragraphStyle,
                  NSForegroundColorAttributeName : [UIColor secondaryLabelColor]
                  };
-    labelBounds = [unitName boundingRectWithSize:CGSizeMake( 140.0, 40.0)
+    labelBounds = [unitName boundingRectWithSize:CGSizeMake( _maxX, 40.0)
                                          options:NSStringDrawingUsesLineFragmentOrigin
                                       attributes:drawAttr
                                          context:nil];
