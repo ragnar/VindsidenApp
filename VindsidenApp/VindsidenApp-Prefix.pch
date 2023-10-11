@@ -17,40 +17,12 @@
     #import <CoreLocation/CoreLocation.h>
     #import <SystemConfiguration/SystemConfiguration.h>
     #import <MobileCoreServices/MobileCoreServices.h>
-
-//    #import "VindsidenApp-Swift.h"
-
 #endif
-
-
-#ifdef __INCLUDE_NSLOG
-#    warning "Including NSLog"
-#    define LOG(s, ...)  NSLog(s, ## __VA_ARGS__)
-#    define DLOG(s, ...) NSLog((@"(%s line: %d) " s), __FUNCTION__, __LINE__, ## __VA_ARGS__)
-#    define LOG_RECT(  s, r ) NSLog((@"CGRect (%@): x:%.2f, y:%.2f, w:%.2f, h:%.2f"), s, r.origin.x, r.origin.y, r.size.width, r.size.height)
-#    define LOG_POINT( s, p ) NSLog((@"CGPoint (%@): x:%.2f, y:%.2f"), s, p.x, p.y)
-#    define LOG_SIZE(  s, p ) NSLog((@"CGSize (%@): w:%.2f, h:%.2f"), s, p.width, p.height)
-#    define LOG_INDEXPATH( s, p ) NSLog((@"indexPath (%@): section: %d, row:%d"), s, p.section, p.row)
-#else
-#    define LOG(s, ...)  while(0){}
-#    define DLOG(s, ...) while(0){}
-#    define LOG_RECT(  s, r ) while(0){}
-#    define LOG_POINT( s, p ) while(0){}
-#    define LOG_SIZE(  s, p ) while(0){}
-#    define LOG_INDEXPATH( s, p ) while(0){}
-#endif
-
-#define WARNING(s, ...) NSLog((@"(%s l:%d) WARNING: " s), __FUNCTION__, __LINE__, ## __VA_ARGS__)
-#define FATAL(s, ...)   NSLog((@"(%s l:%d) FATAL: " s), __FUNCTION__, __LINE__, ## __VA_ARGS__)
-
-#define IGNORE_EXCEPTION(code) @try {code;} @catch (NSException *exception) {}
 
 /*
  * An easier method to write RGB colors
  */
 #define RGBACOLOR( r, g, b, a ) [UIColor colorWithRed: r/255.0 green: g/255.0 blue: b/255.0 alpha: a]
 #define RGBCOLOR( r, g, b ) RGBACOLOR( r, g, b, 1.0f )
-
-#define kNotificationStationListChanged @"notificationStationListChanged"
 
 #define kPlotHistoryHours 5

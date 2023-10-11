@@ -11,9 +11,9 @@ import WatchConnectivity
 import Foundation
 import CoreData
 import VindsidenWatchKit
+import OSLog
 
 class RHCGraphInterfaceController: WKInterfaceController {
-
     @IBOutlet weak var graphImage: WKInterfaceImage!
     @IBOutlet weak var stationName: WKInterfaceLabel!
 
@@ -25,7 +25,7 @@ class RHCGraphInterfaceController: WKInterfaceController {
             stationName.setText(station.stationName)
 
             guard let stationId = station.stationId else {
-                DLOG("Missing stationId")
+                Logger.debugging.debug("Missing stationId")
                 return;
             }
 

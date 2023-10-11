@@ -7,7 +7,7 @@
 //
 
 import Foundation
-
+import OSLog
 
 class PlotURLSession : NSObject, URLSessionDataDelegate {
     class var sharedPlotSession: PlotURLSession {
@@ -35,12 +35,12 @@ class PlotURLSession : NSObject, URLSessionDataDelegate {
     }
 
     func urlSession(_ session: URLSession, dataTask: URLSessionDataTask, willCacheResponse proposedResponse: CachedURLResponse, completionHandler: @escaping (CachedURLResponse?) -> Void) {
-        DLOG("")
+        Logger.fetcher.debug("")
         completionHandler(nil)
     }
 
     func urlSession(_ session: URLSession, didBecomeInvalidWithError error: Error?) {
-        DLOG("Error: \(String(describing: error?.localizedDescription))")
+        Logger.fetcher.debug("Error: \(String(describing: error?.localizedDescription))")
         self.privateSharedSession = nil
     }
 }
@@ -53,13 +53,12 @@ open class PlotFetcher : NSObject {
     var currentPlot = [String:String]()
 
     open func fetchForStationId( _ stationId: Int, completionHandler:@escaping (([[String:String]], Error?) -> Void)) {
-
         let request = URLRequest(url: URL(string: "http://vindsiden.no/xml.aspx?id=\(stationId)&hours=\(Int(AppConfig.Global.plotHistory-1))")!)
-        DLOG("\(request)")
+        Logger.fetcher.debug("Fetching from: \(request)")
 
         let task = PlotURLSession.sharedPlotSession.sharedSession().dataTask(with: request, completionHandler: { (data: Data?, response: URLResponse?, error: Error?) -> Void in
             guard let data = data else {
-                DLOG("Error: \(String(describing: error))")
+                Logger.fetcher.debug("Error: \(String(describing: error))")
                 completionHandler( [[String:String]](), error)
                 return;
             }

@@ -8,6 +8,7 @@
 
 import Foundation
 import CoreData
+import OSLog
 
 #if os(iOS)
 import MobileCoreServices
@@ -15,109 +16,80 @@ import CoreSpotlight
 #endif
 
 @objc
-open class DataManager: NSObject {
-
+public class DataManager: NSObject {
     @objc public static let shared = DataManager()
 
-    let _formatterQueue: DispatchQueue = DispatchQueue(label: "formatter queue", attributes: [])
+    private let container: NSPersistentContainer
+    private lazy var dateFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        
+        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZZZ"
+        formatter.timeZone = TimeZone(identifier: "UTC")
 
+        return formatter
+    }()
 
-    override init() {
-        super.init()
-        viewContext().automaticallyMergesChangesFromParent = true
-    }
-
-
-    @objc open func viewContext() -> NSManagedObjectContext {
-        return persistentContainer.viewContext
-    }
-
-
-    open func performForegroundTask(_ block: @escaping (NSManagedObjectContext) -> Void) {
-        persistentContainer.viewContext.perform {
-            block(self.persistentContainer.viewContext)
+    init(inMemory: Bool = false) {
+        guard let modelURL = Bundle(for: DataManager.self).url(forResource: AppConfig.CoreData.datamodelName, withExtension: "momd") else {
+            fatalError("Unable to find data model in the bundle.")
         }
-    }
 
+        guard let coreDataModel = NSManagedObjectModel(contentsOf: modelURL) else {
+            fatalError("Unable to create the Core Data model.")
+        }
 
-    open func performBackgroundTask(_ block: @escaping (NSManagedObjectContext) -> Void) {
-        persistentContainer.performBackgroundTask(block)
-    }
+        container = NSPersistentContainer(name: AppConfig.CoreData.datamodelName, managedObjectModel: coreDataModel)
 
+        if inMemory {
+            container.persistentStoreDescriptions.first!.url = URL(fileURLWithPath: "/dev/null")
+        } else {
+            guard let appGroupContainer = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: AppConfig.ApplicationGroups.primary) else {
+                fatalError("Shared file container could not be created.")
+            }
 
-    // MARK: - Core Data Saving support
+            let url = appGroupContainer.appendingPathComponent(AppConfig.CoreData.sqliteName)
 
-
-    open func saveContext() {
-        let context = persistentContainer.viewContext
-        if context.hasChanges {
-            do {
-                try context.save()
-            } catch {
-                let nserror = error as NSError
-                fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
+            if let description = container.persistentStoreDescriptions.first {
+                description.url = url
+                description.setOption(true as NSNumber, forKey: NSPersistentHistoryTrackingKey)
             }
         }
-    }
 
-
-    // MARK: - Core Data stack
-
-
-    fileprivate lazy var persistentContainer: NSPersistentContainer = {
-        /*
-         Need to manually set up the model, since it is placed inside a framework
-         */
-        let modelURL = Bundle(for: DataManager.self).url(forResource: AppConfig.CoreData.datamodelName, withExtension: "momd")
-        let model = NSManagedObjectModel(contentsOf: modelURL!)!
-        let container = NSPersistentContainer(name: AppConfig.CoreData.datamodelName, managedObjectModel: model)
-        let url = self.applicationDocumentsDirectory.appendingPathComponent(AppConfig.CoreData.sqliteName)
-        let description = NSPersistentStoreDescription(url: url)
-        description.shouldInferMappingModelAutomatically = true
-        description.shouldMigrateStoreAutomatically = true
-        container.persistentStoreDescriptions = [description]
-
-        self.addSkipBackupAttributeToItemAtURL(url)
-
-
-        container.loadPersistentStores(completionHandler: { (storeDescription, error) in
+        container.loadPersistentStores { storeDescription, error in
             if let error = error as NSError? {
                 fatalError("Unresolved error \(error), \(error.userInfo)")
             }
-        })
-        return container
-    }()
+        }
+        container.viewContext.automaticallyMergesChangesFromParent = true
+    }
+}
 
 
-    open func cleanupPlots(_ completionHandler: (() -> Void)? = nil) -> Void {
-        performBackgroundTask { (context) in
-            let fetchRequest: NSFetchRequest<NSFetchRequestResult> = CDPlot.fetchRequest()
-            let interval: TimeInterval = -1.0*((1.0+AppConfig.Global.plotHistory)*3600.0)
-            let time = Date(timeIntervalSinceNow: interval)
-            fetchRequest.predicate = NSPredicate(format: "plotTime < %@", time as CVarArg)
+extension DataManager {
+    @objc public func viewContext() -> NSManagedObjectContext {
+        return container.viewContext
+    }
 
-            let request = NSBatchDeleteRequest(fetchRequest: fetchRequest)
-            request.resultType = .resultTypeCount
-
-            do {
-                let result = try context.execute(request) as! NSBatchDeleteResult
-                DLOG("Deleted \(result.result!) plots")
-
-                try context.save()
-                DispatchQueue.main.async {
-                    completionHandler?()
-                }
-            } catch {
-                DLOG("Save failed: \(error)")
-                DispatchQueue.main.async {
-                    completionHandler?()
-                }
-            }
+    public func saveContext() {
+        do {
+            try container.viewContext.save()
+        } catch {
+            let nserror = error as NSError
+            fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
         }
     }
 
+    public func performBackgroundTask(_ block: @escaping (NSManagedObjectContext) -> Void) {
+        container.viewContext.perform {
+            block(self.container.viewContext)
+        }
+    }
 
-    open func removeStaleStationsIds( _ stations: [Int], inManagedObjectContext managedObjectContext: NSManagedObjectContext) -> Void {
+    func dateFromString(_ string: String) -> Date! {
+        return dateFormatter.date(from: string)
+    }
+
+    public func removeStaleStationsIds(_ stations: [Int], inManagedObjectContext managedObjectContext: NSManagedObjectContext) {
         performBackgroundTask { (context) in
             let fetchRequest: NSFetchRequest<NSFetchRequestResult> = CDStation.fetchRequest()
             fetchRequest.predicate = NSPredicate(format: "NOT stationId IN (%@)", stations)
@@ -127,40 +99,66 @@ open class DataManager: NSObject {
 
             do {
                 let result = try managedObjectContext.execute(request) as! NSBatchDeleteResult
-                DLOG("Deleted \(result.result!) station(s)")
+                Logger.persistence.debug("Deleted \(result.result as? Int ?? -1) station(s)")
                 try context.save()
             } catch {
-                DLOG("Delete failed: \(error)")
+                Logger.persistence.debug("Delete failed: \(error)")
             }
         }
     }
 
+    public func cleanupPlots(_ completionHandler: (() -> Void)? = nil) {
+        performBackgroundTask { (context) in
+            let fetchRequest: NSFetchRequest<NSFetchRequestResult> = CDPlot.fetchRequest()
+            let interval: TimeInterval = -1.0 * ((1.0 + AppConfig.Global.plotHistory) * 3600.0)
+            let time = Date(timeIntervalSinceNow: interval)
+            
+            fetchRequest.predicate = NSPredicate(format: "plotTime < %@", time as CVarArg)
 
-    // MARK: - Spotlight
+            let request = NSBatchDeleteRequest(fetchRequest: fetchRequest)
+            request.resultType = .resultTypeCount
 
+            do {
+                let result = try context.execute(request) as! NSBatchDeleteResult
+                Logger.persistence.debug("Deleted \(result.result as? Int ?? -1) plots")
 
-    #if os(iOS)
+                try context.save()
 
-    @objc open func indexVisibleStations( ) {
-        AppConfig.sharedConfiguration.shouldIndexForFirstTime() {
-            let index: CSSearchableIndex = CSSearchableIndex.default()
+                DispatchQueue.main.async {
+                    completionHandler?()
+                }
+            } catch {
+                Logger.persistence.debug("Save failed: \(error)")
 
-            performBackgroundTask { (context) in
-                for station in CDStation.visibleStationsInManagedObjectContext(context) {
-                    self.addStationToIndex(station, index: index)
+                DispatchQueue.main.async {
+                    completionHandler?()
                 }
             }
         }
     }
 
-
-    open func addStationToIndex( _ station: CDStation, index: CSSearchableIndex = CSSearchableIndex.default() ) {
-        if CSSearchableIndex.isIndexingAvailable() == false {
-            DLOG("Indexing not available")
+#if os(iOS)
+    @objc public func indexVisibleStations() {
+        guard AppConfig.sharedConfiguration.shouldIndexForFirstTime() else {
             return
         }
 
-        let search = CSSearchableItemAttributeSet(itemContentType: kUTTypeContent as String)
+        let index: CSSearchableIndex = CSSearchableIndex.default()
+
+        performBackgroundTask { (context) in
+            for station in CDStation.visibleStationsInManagedObjectContext(context) {
+                self.addStationToIndex(station, index: index)
+            }
+        }
+    }
+    
+    public func addStationToIndex(_ station: CDStation, index: CSSearchableIndex = CSSearchableIndex.default()) {
+        guard CSSearchableIndex.isIndexingAvailable() else {
+            Logger.persistence.debug("Indexing not available")
+            return
+        }
+
+        let search = CSSearchableItemAttributeSet(contentType: .content)
         search.city = station.city
         search.latitude = station.coordinateLat
         search.longitude = station.coordinateLon
@@ -175,72 +173,21 @@ open class DataManager: NSObject {
         let item = CSSearchableItem(uniqueIdentifier: url, domainIdentifier: AppConfig.Bundle.appName, attributeSet: search)
 
         CSSearchableIndex.default().indexSearchableItems( [item], completionHandler: { (error: Error?) -> Void in
-            DLOG("Added station: \(String(describing: station.stationName)) with error: \(String(describing: error?.localizedDescription))")
+            Logger.persistence.debug("Added station: \(String(describing: station.stationName)) with error: \(String(describing: error?.localizedDescription))")
         })
     }
 
-
-    open func removeStationFromIndex( _ station: CDStation, index: CSSearchableIndex = CSSearchableIndex.default() ) {
-        if CSSearchableIndex.isIndexingAvailable() == false {
-            DLOG("Indexing not available")
+    public func removeStationFromIndex(_ station: CDStation, index: CSSearchableIndex = CSSearchableIndex.default()) {
+        guard CSSearchableIndex.isIndexingAvailable() else {
+            Logger.persistence.debug("Indexing not available")
             return
         }
 
         let url = "vindsiden://station/\(station.stationId!)"
+        
         CSSearchableIndex.default().deleteSearchableItems(withIdentifiers: [url]) { (error: Error?) -> Void in
-            DLOG("Removed station: \(String(describing: station.stationName)) with error: \(String(describing: error?.localizedDescription))")
+            Logger.persistence.debug("Removed station: \(String(describing: station.stationName)) with error: \(String(describing: error?.localizedDescription))")
         }
     }
-    #endif
-
-
-    // MARK: - File
-
-
-    var applicationDocumentsDirectory: URL {
-        let url = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: AppConfig.ApplicationGroups.primary)
-        if let actualurl = url {
-            return actualurl as URL
-        } else {
-            return URL(string: "FIXME")!
-        }
-    }
-
-
-    func addSkipBackupAttributeToItemAtURL( _ url: URL) -> Void {
-        if FileManager.default.fileExists(atPath: url.path) {
-            do {
-                try (url as NSURL).setResourceValue(true, forKey: URLResourceKey.isExcludedFromBackupKey)
-            } catch let error as NSError {
-                NSLog("Error excluding \(url.lastPathComponent) from backup \(error)");
-            }
-        }
-    }
-
-
-    // MARK: - Date Formatting
-
-
-    var dateFormatter: DateFormatter {
-        if let actdate = _dateFormatter {
-            return actdate
-        }
-
-        _dateFormatter = DateFormatter()
-        _dateFormatter!.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZZZ"
-        _dateFormatter!.timeZone = TimeZone(identifier: "UTC")
-        return _dateFormatter!
-    }
-    var _dateFormatter: DateFormatter? = nil
-
-
-    open func dateFromString(_ string: String) -> Date!
-    {
-        var date: Date? = nil
-        _formatterQueue.sync {
-            date = self.dateFormatter.date(from: string)
-        };
-
-        return date ?? Date.init(timeIntervalSince1970: 0)
-    }
+#endif
 }

@@ -10,6 +10,7 @@ import WatchKit
 import Foundation
 import VindsidenWatchKit
 import CoreData
+import OSLog
 
 class InterfaceController: WKInterfaceController {
 
@@ -130,7 +131,7 @@ class InterfaceController: WKInterfaceController {
     override func handleUserActivity(_ userInfo: [AnyHashable: Any]!) {
         let stationId = userInfo?["station"] as? NSNumber
         if stationId == nil {
-            DLOG("No station provided")
+            Logger.debugging.debug("No station provided")
             return
         }
 

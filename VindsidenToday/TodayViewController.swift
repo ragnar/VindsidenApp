@@ -10,7 +10,7 @@ import UIKit
 import NotificationCenter
 import CoreData
 import VindsidenKit
-
+import OSLog
 
 class TodayViewController: UITableViewController, NCWidgetProviding, NSFetchedResultsControllerDelegate
 {
@@ -24,7 +24,7 @@ class TodayViewController: UITableViewController, NCWidgetProviding, NSFetchedRe
 
     deinit {
         _fetchedResultsController = nil
-        DLOG("")
+        Logger.debugging.debug("")
     }
 
 
@@ -52,14 +52,14 @@ class TodayViewController: UITableViewController, NCWidgetProviding, NSFetchedRe
 
 
     func widgetPerformUpdate(completionHandler: (@escaping (NCUpdateResult) -> Void)) {
-        DLOG("")
+        Logger.debugging.debug("")
         completionHandler(.newData)
         updateContentWithCompletionHandler(completionHandler)
     }
 
 
     func widgetActiveDisplayModeDidChange(_ activeDisplayMode: NCWidgetDisplayMode, withMaximumSize maxSize: CGSize) {
-        DLOG("mode: \(activeDisplayMode), size: \(maxSize)")
+        Logger.debugging.debug("mode: \(String(describing: activeDisplayMode)), size: \(String(describing: maxSize))")
 
         let cellHeight = infoCellHeight()
 
@@ -246,7 +246,7 @@ class TodayViewController: UITableViewController, NCWidgetProviding, NSFetchedRe
 
 
     func updateContentWithCompletionHandler(_ completionHandler: ((NCUpdateResult) -> Void)? = nil) {
-        DLOG("Updating content")
+        Logger.debugging.debug("Updating content")
         WindManager.sharedManager.fetch { (fetchResult: UIBackgroundFetchResult) -> Void in
             DispatchQueue.main.async(execute: { () -> Void in
                 self.tableView.reloadData()

@@ -7,24 +7,13 @@
 //
 
 import Foundation
+import OSLog
 
-@objc(Logger)
-open class Logger : NSObject {
-    open class func DLOG( _ message: String, file: String = #file, function: String = #function, line: Int = #line ) {
-        #if Debug
-            NSLog("([\((file as NSString).lastPathComponent) \(function)] line: \(line)) \(message)")
-        #endif
-    }
+extension Logger {
+    private static var subsystem = Bundle.main.bundleIdentifier!
 
-
-    open class func LOG( _ message: String) {
-        #if Debug
-            NSLog("\(message)")
-        #endif
-    }
-
-
-    open class func WARNING( _ message: String, file: String = #file, function: String = #function, line: Int = #line ) {
-        NSLog("([\((file as NSString).lastPathComponent) \(function)] line: \(line)) \(message)")
-    }
+    public static let debugging = Logger(subsystem: subsystem, category: "debug")
+    public static let persistence = Logger(subsystem: subsystem, category: "persistence")
+    public static let wind = Logger(subsystem: subsystem, category: "wind")
+    public static let fetcher = Logger(subsystem: subsystem, category: "fetcher")
 }

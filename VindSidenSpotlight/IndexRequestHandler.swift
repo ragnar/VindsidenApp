@@ -8,10 +8,9 @@
 
 import CoreSpotlight
 import VindsidenKit
-
+import OSLog
 
 class IndexRequestHandler: CSIndexExtensionRequestHandler {
-
     override func searchableIndex(_ searchableIndex: CSSearchableIndex, reindexAllSearchableItemsWithAcknowledgementHandler acknowledgementHandler: @escaping () -> Void) {
         let managedObjectContext = DataManager.shared.viewContext()
 
@@ -41,7 +40,7 @@ class IndexRequestHandler: CSIndexExtensionRequestHandler {
                 }
             } catch {
                 searchableIndex.deleteSearchableItems(withIdentifiers: [identifier], completionHandler: { (error) in
-                    DLOG("Error: \(String(describing: error))")
+                    Logger.debugging.debug("Error: \(String(describing: error))")
                 })
 
                 continue

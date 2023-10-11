@@ -9,6 +9,7 @@
 import Foundation
 import WatchConnectivity
 import CoreData
+import OSLog
 
 #if os(iOS)
     public typealias WindManagerResult = UIBackgroundFetchResult
@@ -87,7 +88,7 @@ open class WindManager : NSObject {
 
     open func fetch(_ completionHandler: ((WindManagerResult) -> Void)? = nil) -> Void {
         if ( isUpdating ) {
-            DLOG("Already updating")
+            Logger.wind.debug("Already updating")
             #if os(iOS)
                 completionHandler?(.newData)
             #else
@@ -117,16 +118,16 @@ open class WindManager : NSObject {
             if let stationId = station.stationId {
                 PlotFetcher().fetchForStationId(stationId.intValue, completionHandler: { (plots: [[String : String]], error: Error?) -> Void in
                     if (error != nil) {
-                        DLOG("error: \(String(describing: error))")
+                        Logger.wind.debug("error: \(String(describing: error))")
                         numErrors += 1
                     }
 
                     CDPlot.updatePlots(plots, completion: { () -> Void in
                         remainingStations -= 1
 
-                        if remainingStations == 0 {
-                            DLOG("Finished with \(numErrors) errors.")
+                        Logger.wind.debug("Finished with \(numErrors) errors for \(station.stationName!).")
 
+                        if remainingStations == 0 {
                             self.isUpdating = false
                             #if os(iOS)
                                 completionHandler?(.newData)
@@ -144,7 +145,7 @@ open class WindManager : NSObject {
     open func fetchForStationId( _ stationId: Int, completionHandler: ((WindManagerResult) -> Void)? = nil ) -> Void {
         PlotFetcher().fetchForStationId(stationId) { (plots: [[String : String]], error: Error?) -> Void in
             if (error != nil) {
-                DLOG("error: \(String(describing: error))")
+                Logger.wind.debug("error: \(String(describing: error))")
             } else {
                 CDPlot.updatePlots(plots, completion: { () -> Void in
                     #if os(iOS)

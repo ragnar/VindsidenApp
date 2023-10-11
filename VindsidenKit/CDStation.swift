@@ -9,6 +9,7 @@
 import Foundation
 import CoreData
 import MapKit
+import OSLog
 
 @objc(CDStation)
 open class CDStation: NSManagedObject, MKAnnotation {
@@ -140,7 +141,7 @@ open class CDStation: NSManagedObject, MKAnnotation {
         let inputComponents = (gregorian as NSCalendar).components([.year, .month, .day, .hour], from: inDate)
 
         guard let outDate = gregorian.date(from: inputComponents) else {
-            DLOG("Outdate missing")
+            Logger.persistence.debug("Outdate missing")
             return nil
         }
 
@@ -181,7 +182,7 @@ open class CDStation: NSManagedObject, MKAnnotation {
 
             for stationContent in content {
                 guard let stationIdString = stationContent["StationID"] else {
-                    DLOG("No stationId")
+                    Logger.persistence.debug("No stationId")
                     continue
                 }
 
@@ -219,13 +220,13 @@ open class CDStation: NSManagedObject, MKAnnotation {
                 }
                 return
             } catch let error as NSError {
-                DLOG("Error: \(error.userInfo.keys)")
+                Logger.persistence.debug("Error: \(error.userInfo.keys)")
                 DispatchQueue.main.async {
                     completionHandler?(newStations)
                 }
                 return
             } catch {
-                DLOG("Error: \(error)")
+                Logger.persistence.debug("Error: \(error)")
                 DispatchQueue.main.async {
                     completionHandler?(newStations)
                 }
@@ -240,7 +241,7 @@ open class CDStation: NSManagedObject, MKAnnotation {
         DataManager.shared.performBackgroundTask { (context) in
             for stationContent in content {
                 guard let stationId = stationContent["stationId"] as? Int else {
-                    DLOG("No stationId")
+                    Logger.persistence.debug("No stationId")
                     continue
                 }
 
@@ -258,13 +259,13 @@ open class CDStation: NSManagedObject, MKAnnotation {
                 }
                 return
             } catch let error as NSError {
-                DLOG("Error: \(error.userInfo.keys)")
+                Logger.persistence.debug("Error: \(error.userInfo.keys)")
                 DispatchQueue.main.async {
                     completionHandler?(false)
                 }
                 return
             } catch {
-                DLOG("Error: \(error)")
+                Logger.persistence.debug("Error: \(error)")
                 DispatchQueue.main.async {
                     completionHandler?(false)
                 }

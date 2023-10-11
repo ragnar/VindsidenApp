@@ -647,7 +647,7 @@ static NSString *kCellID = @"stationCellID";
 
 - (void)userActivityWasContinued:(NSUserActivity *)userActivity
 {
-    DLOG(@"continued on other device");
+//    Logger.debugging.debug(@"continued on other device");
 }
 
 
@@ -742,7 +742,7 @@ static NSString *kCellID = @"stationCellID";
     WCSession *session = [WCSession defaultSession];
 
     if ( session.isPaired == NO || session.isWatchAppInstalled == NO ) {
-        DLOG(@"Watch is not present: %d - %d", session.isPaired, session.isWatchAppInstalled);
+//        Logger.debugging.debug(@"Watch is not present: %d - %d", session.isPaired, session.isWatchAppInstalled);
         return;
     }
 
@@ -769,7 +769,7 @@ static NSString *kCellID = @"stationCellID";
     NSError *error = nil;
 
     if ( [session updateApplicationContext:context error: &error] == NO ) {
-        DLOG(@"Failed: %@", error.localizedDescription);
+//        Logger.debugging.debug(@"Failed: %@", error.localizedDescription);
     }
 }
 

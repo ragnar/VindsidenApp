@@ -7,11 +7,9 @@
 //
 
 import UIKit
-
-
+import OSLog
 
 extension RHCViewController: UIContextMenuInteractionDelegate {
-
     public func contextMenuInteraction(_ interaction: UIContextMenuInteraction, configurationForMenuAtLocation location: CGPoint) -> UIContextMenuConfiguration? {
 
         guard let cell = collectionView.visibleCells.first as? RHCStationCell, let station = cell.currentStation else {
@@ -28,7 +26,7 @@ extension RHCViewController: UIContextMenuInteractionDelegate {
                     }
 
                     UIApplication.shared.open(url, options: [:]) { (success) in
-                        DLOG("Opened successfully \(success)")
+                        Logger.debugging.debug("Opened successfully \(success)")
                     }
                 }
 
@@ -55,7 +53,7 @@ extension RHCViewController: UIContextMenuInteractionDelegate {
                 }
 
                 UIApplication.shared.open(url, options: [:]) { (success) in
-                    DLOG("Opened successfully \(success)")
+                    Logger.debugging.debug("Opened successfully \(success)")
                 }
             }
 

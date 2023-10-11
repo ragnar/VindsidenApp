@@ -99,7 +99,7 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate {
 //
 //        WKExtension.shared().scheduleBackgroundRefresh(withPreferredDate: fireDate, userInfo: userInfo) { (error) in
 //            if error != nil {
-//                DLOG("Schedule background failed: \(String(describing: error))")
+//                Logger.debugging.debug("Schedule background failed: \(String(describing: error))")
 //            }
 //        }
     }

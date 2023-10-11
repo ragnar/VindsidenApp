@@ -41,7 +41,6 @@
 		AD303C351B282FC100C4B999 /* DrawArrow.m in Sources */ = {isa = PBXBuildFile; fileRef = ADB5A78919DEC29A009AE4A5 /* DrawArrow.m */; };
 		AD303C361B282FC100C4B999 /* GraphImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADC161841B0218D8004F6DAE /* GraphImage.swift */; };
 		AD303C401B28484F00C4B999 /* Vindsiden.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = AD7AA505196E46D800B1518B /* Vindsiden.xcdatamodeld */; };
-		AD303C411B2848B900C4B999 /* Global.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD6BD0EC1A9506C900E6686B /* Global.swift */; };
 		AD303C421B2848EF00C4B999 /* UIColor+AppColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADBEA4CE1A07ECF600B168BF /* UIColor+AppColors.swift */; };
 		AD303C431B28490600C4B999 /* NSNumber+Between.h in Headers */ = {isa = PBXBuildFile; fileRef = ADCD423C196E4E42004973E9 /* NSNumber+Between.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AD303C441B28490600C4B999 /* NSNumber+Convertion.h in Headers */ = {isa = PBXBuildFile; fileRef = ADCD423E196E4E42004973E9 /* NSNumber+Convertion.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -80,7 +79,6 @@
 		AD6143031D0F10E20008C5E8 /* VindsidenWatchKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = AD303C281B282DC800C4B999 /* VindsidenWatchKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		AD66F5651CAEBA8B001A2755 /* IndexRequestHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD66F5641CAEBA8B001A2755 /* IndexRequestHandler.swift */; };
 		AD66F5691CAEBA8B001A2755 /* VindSidenSpotlight.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = AD66F5621CAEBA8B001A2755 /* VindSidenSpotlight.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		AD6BD0ED1A9506C900E6686B /* Global.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD6BD0EC1A9506C900E6686B /* Global.swift */; };
 		AD712AE41D0F4D19006AA2A8 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = AD6142FD1D0F0D1B0008C5E8 /* Localizable.strings */; };
 		AD71965C19EED713006FA2BC /* RHCSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD71965B19EED713006FA2BC /* RHCSettingsViewController.swift */; };
 		AD7AA507196E46D800B1518B /* Vindsiden.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = AD7AA505196E46D800B1518B /* Vindsiden.xcdatamodeld */; };
@@ -414,7 +412,6 @@
 		AD674DA81962EB7100BF257B /* libPods.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libPods.a; path = "Pods/build/Debug-iphoneos/libPods.a"; sourceTree = "<group>"; };
 		AD6B004F1D8C6035006B4EA3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Interface.strings; sourceTree = "<group>"; };
 		AD6B00501D8C6038006B4EA3 /* nb */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nb; path = nb.lproj/Interface.strings; sourceTree = "<group>"; };
-		AD6BD0EC1A9506C900E6686B /* Global.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Global.swift; sourceTree = "<group>"; };
 		AD6BD0F41A967A8800E6686B /* libPods.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libPods.a; path = "Pods/build/Debug-iphoneos/libPods.a"; sourceTree = "<group>"; };
 		AD71965B19EED713006FA2BC /* RHCSettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RHCSettingsViewController.swift; sourceTree = "<group>"; };
 		AD7AA506196E46D800B1518B /* Vindsiden.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Vindsiden.xcdatamodel; sourceTree = "<group>"; };
@@ -782,7 +779,6 @@
 		AD539C9E1947B5CA002644BD /* VindsidenKit */ = {
 			isa = PBXGroup;
 			children = (
-				AD6BD0EC1A9506C900E6686B /* Global.swift */,
 				AD539CA11947B5CA002644BD /* VindsidenKit.h */,
 				AD7BBB4F1A40A01900883770 /* Managers */,
 				AD17EDDF173447EC00943C33 /* Communication */,
@@ -1399,7 +1395,6 @@
 				AD303C4C1B28491600C4B999 /* NSObject+performBlockCancel.m in Sources */,
 				AD303C4B1B28491600C4B999 /* NSNumber+Convertion.m in Sources */,
 				AD303C311B282FB100C4B999 /* Logger.swift in Sources */,
-				AD303C411B2848B900C4B999 /* Global.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1421,7 +1416,6 @@
 				ADCD425D196E4E42004973E9 /* UIFontDescriptor+textStyle.m in Sources */,
 				ADCD4257196E4E42004973E9 /* NSString+fixDateString.m in Sources */,
 				AD7AA507196E46D800B1518B /* Vindsiden.xcdatamodeld in Sources */,
-				AD6BD0ED1A9506C900E6686B /* Global.swift in Sources */,
 				ADE9C4081AAB32840089EB19 /* WindManager.swift in Sources */,
 				ADCD425F196E4E42004973E9 /* UIImage+ImageFromView.m in Sources */,
 				ADCD4253196E4E42004973E9 /* NSObject+performBlockCancel.m in Sources */,

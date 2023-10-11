@@ -8,6 +8,7 @@
 
 import Foundation
 import CoreData
+import OSLog
 
 @objc(CDPlot)
 open class CDPlot: NSManagedObject {
@@ -69,18 +70,18 @@ open class CDPlot: NSManagedObject {
                             completion?()
                         }
                     } catch let error as NSError {
-                        DLOG("Error: \(error.userInfo.keys)")
+                        Logger.persistence.debug("Error: \(error.userInfo.keys)")
                         DispatchQueue.main.async {
                             completion?()
                         }
                     } catch {
-                        DLOG("Error: \(error)")
+                        Logger.persistence.debug("Error: \(error)")
                         DispatchQueue.main.async {
                             completion?()
                         }
                     }
                 } catch {
-                    DLOG("Station not found for stationId: \(stationId)")
+                    Logger.persistence.debug("Station not found for stationId: \(stationId)")
                     DispatchQueue.main.async {
                         completion?()
                     }

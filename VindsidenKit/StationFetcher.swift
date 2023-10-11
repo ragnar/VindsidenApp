@@ -7,7 +7,7 @@
 //
 
 import Foundation
-
+import OSLog
 
 class StationURLSession : NSObject, URLSessionDataDelegate {
     class var sharedStationSession: StationURLSession {
@@ -39,13 +39,13 @@ class StationURLSession : NSObject, URLSessionDataDelegate {
 
 
     func urlSession(_ session: URLSession, dataTask: URLSessionDataTask, willCacheResponse proposedResponse: CachedURLResponse, completionHandler: @escaping (CachedURLResponse?) -> Void) {
-        DLOG("")
+        Logger.fetcher.debug("")
         completionHandler(nil)
     }
 
 
     func urlSession(_ session: URLSession, didBecomeInvalidWithError error: Error?) {
-        DLOG("Error: \(String(describing: error?.localizedDescription))")
+        Logger.fetcher.debug("Error: \(String(describing: error?.localizedDescription))")
         self.privateSharedSession = nil
     }
 }
@@ -58,11 +58,13 @@ open class StationFetcher : NSObject {
     var currentStation = [String:String]()
 
     @objc open func fetch(_ completionHandler:@escaping (([[String:String]], Error?) -> Void)) {
-
         let request = URLRequest(url: URL(string: "http://vindsiden.no//xml.aspx")!)
+
+        Logger.fetcher.debug("Fetching from: \(request)")
+
         let task = StationURLSession.sharedStationSession.sharedSession().dataTask(with: request, completionHandler: { (data: Data?, response: URLResponse?, error: Error?) -> Void in
             guard let data = data else {
-                DLOG("Error: \(String(describing: error))")
+                Logger.fetcher.debug("Error: \(String(describing: error))")
                 DispatchQueue.main.async(execute: { () -> Void in
                     completionHandler( [[String:String]](), error)
                 })

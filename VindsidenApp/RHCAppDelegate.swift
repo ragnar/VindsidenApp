@@ -10,7 +10,7 @@ import UIKit
 import VindsidenKit
 import WatchConnectivity
 import CoreSpotlight
-
+import OSLog
 
 @UIApplicationMain
 class RHCAppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate {
@@ -186,7 +186,7 @@ class RHCAppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate {
                     do {
                         try found.managedObjectContext?.save()
                     } catch {
-                        DLOG("Save failed")
+                        Logger.debugging.debug("Save failed")
                     }
                 })
             }
@@ -227,31 +227,31 @@ class RHCAppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate {
 
 
     func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
-        DLOG("Session: \(session)")
+        Logger.debugging.debug("Session: \(session)")
     }
 
 
     func sessionDidBecomeInactive(_ session: WCSession) {
-        DLOG("Session: \(session)")
+        Logger.debugging.debug("Session: \(session)")
     }
 
 
     func sessionDidDeactivate(_ session: WCSession) {
-        DLOG("Session: \(session)")
+        Logger.debugging.debug("Session: \(session)")
     }
 
 
     func sessionWatchStateDidChange(_ session: WCSession) {
-        DLOG("Session: \(session)")
+        Logger.debugging.debug("Session: \(session)")
     }
 
 
     func sessionReachabilityDidChange(_ session: WCSession) {
-        DLOG("Session: \(session)")
+        Logger.debugging.debug("Session: \(session)")
     }
 
     func session(_ session: WCSession, didReceiveMessage message: [String : Any], replyHandler: @escaping ([String : Any]) -> Void) {
-        DLOG("Session: \(message)")
+        Logger.debugging.debug("Session: \(message)")
         replyHandler(["result": "not_updated"])
     }
 
@@ -259,7 +259,7 @@ class RHCAppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate {
     // MARK: - NSUserActivity
 
     override func updateUserActivityState(_ activity: NSUserActivity) {
-        DLOG("\(activity)")
+        Logger.debugging.debug("\(activity)")
     }
 
     func application(_ application: UIApplication, willContinueUserActivityWithType userActivityType: String) -> Bool {
@@ -268,11 +268,11 @@ class RHCAppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate {
 
 
     func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
-        DLOG("Activity: \(userActivity.activityType) - \(String(describing: userActivity.userInfo))")
+        Logger.debugging.debug("Activity: \(userActivity.activityType) - \(String(describing: userActivity.userInfo))")
 
 
         if userActivity.activityType == CSSearchableItemActionType, let userInfo = userActivity.userInfo, let urlString = userInfo[CSSearchableItemActivityIdentifier] as? String {
-            DLOG("URL STRING: \(urlString)")
+            Logger.debugging.debug("URL STRING: \(urlString)")
             let url = URL(string: urlString)
             let success = openLaunchOptionsURL(url!)
 
@@ -289,7 +289,7 @@ class RHCAppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate {
 
     
     func application(_ application: UIApplication, didFailToContinueUserActivityWithType userActivityType: String, error: Error) {
-        DLOG("did fail to continue: \(userActivityType), \(error)")
+        Logger.debugging.debug("did fail to continue: \(userActivityType), \(error)")
     }
 
 

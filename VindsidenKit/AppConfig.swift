@@ -139,11 +139,13 @@ open class AppConfig : NSObject {
     }
 
 
-    open func shouldIndexForFirstTime( _ completionHandler: () -> Void) {
+    open func shouldIndexForFirstTime() -> Bool {
         if isSpotlightIndexed < 2 {
             isSpotlightIndexed = 2
-            completionHandler()
+            return true
         }
+
+        return false
     }
 
 

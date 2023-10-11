@@ -9,7 +9,7 @@
 import WatchKit
 import WatchConnectivity
 import VindsidenWatchKit
-
+import OSLog
 
 public extension Notification.Name {
     static let ReceivedStations = Notification.Name("ReceivedStations")
@@ -34,9 +34,9 @@ class WCFetcher: NSObject, WCSessionDelegate {
             connectSession = WCSession.default
             connectSession?.delegate = self
             connectSession?.activate()
-            DLOG("Session: \(String(describing: connectSession))")
+            Logger.debugging.debug("Session: \(String(describing: self.connectSession))")
         } else {
-            DLOG("WCSession is not supported")
+            Logger.debugging.debug("WCSession is not supported")
         }
     }
 
@@ -48,12 +48,12 @@ class WCFetcher: NSObject, WCSessionDelegate {
 
 
     func sessionReachabilityDidChange(_ session: WCSession) {
-        DLOG("Session: \(session) - \(session.isReachable)")
+        Logger.debugging.debug("Session: \(session) - \(session.isReachable)")
     }
 
 
     func session(_ session: WCSession, didReceiveMessage message: [String : Any]) {
-        DLOG("Message: \(message)")
+        Logger.debugging.debug("Message: \(message)")
     }
 
 
@@ -75,6 +75,6 @@ class WCFetcher: NSObject, WCSessionDelegate {
             AppConfig.sharedConfiguration.applicationUserDefaults.synchronize()
         }
 
-        DLOG("\(applicationContext)")
+        Logger.debugging.debug("\(applicationContext)")
     }
 }
