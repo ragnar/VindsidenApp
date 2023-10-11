@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 52;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -1881,7 +1881,9 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.juniks.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = VindsidenApp;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_OBJC_BRIDGING_HEADER = "VindsidenApp/VindsidenApp-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -1910,7 +1912,9 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.juniks.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = VindsidenApp;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OBJC_BRIDGING_HEADER = "VindsidenApp/VindsidenApp-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
