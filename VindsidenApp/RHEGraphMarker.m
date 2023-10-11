@@ -173,7 +173,7 @@ extern CGFloat RadiansToDegrees(CGFloat radians);
     }
 
     _numberformatter = [[NSNumberFormatter alloc] init];
-    _numberformatter.numberStyle = kCFNumberFormatterDecimalStyle;
+    _numberformatter.numberStyle = NSNumberFormatterDecimalStyle;
     _numberformatter.maximumFractionDigits = 1;
     //_numberformatter.minimumSignificantDigits = 1;
     [_numberformatter setNotANumberSymbol:@"—.—"];

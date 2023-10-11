@@ -75,7 +75,7 @@
     }
 
     _numberformatter = [[NSNumberFormatter alloc] init];
-    _numberformatter.numberStyle = kCFNumberFormatterDecimalStyle;
+    _numberformatter.numberStyle = NSNumberFormatterDecimalStyle;
     _numberformatter.maximumFractionDigits = 1;
     _numberformatter.minimumFractionDigits = 1;
     //_numberformatter.minimumSignificantDigits = 1;
