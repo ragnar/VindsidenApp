@@ -11,9 +11,6 @@
 #import "RHCStationCell.h"
 #import "RHEGraphView.h"
 
-#import <MotionJpegImageView/MotionJpegImageView.h>
-#import <JTSImageViewController/JTSImageViewController.h>
-
 @import WatchConnectivity;
 @import CoreSpotlight;
 @import VindsidenKit;
@@ -24,7 +21,6 @@ static NSString *kCellID = @"stationCellID";
 @interface RHCViewController ()<NSUserActivityDelegate, UIDataSourceModelAssociation, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, NSFetchedResultsControllerDelegate, RHEStationDetailsDelegate, RHCSettingsDelegate>
 
 @property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
-@property (weak, nonatomic) MotionJpegImageView *cameraView;
 @property (weak, nonatomic) IBOutlet UIPageControl *pageControl;
 @property (weak, nonatomic) IBOutlet UIToolbar *toolbar;
 @property (strong, nonatomic) CDStation *pendingScrollToStation;
@@ -45,7 +41,6 @@ static NSString *kCellID = @"stationCellID";
 
 - (void)dealloc
 {
-    [self.cameraView removeObserver:self forKeyPath:@"image" context:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIApplicationDidBecomeActiveNotification object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIApplicationWillResignActiveNotification object:nil];
     [self endObservingOrientation];
@@ -80,16 +75,17 @@ static NSString *kCellID = @"stationCellID";
     [button addInteraction: interaction];
     UIBarButtonItem *bc = [[UIBarButtonItem alloc] initWithCustomView:button];
 
-    MotionJpegImageView *imageView = [[MotionJpegImageView alloc] initWithFrame:CGRectMake( 0.0, 0.0, 44.0, 33.0)];
-    UITapGestureRecognizer *gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(camera:)];
-    [imageView addGestureRecognizer:gesture];
-    UIBarButtonItem *bt = [[UIBarButtonItem alloc] initWithCustomView:imageView];
-    self.cameraView = imageView;
-    [self.cameraView addObserver:self forKeyPath:@"image" options:NSKeyValueObservingOptionNew context:nil];
+//FIXME: Some camera showing stuff
+//    MotionJpegImageView *imageView = [[MotionJpegImageView alloc] initWithFrame:CGRectMake( 0.0, 0.0, 44.0, 33.0)];
+//    UITapGestureRecognizer *gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(camera:)];
+//    [imageView addGestureRecognizer:gesture];
+//    UIBarButtonItem *bt = [[UIBarButtonItem alloc] initWithCustomView:imageView];
+//    self.cameraView = imageView;
+//    [self.cameraView addObserver:self forKeyPath:@"image" options:NSKeyValueObservingOptionNew context:nil];
 
 
     UIBarButtonItem *flex = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
-    [self.toolbar setItems:@[bd, flex, bt, flex, bc, flex, bb]];
+    [self.toolbar setItems:@[bd, flex, /*bt,*/ flex, bc, flex, bb]];
 
 
     self.pageControl.pageIndicatorTintColor = [UIColor lightGrayColor];
@@ -145,19 +141,20 @@ static NSString *kCellID = @"stationCellID";
 {
     [super viewWillLayoutSubviews];
 
-    if (@available(iOS 11, *)) {
-        if ( _cameraViewConstraints == nil) {
-            _cameraView.translatesAutoresizingMaskIntoConstraints = NO;
-
-            NSLayoutConstraint *heightConstraint = [_cameraView.heightAnchor constraintEqualToConstant:32];
-            NSLayoutConstraint *widthConstraint = [_cameraView.widthAnchor constraintEqualToConstant:140];
-
-            _cameraViewConstraints = @[heightConstraint, widthConstraint];
-
-            [heightConstraint setActive:YES];
-            [widthConstraint setActive:YES];
-        }
-    }
+// FIXME: Some camera showing stuff
+//    if (@available(iOS 11, *)) {
+//        if ( _cameraViewConstraints == nil) {
+//            _cameraView.translatesAutoresizingMaskIntoConstraints = NO;
+//
+//            NSLayoutConstraint *heightConstraint = [_cameraView.heightAnchor constraintEqualToConstant:32];
+//            NSLayoutConstraint *widthConstraint = [_cameraView.widthAnchor constraintEqualToConstant:140];
+//
+//            _cameraViewConstraints = @[heightConstraint, widthConstraint];
+//
+//            [heightConstraint setActive:YES];
+//            [widthConstraint setActive:YES];
+//        }
+//    }
 
     if ( CGSizeEqualToSize(self.cellSize, CGSizeZero) == NO ) {
         self.cellSize = self.collectionView.bounds.size;
@@ -432,37 +429,38 @@ static NSString *kCellID = @"stationCellID";
 
 - (void)updateCameraButton:(BOOL)update
 {
-    [UIView animateWithDuration:0.25
-                     animations:^{
-                         self.cameraView.alpha = 0.0;
-                     }
-                     completion:^(BOOL finished) {
-                         [self.cameraView stop];
-
-                         if ( NO == update ) {
-                             return;
-                         }
-
-                         if ( [[self.collectionView visibleCells] count] == 0 ) {
-                             return;
-                         }
-
-                         RHCStationCell *cell = [self.collectionView visibleCells][0];
-
-                         if ( [cell.currentStation.webCamImage length] == 0 ) {
-                             return;
-                         }
-
-                         [self.cameraView setUrl:[NSURL URLWithString:cell.currentStation.webCamImage]];
-                         [self.cameraView play];
-                         
-                         [UIView animateWithDuration:0.25
-                                          animations:^{
-                                              self.cameraView.alpha = 1.0;
-                                          }
-                          ];
-                     }
-     ];
+// FIXME: Camera showing stuff
+//    [UIView animateWithDuration:0.25
+//                     animations:^{
+//                         self.cameraView.alpha = 0.0;
+//                     }
+//                     completion:^(BOOL finished) {
+//                         [self.cameraView stop];
+//
+//                         if ( NO == update ) {
+//                             return;
+//                         }
+//
+//                         if ( [[self.collectionView visibleCells] count] == 0 ) {
+//                             return;
+//                         }
+//
+//                         RHCStationCell *cell = [self.collectionView visibleCells][0];
+//
+//                         if ( [cell.currentStation.webCamImage length] == 0 ) {
+//                             return;
+//                         }
+//
+//                         [self.cameraView setUrl:[NSURL URLWithString:cell.currentStation.webCamImage]];
+//                         [self.cameraView play];
+//                         
+//                         [UIView animateWithDuration:0.25
+//                                          animations:^{
+//                                              self.cameraView.alpha = 1.0;
+//                                          }
+//                          ];
+//                     }
+//     ];
 }
 
 
@@ -505,21 +503,22 @@ static NSString *kCellID = @"stationCellID";
         return;
     }
 
-    MotionJpegImageView *view = (MotionJpegImageView *)[(UITapGestureRecognizer *)sender view];
-
-    if ( view.image ) {
-        JTSImageInfo *imageInfo = [[JTSImageInfo alloc] init];
-        imageInfo.image = view.image;
-        imageInfo.referenceRect = [view frame];
-        imageInfo.referenceView = [view superview];
-
-        JTSImageViewController *controller = [[JTSImageViewController alloc] initWithImageInfo:imageInfo
-                                                                                          mode:JTSImageViewControllerMode_Image
-                                                                               backgroundStyle:JTSImageViewControllerBackgroundOption_Blurred|JTSImageViewControllerBackgroundOption_Scaled];
-
-        [controller setModalPresentationStyle:UIModalPresentationFullScreen];
-        [controller showFromViewController:self transition:JTSImageViewControllerTransition_FromOriginalPosition];
-    }
+// FIXME: Camera showing stuff
+//    MotionJpegImageView *view = (MotionJpegImageView *)[(UITapGestureRecognizer *)sender view];
+//
+//    if ( view.image ) {
+//        JTSImageInfo *imageInfo = [[JTSImageInfo alloc] init];
+//        imageInfo.image = view.image;
+//        imageInfo.referenceRect = [view frame];
+//        imageInfo.referenceView = [view superview];
+//
+//        JTSImageViewController *controller = [[JTSImageViewController alloc] initWithImageInfo:imageInfo
+//                                                                                          mode:JTSImageViewControllerMode_Image
+//                                                                               backgroundStyle:JTSImageViewControllerBackgroundOption_Blurred|JTSImageViewControllerBackgroundOption_Scaled];
+//
+//        [controller setModalPresentationStyle:UIModalPresentationFullScreen];
+//        [controller showFromViewController:self transition:JTSImageViewControllerTransition_FromOriginalPosition];
+//    }
 }
 
 
@@ -566,7 +565,8 @@ static NSString *kCellID = @"stationCellID";
 {
     if ( [keyPath isEqualToString:@"image"] ) {
         if ( [change[@"new"] isKindOfClass:[UIImage class]] ) {
-            [self.cameraView pause];
+            // FIXME: Camera showing stuff
+//            [self.cameraView pause];
         }
         return;
     }

@@ -8,7 +8,6 @@
 
 import UIKit
 import VindsidenKit
-import JTSImageViewController
 
 @objc(RHEStationDetailsDelegate) protocol RHEStationDetailsDelegate {
     func rheStationDetailsViewControllerDidFinish( _ controller: RHEStationDetailsViewController)
@@ -239,24 +238,25 @@ import JTSImageViewController
 
 
     @IBAction func showCamera( _ sender: AnyObject? ) {
-        if let current = station {
-            let imageInfo = JTSImageInfo()
-
-            guard let webCamImage = current.webCamImage else {
-                return;
-            }
-
-            imageInfo.imageURL = URL(string: webCamImage)
-
-            if let view = sender as? UIView {
-                imageInfo.referenceRect = view.frame
-            }
-
-            imageInfo.referenceView = self.view
-
-            let controller = JTSImageViewController(imageInfo: imageInfo, mode: JTSImageViewControllerMode.image, backgroundStyle: [.blurred, .scaled])
-            controller?.show(from: self, transition: .fromOriginalPosition)
-        }
+        // FIXME: This is where we show camera
+//        if let current = station {
+//            let imageInfo = JTSImageInfo()
+//
+//            guard let webCamImage = current.webCamImage else {
+//                return;
+//            }
+//
+//            imageInfo.imageURL = URL(string: webCamImage)
+//
+//            if let view = sender as? UIView {
+//                imageInfo.referenceRect = view.frame
+//            }
+//
+//            imageInfo.referenceView = self.view
+//
+//            let controller = JTSImageViewController(imageInfo: imageInfo, mode: JTSImageViewControllerMode.image, backgroundStyle: [.blurred, .scaled])
+//            controller?.show(from: self, transition: .fromOriginalPosition)
+//        }
     }
 }
 
