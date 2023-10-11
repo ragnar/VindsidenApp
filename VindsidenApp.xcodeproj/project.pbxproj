@@ -1005,7 +1005,6 @@
 				AD539C941947B0F7002644BD /* Embed App Extensions */,
 				AD539CB91947B5CA002644BD /* Embed Frameworks */,
 				B8BC4B595CE4742DF687D534 /* [CP] Embed Pods Frameworks */,
-				D6C4174BF0CB7DBE2DE8331D /* [CP] Copy Pods Resources */,
 				ADBF8B6E1D0F00020005C0C9 /* Embed Watch Content */,
 			);
 			buildRules = (
@@ -1183,7 +1182,7 @@
 				CLASSPREFIX = RHC;
 				LastSwiftMigration = 0730;
 				LastSwiftUpdateCheck = 0730;
-				LastUpgradeCheck = 1000;
+				LastUpgradeCheck = 1210;
 				ORGANIZATIONNAME = RHC;
 				TargetAttributes = {
 					AD17ED431731012200943C33 = {
@@ -1402,7 +1401,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-VindsidenAppCommon-VindsidenApp/Pods-VindsidenAppCommon-VindsidenApp-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-VindsidenAppCommon-VindsidenApp/Pods-VindsidenAppCommon-VindsidenApp-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/JTSImageViewController/JTSImageViewController.framework",
 				"${BUILT_PRODUCTS_DIR}/MotionJpegImageView/MotionJpegImageView.framework",
 			);
@@ -1413,22 +1412,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-VindsidenAppCommon-VindsidenApp/Pods-VindsidenAppCommon-VindsidenApp-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		D6C4174BF0CB7DBE2DE8331D /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-VindsidenAppCommon-VindsidenApp/Pods-VindsidenAppCommon-VindsidenApp-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-VindsidenAppCommon-VindsidenApp/Pods-VindsidenAppCommon-VindsidenApp-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -1793,6 +1777,7 @@
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -1848,6 +1833,7 @@
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
