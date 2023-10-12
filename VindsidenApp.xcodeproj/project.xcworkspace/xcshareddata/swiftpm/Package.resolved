@@ -1,0 +1,31 @@
+{
+  "pins" : [
+    {
+      "identity" : "units",
+      "kind" : "remoteSourceControl",
+      "location" : "git@github.com:ragnar/Units.git",
+      "state" : {
+        "branch" : "main",
+        "revision" : "29e5b0f4653628d260c0f35970bfd111afedb92b"
+      }
+    },
+    {
+      "identity" : "weatherboxview",
+      "kind" : "remoteSourceControl",
+      "location" : "git@github.com:ragnar/WeatherBoxView.git",
+      "state" : {
+        "branch" : "main",
+        "revision" : "e5de3fe771f77ab9783407218f68d7f96e2fc998"
+      }
+    },
+    {
+      "identity" : "windarrow",
+      "kind" : "remoteSourceControl",
+      "location" : "git@github.com:ragnar/WindArrow.git",
+      "state" : {
+        "revision" : "cbc4e0662ac070db44e4212ed78167162b84fa5f"
+      }
+    }
+  ],
+  "version" : 2
+}
