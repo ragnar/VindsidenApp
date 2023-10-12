@@ -9,87 +9,49 @@
 import Foundation
 import OSLog
 
-class PlotURLSession : NSObject, URLSessionDataDelegate {
-    class var sharedPlotSession: PlotURLSession {
-        struct Singleton {
-            static let sharedAppSession = PlotURLSession()
-        }
-
-        return Singleton.sharedAppSession
-    }
-
-    fileprivate var privateSharedSession: Foundation.URLSession?
-
-    override init() {
-        super.init()
-    }
-
-    func sharedSession() -> Foundation.URLSession {
-
-        if let _sharedSession = privateSharedSession {
-            return _sharedSession
-        } else {
-            privateSharedSession = Foundation.URLSession(configuration: URLSessionConfiguration.ephemeral, delegate: self, delegateQueue: nil)
-            return privateSharedSession!
-        }
-    }
-
-    func urlSession(_ session: URLSession, dataTask: URLSessionDataTask, willCacheResponse proposedResponse: CachedURLResponse, completionHandler: @escaping (CachedURLResponse?) -> Void) {
-        Logger.fetcher.debug("")
-        completionHandler(nil)
-    }
-
-    func urlSession(_ session: URLSession, didBecomeInvalidWithError error: Error?) {
-        Logger.fetcher.debug("Error: \(String(describing: error?.localizedDescription))")
-        self.privateSharedSession = nil
-    }
-}
-
-
-open class PlotFetcher : NSObject {
-
+public final class PlotFetcher: NSObject {
     var characters:String = ""
-    var result = [[String:String]]()
-    var currentPlot = [String:String]()
+    var result = [[String: String]]()
+    var currentPlot = [String: String]()
 
-    open func fetchForStationId( _ stationId: Int, completionHandler:@escaping (([[String:String]], Error?) -> Void)) {
+    @available(*, renamed: "fetchForStationId(_:)")
+    public func fetchForStationId( _ stationId: Int, completionHandler:@escaping (([[String:String]], Error?) -> Void)) {
+        Task {
+            do {
+                let result = try await fetchForStationId(stationId)
+                DispatchQueue.main.async {
+                    completionHandler(result, nil)
+                }
+            } catch {
+                DispatchQueue.main.async {
+                    completionHandler([], error)
+                }
+            }
+        }
+    }
+
+    public func fetchForStationId( _ stationId: Int) async throws -> [[String : String]] {
         let request = URLRequest(url: URL(string: "http://vindsiden.no/xml.aspx?id=\(stationId)&hours=\(Int(AppConfig.Global.plotHistory-1))")!)
+        let session = URLSession(configuration: .ephemeral)
+        
         Logger.fetcher.debug("Fetching from: \(request)")
 
-        let task = PlotURLSession.sharedPlotSession.sharedSession().dataTask(with: request, completionHandler: { (data: Data?, response: URLResponse?, error: Error?) -> Void in
-            guard let data = data else {
-                Logger.fetcher.debug("Error: \(String(describing: error))")
-                completionHandler( [[String:String]](), error)
-                return;
-            }
+        let (data, _) = try await session.data(for: request)
+        let parser = XMLParser(data: data)
+        parser.delegate = self
+        parser.parse()
 
-            let parser = XMLParser(data: data)
-            parser.delegate = self
-            parser.parse()
-
-            DispatchQueue.main.async(execute: { () -> Void in
-                completionHandler(self.result, error)
-            })
-        })
-
-        task.resume()
-    }
-
-
-    open class func invalidate() -> Void {
-        PlotURLSession.sharedPlotSession.sharedSession().invalidateAndCancel()
+        return result
     }
 }
-
 
 extension PlotFetcher: XMLParserDelegate {
     public func parser(_ parser: XMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [String : String]) {
         if elementName == "Measurement" {
-            currentPlot = [String:String]()
+            currentPlot = [String: String]()
         }
         characters = ""
     }
-
 
     public func parser(_ parser: XMLParser, didEndElement elementName: String, namespaceURI: String?, qualifiedName qName: String?) {
         if elementName == "Measurement" {

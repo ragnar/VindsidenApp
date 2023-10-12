@@ -38,59 +38,42 @@ open class CDPlot: NSManagedObject {
     }
 
 
-    open class func updatePlots( _ plots: [[String:String]], completion: (() -> Void)? = nil) -> Void {
+    open class func updatePlots(_ plots: [[String: String]]) throws {
         if plots.isEmpty {
-            completion?()
             return
         }
 
-        DataManager.shared.performBackgroundTask { (context) in
-            if let unwrapped = plots.first, let stationString = unwrapped["StationID"], let stationId = Int(stationString) {
-                do {
-                    let station = try CDStation.existingStationWithId(stationId, inManagedObjectContext: context)
-                    let insertedPlots = NSMutableSet()
+        guard
+            let plot = plots.first,
+            let stationString = plot["StationID"],
+            let stationId = Int(stationString)
+        else {
+            return
+        }
 
-                    for plot in plots {
-                        let managedObject = CDPlot.newOrExistingPlot(plot, forStation: station, inManagedObjectContext: context)
-                        if managedObject.isInserted {
-                            insertedPlots.add(managedObject)
-                        }
-                    }
+        let context = DataManager.shared.container.newBackgroundContext()
 
-                    if insertedPlots.count > 0 {
-                        station.willChangeValue(forKey: "plots")
-                        station.addToPlots(insertedPlots)
-                        station.didChangeValue(forKey: "plots")
-                    }
+        context.mergePolicy = NSOverwriteMergePolicy
 
-                    do {
-                        try context.save()
+        let station = try CDStation.existingStationWithId(stationId, inManagedObjectContext: context)
+        let insertedPlots = NSMutableSet()
 
-                        DispatchQueue.main.async {
-                            completion?()
-                        }
-                    } catch let error as NSError {
-                        Logger.persistence.debug("Error: \(error.userInfo.keys)")
-                        DispatchQueue.main.async {
-                            completion?()
-                        }
-                    } catch {
-                        Logger.persistence.debug("Error: \(error)")
-                        DispatchQueue.main.async {
-                            completion?()
-                        }
-                    }
-                } catch {
-                    Logger.persistence.debug("Station not found for stationId: \(stationId)")
-                    DispatchQueue.main.async {
-                        completion?()
-                    }
-                    return
-                }
+        for plot in plots {
+            let managedObject = CDPlot.newOrExistingPlot(plot, forStation: station, inManagedObjectContext: context)
+
+            if managedObject.isInserted {
+                insertedPlots.add(managedObject)
             }
         }
-    }
 
+        if insertedPlots.count > 0 {
+            station.willChangeValue(forKey: "plots")
+            station.addToPlots(insertedPlots)
+            station.didChangeValue(forKey: "plots")
+        }
+
+        try context.save()
+    }
 
     func updateWithContent( _ content: [String:String] ) {
         if let unwrapped = content["Time"] {

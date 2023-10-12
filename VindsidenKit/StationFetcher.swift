@@ -9,83 +9,39 @@
 import Foundation
 import OSLog
 
-class StationURLSession : NSObject, URLSessionDataDelegate {
-    class var sharedStationSession: StationURLSession {
-        struct Singleton {
-            static let sharedAppSession = StationURLSession()
-        }
+public class StationFetcher : NSObject {
+    var characters: String = ""
+    var result = [[String: String]]()
+    var currentStation = [String: String]()
 
-        return Singleton.sharedAppSession
-    }
-
-
-    fileprivate var privateSharedSession: Foundation.URLSession?
-
-
-    override init() {
-        super.init()
-    }
-
-
-    func sharedSession() -> Foundation.URLSession {
-
-        if let _sharedSession = privateSharedSession {
-            return _sharedSession
-        } else {
-            privateSharedSession = Foundation.URLSession(configuration: URLSessionConfiguration.ephemeral, delegate: self, delegateQueue: nil)
-            return privateSharedSession!
-        }
-    }
-
-
-    func urlSession(_ session: URLSession, dataTask: URLSessionDataTask, willCacheResponse proposedResponse: CachedURLResponse, completionHandler: @escaping (CachedURLResponse?) -> Void) {
-        Logger.fetcher.debug("")
-        completionHandler(nil)
-    }
-
-
-    func urlSession(_ session: URLSession, didBecomeInvalidWithError error: Error?) {
-        Logger.fetcher.debug("Error: \(String(describing: error?.localizedDescription))")
-        self.privateSharedSession = nil
-    }
-}
-
-
-open class StationFetcher : NSObject {
-
-    var characters:String = ""
-    var result = [[String:String]]()
-    var currentStation = [String:String]()
-
-    @objc open func fetch(_ completionHandler:@escaping (([[String:String]], Error?) -> Void)) {
-        let request = URLRequest(url: URL(string: "http://vindsiden.no//xml.aspx")!)
-
-        Logger.fetcher.debug("Fetching from: \(request)")
-
-        let task = StationURLSession.sharedStationSession.sharedSession().dataTask(with: request, completionHandler: { (data: Data?, response: URLResponse?, error: Error?) -> Void in
-            guard let data = data else {
-                Logger.fetcher.debug("Error: \(String(describing: error))")
-                DispatchQueue.main.async(execute: { () -> Void in
-                    completionHandler( [[String:String]](), error)
-                })
-                return;
+    @available(*, renamed: "fetch()")
+    @objc public func fetch(_ completionHandler:@escaping (([[String:String]], Error?) -> Void)) {
+        Task {
+            do {
+                let result = try await fetch()
+                DispatchQueue.main.async {
+                    completionHandler(result, nil)
+                }
+            } catch {
+                DispatchQueue.main.async {
+                    completionHandler([], error)
+                }
             }
-
-            let parser = XMLParser(data: data)
-            parser.delegate = self
-            parser.parse()
-
-            DispatchQueue.main.async(execute: { () -> Void in
-                completionHandler(self.result, error)
-            })
-        }) //as! (Data?, URLResponse?, Error?) -> Void)
-
-        task.resume()
+        }
     }
 
-
-    open class func invalidate() -> Void {
-        StationURLSession.sharedStationSession.sharedSession().invalidateAndCancel()
+    @objc public func fetch() async throws -> [[String : String]] {
+        let request = URLRequest(url: URL(string: "http://vindsiden.no//xml.aspx")!)
+        let session = URLSession(configuration: .ephemeral)
+        
+        Logger.fetcher.debug("Fetching from: \(request)")
+        
+        let (data, _) = try await session.data(for: request)
+        let parser = XMLParser(data: data)
+        parser.delegate = self
+        parser.parse()
+                
+        return result
     }
 }
 
@@ -97,7 +53,6 @@ extension StationFetcher: XMLParserDelegate {
         }
         characters = ""
     }
-
 
     public func parser(_ parser: XMLParser, didEndElement elementName: String, namespaceURI: String?, qualifiedName qName: String?) {
         if elementName == "Station" {

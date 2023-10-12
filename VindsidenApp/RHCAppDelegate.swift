@@ -85,13 +85,6 @@ class RHCAppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate {
     func applicationWillResignActive(_ application: UIApplication) {
     }
 
-
-    func applicationDidEnterBackground(_ application: UIApplication) {
-        PlotFetcher.invalidate()
-        StationFetcher.invalidate()
-    }
-
-
     func applicationWillEnterForeground(_ application: UIApplication) {
         AppConfig.sharedConfiguration.presentReviewControllerIfCriteriaIsMet()
     }

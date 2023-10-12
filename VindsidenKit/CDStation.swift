@@ -12,45 +12,40 @@ import MapKit
 import OSLog
 
 @objc(CDStation)
-open class CDStation: NSManagedObject, MKAnnotation {
+public class CDStation: NSManagedObject, MKAnnotation {
 
     // MARK: - MKAnnotation
 
-
-    open var coordinate: CLLocationCoordinate2D {
+    public var coordinate: CLLocationCoordinate2D {
         return CLLocationCoordinate2D(latitude: (self.coordinateLat?.doubleValue)!, longitude: (self.coordinateLon?.doubleValue)!)
     }
 
-
-    open var title: String? {
+    public var title: String? {
         return self.stationName
     }
 
-
-    open var subtitle: String? {
+    public var subtitle: String? {
         return self.city
     }
 
-
-    @objc open class func existingStationWithId( _ stationId:Int, inManagedObjectContext managedObjectContext: NSManagedObjectContext) throws -> CDStation {
+    @objc
+    public class func existingStationWithId(_ stationId:Int, inManagedObjectContext managedObjectContext: NSManagedObjectContext) throws -> CDStation {
         let request: NSFetchRequest<CDStation> = CDStation.fetchRequest()
         request.predicate = NSPredicate(format: "stationId == \(stationId)")
         request.fetchLimit = 1
 
         let result = try managedObjectContext.fetch(request)
 
-        if result.count > 0 {
-            return result.first!
+        if let first = result.first {
+            return first
         }
 
         throw NSError(domain: AppConfig.Bundle.appName, code: -1, userInfo: nil)
     }
 
-
-    open class func newOrExistingStationWithId( _ stationId: Int, inManagedObectContext managedObjectContext: NSManagedObjectContext) -> CDStation {
+    public class func newOrExistingStationWithId(_ stationId: Int, inManagedObectContext managedObjectContext: NSManagedObjectContext) -> CDStation {
         do {
-            let existing = try CDStation.existingStationWithId(stationId, inManagedObjectContext: managedObjectContext)
-            return existing
+            return try CDStation.existingStationWithId(stationId, inManagedObjectContext: managedObjectContext)
         } catch {
             let entity = CDStation.entity()
             let station = CDStation(entity: entity, insertInto: managedObjectContext)
@@ -58,16 +53,15 @@ open class CDStation: NSManagedObject, MKAnnotation {
         }
     }
 
-
-    open class func searchForStationName( _ stationName: String, inManagedObjectContext managedObjectContext: NSManagedObjectContext) -> CDStation? {
+    public class func searchForStationName(_ stationName: String, inManagedObjectContext managedObjectContext: NSManagedObjectContext) -> CDStation? {
         let request: NSFetchRequest<CDStation> = CDStation.fetchRequest()
         request.predicate = NSPredicate(format: "stationName contains[cd] %@", argumentArray: [stationName])
         request.fetchLimit = 1
 
         do {
             let result = try managedObjectContext.fetch(request)
-            if result.count > 0 {
-                return result.first!
+            if let first = result.first {
+                return first
             }
         } catch {
             return nil
@@ -76,8 +70,7 @@ open class CDStation: NSManagedObject, MKAnnotation {
         return nil
     }
 
-
-    open class func maxOrderForStationsInManagedObjectContext( _ managedObjectContext: NSManagedObjectContext) -> Int {
+    public class func maxOrderForStationsInManagedObjectContext(_ managedObjectContext: NSManagedObjectContext) -> Int {
         let request: NSFetchRequest<NSFetchRequestResult> = CDStation.fetchRequest()
         request.fetchLimit = 1
 
@@ -102,21 +95,20 @@ open class CDStation: NSManagedObject, MKAnnotation {
         return 0
     }
 
-
-    @objc open class func numberOfVisibleStationsInManagedObjectContext( _ managedObjectContext: NSManagedObjectContext) -> Int {
+    @objc
+    public class func numberOfVisibleStationsInManagedObjectContext(_ managedObjectContext: NSManagedObjectContext) -> Int {
         let request: NSFetchRequest<CDStation> = CDStation.fetchRequest()
         request.predicate = NSPredicate(format: "isHidden == NO")
 
         do {
-            let count = try managedObjectContext.count(for: request)
-            return count
+            return try managedObjectContext.count(for: request)
         } catch {
             return 0
         }
     }
 
-
-    @objc open class func visibleStationsInManagedObjectContext( _ managedObjectContext: NSManagedObjectContext, limit: Int = 0) -> [CDStation] {
+    @objc
+    public class func visibleStationsInManagedObjectContext(_ managedObjectContext: NSManagedObjectContext, limit: Int = 0) -> [CDStation] {
         let request: NSFetchRequest<CDStation> = CDStation.fetchRequest()
         request.fetchBatchSize = 20
         request.predicate = NSPredicate(format: "isHidden == NO")
@@ -127,16 +119,15 @@ open class CDStation: NSManagedObject, MKAnnotation {
         }
 
         do {
-            let result = try managedObjectContext.fetch(request)
-            return result
+            return try managedObjectContext.fetch(request)
         } catch {
             return []
         }
     }
 
-    @objc open func lastRegisteredPlot() -> CDPlot? {
+    @objc
+    public func lastRegisteredPlot() -> CDPlot? {
         let inDate = Date().addingTimeInterval(-1*(AppConfig.Global.plotHistory-1)*3600)
-
         let gregorian = Calendar(identifier: Calendar.Identifier.gregorian)
         let inputComponents = (gregorian as NSCalendar).components([.year, .month, .day, .hour], from: inDate)
 
@@ -162,8 +153,8 @@ open class CDStation: NSManagedObject, MKAnnotation {
         return nil
     }
 
-
-    @objc open class func updateWithFetchedContent( _ content: [[String:String]], inManagedObjectContext managedObjectContext: NSManagedObjectContext, completionHandler: ((Bool) -> Void)? = nil) {
+    @objc
+    public class func updateWithFetchedContent(_ content: [[String:String]], inManagedObjectContext managedObjectContext: NSManagedObjectContext, completionHandler: ((Bool) -> Void)? = nil) {
         if content.count == 0 {
             completionHandler?(false)
             return
@@ -235,9 +226,7 @@ open class CDStation: NSManagedObject, MKAnnotation {
         }
     }
 
-
-
-    open class func updateWithWatchContent( _ content: [[String:AnyObject]], inManagedObjectContext managedObjectContext: NSManagedObjectContext, completionHandler: ((Bool) -> Void)? = nil) {
+    public class func updateWithWatchContent(_ content: [[String:AnyObject]], inManagedObjectContext managedObjectContext: NSManagedObjectContext, completionHandler: ((Bool) -> Void)? = nil) {
         DataManager.shared.performBackgroundTask { (context) in
             for stationContent in content {
                 guard let stationId = stationContent["stationId"] as? Int else {
@@ -274,8 +263,7 @@ open class CDStation: NSManagedObject, MKAnnotation {
         }
     }
 
-
-    func updateWithContent( _ content: [String:String] ) {
+    func updateWithContent(_ content: [String:String] ) {
         if let unwrapped = content["StationID"], let stationId = Int(unwrapped) {
             self.stationId = stationId as NSNumber?
         }
@@ -330,7 +318,7 @@ open class CDStation: NSManagedObject, MKAnnotation {
     }
 
 
-    func updateWithWatchContent( _ content: [String:AnyObject] ) {
+    func updateWithWatchContent(_ content: [String:AnyObject] ) {
         if let hidden = content["hidden"] as? Int {
             self.isHidden = hidden as NSNumber?
         }
@@ -356,4 +344,3 @@ open class CDStation: NSManagedObject, MKAnnotation {
         }
     }
 }
-

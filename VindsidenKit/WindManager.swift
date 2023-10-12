@@ -17,16 +17,13 @@ import OSLog
     public typealias WindManagerResult = Void
 #endif
 
-
 @objc(WindManager)
-open class WindManager : NSObject {
-
-    open var refreshInterval: TimeInterval = 0.0
-    var updateTimer: Timer?
-    var isUpdating:Bool = false
+public class WindManager : NSObject {
+    public var refreshInterval: TimeInterval = 0.0
+    private var updateTimer: Timer?
+    var isUpdating: Bool = false
 
     @objc public static let sharedManager = WindManager()
-
 
     override init() {
         super.init()
@@ -36,13 +33,11 @@ open class WindManager : NSObject {
         #endif
     }
 
-
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
 
-
-    open func startUpdating() -> Void {
+    public func startUpdating() -> Void {
         stopUpdating()
 
         if refreshInterval > 0 {
@@ -53,16 +48,14 @@ open class WindManager : NSObject {
         updateNow()
     }
 
-
-    open func stopUpdating() -> Void {
+    public func stopUpdating() -> Void {
         if let unwrappedTimer = updateTimer {
             unwrappedTimer.invalidate()
             updateTimer = nil
         }
     }
 
-
-    @objc open func updateNow() -> Void {
+    @objc func updateNow() -> Void {
         if let unwrappedTimer = updateTimer {
             unwrappedTimer.fire()
         } else {
@@ -85,16 +78,14 @@ open class WindManager : NSObject {
         }
     }
 
-
-    open func fetch(_ completionHandler: ((WindManagerResult) -> Void)? = nil) -> Void {
+    public func fetch() async -> WindManagerResult? {
         if ( isUpdating ) {
             Logger.wind.debug("Already updating")
-            #if os(iOS)
-                completionHandler?(.newData)
-            #else
-                completionHandler?(())
-            #endif
-            return;
+#if os(iOS)
+            return .newData
+#else
+            return nil
+#endif
         }
 
         isUpdating = true
@@ -104,56 +95,79 @@ open class WindManager : NSObject {
 
         if remainingStations <= 0 {
             isUpdating = false
-            #if os(iOS)
-                completionHandler?(.noData)
-            #else
-                completionHandler?(())
-            #endif
-            return
+#if os(iOS)
+            return .noData
+#else
+            return nil
+#endif
         }
 
         var numErrors = 0
 
         for station in stations {
-            if let stationId = station.stationId {
-                PlotFetcher().fetchForStationId(stationId.intValue, completionHandler: { (plots: [[String : String]], error: Error?) -> Void in
-                    if (error != nil) {
-                        Logger.wind.debug("error: \(String(describing: error))")
-                        numErrors += 1
-                    }
+            guard let stationId = station.stationId else {
+                continue
+            }
 
-                    CDPlot.updatePlots(plots, completion: { () -> Void in
-                        remainingStations -= 1
+            do {
+                let plots = try await PlotFetcher().fetchForStationId(stationId.intValue)
 
-                        Logger.wind.debug("Finished with \(numErrors) errors for \(station.stationName!).")
+                try CDPlot.updatePlots(plots)
 
-                        if remainingStations == 0 {
-                            self.isUpdating = false
-                            #if os(iOS)
-                                completionHandler?(.newData)
-                                #else
-                                completionHandler?(())
-                            #endif
-                        }
-                    })
-                })
+                remainingStations -= 1
+
+                Logger.wind.debug("Finished with \(numErrors) errors for \(station.stationName!).")
+
+                if remainingStations <= 0 {
+                    self.isUpdating = false
+#if os(iOS)
+                    return .newData
+#else
+                    return nil
+#endif
+                }
+            } catch {
+                Logger.wind.debug("error: \(String(describing: error))")
+                numErrors += 1
+            }
+        }
+
+        return nil
+    }
+
+    public func fetch(_ completionHandler: ((WindManagerResult) -> Void)? = nil) -> Void {
+        Task {
+            let result = await fetch()
+            DispatchQueue.main.async {
+#if os(iOS)
+                completionHandler?(result ?? .noData)
+#else
+                completionHandler?(())
+#endif
             }
         }
     }
 
 
     open func fetchForStationId( _ stationId: Int, completionHandler: ((WindManagerResult) -> Void)? = nil ) -> Void {
-        PlotFetcher().fetchForStationId(stationId) { (plots: [[String : String]], error: Error?) -> Void in
-            if (error != nil) {
+        Task {
+            do {
+                let plots = try await PlotFetcher().fetchForStationId(stationId)
+
+                try CDPlot.updatePlots(plots)
+
+#if os(iOS)
+                completionHandler?(.newData)
+#else
+                completionHandler?(())
+#endif
+            } catch {
                 Logger.wind.debug("error: \(String(describing: error))")
-            } else {
-                CDPlot.updatePlots(plots, completion: { () -> Void in
-                    #if os(iOS)
-                        completionHandler?(.newData)
-                        #else
-                        completionHandler?(())
-                    #endif
-                })
+#if os(iOS)
+                completionHandler?(.noData)
+#else
+                completionHandler?(())
+#endif
             }
         }
     }
@@ -163,7 +177,9 @@ open class WindManager : NSObject {
 
 
     @objc func updateTimerFired(_ timer: Timer) -> Void {
-        fetch()
+        Task {
+            await fetch()
+        }
     }
 
     #if os(iOS)
