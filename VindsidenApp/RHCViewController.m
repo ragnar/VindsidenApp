@@ -8,7 +8,6 @@
 #import "VindsidenApp-Swift.h"
 
 #import "RHCViewController.h"
-#import "RHCStationCell.h"
 #import "RHEGraphView.h"
 
 @import WatchConnectivity;
