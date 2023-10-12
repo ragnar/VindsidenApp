@@ -85,6 +85,17 @@
 		AD7BBB471A3F53F400883770 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD7BBB461A3F53F400883770 /* Logger.swift */; };
 		AD7BBB491A3F55A100883770 /* AppConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD7BBB481A3F55A100883770 /* AppConfig.swift */; };
 		AD9685832AD6883B00608FB3 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AD9685822AD6883B00608FB3 /* Launch Screen.storyboard */; };
+		AD96858A2AD6A40000608FB3 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD9685892AD6A40000608FB3 /* WidgetKit.framework */; };
+		AD96858C2AD6A40000608FB3 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD96858B2AD6A40000608FB3 /* SwiftUI.framework */; };
+		AD96858F2AD6A40000608FB3 /* VindsidenWidgetBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD96858E2AD6A40000608FB3 /* VindsidenWidgetBundle.swift */; };
+		AD9685912AD6A40000608FB3 /* VindsidenWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD9685902AD6A40000608FB3 /* VindsidenWidget.swift */; };
+		AD9685932AD6A40000608FB3 /* AppIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD9685922AD6A40000608FB3 /* AppIntent.swift */; };
+		AD9685952AD6A40100608FB3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AD9685942AD6A40100608FB3 /* Assets.xcassets */; };
+		AD9685992AD6A40100608FB3 /* VindsidenWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = AD9685882AD6A40000608FB3 /* VindsidenWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		AD96859E2AD6AB3700608FB3 /* Provider.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD96859D2AD6AB3700608FB3 /* Provider.swift */; };
+		AD9685A02AD6ACE900608FB3 /* Plot.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD96859F2AD6ACE900608FB3 /* Plot.swift */; };
+		AD9685A52AD6B8A300608FB3 /* Station.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD9685A42AD6B8A300608FB3 /* Station.swift */; };
+		AD9685A82AD6BED600608FB3 /* WeatherBoxView in Frameworks */ = {isa = PBXBuildFile; productRef = AD9685A72AD6BED600608FB3 /* WeatherBoxView */; };
 		AD9E40651B8C9C1700FABCF5 /* CDStation.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD9E40631B8C9C1700FABCF5 /* CDStation.swift */; };
 		AD9E406A1B8C9CC900FABCF5 /* CDStation.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD9E40631B8C9C1700FABCF5 /* CDStation.swift */; };
 		AD9E406C1B8D8A6900FABCF5 /* StationFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD9E406B1B8D8A6900FABCF5 /* StationFetcher.swift */; };
@@ -250,6 +261,20 @@
 			remoteGlobalIDString = AD539C9C1947B5CA002644BD;
 			remoteInfo = VindsidenKit;
 		};
+		AD9685972AD6A40100608FB3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AD17ED3C1731012200943C33 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = AD9685872AD6A40000608FB3;
+			remoteInfo = VindsidenWidgetExtension;
+		};
+		AD9685A12AD6B0B800608FB3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AD17ED3C1731012200943C33 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = AD539C9C1947B5CA002644BD;
+			remoteInfo = VindsidenKit;
+		};
 		ADBF8B821D0F03BE0005C0C9 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = AD17ED3C1731012200943C33 /* Project object */;
@@ -274,6 +299,7 @@
 			dstSubfolderSpec = 13;
 			files = (
 				AD66F5691CAEBA8B001A2755 /* VindSidenSpotlight.appex in Embed Foundation Extensions */,
+				AD9685992AD6A40100608FB3 /* VindsidenWidgetExtension.appex in Embed Foundation Extensions */,
 				AD539C8E1947B0F7002644BD /* org.juniks.VindsidenApp.VindsidenToday.appex in Embed Foundation Extensions */,
 			);
 			name = "Embed Foundation Extensions";
@@ -418,6 +444,18 @@
 		AD7BBB461A3F53F400883770 /* Logger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		AD7BBB481A3F55A100883770 /* AppConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppConfig.swift; sourceTree = "<group>"; };
 		AD9685822AD6883B00608FB3 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
+		AD9685882AD6A40000608FB3 /* VindsidenWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = VindsidenWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		AD9685892AD6A40000608FB3 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
+		AD96858B2AD6A40000608FB3 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
+		AD96858E2AD6A40000608FB3 /* VindsidenWidgetBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VindsidenWidgetBundle.swift; sourceTree = "<group>"; };
+		AD9685902AD6A40000608FB3 /* VindsidenWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VindsidenWidget.swift; sourceTree = "<group>"; };
+		AD9685922AD6A40000608FB3 /* AppIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppIntent.swift; sourceTree = "<group>"; };
+		AD9685942AD6A40100608FB3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		AD9685962AD6A40100608FB3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		AD96859D2AD6AB3700608FB3 /* Provider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Provider.swift; sourceTree = "<group>"; };
+		AD96859F2AD6ACE900608FB3 /* Plot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Plot.swift; sourceTree = "<group>"; };
+		AD9685A32AD6B12D00608FB3 /* VindsidenWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = VindsidenWidgetExtension.entitlements; sourceTree = "<group>"; };
+		AD9685A42AD6B8A300608FB3 /* Station.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Station.swift; sourceTree = "<group>"; };
 		AD9E40631B8C9C1700FABCF5 /* CDStation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CDStation.swift; sourceTree = "<group>"; };
 		AD9E406B1B8D8A6900FABCF5 /* StationFetcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StationFetcher.swift; path = VindsidenKit/StationFetcher.swift; sourceTree = SOURCE_ROOT; };
 		AD9E40721B8D9BCD00FABCF5 /* PlotFetcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlotFetcher.swift; path = VindsidenKit/PlotFetcher.swift; sourceTree = SOURCE_ROOT; };
@@ -527,6 +565,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AD9685A82AD6BED600608FB3 /* WeatherBoxView in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -545,6 +584,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		AD9685852AD6A40000608FB3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AD96858C2AD6A40000608FB3 /* SwiftUI.framework in Frameworks */,
+				AD96858A2AD6A40000608FB3 /* WidgetKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		ADBF8B7D1D0F03BE0005C0C9 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -559,6 +607,7 @@
 		AD17ED3B1731012200943C33 = {
 			isa = PBXGroup;
 			children = (
+				AD9685A32AD6B12D00608FB3 /* VindsidenWidgetExtension.entitlements */,
 				AD6142F01D0F088D0008C5E8 /* watchkitapp Extension.entitlements */,
 				ADBF8B1F1D0EFA2D0005C0C9 /* watchkitapp.entitlements */,
 				ADBF8AF51D0EF68F0005C0C9 /* Watch2 */,
@@ -569,6 +618,7 @@
 				AD2BB34B19C7718600349495 /* VindsidenAppTests */,
 				AD303C291B282DC800C4B999 /* VindsidenWatchKit */,
 				AD66F5631CAEBA8B001A2755 /* VindSidenSpotlight */,
+				AD96858D2AD6A40000608FB3 /* VindsidenWidget */,
 				AD17ED461731012200943C33 /* Frameworks */,
 				AD17ED451731012200943C33 /* Products */,
 			);
@@ -586,6 +636,7 @@
 				AD66F5621CAEBA8B001A2755 /* VindSidenSpotlight.appex */,
 				ADBF8B741D0F03BE0005C0C9 /* watchkitapp.app */,
 				ADBF8B801D0F03BE0005C0C9 /* watchkitapp Extension.appex */,
+				AD9685882AD6A40000608FB3 /* VindsidenWidgetExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -611,6 +662,8 @@
 				AD17ED6B1731012200943C33 /* SenTestingKit.framework */,
 				AD539C831947B0F6002644BD /* NotificationCenter.framework */,
 				9E713D0A7C32B35097808D07 /* Pods.framework */,
+				AD9685892AD6A40000608FB3 /* WidgetKit.framework */,
+				AD96858B2AD6A40000608FB3 /* SwiftUI.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -859,6 +912,21 @@
 			name = Views;
 			sourceTree = "<group>";
 		};
+		AD96858D2AD6A40000608FB3 /* VindsidenWidget */ = {
+			isa = PBXGroup;
+			children = (
+				AD96858E2AD6A40000608FB3 /* VindsidenWidgetBundle.swift */,
+				AD9685902AD6A40000608FB3 /* VindsidenWidget.swift */,
+				AD96859D2AD6AB3700608FB3 /* Provider.swift */,
+				AD96859F2AD6ACE900608FB3 /* Plot.swift */,
+				AD9685A42AD6B8A300608FB3 /* Station.swift */,
+				AD9685922AD6A40000608FB3 /* AppIntent.swift */,
+				AD9685942AD6A40100608FB3 /* Assets.xcassets */,
+				AD9685962AD6A40100608FB3 /* Info.plist */,
+			);
+			path = VindsidenWidget;
+			sourceTree = "<group>";
+		};
 		ADBF8AF51D0EF68F0005C0C9 /* Watch2 */ = {
 			isa = PBXGroup;
 			children = (
@@ -982,6 +1050,7 @@
 				AD539CB51947B5CA002644BD /* PBXTargetDependency */,
 				AD66F5681CAEBA8B001A2755 /* PBXTargetDependency */,
 				ADBF8B8F1D0F03BE0005C0C9 /* PBXTargetDependency */,
+				AD9685982AD6A40100608FB3 /* PBXTargetDependency */,
 			);
 			name = VindsidenApp;
 			productName = "Vindsiden-v2";
@@ -1056,6 +1125,9 @@
 			dependencies = (
 			);
 			name = VindsidenKit;
+			packageProductDependencies = (
+				AD9685A72AD6BED600608FB3 /* WeatherBoxView */,
+			);
 			productName = VindsidenKit;
 			productReference = AD539C9D1947B5CA002644BD /* VindsidenKit.framework */;
 			productType = "com.apple.product-type.framework";
@@ -1100,6 +1172,24 @@
 			name = VindSidenSpotlight;
 			productName = VindSidenSpotlight;
 			productReference = AD66F5621CAEBA8B001A2755 /* VindSidenSpotlight.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+		AD9685872AD6A40000608FB3 /* VindsidenWidgetExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AD96859C2AD6A40100608FB3 /* Build configuration list for PBXNativeTarget "VindsidenWidgetExtension" */;
+			buildPhases = (
+				AD9685842AD6A40000608FB3 /* Sources */,
+				AD9685852AD6A40000608FB3 /* Frameworks */,
+				AD9685862AD6A40000608FB3 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				AD9685A22AD6B0B800608FB3 /* PBXTargetDependency */,
+			);
+			name = VindsidenWidgetExtension;
+			productName = VindsidenWidgetExtension;
+			productReference = AD9685882AD6A40000608FB3 /* VindsidenWidgetExtension.appex */;
 			productType = "com.apple.product-type.app-extension";
 		};
 		ADBF8B731D0F03BE0005C0C9 /* watchkitapp */ = {
@@ -1148,7 +1238,7 @@
 				BuildIndependentTargetsInParallel = YES;
 				CLASSPREFIX = RHC;
 				LastSwiftMigration = 0730;
-				LastSwiftUpdateCheck = 0730;
+				LastSwiftUpdateCheck = 1500;
 				LastUpgradeCheck = 1500;
 				ORGANIZATIONNAME = RHC;
 				TargetAttributes = {
@@ -1205,6 +1295,9 @@
 							};
 						};
 					};
+					AD9685872AD6A40000608FB3 = {
+						CreatedOnToolsVersion = 15.0;
+					};
 					ADBF8B731D0F03BE0005C0C9 = {
 						CreatedOnToolsVersion = 7.3.1;
 						LastSwiftMigration = 0820;
@@ -1238,6 +1331,9 @@
 				nb,
 			);
 			mainGroup = AD17ED3B1731012200943C33;
+			packageReferences = (
+				AD9685A62AD6BED600608FB3 /* XCRemoteSwiftPackageReference "WeatherBoxView" */,
+			);
 			productRefGroup = AD17ED451731012200943C33 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -1251,6 +1347,7 @@
 				AD66F5611CAEBA8B001A2755 /* VindSidenSpotlight */,
 				ADBF8B731D0F03BE0005C0C9 /* watchkitapp */,
 				ADBF8B7F1D0F03BE0005C0C9 /* watchkitapp Extension */,
+				AD9685872AD6A40000608FB3 /* VindsidenWidgetExtension */,
 			);
 		};
 /* End PBXProject section */
@@ -1315,6 +1412,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AD9685862AD6A40000608FB3 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AD9685952AD6A40100608FB3 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1452,6 +1557,19 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		AD9685842AD6A40000608FB3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AD96859E2AD6AB3700608FB3 /* Provider.swift in Sources */,
+				AD9685912AD6A40000608FB3 /* VindsidenWidget.swift in Sources */,
+				AD96858F2AD6A40000608FB3 /* VindsidenWidgetBundle.swift in Sources */,
+				AD9685A02AD6ACE900608FB3 /* Plot.swift in Sources */,
+				AD9685A52AD6B8A300608FB3 /* Station.swift in Sources */,
+				AD9685932AD6A40000608FB3 /* AppIntent.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		ADBF8B7C1D0F03BE0005C0C9 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1551,6 +1669,16 @@
 			isa = PBXTargetDependency;
 			target = AD539C9C1947B5CA002644BD /* VindsidenKit */;
 			targetProxy = AD7F466B1F98C00500AFAAB7 /* PBXContainerItemProxy */;
+		};
+		AD9685982AD6A40100608FB3 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = AD9685872AD6A40000608FB3 /* VindsidenWidgetExtension */;
+			targetProxy = AD9685972AD6A40100608FB3 /* PBXContainerItemProxy */;
+		};
+		AD9685A22AD6B0B800608FB3 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = AD539C9C1947B5CA002644BD /* VindsidenKit */;
+			targetProxy = AD9685A12AD6B0B800608FB3 /* PBXContainerItemProxy */;
 		};
 		ADBF8B831D0F03BE0005C0C9 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -2352,6 +2480,97 @@
 			};
 			name = Release;
 		};
+		AD96859A2AD6A40100608FB3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_ENTITLEMENTS = VindsidenWidgetExtension.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = U69P77X647;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				INFOPLIST_FILE = VindsidenWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = VindsidenWidget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2023 RHC. All rights reserved.";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = org.juniks.VindsidenApp.VindsidenWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		AD96859B2AD6A40100608FB3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_ENTITLEMENTS = VindsidenWidgetExtension.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = U69P77X647;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				INFOPLIST_FILE = VindsidenWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = VindsidenWidget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2023 RHC. All rights reserved.";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = org.juniks.VindsidenApp.VindsidenWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 		ADBF8B921D0F03BE0005C0C9 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -2605,6 +2824,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		AD9685A62AD6BED600608FB3 /* XCRemoteSwiftPackageReference "WeatherBoxView" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "git@github.com:ragnar/WeatherBoxView.git";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		AD9685A72AD6BED600608FB3 /* WeatherBoxView */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AD9685A62AD6BED600608FB3 /* XCRemoteSwiftPackageReference "WeatherBoxView" */;
+			productName = WeatherBoxView;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		AD7AA505196E46D800B1518B /* Vindsiden.xcdatamodeld */ = {

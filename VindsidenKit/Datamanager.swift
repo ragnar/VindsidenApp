@@ -19,7 +19,8 @@ import CoreSpotlight
 public class DataManager: NSObject {
     @objc public static let shared = DataManager()
 
-    private let container: NSPersistentContainer
+    let container: NSPersistentContainer
+    
     private lazy var dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
         

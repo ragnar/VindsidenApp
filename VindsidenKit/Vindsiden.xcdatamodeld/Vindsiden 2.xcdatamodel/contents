@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14315.18" systemVersion="17G2307" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
-    <entity name="CDPlot" representedClassName="CDPlot" syncable="YES" codeGenerationType="category">
-        <attribute name="dataId" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
-        <attribute name="plotTime" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
-        <attribute name="tempAir" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="NO" syncable="YES"/>
-        <attribute name="tempWater" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="NO" syncable="YES"/>
-        <attribute name="windAvg" optional="YES" attributeType="Float" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
-        <attribute name="windDir" optional="YES" attributeType="Float" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
-        <attribute name="windMax" optional="YES" attributeType="Float" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
-        <attribute name="windMin" optional="YES" attributeType="Float" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
-        <relationship name="station" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="CDStation" inverseName="plots" inverseEntity="CDStation" syncable="YES"/>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="22222" systemVersion="23A344" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="Plot" representedClassName="CDPlot" syncable="YES" codeGenerationType="category">
+        <attribute name="dataId" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO"/>
+        <attribute name="plotTime" attributeType="Date" defaultDateTimeInterval="718713600" usesScalarValueType="NO"/>
+        <attribute name="tempAir" attributeType="Float" defaultValueString="0.0" usesScalarValueType="NO"/>
+        <attribute name="tempWater" attributeType="Float" defaultValueString="0.0" usesScalarValueType="NO"/>
+        <attribute name="windAvg" attributeType="Float" defaultValueString="0" usesScalarValueType="NO"/>
+        <attribute name="windDir" attributeType="Float" defaultValueString="0" usesScalarValueType="NO"/>
+        <attribute name="windMax" attributeType="Float" defaultValueString="0" usesScalarValueType="NO"/>
+        <attribute name="windMin" attributeType="Float" defaultValueString="0" usesScalarValueType="NO"/>
+        <relationship name="station" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Station" inverseName="plots" inverseEntity="Station"/>
         <fetchIndex name="byDataIdIndex">
             <fetchIndexElement property="dataId" type="Binary" order="ascending"/>
         </fetchIndex>
@@ -17,24 +17,24 @@
             <fetchIndexElement property="station" type="Binary" order="ascending"/>
         </fetchIndex>
     </entity>
-    <entity name="CDStation" representedClassName="CDStation" syncable="YES" codeGenerationType="category">
-        <attribute name="city" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="coordinateLat" optional="YES" attributeType="Double" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
-        <attribute name="coordinateLon" optional="YES" attributeType="Double" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
-        <attribute name="copyright" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="isHidden" attributeType="Boolean" defaultValueString="YES" usesScalarValueType="NO" syncable="YES"/>
-        <attribute name="lastMeasurement" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
-        <attribute name="lastRefreshed" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
-        <attribute name="order" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
-        <attribute name="stationId" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
-        <attribute name="stationName" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="stationText" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="statusMessage" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="webCamImage" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="webCamText" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="webCamURL" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="yrURL" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="plots" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="CDPlot" inverseName="station" inverseEntity="CDPlot" syncable="YES"/>
+    <entity name="Station" representedClassName="CDStation" syncable="YES" codeGenerationType="category">
+        <attribute name="city" optional="YES" attributeType="String"/>
+        <attribute name="coordinateLat" optional="YES" attributeType="Double" defaultValueString="0" usesScalarValueType="NO"/>
+        <attribute name="coordinateLon" optional="YES" attributeType="Double" defaultValueString="0" usesScalarValueType="NO"/>
+        <attribute name="copyright" optional="YES" attributeType="String"/>
+        <attribute name="isHidden" attributeType="Boolean" defaultValueString="YES" usesScalarValueType="NO"/>
+        <attribute name="lastMeasurement" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="lastRefreshed" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="order" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="NO"/>
+        <attribute name="stationId" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="NO"/>
+        <attribute name="stationName" optional="YES" attributeType="String"/>
+        <attribute name="stationText" optional="YES" attributeType="String"/>
+        <attribute name="statusMessage" optional="YES" attributeType="String"/>
+        <attribute name="webCamImage" optional="YES" attributeType="String"/>
+        <attribute name="webCamText" optional="YES" attributeType="String"/>
+        <attribute name="webCamURL" optional="YES" attributeType="String"/>
+        <attribute name="yrURL" optional="YES" attributeType="String"/>
+        <relationship name="plots" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Plot" inverseName="station" inverseEntity="Plot"/>
         <fetchIndex name="byOrderIndex">
             <fetchIndexElement property="order" type="Binary" order="ascending"/>
         </fetchIndex>
@@ -47,8 +47,4 @@
             </uniquenessConstraint>
         </uniquenessConstraints>
     </entity>
-    <elements>
-        <element name="CDPlot" positionX="0" positionY="0" width="128" height="180"/>
-        <element name="CDStation" positionX="-333" positionY="423" width="128" height="300"/>
-    </elements>
 </model>

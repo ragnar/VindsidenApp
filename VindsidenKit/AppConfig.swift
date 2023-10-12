@@ -39,8 +39,8 @@ open class AppConfig : NSObject {
     }
 
 
-    struct ApplicationGroups {
-        static let primary = "group.\(Bundle.prefix).\(Bundle.appName)"
+    public struct ApplicationGroups {
+        public static let primary = "group.\(Bundle.prefix).\(Bundle.appName)"
     }
 
 
