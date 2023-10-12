@@ -224,7 +224,6 @@ static NSString *kCellID = @"stationCellID";
         UINavigationController *navCon = segue.destinationViewController;
 
         RHCLandscapeGraphViewController *controller = navCon.viewControllers.firstObject;
-        controller.plots = cell.graphView.plots;
         controller.station = cell.currentStation;
     }
 }

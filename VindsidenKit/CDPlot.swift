@@ -9,9 +9,24 @@
 import Foundation
 import CoreData
 import OSLog
+import Charts
 
 @objc(CDPlot)
-open class CDPlot: NSManagedObject {
+open class CDPlot: NSManagedObject, Plottable {
+    public typealias PrimitivePlottable = Date
+
+    public var primitivePlottable: Date {
+        return plotTime!
+    }
+
+
+    public required init?(primitivePlottable: Date) {
+        nil
+    }
+
+    public override init(entity: NSEntityDescription, insertInto context: NSManagedObjectContext?) {
+        super.init(entity: entity, insertInto: context)
+    }
 
 
     open class func newOrExistingPlot( _ content: [String:String], forStation station:CDStation, inManagedObjectContext managedObjectContext: NSManagedObjectContext) -> CDPlot {
@@ -38,7 +53,7 @@ open class CDPlot: NSManagedObject {
     }
 
 
-    open class func updatePlots(_ plots: [[String: String]]) throws {
+    open class func updatePlots(_ plots: [[String: String]]) async throws {
         if plots.isEmpty {
             return
         }
@@ -51,28 +66,28 @@ open class CDPlot: NSManagedObject {
             return
         }
 
-        let context = DataManager.shared.container.newBackgroundContext()
+        try await DataManager.shared.container.performBackgroundTask { context in
+            context.mergePolicy = NSOverwriteMergePolicy
 
-        context.mergePolicy = NSOverwriteMergePolicy
+            let station = try CDStation.existingStationWithId(stationId, inManagedObjectContext: context)
+            let insertedPlots = NSMutableSet()
 
-        let station = try CDStation.existingStationWithId(stationId, inManagedObjectContext: context)
-        let insertedPlots = NSMutableSet()
+            for plot in plots {
+                let managedObject = CDPlot.newOrExistingPlot(plot, forStation: station, inManagedObjectContext: context)
 
-        for plot in plots {
-            let managedObject = CDPlot.newOrExistingPlot(plot, forStation: station, inManagedObjectContext: context)
-
-            if managedObject.isInserted {
-                insertedPlots.add(managedObject)
+                if managedObject.isInserted {
+                    insertedPlots.add(managedObject)
+                }
             }
-        }
 
-        if insertedPlots.count > 0 {
-            station.willChangeValue(forKey: "plots")
-            station.addToPlots(insertedPlots)
-            station.didChangeValue(forKey: "plots")
-        }
+            if insertedPlots.count > 0 {
+                station.willChangeValue(forKey: "plots")
+                station.addToPlots(insertedPlots)
+                station.didChangeValue(forKey: "plots")
+            }
 
-        try context.save()
+            try context.save()
+        }
     }
 
     func updateWithContent( _ content: [String:String] ) {

@@ -81,8 +81,8 @@ extension DataManager {
     }
 
     public func performBackgroundTask(_ block: @escaping (NSManagedObjectContext) -> Void) {
-        container.viewContext.perform {
-            block(self.container.viewContext)
+        container.performBackgroundTask { context in
+            block(context)
         }
     }
 
@@ -91,7 +91,7 @@ extension DataManager {
     }
 
     public func removeStaleStationsIds(_ stations: [Int], inManagedObjectContext managedObjectContext: NSManagedObjectContext) {
-        performBackgroundTask { (context) in
+        performBackgroundTask { context in
             let fetchRequest: NSFetchRequest<NSFetchRequestResult> = CDStation.fetchRequest()
             fetchRequest.predicate = NSPredicate(format: "NOT stationId IN (%@)", stations)
 
@@ -99,7 +99,7 @@ extension DataManager {
             request.resultType = .resultTypeCount
 
             do {
-                let result = try managedObjectContext.execute(request) as! NSBatchDeleteResult
+                let result = try context.execute(request) as! NSBatchDeleteResult
                 Logger.persistence.debug("Deleted \(result.result as? Int ?? -1) station(s)")
                 try context.save()
             } catch {
@@ -172,9 +172,10 @@ extension DataManager {
 
         let url = "vindsiden://station/\(station.stationId!)"
         let item = CSSearchableItem(uniqueIdentifier: url, domainIdentifier: AppConfig.Bundle.appName, attributeSet: search)
+        let stationName = station.stationName
 
         CSSearchableIndex.default().indexSearchableItems( [item], completionHandler: { (error: Error?) -> Void in
-            Logger.persistence.debug("Added station: \(String(describing: station.stationName)) with error: \(String(describing: error?.localizedDescription))")
+            Logger.persistence.debug("Added station: \(String(describing: stationName)) with error: \(String(describing: error?.localizedDescription))")
         })
     }
 
@@ -184,10 +185,11 @@ extension DataManager {
             return
         }
 
+        let stationName = station.stationName
         let url = "vindsiden://station/\(station.stationId!)"
         
         CSSearchableIndex.default().deleteSearchableItems(withIdentifiers: [url]) { (error: Error?) -> Void in
-            Logger.persistence.debug("Removed station: \(String(describing: station.stationName)) with error: \(String(describing: error?.localizedDescription))")
+            Logger.persistence.debug("Removed station: \(String(describing: stationName)) with error: \(String(describing: error?.localizedDescription))")
         }
     }
 #endif

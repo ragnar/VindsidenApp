@@ -30,7 +30,7 @@ struct VindsidenWidgetEntryView : View {
             Chart {
                 ForEach(entry.plots, id: \.plotTime) { value in
                     AreaMark(
-                        x: .value("Tine", value.plotTime, unit: .minute),
+                        x: .value("Time", value.plotTime, unit: .minute),
                         yStart: .value("Lull", value.windMin),
                         yEnd: .value("Gust", value.windMax)
                     )
@@ -38,8 +38,24 @@ struct VindsidenWidgetEntryView : View {
 
                     LineMark(
                         x: .value("Time", value.plotTime, unit: .minute),
+                        y: .value("Speed Min", value.windMin)
+                    )
+                    .lineStyle(StrokeStyle(lineWidth: 0.5, dash: []))
+                    .foregroundStyle(by: .value("Series", "Variation Min"))
+
+                    LineMark(
+                        x: .value("Time", value.plotTime, unit: .minute),
+                        y: .value("Speed Max", value.windMax)
+                    )
+                    .lineStyle(StrokeStyle(lineWidth: 0.5, dash: []))
+                    .foregroundStyle(by: .value("Series", "Variation Max"))
+
+                    LineMark(
+                        x: .value("Time", value.plotTime, unit: .minute),
                         y: .value("Speed", value.windAvg)
                     )
+                    .lineStyle(StrokeStyle(lineWidth: 1, dash: []))
+                    .foregroundStyle(by: .value("Series", "Average"))
 
                 }
                 .interpolationMethod(.catmullRom)
@@ -57,9 +73,12 @@ struct VindsidenWidgetEntryView : View {
                     }
                 }
             }
+            .chartYAxisLabel("m/s")
             .chartForegroundStyleScale([
-                "Variation": Color.black.opacity(0.05),
-                "Average": Color.blue
+                "Average": Color("AccentColor"),
+                "Variation": Color("AccentColor").opacity(0.1),
+                "Variation Min": Color("AccentColor").opacity(0.3),
+                "Variation Max": Color("AccentColor").opacity(0.3),
             ])
             .chartLegend(.hidden)
         }

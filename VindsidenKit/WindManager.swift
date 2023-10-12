@@ -59,6 +59,7 @@ public class WindManager : NSObject {
     }
 
 
+    @MainActor
     func activeStations() -> [CDStation] {
         let fetchRequest: NSFetchRequest<CDStation> = CDStation.fetchRequest()
         fetchRequest.predicate = NSPredicate(format: "isHidden == NO")
@@ -73,6 +74,7 @@ public class WindManager : NSObject {
         }
     }
 
+    @MainActor
     public func fetch() async {
         if ( isUpdating ) {
             Logger.wind.debug("Already updating")
@@ -99,7 +101,7 @@ public class WindManager : NSObject {
             do {
                 let plots = try await PlotFetcher().fetchForStationId(stationId.intValue)
 
-                try CDPlot.updatePlots(plots)
+                try await CDPlot.updatePlots(plots)
 
                 remainingStations -= 1
 
@@ -121,7 +123,7 @@ public class WindManager : NSObject {
 
 
     @objc func updateTimerFired(_ timer: Timer) -> Void {
-        Task {
+        Task { @MainActor in
             await fetch()
 #if os(iOS)
             WidgetCenter.shared.reloadTimelines(ofKind: "VindsidenWidget")
