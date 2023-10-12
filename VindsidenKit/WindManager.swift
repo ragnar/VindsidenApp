@@ -9,13 +9,8 @@
 import Foundation
 import WatchConnectivity
 import CoreData
+import WidgetKit
 import OSLog
-
-#if os(iOS)
-    public typealias WindManagerResult = UIBackgroundFetchResult
-#else
-    public typealias WindManagerResult = Void
-#endif
 
 @objc(WindManager)
 public class WindManager : NSObject {
@@ -69,8 +64,8 @@ public class WindManager : NSObject {
         fetchRequest.predicate = NSPredicate(format: "isHidden == NO")
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: "order", ascending: true)]
 
-        let context = DataManager.shared.viewContext()
         do {
+            let context = DataManager.shared.viewContext()
             let stations = try context.fetch(fetchRequest)
             return stations
         } catch {
@@ -78,14 +73,10 @@ public class WindManager : NSObject {
         }
     }
 
-    public func fetch() async -> WindManagerResult? {
+    public func fetch() async {
         if ( isUpdating ) {
             Logger.wind.debug("Already updating")
-#if os(iOS)
-            return .newData
-#else
-            return nil
-#endif
+            return
         }
 
         isUpdating = true
@@ -95,11 +86,7 @@ public class WindManager : NSObject {
 
         if remainingStations <= 0 {
             isUpdating = false
-#if os(iOS)
-            return .noData
-#else
-            return nil
-#endif
+            return
         }
 
         var numErrors = 0
@@ -120,11 +107,6 @@ public class WindManager : NSObject {
 
                 if remainingStations <= 0 {
                     self.isUpdating = false
-#if os(iOS)
-                    return .newData
-#else
-                    return nil
-#endif
                 }
             } catch {
                 Logger.wind.debug("error: \(String(describing: error))")
@@ -132,46 +114,8 @@ public class WindManager : NSObject {
             }
         }
 
-        return nil
+        return
     }
-
-    public func fetch(_ completionHandler: ((WindManagerResult) -> Void)? = nil) -> Void {
-        Task {
-            let result = await fetch()
-            DispatchQueue.main.async {
-#if os(iOS)
-                completionHandler?(result ?? .noData)
-#else
-                completionHandler?(())
-#endif
-            }
-        }
-    }
-
-
-    open func fetchForStationId( _ stationId: Int, completionHandler: ((WindManagerResult) -> Void)? = nil ) -> Void {
-        Task {
-            do {
-                let plots = try await PlotFetcher().fetchForStationId(stationId)
-
-                try CDPlot.updatePlots(plots)
-
-#if os(iOS)
-                completionHandler?(.newData)
-#else
-                completionHandler?(())
-#endif
-            } catch {
-                Logger.wind.debug("error: \(String(describing: error))")
-#if os(iOS)
-                completionHandler?(.noData)
-#else
-                completionHandler?(())
-#endif
-            }
-        }
-    }
-
 
     // MARK: - Notifications
 
@@ -179,6 +123,9 @@ public class WindManager : NSObject {
     @objc func updateTimerFired(_ timer: Timer) -> Void {
         Task {
             await fetch()
+#if os(iOS)
+            WidgetCenter.shared.reloadTimelines(ofKind: "VindsidenWidget")
+#endif
         }
     }
 

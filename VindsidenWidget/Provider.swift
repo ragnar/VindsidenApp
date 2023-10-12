@@ -12,39 +12,32 @@ import VindsidenKit
 import WeatherBoxView
 
 struct Provider: AppIntentTimelineProvider  {
-    private let modelContainer: ModelContainer
-
-    init() {
-        guard let appGroupContainer = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: AppConfig.ApplicationGroups.primary) else {
-            fatalError("Shared file container could not be created.")
-        }
-
-        let url = appGroupContainer.appendingPathComponent(AppConfig.CoreData.sqliteName)
-
-        do {
-            modelContainer = try ModelContainer(for: Station.self, Plot.self, configurations: ModelConfiguration(url: url))
-        } catch {
-            fatalError("Failed to create the model container: \(error)")
-        }
-    }
+    private let modelContainer: ModelContainer = PersistentContainer.container
 
     func placeholder(in context: Context) -> SimpleEntry {
-        SimpleEntry(date: Date(), configuration: ConfigurationAppIntent())
+        SimpleEntry(date: Date(), configuration: ConfigurationAppIntent(), plots: [])
     }
 
     func snapshot(for configuration: ConfigurationAppIntent, in context: Context) async -> SimpleEntry {
-        SimpleEntry(date: Date(), configuration: configuration)
+        SimpleEntry(date: Date(), configuration: configuration, plots: [])
     }
 
     func timeline(for configuration: ConfigurationAppIntent, in context: Context) async -> Timeline<SimpleEntry> {
+        guard let stationName = configuration.station else {
+            return Timeline(entries: [], policy: .atEnd)
+        }
+
         let entries: [SimpleEntry] = await Task { @MainActor in
-            var fetchDescriptor = FetchDescriptor(sortBy: [SortDescriptor(\Plot.dataId, order: .reverse)])
-            fetchDescriptor.fetchLimit = 1
+            await WindManager.sharedManager.fetch()
+
+            var fetchDescriptor = FetchDescriptor(sortBy: [SortDescriptor(\Plot.plotTime, order: .reverse)])
+            fetchDescriptor.predicate = #Predicate { $0.station?.stationName == stationName }
+            fetchDescriptor.fetchLimit = 20
 
             if let plots = try? modelContainer.mainContext.fetch(fetchDescriptor), let plot = plots.first {
-                print("plot", plot.dataId, plot.plotTime, plot.station?.stationName ?? "kk")
+                print("plot", plot.dataId, plot.plotTime, plot.station?.stationName ?? "kk", "plots:", plots.count)
                 return [
-                    SimpleEntry(date: plot.plotTime, configuration: configuration)
+                    SimpleEntry(date: plot.plotTime, configuration: configuration, plots: plots.reversed())
                 ]
             }
             return []

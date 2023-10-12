@@ -32,9 +32,11 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate {
 
         DataManager.shared.cleanupPlots { () -> Void in
             NotificationCenter.default.post(name: Notification.Name.FetchingPlots, object: nil)
-            WindManager.sharedManager.fetch({ (result: WindManagerResult) -> Void in
-                NotificationCenter.default.post(name: Notification.Name.ReceivedPlots, object: nil)
-            })
+
+            Task { @MainActor in
+                await WindManager.sharedManager.fetch()
+                NotificationCenter.default.post( name: Notification.Name.ReceivedPlots, object: nil)
+            }
         }
     }
 
@@ -55,15 +57,17 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate {
                     return
                 }
 
-                WindManager.sharedManager.fetch({ (result: WindManagerResult) -> Void in
-                    NotificationCenter.default.post(name: Notification.Name.ReceivedPlots, object: nil)
+                Task { @MainActor in
+                    await WindManager.sharedManager.fetch()
+                    NotificationCenter.default.post( name: Notification.Name.ReceivedPlots, object: nil)
+
                     if #available(watchOSApplicationExtension 4.0, *) {
                         backgroundTask.setTaskCompletedWithSnapshot(false)
                     } else {
                         backgroundTask.setTaskCompleted()
                     }
                     self.scheduleRefresh()
-                })
+                }
 
 //            case let snapshotTask as WKSnapshotRefreshBackgroundTask:
 //                // Snapshot tasks have a unique completion call, make sure to set your expiration date

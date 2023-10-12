@@ -91,6 +91,7 @@
 		AD9685A02AD6ACE900608FB3 /* Plot.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD96859F2AD6ACE900608FB3 /* Plot.swift */; };
 		AD9685A52AD6B8A300608FB3 /* Station.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD9685A42AD6B8A300608FB3 /* Station.swift */; };
 		AD9685A82AD6BED600608FB3 /* WeatherBoxView in Frameworks */ = {isa = PBXBuildFile; productRef = AD9685A72AD6BED600608FB3 /* WeatherBoxView */; };
+		AD9685AA2AD7CA2000608FB3 /* PersistentContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD9685A92AD7CA2000608FB3 /* PersistentContainer.swift */; };
 		AD9E40651B8C9C1700FABCF5 /* CDStation.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD9E40631B8C9C1700FABCF5 /* CDStation.swift */; };
 		AD9E406A1B8C9CC900FABCF5 /* CDStation.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD9E40631B8C9C1700FABCF5 /* CDStation.swift */; };
 		AD9E406C1B8D8A6900FABCF5 /* StationFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD9E406B1B8D8A6900FABCF5 /* StationFetcher.swift */; };
@@ -425,6 +426,7 @@
 		AD96859F2AD6ACE900608FB3 /* Plot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Plot.swift; sourceTree = "<group>"; };
 		AD9685A32AD6B12D00608FB3 /* VindsidenWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = VindsidenWidgetExtension.entitlements; sourceTree = "<group>"; };
 		AD9685A42AD6B8A300608FB3 /* Station.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Station.swift; sourceTree = "<group>"; };
+		AD9685A92AD7CA2000608FB3 /* PersistentContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistentContainer.swift; sourceTree = "<group>"; };
 		AD9E40631B8C9C1700FABCF5 /* CDStation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CDStation.swift; sourceTree = "<group>"; };
 		AD9E406B1B8D8A6900FABCF5 /* StationFetcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StationFetcher.swift; path = VindsidenKit/StationFetcher.swift; sourceTree = SOURCE_ROOT; };
 		AD9E40721B8D9BCD00FABCF5 /* PlotFetcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlotFetcher.swift; path = VindsidenKit/PlotFetcher.swift; sourceTree = SOURCE_ROOT; };
@@ -855,6 +857,7 @@
 				AD96859F2AD6ACE900608FB3 /* Plot.swift */,
 				AD9685A42AD6B8A300608FB3 /* Station.swift */,
 				AD9685922AD6A40000608FB3 /* AppIntent.swift */,
+				AD9685A92AD7CA2000608FB3 /* PersistentContainer.swift */,
 				AD9685942AD6A40100608FB3 /* Assets.xcassets */,
 				AD9685962AD6A40100608FB3 /* Info.plist */,
 			);
@@ -1450,6 +1453,7 @@
 				AD96859E2AD6AB3700608FB3 /* Provider.swift in Sources */,
 				AD9685912AD6A40000608FB3 /* VindsidenWidget.swift in Sources */,
 				AD96858F2AD6A40000608FB3 /* VindsidenWidgetBundle.swift in Sources */,
+				AD9685AA2AD7CA2000608FB3 /* PersistentContainer.swift in Sources */,
 				AD9685A02AD6ACE900608FB3 /* Plot.swift in Sources */,
 				AD9685A52AD6B8A300608FB3 /* Station.swift in Sources */,
 				AD9685932AD6A40000608FB3 /* AppIntent.swift in Sources */,

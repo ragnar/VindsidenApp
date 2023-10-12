@@ -13,26 +13,19 @@ import VindsidenKit
 
 struct ConfigurationAppIntent: WidgetConfigurationIntent {
     static var title: LocalizedStringResource = "Configuration"
-    static var description = IntentDescription("This is an example widget.")
+    static var description = IntentDescription("Select wind station to show in the widget.")
 
     @Parameter(title: "Select station", optionsProvider: StationOptionsProvider())
     var station: String?
 
     struct StationOptionsProvider: DynamicOptionsProvider {
         func results() async throws -> [String] {
-            guard let appGroupContainer = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: AppConfig.ApplicationGroups.primary) else {
-                fatalError("Shared file container could not be created.")
-            }
-
-            let url = appGroupContainer.appendingPathComponent(AppConfig.CoreData.sqliteName)
-
             do {
-                let modelContainer = try ModelContainer(for: Station.self, Plot.self, configurations: ModelConfiguration(url: url))
-
                 return try await Task { @MainActor in
-                    let fetchDescriptor = FetchDescriptor(sortBy: [SortDescriptor(\Station.stationName, order: .forward)])
+                    var fetchDescriptor = FetchDescriptor(sortBy: [SortDescriptor(\Station.stationName, order: .forward)])
+                    fetchDescriptor.predicate = #Predicate { $0.isHidden == false }
 
-                    return try modelContainer.mainContext.fetch(fetchDescriptor).compactMap { $0.stationName }
+                    return try PersistentContainer.container.mainContext.fetch(fetchDescriptor).compactMap { $0.stationName }
                 }.value
             } catch {
                 fatalError("Failed to create the model container: \(error)")
@@ -40,4 +33,3 @@ struct ConfigurationAppIntent: WidgetConfigurationIntent {
         }
     }
 }
-

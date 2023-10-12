@@ -10,6 +10,7 @@ import UIKit
 import VindsidenKit
 import WatchConnectivity
 import CoreSpotlight
+import WidgetKit
 import OSLog
 
 @UIApplicationMain
@@ -108,11 +109,12 @@ class RHCAppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate {
 
 
     func application(_ application: UIApplication, performFetchWithCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
-        WindManager.sharedManager.fetch { (result: UIBackgroundFetchResult) -> Void in
-            completionHandler(result)
+        Task { @MainActor in
+            await WindManager.sharedManager.fetch()
+            WidgetCenter.shared.reloadTimelines(ofKind: "VindsidenWidget")
+            completionHandler(.newData)
         }
     }
-
 
     func application(_ application: UIApplication, handleWatchKitExtensionRequest userInfo: [AnyHashable: Any]?, reply: @escaping ([AnyHashable: Any]?) -> Void) {
         let taskID = application.beginBackgroundTask(expirationHandler: {})

@@ -61,12 +61,11 @@ class WCFetcher: NSObject, WCSessionDelegate {
 
         if let stations = applicationContext["activeStations"] as? [[String:AnyObject]] {
             CDStation.updateWithWatchContent(stations, inManagedObjectContext: DataManager.shared.viewContext(), completionHandler: { (visible: Bool) -> Void in
-                DispatchQueue.main.async(execute: { () -> Void in
-                    WindManager.sharedManager.fetch({ (result: WindManagerResult) -> Void in
-                        NotificationCenter.default.post( name: Notification.Name.ReceivedPlots, object: nil)
-                    })
+                Task { @MainActor in
+                    await WindManager.sharedManager.fetch()
+                    NotificationCenter.default.post( name: Notification.Name.ReceivedPlots, object: nil)
                     NotificationCenter.default.post( name: Notification.Name.ReceivedStations, object: nil)
-                })
+                }
             })
         }
 
