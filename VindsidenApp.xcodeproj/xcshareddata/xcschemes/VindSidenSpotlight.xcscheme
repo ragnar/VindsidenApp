@@ -15,9 +15,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "AD9685872AD6A40000608FB3"
-               BuildableName = "VindsidenWidgetExtension.appex"
-               BlueprintName = "VindsidenWidgetExtension"
+               BlueprintIdentifier = "AD66F5611CAEBA8B001A2755"
+               BuildableName = "VindSidenSpotlight.appex"
+               BlueprintName = "VindSidenSpotlight"
                ReferencedContainer = "container:VindsidenApp.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -41,8 +41,18 @@
       buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
-      shouldUseLaunchSchemeArgsEnv = "YES"
-      shouldAutocreateTestPlan = "YES">
+      shouldUseLaunchSchemeArgsEnv = "YES">
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "AD66F5611CAEBA8B001A2755"
+            BuildableName = "VindSidenSpotlight.appex"
+            BlueprintName = "VindSidenSpotlight"
+            ReferencedContainer = "container:VindsidenApp.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
+      <Testables>
+      </Testables>
    </TestAction>
    <LaunchAction
       buildConfiguration = "Debug"
@@ -57,15 +67,9 @@
       allowLocationSimulation = "YES"
       launchAutomaticallySubstyle = "2">
       <RemoteRunnable
-         runnableDebuggingMode = "2"
-         BundleIdentifier = "com.apple.springboard">
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "AD9685872AD6A40000608FB3"
-            BuildableName = "VindsidenWidgetExtension.appex"
-            BlueprintName = "VindsidenWidgetExtension"
-            ReferencedContainer = "container:VindsidenApp.xcodeproj">
-         </BuildableReference>
+         runnableDebuggingMode = "1"
+         BundleIdentifier = "org.juniks.VindsidenApp"
+         RemotePath = "/Users/ragnar/Library/Developer/CoreSimulator/Devices/015CB069-8C87-4C2D-88F2-1BC4B190674E/data/Containers/Bundle/Application/0242D97C-3D27-461D-B83E-54E53F1DAC41/VindsidenApp.app">
       </RemoteRunnable>
       <MacroExpansion>
          <BuildableReference
@@ -76,23 +80,6 @@
             ReferencedContainer = "container:VindsidenApp.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
-      <EnvironmentVariables>
-         <EnvironmentVariable
-            key = "_XCWidgetKind"
-            value = ""
-            isEnabled = "YES">
-         </EnvironmentVariable>
-         <EnvironmentVariable
-            key = "_XCWidgetDefaultView"
-            value = "timeline"
-            isEnabled = "YES">
-         </EnvironmentVariable>
-         <EnvironmentVariable
-            key = "_XCWidgetFamily"
-            value = "systemSmall"
-            isEnabled = "YES">
-         </EnvironmentVariable>
-      </EnvironmentVariables>
    </LaunchAction>
    <ProfileAction
       buildConfiguration = "Release"

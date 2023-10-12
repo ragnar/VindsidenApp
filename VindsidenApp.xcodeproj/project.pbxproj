@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		AD003850196E7A6400C3232A /* RHCTodayCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD00384F196E7A6400C3232A /* RHCTodayCell.swift */; };
 		AD07B2C11779E90A004BC24C /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AD07B2C01779E90A004BC24C /* Media.xcassets */; };
 		AD0A242624688DD40072B93F /* CoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD0A242524688DD40072B93F /* CoreServices.framework */; };
 		AD17ED481731012200943C33 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD17ED471731012200943C33 /* UIKit.framework */; };
@@ -30,7 +29,6 @@
 		AD2AB4F819C722320029C739 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = AD2AB4FA19C722320029C739 /* InfoPlist.strings */; };
 		AD2AB4FD19C722330029C739 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = AD2AB4FF19C722330029C739 /* InfoPlist.strings */; };
 		AD2AB50219C722330029C739 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = AD2AB50419C722330029C739 /* Localizable.strings */; };
-		AD2AB50719C722340029C739 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = AD2AB50919C722340029C739 /* InfoPlist.strings */; };
 		AD2BB34F19C7718600349495 /* VindsidenAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD2BB34E19C7718600349495 /* VindsidenAppTests.swift */; };
 		AD303C2B1B282DC800C4B999 /* VindsidenWatchKit.h in Headers */ = {isa = PBXBuildFile; fileRef = AD303C2A1B282DC800C4B999 /* VindsidenWatchKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AD303C301B282FB100C4B999 /* Datamanager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD539CC61947B684002644BD /* Datamanager.swift */; };
@@ -59,9 +57,6 @@
 		AD32E38319BC5037008F00EB /* RHCUnitSelectorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD32E38219BC5037008F00EB /* RHCUnitSelectorViewController.swift */; };
 		AD35C66C1D1C408A00E894CC /* ShortcutItemHandling.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD35C66B1D1C408A00E894CC /* ShortcutItemHandling.swift */; };
 		AD4DEA7719CB7528002A220B /* RHCNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD4DEA7619CB7528002A220B /* RHCNavigationViewController.swift */; };
-		AD539C841947B0F7002644BD /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD539C831947B0F6002644BD /* NotificationCenter.framework */; };
-		AD539C891947B0F7002644BD /* TodayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD539C881947B0F7002644BD /* TodayViewController.swift */; };
-		AD539C8E1947B0F7002644BD /* org.juniks.VindsidenApp.VindsidenToday.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = AD539C821947B0F6002644BD /* org.juniks.VindsidenApp.VindsidenToday.appex */; platformFilter = ios; };
 		AD539CA21947B5CA002644BD /* VindsidenKit.h in Headers */ = {isa = PBXBuildFile; fileRef = AD539CA11947B5CA002644BD /* VindsidenKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AD539CA81947B5CA002644BD /* VindsidenKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD539C9D1947B5CA002644BD /* VindsidenKit.framework */; };
 		AD539CAF1947B5CA002644BD /* VindsidenKitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD539CAE1947B5CA002644BD /* VindsidenKitTests.swift */; };
@@ -107,8 +102,6 @@
 		AD9EA2B81B8F1A6400F653FE /* NSDate+RelativeDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD9EA2B71B8F1A6400F653FE /* NSDate+RelativeDate.swift */; };
 		AD9EA2B91B8F1A6400F653FE /* NSDate+RelativeDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD9EA2B71B8F1A6400F653FE /* NSDate+RelativeDate.swift */; };
 		AD9EA2BB1B8F228000F653FE /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = AD2AB50419C722330029C739 /* Localizable.strings */; };
-		ADA0C64019C0EEBC00152005 /* Today.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ADA0C64219C0EEBC00152005 /* Today.storyboard */; };
-		ADA0C64719C0EF1A00152005 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = AD17EDC517312A5000943C33 /* Localizable.strings */; };
 		ADA2351A19FD69C6006A72D4 /* RHEStationDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADA2351919FD69C6006A72D4 /* RHEStationDetailsViewController.swift */; };
 		ADA2351C1A040839006A72D4 /* RHCDStationDetailsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADA2351B1A040839006A72D4 /* RHCDStationDetailsCell.swift */; };
 		ADB5A78A19DEC29A009AE4A5 /* DrawArrow.h in Headers */ = {isa = PBXBuildFile; fileRef = ADB5A78819DEC29A009AE4A5 /* DrawArrow.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -155,13 +148,6 @@
 			proxyType = 1;
 			remoteGlobalIDString = AD17ED431731012200943C33;
 			remoteInfo = VindsidenApp;
-		};
-		AD539C8C1947B0F7002644BD /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = AD17ED3C1731012200943C33 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = AD539C811947B0F6002644BD;
-			remoteInfo = VindsidenToday;
 		};
 		AD539C8F1947B0F7002644BD /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -247,13 +233,6 @@
 			remoteGlobalIDString = AD539C9C1947B5CA002644BD;
 			remoteInfo = VindsidenKit;
 		};
-		AD7F46691F98BFF600AFAAB7 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = AD17ED3C1731012200943C33 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = AD539C9C1947B5CA002644BD;
-			remoteInfo = VindsidenKit;
-		};
 		AD7F466B1F98C00500AFAAB7 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = AD17ED3C1731012200943C33 /* Project object */;
@@ -300,7 +279,6 @@
 			files = (
 				AD66F5691CAEBA8B001A2755 /* VindSidenSpotlight.appex in Embed Foundation Extensions */,
 				AD9685992AD6A40100608FB3 /* VindsidenWidgetExtension.appex in Embed Foundation Extensions */,
-				AD539C8E1947B0F7002644BD /* org.juniks.VindsidenApp.VindsidenToday.appex in Embed Foundation Extensions */,
 			);
 			name = "Embed Foundation Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -353,8 +331,6 @@
 
 /* Begin PBXFileReference section */
 		9E713D0A7C32B35097808D07 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		AD00384E196E741800C3232A /* VindsidenApp-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "VindsidenApp-Bridging-Header.h"; path = "../VindsidenApp-Bridging-Header.h"; sourceTree = "<group>"; };
-		AD00384F196E7A6400C3232A /* RHCTodayCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RHCTodayCell.swift; sourceTree = "<group>"; };
 		AD0636131B069CB900EF7321 /* en */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		AD0636141B069CBB00EF7321 /* Base */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		AD0636151B069CE000EF7321 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -393,13 +369,10 @@
 		AD17EDC617312A5000943C33 /* en */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		AD17EDF81736492200943C33 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		AD1812A91AF9E7B40040080D /* Base */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		AD1812AA1AF9E7CE0040080D /* en */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		AD1812AB1AF9E7CE0040080D /* Base */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		AD1B7EF119A7E82900D8B253 /* libPods.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libPods.a; path = "Pods/build/Debug-iphoneos/libPods.a"; sourceTree = "<group>"; };
 		AD2AB4F919C722320029C739 /* nb */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = nb; path = nb.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		AD2AB4FE19C722330029C739 /* nb */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = nb; path = nb.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		AD2AB50319C722330029C739 /* nb */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = nb; path = nb.lproj/Localizable.strings; sourceTree = "<group>"; };
-		AD2AB50819C722340029C739 /* nb */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = nb; path = nb.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		AD2BB34A19C7718600349495 /* VindsidenAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VindsidenAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		AD2BB34D19C7718600349495 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AD2BB34E19C7718600349495 /* VindsidenAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VindsidenAppTests.swift; sourceTree = "<group>"; };
@@ -412,12 +385,8 @@
 		AD32E38219BC5037008F00EB /* RHCUnitSelectorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RHCUnitSelectorViewController.swift; sourceTree = "<group>"; };
 		AD35C66B1D1C408A00E894CC /* ShortcutItemHandling.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShortcutItemHandling.swift; sourceTree = "<group>"; };
 		AD4DEA7619CB7528002A220B /* RHCNavigationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RHCNavigationViewController.swift; sourceTree = "<group>"; };
-		AD539C821947B0F6002644BD /* org.juniks.VindsidenApp.VindsidenToday.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = org.juniks.VindsidenApp.VindsidenToday.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		AD539C831947B0F6002644BD /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
-		AD539C871947B0F7002644BD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		AD539C881947B0F7002644BD /* TodayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayViewController.swift; sourceTree = "<group>"; };
 		AD539C951947B2B1002644BD /* VindsidenApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = VindsidenApp.entitlements; sourceTree = "<group>"; };
-		AD539C961947B2D0002644BD /* org.juniks.VindsidenApp.VindsidenToday.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = org.juniks.VindsidenApp.VindsidenToday.entitlements; sourceTree = "<group>"; };
 		AD539C9D1947B5CA002644BD /* VindsidenKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = VindsidenKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AD539CA01947B5CA002644BD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AD539CA11947B5CA002644BD /* VindsidenKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VindsidenKit.h; sourceTree = "<group>"; };
@@ -461,9 +430,6 @@
 		AD9E40721B8D9BCD00FABCF5 /* PlotFetcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlotFetcher.swift; path = VindsidenKit/PlotFetcher.swift; sourceTree = SOURCE_ROOT; };
 		AD9E40751B8DA11B00FABCF5 /* CDPlot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CDPlot.swift; sourceTree = "<group>"; };
 		AD9EA2B71B8F1A6400F653FE /* NSDate+RelativeDate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSDate+RelativeDate.swift"; sourceTree = "<group>"; };
-		ADA0C64119C0EEBC00152005 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Today.storyboard; sourceTree = "<group>"; };
-		ADA0C64419C0EEC000152005 /* en */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Today.strings; sourceTree = "<group>"; };
-		ADA0C64619C0EEC200152005 /* nb */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = nb; path = nb.lproj/Today.strings; sourceTree = "<group>"; };
 		ADA2351919FD69C6006A72D4 /* RHEStationDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RHEStationDetailsViewController.swift; sourceTree = "<group>"; };
 		ADA2351B1A040839006A72D4 /* RHCDStationDetailsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RHCDStationDetailsCell.swift; sourceTree = "<group>"; };
 		ADB5A78819DEC29A009AE4A5 /* DrawArrow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DrawArrow.h; sourceTree = "<group>"; };
@@ -553,14 +519,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		AD539C7F1947B0F6002644BD /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				AD539C841947B0F7002644BD /* NotificationCenter.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		AD539C991947B5CA002644BD /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -612,7 +570,6 @@
 				ADBF8B1F1D0EFA2D0005C0C9 /* watchkitapp.entitlements */,
 				ADBF8AF51D0EF68F0005C0C9 /* Watch2 */,
 				AD17ED4D1731012200943C33 /* VindsidenApp */,
-				AD539C851947B0F7002644BD /* VindsidenToday */,
 				AD539C9E1947B5CA002644BD /* VindsidenKit */,
 				AD539CAB1947B5CA002644BD /* VindsidenKitTests */,
 				AD2BB34B19C7718600349495 /* VindsidenAppTests */,
@@ -628,7 +585,6 @@
 			isa = PBXGroup;
 			children = (
 				AD17ED441731012200943C33 /* VindsidenApp.app */,
-				AD539C821947B0F6002644BD /* org.juniks.VindsidenApp.VindsidenToday.appex */,
 				AD539C9D1947B5CA002644BD /* VindsidenKit.framework */,
 				AD539CA71947B5CA002644BD /* VindsidenKitTests.xctest */,
 				AD2BB34A19C7718600349495 /* VindsidenAppTests.xctest */,
@@ -805,28 +761,6 @@
 				AD303C2C1B282DC800C4B999 /* Info.plist */,
 			);
 			path = VindsidenWatchKit;
-			sourceTree = "<group>";
-		};
-		AD539C851947B0F7002644BD /* VindsidenToday */ = {
-			isa = PBXGroup;
-			children = (
-				AD539C881947B0F7002644BD /* TodayViewController.swift */,
-				ADA0C64219C0EEBC00152005 /* Today.storyboard */,
-				AD00384F196E7A6400C3232A /* RHCTodayCell.swift */,
-				AD539C861947B0F7002644BD /* Supporting Files */,
-			);
-			path = VindsidenToday;
-			sourceTree = "<group>";
-		};
-		AD539C861947B0F7002644BD /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				AD2AB50919C722340029C739 /* InfoPlist.strings */,
-				AD00384E196E741800C3232A /* VindsidenApp-Bridging-Header.h */,
-				AD539C961947B2D0002644BD /* org.juniks.VindsidenApp.VindsidenToday.entitlements */,
-				AD539C871947B0F7002644BD /* Info.plist */,
-			);
-			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
 		AD539C9E1947B5CA002644BD /* VindsidenKit */ = {
@@ -1045,7 +979,6 @@
 			);
 			dependencies = (
 				AD539CB11947B5CA002644BD /* PBXTargetDependency */,
-				AD539C8D1947B0F7002644BD /* PBXTargetDependency */,
 				AD539C901947B0F7002644BD /* PBXTargetDependency */,
 				AD539CB51947B5CA002644BD /* PBXTargetDependency */,
 				AD66F5681CAEBA8B001A2755 /* PBXTargetDependency */,
@@ -1092,24 +1025,6 @@
 			productName = VindsidenWatchKit;
 			productReference = AD303C281B282DC800C4B999 /* VindsidenWatchKit.framework */;
 			productType = "com.apple.product-type.framework";
-		};
-		AD539C811947B0F6002644BD /* VindsidenToday */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = AD539C911947B0F7002644BD /* Build configuration list for PBXNativeTarget "VindsidenToday" */;
-			buildPhases = (
-				AD539C7E1947B0F6002644BD /* Sources */,
-				AD539C7F1947B0F6002644BD /* Frameworks */,
-				AD539C801947B0F6002644BD /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				AD7F466A1F98BFF600AFAAB7 /* PBXTargetDependency */,
-			);
-			name = VindsidenToday;
-			productName = VindsidenToday;
-			productReference = AD539C821947B0F6002644BD /* org.juniks.VindsidenApp.VindsidenToday.appex */;
-			productType = "com.apple.product-type.app-extension";
 		};
 		AD539C9C1947B5CA002644BD /* VindsidenKit */ = {
 			isa = PBXNativeTarget;
@@ -1264,15 +1179,6 @@
 						LastSwiftMigration = 1020;
 						ProvisioningStyle = Automatic;
 					};
-					AD539C811947B0F6002644BD = {
-						CreatedOnToolsVersion = 6.0;
-						LastSwiftMigration = 1020;
-						SystemCapabilities = {
-							com.apple.iOS = {
-								enabled = 1;
-							};
-						};
-					};
 					AD539C9C1947B5CA002644BD = {
 						CreatedOnToolsVersion = 6.0;
 						DevelopmentTeam = U69P77X647;
@@ -1339,15 +1245,14 @@
 			projectRoot = "";
 			targets = (
 				AD17ED431731012200943C33 /* VindsidenApp */,
-				AD539C811947B0F6002644BD /* VindsidenToday */,
+				AD9685872AD6A40000608FB3 /* VindsidenWidgetExtension */,
+				AD66F5611CAEBA8B001A2755 /* VindSidenSpotlight */,
 				AD539C9C1947B5CA002644BD /* VindsidenKit */,
 				AD539CA61947B5CA002644BD /* VindsidenKitTests */,
 				AD2BB34919C7718600349495 /* VindsidenAppTests */,
 				AD303C271B282DC800C4B999 /* VindsidenWatchKit */,
-				AD66F5611CAEBA8B001A2755 /* VindSidenSpotlight */,
 				ADBF8B731D0F03BE0005C0C9 /* watchkitapp */,
 				ADBF8B7F1D0F03BE0005C0C9 /* watchkitapp Extension */,
-				AD9685872AD6A40000608FB3 /* VindsidenWidgetExtension */,
 			);
 		};
 /* End PBXProject section */
@@ -1378,16 +1283,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				AD9EA2BB1B8F228000F653FE /* Localizable.strings in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		AD539C801947B0F6002644BD /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				ADA0C64019C0EEBC00152005 /* Today.storyboard in Resources */,
-				AD2AB50719C722340029C739 /* InfoPlist.strings in Resources */,
-				ADA0C64719C0EF1A00152005 /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1503,15 +1398,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		AD539C7E1947B0F6002644BD /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				AD539C891947B0F7002644BD /* TodayViewController.swift in Sources */,
-				AD003850196E7A6400C3232A /* RHCTodayCell.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		AD539C981947B5CA002644BD /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1593,16 +1479,9 @@
 			target = AD17ED431731012200943C33 /* VindsidenApp */;
 			targetProxy = AD2BB35019C7718600349495 /* PBXContainerItemProxy */;
 		};
-		AD539C8D1947B0F7002644BD /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			platformFilter = ios;
-			target = AD539C811947B0F6002644BD /* VindsidenToday */;
-			targetProxy = AD539C8C1947B0F7002644BD /* PBXContainerItemProxy */;
-		};
 		AD539C901947B0F7002644BD /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			platformFilter = ios;
-			target = AD539C811947B0F6002644BD /* VindsidenToday */;
 			targetProxy = AD539C8F1947B0F7002644BD /* PBXContainerItemProxy */;
 		};
 		AD539CAA1947B5CA002644BD /* PBXTargetDependency */ = {
@@ -1659,11 +1538,6 @@
 			isa = PBXTargetDependency;
 			target = AD539C9C1947B5CA002644BD /* VindsidenKit */;
 			targetProxy = AD674DA01962E94900BF257B /* PBXContainerItemProxy */;
-		};
-		AD7F466A1F98BFF600AFAAB7 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = AD539C9C1947B5CA002644BD /* VindsidenKit */;
-			targetProxy = AD7F46691F98BFF600AFAAB7 /* PBXContainerItemProxy */;
 		};
 		AD7F466C1F98C00500AFAAB7 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -1752,16 +1626,6 @@
 			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
-		AD2AB50919C722340029C739 /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				AD2AB50819C722340029C739 /* nb */,
-				AD1812AA1AF9E7CE0040080D /* en */,
-				AD1812AB1AF9E7CE0040080D /* Base */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
 		AD6142FD1D0F0D1B0008C5E8 /* Localizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -1770,16 +1634,6 @@
 				AD6143011D0F0D230008C5E8 /* nb */,
 			);
 			name = Localizable.strings;
-			sourceTree = "<group>";
-		};
-		ADA0C64219C0EEBC00152005 /* Today.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				ADA0C64119C0EEBC00152005 /* Base */,
-				ADA0C64419C0EEC000152005 /* en */,
-				ADA0C64619C0EEC200152005 /* nb */,
-			);
-			name = Today.storyboard;
 			sourceTree = "<group>";
 		};
 		ADBF8B761D0F03BE0005C0C9 /* Interface.storyboard */ = {
@@ -2151,84 +2005,6 @@
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 4;
 				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
-		AD539C921947B0F7002644BD /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CLANG_WARN_UNREACHABLE_CODE = YES;
-				CODE_SIGN_ENTITLEMENTS = VindsidenToday/org.juniks.VindsidenApp.VindsidenToday.entitlements;
-				DEVELOPMENT_TEAM = U69P77X647;
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				INFOPLIST_FILE = VindsidenToday/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = Vindsiden;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@executable_path/../../Frameworks",
-				);
-				METAL_ENABLE_DEBUG_INFO = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = "$(PRODUCT_NAME)";
-				PRODUCT_NAME = "org.juniks.VindsidenApp.$(TARGET_NAME:rfc1034identifier)";
-				SKIP_INSTALL = YES;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
-				SUPPORTS_MACCATALYST = NO;
-				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
-				SWIFT_OBJC_BRIDGING_HEADER = "VindsidenApp-Bridging-Header.h";
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Debug;
-		};
-		AD539C931947B0F7002644BD /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CLANG_WARN_UNREACHABLE_CODE = YES;
-				CODE_SIGN_ENTITLEMENTS = VindsidenToday/org.juniks.VindsidenApp.VindsidenToday.entitlements;
-				DEVELOPMENT_TEAM = U69P77X647;
-				ENABLE_NS_ASSERTIONS = NO;
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				INFOPLIST_FILE = VindsidenToday/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = Vindsiden;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@executable_path/../../Frameworks",
-				);
-				METAL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = "$(PRODUCT_NAME)";
-				PRODUCT_NAME = "org.juniks.VindsidenApp.$(TARGET_NAME:rfc1034identifier)";
-				SKIP_INSTALL = YES;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
-				SUPPORTS_MACCATALYST = NO;
-				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
-				SWIFT_COMPILATION_MODE = wholemodule;
-				SWIFT_OBJC_BRIDGING_HEADER = "VindsidenApp-Bridging-Header.h";
-				SWIFT_OPTIMIZATION_LEVEL = "-O";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
@@ -2756,15 +2532,6 @@
 			buildConfigurations = (
 				AD303C2E1B282DC800C4B999 /* Debug */,
 				AD303C2F1B282DC800C4B999 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		AD539C911947B0F7002644BD /* Build configuration list for PBXNativeTarget "VindsidenToday" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				AD539C921947B0F7002644BD /* Debug */,
-				AD539C931947B0F7002644BD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
