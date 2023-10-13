@@ -21,6 +21,12 @@
     "No stations configured" : {
       "comment" : "Not configured header text",
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No stations configured"
+          }
+        },
         "nb" : {
           "stringUnit" : {
             "state" : "translated",
@@ -32,6 +38,12 @@
     "Open the main app to configure visible stations" : {
       "comment" : "Not configured text",
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Open the main app to configure visible stations"
+          }
+        },
         "nb" : {
           "stringUnit" : {
             "state" : "translated",
@@ -43,6 +55,12 @@
     "Updating" : {
       "comment" : "Updating",
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Updating"
+          }
+        },
         "nb" : {
           "stringUnit" : {
             "state" : "translated",

@@ -65,6 +65,12 @@
     },
     "Camera" : {
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Camera"
+          }
+        },
         "nb" : {
           "stringUnit" : {
             "state" : "translated",
@@ -92,6 +98,12 @@
     },
     "Close" : {
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Close"
+          }
+        },
         "nb" : {
           "stringUnit" : {
             "state" : "translated",
@@ -102,6 +114,12 @@
     },
     "Copyright" : {
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Copyright"
+          }
+        },
         "nb" : {
           "stringUnit" : {
             "state" : "translated",
@@ -112,6 +130,12 @@
     },
     "Go to yr.no" : {
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Go to yr.no"
+          }
+        },
         "nb" : {
           "stringUnit" : {
             "state" : "translated",
@@ -122,6 +146,12 @@
     },
     "Gust" : {
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gust"
+          }
+        },
         "nb" : {
           "stringUnit" : {
             "state" : "translated",
@@ -132,6 +162,12 @@
     },
     "Info" : {
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Info"
+          }
+        },
         "nb" : {
           "stringUnit" : {
             "state" : "translated",
@@ -423,6 +459,12 @@
     },
     "Lull" : {
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lull"
+          }
+        },
         "nb" : {
           "stringUnit" : {
             "state" : "translated",
@@ -501,6 +543,12 @@
     },
     "Name" : {
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Name"
+          }
+        },
         "nb" : {
           "stringUnit" : {
             "state" : "translated",
@@ -545,6 +593,12 @@
     },
     "Place" : {
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Place"
+          }
+        },
         "nb" : {
           "stringUnit" : {
             "state" : "translated",
@@ -555,6 +609,12 @@
     },
     "Series" : {
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Series"
+          }
+        },
         "nb" : {
           "stringUnit" : {
             "state" : "translated",
@@ -565,6 +625,12 @@
     },
     "Settings" : {
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Settings"
+          }
+        },
         "nb" : {
           "stringUnit" : {
             "state" : "translated",
@@ -592,6 +658,12 @@
     },
     "Speed" : {
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Speed"
+          }
+        },
         "nb" : {
           "stringUnit" : {
             "state" : "translated",
@@ -602,6 +674,12 @@
     },
     "Speed Max" : {
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Speed Max"
+          }
+        },
         "nb" : {
           "stringUnit" : {
             "state" : "translated",
@@ -612,6 +690,12 @@
     },
     "Speed Min" : {
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Speed Min"
+          }
+        },
         "nb" : {
           "stringUnit" : {
             "state" : "translated",
@@ -622,6 +706,12 @@
     },
     "Stations" : {
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Stations"
+          }
+        },
         "nb" : {
           "stringUnit" : {
             "state" : "translated",
@@ -632,6 +722,12 @@
     },
     "Status" : {
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Status"
+          }
+        },
         "nb" : {
           "stringUnit" : {
             "state" : "translated",
@@ -660,6 +756,12 @@
     },
     "Temperature" : {
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Temperature"
+          }
+        },
         "nb" : {
           "stringUnit" : {
             "state" : "translated",
@@ -670,6 +772,12 @@
     },
     "Time" : {
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Time"
+          }
+        },
         "nb" : {
           "stringUnit" : {
             "state" : "translated",
@@ -714,6 +822,12 @@
     },
     "View in Maps" : {
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "View in Maps"
+          }
+        },
         "nb" : {
           "stringUnit" : {
             "state" : "translated",
