@@ -19,6 +19,7 @@ struct SimpleEntry: TimelineEntry {
 
 struct VindsidenWidgetEntryView : View {
     @Environment(\.widgetFamily) var family
+    @StateObject private var settings: UserObservable = UserObservable()
 
     var entry: Provider.Entry
 
@@ -31,32 +32,31 @@ struct VindsidenWidgetEntryView : View {
                 ForEach(entry.plots, id: \.plotTime) { value in
                     AreaMark(
                         x: .value("Time", value.plotTime, unit: .minute),
-                        yStart: .value("Lull", value.windMin),
-                        yEnd: .value("Gust", value.windMax)
+                        yStart: .value("Lull", convertedWind(value.windMin)),
+                        yEnd: .value("Gust", convertedWind(value.windMax))
                     )
                     .foregroundStyle(by: .value("Series", "Variation"))
 
                     LineMark(
                         x: .value("Time", value.plotTime, unit: .minute),
-                        y: .value("Speed Min", value.windMin)
+                        y: .value("Speed Min", convertedWind(value.windMin))
                     )
                     .lineStyle(StrokeStyle(lineWidth: 0.5, dash: []))
                     .foregroundStyle(by: .value("Series", "Variation Min"))
 
                     LineMark(
                         x: .value("Time", value.plotTime, unit: .minute),
-                        y: .value("Speed Max", value.windMax)
+                        y: .value("Speed Max", convertedWind(value.windMax))
                     )
                     .lineStyle(StrokeStyle(lineWidth: 0.5, dash: []))
                     .foregroundStyle(by: .value("Series", "Variation Max"))
 
                     LineMark(
                         x: .value("Time", value.plotTime, unit: .minute),
-                        y: .value("Speed", value.windAvg)
+                        y: .value("Speed", convertedWind(value.windAvg))
                     )
                     .lineStyle(StrokeStyle(lineWidth: 1, dash: []))
                     .foregroundStyle(by: .value("Series", "Average"))
-
                 }
                 .interpolationMethod(.catmullRom)
 
@@ -73,7 +73,7 @@ struct VindsidenWidgetEntryView : View {
                     }
                 }
             }
-            .chartYAxisLabel("m/s")
+            .chartYAxisLabel(settings.windUnit.symbol)
             .chartForegroundStyleScale([
                 "Average": Color("AccentColor"),
                 "Variation": Color("AccentColor").opacity(0.1),
@@ -84,12 +84,18 @@ struct VindsidenWidgetEntryView : View {
         }
     }
 
-    func showXAxisValue(for index: Int) -> Bool {
+    private func showXAxisValue(for index: Int) -> Bool {
         if case .systemSmall = family {
             return index % 2 != 0
         }
 
         return true
+    }
+
+    private func convertedWind(_ base: Double) -> Double {
+        let unit = settings.windUnit
+
+        return base.fromUnit(.metersPerSecond).toUnit(unit)
     }
 }
 

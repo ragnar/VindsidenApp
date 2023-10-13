@@ -101,6 +101,7 @@
 		ADB97FC82AD930EC00CE7B01 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = ADB97FC62AD930EC00CE7B01 /* Localizable.xcstrings */; };
 		ADB97FC92AD930EC00CE7B01 /* InfoPlist.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = ADB97FC72AD930EC00CE7B01 /* InfoPlist.xcstrings */; };
 		ADB97FCC2AD9315E00CE7B01 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = ADB97FCA2AD9312B00CE7B01 /* Localizable.xcstrings */; };
+		ADB97FCE2AD9349300CE7B01 /* RHCStationInfo+Swift.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB97FCD2AD9349300CE7B01 /* RHCStationInfo+Swift.swift */; };
 		ADBEA4CF1A07ECF600B168BF /* UIColor+AppColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADBEA4CE1A07ECF600B168BF /* UIColor+AppColors.swift */; };
 		ADBF8B781D0F03BE0005C0C9 /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ADBF8B761D0F03BE0005C0C9 /* Interface.storyboard */; };
 		ADBF8B7A1D0F03BE0005C0C9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ADBF8B791D0F03BE0005C0C9 /* Assets.xcassets */; };
@@ -412,6 +413,7 @@
 		ADB97FC62AD930EC00CE7B01 /* Localizable.xcstrings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		ADB97FC72AD930EC00CE7B01 /* InfoPlist.xcstrings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json.xcstrings; path = InfoPlist.xcstrings; sourceTree = "<group>"; };
 		ADB97FCA2AD9312B00CE7B01 /* Localizable.xcstrings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
+		ADB97FCD2AD9349300CE7B01 /* RHCStationInfo+Swift.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RHCStationInfo+Swift.swift"; sourceTree = "<group>"; };
 		ADBEA4CE1A07ECF600B168BF /* UIColor+AppColors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+AppColors.swift"; sourceTree = "<group>"; };
 		ADBF8B1F1D0EFA2D0005C0C9 /* watchkitapp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = watchkitapp.entitlements; path = watchkitapp/watchkitapp.entitlements; sourceTree = "<group>"; };
 		ADBF8B741D0F03BE0005C0C9 /* watchkitapp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = watchkitapp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -667,6 +669,7 @@
 			children = (
 				AD17ED861731058400943C33 /* RHCStationInfo.h */,
 				AD17ED871731058400943C33 /* RHCStationInfo.m */,
+				ADB97FCD2AD9349300CE7B01 /* RHCStationInfo+Swift.swift */,
 			);
 			name = "Station View";
 			sourceTree = "<group>";
@@ -1316,6 +1319,7 @@
 			files = (
 				AD30BC5219F024D9000CE40C /* RHCAppDelegate.swift in Sources */,
 				ADB97FB12AD91E6E00CE7B01 /* StationPickerView.swift in Sources */,
+				ADB97FCE2AD9349300CE7B01 /* RHCStationInfo+Swift.swift in Sources */,
 				AD9685AE2AD8119700608FB3 /* RHCStationInfo.m in Sources */,
 				ADA2351A19FD69C6006A72D4 /* RHEStationDetailsViewController.swift in Sources */,
 				AD9685AC2AD80BBB00608FB3 /* RHCStationCell.swift in Sources */,

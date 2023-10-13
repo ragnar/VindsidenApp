@@ -6,6 +6,7 @@
 //  Copyright (c) 2013 RHC. All rights reserved.
 //
 
+#import "VindsidenApp-Swift.h"
 #import "RHCStationInfo.h"
 
 @import VindsidenKit;
@@ -56,14 +57,12 @@
 
 - (void)updateWithPlot:(CDPlot *)plot
 {
-    SpeedConvertion unit = [[AppConfig sharedConfiguration].applicationUserDefaults integerForKey:@"selectedUnit"];
-
-    _windSpeed.text = (isnan([plot.windMin floatValue]) ? @"—.—" : [NSString stringWithFormat:@"%@ %@",  [[self numberFormatter] stringFromNumber:@([plot.windMin speedConvertionTo:unit])], [NSNumber shortUnitNameString:unit]]);
-    _windGust.text = (isnan([plot.windMax floatValue]) ? @"—.—" : [NSString stringWithFormat:@"%@ %@", [[self numberFormatter] stringFromNumber:@([plot.windMax speedConvertionTo:unit])], [NSNumber shortUnitNameString:unit]]);
-    _windAverage.text = (isnan([plot.windAvg floatValue]) ? @"—.—" : [NSString stringWithFormat:@"%@ %@", [[self numberFormatter] stringFromNumber:@([plot.windAvg speedConvertionTo:unit])], [NSNumber shortUnitNameString:unit]]);
+    _windSpeed.text = [self windStringWithValue:[plot.windMin doubleValue]];
+    _windGust.text = [self windStringWithValue:[plot.windMax doubleValue]];
+    _windAverage.text = [self windStringWithValue:[plot.windAvg doubleValue]];
     _windBeaufort.text = (isnan([plot.windAvg floatValue]) ? @"—.—" : [NSString stringWithFormat:@"%0.0f", [plot.windMin speedInBeaufort]]);
     _windDirection.text = (isnan([plot.windDir floatValue]) ? @"—.—" : [NSString stringWithFormat:@"%0.0f° (%@)", [plot.windDir floatValue], [plot windDirectionString]]);
-    _tempAir.text = (isnan([plot.tempAir floatValue]) ? @"—.—" : [NSString stringWithFormat:@"%@ °C", [[self numberFormatter] stringFromNumber:plot.tempAir]]);
+    _tempAir.text = [self tempStringWithValue:[plot.tempAir doubleValue]];
 }
 
 
