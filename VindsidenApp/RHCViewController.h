@@ -18,5 +18,7 @@
 
 - (void)scrollToStation:(CDStation *)station;
 
+- (void)updateApplicationContextToWatch;
+
 @end
 

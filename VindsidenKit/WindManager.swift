@@ -50,7 +50,7 @@ public class WindManager : NSObject {
         }
     }
 
-    @objc func updateNow() -> Void {
+    @objc public func updateNow() -> Void {
         if let unwrappedTimer = updateTimer {
             unwrappedTimer.fire()
         } else {

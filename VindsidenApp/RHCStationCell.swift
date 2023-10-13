@@ -93,8 +93,8 @@ class RHCStationCell: UICollectionViewCell {
 
         let plotGraph = SwiftUIPlotGraph(stationId: stationId.intValue)
         let vc = UIHostingController(rootView: plotGraph
-            .environment(\.managedObjectContext,
-                          DataManager.shared.viewContext())
+            .environmentObject((UIApplication.shared.delegate as? RHCAppDelegate)!.settings)
+            .environment(\.managedObjectContext, DataManager.shared.viewContext())
         )
 
         let swiftuiView = vc.view!
@@ -166,8 +166,8 @@ class RHCStationCell: UICollectionViewCell {
 }
 
 struct SwiftUIPlotGraph: View {
+    @EnvironmentObject private var settings: UserObservable
     @Environment(\.managedObjectContext) private var viewContext
-    @StateObject private var settings: UserObservable = UserObservable()
 
     var stationId: Int
 

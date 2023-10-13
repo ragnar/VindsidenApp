@@ -93,31 +93,22 @@ extension RHCViewController: UIContextMenuInteractionDelegate {
 extension RHCViewController {
     @objc
     func openSettings() {
-        let root = UIHostingController(rootView: SettingsView()
-            .environment(\.managedObjectContext,
-                          DataManager.shared.viewContext())
+        let root = UIHostingController(rootView: SettingsView(dismissAction: {
+            Logger.debugging.debug("Settings Dismissed")
+            
+            self.updateApplicationContextToWatch()
+            (UIApplication.shared.delegate as? RHCAppDelegate)?.updateShortcutItems()
+            WindManager.sharedManager.updateNow()
+
+            if let cell = self.collectionView.visibleCells.first as? RHCStationCell {
+                cell.displayPlots()
+            }
+        })
+            .environmentObject((UIApplication.shared.delegate as? RHCAppDelegate)!.settings)
+            .environment(\.managedObjectContext, DataManager.shared.viewContext())
         )
+
         navigationController?.present(root, animated: true)
     }
 }
 
-/* FIXME: Do this on dismiss for new settings
-        #pragma mark - Settings Delegate
-
-        - (void)rhcSettingsDidFinish:(RHCSettingsViewController *)controller shouldDismiss:(BOOL)shouldDismiss
-        {
-            [self updateApplicationContextToWatch];
-            [(RHCAppDelegate *)[[UIApplication sharedApplication] delegate] updateShortcutItems];
-            [[WindManager sharedManager] updateNow];
-
-            if ( [[self.collectionView visibleCells] count] ) {
-                RHCStationCell *cell = [self.collectionView visibleCells][0];
-                [cell displayPlots];
-            }
-
-            if (shouldDismiss) {
-                [self dismissViewControllerAnimated:YES completion:nil];
-            }
-        }
-
-*/

@@ -12,12 +12,15 @@ import WatchConnectivity
 import CoreSpotlight
 import WidgetKit
 import OSLog
+import SwiftUI
 
 @UIApplicationMain
 class RHCAppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate {
 
     var window: UIWindow?
     var connectionSession: WCSession?
+
+    @ObservedObject var settings: UserObservable = UserObservable()
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 

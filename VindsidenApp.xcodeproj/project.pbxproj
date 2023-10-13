@@ -143,49 +143,7 @@
 			remoteGlobalIDString = AD17ED431731012200943C33;
 			remoteInfo = VindsidenApp;
 		};
-		AD539CA91947B5CA002644BD /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = AD17ED3C1731012200943C33 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = AD539C9C1947B5CA002644BD;
-			remoteInfo = VindsidenKit;
-		};
 		AD539CB01947B5CA002644BD /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = AD17ED3C1731012200943C33 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = AD539C9C1947B5CA002644BD;
-			remoteInfo = VindsidenKit;
-		};
-		AD539CB41947B5CA002644BD /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = AD17ED3C1731012200943C33 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = AD539C9C1947B5CA002644BD;
-			remoteInfo = VindsidenKit;
-		};
-		AD539CBD1947B5CB002644BD /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = AD17ED3C1731012200943C33 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = AD539C9C1947B5CA002644BD;
-			remoteInfo = VindsidenKit;
-		};
-		AD539CBF1947B5CB002644BD /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = AD17ED3C1731012200943C33 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = AD539C9C1947B5CA002644BD;
-			remoteInfo = VindsidenKit;
-		};
-		AD539CC11947B5CB002644BD /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = AD17ED3C1731012200943C33 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = AD539C9C1947B5CA002644BD;
-			remoteInfo = VindsidenKit;
-		};
-		AD539CC31947B5CC002644BD /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = AD17ED3C1731012200943C33 /* Project object */;
 			proxyType = 1;
@@ -205,13 +163,6 @@
 			proxyType = 1;
 			remoteGlobalIDString = AD66F5611CAEBA8B001A2755;
 			remoteInfo = VindSidenSpotlight;
-		};
-		AD674D9E1962E94900BF257B /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = AD17ED3C1731012200943C33 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = AD539C9C1947B5CA002644BD;
-			remoteInfo = VindsidenKit;
 		};
 		AD674DA01962E94900BF257B /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -949,7 +900,6 @@
 			);
 			dependencies = (
 				AD539CB11947B5CA002644BD /* PBXTargetDependency */,
-				AD539CB51947B5CA002644BD /* PBXTargetDependency */,
 				AD66F5681CAEBA8B001A2755 /* PBXTargetDependency */,
 				ADBF8B8F1D0F03BE0005C0C9 /* PBXTargetDependency */,
 				AD9685982AD6A40100608FB3 /* PBXTargetDependency */,
@@ -1030,12 +980,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				AD539CAA1947B5CA002644BD /* PBXTargetDependency */,
-				AD539CBE1947B5CB002644BD /* PBXTargetDependency */,
-				AD539CC01947B5CB002644BD /* PBXTargetDependency */,
-				AD539CC21947B5CB002644BD /* PBXTargetDependency */,
-				AD539CC41947B5CC002644BD /* PBXTargetDependency */,
-				AD674D9F1962E94900BF257B /* PBXTargetDependency */,
 				AD674DA11962E94900BF257B /* PBXTargetDependency */,
 			);
 			name = VindsidenKitTests;
@@ -1455,40 +1399,10 @@
 			target = AD17ED431731012200943C33 /* VindsidenApp */;
 			targetProxy = AD2BB35019C7718600349495 /* PBXContainerItemProxy */;
 		};
-		AD539CAA1947B5CA002644BD /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = AD539C9C1947B5CA002644BD /* VindsidenKit */;
-			targetProxy = AD539CA91947B5CA002644BD /* PBXContainerItemProxy */;
-		};
 		AD539CB11947B5CA002644BD /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = AD539C9C1947B5CA002644BD /* VindsidenKit */;
 			targetProxy = AD539CB01947B5CA002644BD /* PBXContainerItemProxy */;
-		};
-		AD539CB51947B5CA002644BD /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = AD539C9C1947B5CA002644BD /* VindsidenKit */;
-			targetProxy = AD539CB41947B5CA002644BD /* PBXContainerItemProxy */;
-		};
-		AD539CBE1947B5CB002644BD /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = AD539C9C1947B5CA002644BD /* VindsidenKit */;
-			targetProxy = AD539CBD1947B5CB002644BD /* PBXContainerItemProxy */;
-		};
-		AD539CC01947B5CB002644BD /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = AD539C9C1947B5CA002644BD /* VindsidenKit */;
-			targetProxy = AD539CBF1947B5CB002644BD /* PBXContainerItemProxy */;
-		};
-		AD539CC21947B5CB002644BD /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = AD539C9C1947B5CA002644BD /* VindsidenKit */;
-			targetProxy = AD539CC11947B5CB002644BD /* PBXContainerItemProxy */;
-		};
-		AD539CC41947B5CC002644BD /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = AD539C9C1947B5CA002644BD /* VindsidenKit */;
-			targetProxy = AD539CC31947B5CC002644BD /* PBXContainerItemProxy */;
 		};
 		AD6142EC1D0F06F10008C5E8 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -1499,11 +1413,6 @@
 			isa = PBXTargetDependency;
 			target = AD66F5611CAEBA8B001A2755 /* VindSidenSpotlight */;
 			targetProxy = AD66F5671CAEBA8B001A2755 /* PBXContainerItemProxy */;
-		};
-		AD674D9F1962E94900BF257B /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = AD539C9C1947B5CA002644BD /* VindsidenKit */;
-			targetProxy = AD674D9E1962E94900BF257B /* PBXContainerItemProxy */;
 		};
 		AD674DA11962E94900BF257B /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;

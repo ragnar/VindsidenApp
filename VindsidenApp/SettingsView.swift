@@ -12,7 +12,9 @@ import Units
 
 struct SettingsView: View {
     @Environment(\.dismiss) private var dismiss
-    @StateObject private var settings: UserObservable = UserObservable()
+    @EnvironmentObject var settings: UserObservable
+
+    var dismissAction: () -> Void
 
     var body: some View {
         NavigationView {
@@ -52,6 +54,9 @@ struct SettingsView: View {
                 }
             }
         }
+        .onDisappear(perform: {
+            dismissAction()
+        })
     }
 }
 
