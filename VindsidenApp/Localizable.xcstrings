@@ -590,16 +590,6 @@
         }
       }
     },
-    "Show Camera" : {
-      "localizations" : {
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Vis kamera"
-          }
-        }
-      }
-    },
     "Speed" : {
       "localizations" : {
         "nb" : {
@@ -701,16 +691,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Enheter"
-          }
-        }
-      }
-    },
-    "Unknown" : {
-      "localizations" : {
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ukjent"
           }
         }
       }

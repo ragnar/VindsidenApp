@@ -54,6 +54,7 @@ struct SettingsView: View {
                 }
             }
         }
+        .navigationViewStyle(StackNavigationViewStyle())
         .onDisappear(perform: {
             dismissAction()
         })

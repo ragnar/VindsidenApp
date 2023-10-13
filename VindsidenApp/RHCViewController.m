@@ -16,7 +16,7 @@
 
 static NSString *kCellID = @"stationCellID";
 
-@interface RHCViewController ()<NSUserActivityDelegate, UIDataSourceModelAssociation, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, NSFetchedResultsControllerDelegate, RHEStationDetailsDelegate>
+@interface RHCViewController ()<NSUserActivityDelegate, UIDataSourceModelAssociation, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, NSFetchedResultsControllerDelegate>
 
 @property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
 @property (weak, nonatomic) IBOutlet UIPageControl *pageControl;
@@ -52,7 +52,7 @@ static NSString *kCellID = @"stationCellID";
 
     UIButton *button = nil;
 
-    button = [UIButton systemButtonWithImage:[UIImage systemImageNamed:@"gear"] target:self action:@selector(settings:)];
+    button = [UIButton systemButtonWithImage:[UIImage systemImageNamed:@"gearshape"] target:self action:@selector(settings:)];
     UIBarButtonItem *bb = [[UIBarButtonItem alloc] initWithCustomView:button];
 
 //    UIBarButtonItem *bb = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"settings"]
@@ -65,9 +65,6 @@ static NSString *kCellID = @"stationCellID";
                                                                         action:@selector(share:)];
 
     button = [UIButton systemButtonWithImage:[UIImage systemImageNamed:@"info.circle"] target:self action:@selector(info:)];
-
-    UIContextMenuInteraction *interaction = [[UIContextMenuInteraction alloc] initWithDelegate:self];
-    [button addInteraction: interaction];
     UIBarButtonItem *bc = [[UIBarButtonItem alloc] initWithCustomView:button];
 
 //FIXME: Some camera showing stuff
@@ -195,25 +192,6 @@ static NSString *kCellID = @"stationCellID";
 {
     return NO;
 }
-
-
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    RHCStationCell *cell =  nil;
-
-    if ( [self.collectionView.visibleCells count] ) {
-        cell = [self.collectionView visibleCells].firstObject;
-    }
-
-    if ( [segue.identifier isEqualToString:@"ShowStationDetails"] ) {
-        UINavigationController *navCon = segue.destinationViewController;
-        RHEStationDetailsViewController *controller = navCon.viewControllers.firstObject;
-        controller.delegate = self;
-        controller.station = cell.currentStation;
-        controller.showButtons = true;
-    }
-}
-
 
 #pragma mark - Notifications
 
@@ -459,7 +437,7 @@ static NSString *kCellID = @"stationCellID";
 
 - (IBAction)info:(id)sender
 {
-    [self performSegueWithIdentifier:@"ShowStationDetails" sender:sender];
+    [self openStationDetails];
 }
 
 
@@ -511,15 +489,6 @@ static NSString *kCellID = @"stationCellID";
     NSInteger page = [(UIPageControl *)sender currentPage];
     NSIndexPath *indexPath = [NSIndexPath indexPathForItem:page inSection:0];
     [self.collectionView scrollToItemAtIndexPath:indexPath atScrollPosition:UICollectionViewScrollPositionNone animated:YES];
-}
-
-
-#pragma mark - Station Details Delegate
-
-
-- (void)rheStationDetailsViewControllerDidFinish:(RHEStationDetailsViewController *)controller
-{
-    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 #pragma mark -
@@ -684,8 +653,5 @@ static NSString *kCellID = @"stationCellID";
 //        Logger.debugging.debug(@"Failed: %@", error.localizedDescription);
     }
 }
-
-
-@synthesize station;
 
 @end

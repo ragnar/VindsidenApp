@@ -82,8 +82,6 @@
 		AD9E40781B8DA11B00FABCF5 /* CDPlot.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD9E40751B8DA11B00FABCF5 /* CDPlot.swift */; };
 		AD9EA2B81B8F1A6400F653FE /* NSDate+RelativeDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD9EA2B71B8F1A6400F653FE /* NSDate+RelativeDate.swift */; };
 		AD9EA2B91B8F1A6400F653FE /* NSDate+RelativeDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD9EA2B71B8F1A6400F653FE /* NSDate+RelativeDate.swift */; };
-		ADA2351A19FD69C6006A72D4 /* RHEStationDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADA2351919FD69C6006A72D4 /* RHEStationDetailsViewController.swift */; };
-		ADA2351C1A040839006A72D4 /* RHCDStationDetailsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADA2351B1A040839006A72D4 /* RHCDStationDetailsCell.swift */; };
 		ADB5A78A19DEC29A009AE4A5 /* DrawArrow.h in Headers */ = {isa = PBXBuildFile; fileRef = ADB5A78819DEC29A009AE4A5 /* DrawArrow.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		ADB5A78B19DEC29A009AE4A5 /* DrawArrow.m in Sources */ = {isa = PBXBuildFile; fileRef = ADB5A78919DEC29A009AE4A5 /* DrawArrow.m */; };
 		ADB97FAD2AD914D900CE7B01 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB97FAC2AD914D900CE7B01 /* SettingsView.swift */; };
@@ -129,6 +127,7 @@
 		ADCD425F196E4E42004973E9 /* UIImage+ImageFromView.m in Sources */ = {isa = PBXBuildFile; fileRef = ADCD424D196E4E42004973E9 /* UIImage+ImageFromView.m */; };
 		ADDB4F5019CB68F1005D5D38 /* RHCAlertManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADDB4F4F19CB68F1005D5D38 /* RHCAlertManager.swift */; };
 		ADE9C4081AAB32840089EB19 /* WindManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADE9C4071AAB32840089EB19 /* WindManager.swift */; };
+		ADEC5BC42AD9548B00A65057 /* StationDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADEC5BC32AD9548B00A65057 /* StationDetailsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -339,8 +338,6 @@
 		AD9E40721B8D9BCD00FABCF5 /* PlotFetcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlotFetcher.swift; path = VindsidenKit/PlotFetcher.swift; sourceTree = SOURCE_ROOT; };
 		AD9E40751B8DA11B00FABCF5 /* CDPlot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CDPlot.swift; sourceTree = "<group>"; };
 		AD9EA2B71B8F1A6400F653FE /* NSDate+RelativeDate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSDate+RelativeDate.swift"; sourceTree = "<group>"; };
-		ADA2351919FD69C6006A72D4 /* RHEStationDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RHEStationDetailsViewController.swift; sourceTree = "<group>"; };
-		ADA2351B1A040839006A72D4 /* RHCDStationDetailsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RHCDStationDetailsCell.swift; sourceTree = "<group>"; };
 		ADB5A78819DEC29A009AE4A5 /* DrawArrow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DrawArrow.h; sourceTree = "<group>"; };
 		ADB5A78919DEC29A009AE4A5 /* DrawArrow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DrawArrow.m; sourceTree = "<group>"; };
 		ADB7BA411B3A98E9000921E0 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = Platforms/WatchOS.platform/Developer/SDKs/WatchOS2.0.sdk/System/Library/Frameworks/CoreGraphics.framework; sourceTree = DEVELOPER_DIR; };
@@ -394,6 +391,7 @@
 		ADCD424D196E4E42004973E9 /* UIImage+ImageFromView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ImageFromView.m"; sourceTree = "<group>"; };
 		ADDB4F4F19CB68F1005D5D38 /* RHCAlertManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RHCAlertManager.swift; sourceTree = "<group>"; };
 		ADE9C4071AAB32840089EB19 /* WindManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WindManager.swift; sourceTree = "<group>"; };
+		ADEC5BC32AD9548B00A65057 /* StationDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationDetailsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -616,8 +614,7 @@
 		AD17EDE41734486D00943C33 /* Station Details View Controller */ = {
 			isa = PBXGroup;
 			children = (
-				ADA2351919FD69C6006A72D4 /* RHEStationDetailsViewController.swift */,
-				ADA2351B1A040839006A72D4 /* RHCDStationDetailsCell.swift */,
+				ADEC5BC32AD9548B00A65057 /* StationDetailsView.swift */,
 			);
 			name = "Station Details View Controller";
 			sourceTree = "<group>";
@@ -1241,12 +1238,11 @@
 				ADB97FB12AD91E6E00CE7B01 /* StationPickerView.swift in Sources */,
 				ADB97FCE2AD9349300CE7B01 /* RHCStationInfo+Swift.swift in Sources */,
 				AD9685AE2AD8119700608FB3 /* RHCStationInfo.m in Sources */,
-				ADA2351A19FD69C6006A72D4 /* RHEStationDetailsViewController.swift in Sources */,
 				AD9685AC2AD80BBB00608FB3 /* RHCStationCell.swift in Sources */,
+				ADEC5BC42AD9548B00A65057 /* StationDetailsView.swift in Sources */,
 				AD17ED641731012200943C33 /* RHCViewController.m in Sources */,
 				AD35C66C1D1C408A00E894CC /* ShortcutItemHandling.swift in Sources */,
 				AD55F5B7233AAB2F00757CBD /* RHCViewController+Swift.swift in Sources */,
-				ADA2351C1A040839006A72D4 /* RHCDStationDetailsCell.swift in Sources */,
 				AD4DEA7719CB7528002A220B /* RHCNavigationViewController.swift in Sources */,
 				AD1B45881CAEE9F200F171DB /* IndexRequestHandler.swift in Sources */,
 				ADDB4F5019CB68F1005D5D38 /* RHCAlertManager.swift in Sources */,
