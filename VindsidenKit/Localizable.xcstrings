@@ -1,0 +1,585 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "%d days ago" : {
+      "comment" : "Days ago",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%d days ago"
+          }
+        },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%d dager siden"
+          }
+        }
+      }
+    },
+    "%d hours ago" : {
+      "comment" : "Hours ago",
+      "localizations" : {
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%d timer siden"
+          }
+        }
+      }
+    },
+    "%d minutes ago" : {
+      "comment" : "Minutes ago",
+      "localizations" : {
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%d minutter siden"
+          }
+        }
+      }
+    },
+    "%d months ago" : {
+      "comment" : "Months ago",
+      "localizations" : {
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%d måneder siden"
+          }
+        }
+      }
+    },
+    "%d seconds ago" : {
+      "comment" : "Seconds ago",
+      "localizations" : {
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%d sekunder siden"
+          }
+        }
+      }
+    },
+    "%d weeks ago" : {
+      "comment" : "Weeks ago",
+      "localizations" : {
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%d uker siden"
+          }
+        }
+      }
+    },
+    "%d years ago" : {
+      "comment" : "Years ago",
+      "localizations" : {
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%d år siden"
+          }
+        }
+      }
+    },
+    "1 day ago" : {
+      "comment" : "1 day ago",
+      "localizations" : {
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "1 dag siden"
+          }
+        }
+      }
+    },
+    "1 month ago" : {
+      "comment" : "1 month ago",
+      "localizations" : {
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "1 måned siden"
+          }
+        }
+      }
+    },
+    "1 week ago" : {
+      "comment" : "1 week ago",
+      "localizations" : {
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "1 uke siden"
+          }
+        }
+      }
+    },
+    "1 year ago" : {
+      "comment" : "1 year ago",
+      "localizations" : {
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "1 år siden"
+          }
+        }
+      }
+    },
+    "A minute ago" : {
+      "comment" : "A minute ago",
+      "localizations" : {
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Et øyeblikk siden"
+          }
+        }
+      }
+    },
+    "An hour ago" : {
+      "comment" : "An hour ago",
+      "localizations" : {
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "En time siden"
+          }
+        }
+      }
+    },
+    "Beaufort" : {
+      "localizations" : {
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Beaufort"
+          }
+        }
+      }
+    },
+    "bft" : {
+      "localizations" : {
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "bft"
+          }
+        }
+      }
+    },
+    "DIRECTION_E" : {
+      "comment" : "WindPlot, Wind direction: E",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "E"
+          }
+        },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ø"
+          }
+        }
+      }
+    },
+    "DIRECTION_ENE" : {
+      "comment" : "WindPlot, Wind direction: ENE",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ENE"
+          }
+        },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ØNØ"
+          }
+        }
+      }
+    },
+    "DIRECTION_ESE" : {
+      "comment" : "WindPlot, Wind direction: ESE",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ESE"
+          }
+        },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ØSØ"
+          }
+        }
+      }
+    },
+    "DIRECTION_N" : {
+      "comment" : "WindPlot, Wind direction: N",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "N"
+          }
+        },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "N"
+          }
+        }
+      }
+    },
+    "DIRECTION_NE" : {
+      "comment" : "WindPlot, Wind direction: NE",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "NE"
+          }
+        },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "NØ"
+          }
+        }
+      }
+    },
+    "DIRECTION_NNE" : {
+      "comment" : "WindPlot, Wind direction: NNE",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "NNE"
+          }
+        },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "NNØ"
+          }
+        }
+      }
+    },
+    "DIRECTION_NNW" : {
+      "comment" : "WindPlot, Wind direction: NNW",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "NNW"
+          }
+        },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "NNV"
+          }
+        }
+      }
+    },
+    "DIRECTION_NW" : {
+      "comment" : "WindPlot, Wind direction: NW",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "NW"
+          }
+        },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "NV"
+          }
+        }
+      }
+    },
+    "DIRECTION_S" : {
+      "comment" : "WindPlot, Wind direction: S",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "S"
+          }
+        },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "S"
+          }
+        }
+      }
+    },
+    "DIRECTION_SE" : {
+      "comment" : "WindPlot, Wind direction: SE",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "SE"
+          }
+        },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "SØ"
+          }
+        }
+      }
+    },
+    "DIRECTION_SSE" : {
+      "comment" : "WindPlot, Wind direction: SSE",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "SSE"
+          }
+        },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "SSØ"
+          }
+        }
+      }
+    },
+    "DIRECTION_SSW" : {
+      "comment" : "WindPlot, Wind direction: SSW",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "SSW"
+          }
+        },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "SSV"
+          }
+        }
+      }
+    },
+    "DIRECTION_SW" : {
+      "comment" : "WindPlot, Wind direction: SW",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "SW"
+          }
+        },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "SV"
+          }
+        }
+      }
+    },
+    "DIRECTION_UKN" : {
+      "comment" : "WindPlot, Wind direction: UKN",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "UNK"
+          }
+        },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "UKJ"
+          }
+        }
+      }
+    },
+    "DIRECTION_W" : {
+      "comment" : "WindPlot, Wind direction: W",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "W"
+          }
+        },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "V"
+          }
+        }
+      }
+    },
+    "DIRECTION_WNW" : {
+      "comment" : "WindPlot, Wind direction: WNW",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "WNW"
+          }
+        },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "VNV"
+          }
+        }
+      }
+    },
+    "DIRECTION_WSW" : {
+      "comment" : "WindPlot, Wind direction: WSW",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "WSW"
+          }
+        },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "VSV"
+          }
+        }
+      }
+    },
+    "Just now" : {
+      "comment" : "Just now",
+      "localizations" : {
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nå"
+          }
+        }
+      }
+    },
+    "Kilometers per hour" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kilometer i timen"
+          }
+        },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kilometer i timen"
+          }
+        }
+      }
+    },
+    "km/h" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "km/t"
+          }
+        },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "km/t"
+          }
+        }
+      }
+    },
+    "Knots" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Knop"
+          }
+        },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Knop"
+          }
+        }
+      }
+    },
+    "kts" : {
+      "localizations" : {
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "kts"
+          }
+        }
+      }
+    },
+    "m/s" : {
+      "localizations" : {
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "m/s"
+          }
+        }
+      }
+    },
+    "Meters per second" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Meter i sekundet"
+          }
+        },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Meter i sekundet"
+          }
+        }
+      }
+    },
+    "Miles per hour" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Miles i timen"
+          }
+        },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Miles i timen"
+          }
+        }
+      }
+    },
+    "miles/h" : {
+      "localizations" : {
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "miles/h"
+          }
+        }
+      }
+    }
+  },
+  "version" : "1.0"
+}

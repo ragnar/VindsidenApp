@@ -167,6 +167,8 @@ class RHCStationCell: UICollectionViewCell {
 struct SwiftUIPlotGraph: View {
     @Environment(\.managedObjectContext) private var viewContext
 
+    private let unit = SpeedConvertion(rawValue: AppConfig.sharedConfiguration.applicationUserDefaults.integer(forKey: "selectedUnit"))
+
     var stationId: Int
 
     @FetchRequest private var plots: FetchedResults<CDPlot>

@@ -1,0 +1,546 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "2O0-wh-T8a.text" : {
+      "comment" : "Class = \"WKInterfaceLabel\"; text = \"-.-\"; ObjectID = \"2O0-wh-T8a\";",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "-.-"
+          }
+        },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "-.-"
+          }
+        }
+      }
+    },
+    "6gj-Pc-sn0.text" : {
+      "comment" : "Class = \"WKInterfaceLabel\"; text = \"m/s\"; ObjectID = \"6gj-Pc-sn0\";",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "m/s"
+          }
+        },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "m/s"
+          }
+        }
+      }
+    },
+    "7B4-dW-qTp.text" : {
+      "comment" : "Class = \"WKInterfaceLabel\"; text = \"Label\"; ObjectID = \"7B4-dW-qTp\";",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Label"
+          }
+        },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Label"
+          }
+        }
+      }
+    },
+    "7ZP-Ip-xfm.text" : {
+      "comment" : "Class = \"WKInterfaceLabel\"; text = \"Label\"; ObjectID = \"7ZP-Ip-xfm\";",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Label"
+          }
+        },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Label"
+          }
+        }
+      }
+    },
+    "8df-jM-x00.text" : {
+      "comment" : "Class = \"WKInterfaceLabel\"; text = \"Label\"; ObjectID = \"8df-jM-x00\";",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Label"
+          }
+        },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Label"
+          }
+        }
+      }
+    },
+    "AgC-eL-Hgc.title" : {
+      "comment" : "Class = \"WKInterfaceController\"; title = \"Vindsiden\"; ObjectID = \"AgC-eL-Hgc\";",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Vindsiden"
+          }
+        },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vindsiden"
+          }
+        }
+      }
+    },
+    "CbE-HM-XmP.text" : {
+      "comment" : "Class = \"WKInterfaceLabel\"; text = \"No stations configured\"; ObjectID = \"CbE-HM-XmP\";",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "No stations configured"
+          }
+        },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ingen stasjoner konfigurert"
+          }
+        }
+      }
+    },
+    "cFU-aX-gv7.text" : {
+      "comment" : "Class = \"WKInterfaceLabel\"; text = \"Wind gust:\"; ObjectID = \"cFU-aX-gv7\";",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Wind gust:"
+          }
+        },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vindkast:"
+          }
+        }
+      }
+    },
+    "DUi-i2-yv2.text" : {
+      "comment" : "Class = \"WKInterfaceLabel\"; text = \"Label\"; ObjectID = \"DUi-i2-yv2\";",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Label"
+          }
+        },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Label"
+          }
+        }
+      }
+    },
+    "EP8-lv-urV.text" : {
+      "comment" : "Class = \"WKInterfaceLabel\"; text = \"Average:\"; ObjectID = \"EP8-lv-urV\";",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Average:"
+          }
+        },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gjennomsnitt:"
+          }
+        }
+      }
+    },
+    "Fed-0E-lNq.text" : {
+      "comment" : "Class = \"WKInterfaceLabel\"; text = \"Label\"; ObjectID = \"Fed-0E-lNq\";",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Label"
+          }
+        },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Label"
+          }
+        }
+      }
+    },
+    "gcj-kQ-oD3.text" : {
+      "comment" : "Class = \"WKInterfaceLabel\"; text = \"Unknown station\"; ObjectID = \"gcj-kQ-oD3\";",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Unknown station"
+          }
+        },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ukjent stasjon"
+          }
+        }
+      }
+    },
+    "GTK-xa-ecI.text" : {
+      "comment" : "Class = \"WKInterfaceLabel\"; text = \"Beaufort:\"; ObjectID = \"GTK-xa-ecI\";",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Beaufort:"
+          }
+        },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Beaufort:"
+          }
+        }
+      }
+    },
+    "Iq3-Fr-BgZ.text" : {
+      "comment" : "Class = \"WKInterfaceLabel\"; text = \"Label\"; ObjectID = \"Iq3-Fr-BgZ\";",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Label"
+          }
+        },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Label"
+          }
+        }
+      }
+    },
+    "KdW-Mv-Kix.text" : {
+      "comment" : "Class = \"WKInterfaceLabel\"; text = \"Label\"; ObjectID = \"KdW-Mv-Kix\";",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Label"
+          }
+        },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Label"
+          }
+        }
+      }
+    },
+    "LMr-Eq-tMg.text" : {
+      "comment" : "Class = \"WKInterfaceLabel\"; text = \"Label\"; ObjectID = \"LMr-Eq-tMg\";",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Label"
+          }
+        },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Label"
+          }
+        }
+      }
+    },
+    "lW7-Cz-FvF.text" : {
+      "comment" : "Class = \"WKInterfaceLabel\"; text = \"Never updated\"; ObjectID = \"lW7-Cz-FvF\";",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Never updated"
+          }
+        },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ikke oppdatert"
+          }
+        }
+      }
+    },
+    "Mhf-Ah-jbA.text" : {
+      "comment" : "Class = \"WKInterfaceLabel\"; text = \"-.-\"; ObjectID = \"Mhf-Ah-jbA\";",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "-.-"
+          }
+        },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "-.-"
+          }
+        }
+      }
+    },
+    "Nap-Uo-oXu.text" : {
+      "comment" : "Class = \"WKInterfaceLabel\"; text = \"Wind gust:\"; ObjectID = \"Nap-Uo-oXu\";",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wind gust:"
+          }
+        },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vindkast:"
+          }
+        }
+      }
+    },
+    "oj1-Lq-E66.text" : {
+      "comment" : "Class = \"WKInterfaceLabel\"; text = \"Label\"; ObjectID = \"oj1-Lq-E66\";",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Label"
+          }
+        },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Label"
+          }
+        }
+      }
+    },
+    "omH-DT-k2h.text" : {
+      "comment" : "Class = \"WKInterfaceLabel\"; text = \"Label\"; ObjectID = \"omH-DT-k2h\";",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Label"
+          }
+        },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Label"
+          }
+        }
+      }
+    },
+    "QRL-SP-Q60.text" : {
+      "comment" : "Class = \"WKInterfaceLabel\"; text = \"Average:\"; ObjectID = \"QRL-SP-Q60\";",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Average:"
+          }
+        },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gjennomsnitt:"
+          }
+        }
+      }
+    },
+    "sDR-HI-pmc.text" : {
+      "comment" : "Class = \"WKInterfaceLabel\"; text = \"Label\"; ObjectID = \"sDR-HI-pmc\";",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Label"
+          }
+        },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Label"
+          }
+        }
+      }
+    },
+    "sS3-OE-dAE.title" : {
+      "comment" : "Class = \"WKInterfaceMenuItem\"; title = \"Graph\"; ObjectID = \"sS3-OE-dAE\";",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Graph"
+          }
+        },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Graf"
+          }
+        }
+      }
+    },
+    "TMe-m6-g1E.title" : {
+      "comment" : "Class = \"WKInterfaceController\"; title = \"Close\"; ObjectID = \"TMe-m6-g1E\";",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Close"
+          }
+        },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lukk"
+          }
+        }
+      }
+    },
+    "ToV-eP-uxn.text" : {
+      "comment" : "Class = \"WKInterfaceLabel\"; text = \"Air temp:\"; ObjectID = \"ToV-eP-uxn\";",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Air temp:"
+          }
+        },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lufttemp:"
+          }
+        }
+      }
+    },
+    "v7v-Ed-LHJ.text" : {
+      "comment" : "Class = \"WKInterfaceLabel\"; text = \"Not configured\"; ObjectID = \"v7v-Ed-LHJ\";",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Not configured"
+          }
+        },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ikke konfigurert"
+          }
+        }
+      }
+    },
+    "vKG-Yz-WDV.text" : {
+      "comment" : "Class = \"WKInterfaceLabel\"; text = \"Label\"; ObjectID = \"vKG-Yz-WDV\";",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Label"
+          }
+        },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Label"
+          }
+        }
+      }
+    },
+    "XPe-fi-0Iq.text" : {
+      "comment" : "Class = \"WKInterfaceLabel\"; text = \"m/s\"; ObjectID = \"XPe-fi-0Iq\";",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "m/s"
+          }
+        },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "m/s"
+          }
+        }
+      }
+    },
+    "zW4-V8-nlA.title" : {
+      "comment" : "Class = \"WKInterfaceMenuItem\"; title = \"Map\"; ObjectID = \"zW4-V8-nlA\";",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Map"
+          }
+        },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kart"
+          }
+        }
+      }
+    }
+  },
+  "version" : "1.0"
+}
