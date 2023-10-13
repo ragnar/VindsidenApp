@@ -8,7 +8,6 @@
 #import "VindsidenApp-Swift.h"
 
 #import "RHCViewController.h"
-#import "RHEGraphView.h"
 
 @import WatchConnectivity;
 @import CoreSpotlight;
@@ -42,15 +41,12 @@ static NSString *kCellID = @"stationCellID";
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIApplicationDidBecomeActiveNotification object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIApplicationWillResignActiveNotification object:nil];
-    [self endObservingOrientation];
 }
 
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
-    [self beginObservingOrientation];
 
     [[self collectionView] setContentInsetAdjustmentBehavior: UIScrollViewContentInsetAdjustmentNever];
 
@@ -215,11 +211,6 @@ static NSString *kCellID = @"stationCellID";
         controller.delegate = self;
         controller.station = cell.currentStation;
         controller.showButtons = true;
-    } else if ( [segue.identifier isEqualToString:@"PresentGraphLandscape"] ) {
-        UINavigationController *navCon = segue.destinationViewController;
-
-        RHCLandscapeGraphViewController *controller = navCon.viewControllers.firstObject;
-        controller.station = cell.currentStation;
     }
 }
 
@@ -562,58 +553,6 @@ static NSString *kCellID = @"stationCellID";
         self.pendingScrollToStation = station;
     }
 }
-
-
-- (void)orientationChanged:(NSNotification *)notification
-{
-    UIDeviceOrientation deviceOrientation = [UIDevice currentDevice].orientation;
-    if (UIDeviceOrientationIsLandscape(deviceOrientation) && !_isShowingLandscapeView) {
-        if ( self.presentedViewController ) {
-            return;
-        }
-
-        dispatch_async(dispatch_get_main_queue(), ^{
-            self->_isShowingLandscapeView = YES;
-            [self performSegueWithIdentifier:@"PresentGraphLandscape" sender:self];
-        });
-    }
-    else if (UIDeviceOrientationIsPortrait(deviceOrientation) && _isShowingLandscapeView) {
-        if ( NO == [self.presentedViewController isKindOfClass:[RHCRotatingNavigationController class]] ) {
-            return;
-        }
-
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self dismissViewControllerAnimated:YES completion:nil];
-            self->_isShowingLandscapeView = NO;
-        });
-    }
-}
-
-
-- (void)beginObservingOrientation
-{
-    if ( self.traitCollection.userInterfaceIdiom == UIUserInterfaceIdiomPad ) {
-        return;
-    }
-
-    _isShowingLandscapeView = NO;
-    [[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(orientationChanged:)
-                                                 name:UIDeviceOrientationDidChangeNotification
-                                               object:nil];
-}
-
-
-- (void)endObservingOrientation
-{
-    if ( self.traitCollection.userInterfaceIdiom == UIUserInterfaceIdiomPad ) {
-        return;
-    }
-    [[UIDevice currentDevice] endGeneratingDeviceOrientationNotifications];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIDeviceOrientationDidChangeNotification object:nil];
-}
-
 
 #pragma mark - NSUserActivity
 

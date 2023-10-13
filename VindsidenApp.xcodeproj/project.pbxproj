@@ -10,8 +10,6 @@
 		AD07B2C11779E90A004BC24C /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AD07B2C01779E90A004BC24C /* Media.xcassets */; };
 		AD17ED611731012200943C33 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AD17ED5F1731012200943C33 /* MainStoryboard.storyboard */; };
 		AD17ED641731012200943C33 /* RHCViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD17ED631731012200943C33 /* RHCViewController.m */; };
-		AD17EDAA1731066F00943C33 /* RHEGraphMarker.m in Sources */ = {isa = PBXBuildFile; fileRef = AD17ED971731066E00943C33 /* RHEGraphMarker.m */; };
-		AD17EDAB1731066F00943C33 /* RHEGraphView.m in Sources */ = {isa = PBXBuildFile; fileRef = AD17ED991731066E00943C33 /* RHEGraphView.m */; };
 		AD1B45881CAEE9F200F171DB /* IndexRequestHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD66F5641CAEBA8B001A2755 /* IndexRequestHandler.swift */; };
 		AD2BB34F19C7718600349495 /* VindsidenAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD2BB34E19C7718600349495 /* VindsidenAppTests.swift */; };
 		AD303C2B1B282DC800C4B999 /* VindsidenWatchKit.h in Headers */ = {isa = PBXBuildFile; fileRef = AD303C2A1B282DC800C4B999 /* VindsidenWatchKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -129,9 +127,7 @@
 		ADCD425D196E4E42004973E9 /* UIFontDescriptor+textStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = ADCD424B196E4E42004973E9 /* UIFontDescriptor+textStyle.m */; };
 		ADCD425E196E4E42004973E9 /* UIImage+ImageFromView.h in Headers */ = {isa = PBXBuildFile; fileRef = ADCD424C196E4E42004973E9 /* UIImage+ImageFromView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		ADCD425F196E4E42004973E9 /* UIImage+ImageFromView.m in Sources */ = {isa = PBXBuildFile; fileRef = ADCD424D196E4E42004973E9 /* UIImage+ImageFromView.m */; };
-		ADD211C119CF139300497DC1 /* RHCLandscapeGraphViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADD211C019CF139300497DC1 /* RHCLandscapeGraphViewController.swift */; };
 		ADDB4F5019CB68F1005D5D38 /* RHCAlertManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADDB4F4F19CB68F1005D5D38 /* RHCAlertManager.swift */; };
-		ADE1863D1B9887AF0081EBEA /* RHCRotatingNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADE1863C1B9887AF0081EBEA /* RHCRotatingNavigationController.swift */; };
 		ADE9C4081AAB32840089EB19 /* WindManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADE9C4071AAB32840089EB19 /* WindManager.swift */; };
 /* End PBXBuildFile section */
 
@@ -284,10 +280,6 @@
 		AD17ED6B1731012200943C33 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		AD17ED861731058400943C33 /* RHCStationInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RHCStationInfo.h; sourceTree = "<group>"; };
 		AD17ED871731058400943C33 /* RHCStationInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RHCStationInfo.m; sourceTree = "<group>"; };
-		AD17ED961731066D00943C33 /* RHEGraphMarker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RHEGraphMarker.h; sourceTree = "<group>"; };
-		AD17ED971731066E00943C33 /* RHEGraphMarker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RHEGraphMarker.m; sourceTree = "<group>"; };
-		AD17ED981731066E00943C33 /* RHEGraphView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RHEGraphView.h; sourceTree = "<group>"; };
-		AD17ED991731066E00943C33 /* RHEGraphView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RHEGraphView.m; sourceTree = "<group>"; };
 		AD17EDB617310E5300943C33 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		AD17EDB817310E5B00943C33 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		AD17EDBA17310E6200943C33 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -400,9 +392,7 @@
 		ADCD424B196E4E42004973E9 /* UIFontDescriptor+textStyle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIFontDescriptor+textStyle.m"; sourceTree = "<group>"; };
 		ADCD424C196E4E42004973E9 /* UIImage+ImageFromView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ImageFromView.h"; sourceTree = "<group>"; };
 		ADCD424D196E4E42004973E9 /* UIImage+ImageFromView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ImageFromView.m"; sourceTree = "<group>"; };
-		ADD211C019CF139300497DC1 /* RHCLandscapeGraphViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RHCLandscapeGraphViewController.swift; sourceTree = "<group>"; };
 		ADDB4F4F19CB68F1005D5D38 /* RHCAlertManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RHCAlertManager.swift; sourceTree = "<group>"; };
-		ADE1863C1B9887AF0081EBEA /* RHCRotatingNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RHCRotatingNavigationController.swift; sourceTree = "<group>"; };
 		ADE9C4071AAB32840089EB19 /* WindManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WindManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -554,7 +544,6 @@
 				AD17EDE51734487F00943C33 /* Settings */,
 				AD17ED4E1731012200943C33 /* Supporting Files */,
 				AD4DEA7619CB7528002A220B /* RHCNavigationViewController.swift */,
-				ADE1863C1B9887AF0081EBEA /* RHCRotatingNavigationController.swift */,
 				ADDB4F4F19CB68F1005D5D38 /* RHCAlertManager.swift */,
 			);
 			path = VindsidenApp;
@@ -574,17 +563,6 @@
 				AD9685822AD6883B00608FB3 /* Launch Screen.storyboard */,
 			);
 			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		AD17EDDE173447CB00943C33 /* Graph View */ = {
-			isa = PBXGroup;
-			children = (
-				AD17ED961731066D00943C33 /* RHEGraphMarker.h */,
-				AD17ED971731066E00943C33 /* RHEGraphMarker.m */,
-				AD17ED981731066E00943C33 /* RHEGraphView.h */,
-				AD17ED991731066E00943C33 /* RHEGraphView.m */,
-			);
-			name = "Graph View";
 			sourceTree = "<group>";
 		};
 		AD17EDDF173447EC00943C33 /* Communication */ = {
@@ -609,7 +587,6 @@
 		AD17EDE11734482100943C33 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				AD17EDDE173447CB00943C33 /* Graph View */,
 				AD17EDE21734483400943C33 /* Station View */,
 			);
 			name = Views;
@@ -631,7 +608,6 @@
 				AD17ED621731012200943C33 /* RHCViewController.h */,
 				AD17ED631731012200943C33 /* RHCViewController.m */,
 				AD55F5B6233AAB2F00757CBD /* RHCViewController+Swift.swift */,
-				ADD211C019CF139300497DC1 /* RHCLandscapeGraphViewController.swift */,
 				AD9685AB2AD80BBB00608FB3 /* RHCStationCell.swift */,
 			);
 			name = "Main View Controller";
@@ -1270,11 +1246,7 @@
 				AD17ED641731012200943C33 /* RHCViewController.m in Sources */,
 				AD35C66C1D1C408A00E894CC /* ShortcutItemHandling.swift in Sources */,
 				AD55F5B7233AAB2F00757CBD /* RHCViewController+Swift.swift in Sources */,
-				ADD211C119CF139300497DC1 /* RHCLandscapeGraphViewController.swift in Sources */,
-				ADE1863D1B9887AF0081EBEA /* RHCRotatingNavigationController.swift in Sources */,
 				ADA2351C1A040839006A72D4 /* RHCDStationDetailsCell.swift in Sources */,
-				AD17EDAA1731066F00943C33 /* RHEGraphMarker.m in Sources */,
-				AD17EDAB1731066F00943C33 /* RHEGraphView.m in Sources */,
 				AD4DEA7719CB7528002A220B /* RHCNavigationViewController.swift in Sources */,
 				AD1B45881CAEE9F200F171DB /* IndexRequestHandler.swift in Sources */,
 				ADDB4F5019CB68F1005D5D38 /* RHCAlertManager.swift in Sources */,

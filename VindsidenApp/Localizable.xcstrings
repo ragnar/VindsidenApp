@@ -120,23 +120,6 @@
         }
       }
     },
-    "GRAPH_MARKER_POPUP" : {
-      "comment" : "Gust: %@, Avg: %@, Speed: %@",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Gust: %@ Avg: %@ Speed: %@"
-          }
-        },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Gust: %@ Gj.snt: %@ Hastighet: %@"
-          }
-        }
-      }
-    },
     "Gust" : {
       "localizations" : {
         "nb" : {

@@ -415,24 +415,6 @@
         }
       }
     },
-    "nHp-c8-bEx.text" : {
-      "comment" : "Class = \"UILabel\"; text = \"Label\"; ObjectID = \"nHp-c8-bEx\";",
-      "extractionState" : "extracted_with_value",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "Label"
-          }
-        },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Stasjonsnavn"
-          }
-        }
-      }
-    },
     "OCw-xJ-J7L.text" : {
       "comment" : "Class = \"UILabel\"; text = \"Title\"; ObjectID = \"OCw-xJ-J7L\";",
       "extractionState" : "extracted_with_value",

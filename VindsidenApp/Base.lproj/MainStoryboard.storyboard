@@ -315,7 +315,6 @@
                         <outlet property="pageControl" destination="Dp6-Nd-Eki" id="JCL-33-VWT"/>
                         <outlet property="toolbar" destination="EdT-XP-BFV" id="Rsv-s5-zFY"/>
                         <segue destination="KWr-m7-T9q" kind="presentation" identifier="ShowStationDetails" modalPresentationStyle="automatic" id="gZG-1Q-BfR"/>
-                        <segue destination="JMx-zR-j3n" kind="presentation" identifier="PresentGraphLandscape" modalPresentationStyle="overFullScreen" modalTransitionStyle="crossDissolve" id="UBO-jo-R7X"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xXh-KP-MIO" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -409,47 +408,6 @@
             </objects>
             <point key="canvasLocation" x="3353" y="1044"/>
         </scene>
-        <!--Landscape Graph View Controller-->
-        <scene sceneID="sFL-pN-9RF">
-            <objects>
-                <viewController modalPresentationStyle="fullScreen" id="Z90-Vm-Lch" customClass="RHCLandscapeGraphViewController" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="khe-U2-fMd">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zxU-hP-1XR" customClass="RHEGraphView">
-                                <rect key="frame" x="0.0" y="40.5" width="375" height="626.5"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                            </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nHp-c8-bEx">
-                                <rect key="frame" x="10" y="10" width="43.5" height="20.5"/>
-                                <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
-                        <viewLayoutGuide key="safeArea" id="t2h-po-ymW"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <constraints>
-                            <constraint firstItem="nHp-c8-bEx" firstAttribute="top" secondItem="t2h-po-ymW" secondAttribute="top" constant="10" id="54P-se-tbD"/>
-                            <constraint firstItem="t2h-po-ymW" firstAttribute="trailing" secondItem="zxU-hP-1XR" secondAttribute="trailing" id="85P-uC-r78"/>
-                            <constraint firstItem="t2h-po-ymW" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="nHp-c8-bEx" secondAttribute="trailing" constant="10" id="GCa-SJ-FIj"/>
-                            <constraint firstItem="t2h-po-ymW" firstAttribute="bottom" secondItem="zxU-hP-1XR" secondAttribute="bottom" id="IBR-oE-ihN"/>
-                            <constraint firstItem="zxU-hP-1XR" firstAttribute="top" secondItem="nHp-c8-bEx" secondAttribute="bottom" constant="10" id="fmd-QI-Pjh"/>
-                            <constraint firstItem="nHp-c8-bEx" firstAttribute="leading" secondItem="t2h-po-ymW" secondAttribute="leading" constant="10" id="lfH-QB-8B5"/>
-                            <constraint firstItem="zxU-hP-1XR" firstAttribute="leading" secondItem="t2h-po-ymW" secondAttribute="leading" id="wur-nd-LYf"/>
-                        </constraints>
-                    </view>
-                    <navigationItem key="navigationItem" id="fp2-L3-ak1"/>
-                    <connections>
-                        <outlet property="graphView" destination="zxU-hP-1XR" id="I5u-pf-UuT"/>
-                        <outlet property="stationName" destination="nHp-c8-bEx" id="aa2-Te-JVn"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="KCE-JW-liA" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2308" y="1763"/>
-        </scene>
         <!--Navigation Controller-->
         <scene sceneID="coP-8m-qSA">
             <objects>
@@ -466,23 +424,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wVR-HP-RXZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2309" y="1044"/>
-        </scene>
-        <!--Rotating Navigation Controller-->
-        <scene sceneID="emw-9r-9HM">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" modalPresentationStyle="fullScreen" navigationBarHidden="YES" id="JMx-zR-j3n" customClass="RHCRotatingNavigationController" customModule="VindsidenApp" customModuleProvider="target" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="7Ds-a7-rLO">
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="Z90-Vm-Lch" kind="relationship" relationship="rootViewController" id="N2e-Xh-RUb"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="7ZQ-lW-mfl" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1073" y="1218"/>
         </scene>
     </scenes>
     <color key="tintColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
