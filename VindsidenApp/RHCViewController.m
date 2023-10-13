@@ -17,7 +17,7 @@
 
 static NSString *kCellID = @"stationCellID";
 
-@interface RHCViewController ()<NSUserActivityDelegate, UIDataSourceModelAssociation, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, NSFetchedResultsControllerDelegate, RHEStationDetailsDelegate, RHCSettingsDelegate>
+@interface RHCViewController ()<NSUserActivityDelegate, UIDataSourceModelAssociation, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, NSFetchedResultsControllerDelegate, RHEStationDetailsDelegate>
 
 @property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
 @property (weak, nonatomic) IBOutlet UIPageControl *pageControl;
@@ -209,12 +209,7 @@ static NSString *kCellID = @"stationCellID";
         cell = [self.collectionView visibleCells].firstObject;
     }
 
-    if ( [segue.identifier isEqualToString:@"ShowSettings"] ) {
-        UINavigationController *navCon = segue.destinationViewController;
-        RHCSettingsViewController *controller = navCon.viewControllers.firstObject;
-        controller.delegate = self;
-        navCon.presentationController.delegate = controller;
-    } else if ( [segue.identifier isEqualToString:@"ShowStationDetails"] ) {
+    if ( [segue.identifier isEqualToString:@"ShowStationDetails"] ) {
         UINavigationController *navCon = segue.destinationViewController;
         RHEStationDetailsViewController *controller = navCon.viewControllers.firstObject;
         controller.delegate = self;
@@ -467,7 +462,7 @@ static NSString *kCellID = @"stationCellID";
 
 - (IBAction)settings:(id)sender
 {
-    [self performSegueWithIdentifier:@"ShowSettings" sender:sender];
+    [self openSettings];
 }
 
 
@@ -535,26 +530,6 @@ static NSString *kCellID = @"stationCellID";
 {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
-
-
-#pragma mark - Settings Delegate
-
-- (void)rhcSettingsDidFinish:(RHCSettingsViewController *)controller shouldDismiss:(BOOL)shouldDismiss
-{
-    [self updateApplicationContextToWatch];
-    [(RHCAppDelegate *)[[UIApplication sharedApplication] delegate] updateShortcutItems];
-    [[WindManager sharedManager] updateNow];
-
-    if ( [[self.collectionView visibleCells] count] ) {
-        RHCStationCell *cell = [self.collectionView visibleCells][0];
-        [cell displayPlots];
-    }
-
-    if (shouldDismiss) {
-        [self dismissViewControllerAnimated:YES completion:nil];
-    }
-}
-
 
 #pragma mark -
 

@@ -8,21 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		AD07B2C11779E90A004BC24C /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AD07B2C01779E90A004BC24C /* Media.xcassets */; };
-		AD0A242624688DD40072B93F /* CoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD0A242524688DD40072B93F /* CoreServices.framework */; };
-		AD17ED481731012200943C33 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD17ED471731012200943C33 /* UIKit.framework */; };
-		AD17ED4A1731012200943C33 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD17ED491731012200943C33 /* Foundation.framework */; };
-		AD17ED4C1731012200943C33 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD17ED4B1731012200943C33 /* CoreGraphics.framework */; };
 		AD17ED521731012200943C33 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = AD17ED501731012200943C33 /* InfoPlist.strings */; };
 		AD17ED611731012200943C33 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AD17ED5F1731012200943C33 /* MainStoryboard.storyboard */; };
 		AD17ED641731012200943C33 /* RHCViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD17ED631731012200943C33 /* RHCViewController.m */; };
 		AD17EDAA1731066F00943C33 /* RHEGraphMarker.m in Sources */ = {isa = PBXBuildFile; fileRef = AD17ED971731066E00943C33 /* RHEGraphMarker.m */; };
 		AD17EDAB1731066F00943C33 /* RHEGraphView.m in Sources */ = {isa = PBXBuildFile; fileRef = AD17ED991731066E00943C33 /* RHEGraphView.m */; };
-		AD17EDB717310E5400943C33 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD17EDB617310E5300943C33 /* CoreData.framework */; };
-		AD17EDB917310E5B00943C33 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD17EDB817310E5B00943C33 /* SystemConfiguration.framework */; };
-		AD17EDBB17310E6200943C33 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD17EDBA17310E6200943C33 /* QuartzCore.framework */; };
-		AD17EDC117310E7A00943C33 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD17EDC017310E7A00943C33 /* CoreLocation.framework */; };
 		AD17EDC717312A5000943C33 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = AD17EDC517312A5000943C33 /* Localizable.strings */; };
-		AD17EDF91736492500943C33 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD17EDF81736492200943C33 /* AdSupport.framework */; };
 		AD1B45881CAEE9F200F171DB /* IndexRequestHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD66F5641CAEBA8B001A2755 /* IndexRequestHandler.swift */; };
 		AD2AB4F819C722320029C739 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = AD2AB4FA19C722320029C739 /* InfoPlist.strings */; };
 		AD2AB4FD19C722330029C739 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = AD2AB4FF19C722330029C739 /* InfoPlist.strings */; };
@@ -51,8 +42,6 @@
 		AD303C4E1B28491600C4B999 /* NSString+fixDateString.m in Sources */ = {isa = PBXBuildFile; fileRef = ADCD4245196E4E42004973E9 /* NSString+fixDateString.m */; };
 		AD303C4F1B28491600C4B999 /* NSString+isNumeric.m in Sources */ = {isa = PBXBuildFile; fileRef = ADCD4247196E4E42004973E9 /* NSString+isNumeric.m */; };
 		AD30BC5219F024D9000CE40C /* RHCAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD30BC5119F024D9000CE40C /* RHCAppDelegate.swift */; };
-		AD32E38119BA2FC2008F00EB /* RHEStationPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD32E38019BA2FC2008F00EB /* RHEStationPickerViewController.swift */; };
-		AD32E38319BC5037008F00EB /* RHCUnitSelectorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD32E38219BC5037008F00EB /* RHCUnitSelectorViewController.swift */; };
 		AD35C66C1D1C408A00E894CC /* ShortcutItemHandling.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD35C66B1D1C408A00E894CC /* ShortcutItemHandling.swift */; };
 		AD4DEA7719CB7528002A220B /* RHCNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD4DEA7619CB7528002A220B /* RHCNavigationViewController.swift */; };
 		AD539CA21947B5CA002644BD /* VindsidenKit.h in Headers */ = {isa = PBXBuildFile; fileRef = AD539CA11947B5CA002644BD /* VindsidenKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -73,7 +62,6 @@
 		AD66F5651CAEBA8B001A2755 /* IndexRequestHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD66F5641CAEBA8B001A2755 /* IndexRequestHandler.swift */; };
 		AD66F5691CAEBA8B001A2755 /* VindSidenSpotlight.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = AD66F5621CAEBA8B001A2755 /* VindSidenSpotlight.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		AD712AE41D0F4D19006AA2A8 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = AD6142FD1D0F0D1B0008C5E8 /* Localizable.strings */; };
-		AD71965C19EED713006FA2BC /* RHCSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD71965B19EED713006FA2BC /* RHCSettingsViewController.swift */; };
 		AD7AA507196E46D800B1518B /* Vindsiden.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = AD7AA505196E46D800B1518B /* Vindsiden.xcdatamodeld */; };
 		AD7BBB471A3F53F400883770 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD7BBB461A3F53F400883770 /* Logger.swift */; };
 		AD7BBB491A3F55A100883770 /* AppConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD7BBB481A3F55A100883770 /* AppConfig.swift */; };
@@ -107,7 +95,12 @@
 		ADA2351C1A040839006A72D4 /* RHCDStationDetailsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADA2351B1A040839006A72D4 /* RHCDStationDetailsCell.swift */; };
 		ADB5A78A19DEC29A009AE4A5 /* DrawArrow.h in Headers */ = {isa = PBXBuildFile; fileRef = ADB5A78819DEC29A009AE4A5 /* DrawArrow.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		ADB5A78B19DEC29A009AE4A5 /* DrawArrow.m in Sources */ = {isa = PBXBuildFile; fileRef = ADB5A78919DEC29A009AE4A5 /* DrawArrow.m */; };
-		ADB7BA421B3A98E9000921E0 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ADB7BA411B3A98E9000921E0 /* CoreGraphics.framework */; };
+		ADB97FAD2AD914D900CE7B01 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB97FAC2AD914D900CE7B01 /* SettingsView.swift */; };
+		ADB97FAF2AD9154D00CE7B01 /* UserObservable.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB97FAE2AD9154D00CE7B01 /* UserObservable.swift */; };
+		ADB97FB12AD91E6E00CE7B01 /* StationPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB97FB02AD91E6E00CE7B01 /* StationPickerView.swift */; };
+		ADB97FB32AD923F300CE7B01 /* WeatherBoxView in Frameworks */ = {isa = PBXBuildFile; productRef = ADB97FB22AD923F300CE7B01 /* WeatherBoxView */; };
+		ADB97FB52AD9240500CE7B01 /* WeatherBoxView in Frameworks */ = {isa = PBXBuildFile; productRef = ADB97FB42AD9240500CE7B01 /* WeatherBoxView */; };
+		ADB97FB62AD924B500CE7B01 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD96858B2AD6A40000608FB3 /* SwiftUI.framework */; };
 		ADBEA4CF1A07ECF600B168BF /* UIColor+AppColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADBEA4CE1A07ECF600B168BF /* UIColor+AppColors.swift */; };
 		ADBF8B781D0F03BE0005C0C9 /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ADBF8B761D0F03BE0005C0C9 /* Interface.storyboard */; };
 		ADBF8B7A1D0F03BE0005C0C9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ADBF8B791D0F03BE0005C0C9 /* Assets.xcassets */; };
@@ -149,13 +142,6 @@
 			proxyType = 1;
 			remoteGlobalIDString = AD17ED431731012200943C33;
 			remoteInfo = VindsidenApp;
-		};
-		AD539C8F1947B0F7002644BD /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = AD17ED3C1731012200943C33 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = AD539C811947B0F6002644BD;
-			remoteInfo = VindsidenToday;
 		};
 		AD539CA91947B5CA002644BD /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -380,8 +366,6 @@
 		AD303C2C1B282DC800C4B999 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AD30BC5119F024D9000CE40C /* RHCAppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RHCAppDelegate.swift; sourceTree = "<group>"; };
 		AD32E37F19BA2FC1008F00EB /* VindsidenApp-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "VindsidenApp-Bridging-Header.h"; sourceTree = "<group>"; };
-		AD32E38019BA2FC2008F00EB /* RHEStationPickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RHEStationPickerViewController.swift; sourceTree = "<group>"; };
-		AD32E38219BC5037008F00EB /* RHCUnitSelectorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RHCUnitSelectorViewController.swift; sourceTree = "<group>"; };
 		AD35C66B1D1C408A00E894CC /* ShortcutItemHandling.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShortcutItemHandling.swift; sourceTree = "<group>"; };
 		AD4DEA7619CB7528002A220B /* RHCNavigationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RHCNavigationViewController.swift; sourceTree = "<group>"; };
 		AD539C831947B0F6002644BD /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
@@ -407,7 +391,6 @@
 		AD6B004F1D8C6035006B4EA3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Interface.strings; sourceTree = "<group>"; };
 		AD6B00501D8C6038006B4EA3 /* nb */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nb; path = nb.lproj/Interface.strings; sourceTree = "<group>"; };
 		AD6BD0F41A967A8800E6686B /* libPods.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libPods.a; path = "Pods/build/Debug-iphoneos/libPods.a"; sourceTree = "<group>"; };
-		AD71965B19EED713006FA2BC /* RHCSettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RHCSettingsViewController.swift; sourceTree = "<group>"; };
 		AD7AA506196E46D800B1518B /* Vindsiden.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Vindsiden.xcdatamodel; sourceTree = "<group>"; };
 		AD7BBB461A3F53F400883770 /* Logger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		AD7BBB481A3F55A100883770 /* AppConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppConfig.swift; sourceTree = "<group>"; };
@@ -436,6 +419,9 @@
 		ADB5A78819DEC29A009AE4A5 /* DrawArrow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DrawArrow.h; sourceTree = "<group>"; };
 		ADB5A78919DEC29A009AE4A5 /* DrawArrow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DrawArrow.m; sourceTree = "<group>"; };
 		ADB7BA411B3A98E9000921E0 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = Platforms/WatchOS.platform/Developer/SDKs/WatchOS2.0.sdk/System/Library/Frameworks/CoreGraphics.framework; sourceTree = DEVELOPER_DIR; };
+		ADB97FAC2AD914D900CE7B01 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		ADB97FAE2AD9154D00CE7B01 /* UserObservable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserObservable.swift; sourceTree = "<group>"; };
+		ADB97FB02AD91E6E00CE7B01 /* StationPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationPickerView.swift; sourceTree = "<group>"; };
 		ADBEA4CE1A07ECF600B168BF /* UIColor+AppColors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+AppColors.swift"; sourceTree = "<group>"; };
 		ADBF8B1F1D0EFA2D0005C0C9 /* watchkitapp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = watchkitapp.entitlements; path = watchkitapp/watchkitapp.entitlements; sourceTree = "<group>"; };
 		ADBF8B741D0F03BE0005C0C9 /* watchkitapp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = watchkitapp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -492,16 +478,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AD17EDF91736492500943C33 /* AdSupport.framework in Frameworks */,
-				AD17EDC117310E7A00943C33 /* CoreLocation.framework in Frameworks */,
-				AD17EDBB17310E6200943C33 /* QuartzCore.framework in Frameworks */,
-				AD17EDB917310E5B00943C33 /* SystemConfiguration.framework in Frameworks */,
+				ADB97FB62AD924B500CE7B01 /* SwiftUI.framework in Frameworks */,
 				AD539CB21947B5CA002644BD /* VindsidenKit.framework in Frameworks */,
-				AD17EDB717310E5400943C33 /* CoreData.framework in Frameworks */,
-				AD0A242624688DD40072B93F /* CoreServices.framework in Frameworks */,
-				AD17ED481731012200943C33 /* UIKit.framework in Frameworks */,
-				AD17ED4A1731012200943C33 /* Foundation.framework in Frameworks */,
-				AD17ED4C1731012200943C33 /* CoreGraphics.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -516,7 +494,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				ADB7BA421B3A98E9000921E0 /* CoreGraphics.framework in Frameworks */,
+				ADB97FB32AD923F300CE7B01 /* WeatherBoxView in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -548,6 +526,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AD96858C2AD6A40000608FB3 /* SwiftUI.framework in Frameworks */,
+				ADB97FB52AD9240500CE7B01 /* WeatherBoxView in Frameworks */,
 				AD96858A2AD6A40000608FB3 /* WidgetKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -729,9 +708,8 @@
 		AD17EDE51734487F00943C33 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
-				AD32E38219BC5037008F00EB /* RHCUnitSelectorViewController.swift */,
-				AD32E38019BA2FC2008F00EB /* RHEStationPickerViewController.swift */,
-				AD71965B19EED713006FA2BC /* RHCSettingsViewController.swift */,
+				ADB97FAC2AD914D900CE7B01 /* SettingsView.swift */,
+				ADB97FB02AD91E6E00CE7B01 /* StationPickerView.swift */,
 			);
 			name = Settings;
 			sourceTree = "<group>";
@@ -773,6 +751,7 @@
 				ADCD4260196E4E8A004973E9 /* Categories */,
 				AD7BBB4E1A409FF000883770 /* Data Model */,
 				AD539C9F1947B5CA002644BD /* Supporting Files */,
+				ADB97FAE2AD9154D00CE7B01 /* UserObservable.swift */,
 			);
 			path = VindsidenKit;
 			sourceTree = "<group>";
@@ -980,7 +959,6 @@
 			);
 			dependencies = (
 				AD539CB11947B5CA002644BD /* PBXTargetDependency */,
-				AD539C901947B0F7002644BD /* PBXTargetDependency */,
 				AD539CB51947B5CA002644BD /* PBXTargetDependency */,
 				AD66F5681CAEBA8B001A2755 /* PBXTargetDependency */,
 				ADBF8B8F1D0F03BE0005C0C9 /* PBXTargetDependency */,
@@ -1023,6 +1001,9 @@
 			dependencies = (
 			);
 			name = VindsidenWatchKit;
+			packageProductDependencies = (
+				ADB97FB22AD923F300CE7B01 /* WeatherBoxView */,
+			);
 			productName = VindsidenWatchKit;
 			productReference = AD303C281B282DC800C4B999 /* VindsidenWatchKit.framework */;
 			productType = "com.apple.product-type.framework";
@@ -1104,6 +1085,9 @@
 				AD9685A22AD6B0B800608FB3 /* PBXTargetDependency */,
 			);
 			name = VindsidenWidgetExtension;
+			packageProductDependencies = (
+				ADB97FB42AD9240500CE7B01 /* WeatherBoxView */,
+			);
 			productName = VindsidenWidgetExtension;
 			productReference = AD9685882AD6A40000608FB3 /* VindsidenWidgetExtension.appex */;
 			productType = "com.apple.product-type.app-extension";
@@ -1345,6 +1329,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AD30BC5219F024D9000CE40C /* RHCAppDelegate.swift in Sources */,
+				ADB97FB12AD91E6E00CE7B01 /* StationPickerView.swift in Sources */,
 				AD9685AE2AD8119700608FB3 /* RHCStationInfo.m in Sources */,
 				ADA2351A19FD69C6006A72D4 /* RHEStationDetailsViewController.swift in Sources */,
 				AD9685AC2AD80BBB00608FB3 /* RHCStationCell.swift in Sources */,
@@ -1354,14 +1339,12 @@
 				ADD211C119CF139300497DC1 /* RHCLandscapeGraphViewController.swift in Sources */,
 				ADE1863D1B9887AF0081EBEA /* RHCRotatingNavigationController.swift in Sources */,
 				ADA2351C1A040839006A72D4 /* RHCDStationDetailsCell.swift in Sources */,
-				AD32E38319BC5037008F00EB /* RHCUnitSelectorViewController.swift in Sources */,
 				AD17EDAA1731066F00943C33 /* RHEGraphMarker.m in Sources */,
 				AD17EDAB1731066F00943C33 /* RHEGraphView.m in Sources */,
 				AD4DEA7719CB7528002A220B /* RHCNavigationViewController.swift in Sources */,
 				AD1B45881CAEE9F200F171DB /* IndexRequestHandler.swift in Sources */,
-				AD32E38119BA2FC2008F00EB /* RHEStationPickerViewController.swift in Sources */,
 				ADDB4F5019CB68F1005D5D38 /* RHCAlertManager.swift in Sources */,
-				AD71965C19EED713006FA2BC /* RHCSettingsViewController.swift in Sources */,
+				ADB97FAD2AD914D900CE7B01 /* SettingsView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1404,6 +1387,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AD7BBB471A3F53F400883770 /* Logger.swift in Sources */,
+				ADB97FAF2AD9154D00CE7B01 /* UserObservable.swift in Sources */,
 				AD7BBB491A3F55A100883770 /* AppConfig.swift in Sources */,
 				ADCD425D196E4E42004973E9 /* UIFontDescriptor+textStyle.m in Sources */,
 				ADCD4257196E4E42004973E9 /* NSString+fixDateString.m in Sources */,
@@ -1480,11 +1464,6 @@
 			isa = PBXTargetDependency;
 			target = AD17ED431731012200943C33 /* VindsidenApp */;
 			targetProxy = AD2BB35019C7718600349495 /* PBXContainerItemProxy */;
-		};
-		AD539C901947B0F7002644BD /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			platformFilter = ios;
-			targetProxy = AD539C8F1947B0F7002644BD /* PBXContainerItemProxy */;
 		};
 		AD539CAA1947B5CA002644BD /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -2607,6 +2586,16 @@
 
 /* Begin XCSwiftPackageProductDependency section */
 		AD9685A72AD6BED600608FB3 /* WeatherBoxView */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AD9685A62AD6BED600608FB3 /* XCRemoteSwiftPackageReference "WeatherBoxView" */;
+			productName = WeatherBoxView;
+		};
+		ADB97FB22AD923F300CE7B01 /* WeatherBoxView */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AD9685A62AD6BED600608FB3 /* XCRemoteSwiftPackageReference "WeatherBoxView" */;
+			productName = WeatherBoxView;
+		};
+		ADB97FB42AD9240500CE7B01 /* WeatherBoxView */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = AD9685A62AD6BED600608FB3 /* XCRemoteSwiftPackageReference "WeatherBoxView" */;
 			productName = WeatherBoxView;

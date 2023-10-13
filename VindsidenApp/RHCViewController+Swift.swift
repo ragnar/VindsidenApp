@@ -7,7 +7,9 @@
 //
 
 import UIKit
+import SwiftUI
 import OSLog
+import VindsidenKit
 
 extension RHCViewController: UIContextMenuInteractionDelegate {
     public func contextMenuInteraction(_ interaction: UIContextMenuInteraction, configurationForMenuAtLocation location: CGPoint) -> UIContextMenuConfiguration? {
@@ -87,3 +89,35 @@ extension RHCViewController: UIContextMenuInteractionDelegate {
         }
     }
 }
+
+extension RHCViewController {
+    @objc
+    func openSettings() {
+        let root = UIHostingController(rootView: SettingsView()
+            .environment(\.managedObjectContext,
+                          DataManager.shared.viewContext())
+        )
+        navigationController?.present(root, animated: true)
+    }
+}
+
+/* FIXME: Do this on dismiss for new settings
+        #pragma mark - Settings Delegate
+
+        - (void)rhcSettingsDidFinish:(RHCSettingsViewController *)controller shouldDismiss:(BOOL)shouldDismiss
+        {
+            [self updateApplicationContextToWatch];
+            [(RHCAppDelegate *)[[UIApplication sharedApplication] delegate] updateShortcutItems];
+            [[WindManager sharedManager] updateNow];
+
+            if ( [[self.collectionView visibleCells] count] ) {
+                RHCStationCell *cell = [self.collectionView visibleCells][0];
+                [cell displayPlots];
+            }
+
+            if (shouldDismiss) {
+                [self dismissViewControllerAnimated:YES completion:nil];
+            }
+        }
+
+*/
