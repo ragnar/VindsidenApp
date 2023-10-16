@@ -4,6 +4,12 @@
     "%@ version %@.%@" : {
       "comment" : "Version string in settings view",
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ version %@.%@"
+          }
+        },
         "nb" : {
           "stringUnit" : {
             "state" : "translated",
@@ -25,6 +31,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Nye værstasjoner lastet ned. Gå til settings for å se på dem."
+          }
+        }
+      }
+    },
+    "Average" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Average"
+          }
+        },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gjennomsnitt"
           }
         }
       }
@@ -262,23 +284,6 @@
         }
       }
     },
-    "LABEL_NOT_UPDATED" : {
-      "comment" : "Not updated",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Not updated"
-          }
-        },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ikke oppdatert"
-          }
-        }
-      }
-    },
     "LABEL_PERMIT" : {
       "comment" : "Værdata hentet med tillatelse fra\nhttp://vindsiden.no\n\n",
       "localizations" : {
@@ -350,23 +355,6 @@
         }
       }
     },
-    "LABEL_UPDATING" : {
-      "comment" : "Updating",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Updating"
-          }
-        },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Oppdaterer"
-          }
-        }
-      }
-    },
     "LABEL_WIND_AVG" : {
       "comment" : "Average",
       "extractionState" : "manual",
@@ -416,7 +404,7 @@
         "nb" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Vind retning"
+            "value" : "Vindretning"
           }
         }
       }
@@ -434,7 +422,7 @@
         "nb" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Vind gust"
+            "value" : "Vindkast"
           }
         }
       }
@@ -754,6 +742,22 @@
         }
       }
     },
+    "Temp Air" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Temp Air"
+          }
+        },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lufttemperatur"
+          }
+        }
+      }
+    },
     "Temperature" : {
       "localizations" : {
         "en" : {
@@ -849,6 +853,70 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Synlig"
+          }
+        }
+      }
+    },
+    "Wind Beaufort" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wind Beaufort"
+          }
+        },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Beaufort"
+          }
+        }
+      }
+    },
+    "Wind Direction" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wind Direction"
+          }
+        },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vindretning"
+          }
+        }
+      }
+    },
+    "Wind Gust" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wind Gust"
+          }
+        },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vindkast"
+          }
+        }
+      }
+    },
+    "Wind Speed" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wind Speed"
+          }
+        },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vindhastighet"
           }
         }
       }

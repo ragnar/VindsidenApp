@@ -19,60 +19,6 @@
         }
       }
     },
-    "2O1-Wu-nV1.text" : {
-      "comment" : "Class = \"UILabel\"; text = \"Wind speed\"; ObjectID = \"2O1-Wu-nV1\";",
-      "extractionState" : "extracted_with_value",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "Wind speed"
-          }
-        },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Vind hastighet"
-          }
-        }
-      }
-    },
-    "2vF-fz-xPY.text" : {
-      "comment" : "Class = \"UILabel\"; text = \"nr12\"; ObjectID = \"2vF-fz-xPY\";",
-      "extractionState" : "extracted_with_value",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "nr12"
-          }
-        },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "nr12"
-          }
-        }
-      }
-    },
-    "3Nd-be-0RW.text" : {
-      "comment" : "Class = \"UILabel\"; text = \"nr6\"; ObjectID = \"3Nd-be-0RW\";",
-      "extractionState" : "extracted_with_value",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "nr6"
-          }
-        },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "nr6"
-          }
-        }
-      }
-    },
     "4GR-cF-l56.title" : {
       "comment" : "Class = \"IBUINavigationItem\"; title = \"Station Picker\"; ObjectID = \"4GR-cF-l56\";",
       "extractionState" : "manual",
@@ -145,42 +91,6 @@
         }
       }
     },
-    "gL2-g9-tf3.text" : {
-      "comment" : "Class = \"UILabel\"; text = \"nr4\"; ObjectID = \"gL2-g9-tf3\";",
-      "extractionState" : "extracted_with_value",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "nr4"
-          }
-        },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "nr4"
-          }
-        }
-      }
-    },
-    "gQM-kn-Uu6.text" : {
-      "comment" : "Class = \"UILabel\"; text = \"Wind direction\"; ObjectID = \"gQM-kn-Uu6\";",
-      "extractionState" : "extracted_with_value",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "Wind direction"
-          }
-        },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Vind retning"
-          }
-        }
-      }
-    },
     "gvw-Yl-x7e.text" : {
       "comment" : "Class = \"IBUILabel\"; text = \"Title\"; ObjectID = \"gvw-Yl-x7e\";",
       "extractionState" : "manual",
@@ -195,42 +105,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Title"
-          }
-        }
-      }
-    },
-    "HCH-43-Lb8.text" : {
-      "comment" : "Class = \"UILabel\"; text = \"Temp air\"; ObjectID = \"HCH-43-Lb8\";",
-      "extractionState" : "extracted_with_value",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "Temp air"
-          }
-        },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Temp luft"
-          }
-        }
-      }
-    },
-    "HRG-g4-QSb.text" : {
-      "comment" : "Class = \"UILabel\"; text = \"Verket\"; ObjectID = \"HRG-g4-QSb\";",
-      "extractionState" : "extracted_with_value",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "Verket"
-          }
-        },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Verket"
           }
         }
       }
@@ -307,24 +181,6 @@
         }
       }
     },
-    "KN1-dX-8Yo.text" : {
-      "comment" : "Class = \"UILabel\"; text = \"nr10\"; ObjectID = \"KN1-dX-8Yo\";",
-      "extractionState" : "extracted_with_value",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "nr10"
-          }
-        },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "nr10"
-          }
-        }
-      }
-    },
     "kog-Ms-KMI.text" : {
       "comment" : "Class = \"IBUILabel\"; text = \"Label\"; ObjectID = \"kog-Ms-KMI\";",
       "extractionState" : "manual",
@@ -357,24 +213,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Detail"
-          }
-        }
-      }
-    },
-    "LRv-Ay-aga.text" : {
-      "comment" : "Class = \"UILabel\"; text = \"Label\"; ObjectID = \"LRv-Ay-aga\";",
-      "extractionState" : "extracted_with_value",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "Label"
-          }
-        },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Label"
           }
         }
       }
@@ -447,96 +285,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Detail"
-          }
-        }
-      }
-    },
-    "pRF-Gf-OHu.text" : {
-      "comment" : "Class = \"UILabel\"; text = \"nr2\"; ObjectID = \"pRF-Gf-OHu\";",
-      "extractionState" : "extracted_with_value",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "nr2"
-          }
-        },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "nr2"
-          }
-        }
-      }
-    },
-    "R7C-CF-x4f.text" : {
-      "comment" : "Class = \"UILabel\"; text = \"Wind gust\"; ObjectID = \"R7C-CF-x4f\";",
-      "extractionState" : "extracted_with_value",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "Wind gust"
-          }
-        },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Vind gust"
-          }
-        }
-      }
-    },
-    "S6k-3c-4lq.text" : {
-      "comment" : "Class = \"UILabel\"; text = \"nr8\"; ObjectID = \"S6k-3c-4lq\";",
-      "extractionState" : "extracted_with_value",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "nr8"
-          }
-        },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "nr8"
-          }
-        }
-      }
-    },
-    "u8o-PO-LuG.text" : {
-      "comment" : "Class = \"UILabel\"; text = \"Beaufort\"; ObjectID = \"u8o-PO-LuG\";",
-      "extractionState" : "extracted_with_value",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "Beaufort"
-          }
-        },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Beaufort"
-          }
-        }
-      }
-    },
-    "Ydn-Pe-HF2.text" : {
-      "comment" : "Class = \"UILabel\"; text = \"Average\"; ObjectID = \"Ydn-Pe-HF2\";",
-      "extractionState" : "extracted_with_value",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "Average"
-          }
-        },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Gjennomsnitt"
           }
         }
       }

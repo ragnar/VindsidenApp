@@ -71,7 +71,6 @@
 		AD9685A82AD6BED600608FB3 /* WeatherBoxView in Frameworks */ = {isa = PBXBuildFile; productRef = AD9685A72AD6BED600608FB3 /* WeatherBoxView */; };
 		AD9685AA2AD7CA2000608FB3 /* PersistentContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD9685A92AD7CA2000608FB3 /* PersistentContainer.swift */; };
 		AD9685AC2AD80BBB00608FB3 /* RHCStationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD9685AB2AD80BBB00608FB3 /* RHCStationCell.swift */; };
-		AD9685AE2AD8119700608FB3 /* RHCStationInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = AD17ED871731058400943C33 /* RHCStationInfo.m */; };
 		AD9E40651B8C9C1700FABCF5 /* CDStation.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD9E40631B8C9C1700FABCF5 /* CDStation.swift */; };
 		AD9E406A1B8C9CC900FABCF5 /* CDStation.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD9E40631B8C9C1700FABCF5 /* CDStation.swift */; };
 		AD9E406C1B8D8A6900FABCF5 /* StationFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD9E406B1B8D8A6900FABCF5 /* StationFetcher.swift */; };
@@ -97,7 +96,6 @@
 		ADB97FC82AD930EC00CE7B01 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = ADB97FC62AD930EC00CE7B01 /* Localizable.xcstrings */; };
 		ADB97FC92AD930EC00CE7B01 /* InfoPlist.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = ADB97FC72AD930EC00CE7B01 /* InfoPlist.xcstrings */; };
 		ADB97FCC2AD9315E00CE7B01 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = ADB97FCA2AD9312B00CE7B01 /* Localizable.xcstrings */; };
-		ADB97FCE2AD9349300CE7B01 /* RHCStationInfo+Swift.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB97FCD2AD9349300CE7B01 /* RHCStationInfo+Swift.swift */; };
 		ADBEA4CF1A07ECF600B168BF /* UIColor+AppColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADBEA4CE1A07ECF600B168BF /* UIColor+AppColors.swift */; };
 		ADBF8B781D0F03BE0005C0C9 /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ADBF8B761D0F03BE0005C0C9 /* Interface.storyboard */; };
 		ADBF8B7A1D0F03BE0005C0C9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ADBF8B791D0F03BE0005C0C9 /* Assets.xcassets */; };
@@ -130,6 +128,7 @@
 		ADEC5BC42AD9548B00A65057 /* StationDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADEC5BC32AD9548B00A65057 /* StationDetailsView.swift */; };
 		ADEC5BC62ADD038F00A65057 /* PreviewSampleData.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADEC5BC52ADD038F00A65057 /* PreviewSampleData.swift */; };
 		ADEC5BC82ADD1BD600A65057 /* SwiftUIPlotGraph.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADEC5BC72ADD1BD600A65057 /* SwiftUIPlotGraph.swift */; };
+		ADEC5BCA2ADD46ED00A65057 /* StationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADEC5BC92ADD46ED00A65057 /* StationView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -279,8 +278,6 @@
 		AD17ED621731012200943C33 /* RHCViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RHCViewController.h; sourceTree = "<group>"; };
 		AD17ED631731012200943C33 /* RHCViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RHCViewController.m; sourceTree = "<group>"; };
 		AD17ED6B1731012200943C33 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
-		AD17ED861731058400943C33 /* RHCStationInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RHCStationInfo.h; sourceTree = "<group>"; };
-		AD17ED871731058400943C33 /* RHCStationInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RHCStationInfo.m; sourceTree = "<group>"; };
 		AD17EDB617310E5300943C33 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		AD17EDB817310E5B00943C33 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		AD17EDBA17310E6200943C33 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -355,7 +352,6 @@
 		ADB97FC62AD930EC00CE7B01 /* Localizable.xcstrings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		ADB97FC72AD930EC00CE7B01 /* InfoPlist.xcstrings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json.xcstrings; path = InfoPlist.xcstrings; sourceTree = "<group>"; };
 		ADB97FCA2AD9312B00CE7B01 /* Localizable.xcstrings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
-		ADB97FCD2AD9349300CE7B01 /* RHCStationInfo+Swift.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RHCStationInfo+Swift.swift"; sourceTree = "<group>"; };
 		ADBEA4CE1A07ECF600B168BF /* UIColor+AppColors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+AppColors.swift"; sourceTree = "<group>"; };
 		ADBF8B1F1D0EFA2D0005C0C9 /* watchkitapp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = watchkitapp.entitlements; path = watchkitapp/watchkitapp.entitlements; sourceTree = "<group>"; };
 		ADBF8B741D0F03BE0005C0C9 /* watchkitapp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = watchkitapp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -396,6 +392,7 @@
 		ADEC5BC32AD9548B00A65057 /* StationDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationDetailsView.swift; sourceTree = "<group>"; };
 		ADEC5BC52ADD038F00A65057 /* PreviewSampleData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewSampleData.swift; sourceTree = "<group>"; };
 		ADEC5BC72ADD1BD600A65057 /* SwiftUIPlotGraph.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUIPlotGraph.swift; sourceTree = "<group>"; };
+		ADEC5BC92ADD46ED00A65057 /* StationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -539,7 +536,6 @@
 		AD17ED4D1731012200943C33 /* VindsidenApp */ = {
 			isa = PBXGroup;
 			children = (
-				AD17EDE11734482100943C33 /* Views */,
 				AD17EDE01734480300943C33 /* App Delegate */,
 				AD17EDE31734485A00943C33 /* Main View Controller */,
 				AD17EDE41734486D00943C33 /* Station Details View Controller */,
@@ -586,24 +582,6 @@
 			name = "App Delegate";
 			sourceTree = "<group>";
 		};
-		AD17EDE11734482100943C33 /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				AD17EDE21734483400943C33 /* Station View */,
-			);
-			name = Views;
-			sourceTree = "<group>";
-		};
-		AD17EDE21734483400943C33 /* Station View */ = {
-			isa = PBXGroup;
-			children = (
-				AD17ED861731058400943C33 /* RHCStationInfo.h */,
-				AD17ED871731058400943C33 /* RHCStationInfo.m */,
-				ADB97FCD2AD9349300CE7B01 /* RHCStationInfo+Swift.swift */,
-			);
-			name = "Station View";
-			sourceTree = "<group>";
-		};
 		AD17EDE31734485A00943C33 /* Main View Controller */ = {
 			isa = PBXGroup;
 			children = (
@@ -612,6 +590,7 @@
 				AD55F5B6233AAB2F00757CBD /* RHCViewController+Swift.swift */,
 				AD9685AB2AD80BBB00608FB3 /* RHCStationCell.swift */,
 				ADEC5BC72ADD1BD600A65057 /* SwiftUIPlotGraph.swift */,
+				ADEC5BC92ADD46ED00A65057 /* StationView.swift */,
 			);
 			name = "Main View Controller";
 			sourceTree = "<group>";
@@ -1242,8 +1221,7 @@
 			files = (
 				AD30BC5219F024D9000CE40C /* RHCAppDelegate.swift in Sources */,
 				ADB97FB12AD91E6E00CE7B01 /* StationPickerView.swift in Sources */,
-				ADB97FCE2AD9349300CE7B01 /* RHCStationInfo+Swift.swift in Sources */,
-				AD9685AE2AD8119700608FB3 /* RHCStationInfo.m in Sources */,
+				ADEC5BCA2ADD46ED00A65057 /* StationView.swift in Sources */,
 				AD9685AC2AD80BBB00608FB3 /* RHCStationCell.swift in Sources */,
 				ADEC5BC42AD9548B00A65057 /* StationDetailsView.swift in Sources */,
 				AD17ED641731012200943C33 /* RHCViewController.m in Sources */,

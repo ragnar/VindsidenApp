@@ -27,7 +27,9 @@ struct StationDetailsView: View {
                 }
 
                 Section {
-                    LinkCell(title: "Go to yr.no", url: yrURL())
+                    if station.yrURL?.isEmpty == false {
+                        LinkCell(title: "Go to yr.no", url: yrURL())
+                    }
                     LinkCell(title: "View in Maps", url: mapsURL())
                 }
             }

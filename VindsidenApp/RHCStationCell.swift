@@ -13,14 +13,7 @@ import Units
 
 @objc
 class RHCStationCell: UICollectionViewCell {
-    @IBOutlet weak var stationNameLabel: UILabel?
-    @IBOutlet weak var updatedAtLabel: UILabel?
-    @IBOutlet weak var cameraButton: UIButton?
-    @IBOutlet weak var graphView: UIView?
-    @IBOutlet weak var stationView: RHCStationInfo?
-
-    var plotGraph: SwiftUIPlotGraph?
-    var plotGraphView: UIView?
+    @ObservedObject var observer: PlotObservable = PlotObservable()
 
     @objc
     weak var currentStation: CDStation? {
@@ -29,85 +22,16 @@ class RHCStationCell: UICollectionViewCell {
                 return
             }
 
-            stationNameLabel?.text = station.stationName
-//            graphView?.copyright = station.copyright
-
-            if plotGraph == nil {
-                addPlotGraph()
-            }
+            observer.station = station
 
             displayPlots()
 
-            updatedTimer?.invalidate()
-            let updatedTimer = Timer(fireAt: Date(),
-                                     interval: 1,
-                                     target: self,
-                                     selector: #selector(updateLastUpdatedLabel),
-                                     userInfo: nil,
-                                     repeats: true)
-
-            RunLoop.current.add(updatedTimer, forMode: .default)
-            self.updatedTimer = updatedTimer
+            contentConfiguration = UIHostingConfiguration(content: {
+                StationView(observer: observer)
+                    .environmentObject((UIApplication.shared.delegate as? RHCAppDelegate)!.settings)
+                    .environment(\.managedObjectContext, DataManager.shared.viewContext())
+            })
         }
-    }
-
-    var updatedTimer: Timer?
-
-    lazy var dateFormatter: DateFormatter = {
-        let formatter = DateFormatter()
-        formatter.dateStyle = .medium
-        formatter.timeStyle = .medium
-
-        return formatter
-    }()
-
-    override func awakeFromNib() {
-        super.awakeFromNib()
-
-        updatedAtLabel?.text = ""
-        cameraButton?.alpha = 0.0
-    }
-
-    override func prepareForReuse() {
-        super.prepareForReuse()
-
-        updatedTimer?.invalidate()
-        updatedTimer = nil
-
-        updatedAtLabel?.text = NSLocalizedString("LABEL_UPDATING", comment: "Updating")
-
-        cameraButton?.alpha = 0.0
-        stationView?.resetInfoLabels()
-        plotGraphView?.removeFromSuperview()
-        plotGraph = nil
-    }
-
-    func addPlotGraph() {
-        guard
-            let graphView,
-            let stationId = currentStation?.stationId else {
-            return
-        }
-
-        let plotGraph = SwiftUIPlotGraph(stationId: stationId.intValue)
-        let vc = UIHostingController(rootView: plotGraph
-            .environmentObject((UIApplication.shared.delegate as? RHCAppDelegate)!.settings)
-            .environment(\.managedObjectContext, DataManager.shared.viewContext())
-        )
-
-        let swiftuiView = vc.view!
-        swiftuiView.translatesAutoresizingMaskIntoConstraints = false
-
-        graphView.addSubview(swiftuiView)
-        self.plotGraphView = swiftuiView
-        self.plotGraph = plotGraph
-
-        NSLayoutConstraint.activate([
-            swiftuiView.leadingAnchor.constraint(equalTo: graphView.leadingAnchor),
-            swiftuiView.trailingAnchor.constraint(equalTo: graphView.trailingAnchor),
-            swiftuiView.bottomAnchor.constraint(equalTo: graphView.bottomAnchor),
-            swiftuiView.topAnchor.constraint(equalTo: graphView.topAnchor),
-        ])
     }
 
     @objc
@@ -140,25 +64,6 @@ class RHCStationCell: UICollectionViewCell {
 
         let cdplots: [CDPlot] = (try? context.fetch(fetchRequest)) ?? []
 
-        if cdplots.isEmpty {
-            updatedAtLabel?.text = NSLocalizedString("LABEL_NOT_UPDATED", comment: "Not updated")
-        } else {
-            stationView?.update(with: cdplots.first)
-            updateLastUpdatedLabel()
-        }
-    }
-
-    @objc
-    func updateLastUpdatedLabel() {
-        guard let plot = currentStation?.lastRegisteredPlot() else {
-            updatedAtLabel?.text = NSLocalizedString("LABEL_NOT_UPDATED", comment: "Not updated")
-            return
-        }
-
-        if plot.plotTime?.compare(Date()) == .orderedAscending {
-            updatedAtLabel?.text = AppConfig.sharedConfiguration.relativeDate(plot.plotTime)
-        } else {
-            updatedAtLabel?.text = AppConfig.sharedConfiguration.relativeDate(nil)
-        }
+        observer.plot = cdplots.first
     }
 }
