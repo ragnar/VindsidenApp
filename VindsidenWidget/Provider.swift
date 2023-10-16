@@ -12,14 +12,29 @@ import VindsidenKit
 import WeatherBoxView
 
 struct Provider: AppIntentTimelineProvider  {
-    private let modelContainer: ModelContainer = PersistentContainer.container
-
     func placeholder(in context: Context) -> SimpleEntry {
-        SimpleEntry(date: Date(), configuration: ConfigurationAppIntent(), plots: [])
+        let configuration = ConfigurationAppIntent()
+
+        configuration.station = "Larkollen"
+
+        return SimpleEntry(date: Date(), configuration: configuration, plots: [])
     }
 
     func snapshot(for configuration: ConfigurationAppIntent, in context: Context) async -> SimpleEntry {
-        SimpleEntry(date: Date(), configuration: configuration, plots: [])
+        guard context.isPreview else {
+            return SimpleEntry(date: Date(), configuration: configuration, plots: [])
+        }
+
+        let plots = await Task { @MainActor in
+            let fetchDescriptor = FetchDescriptor(sortBy: [SortDescriptor(\Plot.plotTime, order: .reverse)])
+            let plots = try? PreviewSampleData.container.mainContext.fetch(fetchDescriptor)
+
+            return plots ?? []
+        }.value
+
+        configuration.station = "Larkollen"
+
+        return SimpleEntry(date: Date(), configuration: configuration, plots: plots)
     }
 
     func timeline(for configuration: ConfigurationAppIntent, in context: Context) async -> Timeline<SimpleEntry> {
@@ -30,6 +45,12 @@ struct Provider: AppIntentTimelineProvider  {
         let entries: [SimpleEntry] = await Task { @MainActor in
             await WindManager.sharedManager.fetch()
 
+            let modelContainer: ModelContainer = PersistentContainer.container
+            let gregorian = NSCalendar(identifier: .gregorian)!
+            let inDate = Date().addingTimeInterval(-1*(5-1)*3600)
+            let inputComponents = gregorian.components([.year, .month, .day, .hour], from: inDate)
+            let outDate = gregorian.date(from: inputComponents) ?? Date()
+
             var fetchDescriptor = FetchDescriptor(sortBy: [SortDescriptor(\Plot.plotTime, order: .reverse)])
             fetchDescriptor.predicate = #Predicate { $0.station?.stationName == stationName }
             fetchDescriptor.fetchLimit = 20
@@ -37,7 +58,10 @@ struct Provider: AppIntentTimelineProvider  {
             if let plots = try? modelContainer.mainContext.fetch(fetchDescriptor), let plot = plots.first {
                 print("plot", plot.dataId, plot.plotTime, plot.station?.stationName ?? "kk", "plots:", plots.count)
                 return [
-                    SimpleEntry(date: plot.plotTime, configuration: configuration, plots: plots.reversed())
+                    SimpleEntry(date: plot.plotTime, 
+                                configuration: configuration,
+                                plots: plots.filter { $0.plotTime >= outDate }.reversed()
+                               )
                 ]
             }
             return []

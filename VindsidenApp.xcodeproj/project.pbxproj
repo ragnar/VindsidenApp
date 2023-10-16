@@ -128,6 +128,7 @@
 		ADDB4F5019CB68F1005D5D38 /* RHCAlertManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADDB4F4F19CB68F1005D5D38 /* RHCAlertManager.swift */; };
 		ADE9C4081AAB32840089EB19 /* WindManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADE9C4071AAB32840089EB19 /* WindManager.swift */; };
 		ADEC5BC42AD9548B00A65057 /* StationDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADEC5BC32AD9548B00A65057 /* StationDetailsView.swift */; };
+		ADEC5BC62ADD038F00A65057 /* PreviewSampleData.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADEC5BC52ADD038F00A65057 /* PreviewSampleData.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -392,6 +393,7 @@
 		ADDB4F4F19CB68F1005D5D38 /* RHCAlertManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RHCAlertManager.swift; sourceTree = "<group>"; };
 		ADE9C4071AAB32840089EB19 /* WindManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WindManager.swift; sourceTree = "<group>"; };
 		ADEC5BC32AD9548B00A65057 /* StationDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationDetailsView.swift; sourceTree = "<group>"; };
+		ADEC5BC52ADD038F00A65057 /* PreviewSampleData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewSampleData.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -749,6 +751,7 @@
 				AD9685A42AD6B8A300608FB3 /* Station.swift */,
 				AD9685922AD6A40000608FB3 /* AppIntent.swift */,
 				AD9685A92AD7CA2000608FB3 /* PersistentContainer.swift */,
+				ADEC5BC52ADD038F00A65057 /* PreviewSampleData.swift */,
 				AD9685942AD6A40100608FB3 /* Assets.xcassets */,
 				AD9685962AD6A40100608FB3 /* Info.plist */,
 			);
@@ -1334,6 +1337,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ADEC5BC62ADD038F00A65057 /* PreviewSampleData.swift in Sources */,
 				AD96859E2AD6AB3700608FB3 /* Provider.swift in Sources */,
 				AD9685912AD6A40000608FB3 /* VindsidenWidget.swift in Sources */,
 				AD96858F2AD6A40000608FB3 /* VindsidenWidgetBundle.swift in Sources */,

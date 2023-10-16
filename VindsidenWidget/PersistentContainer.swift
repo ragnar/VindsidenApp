@@ -11,15 +11,18 @@ import SwiftData
 import VindsidenKit
 
 struct PersistentContainer {
+    @MainActor
     static var container: ModelContainer {
         guard let appGroupContainer = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: AppConfig.ApplicationGroups.primary) else {
             fatalError("Shared file container could not be created.")
         }
 
         let url = appGroupContainer.appendingPathComponent(AppConfig.CoreData.sqliteName)
+        let schema = Schema([Station.self, Plot.self])
+        let configuration = ModelConfiguration(url: url)
 
         do {
-            return try ModelContainer(for: Station.self, Plot.self, configurations: ModelConfiguration(url: url))
+            return try ModelContainer(for: schema, configurations: configuration)
         } catch {
             fatalError("Unable to create model container: \(error)")
         }
