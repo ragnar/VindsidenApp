@@ -50,10 +50,10 @@ static NSString *kCellID = @"stationCellID";
 
     [[self collectionView] setContentInsetAdjustmentBehavior: UIScrollViewContentInsetAdjustmentNever];
 
-    UIButton *button = nil;
-
-    button = [UIButton systemButtonWithImage:[UIImage systemImageNamed:@"gearshape"] target:self action:@selector(settings:)];
-    UIBarButtonItem *bb = [[UIBarButtonItem alloc] initWithCustomView:button];
+    UIBarButtonItem *bb = [[UIBarButtonItem alloc] initWithImage:[UIImage systemImageNamed:@"gearshape"] 
+                                                           style: UIBarButtonItemStylePlain
+                                                          target:self
+                                                          action:@selector(settings:)];
 
 //    UIBarButtonItem *bb = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"settings"]
 //                                                           style:UIBarButtonItemStylePlain
@@ -64,8 +64,10 @@ static NSString *kCellID = @"stationCellID";
                                                                         target:self
                                                                         action:@selector(share:)];
 
-    button = [UIButton systemButtonWithImage:[UIImage systemImageNamed:@"info.circle"] target:self action:@selector(info:)];
-    UIBarButtonItem *bc = [[UIBarButtonItem alloc] initWithCustomView:button];
+    UIBarButtonItem *bc = [[UIBarButtonItem alloc] initWithImage:[UIImage systemImageNamed:@"info.circle"] 
+                                                           style: UIBarButtonItemStylePlain
+                                                          target:self
+                                                          action:@selector(info:)];
 
 //FIXME: Some camera showing stuff
 //    MotionJpegImageView *imageView = [[MotionJpegImageView alloc] initWithFrame:CGRectMake( 0.0, 0.0, 44.0, 33.0)];
@@ -84,12 +86,11 @@ static NSString *kCellID = @"stationCellID";
     self.pageControl.currentPageIndicatorTintColor = [UIColor darkGrayColor];
     self.pageControl.numberOfPages = [CDStation numberOfVisibleStationsInManagedObjectContext:[DataManager shared].viewContext];
 
-
     _transformedCells = [NSMutableSet set];
 
     StationFetcher *fetcher = [[StationFetcher alloc] init];
+    
     [fetcher fetch:^( NSArray *stations, NSError * __nullable error) {
-
         if ( error ) {
             [[RHCAlertManager defaultManager] showNetworkError:error];
         } else {
@@ -153,7 +154,6 @@ static NSString *kCellID = @"stationCellID";
     }
 
     [self.collectionView.collectionViewLayout invalidateLayout];
-
 }
 
 
@@ -194,7 +194,6 @@ static NSString *kCellID = @"stationCellID";
 }
 
 #pragma mark - Notifications
-
 
 - (void)applicationDidBecomeActive:(NSNotification *)notificaiton
 {
