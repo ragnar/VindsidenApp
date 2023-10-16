@@ -129,6 +129,7 @@
 		ADE9C4081AAB32840089EB19 /* WindManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADE9C4071AAB32840089EB19 /* WindManager.swift */; };
 		ADEC5BC42AD9548B00A65057 /* StationDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADEC5BC32AD9548B00A65057 /* StationDetailsView.swift */; };
 		ADEC5BC62ADD038F00A65057 /* PreviewSampleData.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADEC5BC52ADD038F00A65057 /* PreviewSampleData.swift */; };
+		ADEC5BC82ADD1BD600A65057 /* SwiftUIPlotGraph.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADEC5BC72ADD1BD600A65057 /* SwiftUIPlotGraph.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -394,6 +395,7 @@
 		ADE9C4071AAB32840089EB19 /* WindManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WindManager.swift; sourceTree = "<group>"; };
 		ADEC5BC32AD9548B00A65057 /* StationDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationDetailsView.swift; sourceTree = "<group>"; };
 		ADEC5BC52ADD038F00A65057 /* PreviewSampleData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewSampleData.swift; sourceTree = "<group>"; };
+		ADEC5BC72ADD1BD600A65057 /* SwiftUIPlotGraph.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUIPlotGraph.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -609,6 +611,7 @@
 				AD17ED631731012200943C33 /* RHCViewController.m */,
 				AD55F5B6233AAB2F00757CBD /* RHCViewController+Swift.swift */,
 				AD9685AB2AD80BBB00608FB3 /* RHCStationCell.swift */,
+				ADEC5BC72ADD1BD600A65057 /* SwiftUIPlotGraph.swift */,
 			);
 			name = "Main View Controller";
 			sourceTree = "<group>";
@@ -1246,6 +1249,7 @@
 				AD17ED641731012200943C33 /* RHCViewController.m in Sources */,
 				AD35C66C1D1C408A00E894CC /* ShortcutItemHandling.swift in Sources */,
 				AD55F5B7233AAB2F00757CBD /* RHCViewController+Swift.swift in Sources */,
+				ADEC5BC82ADD1BD600A65057 /* SwiftUIPlotGraph.swift in Sources */,
 				AD4DEA7719CB7528002A220B /* RHCNavigationViewController.swift in Sources */,
 				AD1B45881CAEE9F200F171DB /* IndexRequestHandler.swift in Sources */,
 				ADDB4F5019CB68F1005D5D38 /* RHCAlertManager.swift in Sources */,
