@@ -47,12 +47,67 @@ extension RHCViewController {
 
     @objc
     func openStationDetails() {
-        guard let cell = self.collectionView.visibleCells.first as? RHCStationCell else {
+        guard 
+            let cell = self.collectionView.visibleCells.first as? RHCStationCell,
+            let currentStation = cell.currentStation
+        else {
             return
         }
 
-        let root = UIHostingController(rootView: StationDetailsView(station: cell.currentStation!))
+        let root = UIHostingController(rootView: StationDetailsView(station: currentStation))
         navigationController?.present(root, animated: true)
+    }
+
+    @objc
+    func openCamera() {
+        guard
+            let cell = self.collectionView.visibleCells.first as? RHCStationCell,
+            let webCamURL = cell.currentStation?.webCamImage,
+            let url = URL(string: webCamURL)
+        else {
+            return
+        }
+
+        Logger.debugging.debug("Webcam: \(url)")
+
+        var photoView = PhotoView(imageUrl: url)
+        let rootView = photoView
+            .edgesIgnoringSafeArea(.all)
+            .modifier(RotateOnDragModifier())
+            .modifier(SwipeToDismissModifier(
+                onDismiss: {
+                    defer {
+                        self.dismiss(animated: false)
+                    }
+
+                    guard let backgroundView = photoView.backgroundView else {
+                        return
+                    }
+
+                    photoView.opacity = 0.0
+                    backgroundView.backgroundColor = .clear
+                },
+                onChange: { percent in
+                    guard let backgroundView = photoView.backgroundView else {
+                        return
+                    }
+
+                    backgroundView.backgroundColor = .black.withAlphaComponent(percent)
+                }
+            ))
+
+        let controller = UIHostingController(rootView: rootView)
+        controller.view.backgroundColor = UIColor.black.withAlphaComponent(0.85)
+        controller.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
+        controller.view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(dismissPhoto(_:))))
+        photoView.backgroundView = controller.view
+
+        navigationController?.present(controller, animated: true)
+    }
+
+    @objc
+    func dismissPhoto(_ sender: Any) {
+        self.dismiss(animated: true)
     }
 }
 

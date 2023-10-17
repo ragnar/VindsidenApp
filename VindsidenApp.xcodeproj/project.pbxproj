@@ -134,6 +134,9 @@
 		ADEC5BD02ADEA01900A65057 /* Plot.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD96859F2AD6ACE900608FB3 /* Plot.swift */; };
 		ADEC5BD12ADEA03700A65057 /* PersistentContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD9685A92AD7CA2000608FB3 /* PersistentContainer.swift */; };
 		ADEC5BD32ADEA73B00A65057 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = ADEC5BD22ADEA73B00A65057 /* Localizable.xcstrings */; };
+		ADEC5BD52ADEB12C00A65057 /* PhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADEC5BD42ADEB12C00A65057 /* PhotoView.swift */; };
+		ADEC5BD72ADEB1CD00A65057 /* SwipeToDismissModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADEC5BD62ADEB1CD00A65057 /* SwipeToDismissModifier.swift */; };
+		ADEC5BD92ADEB1E500A65057 /* RotateOnDragModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADEC5BD82ADEB1E500A65057 /* RotateOnDragModifier.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -399,6 +402,9 @@
 		ADEC5BC72ADD1BD600A65057 /* SwiftUIPlotGraph.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUIPlotGraph.swift; sourceTree = "<group>"; };
 		ADEC5BC92ADD46ED00A65057 /* StationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationView.swift; sourceTree = "<group>"; };
 		ADEC5BD22ADEA73B00A65057 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
+		ADEC5BD42ADEB12C00A65057 /* PhotoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoView.swift; sourceTree = "<group>"; };
+		ADEC5BD62ADEB1CD00A65057 /* SwipeToDismissModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeToDismissModifier.swift; sourceTree = "<group>"; };
+		ADEC5BD82ADEB1E500A65057 /* RotateOnDragModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RotateOnDragModifier.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -597,6 +603,9 @@
 				AD9685AB2AD80BBB00608FB3 /* RHCStationCell.swift */,
 				ADEC5BC72ADD1BD600A65057 /* SwiftUIPlotGraph.swift */,
 				ADEC5BC92ADD46ED00A65057 /* StationView.swift */,
+				ADEC5BD42ADEB12C00A65057 /* PhotoView.swift */,
+				ADEC5BD62ADEB1CD00A65057 /* SwipeToDismissModifier.swift */,
+				ADEC5BD82ADEB1E500A65057 /* RotateOnDragModifier.swift */,
 			);
 			name = "Main View Controller";
 			sourceTree = "<group>";
@@ -1230,8 +1239,10 @@
 				ADEC5BD12ADEA03700A65057 /* PersistentContainer.swift in Sources */,
 				AD30BC5219F024D9000CE40C /* RHCAppDelegate.swift in Sources */,
 				ADEC5BCE2ADEA01900A65057 /* Station.swift in Sources */,
+				ADEC5BD52ADEB12C00A65057 /* PhotoView.swift in Sources */,
 				ADB97FB12AD91E6E00CE7B01 /* StationPickerView.swift in Sources */,
 				ADEC5BD02ADEA01900A65057 /* Plot.swift in Sources */,
+				ADEC5BD92ADEB1E500A65057 /* RotateOnDragModifier.swift in Sources */,
 				ADEC5BCA2ADD46ED00A65057 /* StationView.swift in Sources */,
 				AD9685AC2AD80BBB00608FB3 /* RHCStationCell.swift in Sources */,
 				ADEC5BC42AD9548B00A65057 /* StationDetailsView.swift in Sources */,
@@ -1244,6 +1255,7 @@
 				ADEC5BCD2ADEA00A00A65057 /* AppIntent.swift in Sources */,
 				ADDB4F5019CB68F1005D5D38 /* RHCAlertManager.swift in Sources */,
 				ADB97FAD2AD914D900CE7B01 /* SettingsView.swift in Sources */,
+				ADEC5BD72ADEB1CD00A65057 /* SwipeToDismissModifier.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
