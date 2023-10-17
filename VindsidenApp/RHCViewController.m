@@ -88,17 +88,7 @@ static NSString *kCellID = @"stationCellID";
 
     _transformedCells = [NSMutableSet set];
 
-    StationFetcher *fetcher = [[StationFetcher alloc] init];
-    
-    [fetcher fetch:^( NSArray *stations, NSError * __nullable error) {
-        if ( error ) {
-            [[RHCAlertManager defaultManager] showNetworkError:error];
-        } else {
-            [self updateStations:stations];
-            [self updateCameraButton:YES];
-            [self saveActivity];
-        }
-    }];
+    [self fetchStations];
 
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationDidBecomeActive:) name:UIApplicationDidBecomeActiveNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationWillResignActive:) name:UIApplicationWillResignActiveNotification object:nil];

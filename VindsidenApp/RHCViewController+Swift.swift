@@ -13,6 +13,19 @@ import VindsidenKit
 
 extension RHCViewController {
     @objc
+    func fetchStations() {
+        Task {
+            do {
+                let stations = try await StationFetcher().fetch()
+                updateStations(stations)
+                saveActivity()
+            } catch {
+                RHCAlertManager.defaultManager.showNetworkError(error as NSError)
+            }
+        }
+    }
+
+    @objc
     func openSettings() {
         let root = UIHostingController(rootView: SettingsView(dismissAction: {
             Logger.debugging.debug("Settings Dismissed")

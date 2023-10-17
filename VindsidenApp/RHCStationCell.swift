@@ -15,6 +15,24 @@ import Units
 class RHCStationCell: UICollectionViewCell {
     @ObservedObject var observer: PlotObservable = PlotObservable()
 
+    override init(frame: CGRect) {
+        fatalError("Not implemented")
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+
+        setupView()
+    }
+
+    func setupView() {
+        contentConfiguration = UIHostingConfiguration(content: {
+            StationView(observer: observer)
+                .environmentObject((UIApplication.shared.delegate as? RHCAppDelegate)!.settings)
+                .environment(\.managedObjectContext, DataManager.shared.viewContext())
+        })
+    }
+
     @objc
     weak var currentStation: CDStation? {
         didSet {
@@ -25,12 +43,6 @@ class RHCStationCell: UICollectionViewCell {
             observer.station = station
 
             displayPlots()
-
-            contentConfiguration = UIHostingConfiguration(content: {
-                StationView(observer: observer)
-                    .environmentObject((UIApplication.shared.delegate as? RHCAppDelegate)!.settings)
-                    .environment(\.managedObjectContext, DataManager.shared.viewContext())
-            })
         }
     }
 
@@ -41,7 +53,7 @@ class RHCStationCell: UICollectionViewCell {
         }
     }
 
-    func syncDisplayPlots() {
+    private func syncDisplayPlots() {
         guard
             let gregorian = NSCalendar(identifier: .gregorian),
             let currentStation,
@@ -50,14 +62,14 @@ class RHCStationCell: UICollectionViewCell {
             return
         }
 
-//        let inDate = Date().addingTimeInterval(-1*(kPlotHistoryHours-1)*3600)
-        let inDate = Date().addingTimeInterval(-1*(5-1)*3600)
+        let inDate = Date().addingTimeInterval(-1*(AppConfig.Global.plotHistory-1)*3600)
         let inputComponents = gregorian.components([.year, .month, .day, .hour], from: inDate)
         let outDate = gregorian.date(from: inputComponents) ?? Date()
 
         let fetchRequest = CDPlot.fetchRequest()
 
         fetchRequest.predicate = NSPredicate(format: "station == %@ AND plotTime >= %@", currentStation, outDate as CVarArg)
+        fetchRequest.fetchLimit = 1
         fetchRequest.sortDescriptors = [
             NSSortDescriptor(key: "plotTime", ascending: false),
         ]

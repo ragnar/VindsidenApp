@@ -53,9 +53,9 @@ open class CDPlot: NSManagedObject, Plottable {
     }
 
 
-    open class func updatePlots(_ plots: [[String: String]]) async throws {
+    open class func updatePlots(_ plots: [[String: String]]) async throws -> Int {
         if plots.isEmpty {
-            return
+            return 0
         }
 
         guard
@@ -63,10 +63,10 @@ open class CDPlot: NSManagedObject, Plottable {
             let stationString = plot["StationID"],
             let stationId = Int(stationString)
         else {
-            return
+            return 0
         }
 
-        try await DataManager.shared.container.performBackgroundTask { context in
+        return try await DataManager.shared.container.performBackgroundTask { context in
             context.mergePolicy = NSOverwriteMergePolicy
 
             let station = try CDStation.existingStationWithId(stationId, inManagedObjectContext: context)
@@ -87,6 +87,8 @@ open class CDPlot: NSManagedObject, Plottable {
             }
 
             try context.save()
+
+            return insertedPlots.count
         }
     }
 

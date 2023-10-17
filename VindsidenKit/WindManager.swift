@@ -84,14 +84,12 @@ public class WindManager : NSObject {
         isUpdating = true
 
         let stations = activeStations()
-        var remainingStations = UInt8(stations.count)
+        var remainingStations = stations.count
 
         if remainingStations <= 0 {
             isUpdating = false
             return
         }
-
-        var numErrors = 0
 
         for station in stations {
             guard let stationId = station.stationId else {
@@ -100,19 +98,17 @@ public class WindManager : NSObject {
 
             do {
                 let plots = try await PlotFetcher().fetchForStationId(stationId.intValue)
+                let num = try await CDPlot.updatePlots(plots)
 
-                try await CDPlot.updatePlots(plots)
-
-                remainingStations -= 1
-
-                Logger.wind.debug("Finished with \(numErrors) errors for \(station.stationName!).")
-
-                if remainingStations <= 0 {
-                    self.isUpdating = false
-                }
+                Logger.wind.debug("Finished with \(num) new plots for \(station.stationName!).")
             } catch {
-                Logger.wind.debug("error: \(String(describing: error))")
-                numErrors += 1
+                Logger.wind.debug("error: \(String(describing: error)) for \(station.stationName!).")
+            }
+
+            remainingStations -= 1
+
+            if remainingStations <= 0 {
+                self.isUpdating = false
             }
         }
 

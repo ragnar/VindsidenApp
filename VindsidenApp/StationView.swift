@@ -36,7 +36,10 @@ public class PlotObservable: ObservableObject {
     }
 
     func tempString(value: NSNumber?, for unit: TempUnit) -> String {
-        guard let value = value?.doubleValue else {
+        guard 
+            let value = value?.doubleValue,
+            value != -999
+        else {
             return "-.- \(unit.symbol)"
         }
 

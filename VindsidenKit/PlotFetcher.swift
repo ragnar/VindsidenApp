@@ -14,22 +14,6 @@ public final class PlotFetcher: NSObject {
     var result = [[String: String]]()
     var currentPlot = [String: String]()
 
-    @available(*, renamed: "fetchForStationId(_:)")
-    public func fetchForStationId( _ stationId: Int, completionHandler:@escaping (([[String:String]], Error?) -> Void)) {
-        Task {
-            do {
-                let result = try await fetchForStationId(stationId)
-                DispatchQueue.main.async {
-                    completionHandler(result, nil)
-                }
-            } catch {
-                DispatchQueue.main.async {
-                    completionHandler([], error)
-                }
-            }
-        }
-    }
-
     public func fetchForStationId( _ stationId: Int) async throws -> [[String : String]] {
         let request = URLRequest(url: URL(string: "http://vindsiden.no/xml.aspx?id=\(stationId)&hours=\(Int(AppConfig.Global.plotHistory-1))")!)
         let session = URLSession(configuration: .ephemeral)

@@ -3,8 +3,8 @@
     <entity name="Plot" representedClassName="CDPlot" syncable="YES" codeGenerationType="category">
         <attribute name="dataId" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO"/>
         <attribute name="plotTime" attributeType="Date" defaultDateTimeInterval="718713600" usesScalarValueType="NO"/>
-        <attribute name="tempAir" attributeType="Float" defaultValueString="0.0" usesScalarValueType="NO"/>
-        <attribute name="tempWater" attributeType="Float" defaultValueString="0.0" usesScalarValueType="NO"/>
+        <attribute name="tempAir" attributeType="Float" defaultValueString="-999" usesScalarValueType="NO"/>
+        <attribute name="tempWater" attributeType="Float" defaultValueString="-999" usesScalarValueType="NO"/>
         <attribute name="windAvg" attributeType="Float" defaultValueString="0" usesScalarValueType="NO"/>
         <attribute name="windDir" attributeType="Float" defaultValueString="0" usesScalarValueType="NO"/>
         <attribute name="windMax" attributeType="Float" defaultValueString="0" usesScalarValueType="NO"/>

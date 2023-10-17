@@ -14,22 +14,6 @@ public class StationFetcher : NSObject {
     var result = [[String: String]]()
     var currentStation = [String: String]()
 
-    @available(*, renamed: "fetch()")
-    @objc public func fetch(_ completionHandler:@escaping (([[String:String]], Error?) -> Void)) {
-        Task {
-            do {
-                let result = try await fetch()
-                DispatchQueue.main.async {
-                    completionHandler(result, nil)
-                }
-            } catch {
-                DispatchQueue.main.async {
-                    completionHandler([], error)
-                }
-            }
-        }
-    }
-
     @objc public func fetch() async throws -> [[String : String]] {
         let request = URLRequest(url: URL(string: "http://vindsiden.no//xml.aspx")!)
         let session = URLSession(configuration: .ephemeral)
