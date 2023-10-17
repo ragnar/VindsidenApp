@@ -15,7 +15,7 @@ public final class PlotFetcher: NSObject {
     var currentPlot = [String: String]()
 
     public func fetchForStationId( _ stationId: Int) async throws -> [[String : String]] {
-        let request = URLRequest(url: URL(string: "http://vindsiden.no/xml.aspx?id=\(stationId)&hours=\(Int(AppConfig.Global.plotHistory-1))")!)
+        let request = URLRequest(url: URL(string: "http://vindsiden.no/xml.aspx?id=\(stationId)&hours=\(Int(AppConfig.Global.plotHistory))")!)
         let session = URLSession(configuration: .ephemeral)
         
         Logger.fetcher.debug("Fetching from: \(request)")

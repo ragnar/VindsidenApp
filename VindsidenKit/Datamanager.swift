@@ -111,7 +111,7 @@ extension DataManager {
     public func cleanupPlots(_ completionHandler: (() -> Void)? = nil) {
         performBackgroundTask { (context) in
             let fetchRequest: NSFetchRequest<NSFetchRequestResult> = CDPlot.fetchRequest()
-            let interval: TimeInterval = -1.0 * ((1.0 + AppConfig.Global.plotHistory) * 3600.0)
+            let interval: TimeInterval = -1.0 * AppConfig.Global.plotHistory * 3600.0
             let time = Date(timeIntervalSinceNow: interval)
             
             fetchRequest.predicate = NSPredicate(format: "plotTime < %@", time as CVarArg)

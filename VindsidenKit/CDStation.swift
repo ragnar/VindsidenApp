@@ -127,7 +127,7 @@ public class CDStation: NSManagedObject, MKAnnotation {
 
     @objc
     public func lastRegisteredPlot() -> CDPlot? {
-        let inDate = Date().addingTimeInterval(-1*(AppConfig.Global.plotHistory-1)*3600)
+        let inDate = Date().addingTimeInterval(-1*AppConfig.Global.plotHistory*3600)
         let gregorian = Calendar(identifier: Calendar.Identifier.gregorian)
         let inputComponents = (gregorian as NSCalendar).components([.year, .month, .day, .hour], from: inDate)
 

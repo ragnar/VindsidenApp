@@ -62,20 +62,21 @@ class RHCStationCell: UICollectionViewCell {
             return
         }
 
-        let inDate = Date().addingTimeInterval(-1*(AppConfig.Global.plotHistory-1)*3600)
+        let inDate = Date().addingTimeInterval(-1*AppConfig.Global.plotHistory*3600)
         let inputComponents = gregorian.components([.year, .month, .day, .hour], from: inDate)
         let outDate = gregorian.date(from: inputComponents) ?? Date()
 
         let fetchRequest = CDPlot.fetchRequest()
 
         fetchRequest.predicate = NSPredicate(format: "station == %@ AND plotTime >= %@", currentStation, outDate as CVarArg)
+        fetchRequest.fetchLimit = 35
         fetchRequest.sortDescriptors = [
-            NSSortDescriptor(key: "plotTime", ascending: true),
+            NSSortDescriptor(key: "plotTime", ascending: false),
         ]
 
         let cdplots: [CDPlot] = (try? context.fetch(fetchRequest)) ?? []
 
-        observer.plot = cdplots.last
+        observer.plot = cdplots.first
         observer.plots = cdplots
     }
 }

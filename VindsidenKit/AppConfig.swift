@@ -23,7 +23,7 @@ open class AppConfig : NSObject {
 
 
     public struct Global {
-        public static let plotHistory = 6.0
+        public static let plotHistory = 5.0
     }
 
     public struct Bundle {

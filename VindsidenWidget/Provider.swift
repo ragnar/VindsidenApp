@@ -47,7 +47,7 @@ struct Provider: AppIntentTimelineProvider  {
 
             let modelContainer: ModelContainer = PersistentContainer.container
             let gregorian = NSCalendar(identifier: .gregorian)!
-            let inDate = Date().addingTimeInterval(-1*(5-1)*3600)
+            let inDate = Date().addingTimeInterval(-1*AppConfig.Global.plotHistory*3600)
             let inputComponents = gregorian.components([.year, .month, .day, .hour], from: inDate)
             let outDate = gregorian.date(from: inputComponents) ?? Date()
 
