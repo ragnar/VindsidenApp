@@ -55,24 +55,6 @@
         }
       }
     },
-    "8kr-0C-mVT.title" : {
-      "comment" : "Class = \"UINavigationItem\"; title = \"Station\"; ObjectID = \"8kr-0C-mVT\";",
-      "extractionState" : "extracted_with_value",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "Station"
-          }
-        },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Stasjon"
-          }
-        }
-      }
-    },
     "bkq-qy-gaE.title" : {
       "comment" : "Class = \"IBUINavigationItem\"; title = \"Units\"; ObjectID = \"bkq-qy-gaE\";",
       "extractionState" : "manual",
@@ -105,24 +87,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Title"
-          }
-        }
-      }
-    },
-    "jGW-4Z-Yha.text" : {
-      "comment" : "Class = \"UILabel\"; text = \"Details\"; ObjectID = \"jGW-4Z-Yha\";",
-      "extractionState" : "extracted_with_value",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "Details"
-          }
-        },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Detaljer"
           }
         }
       }
@@ -224,42 +188,6 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Title"
-          }
-        },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Title"
-          }
-        }
-      }
-    },
-    "Md2-ug-Xzs.text" : {
-      "comment" : "Class = \"UILabel\"; text = \"Header\"; ObjectID = \"Md2-ug-Xzs\";",
-      "extractionState" : "extracted_with_value",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "Header"
-          }
-        },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Header"
-          }
-        }
-      }
-    },
-    "OCw-xJ-J7L.text" : {
-      "comment" : "Class = \"UILabel\"; text = \"Title\"; ObjectID = \"OCw-xJ-J7L\";",
-      "extractionState" : "extracted_with_value",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "new",
             "value" : "Title"
           }
         },
