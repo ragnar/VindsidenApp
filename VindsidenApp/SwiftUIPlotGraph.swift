@@ -8,32 +8,15 @@
 
 import SwiftUI
 import Charts
-import SwiftData
 import Units
 
 struct SwiftUIPlotGraph: View {
     @EnvironmentObject private var settings: UserObservable
-    @Environment(\.managedObjectContext) private var viewContext
-
-    var stationId: Int
-
-    @FetchRequest private var plots: FetchedResults<CDPlot>
-
-    init(stationId: Int) {
-        let gregorian = NSCalendar(identifier: .gregorian)!
-        let inDate = Date().addingTimeInterval(-1*(5-1)*3600)
-        let inputComponents = gregorian.components([.year, .month, .day, .hour], from: inDate)
-        let outDate = gregorian.date(from: inputComponents) ?? Date()
-
-        self.stationId = stationId
-        self._plots = FetchRequest<CDPlot>(sortDescriptors: [SortDescriptor(\.plotTime)],
-                                           predicate: NSPredicate(format: "station.stationId == %d AND plotTime >= %@", stationId, outDate as CVarArg)
-        )
-    }
+    @ObservedObject var observer: PlotObservable
 
     var body: some View {
         Chart {
-            ForEach(plots) { value in
+            ForEach(observer.plots) { value in
                 AreaMark(
                     x: .value("Time", value.plotTime!, unit: .minute),
                     yStart: .value("Lull", convertedWind(value.windMin)),
@@ -65,12 +48,12 @@ struct SwiftUIPlotGraph: View {
             .interpolationMethod(.catmullRom)
         }
         .chartXAxis {
-            AxisMarks(values: Array(plots)) { value in
+            AxisMarks(values: Array(observer.plots)) { value in
                 AxisGridLine()
                 AxisTick()
                 AxisValueLabel {
                     Image(systemName: "arrow.down")
-                        .rotationEffect(.degrees(plots[value.index].windDir!.doubleValue))
+                        .rotationEffect(.degrees(observer.plots[value.index].windDir!.doubleValue))
                 }
             }
         }

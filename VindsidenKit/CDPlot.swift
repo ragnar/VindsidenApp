@@ -55,7 +55,7 @@ open class CDPlot: NSManagedObject, Plottable {
 
     open class func updatePlots(_ plots: [[String: String]]) async throws -> Int {
         if plots.isEmpty {
-            return 0
+            return -1
         }
 
         guard
@@ -63,7 +63,7 @@ open class CDPlot: NSManagedObject, Plottable {
             let stationString = plot["StationID"],
             let stationId = Int(stationString)
         else {
-            return 0
+            return -1
         }
 
         return try await DataManager.shared.container.performBackgroundTask { context in
@@ -80,11 +80,11 @@ open class CDPlot: NSManagedObject, Plottable {
                 }
             }
 
+            station.willChangeValue(forKey: "plots")
             if insertedPlots.count > 0 {
-                station.willChangeValue(forKey: "plots")
                 station.addToPlots(insertedPlots)
-                station.didChangeValue(forKey: "plots")
             }
+            station.didChangeValue(forKey: "plots")
 
             try context.save()
 

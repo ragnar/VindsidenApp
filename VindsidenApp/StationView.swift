@@ -29,6 +29,12 @@ public class PlotObservable: ObservableObject {
         }
     }
 
+    @Published public var plots: [CDPlot] = [] {
+        didSet {
+            Logger.debugging.debug("Plots was set. \(self.plots.count)")
+        }
+    }
+
     @Published public var station: CDStation? {
         didSet {
             Logger.debugging.debug("Station was set. \(String(describing: self.station?.stationName))")
@@ -85,10 +91,7 @@ struct StationView: View {
     @ObservedObject var observer: PlotObservable
 
     var body: some View {
-        if
-            let stationId = observer.station?.stationId,
-            let stationName = observer.station?.stationName
-        {
+        if let stationName = observer.station?.stationName {
             GeometryReader(content: { geometry in
                 VStack(alignment: .leading) {
                     Text(stationName)
@@ -114,7 +117,7 @@ struct StationView: View {
                         Text("Updating")
                     }
                     Spacer()
-                    SwiftUIPlotGraph(stationId: stationId.intValue)
+                    SwiftUIPlotGraph(observer: observer)
                         .frame(minHeight: 200, maxHeight: 240)
                         .padding(.bottom)
                         .environmentObject((UIApplication.shared.delegate as? RHCAppDelegate)!.settings)

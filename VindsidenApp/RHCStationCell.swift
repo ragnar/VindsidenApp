@@ -69,13 +69,13 @@ class RHCStationCell: UICollectionViewCell {
         let fetchRequest = CDPlot.fetchRequest()
 
         fetchRequest.predicate = NSPredicate(format: "station == %@ AND plotTime >= %@", currentStation, outDate as CVarArg)
-        fetchRequest.fetchLimit = 1
         fetchRequest.sortDescriptors = [
-            NSSortDescriptor(key: "plotTime", ascending: false),
+            NSSortDescriptor(key: "plotTime", ascending: true),
         ]
 
         let cdplots: [CDPlot] = (try? context.fetch(fetchRequest)) ?? []
 
-        observer.plot = cdplots.first
+        observer.plot = cdplots.last
+        observer.plots = cdplots
     }
 }
