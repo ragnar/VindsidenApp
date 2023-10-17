@@ -268,8 +268,18 @@ class RHCAppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate {
     func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
         Logger.debugging.debug("Activity: \(userActivity.activityType) - \(String(describing: userActivity.userInfo))")
 
+        if let intent = userActivity.widgetConfigurationIntent(of: ConfigurationAppIntent.self), let name = intent.station {
+            guard 
+                let station = CDStation.searchForStationName(name, inManagedObjectContext: DataManager.shared.viewContext()),
+                let stationId = station.stationId?.intValue,
+                let url = URL(string: "vindsiden://station/\(stationId)")
+            else {
+                return false
+            }
 
-        if userActivity.activityType == CSSearchableItemActionType, let userInfo = userActivity.userInfo, let urlString = userInfo[CSSearchableItemActivityIdentifier] as? String {
+            return openLaunchOptionsURL(url)
+
+        } else if userActivity.activityType == CSSearchableItemActionType, let userInfo = userActivity.userInfo, let urlString = userInfo[CSSearchableItemActivityIdentifier] as? String {
             Logger.debugging.debug("URL STRING: \(urlString)")
             let url = URL(string: urlString)
             let success = openLaunchOptionsURL(url!)

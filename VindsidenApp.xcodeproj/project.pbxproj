@@ -129,6 +129,11 @@
 		ADEC5BC62ADD038F00A65057 /* PreviewSampleData.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADEC5BC52ADD038F00A65057 /* PreviewSampleData.swift */; };
 		ADEC5BC82ADD1BD600A65057 /* SwiftUIPlotGraph.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADEC5BC72ADD1BD600A65057 /* SwiftUIPlotGraph.swift */; };
 		ADEC5BCA2ADD46ED00A65057 /* StationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADEC5BC92ADD46ED00A65057 /* StationView.swift */; };
+		ADEC5BCD2ADEA00A00A65057 /* AppIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD9685922AD6A40000608FB3 /* AppIntent.swift */; };
+		ADEC5BCE2ADEA01900A65057 /* Station.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD9685A42AD6B8A300608FB3 /* Station.swift */; };
+		ADEC5BD02ADEA01900A65057 /* Plot.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD96859F2AD6ACE900608FB3 /* Plot.swift */; };
+		ADEC5BD12ADEA03700A65057 /* PersistentContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD9685A92AD7CA2000608FB3 /* PersistentContainer.swift */; };
+		ADEC5BD32ADEA73B00A65057 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = ADEC5BD22ADEA73B00A65057 /* Localizable.xcstrings */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -393,6 +398,7 @@
 		ADEC5BC52ADD038F00A65057 /* PreviewSampleData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewSampleData.swift; sourceTree = "<group>"; };
 		ADEC5BC72ADD1BD600A65057 /* SwiftUIPlotGraph.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUIPlotGraph.swift; sourceTree = "<group>"; };
 		ADEC5BC92ADD46ED00A65057 /* StationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationView.swift; sourceTree = "<group>"; };
+		ADEC5BD22ADEA73B00A65057 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -736,6 +742,7 @@
 				ADEC5BC52ADD038F00A65057 /* PreviewSampleData.swift */,
 				AD9685942AD6A40100608FB3 /* Assets.xcassets */,
 				AD9685962AD6A40100608FB3 /* Info.plist */,
+				ADEC5BD22ADEA73B00A65057 /* Localizable.xcstrings */,
 			);
 			path = VindsidenWidget;
 			sourceTree = "<group>";
@@ -1190,6 +1197,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ADEC5BD32ADEA73B00A65057 /* Localizable.xcstrings in Resources */,
 				AD9685952AD6A40100608FB3 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1219,8 +1227,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ADEC5BD12ADEA03700A65057 /* PersistentContainer.swift in Sources */,
 				AD30BC5219F024D9000CE40C /* RHCAppDelegate.swift in Sources */,
+				ADEC5BCE2ADEA01900A65057 /* Station.swift in Sources */,
 				ADB97FB12AD91E6E00CE7B01 /* StationPickerView.swift in Sources */,
+				ADEC5BD02ADEA01900A65057 /* Plot.swift in Sources */,
 				ADEC5BCA2ADD46ED00A65057 /* StationView.swift in Sources */,
 				AD9685AC2AD80BBB00608FB3 /* RHCStationCell.swift in Sources */,
 				ADEC5BC42AD9548B00A65057 /* StationDetailsView.swift in Sources */,
@@ -1230,6 +1241,7 @@
 				ADEC5BC82ADD1BD600A65057 /* SwiftUIPlotGraph.swift in Sources */,
 				AD4DEA7719CB7528002A220B /* RHCNavigationViewController.swift in Sources */,
 				AD1B45881CAEE9F200F171DB /* IndexRequestHandler.swift in Sources */,
+				ADEC5BCD2ADEA00A00A65057 /* AppIntent.swift in Sources */,
 				ADDB4F5019CB68F1005D5D38 /* RHCAlertManager.swift in Sources */,
 				ADB97FAD2AD914D900CE7B01 /* SettingsView.swift in Sources */,
 			);

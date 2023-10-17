@@ -134,6 +134,22 @@
         }
       }
     },
+    "Configuration" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Configuration"
+          }
+        },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Konfigurasjon"
+          }
+        }
+      }
+    },
     "Copyright" : {
       "localizations" : {
         "en" : {
@@ -591,6 +607,38 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Sted"
+          }
+        }
+      }
+    },
+    "Select station" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Select Station"
+          }
+        },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Velg stasjon"
+          }
+        }
+      }
+    },
+    "Select wind station to show in the widget." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Select wind station to show in the widget."
+          }
+        },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Velg en vindstasjon som skal vises i widget."
           }
         }
       }
