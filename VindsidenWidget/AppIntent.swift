@@ -11,20 +11,6 @@ import AppIntents
 import SwiftData
 import VindsidenKit
 
-struct ConfigurationAppIntent: AppIntent, WidgetConfigurationIntent {
-    static var title: LocalizedStringResource = "View station"
-    static var description = IntentDescription("Select wind station to show in the widget.")
-    static var openAppWhenRun: Bool = true
-
-    @Parameter(title: "Select station")
-    var station: IntentStation?
-
-    @MainActor
-    func perform() async throws -> some IntentResult {
-        return .result()
-    }
-}
-
 struct IntentStation: AppEntity, Hashable {
     var id: Int
     var name: String

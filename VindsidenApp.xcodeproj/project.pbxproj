@@ -137,6 +137,8 @@
 		ADEC5BD52ADEB12C00A65057 /* PhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADEC5BD42ADEB12C00A65057 /* PhotoView.swift */; };
 		ADEC5BD72ADEB1CD00A65057 /* SwipeToDismissModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADEC5BD62ADEB1CD00A65057 /* SwipeToDismissModifier.swift */; };
 		ADEC5BD92ADEB1E500A65057 /* RotateOnDragModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADEC5BD82ADEB1E500A65057 /* RotateOnDragModifier.swift */; };
+		ADEC5C272AE005DD00A65057 /* ConfigurationAppIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADEC5C222ADFFBC600A65057 /* ConfigurationAppIntent.swift */; };
+		ADEC5C282AE005DE00A65057 /* ConfigurationAppIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADEC5C222ADFFBC600A65057 /* ConfigurationAppIntent.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -405,6 +407,7 @@
 		ADEC5BD42ADEB12C00A65057 /* PhotoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoView.swift; sourceTree = "<group>"; };
 		ADEC5BD62ADEB1CD00A65057 /* SwipeToDismissModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeToDismissModifier.swift; sourceTree = "<group>"; };
 		ADEC5BD82ADEB1E500A65057 /* RotateOnDragModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RotateOnDragModifier.swift; sourceTree = "<group>"; };
+		ADEC5C222ADFFBC600A65057 /* ConfigurationAppIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigurationAppIntent.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -747,6 +750,7 @@
 				AD96859F2AD6ACE900608FB3 /* Plot.swift */,
 				AD9685A42AD6B8A300608FB3 /* Station.swift */,
 				AD9685922AD6A40000608FB3 /* AppIntent.swift */,
+				ADEC5C222ADFFBC600A65057 /* ConfigurationAppIntent.swift */,
 				AD9685A92AD7CA2000608FB3 /* PersistentContainer.swift */,
 				ADEC5BC52ADD038F00A65057 /* PreviewSampleData.swift */,
 				AD9685942AD6A40100608FB3 /* Assets.xcassets */,
@@ -1244,6 +1248,7 @@
 				ADEC5BD02ADEA01900A65057 /* Plot.swift in Sources */,
 				ADEC5BD92ADEB1E500A65057 /* RotateOnDragModifier.swift in Sources */,
 				ADEC5BCA2ADD46ED00A65057 /* StationView.swift in Sources */,
+				ADEC5C282AE005DE00A65057 /* ConfigurationAppIntent.swift in Sources */,
 				AD9685AC2AD80BBB00608FB3 /* RHCStationCell.swift in Sources */,
 				ADEC5BC42AD9548B00A65057 /* StationDetailsView.swift in Sources */,
 				AD17ED641731012200943C33 /* RHCViewController.m in Sources */,
@@ -1345,6 +1350,7 @@
 			files = (
 				ADEC5BC62ADD038F00A65057 /* PreviewSampleData.swift in Sources */,
 				AD96859E2AD6AB3700608FB3 /* Provider.swift in Sources */,
+				ADEC5C272AE005DD00A65057 /* ConfigurationAppIntent.swift in Sources */,
 				AD9685912AD6A40000608FB3 /* VindsidenWidget.swift in Sources */,
 				AD96858F2AD6A40000608FB3 /* VindsidenWidgetBundle.swift in Sources */,
 				AD9685AA2AD7CA2000608FB3 /* PersistentContainer.swift in Sources */,
@@ -1502,6 +1508,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_SWIFT_FLAGS = "-DDebug";
 				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG Debug";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 3.0;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -1555,6 +1562,7 @@
 				MARKETING_VERSION = 5.0.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "";
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
@@ -1592,6 +1600,7 @@
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) MAINAPP";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "VindsidenApp/VindsidenApp-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -1629,6 +1638,7 @@
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) MAINAPP";
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "VindsidenApp/VindsidenApp-Bridging-Header.h";
@@ -2096,7 +2106,6 @@
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
