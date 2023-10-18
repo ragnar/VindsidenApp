@@ -25,7 +25,7 @@ struct VindsidenWidgetEntryView : View {
 
     var body: some View {
         VStack(alignment: .leading) {
-            Text(entry.configuration.station ?? "Unnamed")
+            Text(entry.configuration.station?.name ?? "Unnamed")
             Text(entry.date, style: .relative)
                 .font(.caption)
             Chart {

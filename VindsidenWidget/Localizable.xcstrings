@@ -1,22 +1,6 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
-    "Configuration" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Configuration"
-          }
-        },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Konfigurasjon"
-          }
-        }
-      }
-    },
     "Gust" : {
       "localizations" : {
         "en" : {
@@ -145,6 +129,22 @@
         }
       }
     },
+    "Station" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Station"
+          }
+        },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Stasjon"
+          }
+        }
+      }
+    },
     "Time" : {
       "localizations" : {
         "en" : {
@@ -157,6 +157,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Tid"
+          }
+        }
+      }
+    },
+    "View station" : {
+      "localizations" : {
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vis stasjon"
           }
         }
       }

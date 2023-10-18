@@ -134,22 +134,6 @@
         }
       }
     },
-    "Configuration" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Configuration"
-          }
-        },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Konfigurasjon"
-          }
-        }
-      }
-    },
     "Copyright" : {
       "localizations" : {
         "en" : {
@@ -740,6 +724,22 @@
         }
       }
     },
+    "Station" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Station"
+          }
+        },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Stasjon"
+          }
+        }
+      }
+    },
     "Stations" : {
       "localizations" : {
         "en" : {
@@ -884,6 +884,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Vis i kart"
+          }
+        }
+      }
+    },
+    "View station" : {
+      "localizations" : {
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vis stasjon"
           }
         }
       }

@@ -268,11 +268,10 @@ class RHCAppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate {
     func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
         Logger.debugging.debug("Activity: \(userActivity.activityType) - \(String(describing: userActivity.userInfo))")
 
-        if let intent = userActivity.widgetConfigurationIntent(of: ConfigurationAppIntent.self), let name = intent.station {
-            guard 
-                let station = CDStation.searchForStationName(name, inManagedObjectContext: DataManager.shared.viewContext()),
-                let stationId = station.stationId?.intValue,
-                let url = URL(string: "vindsiden://station/\(stationId)")
+        if let intent = userActivity.widgetConfigurationIntent(of: ConfigurationAppIntent.self) {
+            guard
+                let station = intent.station,
+                let url = URL(string: "vindsiden://station/\(station.id)")
             else {
                 return false
             }

@@ -11,25 +11,54 @@ import AppIntents
 import SwiftData
 import VindsidenKit
 
-struct ConfigurationAppIntent: WidgetConfigurationIntent {
-    static var title: LocalizedStringResource = "Configuration"
+struct ConfigurationAppIntent: AppIntent, WidgetConfigurationIntent {
+    static var title: LocalizedStringResource = "View station"
     static var description = IntentDescription("Select wind station to show in the widget.")
+    static var openAppWhenRun: Bool = true
 
-    @Parameter(title: "Select station", optionsProvider: StationOptionsProvider())
-    var station: String?
+    @Parameter(title: "Select station")
+    var station: IntentStation?
 
-    struct StationOptionsProvider: DynamicOptionsProvider {
-        func results() async throws -> [String] {
-            do {
-                return try await Task { @MainActor in
-                    var fetchDescriptor = FetchDescriptor(sortBy: [SortDescriptor(\Station.stationName, order: .forward)])
-                    fetchDescriptor.predicate = #Predicate { $0.isHidden == false }
+    @MainActor
+    func perform() async throws -> some IntentResult {
+        return .result()
+    }
+}
 
-                    return try PersistentContainer.container.mainContext.fetch(fetchDescriptor).compactMap { $0.stationName }
-                }.value
-            } catch {
-                fatalError("Failed to create the model container: \(error)")
-            }
-        }
+struct IntentStation: AppEntity, Hashable {
+    var id: Int
+    var name: String
+
+    static var typeDisplayRepresentation: TypeDisplayRepresentation = .init(stringLiteral: "Station")
+
+    var displayRepresentation: DisplayRepresentation {
+        return DisplayRepresentation(stringLiteral: name)
+    }
+
+    static var defaultQuery = StationQuery()
+}
+
+struct StationQuery: EntityQuery {
+    func entities(for identifiers: [IntentStation.ID]) async throws -> [IntentStation] {
+        return try await Task { @MainActor in
+            var fetchDescriptor = FetchDescriptor(sortBy: [SortDescriptor(\Station.stationName, order: .forward)])
+            fetchDescriptor.predicate = #Predicate { $0.isHidden == false }
+
+            return try PersistentContainer
+                .container
+                .mainContext
+                .fetch(fetchDescriptor)
+                .filter { identifiers.contains($0.stationId) }
+                .compactMap { IntentStation(id: $0.stationId, name: $0.stationName ?? "") }
+        }.value
+    }
+
+    func suggestedEntities() async throws -> [IntentStation] {
+        return try await Task { @MainActor in
+            var fetchDescriptor = FetchDescriptor(sortBy: [SortDescriptor(\Station.stationName, order: .forward)])
+            fetchDescriptor.predicate = #Predicate { $0.isHidden == false }
+
+            return try PersistentContainer.container.mainContext.fetch(fetchDescriptor).compactMap { IntentStation(id: $0.stationId, name: $0.stationName ?? "") }
+        }.value
     }
 }

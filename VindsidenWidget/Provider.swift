@@ -15,7 +15,7 @@ struct Provider: AppIntentTimelineProvider  {
     func placeholder(in context: Context) -> SimpleEntry {
         let configuration = ConfigurationAppIntent()
 
-        configuration.station = "Larkollen"
+        configuration.station = IntentStation(id: -1, name: "Larkollen")
 
         return SimpleEntry(date: Date(), configuration: configuration, plots: [])
     }
@@ -32,13 +32,13 @@ struct Provider: AppIntentTimelineProvider  {
             return plots ?? []
         }.value
 
-        configuration.station = "Larkollen"
+        configuration.station = IntentStation(id: -1, name: "Larkollen")
 
         return SimpleEntry(date: Date(), configuration: configuration, plots: plots)
     }
 
     func timeline(for configuration: ConfigurationAppIntent, in context: Context) async -> Timeline<SimpleEntry> {
-        guard let stationName = configuration.station else {
+        guard let stationId = configuration.station?.id else {
             return Timeline(entries: [], policy: .atEnd)
         }
 
@@ -52,7 +52,7 @@ struct Provider: AppIntentTimelineProvider  {
             let outDate = gregorian.date(from: inputComponents) ?? Date()
 
             var fetchDescriptor = FetchDescriptor(sortBy: [SortDescriptor(\Plot.plotTime, order: .reverse)])
-            fetchDescriptor.predicate = #Predicate { $0.station?.stationName == stationName }
+            fetchDescriptor.predicate = #Predicate { $0.station?.stationId == stationId }
             fetchDescriptor.fetchLimit = 20
 
             if let plots = try? modelContainer.mainContext.fetch(fetchDescriptor), let plot = plots.first {
