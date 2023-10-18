@@ -41,7 +41,6 @@ static NSString *kCellID = @"stationCellID";
 - (void)dealloc
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIApplicationDidBecomeActiveNotification object:nil];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIApplicationWillResignActiveNotification object:nil];
 }
 
 
@@ -84,7 +83,6 @@ static NSString *kCellID = @"stationCellID";
     [self fetchStations];
 
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationDidBecomeActive:) name:UIApplicationDidBecomeActiveNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationWillResignActive:) name:UIApplicationWillResignActiveNotification object:nil];
 }
 
 
@@ -152,12 +150,10 @@ static NSString *kCellID = @"stationCellID";
         [self.collectionView reloadData];
     }
     isFirst = NO;
-}
 
+    RHCStationCell *cell = (RHCStationCell *)[[self.collectionView visibleCells] firstObject];
+    [cell displayPlots];
 
-- (void)applicationWillResignActive:(NSNotification *)notification
-{
-    [self updateCameraButton];
 }
 
 
@@ -358,18 +354,6 @@ static NSString *kCellID = @"stationCellID";
 #pragma mark - Actions
 
 
-- (IBAction)settings:(id)sender
-{
-    [self openSettings];
-}
-
-
-- (IBAction)info:(id)sender
-{
-    [self openStationDetails];
-}
-
-
 - (IBAction)share:(id)sender
 {
     RHCStationCell *cell = [self.collectionView visibleCells][0];
@@ -388,39 +372,12 @@ static NSString *kCellID = @"stationCellID";
 }
 
 
-- (IBAction)camera:(id)sender
-{
-    if ( [[self.collectionView visibleCells] count] == 0 ) {
-        return;
-    }
-
-    [self openCamera];
-}
-
-
 - (IBAction)pageControlChangedValue:(id)sender
 {
     NSInteger page = [(UIPageControl *)sender currentPage];
     NSIndexPath *indexPath = [NSIndexPath indexPathForItem:page inSection:0];
     [self.collectionView scrollToItemAtIndexPath:indexPath atScrollPosition:UICollectionViewScrollPositionNone animated:YES];
 }
-
-#pragma mark -
-
-
-- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
-{
-    if ( [keyPath isEqualToString:@"image"] ) {
-        if ( [change[@"new"] isKindOfClass:[UIImage class]] ) {
-            // FIXME: Camera showing stuff
-//            [self.cameraView pause];
-        }
-        return;
-    }
-
-    [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
-}
-
 
 #pragma mark -
 

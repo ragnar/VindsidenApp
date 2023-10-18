@@ -25,11 +25,10 @@ extension RHCViewController {
         }
     }
 
-    @objc
-    func openSettings() {
+    @IBAction func settings(_ sender: Any) {
         let root = UIHostingController(rootView: SettingsView(dismissAction: {
             Logger.debugging.debug("Settings Dismissed")
-            
+
             self.updateApplicationContextToWatch()
             (UIApplication.shared.delegate as? RHCAppDelegate)?.updateShortcutItems()
             WindManager.sharedManager.updateNow()
@@ -45,9 +44,9 @@ extension RHCViewController {
         navigationController?.present(root, animated: true)
     }
 
-    @objc
-    func openStationDetails() {
-        guard 
+
+    @IBAction func info(_ sender: Any) {
+        guard
             let cell = self.collectionView.visibleCells.first as? RHCStationCell,
             let currentStation = cell.currentStation
         else {
@@ -58,8 +57,7 @@ extension RHCViewController {
         navigationController?.present(root, animated: true)
     }
 
-    @objc
-    func openCamera() {
+    @IBAction func camera(_ sender: Any) {
         guard
             let cell = self.collectionView.visibleCells.first as? RHCStationCell,
             let webCamURL = cell.currentStation?.webCamImage,
