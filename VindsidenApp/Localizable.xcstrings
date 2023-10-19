@@ -579,6 +579,36 @@
         }
       }
     },
+    "Open" : {
+      "localizations" : {
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Åpne"
+          }
+        }
+      }
+    },
+    "Open Station" : {
+      "localizations" : {
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Åpne stasjon"
+          }
+        }
+      }
+    },
+    "Open the application at chosen wind station" : {
+      "localizations" : {
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Åpner applikasjonen på valgt vindstasjon"
+          }
+        }
+      }
+    },
     "Place" : {
       "localizations" : {
         "en" : {
@@ -607,22 +637,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Velg stasjon"
-          }
-        }
-      }
-    },
-    "Select wind station to show in the widget." : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Select wind station to show in the widget."
-          }
-        },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Velg en vindstasjon som skal vises i widget."
           }
         }
       }
@@ -659,6 +673,16 @@
         }
       }
     },
+    "Show" : {
+      "localizations" : {
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vis"
+          }
+        }
+      }
+    },
     "Show All..." : {
       "extractionState" : "manual",
       "localizations" : {
@@ -672,6 +696,26 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Vis alle..."
+          }
+        }
+      }
+    },
+    "Show wind" : {
+      "localizations" : {
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vis vind"
+          }
+        }
+      }
+    },
+    "Shows the current wind data for chosen wind station." : {
+      "localizations" : {
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Viser gjeldene vind-informasjon for valgt stasjon."
           }
         }
       }
@@ -884,16 +928,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Vis i kart"
-          }
-        }
-      }
-    },
-    "View station" : {
-      "localizations" : {
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Vis stasjon"
           }
         }
       }

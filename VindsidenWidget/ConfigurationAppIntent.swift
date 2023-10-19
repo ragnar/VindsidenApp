@@ -10,8 +10,8 @@ import Foundation
 import AppIntents
 
 struct ConfigurationAppIntent: AppIntent, WidgetConfigurationIntent {
-    static var title: LocalizedStringResource = "View station"
-    static var description = IntentDescription("Select wind station to show in the widget.")
+    static var title: LocalizedStringResource = "Open Station"
+    static var description = IntentDescription("Open the application at chosen wind station")
     static var openAppWhenRun: Bool = true
 
     @Parameter(title: "Select station")

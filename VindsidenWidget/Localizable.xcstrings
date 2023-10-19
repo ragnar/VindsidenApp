@@ -33,6 +33,26 @@
         }
       }
     },
+    "Open Station" : {
+      "localizations" : {
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Åpne stasjon"
+          }
+        }
+      }
+    },
+    "Open the application at chosen wind station" : {
+      "localizations" : {
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Åpner applikasjonen på valgt vindstasjon"
+          }
+        }
+      }
+    },
     "Select station" : {
       "localizations" : {
         "en" : {
@@ -45,22 +65,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Velg stasjon"
-          }
-        }
-      }
-    },
-    "Select wind station to show in the widget." : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Select wind station to show in the widget."
-          }
-        },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Velg en vindstasjon som skal vises i widget."
           }
         }
       }
@@ -157,16 +161,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Tid"
-          }
-        }
-      }
-    },
-    "View station" : {
-      "localizations" : {
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Vis stasjon"
           }
         }
       }
