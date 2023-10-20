@@ -59,10 +59,10 @@ struct SwiftUIPlotGraph: View {
         }
         .chartYAxisLabel(settings.windUnit.symbol)
         .chartForegroundStyleScale([
-            "Average": Color("AccentColor"),
-            "Variation": Color("AccentColor").opacity(0.1),
-            "Variation Min": Color("AccentColor").opacity(0.2),
-            "Variation Max": Color("AccentColor").opacity(0.2),
+            "Average": Color.accentColor,
+            "Variation": Color.accentColor.opacity(0.1),
+            "Variation Min": Color.accentColor.opacity(0.2),
+            "Variation Max": Color.accentColor.opacity(0.2),
         ])
         .chartLegend(.hidden)
     }

@@ -16,7 +16,6 @@ import SwiftUI
 
 @UIApplicationMain
 class RHCAppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate {
-
     var window: UIWindow?
     var connectionSession: WCSession?
 
@@ -24,12 +23,7 @@ class RHCAppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 
-        self.window?.tintColor = UIColor.vindsidenGloablTintColor()
-
-        if AppConfig.sharedConfiguration.applicationUserDefaults.integer(forKey: "selectedUnit") == 0 {
-            AppConfig.sharedConfiguration.applicationUserDefaults.set(SpeedConvertion.toMetersPerSecond.rawValue, forKey: "selectedUnit")
-            AppConfig.sharedConfiguration.applicationUserDefaults.synchronize()
-        }
+        self.window?.tintColor = UIColor.accent
 
         if WCSession.isSupported() {
             let connectionSession = WCSession.default

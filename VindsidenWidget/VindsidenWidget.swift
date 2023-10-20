@@ -26,6 +26,9 @@ struct VindsidenWidgetEntryView : View {
     var body: some View {
         VStack(alignment: .leading) {
             Text(entry.configuration.station?.name ?? "Unnamed")
+                .foregroundStyle(Color("AccentColor"))
+                .widgetAccentable()
+
             Text(entry.date, style: .relative)
                 .font(.caption)
             Chart {
