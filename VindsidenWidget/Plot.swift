@@ -10,20 +10,20 @@ import Foundation
 import SwiftData
 import Observation
 
-@Model
+@Model 
 final class Plot {
-    @Attribute(.unique)
-    var dataId: Int
-    var plotTime: Date
-    var tempAir: Double
-    var tempWater: Double
-    var windAvg: Double
-    var windDir: Double
-    var windMax: Double
-    var windMin: Double
+//    @Attribute(.unique)
+    var dataId: Int64 = 0
+    var plotTime: Date = Date()
+    var tempAir: Float = -999
+    var tempWater: Float = -999
+    var windAvg: Float = 0
+    var windDir: Float = 0
+    var windMax: Float = 0
+    var windMin: Float = 0
     var station: Station?
 
-    internal init(dataId: Int, plotTime: Date, tempAir: Double, tempWater: Double, windAvg: Double, windDir: Double, windMax: Double, windMin: Double) {
+    internal init(dataId: Int64, plotTime: Date, tempAir: Float, tempWater: Float, windAvg: Float, windDir: Float, windMax: Float, windMin: Float) {
         self.dataId = dataId
         self.plotTime = plotTime
         self.tempAir = tempAir

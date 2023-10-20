@@ -12,7 +12,7 @@ import Observation
 import AppIntents
 
 @Model
-final class Station {
+final class _Station {
     @Attribute(.unique)
     var stationId: Int
 
@@ -54,4 +54,28 @@ final class Station {
         self.yrURL = yrURL
         self.plots = []
     }
+}
+
+
+@Model
+final class Station {
+    var city: String?
+    var coordinateLat: Double? = 0
+    var coordinateLon: Double? = 0
+    var copyright: String?
+    var isHidden: Bool = true
+    var lastMeasurement: Date?
+    var lastRefreshed: Date?
+    var order: Int16 = 0
+    @Attribute(.unique) var stationId: Int32? = 0
+    var stationName: String?
+    var stationText: String?
+    var statusMessage: String?
+    var webCamImage: String?
+    var webCamText: String?
+    var webCamURL: String?
+    var yrURL: String?
+    @Relationship(deleteRule: .cascade) var plots: [Plot]?
+
+    public init() { }
 }

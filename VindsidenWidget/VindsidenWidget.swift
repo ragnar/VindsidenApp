@@ -71,7 +71,7 @@ struct VindsidenWidgetEntryView : View {
                         AxisTick()
                         AxisValueLabel {
                             Image(systemName: "arrow.down")
-                                .rotationEffect(.degrees(entry.plots[value.index].windDir))
+                                .rotationEffect(.degrees(Double(entry.plots[value.index].windDir)))
                         }
                     }
                 }
@@ -95,10 +95,11 @@ struct VindsidenWidgetEntryView : View {
         return true
     }
 
-    private func convertedWind(_ base: Double) -> Double {
+    private func convertedWind(_ base: Float) -> Double {
         let unit = settings.windUnit
 
-        return base.fromUnit(.metersPerSecond).toUnit(unit)
+        return Double(base).fromUnit(.metersPerSecond).toUnit(unit)
+//        return base.fromUnit(.metersPerSecond).toUnit(unit)
     }
 }
 

@@ -27,23 +27,12 @@ actor PreviewSampleData {
 
 extension Station {
     static var preview: Station {
-        return Station(city: "Oslo",
-                       coordinateLat: 0,
-                       coordinateLon: 0,
-                       copyright: "",
-                       isHidden: false,
-                       lastMeasurement: Date(),
-                       lastRefreshed: Date(),
-                       order: 0,
-                       stationId: 1,
-                       stationName: "Larkollen",
-                       stationText: "",
-                       statusMessage: "",
-                       webCamImage: "",
-                       webCamText: "",
-                       webCamURL: "",
-                       yrURL: ""
-        )
+        var station = Station()
+        station.city = "Oslo"
+        station.stationId = 1
+        station.stationName = "Larkollen"
+
+        return station
     }
 }
 

@@ -51,8 +51,10 @@ struct Provider: AppIntentTimelineProvider  {
             let inputComponents = gregorian.components([.year, .month, .day, .hour], from: inDate)
             let outDate = gregorian.date(from: inputComponents) ?? Date()
 
+            let stationId32 = Int32(stationId)
+
             var fetchDescriptor = FetchDescriptor(sortBy: [SortDescriptor(\Plot.plotTime, order: .reverse)])
-            fetchDescriptor.predicate = #Predicate { $0.station?.stationId == stationId }
+            fetchDescriptor.predicate = #Predicate { $0.station?.stationId == stationId32 }
             fetchDescriptor.fetchLimit = 20
 
             if let plots = try? modelContainer.mainContext.fetch(fetchDescriptor), let plot = plots.first {
