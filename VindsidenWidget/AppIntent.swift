@@ -47,4 +47,12 @@ struct StationQuery: EntityQuery {
             return try PersistentContainer.container.mainContext.fetch(fetchDescriptor).compactMap { IntentStation(id: $0.stationId, name: $0.stationName ?? "") }
         }.value
     }
+
+    func defaultResult() async -> IntentStation? {
+#if MAINAPP
+        return nil
+#else
+        return try? await suggestedEntities().first
+#endif
+    }
 }
