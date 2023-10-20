@@ -25,6 +25,18 @@ extension RHCViewController {
         }
     }
 
+    @objc
+    func refreshCells() {
+        for cell in collectionView.visibleCells {
+            Logger.debugging.log("Refreshing cell...")
+            guard let cell = cell as? RHCStationCell else {
+                continue
+            }
+
+            cell.displayPlots()
+        }
+    }
+
     @IBAction func settings(_ sender: Any) {
         let root = UIHostingController(rootView: SettingsView(dismissAction: {
             Logger.debugging.debug("Settings Dismissed")

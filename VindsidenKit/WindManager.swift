@@ -20,6 +20,10 @@ public class WindManager : NSObject {
 
     @objc public static let sharedManager = WindManager()
 
+#if os(iOS)
+    public var observer: UserObservable?
+#endif
+
     override init() {
         super.init()
         #if os(iOS)
@@ -122,6 +126,7 @@ public class WindManager : NSObject {
         Task { @MainActor in
             await fetch()
 #if os(iOS)
+            observer?.lastChanged = Date()
             WidgetCenter.shared.reloadTimelines(ofKind: "VindsidenWidget")
 #endif
         }

@@ -36,6 +36,7 @@ class RHCAppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate {
 
         DataManager.shared.cleanupPlots {
             WindManager.sharedManager.refreshInterval = 60
+            WindManager.sharedManager.observer = self.settings
             WindManager.sharedManager.startUpdating()
         }
 

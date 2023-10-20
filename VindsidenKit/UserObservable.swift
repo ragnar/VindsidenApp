@@ -24,7 +24,7 @@ public class UserObservable: ObservableObject {
         }
     }
 
-    @Published public private(set) var lastChanged: Date
+    @Published public var lastChanged: Date
 
     public init() {
         self.windUnit = UserSettings.shared.selectedWindUnit

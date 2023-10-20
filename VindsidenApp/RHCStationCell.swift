@@ -7,8 +7,9 @@
 //
 
 import UIKit
-import VindsidenKit
+import OSLog
 import SwiftUI
+import VindsidenKit
 import Units
 
 @objc
@@ -26,9 +27,12 @@ class RHCStationCell: UICollectionViewCell {
     }
 
     func setupView() {
+        @ObservedObject
+        var settings = (UIApplication.shared.delegate as? RHCAppDelegate)!.settings
+
         contentConfiguration = UIHostingConfiguration(content: {
-            StationView(observer: observer)
-                .environmentObject((UIApplication.shared.delegate as? RHCAppDelegate)!.settings)
+            StationView(observer: observer, updater: displayPlots)
+                .environmentObject(settings)
                 .environment(\.managedObjectContext, DataManager.shared.viewContext())
         })
     }

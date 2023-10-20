@@ -90,6 +90,7 @@ static NSString *kCellID = @"stationCellID";
 {
     [super viewDidAppear:animated];
     [self updateCameraButton];
+    [self refreshCells];
 }
 
 - (void)viewWillLayoutSubviews
@@ -292,10 +293,7 @@ static NSString *kCellID = @"stationCellID";
             [self saveActivity];
             break;
         case NSFetchedResultsChangeUpdate:
-        {
-            RHCStationCell *cell = (RHCStationCell *)[self.collectionView cellForItemAtIndexPath:indexPath];
-            cell.currentStation = anObject;
-        }
+            [self refreshCells];
             break;
     }
 }

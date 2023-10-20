@@ -90,6 +90,8 @@ struct StationView: View {
     @EnvironmentObject private var settings: UserObservable
     @ObservedObject var observer: PlotObservable
 
+    var updater: () -> ()
+
     var body: some View {
         if let stationName = observer.station?.stationName {
             GeometryReader(content: { geometry in
@@ -124,8 +126,16 @@ struct StationView: View {
                         .environment(\.managedObjectContext, DataManager.shared.viewContext())
                 }
             })
+            .onChange(of: settings.lastChanged) { _, _ in
+                Logger.debugging.debug("Last changed for: \(stationName)")
+                updater()
+            }
         } else {
             EmptyView()
+                .onChange(of: settings.lastChanged) { _, _ in
+                    Logger.debugging.debug("Last changed for: unknown station name")
+                    updater()
+                }
         }
     }
 }
