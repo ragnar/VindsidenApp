@@ -50,7 +50,7 @@ extension Plot {
         plots.append(Plot(dataId: 7, plotTime: Date().addingTimeInterval(-1*(3600*30)), tempAir: 0, tempWater: 0, windAvg: .random(in: 7...9), windDir: .random(in: 170...190), windMax: .random(in: 9...11), windMin: .random(in: 6...7)))
         plots.append(Plot(dataId: 8, plotTime: Date().addingTimeInterval(-1*(3600*15)), tempAir: 0, tempWater: 0, windAvg: .random(in: 7...9), windDir: .random(in: 170...190), windMax: .random(in: 9...11), windMin: .random(in: 6...7)))
         plots.append(Plot(dataId: 9, plotTime: Date(), tempAir: 0, tempWater: 0, windAvg: 5, windDir: 180, windMax: 6, windMin: 4))
-        plots.forEach { $0.station = Station.preview }
+        //plots.forEach { $0.station = Station.preview }
 
         return plots
     }

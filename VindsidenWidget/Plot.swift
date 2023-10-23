@@ -8,6 +8,7 @@
 
 import Foundation
 import SwiftData
+import Charts
 import Observation
 
 @Model 
@@ -32,5 +33,17 @@ final class Plot {
         self.windDir = windDir
         self.windMax = windMax
         self.windMin = windMin
+    }
+}
+
+extension Plot: Plottable {
+    typealias PrimitivePlottable = Date
+
+    var primitivePlottable: Date {
+        return plotTime
+    }
+
+    convenience init?(primitivePlottable: Date) {
+        nil
     }
 }

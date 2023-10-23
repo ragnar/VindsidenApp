@@ -38,14 +38,11 @@ struct Provider: AppIntentTimelineProvider  {
     }
 
     func timeline(for configuration: ConfigurationAppIntent, in context: Context) async -> Timeline<SimpleEntry> {
-        guard let stationId = configuration.station?.id else {
-            return Timeline(entries: [], policy: .atEnd)
-        }
-
+        let stationId = configuration.station.id
         let entries: [SimpleEntry] = await Task { @MainActor in
             await WindManager.sharedManager.fetch()
 
-            let modelContainer: ModelContainer = PersistentContainer.container
+            let modelContainer: ModelContainer = PersistentContainer.shared.container
             let gregorian = NSCalendar(identifier: .gregorian)!
             let inDate = Date().addingTimeInterval(-1*AppConfig.Global.plotHistory*3600)
             let inputComponents = gregorian.components([.year, .month, .day, .hour], from: inDate)

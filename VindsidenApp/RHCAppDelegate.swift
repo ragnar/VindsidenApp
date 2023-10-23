@@ -264,10 +264,7 @@ class RHCAppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate {
         Logger.debugging.debug("Activity: \(userActivity.activityType) - \(String(describing: userActivity.userInfo))")
 
         if let intent = userActivity.widgetConfigurationIntent(of: ConfigurationAppIntent.self) {
-            guard
-                let station = intent.station,
-                let url = URL(string: "vindsiden://station/\(station.id)")
-            else {
+            guard let url = URL(string: "vindsiden://station/\(intent.station.id)") else {
                 return false
             }
 

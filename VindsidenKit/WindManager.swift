@@ -127,7 +127,7 @@ public class WindManager : NSObject {
             await fetch()
 #if os(iOS)
             observer?.lastChanged = Date()
-            WidgetCenter.shared.reloadTimelines(ofKind: "VindsidenWidget")
+            WidgetCenter.shared.reloadAllTimelines()
 #endif
         }
     }

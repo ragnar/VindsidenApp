@@ -12,10 +12,14 @@ import VindsidenKit
 import OSLog
 
 struct PersistentContainer {
-    @MainActor
-    static var container: ModelContainer {
-        Logger.debugging.error("Model container created")
+    public static let shared = PersistentContainer()
 
+    private init() {
+        Logger.debugging.error("Model container created")
+    }
+
+    @MainActor
+    var container: ModelContainer {
         guard let appGroupContainer = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: AppConfig.ApplicationGroups.primary) else {
             fatalError("Shared file container could not be created.")
         }

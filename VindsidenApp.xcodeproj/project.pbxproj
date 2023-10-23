@@ -125,6 +125,10 @@
 		ADCD425F196E4E42004973E9 /* UIImage+ImageFromView.m in Sources */ = {isa = PBXBuildFile; fileRef = ADCD424D196E4E42004973E9 /* UIImage+ImageFromView.m */; };
 		ADDB4F5019CB68F1005D5D38 /* RHCAlertManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADDB4F4F19CB68F1005D5D38 /* RHCAlertManager.swift */; };
 		ADDE47F82AE15152001187F6 /* AppShortcuts.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADDE47F72AE15152001187F6 /* AppShortcuts.swift */; };
+		ADDE47FC2AE67802001187F6 /* MainWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADDE47FB2AE67802001187F6 /* MainWidgetView.swift */; };
+		ADDE47FE2AE6783D001187F6 /* VindsidenWidgetEntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADDE47FD2AE6783D001187F6 /* VindsidenWidgetEntryView.swift */; };
+		ADDE48002AE67A02001187F6 /* SinglePlotProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADDE47FF2AE67A02001187F6 /* SinglePlotProvider.swift */; };
+		ADDE48022AE67DAC001187F6 /* WidgetData.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADDE48012AE67DAC001187F6 /* WidgetData.swift */; };
 		ADE9C4081AAB32840089EB19 /* WindManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADE9C4071AAB32840089EB19 /* WindManager.swift */; };
 		ADEC5BC42AD9548B00A65057 /* StationDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADEC5BC32AD9548B00A65057 /* StationDetailsView.swift */; };
 		ADEC5BC62ADD038F00A65057 /* PreviewSampleData.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADEC5BC52ADD038F00A65057 /* PreviewSampleData.swift */; };
@@ -400,6 +404,10 @@
 		ADCD424D196E4E42004973E9 /* UIImage+ImageFromView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ImageFromView.m"; sourceTree = "<group>"; };
 		ADDB4F4F19CB68F1005D5D38 /* RHCAlertManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RHCAlertManager.swift; sourceTree = "<group>"; };
 		ADDE47F72AE15152001187F6 /* AppShortcuts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppShortcuts.swift; sourceTree = "<group>"; };
+		ADDE47FB2AE67802001187F6 /* MainWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainWidgetView.swift; sourceTree = "<group>"; };
+		ADDE47FD2AE6783D001187F6 /* VindsidenWidgetEntryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VindsidenWidgetEntryView.swift; sourceTree = "<group>"; };
+		ADDE47FF2AE67A02001187F6 /* SinglePlotProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SinglePlotProvider.swift; sourceTree = "<group>"; };
+		ADDE48012AE67DAC001187F6 /* WidgetData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetData.swift; sourceTree = "<group>"; };
 		ADE9C4071AAB32840089EB19 /* WindManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WindManager.swift; sourceTree = "<group>"; };
 		ADEC5BC32AD9548B00A65057 /* StationDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationDetailsView.swift; sourceTree = "<group>"; };
 		ADEC5BC52ADD038F00A65057 /* PreviewSampleData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewSampleData.swift; sourceTree = "<group>"; };
@@ -749,7 +757,11 @@
 			children = (
 				AD96858E2AD6A40000608FB3 /* VindsidenWidgetBundle.swift */,
 				AD9685902AD6A40000608FB3 /* VindsidenWidget.swift */,
+				ADDE47FD2AE6783D001187F6 /* VindsidenWidgetEntryView.swift */,
+				ADDE47FB2AE67802001187F6 /* MainWidgetView.swift */,
 				AD96859D2AD6AB3700608FB3 /* Provider.swift */,
+				ADDE47FF2AE67A02001187F6 /* SinglePlotProvider.swift */,
+				ADDE48012AE67DAC001187F6 /* WidgetData.swift */,
 				AD96859F2AD6ACE900608FB3 /* Plot.swift */,
 				AD9685A42AD6B8A300608FB3 /* Station.swift */,
 				AD9685922AD6A40000608FB3 /* AppIntent.swift */,
@@ -1352,15 +1364,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ADDE47FC2AE67802001187F6 /* MainWidgetView.swift in Sources */,
 				ADEC5BC62ADD038F00A65057 /* PreviewSampleData.swift in Sources */,
 				AD96859E2AD6AB3700608FB3 /* Provider.swift in Sources */,
+				ADDE48002AE67A02001187F6 /* SinglePlotProvider.swift in Sources */,
 				ADEC5C272AE005DD00A65057 /* ConfigurationAppIntent.swift in Sources */,
 				AD9685912AD6A40000608FB3 /* VindsidenWidget.swift in Sources */,
 				AD96858F2AD6A40000608FB3 /* VindsidenWidgetBundle.swift in Sources */,
 				AD9685AA2AD7CA2000608FB3 /* PersistentContainer.swift in Sources */,
 				AD9685A02AD6ACE900608FB3 /* Plot.swift in Sources */,
 				AD9685A52AD6B8A300608FB3 /* Station.swift in Sources */,
+				ADDE47FE2AE6783D001187F6 /* VindsidenWidgetEntryView.swift in Sources */,
 				AD9685932AD6A40000608FB3 /* AppIntent.swift in Sources */,
+				ADDE48022AE67DAC001187F6 /* WidgetData.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -15,14 +15,13 @@ struct ConfigurationAppIntent: AppIntent, WidgetConfigurationIntent {
     static var openAppWhenRun: Bool = true
 
     @Parameter(title: "Select station")
-    var station: IntentStation?
+    var station: IntentStation
 
     @MainActor
     func perform() async throws -> some IntentResult {
 #if MAINAPP
         guard
             let delegate = UIApplication.shared.delegate as? RHCAppDelegate,
-            let station,
             let url = URL(string: "vindsiden://station/\(station.id)")
         else {
             return .result()

@@ -1,6 +1,54 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "%@ %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@ %2$@"
+          }
+        },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$@ %2$@ "
+          }
+        }
+      }
+    },
+    "%@ %@ %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@ %2$@ %3$@"
+          }
+        },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$@ %2$@ %3$@"
+          }
+        }
+      }
+    },
+    "Display your favorite spot on your home screen" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Display your favorite spot on your home screen"
+          }
+        },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vis din favoritt værstasjon direkte på hjemskjermen"
+          }
+        }
+      }
+    },
     "Gust" : {
       "localizations" : {
         "en" : {
@@ -35,6 +83,12 @@
     },
     "Open Station" : {
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Open Station"
+          }
+        },
         "nb" : {
           "stringUnit" : {
             "state" : "translated",
@@ -45,6 +99,12 @@
     },
     "Open the application at chosen wind station" : {
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Open the application at chosen wind station"
+          }
+        },
         "nb" : {
           "stringUnit" : {
             "state" : "translated",
@@ -161,6 +221,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Tid"
+          }
+        }
+      }
+    },
+    "Weather station" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Weather station"
+          }
+        },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Værstasjon"
           }
         }
       }
