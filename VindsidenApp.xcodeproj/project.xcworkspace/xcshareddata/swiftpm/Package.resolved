@@ -6,7 +6,7 @@
       "location" : "git@github.com:ragnar/Units.git",
       "state" : {
         "branch" : "main",
-        "revision" : "abd620ef209a1a9677e7532231642d9580b20be3"
+        "revision" : "d4754b709a3919ed267a9af774b800dafa68b241"
       }
     },
     {
@@ -15,7 +15,7 @@
       "location" : "git@github.com:ragnar/WeatherBoxView.git",
       "state" : {
         "branch" : "main",
-        "revision" : "e5de3fe771f77ab9783407218f68d7f96e2fc998"
+        "revision" : "3a99bc92713dcb29699ad6009d3688610e527a07"
       }
     },
     {

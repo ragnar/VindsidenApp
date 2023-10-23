@@ -11,17 +11,6 @@ import OSLog
 import VindsidenKit
 import Units
 
-fileprivate let speedFormatter: NumberFormatter = {
-    let _speedFormatter = NumberFormatter()
-    _speedFormatter.numberStyle = NumberFormatter.Style.decimal
-    _speedFormatter.maximumFractionDigits = 1
-    _speedFormatter.minimumFractionDigits = 1
-    _speedFormatter.notANumberSymbol = "—"
-    _speedFormatter.nilSymbol = "—"
-
-    return _speedFormatter
-}()
-
 public class PlotObservable: ObservableObject {
     @Published public var plot: CDPlot? {
         didSet {
@@ -50,9 +39,8 @@ public class PlotObservable: ObservableObject {
         }
 
         let converted = value.toUnit(unit)
-        let string = speedFormatter.string(from: NSNumber(floatLiteral: converted)) ?? "-.-"
 
-        return "\(string) \(unit.symbol)"
+        return unit.formatted(value: converted)
     }
 
     func windString(value: NSNumber?, for unit: WindUnit) -> String {
@@ -61,17 +49,18 @@ public class PlotObservable: ObservableObject {
         }
 
         let converted = value.fromUnit(.metersPerSecond).toUnit(unit)
-        let string = speedFormatter.string(from: NSNumber(floatLiteral: converted)) ?? "-.-"
 
-        return "\(string) \(unit.symbol)"
+        return unit.formatted(value: converted)
     }
 
     func windStringInBeaufort(value: NSNumber?) -> String {
-        guard let value = value?.speedInBeaufort() else {
+        guard let value = value?.doubleValue else {
             return "-"
         }
 
-        return "\(Int(value))"
+        let converted = value.fromUnit(.metersPerSecond).toUnit(.beaufort)
+
+        return converted.formatted(.number.precision(.fractionLength(0)))
     }
 
     func windDirectionString(value: NSNumber?, text: String?) -> String {

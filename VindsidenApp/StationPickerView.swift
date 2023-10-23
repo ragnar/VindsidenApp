@@ -51,6 +51,8 @@ struct StationPickerView: View {
         .toolbar {
             EditButton()
         }
+        .navigationTitle("Stations")
+        .navigationBarTitleDisplayMode(.inline)
     }
 
     func moveNotes(_ indexes: IndexSet, _ i: Int) {
