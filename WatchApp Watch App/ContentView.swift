@@ -10,6 +10,7 @@ import SwiftUI
 import SwiftData
 import VindsidenWatchKit
 import WeatherBoxView
+import WidgetKit
 
 struct ContentView: View {
     @ObservedObject private var data = Resource<WidgetData>()
@@ -48,6 +49,16 @@ struct ContentView: View {
         }
         .onReceive(NotificationCenter.default.publisher(for: .ReceivedStations)) { _ in
             data.forceFetch()
+        }
+        .onContinueUserActivity("ConfigurationAppIntent") { activity in
+            guard 
+                let intent = activity.widgetConfigurationIntent(of: ConfigurationAppIntent.self),
+                let station = data.value.first(where: {$0.name == intent.station.name })
+            else {
+                return
+            }
+
+            selected = station
         }
     }
 }

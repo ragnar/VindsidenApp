@@ -63,6 +63,8 @@
 		AD5025572AE7B385007DDF1F /* VindsidenWatchKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD303C281B282DC800C4B999 /* VindsidenWatchKit.framework */; };
 		AD50255D2AE7B777007DDF1F /* MainWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADDE47FB2AE67802001187F6 /* MainWidgetView.swift */; };
 		AD50255E2AE7B7AC007DDF1F /* VindsidenWidgetBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD96858E2AD6A40000608FB3 /* VindsidenWidgetBundle.swift */; };
+		AD5025602AE7EE79007DDF1F /* ConfigurationAppIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADEC5C222ADFFBC600A65057 /* ConfigurationAppIntent.swift */; };
+		AD5025612AE7EE99007DDF1F /* AppIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD9685922AD6A40000608FB3 /* AppIntent.swift */; };
 		AD539CA21947B5CA002644BD /* VindsidenKit.h in Headers */ = {isa = PBXBuildFile; fileRef = AD539CA11947B5CA002644BD /* VindsidenKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AD539CA81947B5CA002644BD /* VindsidenKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD539C9D1947B5CA002644BD /* VindsidenKit.framework */; };
 		AD539CAF1947B5CA002644BD /* VindsidenKitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD539CAE1947B5CA002644BD /* VindsidenKitTests.swift */; };
@@ -1292,6 +1294,8 @@
 				AD5025352AE79C8C007DDF1F /* Resource.swift in Sources */,
 				AD5025252AE6D50F007DDF1F /* WCFetcher.swift in Sources */,
 				AD5025172AE6D3AA007DDF1F /* WatchAppApp.swift in Sources */,
+				AD5025602AE7EE79007DDF1F /* ConfigurationAppIntent.swift in Sources */,
+				AD5025612AE7EE99007DDF1F /* AppIntent.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
