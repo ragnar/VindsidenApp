@@ -17,8 +17,6 @@ FOUNDATION_EXPORT const unsigned char VindsidenWatchKitVersionString[];
 // In this header, you should import all the public headers of your framework using statements like #import <VindsidenWatchKit/PublicHeader.h>
 
 
-#import <VindsidenWatchKit/DrawArrow.h>
-
 #import <VindsidenWatchKit/NSNumber+Between.h>
 #import <VindsidenWatchKit/NSNumber+Convertion.h>
 #import <VindsidenWatchKit/NSObject+performBlockCancel.h>

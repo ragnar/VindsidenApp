@@ -17,9 +17,6 @@
 		AD303C311B282FB100C4B999 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD7BBB461A3F53F400883770 /* Logger.swift */; };
 		AD303C321B282FB100C4B999 /* AppConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD7BBB481A3F55A100883770 /* AppConfig.swift */; };
 		AD303C331B282FB100C4B999 /* WindManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADE9C4071AAB32840089EB19 /* WindManager.swift */; };
-		AD303C341B282FC100C4B999 /* DrawArrow.h in Headers */ = {isa = PBXBuildFile; fileRef = ADB5A78819DEC29A009AE4A5 /* DrawArrow.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		AD303C351B282FC100C4B999 /* DrawArrow.m in Sources */ = {isa = PBXBuildFile; fileRef = ADB5A78919DEC29A009AE4A5 /* DrawArrow.m */; };
-		AD303C361B282FC100C4B999 /* GraphImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADC161841B0218D8004F6DAE /* GraphImage.swift */; };
 		AD303C401B28484F00C4B999 /* Vindsiden.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = AD7AA505196E46D800B1518B /* Vindsiden.xcdatamodeld */; };
 		AD303C421B2848EF00C4B999 /* UIColor+AppColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADBEA4CE1A07ECF600B168BF /* UIColor+AppColors.swift */; };
 		AD303C431B28490600C4B999 /* NSNumber+Between.h in Headers */ = {isa = PBXBuildFile; fileRef = ADCD423C196E4E42004973E9 /* NSNumber+Between.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -99,8 +96,6 @@
 		AD9E40781B8DA11B00FABCF5 /* CDPlot.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD9E40751B8DA11B00FABCF5 /* CDPlot.swift */; };
 		AD9EA2B81B8F1A6400F653FE /* NSDate+RelativeDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD9EA2B71B8F1A6400F653FE /* NSDate+RelativeDate.swift */; };
 		AD9EA2B91B8F1A6400F653FE /* NSDate+RelativeDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD9EA2B71B8F1A6400F653FE /* NSDate+RelativeDate.swift */; };
-		ADB5A78A19DEC29A009AE4A5 /* DrawArrow.h in Headers */ = {isa = PBXBuildFile; fileRef = ADB5A78819DEC29A009AE4A5 /* DrawArrow.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		ADB5A78B19DEC29A009AE4A5 /* DrawArrow.m in Sources */ = {isa = PBXBuildFile; fileRef = ADB5A78919DEC29A009AE4A5 /* DrawArrow.m */; };
 		ADB97FAD2AD914D900CE7B01 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB97FAC2AD914D900CE7B01 /* SettingsView.swift */; };
 		ADB97FAF2AD9154D00CE7B01 /* UserObservable.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB97FAE2AD9154D00CE7B01 /* UserObservable.swift */; };
 		ADB97FB12AD91E6E00CE7B01 /* StationPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB97FB02AD91E6E00CE7B01 /* StationPickerView.swift */; };
@@ -114,7 +109,6 @@
 		ADB97FC82AD930EC00CE7B01 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = ADB97FC62AD930EC00CE7B01 /* Localizable.xcstrings */; };
 		ADB97FC92AD930EC00CE7B01 /* InfoPlist.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = ADB97FC72AD930EC00CE7B01 /* InfoPlist.xcstrings */; };
 		ADBEA4CF1A07ECF600B168BF /* UIColor+AppColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADBEA4CE1A07ECF600B168BF /* UIColor+AppColors.swift */; };
-		ADC161851B0218D8004F6DAE /* GraphImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADC161841B0218D8004F6DAE /* GraphImage.swift */; };
 		ADCD424E196E4E42004973E9 /* NSNumber+Between.h in Headers */ = {isa = PBXBuildFile; fileRef = ADCD423C196E4E42004973E9 /* NSNumber+Between.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		ADCD424F196E4E42004973E9 /* NSNumber+Between.m in Sources */ = {isa = PBXBuildFile; fileRef = ADCD423D196E4E42004973E9 /* NSNumber+Between.m */; };
 		ADCD4250196E4E42004973E9 /* NSNumber+Convertion.h in Headers */ = {isa = PBXBuildFile; fileRef = ADCD423E196E4E42004973E9 /* NSNumber+Convertion.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -376,8 +370,6 @@
 		AD9E40721B8D9BCD00FABCF5 /* PlotFetcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlotFetcher.swift; path = VindsidenKit/PlotFetcher.swift; sourceTree = SOURCE_ROOT; };
 		AD9E40751B8DA11B00FABCF5 /* CDPlot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CDPlot.swift; sourceTree = "<group>"; };
 		AD9EA2B71B8F1A6400F653FE /* NSDate+RelativeDate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSDate+RelativeDate.swift"; sourceTree = "<group>"; };
-		ADB5A78819DEC29A009AE4A5 /* DrawArrow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DrawArrow.h; sourceTree = "<group>"; };
-		ADB5A78919DEC29A009AE4A5 /* DrawArrow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DrawArrow.m; sourceTree = "<group>"; };
 		ADB7BA411B3A98E9000921E0 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = Platforms/WatchOS.platform/Developer/SDKs/WatchOS2.0.sdk/System/Library/Frameworks/CoreGraphics.framework; sourceTree = DEVELOPER_DIR; };
 		ADB97FAC2AD914D900CE7B01 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		ADB97FAE2AD9154D00CE7B01 /* UserObservable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserObservable.swift; sourceTree = "<group>"; };
@@ -390,7 +382,6 @@
 		ADB97FC62AD930EC00CE7B01 /* Localizable.xcstrings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		ADB97FC72AD930EC00CE7B01 /* InfoPlist.xcstrings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json.xcstrings; path = InfoPlist.xcstrings; sourceTree = "<group>"; };
 		ADBEA4CE1A07ECF600B168BF /* UIColor+AppColors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+AppColors.swift"; sourceTree = "<group>"; };
-		ADC161841B0218D8004F6DAE /* GraphImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphImage.swift; sourceTree = "<group>"; };
 		ADCD423C196E4E42004973E9 /* NSNumber+Between.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSNumber+Between.h"; sourceTree = "<group>"; };
 		ADCD423D196E4E42004973E9 /* NSNumber+Between.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSNumber+Between.m"; sourceTree = "<group>"; };
 		ADCD423E196E4E42004973E9 /* NSNumber+Convertion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSNumber+Convertion.h"; sourceTree = "<group>"; };
@@ -716,7 +707,6 @@
 				AD539CA11947B5CA002644BD /* VindsidenKit.h */,
 				AD7BBB4F1A40A01900883770 /* Managers */,
 				AD17EDDF173447EC00943C33 /* Communication */,
-				AD7BBB501A40A02600883770 /* Views */,
 				ADCD4260196E4E8A004973E9 /* Categories */,
 				AD7BBB4E1A409FF000883770 /* Data Model */,
 				AD539C9F1947B5CA002644BD /* Supporting Files */,
@@ -784,16 +774,6 @@
 			name = Managers;
 			sourceTree = "<group>";
 		};
-		AD7BBB501A40A02600883770 /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				ADB5A78819DEC29A009AE4A5 /* DrawArrow.h */,
-				ADB5A78919DEC29A009AE4A5 /* DrawArrow.m */,
-				ADC161841B0218D8004F6DAE /* GraphImage.swift */,
-			);
-			name = Views;
-			sourceTree = "<group>";
-		};
 		AD96858D2AD6A40000608FB3 /* VindsidenWidget */ = {
 			isa = PBXGroup;
 			children = (
@@ -851,7 +831,6 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AD303C341B282FC100C4B999 /* DrawArrow.h in Headers */,
 				AD303C2B1B282DC800C4B999 /* VindsidenWatchKit.h in Headers */,
 				AD303C461B28490600C4B999 /* NSSet+Sort.h in Headers */,
 				AD303C481B28490600C4B999 /* NSString+isNumeric.h in Headers */,
@@ -866,7 +845,6 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				ADB5A78A19DEC29A009AE4A5 /* DrawArrow.h in Headers */,
 				AD539CA21947B5CA002644BD /* VindsidenKit.h in Headers */,
 				ADCD4250196E4E42004973E9 /* NSNumber+Convertion.h in Headers */,
 				ADCD425E196E4E42004973E9 /* UIImage+ImageFromView.h in Headers */,
@@ -1283,7 +1261,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				AD303C4A1B28491600C4B999 /* NSNumber+Between.m in Sources */,
-				AD303C351B282FC100C4B999 /* DrawArrow.m in Sources */,
 				AD9EA2B91B8F1A6400F653FE /* NSDate+RelativeDate.swift in Sources */,
 				AD9E406D1B8D8A6900FABCF5 /* StationFetcher.swift in Sources */,
 				AD303C4F1B28491600C4B999 /* NSString+isNumeric.m in Sources */,
@@ -1298,7 +1275,6 @@
 				AD5025292AE6D8EA007DDF1F /* PersistentContainer.swift in Sources */,
 				AD303C401B28484F00C4B999 /* Vindsiden.xcdatamodeld in Sources */,
 				AD303C421B2848EF00C4B999 /* UIColor+AppColors.swift in Sources */,
-				AD303C361B282FC100C4B999 /* GraphImage.swift in Sources */,
 				AD303C331B282FB100C4B999 /* WindManager.swift in Sources */,
 				AD303C301B282FB100C4B999 /* Datamanager.swift in Sources */,
 				AD303C4D1B28491600C4B999 /* NSSet+Sort.m in Sources */,
@@ -1354,12 +1330,10 @@
 				ADCD4251196E4E42004973E9 /* NSNumber+Convertion.m in Sources */,
 				AD539CC71947B684002644BD /* Datamanager.swift in Sources */,
 				AD5025332AE79397007DDF1F /* PreviewSampleData.swift in Sources */,
-				ADB5A78B19DEC29A009AE4A5 /* DrawArrow.m in Sources */,
 				ADBEA4CF1A07ECF600B168BF /* UIColor+AppColors.swift in Sources */,
 				AD5025322AE7936B007DDF1F /* Plot.swift in Sources */,
 				ADCD424F196E4E42004973E9 /* NSNumber+Between.m in Sources */,
 				ADCD4255196E4E42004973E9 /* NSSet+Sort.m in Sources */,
-				ADC161851B0218D8004F6DAE /* GraphImage.swift in Sources */,
 				AD9E40771B8DA11B00FABCF5 /* CDPlot.swift in Sources */,
 				AD9E40651B8C9C1700FABCF5 /* CDStation.swift in Sources */,
 				ADCD4259196E4E42004973E9 /* NSString+isNumeric.m in Sources */,
