@@ -13,6 +13,14 @@ import VindsidenKit
 
 extension RHCViewController {
     @objc
+    func transferUnits() -> [String: Int] {
+        return [
+            "windUnit": UserSettings.shared.selectedWindUnit.rawValue,
+            "tempUnit": UserSettings.shared.selectedTempUnit.rawValue,
+        ]
+    }
+
+    @objc
     func fetchStations() {
         Task {
             do {

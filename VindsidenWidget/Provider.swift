@@ -8,8 +8,13 @@
 
 import WidgetKit
 import SwiftData
-import VindsidenKit
 import WeatherBoxView
+
+#if os(watchOS)
+import VindsidenWatchKit
+#else
+import VindsidenKit
+#endif
 
 struct Provider: AppIntentTimelineProvider  {
     func placeholder(in context: Context) -> SimpleEntry {

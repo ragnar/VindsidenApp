@@ -13,10 +13,13 @@ import SwiftUI
 struct VindsidenWidgetBundle: WidgetBundle {
     var body: some Widget {
         MainWidget()
+#if os(iOS)
         VindsidenWidget()
+#endif
     }
 }
 
+#if os(iOS)
 struct VindsidenWidget: Widget {
     let kind: String = "VindsidenWidget"
 
@@ -32,6 +35,7 @@ struct VindsidenWidget: Widget {
         .supportedFamilies([.systemSmall, .systemMedium, .systemLarge, .systemExtraLarge])
     }
 }
+#endif
 
 struct MainWidget: Widget {
     let kind: String = "MainWidget"

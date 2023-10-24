@@ -221,8 +221,10 @@ public class CDStation: NSManagedObject, MKAnnotation {
         }
     }
 
-    public class func updateWithWatchContent(_ content: [[String:AnyObject]], inManagedObjectContext managedObjectContext: NSManagedObjectContext, completionHandler: ((Bool) -> Void)? = nil) {
-        DataManager.shared.performBackgroundTask { (context) in
+    public class func updateWithWatchContent(_ content: [[String:AnyObject]], inManagedObjectContext managedObjectContext: NSManagedObjectContext) async -> Bool {
+        return await DataManager.shared.container.performBackgroundTask { context in
+            context.mergePolicy = NSOverwriteMergePolicy
+
             for stationContent in content {
                 guard let stationId = stationContent["stationId"] as? Int else {
                     Logger.persistence.debug("No stationId")
@@ -238,22 +240,14 @@ public class CDStation: NSManagedObject, MKAnnotation {
 
             do {
                 try context.save()
-                DispatchQueue.main.async {
-                    completionHandler?(false)
-                }
-                return
+
+                return false
             } catch let error as NSError {
                 Logger.persistence.debug("Error: \(error.userInfo.keys)")
-                DispatchQueue.main.async {
-                    completionHandler?(false)
-                }
-                return
+                return false
             } catch {
                 Logger.persistence.debug("Error: \(error)")
-                DispatchQueue.main.async {
-                    completionHandler?(false)
-                }
-                return
+                return false
             }
         }
     }

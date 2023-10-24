@@ -8,35 +8,38 @@
 
 import WatchKit
 import WatchConnectivity
-import VindsidenWatchKit
 import OSLog
+import VindsidenWatchKit
+import Units
 
 public extension Notification.Name {
     static let ReceivedStations = Notification.Name("ReceivedStations")
-    static let ReceivedPlots = Notification.Name("ReceivedPlots")
-    static let FetchingPlots = Notification.Name("FetchingPlots")
 }
-
 
 class WCFetcher: NSObject, WCSessionDelegate {
     static let sharedInstance = WCFetcher()
 
-    var connectSession: WCSession?
+    private var session: WCSession = WCSession.default
 
     override init() {
         super.init()
-
+        session.delegate = self
     }
-
 
     func activate() -> Void {
         if WCSession.isSupported() {
-            connectSession = WCSession.default
-            connectSession?.delegate = self
-            connectSession?.activate()
-            Logger.debugging.debug("Session: \(String(describing: self.connectSession))")
+            session.delegate = self
+            session.activate()
+            Logger.debugging.debug("Session: \(String(describing: self.session))")
         } else {
             Logger.debugging.debug("WCSession is not supported")
+        }
+
+        if session.hasContentPending {
+            Logger.debugging.debug("application context \(self.session.applicationContext)")
+            Logger.debugging.debug("application \(self.session.receivedApplicationContext)")
+        } else {
+            Logger.debugging.debug("no pending content")
         }
     }
 
@@ -58,20 +61,26 @@ class WCFetcher: NSObject, WCSessionDelegate {
 
 
     func session(_ session: WCSession, didReceiveApplicationContext applicationContext: [String : Any]) {
-
-        if let stations = applicationContext["activeStations"] as? [[String:AnyObject]] {
-            CDStation.updateWithWatchContent(stations, inManagedObjectContext: DataManager.shared.viewContext(), completionHandler: { (visible: Bool) -> Void in
-                Task { @MainActor in
-                    await WindManager.sharedManager.fetch()
-                    NotificationCenter.default.post( name: Notification.Name.ReceivedPlots, object: nil)
-                    NotificationCenter.default.post( name: Notification.Name.ReceivedStations, object: nil)
-                }
-            })
-        }
-
         if let unit = applicationContext["unit"] as? Int {
             AppConfig.sharedConfiguration.applicationUserDefaults.set(unit, forKey: "selectedUnit")
             AppConfig.sharedConfiguration.applicationUserDefaults.synchronize()
+        }
+
+        if let units = applicationContext["units"] as? [String: Int] {
+            if let wind = units["windUnit"] {
+                UserSettings.shared.selectedWindUnit = WindUnit(rawValue: wind)!
+            }
+
+            if let temp = units["tempUnit"] {
+                UserSettings.shared.selectedTempUnit = TempUnit(rawValue: temp)!
+            }
+        }
+
+        if let stations = applicationContext["activeStations"] as? [[String:AnyObject]] {
+            Task { @MainActor in
+                _ = await CDStation.updateWithWatchContent(stations, inManagedObjectContext: DataManager.shared.viewContext())
+                NotificationCenter.default.post( name: Notification.Name.ReceivedStations, object: nil)
+            }
         }
 
         Logger.debugging.debug("\(applicationContext)")

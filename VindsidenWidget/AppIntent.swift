@@ -9,7 +9,12 @@
 import WidgetKit
 import AppIntents
 import SwiftData
+
+#if os(watchOS)
+import VindsidenWatchKit
+#else
 import VindsidenKit
+#endif
 
 struct IntentStation: AppEntity, Hashable {
     var id: Int

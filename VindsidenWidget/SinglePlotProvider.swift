@@ -8,10 +8,40 @@
 
 import WidgetKit
 import SwiftData
-import VindsidenKit
 import WeatherBoxView
 
+#if os(watchOS)
+import VindsidenWatchKit
+#else
+import VindsidenKit
+#endif
+
 struct SinglePlotProvider: AppIntentTimelineProvider  {
+    @MainActor
+    func recommendations() -> [AppIntentRecommendation<ConfigurationAppIntent>] {
+        var fetchDescriptor = FetchDescriptor(sortBy: [SortDescriptor(\Station.stationName, order: .forward)])
+        fetchDescriptor.predicate = #Predicate { $0.isHidden == false }
+
+        do {
+            return try PersistentContainer
+                .shared
+                .container
+                .mainContext
+                .fetch(fetchDescriptor)
+                .compactMap {
+                    let intent = ConfigurationAppIntent()
+                    let station = IntentStation(id: Int($0.stationId!), name: $0.stationName ?? "")
+
+                    intent.station = station
+
+                    return AppIntentRecommendation(intent: intent,
+                                                   description: $0.stationName!)
+                }
+        } catch {
+            return []
+        }
+    }
+
     func placeholder(in context: Context) -> SinglePlotEntry {
         let configuration = ConfigurationAppIntent()
 

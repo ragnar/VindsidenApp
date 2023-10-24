@@ -8,9 +8,14 @@
 
 import Foundation
 import SwiftData
-import VindsidenKit
 import WeatherBoxView
 import Units
+
+#if os(watchOS)
+import VindsidenWatchKit
+#else
+import VindsidenKit
+#endif
 
 extension WidgetData {
     @MainActor
@@ -18,9 +23,6 @@ extension WidgetData {
         await WindManager.sharedManager.fetch()
 
         let modelContainer: ModelContainer = PersistentContainer.shared.container
-        let gregorian = NSCalendar(identifier: .gregorian)!
-        let inDate = Date().addingTimeInterval(-1*AppConfig.Global.plotHistory*3600)
-
         let stationId32 = Int32(stationId)
 
         var fetchDescriptor = FetchDescriptor(sortBy: [SortDescriptor(\Plot.plotTime, order: .reverse)])

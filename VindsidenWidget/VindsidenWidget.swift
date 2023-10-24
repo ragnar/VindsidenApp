@@ -8,9 +8,13 @@
 
 import WidgetKit
 import SwiftUI
-import Charts
-import VindsidenKit
 import WeatherBoxView
+
+#if os(watchOS)
+import VindsidenWatchKit
+#else
+import VindsidenKit
+#endif
 
 struct SimpleEntry: TimelineEntry {
     let date: Date

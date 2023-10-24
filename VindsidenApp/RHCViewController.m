@@ -514,6 +514,7 @@ static NSString *kCellID = @"stationCellID";
 
     NSDictionary *context = @{
                               @"activeStations": stations,
+                              @"units": [self transferUnits],
                               @"unit": @([[AppConfig sharedConfiguration].applicationUserDefaults integerForKey:@"selectedUnit"])
                               };
     NSError *error = nil;

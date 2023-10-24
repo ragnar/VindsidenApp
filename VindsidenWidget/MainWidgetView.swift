@@ -10,7 +10,12 @@ import WidgetKit
 import SwiftUI
 import WeatherBoxView
 import WindArrow
+
+#if os(watchOS)
+import VindsidenWatchKit
+#else
 import VindsidenKit
+#endif
 
 struct MainWidgetView : View {
     @Environment(\.widgetFamily) var family
@@ -50,7 +55,7 @@ struct MainWidgetView : View {
             }
 
         default:
-            WeatherBoxView(data: entry.widgetData, timeStyle: .relative)
+            WeatherBoxView(data: entry.widgetData, timeStyle: .relative, useBaro: false)
                 .containerBackground(.fill.tertiary, for: .widget)
                 .edgesIgnoringSafeArea([.horizontal, .bottom])
         }

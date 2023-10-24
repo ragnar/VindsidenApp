@@ -9,9 +9,9 @@
 import SwiftData
 import SwiftUI
 
-actor PreviewSampleData {
+public actor PreviewSampleData {
     @MainActor
-    static var container: ModelContainer = {
+    public static var container: ModelContainer = {
         let schema = Schema([Station.self, Plot.self])
         let configuration = ModelConfiguration(isStoredInMemoryOnly: true)
         let container = try! ModelContainer(for: schema, configurations: [configuration])

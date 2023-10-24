@@ -8,10 +8,9 @@
 
 import Foundation
 import SwiftData
-import VindsidenKit
 import OSLog
 
-struct PersistentContainer {
+public struct PersistentContainer {
     public static let shared = PersistentContainer()
 
     private init() {
@@ -19,7 +18,7 @@ struct PersistentContainer {
     }
 
     @MainActor
-    var container: ModelContainer {
+    public var container: ModelContainer {
         guard let appGroupContainer = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: AppConfig.ApplicationGroups.primary) else {
             fatalError("Shared file container could not be created.")
         }
