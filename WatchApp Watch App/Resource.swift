@@ -29,8 +29,11 @@ final public class Resource<T: ResourceProtocol>: ObservableObject {
 
     let fetcher = PlotFetcher()
 
-    public init(value: [WidgetData]?) {
-        self.value = value ?? []
+    public init() {
+        self.value = []
+        Task {
+            await updateContent()
+        }
     }
 
     public func forceFetch() {
@@ -42,7 +45,11 @@ final public class Resource<T: ResourceProtocol>: ObservableObject {
     @MainActor
     private func reload() async {
         await WindManager.sharedManager.fetch()
+        await updateContent()
+    }
 
+    @MainActor
+    private func updateContent() async {
         var fetchDescriptor = FetchDescriptor(sortBy: [SortDescriptor(\Station.order, order: .forward)])
         fetchDescriptor.predicate = #Predicate { $0.isHidden == false }
 

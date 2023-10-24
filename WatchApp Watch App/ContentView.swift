@@ -12,7 +12,7 @@ import VindsidenWatchKit
 import WeatherBoxView
 
 struct ContentView: View {
-    @ObservedObject private var data = Resource<WidgetData>(value: [])
+    @ObservedObject private var data = Resource<WidgetData>()
     @State private var selected: WidgetData?
 
     var body: some View {
