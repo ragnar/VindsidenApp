@@ -43,10 +43,10 @@ extension WidgetData {
         let units = WidgetData.Units(wind: wind, rain: .mm, temp: temp, baro: .hPa, windDirection: direction)
         let data = WidgetData(name: name,
                               windAngle: Double(plot.windDir),
-                              windSpeed: Double(plot.windMin).toUnit(wind),
-                              windAverage: Double(plot.windAvg).toUnit(wind),
+                              windSpeed: Double(plot.windMin).fromUnit(.metersPerSecond).toUnit(wind),
+                              windAverage: Double(plot.windAvg).fromUnit(.metersPerSecond).toUnit(wind),
                               windAverageMS: Double(plot.windAvg),
-                              windGust: Double(plot.windMax).toUnit(wind),
+                              windGust: Double(plot.windMax).fromUnit(.metersPerSecond).toUnit(wind),
                               units: units,
                               lastUpdated: plot.plotTime
         )
