@@ -63,34 +63,6 @@ struct ContentView: View {
     }
 }
 
-struct ListCell: View {
-    var station: WidgetData
-
-    var body: some View {
-        HStack {
-            Image(systemName: "arrow.down")
-                .rotationEffect(.degrees(station.windAngle))
-
-            VStack(alignment: .leading) {
-                Text(verbatim: station.name)
-                Text(station.lastUpdated, style: .relative)
-                    .font(.footnote)
-            }
-        }
-    }
-}
-
-struct DetailView: View {
-    var station: WidgetData
-
-    var body: some View {
-        WeatherBoxView(data: station,
-                       timeStyle: .relative,
-                       useBaro: false
-        )
-    }
-}
-
 #Preview {
     ContentView()
 }

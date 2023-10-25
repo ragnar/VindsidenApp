@@ -65,6 +65,9 @@
 		AD50255E2AE7B7AC007DDF1F /* VindsidenWidgetBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD96858E2AD6A40000608FB3 /* VindsidenWidgetBundle.swift */; };
 		AD5025602AE7EE79007DDF1F /* ConfigurationAppIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADEC5C222ADFFBC600A65057 /* ConfigurationAppIntent.swift */; };
 		AD5025612AE7EE99007DDF1F /* AppIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD9685922AD6A40000608FB3 /* AppIntent.swift */; };
+		AD5025652AE929A5007DDF1F /* ListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD5025642AE929A5007DDF1F /* ListCell.swift */; };
+		AD5025672AE929E0007DDF1F /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD5025662AE929E0007DDF1F /* DetailView.swift */; };
+		AD5025692AE92A0C007DDF1F /* StationChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD5025682AE92A0C007DDF1F /* StationChartView.swift */; };
 		AD539CA21947B5CA002644BD /* VindsidenKit.h in Headers */ = {isa = PBXBuildFile; fileRef = AD539CA11947B5CA002644BD /* VindsidenKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AD539CA81947B5CA002644BD /* VindsidenKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD539C9D1947B5CA002644BD /* VindsidenKit.framework */; };
 		AD539CAF1947B5CA002644BD /* VindsidenKitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD539CAE1947B5CA002644BD /* VindsidenKitTests.swift */; };
@@ -332,6 +335,9 @@
 		AD5025452AE7B0CE007DDF1F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AD5025472AE7B0CE007DDF1F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AD50255C2AE7B6F2007DDF1F /* WatchWindWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = WatchWindWidgetExtension.entitlements; sourceTree = "<group>"; };
+		AD5025642AE929A5007DDF1F /* ListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListCell.swift; sourceTree = "<group>"; };
+		AD5025662AE929E0007DDF1F /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
+		AD5025682AE92A0C007DDF1F /* StationChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationChartView.swift; sourceTree = "<group>"; };
 		AD539C831947B0F6002644BD /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
 		AD539C951947B2B1002644BD /* VindsidenApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = VindsidenApp.entitlements; sourceTree = "<group>"; };
 		AD539C9D1947B5CA002644BD /* VindsidenKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = VindsidenKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -678,6 +684,9 @@
 				AD5025272AE6D72B007DDF1F /* WatchApp Watch App.entitlements */,
 				AD5025162AE6D3AA007DDF1F /* WatchAppApp.swift */,
 				AD5025182AE6D3AA007DDF1F /* ContentView.swift */,
+				AD5025642AE929A5007DDF1F /* ListCell.swift */,
+				AD5025662AE929E0007DDF1F /* DetailView.swift */,
+				AD5025682AE92A0C007DDF1F /* StationChartView.swift */,
 				AD6142ED1D0F07980008C5E8 /* WCFetcher.swift */,
 				AD5025342AE79C8C007DDF1F /* Resource.swift */,
 				AD50251A2AE6D3AB007DDF1F /* Assets.xcassets */,
@@ -1291,10 +1300,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				AD5025192AE6D3AA007DDF1F /* ContentView.swift in Sources */,
+				AD5025672AE929E0007DDF1F /* DetailView.swift in Sources */,
 				AD5025352AE79C8C007DDF1F /* Resource.swift in Sources */,
 				AD5025252AE6D50F007DDF1F /* WCFetcher.swift in Sources */,
+				AD5025652AE929A5007DDF1F /* ListCell.swift in Sources */,
 				AD5025172AE6D3AA007DDF1F /* WatchAppApp.swift in Sources */,
 				AD5025602AE7EE79007DDF1F /* ConfigurationAppIntent.swift in Sources */,
+				AD5025692AE92A0C007DDF1F /* StationChartView.swift in Sources */,
 				AD5025612AE7EE99007DDF1F /* AppIntent.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
