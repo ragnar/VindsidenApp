@@ -8,11 +8,14 @@
 
 import SwiftUI
 import SwiftData
+import WidgetKit
+import Charts
 import VindsidenWatchKit
 import WeatherBoxView
-import WidgetKit
+import Units
 
 struct ContentView: View {
+    @EnvironmentObject var settings: UserObservable
     @ObservedObject private var data = Resource<WidgetData>()
     @State private var selected: WidgetData?
 
@@ -49,6 +52,11 @@ struct ContentView: View {
         }
         .onReceive(NotificationCenter.default.publisher(for: .ReceivedStations)) { _ in
             data.forceFetch()
+        }
+        .onChange(of: settings.lastChanged) {
+            Task {
+                await data.updateContent()
+            }
         }
         .onContinueUserActivity("ConfigurationAppIntent") { activity in
             guard 

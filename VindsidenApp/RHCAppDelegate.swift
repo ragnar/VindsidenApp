@@ -8,31 +8,22 @@
 
 import UIKit
 import VindsidenKit
-import WatchConnectivity
 import CoreSpotlight
 import WidgetKit
 import OSLog
 import SwiftUI
 
 @UIApplicationMain
-class RHCAppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate {
+class RHCAppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
-    var connectionSession: WCSession?
+    var connectionSession = Connectivity.shared
 
     @ObservedObject var settings: UserObservable = UserObservable()
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-
         self.window?.tintColor = UIColor.accent
 
-        if WCSession.isSupported() {
-            let connectionSession = WCSession.default
-
-            //if connectionSession.paired && connectionSession.watchAppInstalled {
-                connectionSession.delegate = self
-                connectionSession.activate()
-            //}
-        }
+        connectionSession.activate()
 
         DataManager.shared.cleanupPlots {
             WindManager.sharedManager.refreshInterval = 60
@@ -56,7 +47,6 @@ class RHCAppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate {
 
 
     func application(_ application: UIApplication, willFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-
         if let options = launchOptions {
             if let url = options[UIApplication.LaunchOptionsKey.url] as? URL {
                 if let _ = url.host?.range(of: "station", options: .caseInsensitive) {
@@ -72,7 +62,6 @@ class RHCAppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate {
 
 
     func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
-
         if let _ = url.host?.range(of: "station", options: .caseInsensitive) {
             return openLaunchOptionsURL(url)
         }
@@ -90,14 +79,6 @@ class RHCAppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate {
 
 
     func applicationDidBecomeActive(_ application: UIApplication) {
-        if WCSession.isSupported() {
-            let connectionSession = WCSession.default
-
-//            if connectionSession.paired && connectionSession.watchAppInstalled {
-            connectionSession.delegate = self
-            connectionSession.activate()
-//            }
-        }
     }
 
 
@@ -214,40 +195,6 @@ class RHCAppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate {
     func application(_ application: UIApplication, shouldSaveApplicationState coder: NSCoder) -> Bool {
         return true
     }
-
-
-    // MARK: - WC Session
-
-
-    func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
-        Logger.debugging.debug("Session: \(session)")
-    }
-
-
-    func sessionDidBecomeInactive(_ session: WCSession) {
-        Logger.debugging.debug("Session: \(session)")
-    }
-
-
-    func sessionDidDeactivate(_ session: WCSession) {
-        Logger.debugging.debug("Session: \(session)")
-    }
-
-
-    func sessionWatchStateDidChange(_ session: WCSession) {
-        Logger.debugging.debug("Session: \(session)")
-    }
-
-
-    func sessionReachabilityDidChange(_ session: WCSession) {
-        Logger.debugging.debug("Session: \(session)")
-    }
-
-    func session(_ session: WCSession, didReceiveMessage message: [String : Any], replyHandler: @escaping ([String : Any]) -> Void) {
-        Logger.debugging.debug("Session: \(message)")
-        replyHandler(["result": "not_updated"])
-    }
-
 
     // MARK: - NSUserActivity
 

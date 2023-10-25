@@ -49,7 +49,7 @@ final public class Resource<T: ResourceProtocol>: ObservableObject {
     }
 
     @MainActor
-    private func updateContent() async {
+    func updateContent() async {
         var fetchDescriptor = FetchDescriptor(sortBy: [SortDescriptor(\Station.order, order: .forward)])
         fetchDescriptor.predicate = #Predicate { $0.isHidden == false }
 

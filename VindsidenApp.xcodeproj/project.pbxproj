@@ -68,6 +68,7 @@
 		AD5025652AE929A5007DDF1F /* ListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD5025642AE929A5007DDF1F /* ListCell.swift */; };
 		AD5025672AE929E0007DDF1F /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD5025662AE929E0007DDF1F /* DetailView.swift */; };
 		AD5025692AE92A0C007DDF1F /* StationChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD5025682AE92A0C007DDF1F /* StationChartView.swift */; };
+		AD50256C2AE92DB5007DDF1F /* Connectivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD50256B2AE92DB5007DDF1F /* Connectivity.swift */; };
 		AD539CA21947B5CA002644BD /* VindsidenKit.h in Headers */ = {isa = PBXBuildFile; fileRef = AD539CA11947B5CA002644BD /* VindsidenKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AD539CA81947B5CA002644BD /* VindsidenKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD539C9D1947B5CA002644BD /* VindsidenKit.framework */; };
 		AD539CAF1947B5CA002644BD /* VindsidenKitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD539CAE1947B5CA002644BD /* VindsidenKitTests.swift */; };
@@ -338,6 +339,7 @@
 		AD5025642AE929A5007DDF1F /* ListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListCell.swift; sourceTree = "<group>"; };
 		AD5025662AE929E0007DDF1F /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
 		AD5025682AE92A0C007DDF1F /* StationChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationChartView.swift; sourceTree = "<group>"; };
+		AD50256B2AE92DB5007DDF1F /* Connectivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Connectivity.swift; sourceTree = "<group>"; };
 		AD539C831947B0F6002644BD /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
 		AD539C951947B2B1002644BD /* VindsidenApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = VindsidenApp.entitlements; sourceTree = "<group>"; };
 		AD539C9D1947B5CA002644BD /* VindsidenKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = VindsidenKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -577,6 +579,7 @@
 				AD17ED4E1731012200943C33 /* Supporting Files */,
 				AD4DEA7619CB7528002A220B /* RHCNavigationViewController.swift */,
 				ADDB4F4F19CB68F1005D5D38 /* RHCAlertManager.swift */,
+				AD50256B2AE92DB5007DDF1F /* Connectivity.swift */,
 			);
 			path = VindsidenApp;
 			sourceTree = "<group>";
@@ -1249,6 +1252,7 @@
 				AD17ED641731012200943C33 /* RHCViewController.m in Sources */,
 				AD35C66C1D1C408A00E894CC /* ShortcutItemHandling.swift in Sources */,
 				AD55F5B7233AAB2F00757CBD /* RHCViewController+Swift.swift in Sources */,
+				AD50256C2AE92DB5007DDF1F /* Connectivity.swift in Sources */,
 				ADEC5BC82ADD1BD600A65057 /* SwiftUIPlotGraph.swift in Sources */,
 				AD4DEA7719CB7528002A220B /* RHCNavigationViewController.swift in Sources */,
 				AD1B45881CAEE9F200F171DB /* IndexRequestHandler.swift in Sources */,

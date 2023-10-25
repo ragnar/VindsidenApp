@@ -483,45 +483,4 @@ static NSString *kCellID = @"stationCellID";
     return indexPath;
 }
 
-
-
-#pragma mark - WCSession update application context
-
-- (void)updateApplicationContextToWatch
-{
-    WCSession *session = [WCSession defaultSession];
-
-    if ( session.isPaired == NO || session.isWatchAppInstalled == NO ) {
-//        Logger.debugging.debug(@"Watch is not present: %d - %d", session.isPaired, session.isWatchAppInstalled);
-        return;
-    }
-
-    NSArray *result = [CDStation visibleStationsInManagedObjectContext:[DataManager shared].viewContext limit:0];
-    NSMutableArray *stations = [NSMutableArray array];
-
-    for ( CDStation *station in result ) {
-        NSDictionary *info = @{
-                               @"stationId": station.stationId,
-                               @"stationName": station.stationName,
-                               @"order": station.order,
-                               @"hidden": station.isHidden,
-                               @"latitude": station.coordinateLat,
-                               @"longitude": station.coordinateLon
-                               };
-        [stations addObject:info];
-    }
-
-
-    NSDictionary *context = @{
-                              @"activeStations": stations,
-                              @"units": [self transferUnits],
-                              @"unit": @([[AppConfig sharedConfiguration].applicationUserDefaults integerForKey:@"selectedUnit"])
-                              };
-    NSError *error = nil;
-
-    if ( [session updateApplicationContext:context error: &error] == NO ) {
-//        Logger.debugging.debug(@"Failed: %@", error.localizedDescription);
-    }
-}
-
 @end

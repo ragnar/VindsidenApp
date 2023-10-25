@@ -18,7 +18,6 @@
 
 - (void)scrollToStation:(CDStation *)station;
 
-- (void)updateApplicationContextToWatch;
 - (void)updateStations:(NSArray *)stations;
 - (void)saveActivity;
 

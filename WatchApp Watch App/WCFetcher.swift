@@ -20,6 +20,7 @@ class WCFetcher: NSObject, WCSessionDelegate {
     static let sharedInstance = WCFetcher()
 
     private var session: WCSession = WCSession.default
+    var settings: UserObservable?
 
     override init() {
         super.init()
@@ -68,11 +69,15 @@ class WCFetcher: NSObject, WCSessionDelegate {
 
         if let units = applicationContext["units"] as? [String: Int] {
             if let wind = units["windUnit"] {
-                UserSettings.shared.selectedWindUnit = WindUnit(rawValue: wind)!
+                DispatchQueue.main.sync {
+                    self.settings?.windUnit = WindUnit(rawValue: wind)!
+                }
             }
 
             if let temp = units["tempUnit"] {
-                UserSettings.shared.selectedTempUnit = TempUnit(rawValue: temp)!
+                DispatchQueue.main.sync {
+                    settings?.tempUnit = TempUnit(rawValue: temp)!
+                }
             }
         }
 
