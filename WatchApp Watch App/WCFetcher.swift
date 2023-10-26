@@ -83,7 +83,7 @@ class WCFetcher: NSObject, WCSessionDelegate {
 
         if let stations = applicationContext["activeStations"] as? [[String:AnyObject]] {
             Task { @MainActor in
-                _ = await CDStation.updateWithWatchContent(stations, inManagedObjectContext: DataManager.shared.viewContext())
+                _ = await CDStation.updateWithWatchContent(stations)
                 NotificationCenter.default.post( name: Notification.Name.ReceivedStations, object: nil)
             }
         }

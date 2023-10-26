@@ -16,11 +16,10 @@ public class StationFetcher : NSObject {
 
     @objc public func fetch() async throws -> [[String : String]] {
         let request = URLRequest(url: URL(string: "http://vindsiden.no//xml.aspx")!)
-        let session = URLSession(configuration: .ephemeral)
-        
+
         Logger.fetcher.debug("Fetching from: \(request)")
         
-        let (data, _) = try await session.data(for: request)
+        let (data, _) = try await URLSession.vindsiden.data(for: request)
         let parser = XMLParser(data: data)
         parser.delegate = self
         parser.parse()

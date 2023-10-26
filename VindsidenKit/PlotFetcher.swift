@@ -9,18 +9,23 @@
 import Foundation
 import OSLog
 
+extension URLSession {
+    static let vindsiden: URLSession = {
+        return URLSession(configuration: .ephemeral)
+    }()
+}
+
 public final class PlotFetcher: NSObject {
     var characters:String = ""
     var result = [[String: String]]()
     var currentPlot = [String: String]()
 
-    public func fetchForStationId( _ stationId: Int) async throws -> [[String : String]] {
-        let request = URLRequest(url: URL(string: "http://vindsiden.no/xml.aspx?id=\(stationId)&hours=\(Int(AppConfig.Global.plotHistory))")!)
-        let session = URLSession(configuration: .ephemeral)
-        
+    public func fetchForStationId( _ stationId: Int, hours: Int) async throws -> [[String : String]] {
+        let request = URLRequest(url: URL(string: "http://vindsiden.no/xml.aspx?id=\(stationId)&hours=\(hours)")!)
+
         Logger.fetcher.debug("Fetching from: \(request)")
 
-        let (data, _) = try await session.data(for: request)
+        let (data, _) = try await URLSession.vindsiden.data(for: request)
         let parser = XMLParser(data: data)
         parser.delegate = self
         parser.parse()

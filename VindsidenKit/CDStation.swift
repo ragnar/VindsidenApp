@@ -169,7 +169,7 @@ public class CDStation: NSManagedObject, MKAnnotation {
             }
 
             let stationIds = content.map { return Int($0["StationID"]!)! }
-            DataManager.shared.removeStaleStationsIds(stationIds, inManagedObjectContext: context)
+            CDStation.removeStaleStations(stationIds, inManagedObjectContext: context)
 
             for stationContent in content {
                 guard let stationIdString = stationContent["StationID"] else {
@@ -221,9 +221,12 @@ public class CDStation: NSManagedObject, MKAnnotation {
         }
     }
 
-    public class func updateWithWatchContent(_ content: [[String:AnyObject]], inManagedObjectContext managedObjectContext: NSManagedObjectContext) async -> Bool {
+    public class func updateWithWatchContent(_ content: [[String:AnyObject]]) async -> Bool {
         return await DataManager.shared.container.performBackgroundTask { context in
             context.mergePolicy = NSOverwriteMergePolicy
+
+            let stationIds: [Int] = content.map { return $0["stationId"] as! Int }
+            CDStation.removeStaleStations(stationIds, inManagedObjectContext: context)
 
             for stationContent in content {
                 guard let stationId = stationContent["stationId"] as? Int else {
@@ -234,9 +237,6 @@ public class CDStation: NSManagedObject, MKAnnotation {
                 let station = CDStation.newOrExistingStationWithId(stationId, inManagedObectContext: context)
                 station.updateWithWatchContent(stationContent)
             }
-
-            let stationIds: [Int] = content.map { return $0["stationId"] as! Int }
-            DataManager.shared.removeStaleStationsIds(stationIds, inManagedObjectContext: context)
 
             do {
                 try context.save()
@@ -249,6 +249,21 @@ public class CDStation: NSManagedObject, MKAnnotation {
                 Logger.persistence.debug("Error: \(error)")
                 return false
             }
+        }
+    }
+
+    public class func removeStaleStations(_ stations: [Int], inManagedObjectContext context: NSManagedObjectContext) {
+        let fetchRequest: NSFetchRequest<NSFetchRequestResult> = CDStation.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "NOT stationId IN (%@)", stations)
+
+        let request = NSBatchDeleteRequest(fetchRequest: fetchRequest)
+        request.resultType = .resultTypeCount
+
+        do {
+            let result = try context.execute(request) as! NSBatchDeleteResult
+            Logger.persistence.debug("Deleted \(result.result as? Int ?? -1) station(s)")
+        } catch {
+            Logger.persistence.debug("Delete failed: \(error)")
         }
     }
 

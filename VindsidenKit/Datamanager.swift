@@ -90,24 +90,6 @@ extension DataManager {
         return dateFormatter.date(from: string)
     }
 
-    public func removeStaleStationsIds(_ stations: [Int], inManagedObjectContext managedObjectContext: NSManagedObjectContext) {
-        performBackgroundTask { context in
-            let fetchRequest: NSFetchRequest<NSFetchRequestResult> = CDStation.fetchRequest()
-            fetchRequest.predicate = NSPredicate(format: "NOT stationId IN (%@)", stations)
-
-            let request = NSBatchDeleteRequest(fetchRequest: fetchRequest)
-            request.resultType = .resultTypeCount
-
-            do {
-                let result = try context.execute(request) as! NSBatchDeleteResult
-                Logger.persistence.debug("Deleted \(result.result as? Int ?? -1) station(s)")
-                try context.save()
-            } catch {
-                Logger.persistence.debug("Delete failed: \(error)")
-            }
-        }
-    }
-
     public func cleanupPlots(_ completionHandler: (() -> Void)? = nil) {
         performBackgroundTask { (context) in
             let fetchRequest: NSFetchRequest<NSFetchRequestResult> = CDPlot.fetchRequest()

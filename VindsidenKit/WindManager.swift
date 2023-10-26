@@ -16,7 +16,8 @@ import OSLog
 public class WindManager : NSObject {
     public var refreshInterval: TimeInterval = 0.0
     private var updateTimer: Timer?
-    var isUpdating: Bool = false
+    private var isUpdating: Bool = false
+    private var lastFetched: Date?
 
     @objc public static let sharedManager = WindManager()
 
@@ -62,61 +63,83 @@ public class WindManager : NSObject {
         }
     }
 
+    func activeStations() async -> [(Int, String)] {
+        return await DataManager.shared.container.performBackgroundTask { context in
+            let fetchRequest: NSFetchRequest<CDStation> = CDStation.fetchRequest()
+            fetchRequest.predicate = NSPredicate(format: "isHidden == NO")
+            fetchRequest.sortDescriptors = [NSSortDescriptor(key: "order", ascending: true)]
 
-    @MainActor
-    func activeStations() -> [CDStation] {
-        let fetchRequest: NSFetchRequest<CDStation> = CDStation.fetchRequest()
-        fetchRequest.predicate = NSPredicate(format: "isHidden == NO")
-        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "order", ascending: true)]
-
-        do {
-            let context = DataManager.shared.viewContext()
-            let stations = try context.fetch(fetchRequest)
-            return stations
-        } catch {
-            return [CDStation]()
+            do {
+                let stations = try context.fetch(fetchRequest)
+                return stations.compactMap { ($0.stationId!.intValue, $0.stationName!) }
+            } catch {
+                return []
+            }
         }
+    }
+
+    public func fetchHours() -> Int {
+        let maxHours = Int(AppConfig.Global.plotHistory)
+
+        guard let lastFetched else {
+            return maxHours
+        }
+
+        let components = Calendar.current.dateComponents([.hour], from: lastFetched, to: Date())
+
+        guard let hours = components.hour else {
+            return maxHours
+        }
+
+        if hours >= maxHours {
+            return maxHours
+        } else if hours <= 2 {
+            return 3
+        }
+
+        return hours
     }
 
     @MainActor
     public func fetch() async {
-        if ( isUpdating ) {
+        if isUpdating {
             Logger.wind.debug("Already updating")
             return
         }
 
         isUpdating = true
 
-        let stations = activeStations()
-        var remainingStations = stations.count
-
-        if remainingStations <= 0 {
-            isUpdating = false
-            return
-        }
-
-        for station in stations {
-            guard let stationId = station.stationId else {
-                continue
-            }
-
+        @Sendable
+        @MainActor
+        func update(stationId: Int, name: String, hours: Int) async {
             do {
-                let plots = try await PlotFetcher().fetchForStationId(stationId.intValue)
+                let plots = try await PlotFetcher().fetchForStationId(stationId, hours: hours)
                 let num = try await CDPlot.updatePlots(plots)
 
-                Logger.wind.debug("Finished with \(num) new plots for \(station.stationName!).")
+                Logger.wind.debug("Finished with \(num) new plots for \(name).")
             } catch {
-                Logger.wind.debug("error: \(String(describing: error)) for \(station.stationName!).")
-            }
-
-            remainingStations -= 1
-
-            if remainingStations <= 0 {
-                self.isUpdating = false
+                Logger.wind.debug("error: \(String(describing: error)) for \(name).")
             }
         }
 
-        return
+        let stations = await activeStations()
+        let hours = fetchHours()
+
+        await withTaskGroup(
+            of: Void.self,
+            returning: Void.self
+        ) { group in
+            for station in stations {
+                group.addTask {
+                    await update(stationId: station.0, name: station.1, hours: hours)
+                }
+            }
+
+            await group.waitForAll()
+        }
+        
+        lastFetched = Date()
+        isUpdating = false
     }
 
     // MARK: - Notifications
