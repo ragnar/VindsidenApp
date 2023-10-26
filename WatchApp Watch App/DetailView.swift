@@ -19,17 +19,17 @@ struct DetailView: View {
                        timeStyle: .relative,
                        useBaro: false
         )
-//        .toolbar {
-//            ToolbarItem(placement: .cancellationAction) {
-//                Button {
-//                    self.isShowingChart.toggle()
-//                } label: {
-//                    Image(systemName: "chart.xyaxis.line")
-//                }
-//            }
-//        }
-//        .sheet(isPresented: $isShowingChart) {
-//            StationChartView(station: station)
-//        }
+        .toolbar {
+            ToolbarItem(placement: .topBarTrailing) {
+                Button {
+                    self.isShowingChart.toggle()
+                } label: {
+                    Image(systemName: "chart.xyaxis.line")
+                }
+            }
+        }
+        .sheet(isPresented: $isShowingChart) {
+            StationChartView(station: station)
+        }
     }
 }

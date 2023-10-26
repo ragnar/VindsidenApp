@@ -20,20 +20,17 @@ struct StationChartView: View {
     let station: WidgetData
 
     init(station: WidgetData) {
-        self.station = station
-
         let name = station.name
         let date = Calendar.current.date(byAdding: .hour, value: -4, to: Date())!
 
+        self.station = station
         self._plots = Query(filter: #Predicate<VindsidenWatchKit.Plot> { $0.station?.stationName == name && $0.plotTime > date },
                             sort: \.dataId)
-
-        print(plots)
     }
 
     var body: some View {
         Chart {
-            ForEach(plots[..<20], id: \.plotTime) { value in
+            ForEach(plots[..<min(plots.count, 20)], id: \.plotTime) { value in
                 AreaMark(
                     x: .value("Time", value.plotTime, unit: .minute),
                     yStart: .value("Lull", convertedWind(value.windMin)),
@@ -66,7 +63,7 @@ struct StationChartView: View {
 
         }
         .chartXAxis {
-            AxisMarks(values: Array(plots[..<20])) { value in
+            AxisMarks(values: Array(plots[..<min(plots.count, 20)])) { value in
                 if showXAxisValue(for: value.index)  {
                     AxisGridLine()
                     AxisTick()
@@ -79,10 +76,10 @@ struct StationChartView: View {
         }
         .chartYAxisLabel(station.units.wind.symbol)
         .chartForegroundStyleScale([
-            "Average": Color("AccentColor"),
-            "Variation": Color("AccentColor").opacity(0.1),
-            "Variation Min": Color("AccentColor").opacity(0.3),
-            "Variation Max": Color("AccentColor").opacity(0.3),
+            "Average": Color.accentColor,
+            "Variation": Color.accentColor.opacity(0.1),
+            "Variation Min": Color.accentColor.opacity(0.3),
+            "Variation Max": Color.accentColor.opacity(0.3),
         ])
         .chartLegend(.hidden)
         .toolbar {
@@ -94,6 +91,7 @@ struct StationChartView: View {
                 }
             }
         }
+        .navigationTitle(station.name)
     }
 
     private func showXAxisValue(for index: Int) -> Bool {
