@@ -74,18 +74,16 @@ class RHCAppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func applicationWillEnterForeground(_ application: UIApplication) {
-        AppConfig.sharedConfiguration.presentReviewControllerIfCriteriaIsMet()
+        guard let scene =  window?.windowScene else {
+            return
+        }
+
+        AppConfig.sharedConfiguration.presentReviewControllerIfCriteriaIsMet(in: scene)
     }
-
-
-    func applicationDidBecomeActive(_ application: UIApplication) {
-    }
-
 
     func applicationWillTerminate(_ application: UIApplication) {
         DataManager.shared.saveContext()
     }
-
 
     func application(_ application: UIApplication, performFetchWithCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
         Task { @MainActor in
@@ -102,7 +100,6 @@ class RHCAppDelegate: UIResponder, UIApplicationDelegate {
         application.endBackgroundTask(taskID)
     }
 
-
     func application(_ application: UIApplication, supportedInterfaceOrientationsFor window: UIWindow?) -> UIInterfaceOrientationMask {
         guard let window = window else {
             return .allButUpsideDown
@@ -114,7 +111,6 @@ class RHCAppDelegate: UIResponder, UIApplicationDelegate {
 
         return .allButUpsideDown
     }
-
 
     func application(_ application: UIApplication, performActionFor shortcutItem: UIApplicationShortcutItem, completionHandler: @escaping (Bool) -> Void) {
         var didHandleShortcutItem = false

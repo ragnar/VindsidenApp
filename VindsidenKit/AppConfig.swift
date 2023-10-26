@@ -9,7 +9,8 @@
 import Foundation
 
 #if os(iOS)
-    import StoreKit
+import UIKit
+import StoreKit
 #endif
 
 
@@ -165,7 +166,8 @@ open class AppConfig : NSObject {
     // MARK: - Review
 
 
-    open func presentReviewControllerIfCriteriaIsMet() {
+#if os(iOS)
+    open func presentReviewControllerIfCriteriaIsMet(in scene: UIWindowScene) {
         defer {
             applicationUserDefaults.synchronize()
         }
@@ -184,15 +186,12 @@ open class AppConfig : NSObject {
 
         applicationUserDefaults.set([version: count + 1], forKey: Defaults.bootCount)
 
-        if count % 7 == 0 {
+        if count % 5 == 0 {
             applicationUserDefaults.set([version: 1], forKey: Defaults.bootCount)
-            #if os(iOS)
-                if #available(iOS 10.3, *) {
-                    DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: {
-                        SKStoreReviewController.requestReview()
-                    })
-                }
-            #endif
+            DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1)) {
+                SKStoreReviewController.requestReview(in: scene)
+            }
         }
     }
+#endif
 }
