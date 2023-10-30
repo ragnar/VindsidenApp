@@ -20,14 +20,14 @@ struct ConfigurationAppIntent: AppIntent, WidgetConfigurationIntent {
     @MainActor
     func perform() async throws -> some IntentResult {
 #if MAINAPP
-        guard
-            let delegate = UIApplication.shared.delegate as? RHCAppDelegate,
-            let url = URL(string: "vindsiden://station/\(station.id)")
-        else {
-            return .result()
-        }
-
-        _ = delegate.openLaunchOptionsURL(url)
+//        guard
+//            let delegate = UIApplication.shared.delegate as? RHCAppDelegate,
+//            let url = URL(string: "vindsiden://station/\(station.id)")
+//        else {
+//            return .result()
+//        }
+//
+//        _ = delegate.openLaunchOptionsURL(url)
 #endif
 
         return .result()

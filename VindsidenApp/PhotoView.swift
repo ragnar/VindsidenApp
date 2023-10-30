@@ -21,6 +21,7 @@ struct PhotoView: View {
     @State private var offset: CGPoint = .zero
     @State private var lastTranslation: CGSize = .zero
 
+    let title: String
     let imageUrl: URL
 
     weak var backgroundView: UIView?
@@ -51,10 +52,16 @@ struct PhotoView: View {
                     }
                 }
             }
-            .foregroundColor(.white)
-            .tint(.white)
             .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .edgesIgnoringSafeArea(.all)
+        }
+        .navigationTitle(title)
+        .navigationBarTitleDisplayMode(.inline)
+        .toolbar {
+            ToolbarItemGroup(placement: .topBarLeading) {
+                Button("Close") {
+                    dismiss()
+                }
+            }
         }
     }
 

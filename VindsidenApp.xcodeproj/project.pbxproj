@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		AD07B2C11779E90A004BC24C /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AD07B2C01779E90A004BC24C /* Media.xcassets */; };
 		AD17ED611731012200943C33 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AD17ED5F1731012200943C33 /* MainStoryboard.storyboard */; };
-		AD17ED641731012200943C33 /* RHCViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD17ED631731012200943C33 /* RHCViewController.m */; };
 		AD1B45881CAEE9F200F171DB /* IndexRequestHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD66F5641CAEBA8B001A2755 /* IndexRequestHandler.swift */; };
 		AD2BB34F19C7718600349495 /* VindsidenAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD2BB34E19C7718600349495 /* VindsidenAppTests.swift */; };
 		AD303C2B1B282DC800C4B999 /* VindsidenWatchKit.h in Headers */ = {isa = PBXBuildFile; fileRef = AD303C2A1B282DC800C4B999 /* VindsidenWatchKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -31,7 +30,6 @@
 		AD303C4D1B28491600C4B999 /* NSSet+Sort.m in Sources */ = {isa = PBXBuildFile; fileRef = ADCD4243196E4E42004973E9 /* NSSet+Sort.m */; };
 		AD303C4E1B28491600C4B999 /* NSString+fixDateString.m in Sources */ = {isa = PBXBuildFile; fileRef = ADCD4245196E4E42004973E9 /* NSString+fixDateString.m */; };
 		AD303C4F1B28491600C4B999 /* NSString+isNumeric.m in Sources */ = {isa = PBXBuildFile; fileRef = ADCD4247196E4E42004973E9 /* NSString+isNumeric.m */; };
-		AD30BC5219F024D9000CE40C /* RHCAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD30BC5119F024D9000CE40C /* RHCAppDelegate.swift */; };
 		AD35C66C1D1C408A00E894CC /* ShortcutItemHandling.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD35C66B1D1C408A00E894CC /* ShortcutItemHandling.swift */; };
 		AD4DEA7719CB7528002A220B /* RHCNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD4DEA7619CB7528002A220B /* RHCNavigationViewController.swift */; };
 		AD5025172AE6D3AA007DDF1F /* WatchAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD5025162AE6D3AA007DDF1F /* WatchAppApp.swift */; };
@@ -75,7 +73,6 @@
 		AD539CB21947B5CA002644BD /* VindsidenKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD539C9D1947B5CA002644BD /* VindsidenKit.framework */; };
 		AD539CB31947B5CA002644BD /* VindsidenKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = AD539C9D1947B5CA002644BD /* VindsidenKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		AD539CC71947B684002644BD /* Datamanager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD539CC61947B684002644BD /* Datamanager.swift */; };
-		AD55F5B7233AAB2F00757CBD /* RHCViewController+Swift.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD55F5B6233AAB2F00757CBD /* RHCViewController+Swift.swift */; };
 		AD66F5651CAEBA8B001A2755 /* IndexRequestHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD66F5641CAEBA8B001A2755 /* IndexRequestHandler.swift */; };
 		AD66F5691CAEBA8B001A2755 /* VindSidenSpotlight.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = AD66F5621CAEBA8B001A2755 /* VindSidenSpotlight.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		AD7AA507196E46D800B1518B /* Vindsiden.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = AD7AA505196E46D800B1518B /* Vindsiden.xcdatamodeld */; };
@@ -91,7 +88,6 @@
 		AD9685992AD6A40100608FB3 /* VindsidenWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = AD9685882AD6A40000608FB3 /* VindsidenWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		AD96859E2AD6AB3700608FB3 /* Provider.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD96859D2AD6AB3700608FB3 /* Provider.swift */; };
 		AD9685A82AD6BED600608FB3 /* WeatherBoxView in Frameworks */ = {isa = PBXBuildFile; productRef = AD9685A72AD6BED600608FB3 /* WeatherBoxView */; };
-		AD9685AC2AD80BBB00608FB3 /* RHCStationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD9685AB2AD80BBB00608FB3 /* RHCStationCell.swift */; };
 		AD9E40651B8C9C1700FABCF5 /* CDStation.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD9E40631B8C9C1700FABCF5 /* CDStation.swift */; };
 		AD9E406A1B8C9CC900FABCF5 /* CDStation.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD9E40631B8C9C1700FABCF5 /* CDStation.swift */; };
 		AD9E406C1B8D8A6900FABCF5 /* StationFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD9E406B1B8D8A6900FABCF5 /* StationFetcher.swift */; };
@@ -139,10 +135,16 @@
 		ADDE47FE2AE6783D001187F6 /* VindsidenWidgetEntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADDE47FD2AE6783D001187F6 /* VindsidenWidgetEntryView.swift */; };
 		ADDE48002AE67A02001187F6 /* SinglePlotProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADDE47FF2AE67A02001187F6 /* SinglePlotProvider.swift */; };
 		ADDE48022AE67DAC001187F6 /* WidgetData.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADDE48012AE67DAC001187F6 /* WidgetData.swift */; };
+		ADE6965E2AEB93B200FB35EF /* VindsidenApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADE6965D2AEB93B200FB35EF /* VindsidenApp.swift */; };
+		ADE696612AEB93E800FB35EF /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADE696602AEB93E800FB35EF /* ContentView.swift */; };
+		ADE696622AEB94E500FB35EF /* Resource.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD5025342AE79C8C007DDF1F /* Resource.swift */; };
+		ADE696652AEB981F00FB35EF /* StationDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADE696642AEB981F00FB35EF /* StationDetailView.swift */; };
+		ADE696672AEBBF4800FB35EF /* PageControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADE696662AEBBF4800FB35EF /* PageControl.swift */; };
+		ADE6966B2AEF996500FB35EF /* ListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADE6966A2AEF996500FB35EF /* ListCell.swift */; };
+		ADE6966D2AF0E34E00FB35EF /* InfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADE6966C2AF0E34D00FB35EF /* InfoView.swift */; };
 		ADE9C4081AAB32840089EB19 /* WindManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADE9C4071AAB32840089EB19 /* WindManager.swift */; };
 		ADEC5BC42AD9548B00A65057 /* StationDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADEC5BC32AD9548B00A65057 /* StationDetailsView.swift */; };
 		ADEC5BC82ADD1BD600A65057 /* SwiftUIPlotGraph.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADEC5BC72ADD1BD600A65057 /* SwiftUIPlotGraph.swift */; };
-		ADEC5BCA2ADD46ED00A65057 /* StationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADEC5BC92ADD46ED00A65057 /* StationView.swift */; };
 		ADEC5BCD2ADEA00A00A65057 /* AppIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD9685922AD6A40000608FB3 /* AppIntent.swift */; };
 		ADEC5BD32ADEA73B00A65057 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = ADEC5BD22ADEA73B00A65057 /* Localizable.xcstrings */; };
 		ADEC5BD52ADEB12C00A65057 /* PhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADEC5BD42ADEB12C00A65057 /* PhotoView.swift */; };
@@ -416,6 +418,12 @@
 		ADDE47FD2AE6783D001187F6 /* VindsidenWidgetEntryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VindsidenWidgetEntryView.swift; sourceTree = "<group>"; };
 		ADDE47FF2AE67A02001187F6 /* SinglePlotProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SinglePlotProvider.swift; sourceTree = "<group>"; };
 		ADDE48012AE67DAC001187F6 /* WidgetData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetData.swift; sourceTree = "<group>"; };
+		ADE6965D2AEB93B200FB35EF /* VindsidenApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VindsidenApp.swift; sourceTree = "<group>"; };
+		ADE696602AEB93E800FB35EF /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		ADE696642AEB981F00FB35EF /* StationDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationDetailView.swift; sourceTree = "<group>"; };
+		ADE696662AEBBF4800FB35EF /* PageControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageControl.swift; sourceTree = "<group>"; };
+		ADE6966A2AEF996500FB35EF /* ListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListCell.swift; sourceTree = "<group>"; };
+		ADE6966C2AF0E34D00FB35EF /* InfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoView.swift; sourceTree = "<group>"; };
 		ADE9C4071AAB32840089EB19 /* WindManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WindManager.swift; sourceTree = "<group>"; };
 		ADEC5BC32AD9548B00A65057 /* StationDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationDetailsView.swift; sourceTree = "<group>"; };
 		ADEC5BC52ADD038F00A65057 /* PreviewSampleData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewSampleData.swift; sourceTree = "<group>"; };
@@ -572,6 +580,7 @@
 		AD17ED4D1731012200943C33 /* VindsidenApp */ = {
 			isa = PBXGroup;
 			children = (
+				ADE6965F2AEB93BC00FB35EF /* SwiftUI */,
 				AD17EDE01734480300943C33 /* App Delegate */,
 				AD17EDE31734485A00943C33 /* Main View Controller */,
 				AD17EDE41734486D00943C33 /* Station Details View Controller */,
@@ -627,7 +636,6 @@
 				AD17ED631731012200943C33 /* RHCViewController.m */,
 				AD55F5B6233AAB2F00757CBD /* RHCViewController+Swift.swift */,
 				AD9685AB2AD80BBB00608FB3 /* RHCStationCell.swift */,
-				ADEC5BC72ADD1BD600A65057 /* SwiftUIPlotGraph.swift */,
 				ADEC5BC92ADD46ED00A65057 /* StationView.swift */,
 				ADEC5BD42ADEB12C00A65057 /* PhotoView.swift */,
 				ADEC5BD62ADEB1CD00A65057 /* SwipeToDismissModifier.swift */,
@@ -836,6 +844,20 @@
 				AD9EA2B71B8F1A6400F653FE /* NSDate+RelativeDate.swift */,
 			);
 			name = Categories;
+			sourceTree = "<group>";
+		};
+		ADE6965F2AEB93BC00FB35EF /* SwiftUI */ = {
+			isa = PBXGroup;
+			children = (
+				ADE6965D2AEB93B200FB35EF /* VindsidenApp.swift */,
+				ADE696602AEB93E800FB35EF /* ContentView.swift */,
+				ADE696642AEB981F00FB35EF /* StationDetailView.swift */,
+				ADE696662AEBBF4800FB35EF /* PageControl.swift */,
+				ADE6966A2AEF996500FB35EF /* ListCell.swift */,
+				ADEC5BC72ADD1BD600A65057 /* SwiftUIPlotGraph.swift */,
+				ADE6966C2AF0E34D00FB35EF /* InfoView.swift */,
+			);
+			path = SwiftUI;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1241,17 +1263,19 @@
 			buildActionMask = 2147483647;
 			files = (
 				ADDE47F82AE15152001187F6 /* AppShortcuts.swift in Sources */,
-				AD30BC5219F024D9000CE40C /* RHCAppDelegate.swift in Sources */,
 				ADEC5BD52ADEB12C00A65057 /* PhotoView.swift in Sources */,
+				ADE696612AEB93E800FB35EF /* ContentView.swift in Sources */,
+				ADE696622AEB94E500FB35EF /* Resource.swift in Sources */,
+				ADE6965E2AEB93B200FB35EF /* VindsidenApp.swift in Sources */,
+				ADE6966B2AEF996500FB35EF /* ListCell.swift in Sources */,
 				ADB97FB12AD91E6E00CE7B01 /* StationPickerView.swift in Sources */,
 				ADEC5BD92ADEB1E500A65057 /* RotateOnDragModifier.swift in Sources */,
-				ADEC5BCA2ADD46ED00A65057 /* StationView.swift in Sources */,
 				ADEC5C282AE005DE00A65057 /* ConfigurationAppIntent.swift in Sources */,
-				AD9685AC2AD80BBB00608FB3 /* RHCStationCell.swift in Sources */,
+				ADE696672AEBBF4800FB35EF /* PageControl.swift in Sources */,
+				ADE696652AEB981F00FB35EF /* StationDetailView.swift in Sources */,
 				ADEC5BC42AD9548B00A65057 /* StationDetailsView.swift in Sources */,
-				AD17ED641731012200943C33 /* RHCViewController.m in Sources */,
+				ADE6966D2AF0E34E00FB35EF /* InfoView.swift in Sources */,
 				AD35C66C1D1C408A00E894CC /* ShortcutItemHandling.swift in Sources */,
-				AD55F5B7233AAB2F00757CBD /* RHCViewController+Swift.swift in Sources */,
 				AD50256C2AE92DB5007DDF1F /* Connectivity.swift in Sources */,
 				ADEC5BC82ADD1BD600A65057 /* SwiftUIPlotGraph.swift in Sources */,
 				AD4DEA7719CB7528002A220B /* RHCNavigationViewController.swift in Sources */,
@@ -1603,12 +1627,13 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "VindsidenApp/VindsidenApp-Prefix.pch";
 				INFOPLIST_FILE = "VindsidenApp/VindsidenApp-Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = Vindsiden;
 				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "Vindsiden need access to be able to store wind information images.";
 				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen";
 				INFOPLIST_KEY_UIMainStoryboardFile = MainStoryboard;
 				INFOPLIST_KEY_UIRequiredDeviceCapabilities = armv7;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortraitUpsideDown";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1639,12 +1664,13 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "VindsidenApp/VindsidenApp-Prefix.pch";
 				INFOPLIST_FILE = "VindsidenApp/VindsidenApp-Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = Vindsiden;
 				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "Vindsiden need access to be able to store wind information images.";
 				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen";
 				INFOPLIST_KEY_UIMainStoryboardFile = MainStoryboard;
 				INFOPLIST_KEY_UIRequiredDeviceCapabilities = armv7;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortraitUpsideDown";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

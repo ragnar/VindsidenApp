@@ -47,14 +47,14 @@ extension RHCViewController {
             Logger.debugging.debug("Settings Dismissed")
 
             self.updateApplicationContextToWatch()
-            (UIApplication.shared.delegate as? RHCAppDelegate)?.updateShortcutItems()
+//            (UIApplication.shared.delegate as? RHCAppDelegate)?.updateShortcutItems()
             WindManager.sharedManager.updateNow()
 
             if let cell = self.collectionView.visibleCells.first as? RHCStationCell {
                 cell.displayPlots()
             }
         })
-            .environmentObject((UIApplication.shared.delegate as? RHCAppDelegate)!.settings)
+//            .environmentObject((UIApplication.shared.delegate as? RHCAppDelegate)!.settings)
             .environment(\.managedObjectContext, DataManager.shared.viewContext())
         )
 

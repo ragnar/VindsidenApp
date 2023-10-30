@@ -47,10 +47,10 @@ class RHCAlertManager : NSObject
 
             self.networkAlertController?.addAction(defaultAction)
 
-            let appDelegate = UIApplication.shared.delegate as! RHCAppDelegate
-            let controller = appDelegate.window?.rootViewController
-
-            controller?.present(self.networkAlertController!, animated: true, completion: nil)
+//            let appDelegate = UIApplication.shared.delegate as! RHCAppDelegate
+//            let controller = appDelegate.window?.rootViewController
+//
+//            controller?.present(self.networkAlertController!, animated: true, completion: nil)
         })
     }
 }

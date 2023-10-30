@@ -69,7 +69,7 @@
       <RemoteRunnable
          runnableDebuggingMode = "1"
          BundleIdentifier = "org.juniks.VindsidenApp"
-         RemotePath = "/Users/ragnar/Library/Developer/CoreSimulator/Devices/015CB069-8C87-4C2D-88F2-1BC4B190674E/data/Containers/Bundle/Application/0242D97C-3D27-461D-B83E-54E53F1DAC41/VindsidenApp.app">
+         RemotePath = "/Users/ragnar/Library/Developer/CoreSimulator/Devices/957AFDAF-6864-40F6-86A9-FD48ACCD7BC2/data/Containers/Bundle/Application/DE5C1797-FE0B-4496-A5DF-184165FB01CB/VindsidenApp.app">
       </RemoteRunnable>
       <MacroExpansion>
          <BuildableReference

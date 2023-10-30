@@ -37,11 +37,13 @@ extension WidgetData {
         }
 
         let name = plot.station?.stationName ?? "Unknown"
+        let stationId: String? = plot.station?.stationId.map { "\($0)" }
         let temp: TempUnit = UserSettings.shared.selectedTempUnit
         let wind: WindUnit = UserSettings.shared.selectedWindUnit
         let direction = DirectionUnit(rawValue: Double(plot.windDir)) ?? .unknown
         let units = WidgetData.Units(wind: wind, rain: .mm, temp: temp, baro: .hPa, windDirection: direction)
-        let data = WidgetData(name: name,
+        let data = WidgetData(customIdentifier: stationId,
+                              name: name,
                               windAngle: Double(plot.windDir),
                               windSpeed: Double(plot.windMin).fromUnit(.metersPerSecond).toUnit(wind),
                               windAverage: Double(plot.windAvg).fromUnit(.metersPerSecond).toUnit(wind),

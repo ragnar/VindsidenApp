@@ -10,11 +10,12 @@ import CoreSpotlight
 import VindsidenKit
 import OSLog
 
+@MainActor
 class IndexRequestHandler: CSIndexExtensionRequestHandler {
     override func searchableIndex(_ searchableIndex: CSSearchableIndex, reindexAllSearchableItemsWithAcknowledgementHandler acknowledgementHandler: @escaping () -> Void) {
-        let managedObjectContext = DataManager.shared.viewContext()
+        let stations = Station.visible(in: PersistentContainer.shared.container.mainContext)
 
-        for station in CDStation.visibleStationsInManagedObjectContext(managedObjectContext) {
+        for station in stations {
             DataManager.shared.addStationToIndex(station, index: searchableIndex)
         }
 
@@ -23,27 +24,24 @@ class IndexRequestHandler: CSIndexExtensionRequestHandler {
 
 
     override func searchableIndex(_ searchableIndex: CSSearchableIndex, reindexSearchableItemsWithIdentifiers identifiers: [String], acknowledgementHandler: @escaping () -> Void) {
-        let managedObjectContext = DataManager.shared.viewContext()
+        let context = PersistentContainer.shared.container.mainContext
 
         for identifier in identifiers {
-            do {
-                let stationIDString = (identifier as NSString).lastPathComponent
+            let stationIDString = (identifier as NSString).lastPathComponent
 
-                if let stationID = Int(stationIDString) {
-                    let station = try CDStation.existingStationWithId(stationID, inManagedObjectContext: managedObjectContext)
-
-                    if let hidden = station.isHidden, hidden.boolValue == false {
-                        DataManager.shared.addStationToIndex(station, index: searchableIndex)
-                    } else {
-                        DataManager.shared.removeStationFromIndex(station, index: searchableIndex)
-                    }
+            if let stationID = Int(stationIDString) {
+                guard let station = Station.existing(for: stationID, in: context) else {
+                    searchableIndex.deleteSearchableItems(withIdentifiers: [identifier], completionHandler: { (error) in
+                        Logger.debugging.debug("Error: \(String(describing: error))")
+                    })
+                    continue
                 }
-            } catch {
-                searchableIndex.deleteSearchableItems(withIdentifiers: [identifier], completionHandler: { (error) in
-                    Logger.debugging.debug("Error: \(String(describing: error))")
-                })
 
-                continue
+                if station.isHidden {
+                    DataManager.shared.removeStationFromIndex(station, index: searchableIndex)
+                } else {
+                    DataManager.shared.addStationToIndex(station, index: searchableIndex)
+                }
             }
         }
 

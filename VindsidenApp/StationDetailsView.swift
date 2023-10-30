@@ -8,32 +8,56 @@
 
 import SwiftUI
 import UIKit
+import SwiftData
 
 struct StationDetailsView: View {
     @Environment(\.dismiss) private var dismiss
+    @Query var stations: [Station]
+    @State var isShowingCamera: Bool = false
 
-    let station: CDStation
+    let stationName: String
+
+    init(stationName: String) {
+        self.stationName = stationName
+        self._stations = Query(filter: #Predicate<VindsidenKit.Station> { $0.stationName == stationName })
+    }
 
     var body: some View {
         NavigationView {
             Form {
-                Section {
-                    InfoCell(title: "Name", value: station.stationName)
-                    InfoCell(title: "Place", value: station.city)
-                    InfoCell(title: "Copyright", value: station.copyright)
-                    InfoCell(title: "Info", value: station.stationText)
-                    InfoCell(title: "Status", value: station.statusMessage)
-                    InfoCell(title: "Camera", value: station.webCamText)
-                }
+                Group {
+                    if let station = stations.first {
+                        Section {
+                            InfoCell(title: "Name", value: station.stationName)
+                            InfoCell(title: "Place", value: station.city)
+                            InfoCell(title: "Copyright", value: station.copyright)
+                            InfoCell(title: "Info", value: station.stationText)
+                            InfoCell(title: "Status", value: station.statusMessage)
+                            InfoCell(title: "Camera", value: station.webCamText)
+                        }
 
-                Section {
-                    if station.yrURL?.isEmpty == false {
-                        LinkCell(title: "Go to yr.no", url: yrURL())
+                        Section {
+                            if station.webCamURL?.isEmpty == false {
+                                LinkCell(title: "Show image", url: webcamURL())
+                                    .environment(\.openURL, OpenURLAction { url in
+                                        isShowingCamera.toggle()
+                                        return .handled
+                                    })
+                            }
+
+                            if station.yrURL?.isEmpty == false {
+                                LinkCell(title: "Go to yr.no", url: yrURL())
+                            }
+                            LinkCell(title: "View in Maps", url: mapsURL())
+                        }
+                    } else {
+                        Section {
+                            InfoCell(title: "Name", value: stationName)
+                        }
                     }
-                    LinkCell(title: "View in Maps", url: mapsURL())
                 }
             }
-            .navigationTitle(station.stationName!)
+            .navigationTitle(stationName)
             .listStyle(.insetGrouped)
             .toolbar {
                 ToolbarItemGroup(placement: .topBarLeading) {
@@ -43,11 +67,27 @@ struct StationDetailsView: View {
                 }
             }
         }
-        .navigationViewStyle(StackNavigationViewStyle())
+        .sheet(isPresented: $isShowingCamera, content: {
+            PhotoView(title: stationName, imageUrl: webcamURL())
+                .edgesIgnoringSafeArea(.all)
+        })
+    }
+
+    func webcamURL() -> URL {
+        guard 
+            let station = stations.first,
+            let webCamURL = station.webCamImage,
+            let url = URL(string: webCamURL)
+        else {
+            fatalError("Unable to create url")
+        }
+
+        return url
     }
 
     func yrURL() -> URL {
         guard
+            let station = stations.first,
             let unwrapped = station.yrURL,
             let yrurl = unwrapped.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed),
             let url = URL(string: yrurl)
@@ -59,6 +99,10 @@ struct StationDetailsView: View {
     }
 
     func mapsURL() -> URL {
+        guard let station = stations.first else {
+            fatalError("Unable to create url")
+        }
+
         let spotCord = station.coordinate
         var query = "http://maps.apple.com/?t=h&z=10"
 

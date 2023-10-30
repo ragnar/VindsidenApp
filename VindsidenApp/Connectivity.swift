@@ -58,7 +58,9 @@ class Connectivity: NSObject, WCSessionDelegate {
         }
 
         if activationState == .activated, sendData {
-            updateApplicationContextToWatch()
+            Task {
+                await updateApplicationContextToWatch()
+            }
             sendData = false
         }
     }
@@ -73,6 +75,7 @@ class Connectivity: NSObject, WCSessionDelegate {
         settings.updateFromApplicationContext(applicationContext)
     }
 
+    @MainActor
     func updateApplicationContextToWatch() {
 #if os(iOS)
         if session.isPaired == false || session.isWatchAppInstalled == false {
@@ -94,7 +97,7 @@ class Connectivity: NSObject, WCSessionDelegate {
             return
         }
 
-        let result = CDStation.visibleStationsInManagedObjectContext(DataManager.shared.viewContext(), limit: 0)
+        let result = Station.visible(in: PersistentContainer.shared.container.mainContext)
         var stations = [[String: Any]]()
 
         result.forEach { station in

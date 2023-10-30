@@ -12,23 +12,9 @@ import VindsidenKit
 import Units
 
 public class PlotObservable: ObservableObject {
-    @Published public var plot: CDPlot? {
-        didSet {
-            Logger.debugging.debug("Plot was set. \(String(describing: self.plot?.plotTime))")
-        }
-    }
-
-    @Published public var plots: [CDPlot] = [] {
-        didSet {
-            Logger.debugging.debug("Plots was set. \(self.plots.count)")
-        }
-    }
-
-    @Published public var station: CDStation? {
-        didSet {
-            Logger.debugging.debug("Station was set. \(String(describing: self.station?.stationName))")
-        }
-    }
+    @Published public var plot: CDPlot?
+    @Published public var plots: [CDPlot] = []
+    @Published public var station: CDStation?
 
     func tempString(value: NSNumber?, for unit: TempUnit) -> String {
         guard 
@@ -108,11 +94,11 @@ struct StationView: View {
                         Text("Updating")
                     }
                     Spacer()
-                    SwiftUIPlotGraph(observer: observer)
-                        .frame(minHeight: 200, maxHeight: 240)
-                        .padding(.bottom)
-                        .environmentObject((UIApplication.shared.delegate as? RHCAppDelegate)!.settings)
-                        .environment(\.managedObjectContext, DataManager.shared.viewContext())
+//                    SwiftUIPlotGraph(observer: observer)
+//                        .frame(minHeight: 200, maxHeight: 240)
+//                        .padding(.bottom)
+////                        .environmentObject((UIApplication.shared.delegate as? RHCAppDelegate)!.settings)
+//                        .environment(\.managedObjectContext, DataManager.shared.viewContext())
                 }
             })
             .onChange(of: settings.lastChanged) { _, _ in
@@ -126,24 +112,5 @@ struct StationView: View {
                     updater()
                 }
         }
-    }
-}
-
-
-struct InfoView: View {
-    var label: LocalizedStringKey
-    var value: String
-
-    var body: some View {
-        VStack(alignment: .center) {
-            Text(label)
-                .font(.footnote)
-            Text(value)
-                .bold()
-        }
-        .frame(maxWidth: .infinity)
-        .padding([.top, .bottom], 6)
-        .background(Color(uiColor: .tertiarySystemFill))
-        .clipShape(RoundedRectangle(cornerRadius: 12))
     }
 }

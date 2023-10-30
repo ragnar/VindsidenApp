@@ -187,9 +187,6 @@ public class CDStation: NSManagedObject, MKAnnotation {
                     if station.stationId == 60 {
                         station.order = 101
                         station.isHidden = false
-                        #if os(iOS)
-                            DataManager.shared.addStationToIndex(station)
-                        #endif
                     } else {
                         order += 1
                         station.order = order as NSNumber?
@@ -197,7 +194,6 @@ public class CDStation: NSManagedObject, MKAnnotation {
                     }
                 }
             }
-
 
             do {
                 try context.save()

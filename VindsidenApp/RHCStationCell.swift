@@ -27,12 +27,12 @@ class RHCStationCell: UICollectionViewCell {
     }
 
     func setupView() {
-        @ObservedObject
-        var settings = (UIApplication.shared.delegate as? RHCAppDelegate)!.settings
+//        @ObservedObject
+//        var settings = (UIApplication.shared.delegate as? RHCAppDelegate)!.settings
 
         contentConfiguration = UIHostingConfiguration(content: {
             StationView(observer: observer, updater: displayPlots)
-                .environmentObject(settings)
+//                .environmentObject(settings)
                 .environment(\.managedObjectContext, DataManager.shared.viewContext())
         })
     }

@@ -9,25 +9,32 @@
 import Foundation
 import SwiftData
 import OSLog
-import VindsidenWatchKit
 import WeatherBoxView
 import Units
+
+#if os(watchOS)
+import VindsidenWatchKit
+#else
+import VindsidenKit
+#endif
 
 public typealias ResourceProtocol = Decodable & Identifiable
 typealias RefreshMethodHandler = () -> Void
 
 final public class Resource<T: ResourceProtocol>: ObservableObject {
+    let fetcher = PlotFetcher()
+
     @Published public var value: [WidgetData]
 
     public var isPaused: Bool = true {
         didSet {
+#if os(watchOS)
             if isPaused == false {
                 forceFetch()
             }
+#endif
         }
     }
-
-    let fetcher = PlotFetcher()
 
     public init() {
         self.value = []
@@ -43,7 +50,7 @@ final public class Resource<T: ResourceProtocol>: ObservableObject {
     }
 
     @MainActor
-    private func reload() async {
+    func reload() async {
         await WindManager.sharedManager.fetch()
         await updateContent()
     }
@@ -64,5 +71,7 @@ final public class Resource<T: ResourceProtocol>: ObservableObject {
         stations.forEach { widgetDatas.append($0.widgetData()) }
 
         self.value = widgetDatas
+
+        Logger.debugging.debug("Reloaded \(widgetDatas.count) stations.")
     }
 }

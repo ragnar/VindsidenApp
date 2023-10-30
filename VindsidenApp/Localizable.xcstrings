@@ -18,23 +18,6 @@
         }
       }
     },
-    "ALERT_NEW_STATIONS_FOUND" : {
-      "comment" : "New stations found. Go to settings to view them",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "New weather stations downloaded. Go to settings to view them."
-          }
-        },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Nye værstasjoner lastet ned. Gå til settings for å se på dem."
-          }
-        }
-      }
-    },
     "Average" : {
       "localizations" : {
         "en" : {
@@ -150,6 +133,16 @@
         }
       }
     },
+    "Details" : {
+      "localizations" : {
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Detaljer"
+          }
+        }
+      }
+    },
     "Go to yr.no" : {
       "localizations" : {
         "en" : {
@@ -178,6 +171,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Gust"
+          }
+        }
+      }
+    },
+    "Hide" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hide"
+          }
+        },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Skjul"
           }
         }
       }
@@ -581,6 +590,12 @@
     },
     "Open" : {
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Open"
+          }
+        },
         "nb" : {
           "stringUnit" : {
             "state" : "translated",
@@ -675,6 +690,12 @@
     },
     "Show" : {
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Show"
+          }
+        },
         "nb" : {
           "stringUnit" : {
             "state" : "translated",
@@ -700,8 +721,30 @@
         }
       }
     },
+    "Show image" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Show image"
+          }
+        },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vis bilde"
+          }
+        }
+      }
+    },
     "Show wind" : {
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Show wind"
+          }
+        },
         "nb" : {
           "stringUnit" : {
             "state" : "translated",

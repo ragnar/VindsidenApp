@@ -27,7 +27,7 @@ public actor PreviewSampleData {
 
 extension Station {
     static var preview: Station {
-        var station = Station()
+        let station = Station()
         station.city = "Oslo"
         station.stationId = 1
         station.stationName = "Larkollen"

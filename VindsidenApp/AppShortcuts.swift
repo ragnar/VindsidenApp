@@ -9,6 +9,7 @@
 
 import AppIntents
 import SwiftUI
+import SwiftData
 import VindsidenKit
 import WeatherBoxView
 import Units
@@ -45,49 +46,34 @@ struct ShowWindStatus: AppIntent {
 
     @MainActor
     func perform() async throws -> some IntentResult & ShowsSnippetView {
+        let stationId32 = Int32(station.id)
+
         await WindManager.sharedManager.fetch()
 
-        guard
-            let gregorian = NSCalendar(identifier: .gregorian),
-            let currentStation = try? CDStation.existingStationWithId(station.id, inManagedObjectContext: DataManager.shared.viewContext()),
-            let context = currentStation.managedObjectContext
-        else {
+        var fetchDescriptor = FetchDescriptor(sortBy: [SortDescriptor(\Plot.plotTime, order: .reverse)])
+        fetchDescriptor.predicate = #Predicate { $0.station?.stationId == stationId32 }
+        fetchDescriptor.fetchLimit = 1
+
+        if let plots = try? PersistentContainer.shared.container.mainContext.fetch(fetchDescriptor), let plot = plots.first {
+            let temp: TempUnit = UserSettings.shared.selectedTempUnit
+            let wind: WindUnit = UserSettings.shared.selectedWindUnit
+            let direction = DirectionUnit(rawValue: Double(plot.windDir)) ?? .unknown
+            let units = WidgetData.Units(wind: wind, rain: .mm, temp: temp, baro: .hPa, windDirection: direction)
+
+            let info = WidgetData(customIdentifier: "\(station.id)",
+                                  name: station.name,
+                                  windAngle: Double(plot.windDir),
+                                  windSpeed: Double(plot.windMin),
+                                  windAverage: Double(plot.windAvg),
+                                  windAverageMS: Double(plot.windAvg),
+                                  windGust: Double(plot.windMax),
+                                  units: units,
+                                  lastUpdated: plot.plotTime)
+
+            return .result(view: IntentWindView(info: info))
+        } else {
             return .result()
         }
-
-        let inDate = Date().addingTimeInterval(-1*AppConfig.Global.plotHistory*3600)
-        let inputComponents = gregorian.components([.year, .month, .day, .hour], from: inDate)
-        let outDate = gregorian.date(from: inputComponents) ?? Date()
-
-        let fetchRequest = CDPlot.fetchRequest()
-
-        fetchRequest.predicate = NSPredicate(format: "station == %@ AND plotTime >= %@", currentStation, outDate as CVarArg)
-        fetchRequest.fetchLimit = 1
-        fetchRequest.sortDescriptors = [
-            NSSortDescriptor(key: "plotTime", ascending: false),
-        ]
-
-        let plot: CDPlot? = ((try? context.fetch(fetchRequest)) ?? []).first
-
-        guard let plot else {
-            return .result()
-        }
-
-        let temp: TempUnit = UserSettings.shared.selectedTempUnit
-        let wind: WindUnit = UserSettings.shared.selectedWindUnit
-        let direction = DirectionUnit(rawValue: plot.windDir?.doubleValue ?? 0) ?? .unknown
-        let units = WidgetData.Units(wind: wind, rain: .mm, temp: temp, baro: .hPa, windDirection: direction)
-
-        let info = WidgetData(name: station.name,
-                              windAngle: plot.windDir?.doubleValue ?? 0,
-                              windSpeed: plot.windMin?.doubleValue ?? 0,
-                              windAverage: plot.windAvg?.doubleValue ?? 0,
-                              windAverageMS: plot.windAvg?.doubleValue ?? 0,
-                              windGust: plot.windMax?.doubleValue ?? 0,
-                              units: units,
-                              lastUpdated: plot.plotTime ?? Date())
-
-        return .result(view: IntentWindView(info: info))
     }
 }
 

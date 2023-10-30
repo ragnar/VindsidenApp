@@ -7,46 +7,44 @@
 //
 
 import SwiftUI
+import SwiftData
 import VindsidenKit
 
 
 struct StationPickerView: View {
-    @Environment(\.managedObjectContext) private var viewContext
+    @Environment(\.modelContext) private var modelContext
     @Environment(\.editMode) private var editMode
 
-    @FetchRequest(sortDescriptors: [
-        NSSortDescriptor(key: "order", ascending: true),
-        NSSortDescriptor(key: "stationName", ascending: true),
-    ])
-    private var stations: FetchedResults<CDStation>
+    @Query(sort: [SortDescriptor(\Station.order), SortDescriptor(\Station.stationName)])
+    private var stations: [Station]
 
     var body: some View {
         List {
             ForEach(stations) { station in
                 HStack {
                     PickerCell(name: station.stationName!,
-                               value: .constant(!(station.isHidden?.boolValue ?? false)))
+                               value: .constant(station.isHidden == false))
                     .disabled(editMode?.wrappedValue.isEditing ?? false)
                     .onTapGesture(count: 1, perform: {
                         if editMode?.wrappedValue.isEditing ?? false {
                             return
                         }
 
-                        guard var isHidden = station.isHidden?.boolValue else {
-                            return
+                        station.isHidden.toggle()
+                        try? modelContext.save()
+
+                        if station.isHidden {
+                            DataManager.shared.removeStationFromIndex(station)
+                        } else {
+                            DataManager.shared.addStationToIndex(station)
                         }
-
-                        isHidden.toggle()
-
-                        station.isHidden = NSNumber(booleanLiteral: isHidden)
-                        try? viewContext.save()
                     })
                     Spacer()
                     Text(verbatim: station.city!)
                         .foregroundStyle(.secondary)
                 }
             }
-            .onMove(perform: moveNotes)
+            .onMove(perform: moveStations)
         }
         .toolbar {
             EditButton()
@@ -55,68 +53,21 @@ struct StationPickerView: View {
         .navigationBarTitleDisplayMode(.inline)
     }
 
-    func moveNotes(_ indexes: IndexSet, _ i: Int) {
-        guard
-            let from = indexes.first,
-            indexes.count == 1,
-            from != i
-        else { 
-            return
-        }
+    func moveStations(_ indexes: IndexSet, _ i: Int) {
+        var modifying = stations
+        var order: Int16 = 1
 
-        var undo = viewContext.undoManager
-        var resetUndo = false
+        modifying.move(fromOffsets: indexes, toOffset: i)
 
-        if undo == nil {
-            viewContext.undoManager = .init()
-            undo = viewContext.undoManager
-            resetUndo = true
-        }
-
-        defer {
-            if resetUndo {
-                viewContext.undoManager = nil
-            }
+        modifying.forEach { station in
+            station.order = order
+            order += 1
         }
 
         do {
-            try viewContext.performAndWait {
-                undo?.beginUndoGrouping()
-                let moving = stations[from]
-
-                if from > i { // moving up
-                    stations[i..<from].forEach {
-                        $0.orderIndex = $0.orderIndex + 1
-                    }
-                    moving.orderIndex = Int(i)
-                }
-
-                if from < i { // moving down
-                    stations[(from+1)..<i].forEach {
-                        $0.orderIndex = $0.orderIndex - 1
-                    }
-                    moving.orderIndex = Int(i)
-                }
-
-                undo?.endUndoGrouping()
-                try viewContext.save()
-            }
+            try modelContext.save()
         } catch {
-            undo?.endUndoGrouping()
-            viewContext.undo()
-
-            fatalError(error.localizedDescription)
-        }
-    }
-}
-
-extension CDStation {
-    var orderIndex: Int {
-        set {
-            order = NSNumber(integerLiteral: newValue)
-        }
-        get {
-            return order?.intValue ?? 0
+            print("SAVING FAILED")
         }
     }
 }

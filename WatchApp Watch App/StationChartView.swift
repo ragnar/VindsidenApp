@@ -25,7 +25,9 @@ struct StationChartView: View {
 
         self.station = station
         self._plots = Query(filter: #Predicate<VindsidenWatchKit.Plot> { $0.station?.stationName == name && $0.plotTime > date },
-                            sort: \.dataId)
+                            sort: \.dataId,
+                            order: .reverse
+        )
     }
 
     var body: some View {

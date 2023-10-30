@@ -24,11 +24,19 @@ public class UserObservable: ObservableObject {
         }
     }
 
+    @Published public var selectedStationName: String? {
+        didSet {
+            UserSettings.shared.selectedStationName = selectedStationName
+            self.lastChanged = Date()
+        }
+    }
+
     @Published public var lastChanged: Date
 
     public init() {
         self.windUnit = UserSettings.shared.selectedWindUnit
         self.tempUnit = UserSettings.shared.selectedTempUnit
+        self.selectedStationName = UserSettings.shared.selectedStationName
         self.lastChanged = Date()
     }
 
@@ -51,6 +59,9 @@ public final class UserSettings: ObservableObject {
 
     @UserSetting(defaultValue: .celsius, storageKey: "selectedTempUnit")
     public var selectedTempUnit: TempUnit
+
+    @UserSetting(defaultValue: nil, storageKey: "selectedStationName")
+    public var selectedStationName: String?
 
     public static var shared = UserSettings()
 

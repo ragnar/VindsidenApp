@@ -126,31 +126,39 @@ extension DataManager {
             return
         }
 
-        let index: CSSearchableIndex = CSSearchableIndex.default()
+        Task { @MainActor in
+            let index = CSSearchableIndex.default()
+            let context = PersistentContainer.shared.container.mainContext
+            let stations = Station.visible(in: context)
 
-        performBackgroundTask { (context) in
-            for station in CDStation.visibleStationsInManagedObjectContext(context) {
+            for station in stations {
                 self.addStationToIndex(station, index: index)
             }
         }
     }
-    
-    public func addStationToIndex(_ station: CDStation, index: CSSearchableIndex = CSSearchableIndex.default()) {
+
+    public func addStationToIndex(_ station: Station, index: CSSearchableIndex = CSSearchableIndex.default()) {
         guard CSSearchableIndex.isIndexingAvailable() else {
             Logger.persistence.debug("Indexing not available")
             return
         }
 
+        let lookupKey = CSCustomAttributeKey(keyName: "lookupKey", searchable: false, searchableByDefault: false, unique: true, multiValued: false)!
         let search = CSSearchableItemAttributeSet(contentType: .content)
         search.city = station.city
-        search.latitude = station.coordinateLat
-        search.longitude = station.coordinateLon
+
+        if let lat = station.coordinateLat, let lon = station.coordinateLon {
+            search.latitude = NSNumber(floatLiteral: lat)
+            search.longitude = NSNumber(floatLiteral: lon)
+        }
+
         search.namedLocation = station.city
         search.displayName = station.stationName
         search.copyright = station.copyright
         search.keywords = ["kite", "surf", "wind", "fluid", "naish", "ozone", "f-one"]
         search.title = station.stationName
         search.contentDescription = station.city
+        search.setValue(station.stationName as? NSString, forCustomKey: lookupKey)
 
         let url = "vindsiden://station/\(station.stationId!)"
         let item = CSSearchableItem(uniqueIdentifier: url, domainIdentifier: AppConfig.Bundle.appName, attributeSet: search)
@@ -161,7 +169,7 @@ extension DataManager {
         })
     }
 
-    public func removeStationFromIndex(_ station: CDStation, index: CSSearchableIndex = CSSearchableIndex.default()) {
+    public func removeStationFromIndex(_ station: Station, index: CSSearchableIndex = CSSearchableIndex.default()) {
         guard CSSearchableIndex.isIndexingAvailable() else {
             Logger.persistence.debug("Indexing not available")
             return
@@ -169,7 +177,7 @@ extension DataManager {
 
         let stationName = station.stationName
         let url = "vindsiden://station/\(station.stationId!)"
-        
+
         CSSearchableIndex.default().deleteSearchableItems(withIdentifiers: [url]) { (error: Error?) -> Void in
             Logger.persistence.debug("Removed station: \(String(describing: stationName)) with error: \(String(describing: error?.localizedDescription))")
         }
