@@ -18,7 +18,8 @@ struct StationDetailView: View {
         GeometryReader(content: { geometry in
             VStack(alignment: .leading) {
                 Text(station.name)
-                    .font(.system(size: 62, weight: .ultraLight))
+                    .font(.system(size: 36, weight: .medium))
+                    .foregroundStyle(.accent.gradient)
                     .minimumScaleFactor(0.5)
                     .lineLimit(1)
 

@@ -34,9 +34,11 @@ struct ListCell: View {
 
             Image(systemName: "arrow.down")
                 .rotationEffect(.degrees(station.windAngle))
+                .font(.title2)
 
             VStack(alignment: .leading) {
                 Text(verbatim: station.name)
+                    .font(.headline)
                 Text(station.lastUpdated, style: .relative)
                     .font(.footnote)
             }
