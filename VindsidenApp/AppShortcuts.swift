@@ -48,7 +48,7 @@ struct ShowWindStatus: AppIntent {
     func perform() async throws -> some IntentResult & ShowsSnippetView {
         let stationId32 = Int32(station.id)
 
-        await WindManager.sharedManager.fetch()
+        await WindManager.sharedManager.fetch(stationId: station.id)
 
         var fetchDescriptor = FetchDescriptor(sortBy: [SortDescriptor(\Plot.plotTime, order: .reverse)])
         fetchDescriptor.predicate = #Predicate { $0.station?.stationId == stationId32 }

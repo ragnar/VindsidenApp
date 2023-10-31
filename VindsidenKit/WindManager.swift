@@ -101,7 +101,7 @@ public class WindManager : NSObject {
     }
 
     @MainActor
-    public func fetch() async {
+    public func fetch(stationId: Int? = nil) async {
         if isUpdating {
             Logger.wind.debug("Already updating")
             return
@@ -122,7 +122,14 @@ public class WindManager : NSObject {
             }
         }
 
-        let stations = await activeStations()
+        let stations: [(Int, String)]
+
+        if let stationId {
+            stations = [(stationId, "Widget loading")]
+        } else {
+            stations = await activeStations()
+        }
+
         let hours = fetchHours()
 
         await withTaskGroup(

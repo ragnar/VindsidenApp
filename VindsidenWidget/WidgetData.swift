@@ -20,7 +20,7 @@ import VindsidenKit
 extension WidgetData {
     @MainActor
     static func loadData(for stationId: Int) async throws -> WidgetData? {
-        await WindManager.sharedManager.fetch()
+        await WindManager.sharedManager.fetch(stationId: stationId)
 
         let modelContainer: ModelContainer = PersistentContainer.shared.container
         let stationId32 = Int32(stationId)
