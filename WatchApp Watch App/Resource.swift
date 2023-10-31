@@ -51,7 +51,7 @@ final public class Resource<T: ResourceProtocol>: ObservableObject {
 
     @MainActor
     func reload() async {
-        await WindManager.sharedManager.fetch()
+        try? await WindManager.shared.fetch()
         await updateContent()
     }
 

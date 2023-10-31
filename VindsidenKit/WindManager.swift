@@ -12,70 +12,77 @@ import CoreData
 import WidgetKit
 import OSLog
 
-@objc(WindManager)
-public class WindManager : NSObject {
-    public var refreshInterval: TimeInterval = 0.0
-    private var updateTimer: Timer?
-    private var isUpdating: Bool = false
+public actor WindManager {
+    public static let shared = WindManager()
+
+    private var refreshTasks: [String: Task<Void, Error>] = [:]
     private var lastFetched: Date?
 
-    @objc public static let sharedManager = WindManager()
+    public func updateStations() async -> Bool {
+        do {
+            let stations = try await StationFetcher().fetch()
+            let inserted = await Task { @MainActor in
+                return Station.updateWithFetchedContent(stations,
+                                                        in: PersistentContainer.shared.container.mainContext)
+            }.value
 
-#if os(iOS)
-    public var observer: UserObservable?
-#endif
-
-    override init() {
-        super.init()
-        #if os(iOS)
-            NotificationCenter.default.addObserver(self, selector: #selector(UIApplicationDelegate.applicationDidEnterBackground(_:)), name: UIApplication.didEnterBackgroundNotification, object: nil)
-            NotificationCenter.default.addObserver(self, selector: #selector(UIApplicationDelegate.applicationWillEnterForeground(_:)), name: UIApplication.willEnterForegroundNotification, object: nil)
-        #endif
-    }
-
-    deinit {
-        NotificationCenter.default.removeObserver(self)
-    }
-
-    public func startUpdating() -> Void {
-        stopUpdating()
-
-        if refreshInterval > 0 {
-            let timer = Timer.scheduledTimer( timeInterval: refreshInterval, target: self, selector: #selector(WindManager.updateTimerFired(_:)), userInfo: nil, repeats: true)
-            updateTimer = timer
-        }
-
-        updateNow()
-    }
-
-    public func stopUpdating() -> Void {
-        if let unwrappedTimer = updateTimer {
-            unwrappedTimer.invalidate()
-            updateTimer = nil
+            return inserted
+        } catch {
+            return false
         }
     }
 
-    @objc public func updateNow() -> Void {
-        if let unwrappedTimer = updateTimer {
-            unwrappedTimer.fire()
-        } else {
-            updateTimerFired(Timer())
+    public func fetch(stationId: Int? = nil) async throws {
+        let taskId = "\(stationId ?? -9999)"
+
+        Logger.windManager.debug("Start refreshing for \(taskId)")
+
+        if let refreshTask = refreshTasks[taskId] {
+            Logger.windManager.debug("Already refreshing for \(taskId)")
+            return try await refreshTask.value
         }
-    }
 
-    func activeStations() async -> [(Int, String)] {
-        return await DataManager.shared.container.performBackgroundTask { context in
-            let fetchRequest: NSFetchRequest<CDStation> = CDStation.fetchRequest()
-            fetchRequest.predicate = NSPredicate(format: "isHidden == NO")
-            fetchRequest.sortDescriptors = [NSSortDescriptor(key: "order", ascending: true)]
-
-            do {
-                let stations = try context.fetch(fetchRequest)
-                return stations.compactMap { ($0.stationId!.intValue, $0.stationName!) }
-            } catch {
-                return []
+        let task = Task { () throws -> Void in
+            defer {
+                refreshTasks[taskId] = nil
+                Logger.windManager.debug("Finished refreshing for \(taskId)")
             }
+
+            let hours = fetchHours()
+            let stations: [(Int, String)]
+
+            if let stationId {
+                stations = [(stationId, "Widget loading")]
+            } else {
+                stations = await activeStations()
+            }
+
+            await withTaskGroup(
+                of: Void.self,
+                returning: Void.self
+            ) { group in
+                for station in stations {
+                    group.addTask {
+                        await self.update(stationId: station.0, name: station.1, hours: hours)
+                    }
+                }
+
+                await group.waitForAll()
+            }
+
+            lastFetched = Date()
         }
+
+        refreshTasks[taskId] = task
+
+        return try await task.value
+    }
+
+    @MainActor
+    private func activeStations() async -> [(Int, String)] {
+        let result = Station.visible(in: PersistentContainer.shared.container.mainContext)
+
+        return result.compactMap { (Int($0.stationId!), $0.stationName!) }
     }
 
     public func fetchHours() -> Int {
@@ -100,76 +107,16 @@ public class WindManager : NSObject {
         return hours
     }
 
+    @Sendable
     @MainActor
-    public func fetch(stationId: Int? = nil) async {
-        if isUpdating {
-            Logger.wind.debug("Already updating")
-            return
-        }
+    private func update(stationId: Int, name: String, hours: Int) async {
+        do {
+            let plots = try await PlotFetcher().fetchForStationId(stationId, hours: hours)
+            let num = try await CDPlot.updatePlots(plots)
 
-        isUpdating = true
-
-        @Sendable
-        @MainActor
-        func update(stationId: Int, name: String, hours: Int) async {
-            do {
-                let plots = try await PlotFetcher().fetchForStationId(stationId, hours: hours)
-                let num = try await CDPlot.updatePlots(plots)
-
-                Logger.wind.debug("Finished with \(num) new plots for \(name).")
-            } catch {
-                Logger.wind.debug("error: \(String(describing: error)) for \(name).")
-            }
-        }
-
-        let stations: [(Int, String)]
-
-        if let stationId {
-            stations = [(stationId, "Widget loading")]
-        } else {
-            stations = await activeStations()
-        }
-
-        let hours = fetchHours()
-
-        await withTaskGroup(
-            of: Void.self,
-            returning: Void.self
-        ) { group in
-            for station in stations {
-                group.addTask {
-                    await update(stationId: station.0, name: station.1, hours: hours)
-                }
-            }
-
-            await group.waitForAll()
-        }
-        
-        lastFetched = Date()
-        isUpdating = false
-    }
-
-    // MARK: - Notifications
-
-
-    @objc func updateTimerFired(_ timer: Timer) -> Void {
-        Task { @MainActor in
-            await fetch()
-#if os(iOS)
-            observer?.lastChanged = Date()
-            WidgetCenter.shared.reloadAllTimelines()
-#endif
+            Logger.windManager.debug("Finished with \(num) new plots for \(name).")
+        } catch {
+            Logger.windManager.debug("error: \(String(describing: error)) for \(name).")
         }
     }
-
-    #if os(iOS)
-    @objc func applicationWillEnterForeground( _ application: UIApplication) -> Void {
-        startUpdating()
-    }
-
-
-    @objc func applicationDidEnterBackground( _ application: UIApplication) -> Void {
-        stopUpdating()
-    }
-    #endif
 }
