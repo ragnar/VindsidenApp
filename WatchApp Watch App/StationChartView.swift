@@ -100,7 +100,7 @@ struct StationChartView: View {
         return index % 2 == 0
     }
 
-    private func convertedWind(_ base: Float) -> Double {
-        return Double(base).fromUnit(.metersPerSecond).toUnit(station.units.wind)
+    private func convertedWind(_ base: Double) -> Double {
+        return base.fromUnit(.metersPerSecond).toUnit(station.units.wind)
     }
 }

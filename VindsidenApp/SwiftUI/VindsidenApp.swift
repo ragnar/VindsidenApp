@@ -8,6 +8,7 @@
 
 import SwiftUI
 import SwiftData
+import VindsidenKit
 
 @main
 struct VindsidenApp: App {
@@ -23,7 +24,6 @@ struct VindsidenApp: App {
         WindowGroup {
             ContentView()
                 .modelContainer(PersistentContainer.shared.container)
-                .environment(\.managedObjectContext, DataManager.shared.viewContext())
                 .environmentObject(userSettings)
         }
     }

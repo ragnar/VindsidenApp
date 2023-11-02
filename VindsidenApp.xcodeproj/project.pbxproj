@@ -16,7 +16,6 @@
 		AD303C311B282FB100C4B999 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD7BBB461A3F53F400883770 /* Logger.swift */; };
 		AD303C321B282FB100C4B999 /* AppConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD7BBB481A3F55A100883770 /* AppConfig.swift */; };
 		AD303C331B282FB100C4B999 /* WindManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADE9C4071AAB32840089EB19 /* WindManager.swift */; };
-		AD303C401B28484F00C4B999 /* Vindsiden.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = AD7AA505196E46D800B1518B /* Vindsiden.xcdatamodeld */; };
 		AD303C421B2848EF00C4B999 /* UIColor+AppColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADBEA4CE1A07ECF600B168BF /* UIColor+AppColors.swift */; };
 		AD303C431B28490600C4B999 /* NSNumber+Between.h in Headers */ = {isa = PBXBuildFile; fileRef = ADCD423C196E4E42004973E9 /* NSNumber+Between.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AD303C441B28490600C4B999 /* NSNumber+Convertion.h in Headers */ = {isa = PBXBuildFile; fileRef = ADCD423E196E4E42004973E9 /* NSNumber+Convertion.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -30,7 +29,6 @@
 		AD303C4D1B28491600C4B999 /* NSSet+Sort.m in Sources */ = {isa = PBXBuildFile; fileRef = ADCD4243196E4E42004973E9 /* NSSet+Sort.m */; };
 		AD303C4E1B28491600C4B999 /* NSString+fixDateString.m in Sources */ = {isa = PBXBuildFile; fileRef = ADCD4245196E4E42004973E9 /* NSString+fixDateString.m */; };
 		AD303C4F1B28491600C4B999 /* NSString+isNumeric.m in Sources */ = {isa = PBXBuildFile; fileRef = ADCD4247196E4E42004973E9 /* NSString+isNumeric.m */; };
-		AD35C66C1D1C408A00E894CC /* ShortcutItemHandling.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD35C66B1D1C408A00E894CC /* ShortcutItemHandling.swift */; };
 		AD4DEA7719CB7528002A220B /* RHCNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD4DEA7619CB7528002A220B /* RHCNavigationViewController.swift */; };
 		AD5025172AE6D3AA007DDF1F /* WatchAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD5025162AE6D3AA007DDF1F /* WatchAppApp.swift */; };
 		AD5025192AE6D3AA007DDF1F /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD5025182AE6D3AA007DDF1F /* ContentView.swift */; };
@@ -75,7 +73,6 @@
 		AD539CC71947B684002644BD /* Datamanager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD539CC61947B684002644BD /* Datamanager.swift */; };
 		AD66F5651CAEBA8B001A2755 /* IndexRequestHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD66F5641CAEBA8B001A2755 /* IndexRequestHandler.swift */; };
 		AD66F5691CAEBA8B001A2755 /* VindSidenSpotlight.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = AD66F5621CAEBA8B001A2755 /* VindSidenSpotlight.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		AD7AA507196E46D800B1518B /* Vindsiden.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = AD7AA505196E46D800B1518B /* Vindsiden.xcdatamodeld */; };
 		AD7BBB471A3F53F400883770 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD7BBB461A3F53F400883770 /* Logger.swift */; };
 		AD7BBB491A3F55A100883770 /* AppConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD7BBB481A3F55A100883770 /* AppConfig.swift */; };
 		AD9685832AD6883B00608FB3 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AD9685822AD6883B00608FB3 /* Launch Screen.storyboard */; };
@@ -88,14 +85,10 @@
 		AD9685992AD6A40100608FB3 /* VindsidenWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = AD9685882AD6A40000608FB3 /* VindsidenWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		AD96859E2AD6AB3700608FB3 /* Provider.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD96859D2AD6AB3700608FB3 /* Provider.swift */; };
 		AD9685A82AD6BED600608FB3 /* WeatherBoxView in Frameworks */ = {isa = PBXBuildFile; productRef = AD9685A72AD6BED600608FB3 /* WeatherBoxView */; };
-		AD9E40651B8C9C1700FABCF5 /* CDStation.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD9E40631B8C9C1700FABCF5 /* CDStation.swift */; };
-		AD9E406A1B8C9CC900FABCF5 /* CDStation.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD9E40631B8C9C1700FABCF5 /* CDStation.swift */; };
 		AD9E406C1B8D8A6900FABCF5 /* StationFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD9E406B1B8D8A6900FABCF5 /* StationFetcher.swift */; };
 		AD9E406D1B8D8A6900FABCF5 /* StationFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD9E406B1B8D8A6900FABCF5 /* StationFetcher.swift */; };
 		AD9E40731B8D9BCD00FABCF5 /* PlotFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD9E40721B8D9BCD00FABCF5 /* PlotFetcher.swift */; };
 		AD9E40741B8D9BCD00FABCF5 /* PlotFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD9E40721B8D9BCD00FABCF5 /* PlotFetcher.swift */; };
-		AD9E40771B8DA11B00FABCF5 /* CDPlot.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD9E40751B8DA11B00FABCF5 /* CDPlot.swift */; };
-		AD9E40781B8DA11B00FABCF5 /* CDPlot.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD9E40751B8DA11B00FABCF5 /* CDPlot.swift */; };
 		AD9EA2B81B8F1A6400F653FE /* NSDate+RelativeDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD9EA2B71B8F1A6400F653FE /* NSDate+RelativeDate.swift */; };
 		AD9EA2B91B8F1A6400F653FE /* NSDate+RelativeDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD9EA2B71B8F1A6400F653FE /* NSDate+RelativeDate.swift */; };
 		ADB97FAD2AD914D900CE7B01 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB97FAC2AD914D900CE7B01 /* SettingsView.swift */; };
@@ -297,16 +290,12 @@
 		9E713D0A7C32B35097808D07 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AD07B2C01779E90A004BC24C /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Media.xcassets; sourceTree = "<group>"; };
 		AD0A242524688DD40072B93F /* CoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreServices.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk/System/Library/Frameworks/CoreServices.framework; sourceTree = DEVELOPER_DIR; };
-		AD1379791B94B912008A4FFB /* Vindsiden 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Vindsiden 2.xcdatamodel"; sourceTree = "<group>"; };
 		AD146F4C1741251E00205BB9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
 		AD17ED441731012200943C33 /* VindsidenApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VindsidenApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AD17ED471731012200943C33 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		AD17ED491731012200943C33 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		AD17ED4B1731012200943C33 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		AD17ED4F1731012200943C33 /* VindsidenApp-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "VindsidenApp-Info.plist"; sourceTree = "<group>"; };
-		AD17ED551731012200943C33 /* VindsidenApp-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "VindsidenApp-Prefix.pch"; sourceTree = "<group>"; };
-		AD17ED621731012200943C33 /* RHCViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RHCViewController.h; sourceTree = "<group>"; };
-		AD17ED631731012200943C33 /* RHCViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RHCViewController.m; sourceTree = "<group>"; };
 		AD17ED6B1731012200943C33 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		AD17EDB617310E5300943C33 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		AD17EDB817310E5B00943C33 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
@@ -322,9 +311,6 @@
 		AD303C281B282DC800C4B999 /* VindsidenWatchKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = VindsidenWatchKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AD303C2A1B282DC800C4B999 /* VindsidenWatchKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VindsidenWatchKit.h; sourceTree = "<group>"; };
 		AD303C2C1B282DC800C4B999 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		AD30BC5119F024D9000CE40C /* RHCAppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RHCAppDelegate.swift; sourceTree = "<group>"; };
-		AD32E37F19BA2FC1008F00EB /* VindsidenApp-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "VindsidenApp-Bridging-Header.h"; sourceTree = "<group>"; };
-		AD35C66B1D1C408A00E894CC /* ShortcutItemHandling.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShortcutItemHandling.swift; sourceTree = "<group>"; };
 		AD4DEA7619CB7528002A220B /* RHCNavigationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RHCNavigationViewController.swift; sourceTree = "<group>"; };
 		AD5025142AE6D3AA007DDF1F /* WatchApp Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "WatchApp Watch App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		AD5025162AE6D3AA007DDF1F /* WatchAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchAppApp.swift; sourceTree = "<group>"; };
@@ -351,7 +337,6 @@
 		AD539CAD1947B5CA002644BD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AD539CAE1947B5CA002644BD /* VindsidenKitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VindsidenKitTests.swift; sourceTree = "<group>"; };
 		AD539CC61947B684002644BD /* Datamanager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Datamanager.swift; sourceTree = "<group>"; };
-		AD55F5B6233AAB2F00757CBD /* RHCViewController+Swift.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RHCViewController+Swift.swift"; sourceTree = "<group>"; };
 		AD6142ED1D0F07980008C5E8 /* WCFetcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WCFetcher.swift; sourceTree = "<group>"; };
 		AD66F5621CAEBA8B001A2755 /* VindSidenSpotlight.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = VindSidenSpotlight.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		AD66F5641CAEBA8B001A2755 /* IndexRequestHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndexRequestHandler.swift; sourceTree = "<group>"; };
@@ -359,7 +344,6 @@
 		AD66F56E1CAEBEE7001A2755 /* VindSidenSpotlight.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = VindSidenSpotlight.entitlements; sourceTree = "<group>"; };
 		AD674DA81962EB7100BF257B /* libPods.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libPods.a; path = "Pods/build/Debug-iphoneos/libPods.a"; sourceTree = "<group>"; };
 		AD6BD0F41A967A8800E6686B /* libPods.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libPods.a; path = "Pods/build/Debug-iphoneos/libPods.a"; sourceTree = "<group>"; };
-		AD7AA506196E46D800B1518B /* Vindsiden.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Vindsiden.xcdatamodel; sourceTree = "<group>"; };
 		AD7BBB461A3F53F400883770 /* Logger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		AD7BBB481A3F55A100883770 /* AppConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppConfig.swift; sourceTree = "<group>"; };
 		AD9685822AD6883B00608FB3 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
@@ -376,11 +360,8 @@
 		AD9685A32AD6B12D00608FB3 /* VindsidenWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = VindsidenWidgetExtension.entitlements; sourceTree = "<group>"; };
 		AD9685A42AD6B8A300608FB3 /* Station.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Station.swift; sourceTree = "<group>"; };
 		AD9685A92AD7CA2000608FB3 /* PersistentContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistentContainer.swift; sourceTree = "<group>"; };
-		AD9685AB2AD80BBB00608FB3 /* RHCStationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RHCStationCell.swift; sourceTree = "<group>"; };
-		AD9E40631B8C9C1700FABCF5 /* CDStation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CDStation.swift; sourceTree = "<group>"; };
 		AD9E406B1B8D8A6900FABCF5 /* StationFetcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StationFetcher.swift; path = VindsidenKit/StationFetcher.swift; sourceTree = SOURCE_ROOT; };
 		AD9E40721B8D9BCD00FABCF5 /* PlotFetcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlotFetcher.swift; path = VindsidenKit/PlotFetcher.swift; sourceTree = SOURCE_ROOT; };
-		AD9E40751B8DA11B00FABCF5 /* CDPlot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CDPlot.swift; sourceTree = "<group>"; };
 		AD9EA2B71B8F1A6400F653FE /* NSDate+RelativeDate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSDate+RelativeDate.swift"; sourceTree = "<group>"; };
 		ADB7BA411B3A98E9000921E0 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = Platforms/WatchOS.platform/Developer/SDKs/WatchOS2.0.sdk/System/Library/Frameworks/CoreGraphics.framework; sourceTree = DEVELOPER_DIR; };
 		ADB97FAC2AD914D900CE7B01 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
@@ -428,7 +409,6 @@
 		ADEC5BC32AD9548B00A65057 /* StationDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationDetailsView.swift; sourceTree = "<group>"; };
 		ADEC5BC52ADD038F00A65057 /* PreviewSampleData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewSampleData.swift; sourceTree = "<group>"; };
 		ADEC5BC72ADD1BD600A65057 /* SwiftUIPlotGraph.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUIPlotGraph.swift; sourceTree = "<group>"; };
-		ADEC5BC92ADD46ED00A65057 /* StationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationView.swift; sourceTree = "<group>"; };
 		ADEC5BD22ADEA73B00A65057 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		ADEC5BD42ADEB12C00A65057 /* PhotoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoView.swift; sourceTree = "<group>"; };
 		ADEC5BD62ADEB1CD00A65057 /* SwipeToDismissModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeToDismissModifier.swift; sourceTree = "<group>"; };
@@ -599,11 +579,9 @@
 				ADB97FC42AD9309B00CE7B01 /* Localizable.xcstrings */,
 				ADB97FC22AD9306700CE7B01 /* InfoPlist.xcstrings */,
 				AD07B2C01779E90A004BC24C /* Media.xcassets */,
-				AD32E37F19BA2FC1008F00EB /* VindsidenApp-Bridging-Header.h */,
 				AD539C951947B2B1002644BD /* VindsidenApp.entitlements */,
 				AD17ED5F1731012200943C33 /* MainStoryboard.storyboard */,
 				AD17ED4F1731012200943C33 /* VindsidenApp-Info.plist */,
-				AD17ED551731012200943C33 /* VindsidenApp-Prefix.pch */,
 				AD9685822AD6883B00608FB3 /* Launch Screen.storyboard */,
 			);
 			name = "Supporting Files";
@@ -622,8 +600,6 @@
 		AD17EDE01734480300943C33 /* App Delegate */ = {
 			isa = PBXGroup;
 			children = (
-				AD30BC5119F024D9000CE40C /* RHCAppDelegate.swift */,
-				AD35C66B1D1C408A00E894CC /* ShortcutItemHandling.swift */,
 				ADDE47F72AE15152001187F6 /* AppShortcuts.swift */,
 			);
 			name = "App Delegate";
@@ -632,11 +608,6 @@
 		AD17EDE31734485A00943C33 /* Main View Controller */ = {
 			isa = PBXGroup;
 			children = (
-				AD17ED621731012200943C33 /* RHCViewController.h */,
-				AD17ED631731012200943C33 /* RHCViewController.m */,
-				AD55F5B6233AAB2F00757CBD /* RHCViewController+Swift.swift */,
-				AD9685AB2AD80BBB00608FB3 /* RHCStationCell.swift */,
-				ADEC5BC92ADD46ED00A65057 /* StationView.swift */,
 				ADEC5BD42ADEB12C00A65057 /* PhotoView.swift */,
 				ADEC5BD62ADEB1CD00A65057 /* SwipeToDismissModifier.swift */,
 				ADEC5BD82ADEB1E500A65057 /* RotateOnDragModifier.swift */,
@@ -730,7 +701,6 @@
 				AD7BBB4F1A40A01900883770 /* Managers */,
 				AD17EDDF173447EC00943C33 /* Communication */,
 				ADCD4260196E4E8A004973E9 /* Categories */,
-				AD7BBB4E1A409FF000883770 /* Data Model */,
 				AD539C9F1947B5CA002644BD /* Supporting Files */,
 				ADB97FAE2AD9154D00CE7B01 /* UserObservable.swift */,
 			);
@@ -773,16 +743,6 @@
 				AD66F5661CAEBA8B001A2755 /* Info.plist */,
 			);
 			path = VindSidenSpotlight;
-			sourceTree = "<group>";
-		};
-		AD7BBB4E1A409FF000883770 /* Data Model */ = {
-			isa = PBXGroup;
-			children = (
-				AD7AA505196E46D800B1518B /* Vindsiden.xcdatamodeld */,
-				AD9E40751B8DA11B00FABCF5 /* CDPlot.swift */,
-				AD9E40631B8C9C1700FABCF5 /* CDStation.swift */,
-			);
-			name = "Data Model";
 			sourceTree = "<group>";
 		};
 		AD7BBB4F1A40A01900883770 /* Managers */ = {
@@ -1275,7 +1235,6 @@
 				ADE696652AEB981F00FB35EF /* StationDetailView.swift in Sources */,
 				ADEC5BC42AD9548B00A65057 /* StationDetailsView.swift in Sources */,
 				ADE6966D2AF0E34E00FB35EF /* InfoView.swift in Sources */,
-				AD35C66C1D1C408A00E894CC /* ShortcutItemHandling.swift in Sources */,
 				AD50256C2AE92DB5007DDF1F /* Connectivity.swift in Sources */,
 				ADEC5BC82ADD1BD600A65057 /* SwiftUIPlotGraph.swift in Sources */,
 				AD4DEA7719CB7528002A220B /* RHCNavigationViewController.swift in Sources */,
@@ -1304,15 +1263,12 @@
 				AD9E406D1B8D8A6900FABCF5 /* StationFetcher.swift in Sources */,
 				AD303C4F1B28491600C4B999 /* NSString+isNumeric.m in Sources */,
 				AD9E40741B8D9BCD00FABCF5 /* PlotFetcher.swift in Sources */,
-				AD9E406A1B8C9CC900FABCF5 /* CDStation.swift in Sources */,
 				AD5025282AE6D8C0007DDF1F /* UserObservable.swift in Sources */,
 				AD50252B2AE6D8FF007DDF1F /* Plot.swift in Sources */,
 				AD50252A2AE6D8FB007DDF1F /* Station.swift in Sources */,
-				AD9E40781B8DA11B00FABCF5 /* CDPlot.swift in Sources */,
 				AD303C4E1B28491600C4B999 /* NSString+fixDateString.m in Sources */,
 				AD303C321B282FB100C4B999 /* AppConfig.swift in Sources */,
 				AD5025292AE6D8EA007DDF1F /* PersistentContainer.swift in Sources */,
-				AD303C401B28484F00C4B999 /* Vindsiden.xcdatamodeld in Sources */,
 				AD303C421B2848EF00C4B999 /* UIColor+AppColors.swift in Sources */,
 				AD303C331B282FB100C4B999 /* WindManager.swift in Sources */,
 				AD303C301B282FB100C4B999 /* Datamanager.swift in Sources */,
@@ -1362,7 +1318,6 @@
 				AD7BBB491A3F55A100883770 /* AppConfig.swift in Sources */,
 				ADCD425D196E4E42004973E9 /* UIFontDescriptor+textStyle.m in Sources */,
 				ADCD4257196E4E42004973E9 /* NSString+fixDateString.m in Sources */,
-				AD7AA507196E46D800B1518B /* Vindsiden.xcdatamodeld in Sources */,
 				ADE9C4081AAB32840089EB19 /* WindManager.swift in Sources */,
 				ADCD425F196E4E42004973E9 /* UIImage+ImageFromView.m in Sources */,
 				ADCD4253196E4E42004973E9 /* NSObject+performBlockCancel.m in Sources */,
@@ -1378,8 +1333,6 @@
 				AD5025322AE7936B007DDF1F /* Plot.swift in Sources */,
 				ADCD424F196E4E42004973E9 /* NSNumber+Between.m in Sources */,
 				ADCD4255196E4E42004973E9 /* NSSet+Sort.m in Sources */,
-				AD9E40771B8DA11B00FABCF5 /* CDPlot.swift in Sources */,
-				AD9E40651B8C9C1700FABCF5 /* CDStation.swift in Sources */,
 				ADCD4259196E4E42004973E9 /* NSString+isNumeric.m in Sources */,
 				AD5025362AE7A31B007DDF1F /* PersistentContainer.swift in Sources */,
 			);
@@ -1624,8 +1577,6 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = VindsidenApp/VindsidenApp.entitlements;
 				DEVELOPMENT_TEAM = U69P77X647;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "VindsidenApp/VindsidenApp-Prefix.pch";
 				INFOPLIST_FILE = "VindsidenApp/VindsidenApp-Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = Vindsiden;
 				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "Vindsiden need access to be able to store wind information images.";
@@ -1645,7 +1596,6 @@
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) MAINAPP";
 				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_OBJC_BRIDGING_HEADER = "VindsidenApp/VindsidenApp-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
@@ -1661,8 +1611,6 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = VindsidenApp/VindsidenApp.entitlements;
 				DEVELOPMENT_TEAM = U69P77X647;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "VindsidenApp/VindsidenApp-Prefix.pch";
 				INFOPLIST_FILE = "VindsidenApp/VindsidenApp-Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = Vindsiden;
 				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "Vindsiden need access to be able to store wind information images.";
@@ -1683,7 +1631,6 @@
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) MAINAPP";
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_OBJC_BRIDGING_HEADER = "VindsidenApp/VindsidenApp-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
@@ -2460,20 +2407,6 @@
 			productName = WeatherBoxView;
 		};
 /* End XCSwiftPackageProductDependency section */
-
-/* Begin XCVersionGroup section */
-		AD7AA505196E46D800B1518B /* Vindsiden.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				AD1379791B94B912008A4FFB /* Vindsiden 2.xcdatamodel */,
-				AD7AA506196E46D800B1518B /* Vindsiden.xcdatamodel */,
-			);
-			currentVersion = AD1379791B94B912008A4FFB /* Vindsiden 2.xcdatamodel */;
-			path = Vindsiden.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = AD17ED3C1731012200943C33 /* Project object */;
 }

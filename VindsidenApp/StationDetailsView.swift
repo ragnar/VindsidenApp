@@ -9,6 +9,7 @@
 import SwiftUI
 import UIKit
 import SwiftData
+import VindsidenKit
 
 struct StationDetailsView: View {
     @Environment(\.dismiss) private var dismiss

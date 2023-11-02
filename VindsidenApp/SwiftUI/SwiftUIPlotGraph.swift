@@ -86,8 +86,8 @@ struct SwiftUIPlotGraph: View {
         .chartLegend(.hidden)
     }
 
-    func convertedWind(_ base: Float?) -> Double {
-        let value = Double(base ?? -999)
+    func convertedWind(_ base: Double?) -> Double {
+        let value = base ?? -999
         let unit = settings.windUnit
 
         return value.fromUnit(.metersPerSecond).toUnit(unit)

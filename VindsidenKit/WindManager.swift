@@ -8,7 +8,7 @@
 
 import Foundation
 import WatchConnectivity
-import CoreData
+import SwiftData
 import WidgetKit
 import OSLog
 
@@ -112,7 +112,7 @@ public actor WindManager {
     private func update(stationId: Int, name: String, hours: Int) async {
         do {
             let plots = try await PlotFetcher().fetchForStationId(stationId, hours: hours)
-            let num = try await CDPlot.updatePlots(plots)
+            let num = try await Plot.updatePlots(plots, in: PersistentContainer.shared.container.mainContext)
 
             Logger.windManager.debug("Finished with \(num) new plots for \(name).")
         } catch {

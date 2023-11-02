@@ -89,11 +89,10 @@ struct VindsidenWidgetEntryView : View {
         return true
     }
 
-    private func convertedWind(_ base: Float) -> Double {
+    private func convertedWind(_ base: Double) -> Double {
         let unit = settings.windUnit
 
-        return Double(base).fromUnit(.metersPerSecond).toUnit(unit)
-        //        return base.fromUnit(.metersPerSecond).toUnit(unit)
+        return base.fromUnit(.metersPerSecond).toUnit(unit)
     }
 }
 
