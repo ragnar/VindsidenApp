@@ -631,6 +631,7 @@
 			children = (
 				AD539CA11947B5CA002644BD /* VindsidenKit.h */,
 				ADB97FAE2AD9154D00CE7B01 /* UserObservable.swift */,
+				AD8BF73F2AF39E0400A63A9B /* Models */,
 				AD7BBB4F1A40A01900883770 /* Managers */,
 				AD17EDDF173447EC00943C33 /* Communication */,
 				AD539C9F1947B5CA002644BD /* Supporting Files */,
@@ -685,6 +686,17 @@
 			name = Managers;
 			sourceTree = "<group>";
 		};
+		AD8BF73F2AF39E0400A63A9B /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				AD9685A92AD7CA2000608FB3 /* PersistentContainer.swift */,
+				ADEC5BC52ADD038F00A65057 /* PreviewSampleData.swift */,
+				AD96859F2AD6ACE900608FB3 /* Plot.swift */,
+				AD9685A42AD6B8A300608FB3 /* Station.swift */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
 		AD96858D2AD6A40000608FB3 /* VindsidenWidget */ = {
 			isa = PBXGroup;
 			children = (
@@ -695,12 +707,8 @@
 				AD96859D2AD6AB3700608FB3 /* Provider.swift */,
 				ADDE47FF2AE67A02001187F6 /* SinglePlotProvider.swift */,
 				ADDE48012AE67DAC001187F6 /* WidgetData.swift */,
-				AD96859F2AD6ACE900608FB3 /* Plot.swift */,
-				AD9685A42AD6B8A300608FB3 /* Station.swift */,
 				AD9685922AD6A40000608FB3 /* AppIntent.swift */,
 				ADEC5C222ADFFBC600A65057 /* ConfigurationAppIntent.swift */,
-				AD9685A92AD7CA2000608FB3 /* PersistentContainer.swift */,
-				ADEC5BC52ADD038F00A65057 /* PreviewSampleData.swift */,
 				AD9685942AD6A40100608FB3 /* Assets.xcassets */,
 				AD9685962AD6A40100608FB3 /* Info.plist */,
 				ADEC5BD22ADEA73B00A65057 /* Localizable.xcstrings */,
