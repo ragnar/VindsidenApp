@@ -44,22 +44,18 @@ class WCFetcher: NSObject, WCSessionDelegate {
         }
     }
 
-
     // MARK: - WCSession
+
     func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
-
     }
-
 
     func sessionReachabilityDidChange(_ session: WCSession) {
         Logger.debugging.debug("Session: \(session) - \(session.isReachable)")
     }
 
-
     func session(_ session: WCSession, didReceiveMessage message: [String : Any]) {
         Logger.debugging.debug("Message: \(message)")
     }
-
 
     func session(_ session: WCSession, didReceiveApplicationContext applicationContext: [String : Any]) {
         if let unit = applicationContext["unit"] as? Int {
@@ -83,7 +79,7 @@ class WCFetcher: NSObject, WCSessionDelegate {
 
         if let stations = applicationContext["activeStations"] as? [[String:AnyObject]] {
             Task { @MainActor in
-                _ = await CDStation.updateWithWatchContent(stations)
+                _ = await Station.updateWithWatchContent(stations, in: PersistentContainer.shared.container.mainContext)
                 NotificationCenter.default.post( name: Notification.Name.ReceivedStations, object: nil)
             }
         }

@@ -30,7 +30,7 @@ struct SinglePlotProvider: AppIntentTimelineProvider  {
                 .fetch(fetchDescriptor)
                 .compactMap {
                     let intent = ConfigurationAppIntent()
-                    let station = IntentStation(id: Int($0.stationId!), name: $0.stationName ?? "")
+                    let station = IntentStation(id: Int($0.stationId), name: $0.stationName ?? "")
 
                     intent.station = station
 

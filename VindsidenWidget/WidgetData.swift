@@ -23,10 +23,9 @@ extension WidgetData {
         try? await WindManager.shared.fetch(stationId: stationId)
 
         let modelContainer: ModelContainer = PersistentContainer.shared.container
-        let stationId32 = Int32(stationId)
 
         var fetchDescriptor = FetchDescriptor(sortBy: [SortDescriptor(\Plot.plotTime, order: .reverse)])
-        fetchDescriptor.predicate = #Predicate { $0.station?.stationId == stationId32 }
+        fetchDescriptor.predicate = #Predicate { $0.station?.stationId == stationId }
         fetchDescriptor.fetchLimit = 1
 
         guard 
@@ -37,7 +36,8 @@ extension WidgetData {
         }
 
         let name = plot.station?.stationName ?? "Unknown"
-        let stationId: String? = plot.station?.stationId.map { "\($0)" }
+        let stationId: String? = "\(stationId)"
+
         let temp: TempUnit = UserSettings.shared.selectedTempUnit
         let wind: WindUnit = UserSettings.shared.selectedWindUnit
         let direction = DirectionUnit(rawValue: Double(plot.windDir)) ?? .unknown

@@ -82,7 +82,7 @@ public actor WindManager {
     private func activeStations() async -> [(Int, String)] {
         let result = Station.visible(in: PersistentContainer.shared.container.mainContext)
 
-        return result.compactMap { (Int($0.stationId!), $0.stationName!) }
+        return result.compactMap { (Int($0.stationId), $0.stationName!) }
     }
 
     public func fetchHours() -> Int {

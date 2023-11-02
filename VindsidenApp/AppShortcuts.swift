@@ -46,12 +46,11 @@ struct ShowWindStatus: AppIntent {
 
     @MainActor
     func perform() async throws -> some IntentResult & ShowsSnippetView {
-        let stationId32 = Int32(station.id)
-
         try? await WindManager.shared.fetch(stationId: station.id)
 
+        let stationId = station.id
         var fetchDescriptor = FetchDescriptor(sortBy: [SortDescriptor(\Plot.plotTime, order: .reverse)])
-        fetchDescriptor.predicate = #Predicate { $0.station?.stationId == stationId32 }
+        fetchDescriptor.predicate = #Predicate { $0.station?.stationId == stationId }
         fetchDescriptor.fetchLimit = 1
 
         if let plots = try? PersistentContainer.shared.container.mainContext.fetch(fetchDescriptor), let plot = plots.first {

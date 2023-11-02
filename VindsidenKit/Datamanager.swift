@@ -160,7 +160,7 @@ extension DataManager {
         search.contentDescription = station.city
         search.setValue(station.stationName as? NSString, forCustomKey: lookupKey)
 
-        let url = "vindsiden://station/\(station.stationId!)"
+        let url = "vindsiden://station/\(station.stationId)"
         let item = CSSearchableItem(uniqueIdentifier: url, domainIdentifier: AppConfig.Bundle.appName, attributeSet: search)
         let stationName = station.stationName
 
@@ -176,7 +176,7 @@ extension DataManager {
         }
 
         let stationName = station.stationName
-        let url = "vindsiden://station/\(station.stationId!)"
+        let url = "vindsiden://station/\(station.stationId)"
 
         CSSearchableIndex.default().deleteSearchableItems(withIdentifiers: [url]) { (error: Error?) -> Void in
             Logger.persistence.debug("Removed station: \(String(describing: stationName)) with error: \(String(describing: error?.localizedDescription))")

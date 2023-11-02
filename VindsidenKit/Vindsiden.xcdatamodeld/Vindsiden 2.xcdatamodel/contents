@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="22225" systemVersion="23A344" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithSwiftData="YES" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="22225" systemVersion="23B74" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithSwiftData="YES" userDefinedModelVersionIdentifier="">
     <entity name="Plot" representedClassName="CDPlot" syncable="YES" codeGenerationType="category">
         <attribute name="dataId" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO"/>
         <attribute name="plotTime" attributeType="Date" defaultDateTimeInterval="718713600" usesScalarValueType="NO"/>
@@ -26,8 +26,8 @@
         <attribute name="lastMeasurement" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="lastRefreshed" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="order" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="NO"/>
-        <attribute name="stationId" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="NO"/>
-        <attribute name="stationName" optional="YES" attributeType="String"/>
+        <attribute name="stationId" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="stationName" attributeType="String"/>
         <attribute name="stationText" optional="YES" attributeType="String"/>
         <attribute name="statusMessage" optional="YES" attributeType="String"/>
         <attribute name="webCamImage" optional="YES" attributeType="String"/>

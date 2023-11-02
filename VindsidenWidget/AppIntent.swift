@@ -40,8 +40,8 @@ struct StationQuery: EntityQuery {
                 .container
                 .mainContext
                 .fetch(fetchDescriptor)
-                .filter { identifiers.contains(Int($0.stationId!)) }
-                .compactMap { IntentStation(id: Int($0.stationId!), name: $0.stationName ?? "") }
+                .filter { identifiers.contains(Int($0.stationId)) }
+                .compactMap { IntentStation(id: Int($0.stationId), name: $0.stationName ?? "") }
         }.value
     }
 
@@ -50,7 +50,7 @@ struct StationQuery: EntityQuery {
             var fetchDescriptor = FetchDescriptor(sortBy: [SortDescriptor(\Station.stationName, order: .forward)])
             fetchDescriptor.predicate = #Predicate { $0.isHidden == false }
 
-            return try PersistentContainer.shared.container.mainContext.fetch(fetchDescriptor).compactMap { IntentStation(id: Int($0.stationId!), name: $0.stationName ?? "") }
+            return try PersistentContainer.shared.container.mainContext.fetch(fetchDescriptor).compactMap { IntentStation(id: Int($0.stationId), name: $0.stationName ?? "") }
         }.value
     }
 

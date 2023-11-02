@@ -35,7 +35,7 @@ public final class Station {
     public var lastRefreshed: Date?
     public var order: Int16 = 0
     @Attribute(.unique)
-    public var stationId: Int32? = 0
+    public var stationId: Int = 0
     public var stationName: String?
     public var stationText: String?
     public var statusMessage: String?
@@ -65,7 +65,7 @@ extension Station {
         }
 
         let name = stationName ?? "Unknown"
-        let stationId: String? = stationId.map { "\($0)" }
+        let stationId: String? = "\(stationId)"
         let temp: TempUnit = UserSettings.shared.selectedTempUnit
         let wind: WindUnit = UserSettings.shared.selectedWindUnit
         let direction = DirectionUnit(rawValue: Double(plot.windDir)) ?? .unknown
@@ -107,7 +107,7 @@ extension Station {
 
     @MainActor
     public static func existing(for stationId: Int, in modelContext: ModelContext) -> Station? {
-        let station32 = Int32(stationId)
+        let station32 = Int(stationId)
         var fetchDescriptor = FetchDescriptor(sortBy: [SortDescriptor(\Station.order, order: .forward)])
         fetchDescriptor.predicate = #Predicate { $0.stationId == station32 }
         fetchDescriptor.fetchLimit = 1
@@ -154,7 +154,11 @@ extension Station {
 
 extension Station {
     @MainActor
-    public class func updateWithFetchedContent(_ content: [[String:String]], in modelContext: ModelContext) -> Bool {
+    public class func updateWithFetchedContent(_ content: [[String: String]], in modelContext: ModelContext) -> Bool {
+        let stationIds = content.map { return Int($0["StationID"]!)! }
+
+        Station.removeStaleStations(stationIds, in: modelContext)
+
         var inserted = false
         var order = Station.maxOrder(in: modelContext) ?? 200
 
@@ -198,8 +202,56 @@ extension Station {
         return inserted
     }
 
-    func updateWithContent(_ content: [String:String], stationId: Int) {
-        self.stationId = Int32(stationId)
+    @MainActor
+    public class func updateWithWatchContent(_ content: [[String: AnyObject]], in modelContext: ModelContext) async {
+        let stationIds = content.map { return $0["stationId"] as! Int }
+
+        Station.removeStaleStations(stationIds, in: modelContext)
+
+        for stationContent in content {
+            guard let stationId = stationContent["stationId"] as? Int else {
+                Logger.persistence.debug("No stationId")
+                continue
+            }
+
+            let station: Station
+
+            if let existing = Station.existing(for: stationId, in: modelContext) {
+                station = existing
+            } else {
+                station = Station()
+                modelContext.insert(station)
+            }
+
+            station.updateWithWatchContent(stationContent)
+        }
+
+        do {
+            try modelContext.save()
+        } catch {
+            Logger.persistence.error("Save failed: \(error.localizedDescription)")
+        }
+    }
+
+    @MainActor
+    public class func removeStaleStations(_ stations: [Int], in modelContext: ModelContext) {
+        do {
+            let predicate = #Predicate<Station> { station in
+                stations.contains(station.stationId) == false
+            }
+
+            try modelContext.delete(model: Station.self, where: predicate)
+
+            Logger.persistence.debug("Deleted \(modelContext.deletedModelsArray.count) stations")
+
+            try modelContext.save()
+        } catch {
+            Logger.persistence.error("Deleting failed: \(error.localizedDescription)")
+        }
+    }
+
+    func updateWithContent(_ content: [String: String], stationId: Int) {
+        self.stationId = stationId
 
         if let name = content["Name"] {
             self.stationName = name.trimmingCharacters(in: .whitespacesAndNewlines)
@@ -247,6 +299,32 @@ extension Station {
 
         if let lastMeasurement = content["LastMeasurementTime"] {
             self.lastMeasurement = DataManager.shared.dateFromString(lastMeasurement)
+        }
+    }
+
+    func updateWithWatchContent(_ content: [String:AnyObject] ) {
+        if let hidden = content["hidden"] as? Bool {
+            self.isHidden = hidden
+        }
+
+        if let order = content["order"] as? Int16 {
+            self.order = order
+        }
+
+        if let stationId = content["stationId"] as? Int {
+            self.stationId = stationId
+        }
+
+        if let stationName = content["stationName"] as? String {
+            self.stationName = stationName
+        }
+
+        if let lat = content["latitude"] as? Double {
+            self.coordinateLat = lat
+        }
+
+        if let lon = content["longitude"] as? Double {
+            self.coordinateLon = lon
         }
     }
 }
