@@ -23,14 +23,13 @@ class Connectivity: NSObject, WCSessionDelegate {
     }
 
     func activate() -> Void {
-        Logger.debugging.debug("ACTIVATE")
-
-        if WCSession.isSupported() {
-            session.delegate = self
-            session.activate()
-        } else {
+        guard WCSession.isSupported() else {
             Logger.debugging.debug("WCSession is not supported")
+            return
         }
+
+        session.delegate = self
+        session.activate()
 
         if session.hasContentPending {
             Logger.debugging.debug("application context \(self.session.applicationContext)")
@@ -40,7 +39,6 @@ class Connectivity: NSObject, WCSessionDelegate {
         }
     }
 
-#if !os(watchOS)
     func sessionDidBecomeInactive(_ session: WCSession) {
         Logger.debugging.debug("did become active")
     }
@@ -48,7 +46,6 @@ class Connectivity: NSObject, WCSessionDelegate {
     func sessionDidDeactivate(_ session: WCSession) {
         Logger.debugging.debug("did deactivate")
     }
-#endif
 
     func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
         Logger.debugging.debug("activation")
@@ -77,19 +74,10 @@ class Connectivity: NSObject, WCSessionDelegate {
 
     @MainActor
     func updateApplicationContextToWatch() {
-#if os(iOS)
         if session.isPaired == false || session.isWatchAppInstalled == false {
             Logger.debugging.debug("Watch is not present: \(self.session.isPaired) - \(self.session.isWatchAppInstalled)")
             return
         }
-#endif
-
-#if os(watchOS)
-        if session.isReachable == false {
-            print("Companion app not reachable")
-            return
-        }
-#endif
 
         if session.activationState != .activated {
             sendData = true
@@ -111,17 +99,12 @@ class Connectivity: NSObject, WCSessionDelegate {
             ])
         }
 
-        var context: [String: Any] = [
+        let context: [String: Any] = [
             "activeStations": stations,
             "units": transferUnits(),
             "unit": AppConfig.sharedConfiguration.applicationUserDefaults.integer(forKey: "selectedUnit"),
+            "forcerIOS": Date.now.timeIntervalSinceReferenceDate,
         ]
-
-#if os(watchOS)
-        context["forcerWatch"] = Date().timeIntervalSince1970
-#else
-        context["forcerIOS"] = Date().timeIntervalSinceReferenceDate
-#endif
 
         do {
             Logger.debugging.debug("about to send station data \(context)")
@@ -133,9 +116,13 @@ class Connectivity: NSObject, WCSessionDelegate {
     }
 
     func transferUnits() -> [String: Int] {
+        guard let settings = settings else {
+            fatalError("Need settings")
+        }
+
         return [
-            "windUnit": UserSettings.shared.selectedWindUnit.rawValue,
-            "tempUnit": UserSettings.shared.selectedTempUnit.rawValue,
+            "windUnit": settings.windUnit.rawValue,
+            "tempUnit": settings.tempUnit.rawValue,
         ]
     }
 }
