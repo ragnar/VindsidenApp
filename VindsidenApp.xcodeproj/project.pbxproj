@@ -3,12 +3,11 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 60;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		AD07B2C11779E90A004BC24C /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AD07B2C01779E90A004BC24C /* Media.xcassets */; };
-		AD17ED611731012200943C33 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AD17ED5F1731012200943C33 /* MainStoryboard.storyboard */; };
 		AD1B45881CAEE9F200F171DB /* IndexRequestHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD66F5641CAEBA8B001A2755 /* IndexRequestHandler.swift */; };
 		AD2BB34F19C7718600349495 /* VindsidenAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD2BB34E19C7718600349495 /* VindsidenAppTests.swift */; };
 		AD303C2B1B282DC800C4B999 /* VindsidenWatchKit.h in Headers */ = {isa = PBXBuildFile; fileRef = AD303C2A1B282DC800C4B999 /* VindsidenWatchKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -29,7 +28,6 @@
 		AD303C4D1B28491600C4B999 /* NSSet+Sort.m in Sources */ = {isa = PBXBuildFile; fileRef = ADCD4243196E4E42004973E9 /* NSSet+Sort.m */; };
 		AD303C4E1B28491600C4B999 /* NSString+fixDateString.m in Sources */ = {isa = PBXBuildFile; fileRef = ADCD4245196E4E42004973E9 /* NSString+fixDateString.m */; };
 		AD303C4F1B28491600C4B999 /* NSString+isNumeric.m in Sources */ = {isa = PBXBuildFile; fileRef = ADCD4247196E4E42004973E9 /* NSString+isNumeric.m */; };
-		AD4DEA7719CB7528002A220B /* RHCNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD4DEA7619CB7528002A220B /* RHCNavigationViewController.swift */; };
 		AD5025172AE6D3AA007DDF1F /* WatchAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD5025162AE6D3AA007DDF1F /* WatchAppApp.swift */; };
 		AD5025192AE6D3AA007DDF1F /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD5025182AE6D3AA007DDF1F /* ContentView.swift */; };
 		AD50251B2AE6D3AB007DDF1F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AD50251A2AE6D3AB007DDF1F /* Assets.xcassets */; };
@@ -122,7 +120,6 @@
 		ADCD425D196E4E42004973E9 /* UIFontDescriptor+textStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = ADCD424B196E4E42004973E9 /* UIFontDescriptor+textStyle.m */; };
 		ADCD425E196E4E42004973E9 /* UIImage+ImageFromView.h in Headers */ = {isa = PBXBuildFile; fileRef = ADCD424C196E4E42004973E9 /* UIImage+ImageFromView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		ADCD425F196E4E42004973E9 /* UIImage+ImageFromView.m in Sources */ = {isa = PBXBuildFile; fileRef = ADCD424D196E4E42004973E9 /* UIImage+ImageFromView.m */; };
-		ADDB4F5019CB68F1005D5D38 /* RHCAlertManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADDB4F4F19CB68F1005D5D38 /* RHCAlertManager.swift */; };
 		ADDE47F82AE15152001187F6 /* AppShortcuts.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADDE47F72AE15152001187F6 /* AppShortcuts.swift */; };
 		ADDE47FC2AE67802001187F6 /* MainWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADDE47FB2AE67802001187F6 /* MainWidgetView.swift */; };
 		ADDE47FE2AE6783D001187F6 /* VindsidenWidgetEntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADDE47FD2AE6783D001187F6 /* VindsidenWidgetEntryView.swift */; };
@@ -290,7 +287,6 @@
 		9E713D0A7C32B35097808D07 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AD07B2C01779E90A004BC24C /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Media.xcassets; sourceTree = "<group>"; };
 		AD0A242524688DD40072B93F /* CoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreServices.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk/System/Library/Frameworks/CoreServices.framework; sourceTree = DEVELOPER_DIR; };
-		AD146F4C1741251E00205BB9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
 		AD17ED441731012200943C33 /* VindsidenApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VindsidenApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AD17ED471731012200943C33 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		AD17ED491731012200943C33 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -311,7 +307,6 @@
 		AD303C281B282DC800C4B999 /* VindsidenWatchKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = VindsidenWatchKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AD303C2A1B282DC800C4B999 /* VindsidenWatchKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VindsidenWatchKit.h; sourceTree = "<group>"; };
 		AD303C2C1B282DC800C4B999 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		AD4DEA7619CB7528002A220B /* RHCNavigationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RHCNavigationViewController.swift; sourceTree = "<group>"; };
 		AD5025142AE6D3AA007DDF1F /* WatchApp Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "WatchApp Watch App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		AD5025162AE6D3AA007DDF1F /* WatchAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchAppApp.swift; sourceTree = "<group>"; };
 		AD5025182AE6D3AA007DDF1F /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -367,7 +362,6 @@
 		ADB97FAC2AD914D900CE7B01 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		ADB97FAE2AD9154D00CE7B01 /* UserObservable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserObservable.swift; sourceTree = "<group>"; };
 		ADB97FB02AD91E6E00CE7B01 /* StationPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationPickerView.swift; sourceTree = "<group>"; };
-		ADB97FB82AD92F8800CE7B01 /* mul */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; name = mul; path = mul.lproj/MainStoryboard.xcstrings; sourceTree = "<group>"; };
 		ADB97FB92AD92F8800CE7B01 /* InfoPlist.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = InfoPlist.xcstrings; sourceTree = "<group>"; };
 		ADB97FBE2AD92F8900CE7B01 /* InfoPlist.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = InfoPlist.xcstrings; sourceTree = "<group>"; };
 		ADB97FC22AD9306700CE7B01 /* InfoPlist.xcstrings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json.xcstrings; path = InfoPlist.xcstrings; sourceTree = "<group>"; };
@@ -393,7 +387,6 @@
 		ADCD424B196E4E42004973E9 /* UIFontDescriptor+textStyle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIFontDescriptor+textStyle.m"; sourceTree = "<group>"; };
 		ADCD424C196E4E42004973E9 /* UIImage+ImageFromView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ImageFromView.h"; sourceTree = "<group>"; };
 		ADCD424D196E4E42004973E9 /* UIImage+ImageFromView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ImageFromView.m"; sourceTree = "<group>"; };
-		ADDB4F4F19CB68F1005D5D38 /* RHCAlertManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RHCAlertManager.swift; sourceTree = "<group>"; };
 		ADDE47F72AE15152001187F6 /* AppShortcuts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppShortcuts.swift; sourceTree = "<group>"; };
 		ADDE47FB2AE67802001187F6 /* MainWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainWidgetView.swift; sourceTree = "<group>"; };
 		ADDE47FD2AE6783D001187F6 /* VindsidenWidgetEntryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VindsidenWidgetEntryView.swift; sourceTree = "<group>"; };
@@ -566,8 +559,6 @@
 				AD17EDE41734486D00943C33 /* Station Details View Controller */,
 				AD17EDE51734487F00943C33 /* Settings */,
 				AD17ED4E1731012200943C33 /* Supporting Files */,
-				AD4DEA7619CB7528002A220B /* RHCNavigationViewController.swift */,
-				ADDB4F4F19CB68F1005D5D38 /* RHCAlertManager.swift */,
 				AD50256B2AE92DB5007DDF1F /* Connectivity.swift */,
 			);
 			path = VindsidenApp;
@@ -580,7 +571,6 @@
 				ADB97FC22AD9306700CE7B01 /* InfoPlist.xcstrings */,
 				AD07B2C01779E90A004BC24C /* Media.xcassets */,
 				AD539C951947B2B1002644BD /* VindsidenApp.entitlements */,
-				AD17ED5F1731012200943C33 /* MainStoryboard.storyboard */,
 				AD17ED4F1731012200943C33 /* VindsidenApp-Info.plist */,
 				AD9685822AD6883B00608FB3 /* Launch Screen.storyboard */,
 			);
@@ -1145,7 +1135,6 @@
 				AD9685832AD6883B00608FB3 /* Launch Screen.storyboard in Resources */,
 				ADB97FC52AD9309B00CE7B01 /* Localizable.xcstrings in Resources */,
 				ADB97FC32AD9306700CE7B01 /* InfoPlist.xcstrings in Resources */,
-				AD17ED611731012200943C33 /* MainStoryboard.storyboard in Resources */,
 				AD07B2C11779E90A004BC24C /* Media.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1237,10 +1226,8 @@
 				ADE6966D2AF0E34E00FB35EF /* InfoView.swift in Sources */,
 				AD50256C2AE92DB5007DDF1F /* Connectivity.swift in Sources */,
 				ADEC5BC82ADD1BD600A65057 /* SwiftUIPlotGraph.swift in Sources */,
-				AD4DEA7719CB7528002A220B /* RHCNavigationViewController.swift in Sources */,
 				AD1B45881CAEE9F200F171DB /* IndexRequestHandler.swift in Sources */,
 				ADEC5BCD2ADEA00A00A65057 /* AppIntent.swift in Sources */,
-				ADDB4F5019CB68F1005D5D38 /* RHCAlertManager.swift in Sources */,
 				ADB97FAD2AD914D900CE7B01 /* SettingsView.swift in Sources */,
 				ADEC5BD72ADEB1CD00A65057 /* SwipeToDismissModifier.swift in Sources */,
 			);
@@ -1430,18 +1417,6 @@
 		};
 /* End PBXTargetDependency section */
 
-/* Begin PBXVariantGroup section */
-		AD17ED5F1731012200943C33 /* MainStoryboard.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				AD146F4C1741251E00205BB9 /* Base */,
-				ADB97FB82AD92F8800CE7B01 /* mul */,
-			);
-			name = MainStoryboard.storyboard;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
-
 /* Begin XCBuildConfiguration section */
 		AD17ED7A1731012200943C33 /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -1581,7 +1556,6 @@
 				INFOPLIST_KEY_CFBundleDisplayName = Vindsiden;
 				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "Vindsiden need access to be able to store wind information images.";
 				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen";
-				INFOPLIST_KEY_UIMainStoryboardFile = MainStoryboard;
 				INFOPLIST_KEY_UIRequiredDeviceCapabilities = armv7;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
@@ -1615,7 +1589,6 @@
 				INFOPLIST_KEY_CFBundleDisplayName = Vindsiden;
 				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "Vindsiden need access to be able to store wind information images.";
 				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen";
-				INFOPLIST_KEY_UIMainStoryboardFile = MainStoryboard;
 				INFOPLIST_KEY_UIRequiredDeviceCapabilities = armv7;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
