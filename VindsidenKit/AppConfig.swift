@@ -149,22 +149,7 @@ open class AppConfig : NSObject {
         return false
     }
 
-
-    @objc open func relativeDate( _ dateOrNil: Date?) -> String {
-        var dateToUse: Date
-
-        if let date = dateOrNil {
-            dateToUse = (date as NSDate).earlierDate(Date())
-        } else {
-            dateToUse = Date()
-        }
-
-        return dateToUse.releativeString()
-    }
-
-
     // MARK: - Review
-
 
 #if os(iOS)
     open func presentReviewControllerIfCriteriaIsMet(in scene: UIWindowScene) {

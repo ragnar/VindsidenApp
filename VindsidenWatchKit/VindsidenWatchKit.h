@@ -15,11 +15,3 @@ FOUNDATION_EXPORT double VindsidenWatchKitVersionNumber;
 FOUNDATION_EXPORT const unsigned char VindsidenWatchKitVersionString[];
 
 // In this header, you should import all the public headers of your framework using statements like #import <VindsidenWatchKit/PublicHeader.h>
-
-
-#import <VindsidenWatchKit/NSNumber+Between.h>
-#import <VindsidenWatchKit/NSNumber+Convertion.h>
-#import <VindsidenWatchKit/NSObject+performBlockCancel.h>
-#import <VindsidenWatchKit/NSSet+Sort.h>
-#import <VindsidenWatchKit/NSString+fixDateString.h>
-#import <VindsidenWatchKit/NSString+isNumeric.h>

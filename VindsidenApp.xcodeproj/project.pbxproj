@@ -15,19 +15,6 @@
 		AD303C311B282FB100C4B999 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD7BBB461A3F53F400883770 /* Logger.swift */; };
 		AD303C321B282FB100C4B999 /* AppConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD7BBB481A3F55A100883770 /* AppConfig.swift */; };
 		AD303C331B282FB100C4B999 /* WindManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADE9C4071AAB32840089EB19 /* WindManager.swift */; };
-		AD303C421B2848EF00C4B999 /* UIColor+AppColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADBEA4CE1A07ECF600B168BF /* UIColor+AppColors.swift */; };
-		AD303C431B28490600C4B999 /* NSNumber+Between.h in Headers */ = {isa = PBXBuildFile; fileRef = ADCD423C196E4E42004973E9 /* NSNumber+Between.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		AD303C441B28490600C4B999 /* NSNumber+Convertion.h in Headers */ = {isa = PBXBuildFile; fileRef = ADCD423E196E4E42004973E9 /* NSNumber+Convertion.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		AD303C451B28490600C4B999 /* NSObject+performBlockCancel.h in Headers */ = {isa = PBXBuildFile; fileRef = ADCD4240196E4E42004973E9 /* NSObject+performBlockCancel.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		AD303C461B28490600C4B999 /* NSSet+Sort.h in Headers */ = {isa = PBXBuildFile; fileRef = ADCD4242196E4E42004973E9 /* NSSet+Sort.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		AD303C471B28490600C4B999 /* NSString+fixDateString.h in Headers */ = {isa = PBXBuildFile; fileRef = ADCD4244196E4E42004973E9 /* NSString+fixDateString.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		AD303C481B28490600C4B999 /* NSString+isNumeric.h in Headers */ = {isa = PBXBuildFile; fileRef = ADCD4246196E4E42004973E9 /* NSString+isNumeric.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		AD303C4A1B28491600C4B999 /* NSNumber+Between.m in Sources */ = {isa = PBXBuildFile; fileRef = ADCD423D196E4E42004973E9 /* NSNumber+Between.m */; };
-		AD303C4B1B28491600C4B999 /* NSNumber+Convertion.m in Sources */ = {isa = PBXBuildFile; fileRef = ADCD423F196E4E42004973E9 /* NSNumber+Convertion.m */; };
-		AD303C4C1B28491600C4B999 /* NSObject+performBlockCancel.m in Sources */ = {isa = PBXBuildFile; fileRef = ADCD4241196E4E42004973E9 /* NSObject+performBlockCancel.m */; };
-		AD303C4D1B28491600C4B999 /* NSSet+Sort.m in Sources */ = {isa = PBXBuildFile; fileRef = ADCD4243196E4E42004973E9 /* NSSet+Sort.m */; };
-		AD303C4E1B28491600C4B999 /* NSString+fixDateString.m in Sources */ = {isa = PBXBuildFile; fileRef = ADCD4245196E4E42004973E9 /* NSString+fixDateString.m */; };
-		AD303C4F1B28491600C4B999 /* NSString+isNumeric.m in Sources */ = {isa = PBXBuildFile; fileRef = ADCD4247196E4E42004973E9 /* NSString+isNumeric.m */; };
 		AD5025172AE6D3AA007DDF1F /* WatchAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD5025162AE6D3AA007DDF1F /* WatchAppApp.swift */; };
 		AD5025192AE6D3AA007DDF1F /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD5025182AE6D3AA007DDF1F /* ContentView.swift */; };
 		AD50251B2AE6D3AB007DDF1F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AD50251A2AE6D3AB007DDF1F /* Assets.xcassets */; };
@@ -87,8 +74,6 @@
 		AD9E406D1B8D8A6900FABCF5 /* StationFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD9E406B1B8D8A6900FABCF5 /* StationFetcher.swift */; };
 		AD9E40731B8D9BCD00FABCF5 /* PlotFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD9E40721B8D9BCD00FABCF5 /* PlotFetcher.swift */; };
 		AD9E40741B8D9BCD00FABCF5 /* PlotFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD9E40721B8D9BCD00FABCF5 /* PlotFetcher.swift */; };
-		AD9EA2B81B8F1A6400F653FE /* NSDate+RelativeDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD9EA2B71B8F1A6400F653FE /* NSDate+RelativeDate.swift */; };
-		AD9EA2B91B8F1A6400F653FE /* NSDate+RelativeDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD9EA2B71B8F1A6400F653FE /* NSDate+RelativeDate.swift */; };
 		ADB97FAD2AD914D900CE7B01 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB97FAC2AD914D900CE7B01 /* SettingsView.swift */; };
 		ADB97FAF2AD9154D00CE7B01 /* UserObservable.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB97FAE2AD9154D00CE7B01 /* UserObservable.swift */; };
 		ADB97FB12AD91E6E00CE7B01 /* StationPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB97FB02AD91E6E00CE7B01 /* StationPickerView.swift */; };
@@ -99,27 +84,6 @@
 		ADB97FBF2AD92F8900CE7B01 /* InfoPlist.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = ADB97FBE2AD92F8900CE7B01 /* InfoPlist.xcstrings */; };
 		ADB97FC32AD9306700CE7B01 /* InfoPlist.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = ADB97FC22AD9306700CE7B01 /* InfoPlist.xcstrings */; };
 		ADB97FC52AD9309B00CE7B01 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = ADB97FC42AD9309B00CE7B01 /* Localizable.xcstrings */; };
-		ADB97FC82AD930EC00CE7B01 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = ADB97FC62AD930EC00CE7B01 /* Localizable.xcstrings */; };
-		ADB97FC92AD930EC00CE7B01 /* InfoPlist.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = ADB97FC72AD930EC00CE7B01 /* InfoPlist.xcstrings */; };
-		ADBEA4CF1A07ECF600B168BF /* UIColor+AppColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADBEA4CE1A07ECF600B168BF /* UIColor+AppColors.swift */; };
-		ADCD424E196E4E42004973E9 /* NSNumber+Between.h in Headers */ = {isa = PBXBuildFile; fileRef = ADCD423C196E4E42004973E9 /* NSNumber+Between.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		ADCD424F196E4E42004973E9 /* NSNumber+Between.m in Sources */ = {isa = PBXBuildFile; fileRef = ADCD423D196E4E42004973E9 /* NSNumber+Between.m */; };
-		ADCD4250196E4E42004973E9 /* NSNumber+Convertion.h in Headers */ = {isa = PBXBuildFile; fileRef = ADCD423E196E4E42004973E9 /* NSNumber+Convertion.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		ADCD4251196E4E42004973E9 /* NSNumber+Convertion.m in Sources */ = {isa = PBXBuildFile; fileRef = ADCD423F196E4E42004973E9 /* NSNumber+Convertion.m */; };
-		ADCD4252196E4E42004973E9 /* NSObject+performBlockCancel.h in Headers */ = {isa = PBXBuildFile; fileRef = ADCD4240196E4E42004973E9 /* NSObject+performBlockCancel.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		ADCD4253196E4E42004973E9 /* NSObject+performBlockCancel.m in Sources */ = {isa = PBXBuildFile; fileRef = ADCD4241196E4E42004973E9 /* NSObject+performBlockCancel.m */; };
-		ADCD4254196E4E42004973E9 /* NSSet+Sort.h in Headers */ = {isa = PBXBuildFile; fileRef = ADCD4242196E4E42004973E9 /* NSSet+Sort.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		ADCD4255196E4E42004973E9 /* NSSet+Sort.m in Sources */ = {isa = PBXBuildFile; fileRef = ADCD4243196E4E42004973E9 /* NSSet+Sort.m */; };
-		ADCD4256196E4E42004973E9 /* NSString+fixDateString.h in Headers */ = {isa = PBXBuildFile; fileRef = ADCD4244196E4E42004973E9 /* NSString+fixDateString.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		ADCD4257196E4E42004973E9 /* NSString+fixDateString.m in Sources */ = {isa = PBXBuildFile; fileRef = ADCD4245196E4E42004973E9 /* NSString+fixDateString.m */; };
-		ADCD4258196E4E42004973E9 /* NSString+isNumeric.h in Headers */ = {isa = PBXBuildFile; fileRef = ADCD4246196E4E42004973E9 /* NSString+isNumeric.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		ADCD4259196E4E42004973E9 /* NSString+isNumeric.m in Sources */ = {isa = PBXBuildFile; fileRef = ADCD4247196E4E42004973E9 /* NSString+isNumeric.m */; };
-		ADCD425A196E4E42004973E9 /* UIFont+textStyle.h in Headers */ = {isa = PBXBuildFile; fileRef = ADCD4248196E4E42004973E9 /* UIFont+textStyle.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		ADCD425B196E4E42004973E9 /* UIFont+textStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = ADCD4249196E4E42004973E9 /* UIFont+textStyle.m */; };
-		ADCD425C196E4E42004973E9 /* UIFontDescriptor+textStyle.h in Headers */ = {isa = PBXBuildFile; fileRef = ADCD424A196E4E42004973E9 /* UIFontDescriptor+textStyle.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		ADCD425D196E4E42004973E9 /* UIFontDescriptor+textStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = ADCD424B196E4E42004973E9 /* UIFontDescriptor+textStyle.m */; };
-		ADCD425E196E4E42004973E9 /* UIImage+ImageFromView.h in Headers */ = {isa = PBXBuildFile; fileRef = ADCD424C196E4E42004973E9 /* UIImage+ImageFromView.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		ADCD425F196E4E42004973E9 /* UIImage+ImageFromView.m in Sources */ = {isa = PBXBuildFile; fileRef = ADCD424D196E4E42004973E9 /* UIImage+ImageFromView.m */; };
 		ADDE47F82AE15152001187F6 /* AppShortcuts.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADDE47F72AE15152001187F6 /* AppShortcuts.swift */; };
 		ADDE47FC2AE67802001187F6 /* MainWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADDE47FB2AE67802001187F6 /* MainWidgetView.swift */; };
 		ADDE47FE2AE6783D001187F6 /* VindsidenWidgetEntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADDE47FD2AE6783D001187F6 /* VindsidenWidgetEntryView.swift */; };
@@ -357,7 +321,6 @@
 		AD9685A92AD7CA2000608FB3 /* PersistentContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistentContainer.swift; sourceTree = "<group>"; };
 		AD9E406B1B8D8A6900FABCF5 /* StationFetcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StationFetcher.swift; path = VindsidenKit/StationFetcher.swift; sourceTree = SOURCE_ROOT; };
 		AD9E40721B8D9BCD00FABCF5 /* PlotFetcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlotFetcher.swift; path = VindsidenKit/PlotFetcher.swift; sourceTree = SOURCE_ROOT; };
-		AD9EA2B71B8F1A6400F653FE /* NSDate+RelativeDate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSDate+RelativeDate.swift"; sourceTree = "<group>"; };
 		ADB7BA411B3A98E9000921E0 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = Platforms/WatchOS.platform/Developer/SDKs/WatchOS2.0.sdk/System/Library/Frameworks/CoreGraphics.framework; sourceTree = DEVELOPER_DIR; };
 		ADB97FAC2AD914D900CE7B01 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		ADB97FAE2AD9154D00CE7B01 /* UserObservable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserObservable.swift; sourceTree = "<group>"; };
@@ -366,27 +329,6 @@
 		ADB97FBE2AD92F8900CE7B01 /* InfoPlist.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = InfoPlist.xcstrings; sourceTree = "<group>"; };
 		ADB97FC22AD9306700CE7B01 /* InfoPlist.xcstrings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json.xcstrings; path = InfoPlist.xcstrings; sourceTree = "<group>"; };
 		ADB97FC42AD9309B00CE7B01 /* Localizable.xcstrings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
-		ADB97FC62AD930EC00CE7B01 /* Localizable.xcstrings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
-		ADB97FC72AD930EC00CE7B01 /* InfoPlist.xcstrings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json.xcstrings; path = InfoPlist.xcstrings; sourceTree = "<group>"; };
-		ADBEA4CE1A07ECF600B168BF /* UIColor+AppColors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+AppColors.swift"; sourceTree = "<group>"; };
-		ADCD423C196E4E42004973E9 /* NSNumber+Between.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSNumber+Between.h"; sourceTree = "<group>"; };
-		ADCD423D196E4E42004973E9 /* NSNumber+Between.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSNumber+Between.m"; sourceTree = "<group>"; };
-		ADCD423E196E4E42004973E9 /* NSNumber+Convertion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSNumber+Convertion.h"; sourceTree = "<group>"; };
-		ADCD423F196E4E42004973E9 /* NSNumber+Convertion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSNumber+Convertion.m"; sourceTree = "<group>"; };
-		ADCD4240196E4E42004973E9 /* NSObject+performBlockCancel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+performBlockCancel.h"; sourceTree = "<group>"; };
-		ADCD4241196E4E42004973E9 /* NSObject+performBlockCancel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+performBlockCancel.m"; sourceTree = "<group>"; };
-		ADCD4242196E4E42004973E9 /* NSSet+Sort.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSSet+Sort.h"; sourceTree = "<group>"; };
-		ADCD4243196E4E42004973E9 /* NSSet+Sort.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSSet+Sort.m"; sourceTree = "<group>"; };
-		ADCD4244196E4E42004973E9 /* NSString+fixDateString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+fixDateString.h"; sourceTree = "<group>"; };
-		ADCD4245196E4E42004973E9 /* NSString+fixDateString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+fixDateString.m"; sourceTree = "<group>"; };
-		ADCD4246196E4E42004973E9 /* NSString+isNumeric.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+isNumeric.h"; sourceTree = "<group>"; };
-		ADCD4247196E4E42004973E9 /* NSString+isNumeric.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+isNumeric.m"; sourceTree = "<group>"; };
-		ADCD4248196E4E42004973E9 /* UIFont+textStyle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIFont+textStyle.h"; sourceTree = "<group>"; };
-		ADCD4249196E4E42004973E9 /* UIFont+textStyle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIFont+textStyle.m"; sourceTree = "<group>"; };
-		ADCD424A196E4E42004973E9 /* UIFontDescriptor+textStyle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIFontDescriptor+textStyle.h"; sourceTree = "<group>"; };
-		ADCD424B196E4E42004973E9 /* UIFontDescriptor+textStyle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIFontDescriptor+textStyle.m"; sourceTree = "<group>"; };
-		ADCD424C196E4E42004973E9 /* UIImage+ImageFromView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ImageFromView.h"; sourceTree = "<group>"; };
-		ADCD424D196E4E42004973E9 /* UIImage+ImageFromView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ImageFromView.m"; sourceTree = "<group>"; };
 		ADDE47F72AE15152001187F6 /* AppShortcuts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppShortcuts.swift; sourceTree = "<group>"; };
 		ADDE47FB2AE67802001187F6 /* MainWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainWidgetView.swift; sourceTree = "<group>"; };
 		ADDE47FD2AE6783D001187F6 /* VindsidenWidgetEntryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VindsidenWidgetEntryView.swift; sourceTree = "<group>"; };
@@ -688,11 +630,10 @@
 			isa = PBXGroup;
 			children = (
 				AD539CA11947B5CA002644BD /* VindsidenKit.h */,
+				ADB97FAE2AD9154D00CE7B01 /* UserObservable.swift */,
 				AD7BBB4F1A40A01900883770 /* Managers */,
 				AD17EDDF173447EC00943C33 /* Communication */,
-				ADCD4260196E4E8A004973E9 /* Categories */,
 				AD539C9F1947B5CA002644BD /* Supporting Files */,
-				ADB97FAE2AD9154D00CE7B01 /* UserObservable.swift */,
 			);
 			path = VindsidenKit;
 			sourceTree = "<group>";
@@ -700,8 +641,6 @@
 		AD539C9F1947B5CA002644BD /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				ADB97FC72AD930EC00CE7B01 /* InfoPlist.xcstrings */,
-				ADB97FC62AD930EC00CE7B01 /* Localizable.xcstrings */,
 				AD539CA01947B5CA002644BD /* Info.plist */,
 			);
 			name = "Supporting Files";
@@ -769,33 +708,6 @@
 			path = VindsidenWidget;
 			sourceTree = "<group>";
 		};
-		ADCD4260196E4E8A004973E9 /* Categories */ = {
-			isa = PBXGroup;
-			children = (
-				ADBEA4CE1A07ECF600B168BF /* UIColor+AppColors.swift */,
-				ADCD423C196E4E42004973E9 /* NSNumber+Between.h */,
-				ADCD423D196E4E42004973E9 /* NSNumber+Between.m */,
-				ADCD423E196E4E42004973E9 /* NSNumber+Convertion.h */,
-				ADCD423F196E4E42004973E9 /* NSNumber+Convertion.m */,
-				ADCD4240196E4E42004973E9 /* NSObject+performBlockCancel.h */,
-				ADCD4241196E4E42004973E9 /* NSObject+performBlockCancel.m */,
-				ADCD4242196E4E42004973E9 /* NSSet+Sort.h */,
-				ADCD4243196E4E42004973E9 /* NSSet+Sort.m */,
-				ADCD4244196E4E42004973E9 /* NSString+fixDateString.h */,
-				ADCD4245196E4E42004973E9 /* NSString+fixDateString.m */,
-				ADCD4246196E4E42004973E9 /* NSString+isNumeric.h */,
-				ADCD4247196E4E42004973E9 /* NSString+isNumeric.m */,
-				ADCD4248196E4E42004973E9 /* UIFont+textStyle.h */,
-				ADCD4249196E4E42004973E9 /* UIFont+textStyle.m */,
-				ADCD424A196E4E42004973E9 /* UIFontDescriptor+textStyle.h */,
-				ADCD424B196E4E42004973E9 /* UIFontDescriptor+textStyle.m */,
-				ADCD424C196E4E42004973E9 /* UIImage+ImageFromView.h */,
-				ADCD424D196E4E42004973E9 /* UIImage+ImageFromView.m */,
-				AD9EA2B71B8F1A6400F653FE /* NSDate+RelativeDate.swift */,
-			);
-			name = Categories;
-			sourceTree = "<group>";
-		};
 		ADE6965F2AEB93BC00FB35EF /* SwiftUI */ = {
 			isa = PBXGroup;
 			children = (
@@ -818,12 +730,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				AD303C2B1B282DC800C4B999 /* VindsidenWatchKit.h in Headers */,
-				AD303C461B28490600C4B999 /* NSSet+Sort.h in Headers */,
-				AD303C481B28490600C4B999 /* NSString+isNumeric.h in Headers */,
-				AD303C431B28490600C4B999 /* NSNumber+Between.h in Headers */,
-				AD303C451B28490600C4B999 /* NSObject+performBlockCancel.h in Headers */,
-				AD303C441B28490600C4B999 /* NSNumber+Convertion.h in Headers */,
-				AD303C471B28490600C4B999 /* NSString+fixDateString.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -832,15 +738,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				AD539CA21947B5CA002644BD /* VindsidenKit.h in Headers */,
-				ADCD4250196E4E42004973E9 /* NSNumber+Convertion.h in Headers */,
-				ADCD425E196E4E42004973E9 /* UIImage+ImageFromView.h in Headers */,
-				ADCD425C196E4E42004973E9 /* UIFontDescriptor+textStyle.h in Headers */,
-				ADCD4252196E4E42004973E9 /* NSObject+performBlockCancel.h in Headers */,
-				ADCD4256196E4E42004973E9 /* NSString+fixDateString.h in Headers */,
-				ADCD424E196E4E42004973E9 /* NSNumber+Between.h in Headers */,
-				ADCD4254196E4E42004973E9 /* NSSet+Sort.h in Headers */,
-				ADCD425A196E4E42004973E9 /* UIFont+textStyle.h in Headers */,
-				ADCD4258196E4E42004973E9 /* NSString+isNumeric.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1175,8 +1072,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				ADB97FC92AD930EC00CE7B01 /* InfoPlist.xcstrings in Resources */,
-				ADB97FC82AD930EC00CE7B01 /* Localizable.xcstrings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1245,23 +1140,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AD303C4A1B28491600C4B999 /* NSNumber+Between.m in Sources */,
-				AD9EA2B91B8F1A6400F653FE /* NSDate+RelativeDate.swift in Sources */,
 				AD9E406D1B8D8A6900FABCF5 /* StationFetcher.swift in Sources */,
-				AD303C4F1B28491600C4B999 /* NSString+isNumeric.m in Sources */,
 				AD9E40741B8D9BCD00FABCF5 /* PlotFetcher.swift in Sources */,
 				AD5025282AE6D8C0007DDF1F /* UserObservable.swift in Sources */,
 				AD50252B2AE6D8FF007DDF1F /* Plot.swift in Sources */,
 				AD50252A2AE6D8FB007DDF1F /* Station.swift in Sources */,
-				AD303C4E1B28491600C4B999 /* NSString+fixDateString.m in Sources */,
 				AD303C321B282FB100C4B999 /* AppConfig.swift in Sources */,
 				AD5025292AE6D8EA007DDF1F /* PersistentContainer.swift in Sources */,
-				AD303C421B2848EF00C4B999 /* UIColor+AppColors.swift in Sources */,
 				AD303C331B282FB100C4B999 /* WindManager.swift in Sources */,
 				AD303C301B282FB100C4B999 /* Datamanager.swift in Sources */,
-				AD303C4D1B28491600C4B999 /* NSSet+Sort.m in Sources */,
-				AD303C4C1B28491600C4B999 /* NSObject+performBlockCancel.m in Sources */,
-				AD303C4B1B28491600C4B999 /* NSNumber+Convertion.m in Sources */,
 				AD303C311B282FB100C4B999 /* Logger.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1303,24 +1190,13 @@
 				AD7BBB471A3F53F400883770 /* Logger.swift in Sources */,
 				ADB97FAF2AD9154D00CE7B01 /* UserObservable.swift in Sources */,
 				AD7BBB491A3F55A100883770 /* AppConfig.swift in Sources */,
-				ADCD425D196E4E42004973E9 /* UIFontDescriptor+textStyle.m in Sources */,
-				ADCD4257196E4E42004973E9 /* NSString+fixDateString.m in Sources */,
 				ADE9C4081AAB32840089EB19 /* WindManager.swift in Sources */,
-				ADCD425F196E4E42004973E9 /* UIImage+ImageFromView.m in Sources */,
-				ADCD4253196E4E42004973E9 /* NSObject+performBlockCancel.m in Sources */,
 				AD9E40731B8D9BCD00FABCF5 /* PlotFetcher.swift in Sources */,
 				AD5025312AE7935A007DDF1F /* Station.swift in Sources */,
 				AD9E406C1B8D8A6900FABCF5 /* StationFetcher.swift in Sources */,
-				ADCD425B196E4E42004973E9 /* UIFont+textStyle.m in Sources */,
-				AD9EA2B81B8F1A6400F653FE /* NSDate+RelativeDate.swift in Sources */,
-				ADCD4251196E4E42004973E9 /* NSNumber+Convertion.m in Sources */,
 				AD539CC71947B684002644BD /* Datamanager.swift in Sources */,
 				AD5025332AE79397007DDF1F /* PreviewSampleData.swift in Sources */,
-				ADBEA4CF1A07ECF600B168BF /* UIColor+AppColors.swift in Sources */,
 				AD5025322AE7936B007DDF1F /* Plot.swift in Sources */,
-				ADCD424F196E4E42004973E9 /* NSNumber+Between.m in Sources */,
-				ADCD4255196E4E42004973E9 /* NSSet+Sort.m in Sources */,
-				ADCD4259196E4E42004973E9 /* NSString+isNumeric.m in Sources */,
 				AD5025362AE7A31B007DDF1F /* PersistentContainer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
