@@ -60,6 +60,7 @@
 		AD66F5691CAEBA8B001A2755 /* VindSidenSpotlight.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = AD66F5621CAEBA8B001A2755 /* VindSidenSpotlight.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		AD7BBB471A3F53F400883770 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD7BBB461A3F53F400883770 /* Logger.swift */; };
 		AD7BBB491A3F55A100883770 /* AppConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD7BBB481A3F55A100883770 /* AppConfig.swift */; };
+		AD8BF74D2AF3B11200A63A9B /* VindsidenKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD539C9D1947B5CA002644BD /* VindsidenKit.framework */; settings = {ATTRIBUTES = (Required, ); }; };
 		AD9685832AD6883B00608FB3 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AD9685822AD6883B00608FB3 /* Launch Screen.storyboard */; };
 		AD96858A2AD6A40000608FB3 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD9685892AD6A40000608FB3 /* WidgetKit.framework */; };
 		AD96858C2AD6A40000608FB3 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD96858B2AD6A40000608FB3 /* SwiftUI.framework */; };
@@ -78,7 +79,6 @@
 		ADB97FAF2AD9154D00CE7B01 /* UserObservable.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB97FAE2AD9154D00CE7B01 /* UserObservable.swift */; };
 		ADB97FB12AD91E6E00CE7B01 /* StationPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB97FB02AD91E6E00CE7B01 /* StationPickerView.swift */; };
 		ADB97FB32AD923F300CE7B01 /* WeatherBoxView in Frameworks */ = {isa = PBXBuildFile; productRef = ADB97FB22AD923F300CE7B01 /* WeatherBoxView */; };
-		ADB97FB52AD9240500CE7B01 /* WeatherBoxView in Frameworks */ = {isa = PBXBuildFile; productRef = ADB97FB42AD9240500CE7B01 /* WeatherBoxView */; };
 		ADB97FB62AD924B500CE7B01 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD96858B2AD6A40000608FB3 /* SwiftUI.framework */; };
 		ADB97FBA2AD92F8800CE7B01 /* InfoPlist.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = ADB97FB92AD92F8800CE7B01 /* InfoPlist.xcstrings */; };
 		ADB97FBF2AD92F8900CE7B01 /* InfoPlist.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = ADB97FBE2AD92F8900CE7B01 /* InfoPlist.xcstrings */; };
@@ -421,8 +421,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AD8BF74D2AF3B11200A63A9B /* VindsidenKit.framework in Frameworks */,
 				AD96858C2AD6A40000608FB3 /* SwiftUI.framework in Frameworks */,
-				ADB97FB52AD9240500CE7B01 /* WeatherBoxView in Frameworks */,
 				AD96858A2AD6A40000608FB3 /* WidgetKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -928,7 +928,6 @@
 			);
 			name = VindsidenWidgetExtension;
 			packageProductDependencies = (
-				ADB97FB42AD9240500CE7B01 /* WeatherBoxView */,
 			);
 			productName = VindsidenWidgetExtension;
 			productReference = AD9685882AD6A40000608FB3 /* VindsidenWidgetExtension.appex */;
@@ -2254,11 +2253,6 @@
 			productName = WeatherBoxView;
 		};
 		ADB97FB22AD923F300CE7B01 /* WeatherBoxView */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = AD9685A62AD6BED600608FB3 /* XCRemoteSwiftPackageReference "WeatherBoxView" */;
-			productName = WeatherBoxView;
-		};
-		ADB97FB42AD9240500CE7B01 /* WeatherBoxView */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = AD9685A62AD6BED600608FB3 /* XCRemoteSwiftPackageReference "WeatherBoxView" */;
 			productName = WeatherBoxView;
