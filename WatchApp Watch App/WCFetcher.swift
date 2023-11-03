@@ -8,6 +8,7 @@
 
 import WatchKit
 import WatchConnectivity
+import WidgetKit
 import OSLog
 import VindsidenWatchKit
 import Units
@@ -80,6 +81,7 @@ class WCFetcher: NSObject, WCSessionDelegate {
         if let stations = applicationContext["activeStations"] as? [[String:AnyObject]] {
             Task { @MainActor in
                 _ = await Station.updateWithWatchContent(stations, in: PersistentContainer.shared.container.mainContext)
+                WidgetCenter.shared.invalidateConfigurationRecommendations()
                 NotificationCenter.default.post( name: Notification.Name.ReceivedStations, object: nil)
             }
         }

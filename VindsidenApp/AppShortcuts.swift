@@ -18,7 +18,7 @@ struct AppShortcuts: AppShortcutsProvider {
     static var appShortcuts: [AppShortcut] {
         return [
             AppShortcut(
-                intent: ConfigurationAppIntent(),
+                intent: OpenWindStationIntent(),
                 phrases: [
                     "Open wind station in \(.applicationName)",
                 ],
@@ -34,6 +34,31 @@ struct AppShortcuts: AppShortcutsProvider {
                 systemImageName: "wind"
             ),
         ]
+    }
+
+    static var shortcutTileColor: ShortcutTileColor = .orange
+}
+
+struct OpenWindStationIntent: AppIntent, WidgetConfigurationIntent {
+    static var title: LocalizedStringResource = "Open Station"
+    static var description = IntentDescription("Open the application at chosen wind station")
+    static var openAppWhenRun: Bool = true
+
+    @Parameter(title: "Select station")
+    var station: IntentStation
+
+    @Dependency
+    private var navigationModel: NavigationModel
+
+    init() {
+        IntentStation.defaultQuery = StationQuery(useDefaultValue: false)
+    }
+
+    @MainActor
+    func perform() async throws -> some IntentResult {
+        navigationModel.selectedStationName = station.name
+
+        return .result()
     }
 }
 

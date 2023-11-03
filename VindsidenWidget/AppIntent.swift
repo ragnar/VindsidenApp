@@ -30,9 +30,14 @@ struct IntentStation: AppEntity, Hashable {
 }
 
 struct StationQuery: EntityQuery {
+    var useDefaultValue = true
+
     func entities(for identifiers: [IntentStation.ID]) async throws -> [IntentStation] {
         return try await Task { @MainActor in
-            var fetchDescriptor = FetchDescriptor(sortBy: [SortDescriptor(\Station.stationName, order: .forward)])
+            var fetchDescriptor = FetchDescriptor(sortBy: [
+                SortDescriptor(\Station.order, order: .forward),
+                SortDescriptor(\Station.stationName, order: .forward),
+            ])
             fetchDescriptor.predicate = #Predicate { $0.isHidden == false }
 
             return try PersistentContainer
@@ -47,7 +52,10 @@ struct StationQuery: EntityQuery {
 
     func suggestedEntities() async throws -> [IntentStation] {
         return try await Task { @MainActor in
-            var fetchDescriptor = FetchDescriptor(sortBy: [SortDescriptor(\Station.stationName, order: .forward)])
+            var fetchDescriptor = FetchDescriptor(sortBy: [
+                SortDescriptor(\Station.order, order: .forward),
+                SortDescriptor(\Station.stationName, order: .forward),
+            ])
             fetchDescriptor.predicate = #Predicate { $0.isHidden == false }
 
             return try PersistentContainer.shared.container.mainContext.fetch(fetchDescriptor).compactMap { IntentStation(id: Int($0.stationId), name: $0.stationName ?? "") }
@@ -55,10 +63,10 @@ struct StationQuery: EntityQuery {
     }
 
     func defaultResult() async -> IntentStation? {
-#if MAINAPP
-        return nil
-#else
-        return try? await suggestedEntities().first
-#endif
+        if useDefaultValue {
+            return try? await suggestedEntities().first
+        } else {
+            return nil
+        }
     }
 }

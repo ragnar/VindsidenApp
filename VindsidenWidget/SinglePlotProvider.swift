@@ -19,7 +19,10 @@ import VindsidenKit
 struct SinglePlotProvider: AppIntentTimelineProvider  {
     @MainActor
     func recommendations() -> [AppIntentRecommendation<ConfigurationAppIntent>] {
-        var fetchDescriptor = FetchDescriptor(sortBy: [SortDescriptor(\Station.stationName, order: .forward)])
+        var fetchDescriptor = FetchDescriptor(sortBy: [
+            SortDescriptor(\Station.order, order: .forward),
+            SortDescriptor(\Station.stationName, order: .forward),
+        ])
         fetchDescriptor.predicate = #Predicate { $0.isHidden == false }
 
         do {
