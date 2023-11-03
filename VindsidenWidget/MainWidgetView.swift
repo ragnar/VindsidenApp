@@ -19,7 +19,6 @@ import VindsidenKit
 
 struct MainWidgetView : View {
     @Environment(\.widgetFamily) var family
-    @StateObject private var settings: UserObservable = UserObservable()
 
     var entry: SinglePlotProvider.Entry
 
@@ -59,21 +58,5 @@ struct MainWidgetView : View {
                 .containerBackground(.fill.tertiary, for: .widget)
                 .edgesIgnoringSafeArea([.horizontal, .bottom])
         }
-    }
-}
-
-//struct MainWidget_Previews: PreviewProvider {
-//    static var previews: some View {
-//        MainWidgetView(entry: SimpleEntry(date: Date(), widgetData: WidgetData()))
-//            .previewContext(WidgetPreviewContext(family: .systemSmall))
-//    }
-//}
-
-extension WidgetData {
-    var arrowImage: UIImage {
-        return WindArrow.drawArrowAt(angle: windAngle,
-                                     forSpeed: windAverageMS,
-                                     color: .white,
-                                     highlightedColor: .white)
     }
 }

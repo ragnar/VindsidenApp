@@ -12,7 +12,7 @@ import Units
 
 struct SettingsView: View {
     @Environment(\.dismiss) private var dismiss
-    @EnvironmentObject var settings: UserObservable
+    @Environment(UserObservable.self) private var settings: UserObservable
 
     var dismissAction: () -> Void
 
@@ -27,7 +27,7 @@ struct SettingsView: View {
 
                 Section(header: Text("Speed")) {
                     ForEach(WindUnit.allCases) { element in
-                        Cell(name: element.name, value: element, unit: $settings.windUnit)
+                        Cell(name: element.name, value: element, unit: settings.windUnit)
                             .onTapGesture(count: 1, perform: {
                                 self.settings.windUnit = element
                             })
@@ -36,7 +36,7 @@ struct SettingsView: View {
 
                 Section(header: Text("Temperature"), footer: VersionFooterView()) {
                     ForEach(TempUnit.allCases) { element in
-                        Cell(name: element.name, value: element, unit: $settings.tempUnit)
+                        Cell(name: element.name, value: element, unit: settings.tempUnit)
                             .onTapGesture(count: 1, perform: {
                                 self.settings.tempUnit = element
                             })
@@ -89,7 +89,7 @@ struct VersionFooterView: View {
 struct Cell<T: UnitProtocol>: View {
     var name: String
     var value: T
-    @Binding var unit: T
+    var unit: T
 
     var body: some View {
         HStack {

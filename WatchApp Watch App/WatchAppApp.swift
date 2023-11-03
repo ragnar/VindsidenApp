@@ -14,9 +14,12 @@ import VindsidenWatchKit
 
 @main
 struct WatchApp_Watch_AppApp: App {
-    var userSettings = UserObservable()
+    @State var userSettings: UserObservable
 
     init() {
+        let settings = UserObservable()
+        self.userSettings = settings
+
         WCFetcher.sharedInstance.settings = userSettings
         WCFetcher.sharedInstance.activate()
         UNUserNotificationCenter.current().requestAuthorization(options: [.provisional, .alert, .sound]) { (success, error) in
@@ -32,7 +35,7 @@ struct WatchApp_Watch_AppApp: App {
         WindowGroup {
             ContentView()
                 .modelContainer(PersistentContainer.shared.container)
-                .environmentObject(userSettings)
+                .environment(userSettings)
         }
     }
 }

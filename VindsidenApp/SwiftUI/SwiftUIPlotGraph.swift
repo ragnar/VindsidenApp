@@ -14,7 +14,7 @@ import WeatherBoxView
 import Units
 
 struct SwiftUIPlotGraph: View {
-    @EnvironmentObject private var settings: UserObservable
+    @Environment(UserObservable.self) private var settings
 
     @Query
     var plots: [VindsidenKit.Plot]

@@ -9,6 +9,12 @@
 import WidgetKit
 import SwiftUI
 
+#if os(watchOS)
+import VindsidenWatchKit
+#else
+import VindsidenKit
+#endif
+
 @main
 struct VindsidenWidgetBundle: WidgetBundle {
     var body: some Widget {
@@ -21,7 +27,13 @@ struct VindsidenWidgetBundle: WidgetBundle {
 
 #if os(iOS)
 struct VindsidenWidget: Widget {
+    @State private var settings: UserObservable
+
     let kind: String = "VindsidenWidget"
+
+    init() {
+        settings = UserObservable()
+    }
 
     var body: some WidgetConfiguration {
         AppIntentConfiguration(
@@ -31,6 +43,7 @@ struct VindsidenWidget: Widget {
         ) { entry in
             VindsidenWidgetEntryView(entry: entry)
                 .containerBackground(.fill.tertiary, for: .widget)
+                .environment(settings)
         }
         .supportedFamilies([.systemSmall, .systemMedium, .systemLarge, .systemExtraLarge])
     }
@@ -53,14 +66,15 @@ struct MainWidget: Widget {
 #if os(watchOS)
         .supportedFamilies([
             .accessoryCircular,
-                            .accessoryRectangular,
-                            .accessoryInline,
+            .accessoryRectangular,
+            .accessoryInline,
         ])
 #else
-        .supportedFamilies([.accessoryCircular,
-                            .accessoryRectangular,
-                            .accessoryInline,
-                            .systemSmall,
+        .supportedFamilies([
+            .accessoryCircular,
+            .accessoryRectangular,
+            .accessoryInline,
+            .systemSmall,
         ])
 #endif
     }

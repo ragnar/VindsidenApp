@@ -9,29 +9,30 @@
 import SwiftUI
 import Units
 
-public class UserObservable: ObservableObject {
-    @Published public var windUnit: WindUnit {
+@Observable
+public class UserObservable {
+    public var windUnit: WindUnit {
         didSet {
             UserSettings.shared.selectedWindUnit = windUnit
             self.lastChanged = Date()
         }
     }
 
-    @Published public var tempUnit: TempUnit {
+    public var tempUnit: TempUnit {
         didSet {
             UserSettings.shared.selectedTempUnit = tempUnit
             self.lastChanged = Date()
         }
     }
 
-    @Published public var selectedStationName: String? {
+    public var selectedStationName: String? {
         didSet {
             UserSettings.shared.selectedStationName = selectedStationName
             self.lastChanged = Date()
         }
     }
 
-    @Published public var lastChanged: Date
+    public var lastChanged: Date
 
     public init() {
         self.windUnit = UserSettings.shared.selectedWindUnit
@@ -53,7 +54,7 @@ public class UserObservable: ObservableObject {
     }
 }
 
-public final class UserSettings: ObservableObject {
+public final class UserSettings {
     @UserSetting(defaultValue: .metersPerSecond, storageKey: "selectedWindUnit")
     public var selectedWindUnit: WindUnit
 

@@ -7,15 +7,26 @@
 //
 
 import SwiftUI
+import AppIntents
 import SwiftData
 import VindsidenKit
 
 @main
 struct VindsidenApp: App {
-    var userSettings = UserObservable()
+    @State var userSettings: UserObservable
+    @State var navigationModel: NavigationModel
+
     var session = Connectivity.shared
 
     init() {
+        let userSettings = UserObservable()
+        self.userSettings = userSettings
+
+        let navigationModel = NavigationModel(pendingSelectedStationName: nil)
+        self.navigationModel = navigationModel
+
+        AppDependencyManager.shared.add(dependency: navigationModel)
+
         session.settings = userSettings
         session.activate()
     }
@@ -24,7 +35,8 @@ struct VindsidenApp: App {
         WindowGroup {
             ContentView()
                 .modelContainer(PersistentContainer.shared.container)
-                .environmentObject(userSettings)
+                .environment(userSettings)
+                .environment(navigationModel)
         }
     }
 }

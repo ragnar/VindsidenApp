@@ -17,7 +17,7 @@ struct ListCell: View {
 
     var body: some View {
         HStack {
-            Gauge(value: station.windAverage, in: 0...maxValue) {
+            Gauge(value: station.windAverage, in: 0...max(station.windAverage, maxValue)) {
 
             } currentValueLabel: {
                 Text(station.windAverage, format: .number.precision(.fractionLength(1)))

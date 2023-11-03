@@ -13,7 +13,7 @@ import VindsidenKit
 
 struct VindsidenWidgetEntryView : View {
     @Environment(\.widgetFamily) var family
-    @StateObject private var settings: UserObservable = UserObservable()
+    @Environment(UserObservable.self) var settings
 
     var entry: Provider.Entry
 

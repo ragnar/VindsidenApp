@@ -28,15 +28,16 @@ struct ContentView: View {
     @Environment(\.dismiss) private var dismiss
     @Environment(\.modelContext) private var modelContext
     @Environment(\.openURL) private var openURL
-    @EnvironmentObject private var settings: UserObservable
+    @Environment(UserObservable.self) private var settings
+    @Environment(NavigationModel.self) private var navigationModel
+    
     @State private var visibility: NavigationSplitViewVisibility = .all
     @State private var selected: WidgetData?
     @State private var activeSheet: Sheet? = nil
     @State private var restored: Bool = false
     @State private var gaugeMaxValue: Double = 20
     @State private var pendingSelection: String?
-
-    @ObservedObject private var data = Resource<WidgetData>()
+    @State private var data = Resource<WidgetData>()
 
     var body: some View {
         NavigationSplitView(columnVisibility: $visibility) {
@@ -66,7 +67,7 @@ struct ContentView: View {
             TabView(selection: $selected) {
                 ForEach($data.value) { station in
                     StationDetailView(station: station.wrappedValue)
-                        .environmentObject(settings)
+                        .environment(settings)
                         .tag(Optional(station.wrappedValue))
                         .padding([.leading, .trailing])
                         .navigationBarBackButtonHidden(true)
@@ -125,15 +126,16 @@ struct ContentView: View {
         })
         .onChange(of: data.value, handleDataValueChange)
         .onChange(of: $selected.wrappedValue, handleSelectedChange)
+        .onChange(of: navigationModel.pendingSelectedStationName, handleNavigationStationValueChange)
         .onContinueUserActivity(CSSearchableItemActionType, perform: handleSpotlight)
         .onContinueUserActivity("ConfigurationAppIntent", perform: handleIntent)
         .onOpenURL(perform: handleOpenURL)
-        .onReceive(NotificationCenter.default.publisher(for: UIApplication.didEnterBackgroundNotification), perform: handleNotificationBackground)
         .onReceive(NotificationCenter.default.publisher(for: UIApplication.willEnterForegroundNotification), perform: handleNotificationForeground)
         .refreshable(action: handleRefreshable)
         .task(handleRestore)
     }
 
+    @MainActor 
     @ViewBuilder
     func contextMenuBuilder(name: String) -> some View {
         Button {
@@ -198,21 +200,36 @@ extension ContentView {
         selected = station
     }
 
-    func handleDataValueChange(_ oldValue: any Equatable, _ newValue: any Equatable) {
+    func handleDataValueChange(_ oldValue: [WidgetData], _ newValue: [WidgetData]) {
         updateGaugeMaxValue()
     }
 
-    func handleSelectedChange(_ oldValue: any Equatable, _ newValue: any Equatable) {
-        settings.selectedStationName = selected?.name
+    func handleSelectedChange(_ oldValue: WidgetData?, _ newValue: WidgetData?) {
+        if let newValue {
+            pendingSelection = newValue.name
+            settings.selectedStationName = newValue.name
+        } else {
+            pendingSelection = nil
+            settings.selectedStationName = nil
+        }
     }
 
-    func handleNotificationBackground(_ output: NotificationCenter.Publisher.Output) {
-        data.isPaused = true
+    @MainActor 
+    func handleNavigationStationValueChange(_ oldValue: String?, _ newValue: String?) {
+        guard
+            let newValue,
+            let station = findStation(with: newValue)
+        else {
+            navigationModel.pendingSelectedStationName = nil
+            return
+        }
+
+        pendingSelection = newValue
+        selected = station
+        navigationModel.pendingSelectedStationName = nil
     }
 
     func handleNotificationForeground(_ output: NotificationCenter.Publisher.Output) {
-        data.isPaused = false
-
         Task {
             await fetch()
         }
@@ -228,12 +245,10 @@ extension ContentView {
         if restored == false {
             restored = true
 
-            let inserted = await WindManager.shared.updateStations()
-            Logger.debugging.debug("Got new stations: \(inserted)")
+            await data.updateContent()
 
-            if inserted {
-                await data.updateContent()
-            }
+            Logger.debugging.debug("name: restore: \(settings.selectedStationName ?? "not set")")
+            Logger.debugging.debug("name: restore value: \(data.value.count)")
 
             guard
                 let name = settings.selectedStationName,
@@ -246,6 +261,13 @@ extension ContentView {
             pendingSelection = name
             selected = station
 
+            let inserted = await WindManager.shared.updateStations()
+            Logger.debugging.debug("Got new stations: \(inserted)")
+
+            if inserted {
+                await data.updateContent()
+            }
+
             await fetch()
         }
     }
@@ -257,12 +279,10 @@ extension ContentView {
 
         await data.reload()
 
-        defer {
-            pendingSelection = nil
-        }
+        Logger.debugging.debug("name: fetch: sel: \(name ?? "not set"), pen: \(pendingSelection ?? "not set")")
 
         guard
-            let name = pendingSelection ?? name,
+            let name = pendingSelection,
             let station = findStation(with: name)
         else {
             return

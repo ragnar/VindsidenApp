@@ -61,6 +61,7 @@
 		AD7BBB471A3F53F400883770 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD7BBB461A3F53F400883770 /* Logger.swift */; };
 		AD7BBB491A3F55A100883770 /* AppConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD7BBB481A3F55A100883770 /* AppConfig.swift */; };
 		AD8BF74D2AF3B11200A63A9B /* VindsidenKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD539C9D1947B5CA002644BD /* VindsidenKit.framework */; settings = {ATTRIBUTES = (Required, ); }; };
+		AD8BF74F2AF4EC1100A63A9B /* NavigationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD8BF74E2AF4EC1100A63A9B /* NavigationModel.swift */; };
 		AD9685832AD6883B00608FB3 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AD9685822AD6883B00608FB3 /* Launch Screen.storyboard */; };
 		AD96858A2AD6A40000608FB3 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD9685892AD6A40000608FB3 /* WidgetKit.framework */; };
 		AD96858C2AD6A40000608FB3 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD96858B2AD6A40000608FB3 /* SwiftUI.framework */; };
@@ -305,6 +306,7 @@
 		AD6BD0F41A967A8800E6686B /* libPods.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libPods.a; path = "Pods/build/Debug-iphoneos/libPods.a"; sourceTree = "<group>"; };
 		AD7BBB461A3F53F400883770 /* Logger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		AD7BBB481A3F55A100883770 /* AppConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppConfig.swift; sourceTree = "<group>"; };
+		AD8BF74E2AF4EC1100A63A9B /* NavigationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationModel.swift; sourceTree = "<group>"; };
 		AD9685822AD6883B00608FB3 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		AD9685882AD6A40000608FB3 /* VindsidenWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = VindsidenWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		AD9685892AD6A40000608FB3 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
@@ -726,6 +728,7 @@
 				ADE6966A2AEF996500FB35EF /* ListCell.swift */,
 				ADEC5BC72ADD1BD600A65057 /* SwiftUIPlotGraph.swift */,
 				ADE6966C2AF0E34D00FB35EF /* InfoView.swift */,
+				AD8BF74E2AF4EC1100A63A9B /* NavigationModel.swift */,
 			);
 			path = SwiftUI;
 			sourceTree = "<group>";
@@ -1130,6 +1133,7 @@
 				ADEC5BC82ADD1BD600A65057 /* SwiftUIPlotGraph.swift in Sources */,
 				AD1B45881CAEE9F200F171DB /* IndexRequestHandler.swift in Sources */,
 				ADEC5BCD2ADEA00A00A65057 /* AppIntent.swift in Sources */,
+				AD8BF74F2AF4EC1100A63A9B /* NavigationModel.swift in Sources */,
 				ADB97FAD2AD914D900CE7B01 /* SettingsView.swift in Sources */,
 				ADEC5BD72ADEB1CD00A65057 /* SwipeToDismissModifier.swift in Sources */,
 			);

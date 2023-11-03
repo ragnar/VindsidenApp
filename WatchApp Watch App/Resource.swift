@@ -21,20 +21,11 @@ import VindsidenKit
 public typealias ResourceProtocol = Decodable & Identifiable
 typealias RefreshMethodHandler = () -> Void
 
-final public class Resource<T: ResourceProtocol>: ObservableObject {
+@Observable
+final public class Resource<T: ResourceProtocol> {
     let fetcher = PlotFetcher()
 
-    @Published public var value: [WidgetData]
-
-    public var isPaused: Bool = true {
-        didSet {
-#if os(watchOS)
-            if isPaused == false {
-                forceFetch()
-            }
-#endif
-        }
-    }
+    public var value: [WidgetData]
 
     public init() {
         self.value = []

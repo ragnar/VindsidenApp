@@ -15,9 +15,10 @@ import WeatherBoxView
 import Units
 
 struct ContentView: View {
-    @EnvironmentObject var settings: UserObservable
-    @ObservedObject private var data = Resource<WidgetData>()
+    @Environment(UserObservable.self) private var settings
+    @State private var data = Resource<WidgetData>()
     @State private var selected: WidgetData?
+    @State private var selectedStationName: String?
 
     var body: some View {
         NavigationSplitView() {
@@ -41,21 +42,35 @@ struct ContentView: View {
             .tabViewStyle(.verticalPage)
         }
         .task {
-            data.isPaused = false
-        }
-        .onReceive(NotificationCenter.default.publisher(for: WKApplication.didEnterBackgroundNotification)) { _ in
-            data.isPaused = true
+            await fetch()
         }
         .onReceive(NotificationCenter.default.publisher(for: WKApplication.willEnterForegroundNotification)) { _ in
             WCFetcher.sharedInstance.activate()
-            data.isPaused = false
+
+            Task {
+                await fetch()
+            }
         }
         .onReceive(NotificationCenter.default.publisher(for: .ReceivedStations)) { _ in
-            data.forceFetch()
+            Task {
+                await fetch()
+            }
+        }
+        .onChange(of: $selected.wrappedValue) { _, newValue in
+            selectedStationName = newValue?.name
         }
         .onChange(of: settings.lastChanged) {
             Task {
                 await data.updateContent()
+
+                guard
+                    let name = selectedStationName,
+                    let station = findStation(with: name)
+                else {
+                    return
+                }
+
+                selected = station
             }
         }
         .onContinueUserActivity("ConfigurationAppIntent") { activity in
@@ -66,8 +81,28 @@ struct ContentView: View {
                 return
             }
 
+            selectedStationName = station.name
             selected = station
         }
+    }
+}
+
+extension ContentView {
+    func fetch() async {
+        await data.reload()
+
+        guard
+            let name = selectedStationName,
+            let station = findStation(with: name)
+        else {
+            return
+        }
+
+        selected = station
+    }
+
+    func findStation(with name: String) -> WidgetData? {
+        return data.value.first(where: {$0.name == name })
     }
 }
 

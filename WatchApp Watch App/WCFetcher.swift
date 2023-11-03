@@ -66,13 +66,13 @@ class WCFetcher: NSObject, WCSessionDelegate {
 
         if let units = applicationContext["units"] as? [String: Int] {
             if let wind = units["windUnit"] {
-                DispatchQueue.main.sync {
+                Task { @MainActor in
                     self.settings?.windUnit = WindUnit(rawValue: wind)!
                 }
             }
 
             if let temp = units["tempUnit"] {
-                DispatchQueue.main.sync {
+                Task { @MainActor in
                     settings?.tempUnit = TempUnit(rawValue: temp)!
                 }
             }
