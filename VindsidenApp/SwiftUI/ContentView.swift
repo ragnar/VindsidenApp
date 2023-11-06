@@ -258,21 +258,13 @@ extension ContentView {
             Logger.debugging.debug("name: restore: \(settings.selectedStationName ?? "not set")")
             Logger.debugging.debug("name: restore value: \(data.value.count)")
 
-            guard
-                let name = settings.selectedStationName,
-                let station = data.value.first(where: {$0.name == name })
-            else {
-                await fetch()
-                return
+            if let name = settings.selectedStationName, let station = data.value.first(where: {$0.name == name }) {
+                pendingSelection = name
+                selected = station
             }
 
-            pendingSelection = name
-            selected = station
-
-            let inserted = await WindManager.shared.updateStations()
-            Logger.debugging.debug("Got new stations: \(inserted)")
-
-            if inserted {
+            if await WindManager.shared.updateStations() {
+                Logger.debugging.debug("Got new stations.")
                 await data.updateContent()
             }
 
