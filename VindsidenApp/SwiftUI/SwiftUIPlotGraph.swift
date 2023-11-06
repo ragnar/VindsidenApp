@@ -13,13 +13,24 @@ import VindsidenKit
 import WeatherBoxView
 import Units
 
+extension Array where Element: VindsidenKit.Plot {
+    var latest: Self {
+        if isEmpty {
+            return []
+        }
+
+        let maxPlotCount = 35
+
+        return Array(self[..<Swift.min(count, maxPlotCount)])
+    }
+}
+
 struct SwiftUIPlotGraph: View {
     @Environment(UserObservable.self) private var settings
 
     @Query
     var plots: [VindsidenKit.Plot]
     let station: WidgetData
-    let maxPlotCount = 35
 
     init(station: WidgetData) {
         let name = station.name
@@ -35,7 +46,7 @@ struct SwiftUIPlotGraph: View {
 
     var body: some View {
         Chart {
-            ForEach(plots[..<min(plots.count, maxPlotCount)], id: \.plotTime) { value in
+            ForEach(plots.latest, id: \.plotTime) { value in
                 AreaMark(
                     x: .value("Time", value.plotTime, unit: .minute),
                     yStart: .value("Lull", convertedWind(value.windMin)),
@@ -67,12 +78,15 @@ struct SwiftUIPlotGraph: View {
             .interpolationMethod(.catmullRom)
         }
         .chartXAxis {
-            AxisMarks(values: Array(plots[..<min(plots.count, maxPlotCount)])) { value in
+            AxisMarks(values: plots.latest) { value in
                 AxisGridLine()
                 AxisTick()
-                AxisValueLabel {
-                    Image(systemName: "arrow.down")
-                        .rotationEffect(.degrees(Double(plots[value.index].windDir)))
+                
+                if let windDir = plots[value.as(Date.self)]?.windDir {
+                    AxisValueLabel {
+                        Image(systemName: "arrow.down")
+                            .rotationEffect(.degrees(windDir))
+                    }
                 }
             }
         }

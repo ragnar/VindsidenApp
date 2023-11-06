@@ -15,7 +15,7 @@ import OSLog
 @Model 
 public final class Plot {
     public var dataId: Int = 0
-    public var plotTime: Date = Date()
+    public var plotTime: Date = Date(timeIntervalSince1970: 0)
     public var tempAir: Double = -999
     public var tempWater: Double = -999
     public var windAvg: Double = 0
@@ -38,6 +38,12 @@ public final class Plot {
     }
 
     public init() { }
+}
+
+extension Array where Element: Plot {
+    public subscript(id: Date?) -> Plot? {
+        return first { $0.plotTime == id }
+    }
 }
 
 extension Plot: Plottable {

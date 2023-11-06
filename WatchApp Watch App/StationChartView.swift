@@ -12,6 +12,18 @@ import Charts
 import VindsidenWatchKit
 import WeatherBoxView
 
+extension Array where Element: VindsidenWatchKit.Plot {
+    var latest: Self {
+        if isEmpty {
+            return []
+        }
+
+        let maxPlotCount = 20
+
+        return Array(self[..<Swift.min(count, maxPlotCount)])
+    }
+}
+
 struct StationChartView: View {
     @Environment(\.dismiss) private var dismiss: DismissAction
 
@@ -32,7 +44,7 @@ struct StationChartView: View {
 
     var body: some View {
         Chart {
-            ForEach(plots[..<min(plots.count, 20)], id: \.plotTime) { value in
+            ForEach(plots.latest, id: \.plotTime) { value in
                 AreaMark(
                     x: .value("Time", value.plotTime, unit: .minute),
                     yStart: .value("Lull", convertedWind(value.windMin)),
@@ -65,13 +77,16 @@ struct StationChartView: View {
 
         }
         .chartXAxis {
-            AxisMarks(values: Array(plots[..<min(plots.count, 20)])) { value in
+            AxisMarks(values: plots.latest) { value in
                 if showXAxisValue(for: value.index)  {
                     AxisGridLine()
                     AxisTick()
-                    AxisValueLabel {
-                        Image(systemName: "arrow.down")
-                            .rotationEffect(.degrees(Double(plots[value.index].windDir)))
+
+                    if let windDir = plots[value.as(Date.self)]?.windDir {
+                        AxisValueLabel {
+                            Image(systemName: "arrow.down")
+                                .rotationEffect(.degrees(windDir))
+                        }
                     }
                 }
             }
