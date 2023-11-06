@@ -78,15 +78,12 @@ struct StationChartView: View {
         }
         .chartXAxis {
             AxisMarks(values: plots.latest) { value in
-                if showXAxisValue(for: value.index)  {
+                if showXAxisValue(for: value.index), let windDir = plots[value.as(Date.self)]?.windDir {
                     AxisGridLine()
                     AxisTick()
-
-                    if let windDir = plots[value.as(Date.self)]?.windDir {
-                        AxisValueLabel {
-                            Image(systemName: "arrow.down")
-                                .rotationEffect(.degrees(windDir))
-                        }
+                    AxisValueLabel {
+                        Image(systemName: "arrow.down")
+                            .rotationEffect(.degrees(windDir))
                     }
                 }
             }
@@ -95,8 +92,8 @@ struct StationChartView: View {
         .chartForegroundStyleScale([
             "Average": Color.accentColor,
             "Variation": Color.accentColor.opacity(0.1),
-            "Variation Min": Color.accentColor.opacity(0.3),
-            "Variation Max": Color.accentColor.opacity(0.3),
+            "Variation Min": Color.accentColor.opacity(0.4),
+            "Variation Max": Color.accentColor.opacity(0.4),
         ])
         .chartLegend(.hidden)
         .toolbar {

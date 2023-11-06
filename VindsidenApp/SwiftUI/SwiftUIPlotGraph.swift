@@ -94,8 +94,8 @@ struct SwiftUIPlotGraph: View {
         .chartForegroundStyleScale([
             "Average": Color.accentColor,
             "Variation": Color.accentColor.opacity(0.1),
-            "Variation Min": Color.accentColor.opacity(0.2),
-            "Variation Max": Color.accentColor.opacity(0.2),
+            "Variation Min": Color.accentColor.opacity(0.4),
+            "Variation Max": Color.accentColor.opacity(0.4),
         ])
         .chartLegend(.hidden)
     }
