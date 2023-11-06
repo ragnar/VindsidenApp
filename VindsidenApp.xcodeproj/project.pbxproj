@@ -56,6 +56,7 @@
 		AD539CB21947B5CA002644BD /* VindsidenKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD539C9D1947B5CA002644BD /* VindsidenKit.framework */; };
 		AD539CB31947B5CA002644BD /* VindsidenKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = AD539C9D1947B5CA002644BD /* VindsidenKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		AD539CC71947B684002644BD /* Datamanager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD539CC61947B684002644BD /* Datamanager.swift */; };
+		AD60A5992AF97B2A0003C84B /* View+SplitViewStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD60A5982AF97B2A0003C84B /* View+SplitViewStyle.swift */; };
 		AD66F5651CAEBA8B001A2755 /* IndexRequestHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD66F5641CAEBA8B001A2755 /* IndexRequestHandler.swift */; };
 		AD66F5691CAEBA8B001A2755 /* VindSidenSpotlight.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = AD66F5621CAEBA8B001A2755 /* VindSidenSpotlight.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		AD7BBB471A3F53F400883770 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD7BBB461A3F53F400883770 /* Logger.swift */; };
@@ -297,6 +298,7 @@
 		AD539CAD1947B5CA002644BD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AD539CAE1947B5CA002644BD /* VindsidenKitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VindsidenKitTests.swift; sourceTree = "<group>"; };
 		AD539CC61947B684002644BD /* Datamanager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Datamanager.swift; sourceTree = "<group>"; };
+		AD60A5982AF97B2A0003C84B /* View+SplitViewStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+SplitViewStyle.swift"; sourceTree = "<group>"; };
 		AD6142ED1D0F07980008C5E8 /* WCFetcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WCFetcher.swift; sourceTree = "<group>"; };
 		AD66F5621CAEBA8B001A2755 /* VindSidenSpotlight.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = VindSidenSpotlight.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		AD66F5641CAEBA8B001A2755 /* IndexRequestHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndexRequestHandler.swift; sourceTree = "<group>"; };
@@ -729,6 +731,7 @@
 				ADEC5BC72ADD1BD600A65057 /* SwiftUIPlotGraph.swift */,
 				ADE6966C2AF0E34D00FB35EF /* InfoView.swift */,
 				AD8BF74E2AF4EC1100A63A9B /* NavigationModel.swift */,
+				AD60A5982AF97B2A0003C84B /* View+SplitViewStyle.swift */,
 			);
 			path = SwiftUI;
 			sourceTree = "<group>";
@@ -1116,6 +1119,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AD60A5992AF97B2A0003C84B /* View+SplitViewStyle.swift in Sources */,
 				ADDE47F82AE15152001187F6 /* AppShortcuts.swift in Sources */,
 				ADEC5BD52ADEB12C00A65057 /* PhotoView.swift in Sources */,
 				ADE696612AEB93E800FB35EF /* ContentView.swift in Sources */,

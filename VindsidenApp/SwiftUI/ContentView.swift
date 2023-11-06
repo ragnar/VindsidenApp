@@ -132,6 +132,7 @@ struct ContentView: View {
                 }
             }
         })
+        .currentDeviceNavigationSplitViewStyle()
         .onChange(of: data.value, handleDataValueChange)
         .onChange(of: $selected.wrappedValue, handleSelectedChange)
         .onChange(of: navigationModel.pendingSelectedStationName, handleNavigationStationValueChange)
