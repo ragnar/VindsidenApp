@@ -144,7 +144,7 @@ struct ContentView: View {
         .task(handleRestore)
     }
 
-    @MainActor 
+    @MainActor
     @ViewBuilder
     func contextMenuBuilder(name: String) -> some View {
         Button {
@@ -229,7 +229,6 @@ extension ContentView {
             let newValue,
             let station = findStation(with: newValue)
         else {
-            navigationModel.pendingSelectedStationName = nil
             return
         }
 
@@ -240,6 +239,7 @@ extension ContentView {
 
     func handleNotificationForeground(_ output: NotificationCenter.Publisher.Output) {
         Task {
+            try? await Task.sleep(nanoseconds:500)
             await fetch()
         }
     }
@@ -251,26 +251,27 @@ extension ContentView {
 
     @Sendable
     func handleRestore() async {
-        if restored == false {
-            restored = true
-
-            await data.updateContent()
-
-            Logger.debugging.debug("name: restore: \(settings.selectedStationName ?? "not set")")
-            Logger.debugging.debug("name: restore value: \(data.value.count)")
-
-            if let name = settings.selectedStationName, let station = data.value.first(where: {$0.name == name }) {
-                pendingSelection = name
-                selected = station
-            }
-
-            if await WindManager.shared.updateStations() {
-                Logger.debugging.debug("Got new stations.")
-                await data.updateContent()
-            }
-
-            await fetch()
+        if restored {
+            return
         }
+
+        restored = true
+
+        await data.updateContent()
+
+        Logger.debugging.debug("name: restore: \(settings.selectedStationName ?? "not set")")
+
+        if let name = settings.selectedStationName, let station = data.value.first(where: {$0.name == name }) {
+            pendingSelection = name
+            selected = station
+        }
+
+        if await WindManager.shared.updateStations() {
+            Logger.debugging.debug("Got new stations.")
+            await data.updateContent()
+        }
+
+        await fetch()
     }
 }
 
@@ -278,7 +279,7 @@ extension ContentView {
     func fetch() async {
         let name = selected?.name
 
-        await data.reload()
+        try? await data.reload()
 
         Logger.debugging.debug("name: fetch: sel: \(name ?? "not set"), pen: \(pendingSelection ?? "not set")")
 
@@ -286,6 +287,7 @@ extension ContentView {
             let name = pendingSelection,
             let station = findStation(with: name)
         else {
+            Logger.debugging.debug("Could not find station to set selected")
             return
         }
 

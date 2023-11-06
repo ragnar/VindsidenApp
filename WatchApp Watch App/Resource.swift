@@ -23,11 +23,10 @@ typealias RefreshMethodHandler = () -> Void
 
 @Observable
 final public class Resource<T: ResourceProtocol> {
-    private let fetcher = PlotFetcher()
-
     public var value: [WidgetData]
     public var updateText: LocalizedStringResource
 
+    @ObservationIgnored private var refreshTask: Task<Void, Error>?
     @ObservationIgnored private var timer: Timer?
     @ObservationIgnored private var lastUpdated: Date?
     @ObservationIgnored private var refreshing: Bool = false
@@ -43,41 +42,56 @@ final public class Resource<T: ResourceProtocol> {
     public init() {
         self.value = []
         self.updateText = "Checking for updates..."
-
-        Task {
-            await updateContent()
-        }
     }
 
     public func forceFetch() {
         Task {
-            await reload()
+            try? await reload()
         }
     }
 
     @MainActor
-    func reload() async {
-        refreshing = true
-        updateText = updateUpdateText()
-        timer?.invalidate()
+    func reload() async throws {
+        Logger.resource.debug("Resource started refreshing")
 
-        try? await WindManager.shared.fetch()
-        await updateContent()
-
-        refreshing = false
-        lastUpdated = Date.now
-        updateText = updateUpdateText()
-
-        timer = Timer.scheduledTimer(withTimeInterval: 60, repeats: true) { _ in
-            guard 
-                let lastUpdated = self.lastUpdated,
-                let lastUpdatedFormatted = self.formatter.string(for: lastUpdated)
-            else {
-                return
-            }
-
-            self.updateText = "Updated \(lastUpdatedFormatted)"
+        if let refreshTask {
+            Logger.resource.debug("Resource already refreshing")
+            return try await refreshTask.value
         }
+        
+        let task = Task { () throws -> Void in
+            defer {
+                refreshTask = nil
+                Logger.resource.debug("Resource finished refreshing")
+            }
+            
+            timer?.invalidate()
+            timer = nil
+            refreshing = true
+            updateText = updateUpdateText()
+
+            try? await WindManager.shared.fetch()
+            await updateContent()
+            
+            refreshing = false
+            lastUpdated = Date.now
+            updateText = updateUpdateText()
+            
+            timer = Timer.scheduledTimer(withTimeInterval: 60, repeats: true) { _ in
+                guard
+                    let lastUpdated = self.lastUpdated,
+                    let lastUpdatedFormatted = self.formatter.string(for: lastUpdated)
+                else {
+                    return
+                }
+                
+                self.updateText = "Updated \(lastUpdatedFormatted)"
+            }
+        }
+
+        refreshTask = task
+
+        return try await task.value
     }
 
     @MainActor

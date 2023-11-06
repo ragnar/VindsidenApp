@@ -89,7 +89,7 @@ struct ContentView: View {
 
 extension ContentView {
     func fetch() async {
-        await data.reload()
+        try? await data.reload()
 
         guard
             let name = selectedStationName,

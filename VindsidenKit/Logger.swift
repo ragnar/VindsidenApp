@@ -17,4 +17,5 @@ extension Logger {
     public static let wind = Logger(subsystem: subsystem, category: "wind")
     public static let fetcher = Logger(subsystem: subsystem, category: "fetcher")
     public static let windManager = Logger(subsystem: subsystem, category: "windmanager")
+    public static let resource = Logger(subsystem: subsystem, category: "resource")
 }
