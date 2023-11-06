@@ -45,5 +45,5 @@ struct StationDetailView: View {
 }
 
 #Preview {
-    StationDetailView(station: WidgetData())
+    StationDetailView(station: WidgetData(customIdentifier: nil, name: nil))
 }

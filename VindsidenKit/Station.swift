@@ -57,15 +57,16 @@ extension Station {
 
     @MainActor
     public func widgetData() -> WidgetData {
+        let stationId: String? = "\(stationId)"
+        let name = stationName ?? "Unknown"
+
         guard
             let plots,
             let plot = plots.sorted(by: { $0.dataId > $1.dataId } ).first
         else {
-            return WidgetData()
+            return WidgetData(customIdentifier: stationId, name: name)
         }
 
-        let name = stationName ?? "Unknown"
-        let stationId: String? = "\(stationId)"
         let temp: TempUnit = UserSettings.shared.selectedTempUnit
         let wind: WindUnit = UserSettings.shared.selectedWindUnit
         let direction = DirectionUnit(rawValue: Double(plot.windDir)) ?? .unknown

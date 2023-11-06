@@ -47,5 +47,5 @@ struct ListCell: View {
 }
 
 #Preview {
-    ListCell(station: WidgetData(), maxValue: 20)
+    ListCell(station: WidgetData(customIdentifier: nil, name: nil), maxValue: 20)
 }

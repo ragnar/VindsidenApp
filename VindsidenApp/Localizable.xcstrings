@@ -84,6 +84,22 @@
         }
       }
     },
+    "Checking for updates..." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Checking for updates..."
+          }
+        },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ser etter oppdateringer..."
+          }
+        }
+      }
+    },
     "Choose unit" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -135,6 +151,12 @@
     },
     "Details" : {
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Details"
+          }
+        },
         "nb" : {
           "stringUnit" : {
             "state" : "translated",
@@ -275,24 +297,6 @@
         }
       }
     },
-    "LABEL_LAST_UPDATED_FAILED" : {
-      "comment" : "Unable to retrieve information from station",
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Update failed"
-          }
-        },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Oppdatering feilet"
-          }
-        }
-      }
-    },
     "LABEL_PERMIT" : {
       "comment" : "Værdata hentet med tillatelse fra\nhttp://vindsiden.no\n\n",
       "localizations" : {
@@ -306,150 +310,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Værdata hentet med tillatelse fra\nhttp://vindsiden.no\n\n"
-          }
-        }
-      }
-    },
-    "LABEL_TEMP_MAX" : {
-      "comment" : "Temp max",
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Temp max"
-          }
-        },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Temp maks"
-          }
-        }
-      }
-    },
-    "LABEL_TEMP_MIN" : {
-      "comment" : "Temp min",
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Temp min"
-          }
-        },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Temp min"
-          }
-        }
-      }
-    },
-    "LABEL_TEMP_NOW" : {
-      "comment" : "Temp now",
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Temp now"
-          }
-        },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Temp nå"
-          }
-        }
-      }
-    },
-    "LABEL_WIND_AVG" : {
-      "comment" : "Average",
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Average"
-          }
-        },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Gjennomsnitt"
-          }
-        }
-      }
-    },
-    "LABEL_WIND_BEU" : {
-      "comment" : "Beaufort",
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Beaufort"
-          }
-        },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Beaufort"
-          }
-        }
-      }
-    },
-    "LABEL_WIND_DIR" : {
-      "comment" : "Wind direction",
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Wind direction"
-          }
-        },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Vindretning"
-          }
-        }
-      }
-    },
-    "LABEL_WIND_GUST" : {
-      "comment" : "Wind gust",
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Wind gust"
-          }
-        },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Vindkast"
-          }
-        }
-      }
-    },
-    "LABEL_WIND_SPEED" : {
-      "comment" : "Wind speed",
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Wind speed"
-          }
-        },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Vind hastighet"
           }
         }
       }
@@ -589,6 +449,12 @@
     },
     "Open Station" : {
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Open Station"
+          }
+        },
         "nb" : {
           "stringUnit" : {
             "state" : "translated",
@@ -599,6 +465,12 @@
     },
     "Open the application at chosen wind station" : {
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Open the application at chosen wind station"
+          }
+        },
         "nb" : {
           "stringUnit" : {
             "state" : "translated",
@@ -738,6 +610,12 @@
     },
     "Shows the current wind data for chosen wind station." : {
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Shows the current wind data for chosen wind station."
+          }
+        },
         "nb" : {
           "stringUnit" : {
             "state" : "translated",
@@ -921,6 +799,38 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Enheter"
+          }
+        }
+      }
+    },
+    "Updated %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Updated %@"
+          }
+        },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Oppdatert %@"
+          }
+        }
+      }
+    },
+    "Updated Just Now" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Updated Just Now"
+          }
+        },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Oppdatert nå"
           }
         }
       }

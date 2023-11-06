@@ -23,12 +23,27 @@ typealias RefreshMethodHandler = () -> Void
 
 @Observable
 final public class Resource<T: ResourceProtocol> {
-    let fetcher = PlotFetcher()
+    private let fetcher = PlotFetcher()
 
     public var value: [WidgetData]
+    public var updateText: LocalizedStringResource
+
+    @ObservationIgnored private var timer: Timer?
+    @ObservationIgnored private var lastUpdated: Date?
+    @ObservationIgnored private var refreshing: Bool = false
+
+    @ObservationIgnored private lazy var formatter: RelativeDateTimeFormatter = {
+        let formatter = RelativeDateTimeFormatter()
+        formatter.formattingContext = .middleOfSentence
+        formatter.dateTimeStyle = .named
+
+        return formatter
+    }()
 
     public init() {
         self.value = []
+        self.updateText = "Checking for updates..."
+
         Task {
             await updateContent()
         }
@@ -42,8 +57,27 @@ final public class Resource<T: ResourceProtocol> {
 
     @MainActor
     func reload() async {
+        refreshing = true
+        updateText = updateUpdateText()
+        timer?.invalidate()
+
         try? await WindManager.shared.fetch()
         await updateContent()
+
+        refreshing = false
+        lastUpdated = Date.now
+        updateText = updateUpdateText()
+
+        timer = Timer.scheduledTimer(withTimeInterval: 60, repeats: true) { _ in
+            guard 
+                let lastUpdated = self.lastUpdated,
+                let lastUpdatedFormatted = self.formatter.string(for: lastUpdated)
+            else {
+                return
+            }
+
+            self.updateText = "Updated \(lastUpdatedFormatted)"
+        }
     }
 
     @MainActor
@@ -64,5 +98,13 @@ final public class Resource<T: ResourceProtocol> {
         self.value = widgetDatas
 
         Logger.debugging.debug("Reloaded \(widgetDatas.count) stations.")
+    }
+
+    private func updateUpdateText() -> LocalizedStringResource {
+        if refreshing {
+            return "Checking for updates..."
+        }
+
+        return "Updated Just Now"
     }
 }

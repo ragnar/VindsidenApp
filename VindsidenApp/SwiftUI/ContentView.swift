@@ -62,6 +62,14 @@ struct ContentView: View {
                         Image(systemName: "gearshape")
                     }
                 }
+                ToolbarItemGroup(placement: .bottomBar) {
+                    Spacer()
+                    Text(data.updateText)
+                        .font(.footnote)
+                        .foregroundStyle(.secondary)
+                    Spacer()
+                }
+
             }
         } detail: {
             TabView(selection: $selected) {
