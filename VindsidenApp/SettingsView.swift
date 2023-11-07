@@ -12,9 +12,7 @@ import Units
 
 struct SettingsView: View {
     @Environment(\.dismiss) private var dismiss
-    @Environment(UserObservable.self) private var settings: UserObservable
-
-    var dismissAction: () -> Void
+    @Environment(UserObservable.self) private var settings
 
     var body: some View {
         NavigationView {
@@ -55,9 +53,6 @@ struct SettingsView: View {
             }
         }
         .navigationViewStyle(StackNavigationViewStyle())
-        .onDisappear(perform: {
-            dismissAction()
-        })
     }
 }
 

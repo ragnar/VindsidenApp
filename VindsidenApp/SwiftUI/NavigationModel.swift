@@ -13,11 +13,11 @@ import VindsidenKit
 @MainActor
 @Observable
 class NavigationModel {
-    var pendingSelectedStationName: String?
+    var pendingSelectedStationId: Int?
     var columnVisibility: NavigationSplitViewVisibility
 
-    init(pendingSelectedStationName: String? = nil, columnVisibility: NavigationSplitViewVisibility = .all) {
-        self.pendingSelectedStationName = pendingSelectedStationName
+    init(pendingSelectedStationId: Int? = nil, columnVisibility: NavigationSplitViewVisibility = .all) {
+        self.pendingSelectedStationId = pendingSelectedStationId
         self.columnVisibility = columnVisibility
     }
 }

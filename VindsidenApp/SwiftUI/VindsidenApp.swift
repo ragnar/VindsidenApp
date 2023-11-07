@@ -22,7 +22,7 @@ struct VindsidenApp: App {
         let userSettings = UserObservable()
         self.userSettings = userSettings
 
-        let navigationModel = NavigationModel(pendingSelectedStationName: nil)
+        let navigationModel = NavigationModel(pendingSelectedStationId: nil)
         self.navigationModel = navigationModel
 
         AppDependencyManager.shared.add(dependency: navigationModel)

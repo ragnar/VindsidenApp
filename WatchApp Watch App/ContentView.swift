@@ -18,7 +18,8 @@ struct ContentView: View {
     @Environment(UserObservable.self) private var settings
     @State private var data = Resource<WidgetData>()
     @State private var selected: WidgetData?
-    @State private var selectedStationName: String?
+    @State private var selectedStationId: String?
+    @State private var stationInfoChanged: Bool = false
 
     var body: some View {
         NavigationSplitView() {
@@ -42,67 +43,74 @@ struct ContentView: View {
             .tabViewStyle(.verticalPage)
         }
         .task {
+            await data.updateContent()
             await fetch()
         }
-        .onReceive(NotificationCenter.default.publisher(for: WKApplication.willEnterForegroundNotification)) { _ in
-            WCFetcher.sharedInstance.activate()
+        .onReceive(NotificationCenter.default.publisher(for: WKApplication.willEnterForegroundNotification), perform: handleNotification)
+        .onReceive(NotificationCenter.default.publisher(for: .ReceivedStations), perform: handleNotification)
+        .onChange(of: data.value, handleDataValueChange)
+        .onChange(of: $selected.wrappedValue) { oldValue, newValue in
+            if oldValue == nil {
+                selectedStationId = newValue?.customIdentifier
+                return
+            }
 
-            Task {
-                await fetch()
+            if stationInfoChanged {
+                setSelected()
+                stationInfoChanged = false
+                return
             }
-        }
-        .onReceive(NotificationCenter.default.publisher(for: .ReceivedStations)) { _ in
-            Task {
-                await fetch()
-            }
-        }
-        .onChange(of: $selected.wrappedValue) { _, newValue in
-            selectedStationName = newValue?.name
+
+            selectedStationId = newValue?.customIdentifier
         }
         .onChange(of: settings.lastChanged) {
             Task {
                 await data.updateContent()
-
-                guard
-                    let name = selectedStationName,
-                    let station = findStation(with: name)
-                else {
-                    return
-                }
-
-                selected = station
+                setSelected()
             }
         }
         .onContinueUserActivity("ConfigurationAppIntent") { activity in
-            guard 
-                let intent = activity.widgetConfigurationIntent(of: ConfigurationAppIntent.self),
-                let station = data.value.first(where: {$0.name == intent.station.name })
-            else {
+            guard let intent = activity.widgetConfigurationIntent(of: ConfigurationAppIntent.self) else {
                 return
             }
 
-            selectedStationName = station.name
-            selected = station
+            setSelected(overrideIdentifier: "\(intent.station.id)")
         }
     }
 }
 
 extension ContentView {
+    func handleNotification(_ output: NotificationCenter.Publisher.Output) {
+        WCFetcher.sharedInstance.activate()
+
+        Task {
+            await data.updateContent()
+            await fetch()
+        }
+    }
+
+    func handleDataValueChange(_ oldValue: [WidgetData], _ newValue: [WidgetData]) {
+        stationInfoChanged = true
+        setSelected()
+    }
+
     func fetch() async {
         try? await data.reload()
+    }
 
+    func findStation(withIdentifier identifier: String) -> WidgetData? {
+        return data.value.first(where: {$0.customIdentifier == identifier })
+    }
+
+    func setSelected(overrideIdentifier: String? = nil) {
         guard
-            let name = selectedStationName,
-            let station = findStation(with: name)
+            let stationId = overrideIdentifier ?? selectedStationId,
+            let station = findStation(withIdentifier: stationId)
         else {
             return
         }
 
         selected = station
-    }
-
-    func findStation(with name: String) -> WidgetData? {
-        return data.value.first(where: {$0.name == name })
     }
 }
 

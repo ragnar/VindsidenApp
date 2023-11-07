@@ -32,12 +32,13 @@ struct ContentView: View {
     @Environment(NavigationModel.self) private var navigationModel
     
     @State private var visibility: NavigationSplitViewVisibility = .all
-    @State private var selected: WidgetData?
     @State private var activeSheet: Sheet? = nil
     @State private var restored: Bool = false
     @State private var gaugeMaxValue: Double = 20
-    @State private var pendingSelection: String?
     @State private var data = Resource<WidgetData>()
+    @State private var selectedStationId: String?
+    @State private var selected: WidgetData? 
+    @State private var stationInfoChanged: Bool = false
 
     var body: some View {
         NavigationSplitView(columnVisibility: $visibility) {
@@ -94,6 +95,8 @@ struct ContentView: View {
                         .frame(maxWidth: .infinity)
                     Spacer()
                     Button {
+                        settings.selectedStationId = nil
+                        selectedStationId = nil
                         selected = nil
                     } label: {
                         Image(systemName: "list.bullet")
@@ -114,7 +117,7 @@ struct ContentView: View {
         }, content: { item in
             switch item {
             case .settings:
-                SettingsView(dismissAction: { })
+                SettingsView()
 
             case .selectedInfo:
                 if let selected {
@@ -135,7 +138,7 @@ struct ContentView: View {
         .currentDeviceNavigationSplitViewStyle()
         .onChange(of: data.value, handleDataValueChange)
         .onChange(of: $selected.wrappedValue, handleSelectedChange)
-        .onChange(of: navigationModel.pendingSelectedStationName, handleNavigationStationValueChange)
+        .onChange(of: navigationModel.pendingSelectedStationId, handleNavigationStationValueChange)
         .onContinueUserActivity(CSSearchableItemActionType, perform: handleSpotlight)
         .onContinueUserActivity("ConfigurationAppIntent", perform: handleIntent)
         .onOpenURL(perform: handleOpenURL)
@@ -186,55 +189,57 @@ extension ContentView {
     }
 
     func handleIntent(userActivity: NSUserActivity) {
-        guard
-            let intent = userActivity.widgetConfigurationIntent(of: ConfigurationAppIntent.self),
-            let station = findStation(with: intent.station.name)
-        else {
+        guard let intent = userActivity.widgetConfigurationIntent(of: ConfigurationAppIntent.self) else {
             return
         }
 
-        pendingSelection = intent.station.name
-        selected = station
+        setSelected(overrideIdentifier: "\(intent.station.id)")
     }
 
     func handleOpenURL(url: URL) {
-        guard
-            let identifier = url.pathComponents.last,
-            let station = findStation(withIdentifier: identifier)
-        else {
+        guard let identifier = url.pathComponents.last else {
             return
         }
 
-        pendingSelection = station.name
-        selected = station
+        setSelected(overrideIdentifier: identifier)
     }
 
     func handleDataValueChange(_ oldValue: [WidgetData], _ newValue: [WidgetData]) {
+        stationInfoChanged = true
+        Logger.debugging.debug("Station info changed.")
+        setSelected()
         updateGaugeMaxValue()
     }
 
     func handleSelectedChange(_ oldValue: WidgetData?, _ newValue: WidgetData?) {
-        if let newValue {
-            pendingSelection = newValue.name
-            settings.selectedStationName = newValue.name
-        } else {
-            pendingSelection = nil
-            settings.selectedStationName = nil
-        }
-    }
+        Logger.debugging.debug("Station change: old: \(oldValue?.name ?? "not set"), new: \(newValue?.name ?? "not set")")
 
-    @MainActor 
-    func handleNavigationStationValueChange(_ oldValue: String?, _ newValue: String?) {
-        guard
-            let newValue,
-            let station = findStation(with: newValue)
-        else {
+        if oldValue == nil {
+            selectedStationId = newValue?.customIdentifier
+            settings.selectedStationId = newValue?.customIdentifier
             return
         }
 
-        pendingSelection = newValue
-        selected = station
-        navigationModel.pendingSelectedStationName = nil
+        if stationInfoChanged {
+            setSelected()
+            Logger.debugging.debug("Ignore station change")
+            stationInfoChanged = false
+            return
+        }
+
+        Logger.debugging.debug("Selected updated")
+        selectedStationId = newValue?.customIdentifier
+        settings.selectedStationId = newValue?.customIdentifier
+    }
+
+    @MainActor 
+    func handleNavigationStationValueChange(_ oldValue: Int?, _ newValue: Int?) {
+        guard let newValue else {
+            return
+        }
+
+        navigationModel.pendingSelectedStationId = nil
+        setSelected(overrideIdentifier: "\(newValue)")
     }
 
     func handleNotificationForeground(_ output: NotificationCenter.Publisher.Output) {
@@ -259,11 +264,10 @@ extension ContentView {
 
         await data.updateContent()
 
-        Logger.debugging.debug("name: restore: \(settings.selectedStationName ?? "not set")")
+        Logger.debugging.debug("name: restore: \(settings.selectedStationId ?? "not set")")
 
-        if let name = settings.selectedStationName, let station = data.value.first(where: {$0.name == name }) {
-            pendingSelection = name
-            selected = station
+        if let stationId = settings.selectedStationId {
+            setSelected(overrideIdentifier: stationId)
         }
 
         if await WindManager.shared.updateStations() {
@@ -277,21 +281,8 @@ extension ContentView {
 
 extension ContentView {
     func fetch() async {
-        let name = selected?.name
-
         try? await data.reload()
-
-        Logger.debugging.debug("name: fetch: sel: \(name ?? "not set"), pen: \(pendingSelection ?? "not set")")
-
-        guard
-            let name = pendingSelection,
-            let station = findStation(with: name)
-        else {
-            Logger.debugging.debug("Could not find station to set selected")
-            return
-        }
-
-        selected = station
+        setSelected()
     }
 
     func updateGaugeMaxValue() {
@@ -300,11 +291,18 @@ extension ContentView {
         $gaugeMaxValue.wrappedValue = (max(maxValue, maxAverage) / 10).rounded(.up)*10
     }
 
-    func findStation(with name: String) -> WidgetData? {
-        return data.value.first(where: {$0.name == name })
-    }
-
     func findStation(withIdentifier identifier: String) -> WidgetData? {
         return data.value.first(where: {$0.customIdentifier == identifier })
+    }
+
+    func setSelected(overrideIdentifier: String? = nil) {
+        guard
+            let stationId = overrideIdentifier ?? selectedStationId,
+            let station = findStation(withIdentifier: stationId)
+        else {
+            return
+        }
+
+        selected = station
     }
 }

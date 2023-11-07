@@ -56,7 +56,7 @@ struct OpenWindStationIntent: AppIntent, WidgetConfigurationIntent {
 
     @MainActor
     func perform() async throws -> some IntentResult {
-        navigationModel.pendingSelectedStationName = station.name
+        navigationModel.pendingSelectedStationId = station.id
 
         return .result()
     }
