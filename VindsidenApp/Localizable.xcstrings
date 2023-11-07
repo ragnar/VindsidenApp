@@ -1,6 +1,22 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "%@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@"
+          }
+        },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@"
+          }
+        }
+      }
+    },
     "%@ version %@.%@" : {
       "comment" : "Version string in settings view",
       "localizations" : {
@@ -511,6 +527,22 @@
         }
       }
     },
+    "Selected" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Selected"
+          }
+        },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Valgt"
+          }
+        }
+      }
+    },
     "Series" : {
       "localizations" : {
         "en" : {
@@ -881,6 +913,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Synlig"
+          }
+        }
+      }
+    },
+    "Wind at %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wind at %@"
+          }
+        },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vind kl. %@"
           }
         }
       }

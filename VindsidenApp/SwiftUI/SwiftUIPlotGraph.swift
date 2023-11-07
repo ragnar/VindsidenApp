@@ -32,6 +32,16 @@ struct SwiftUIPlotGraph: View {
     var plots: [VindsidenKit.Plot]
     let station: WidgetData
 
+    @State private var rawSelectedDate: Date?
+
+    private var selectedDate: Date? {
+        guard let rawSelectedDate else {
+            return nil
+        }
+
+        return plots.first(where: { $0.plotTime <= rawSelectedDate})?.plotTime
+    }
+
     init(station: WidgetData) {
         self.station = station
 
@@ -75,6 +85,23 @@ struct SwiftUIPlotGraph: View {
                 )
                 .lineStyle(StrokeStyle(lineWidth: 1, dash: []))
                 .foregroundStyle(by: .value("Series", "Average"))
+
+                if let selectedDate {
+                    RuleMark(
+                        x: .value("Selected", selectedDate)
+                    )
+                    .offset(yStart: -10)
+                    .zIndex(-1)
+                    .annotation(
+                        position: .top, spacing: 0,
+                        overflowResolution: .init(
+                            x: .fit(to: .chart),
+                            y: .disabled
+                        )
+                    ) {
+                        valueSelectionPopover
+                    }
+                }
             }
             .interpolationMethod(.catmullRom)
         }
@@ -99,8 +126,54 @@ struct SwiftUIPlotGraph: View {
             "Variation Max": Color.accentColor.opacity(0.4),
         ])
         .chartLegend(.hidden)
+        .chartXSelection(value: $rawSelectedDate)
     }
 
+    @ViewBuilder
+    var valueSelectionPopover: some View {
+        if let selectedDate, let plot = plots[selectedDate] {
+            VStack(alignment: .leading) {
+                Text("Wind at \(plot.plotTime, format: .dateTime.hour().minute())")
+                    .font(.callout)
+                    .foregroundStyle(.secondary)
+                    .fixedSize()
+                HStack(alignment: .top, spacing: 20) {
+                    VStack(alignment: .center, spacing: 0) {
+                        Text("\(plot.windMax, format: .number.precision(.fractionLength(1)))")
+                            .font(.title2.bold())
+                            .foregroundStyle(.accent.gradient)
+
+                        Text("Gust")
+                            .font(.callout)
+                            .foregroundStyle(.secondary)
+                    }
+
+                    VStack(alignment: .center, spacing: 0) {
+                        Text("\(plot.windAvg, format: .number.precision(.fractionLength(1)))")
+                            .font(.title2.bold())
+                            .foregroundStyle(.accent.gradient)
+                    }
+
+                    VStack(alignment: .center, spacing: 0) {
+                        Text("\(plot.windMin, format: .number.precision(.fractionLength(1)))")
+                            .font(.title2.bold())
+                            .foregroundStyle(.accent.gradient)
+
+                        Text("Lull")
+                            .font(.callout)
+                            .foregroundStyle(.secondary)
+                    }
+                }
+            }
+            .padding(6)
+            .background {
+                RoundedRectangle(cornerRadius: 4)
+                    .foregroundStyle(.thinMaterial)
+            }
+        } else {
+            EmptyView()
+        }
+    }
     func convertedWind(_ base: Double?) -> Double {
         let value = base ?? -999
         let unit = settings.windUnit
