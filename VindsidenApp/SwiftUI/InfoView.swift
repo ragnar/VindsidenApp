@@ -22,7 +22,7 @@ struct InfoView: View {
         .frame(maxWidth: .infinity)
         .padding([.top, .bottom], 6)
         .background(RoundedRectangle(cornerRadius: 12)
-            .foregroundStyle(.thinMaterial)
+            .foregroundStyle(.regularMaterial)
         )
         .foregroundStyle(.primary)
     }

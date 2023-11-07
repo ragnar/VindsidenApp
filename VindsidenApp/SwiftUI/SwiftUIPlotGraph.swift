@@ -13,24 +13,11 @@ import VindsidenKit
 import WeatherBoxView
 import Units
 
-fileprivate let maxPlotCount = 35
-
-extension Array where Element: VindsidenKit.Plot {
-    var latest: Self {
-        if isEmpty {
-            return []
-        }
-
-        return Array(self[..<Swift.min(count, maxPlotCount)])
-    }
-}
-
 struct SwiftUIPlotGraph: View {
     @Environment(UserObservable.self) private var settings
 
-    @Query
-    var plots: [VindsidenKit.Plot]
     let station: WidgetData
+    let plots: [VindsidenKit.Plot]
 
     @State private var rawSelectedDate: Date?
 
@@ -40,19 +27,6 @@ struct SwiftUIPlotGraph: View {
         }
 
         return plots.first(where: { $0.plotTime <= rawSelectedDate})?.plotTime
-    }
-
-    init(station: WidgetData) {
-        self.station = station
-
-        let name = station.name
-        let interval =  Int(-1 * AppConfig.Global.plotHistory)
-        let date = Calendar.current.date(byAdding: .hour, value: interval, to: Date())!
-        var fetchDescriptor = FetchDescriptor<VindsidenKit.Plot>(predicate: #Predicate<VindsidenKit.Plot> { $0.station?.stationName == name && $0.plotTime > date },
-                                                                 sortBy: [SortDescriptor<VindsidenKit.Plot>(\.dataId, order: .reverse) ])
-        fetchDescriptor.fetchLimit = maxPlotCount
-
-        self._plots = Query(fetchDescriptor)
     }
 
     var body: some View {
@@ -167,7 +141,7 @@ struct SwiftUIPlotGraph: View {
             }
             .padding(6)
             .background {
-                RoundedRectangle(cornerRadius: 4)
+                RoundedRectangle(cornerRadius: 12)
                     .foregroundStyle(.thinMaterial)
             }
         } else {
