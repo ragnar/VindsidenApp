@@ -3,9 +3,27 @@
 <plist version="1.0">
 <dict>
 	<key>CFBundleIcons</key>
-	<dict/>
+	<dict>
+		<key>CFBundlePrimaryIcon</key>
+		<dict>
+			<key>NSAppIconComplementingColorNames</key>
+			<array>
+				<string>AlternativeAccentColor1</string>
+				<string>AlternativeAccentColor2</string>
+			</array>
+		</dict>
+	</dict>
 	<key>CFBundleIcons~ipad</key>
-	<dict/>
+	<dict>
+		<key>CFBundlePrimaryIcon</key>
+		<dict>
+			<key>NSAppIconComplementingColorNames</key>
+			<array>
+				<string>AlternativeAccentColor1</string>
+				<string>AlternativeAccentColor2</string>
+			</array>
+		</dict>
+	</dict>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleURLTypes</key>

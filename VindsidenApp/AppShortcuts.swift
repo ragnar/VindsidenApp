@@ -36,7 +36,7 @@ struct AppShortcuts: AppShortcutsProvider {
         ]
     }
 
-    static var shortcutTileColor: ShortcutTileColor = .orange
+    static var shortcutTileColor: ShortcutTileColor = .teal
 }
 
 struct OpenWindStationIntent: AppIntent, WidgetConfigurationIntent {

@@ -26,6 +26,7 @@ struct VindsidenApp: App {
         self.navigationModel = navigationModel
 
         AppDependencyManager.shared.add(dependency: navigationModel)
+        AppShortcuts.updateAppShortcutParameters()
 
         session.settings = userSettings
         session.activate()
