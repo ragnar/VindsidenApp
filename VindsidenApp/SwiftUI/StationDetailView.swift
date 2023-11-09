@@ -76,8 +76,16 @@ struct StationDetailView: View {
             })
 
             Spacer()
-            SwiftUIPlotGraph(station: station, plots: plots)
-                .frame(minHeight: 200, maxHeight: 240)
+
+            if plots.count > 0 {
+                SwiftUIPlotGraph(station: station, plots: plots)
+                    .frame(minHeight: 200, maxHeight: 240)
+            } else {
+                HStack(alignment: .center) {
+                    ProgressView()
+                }
+                .frame(maxWidth: .infinity, minHeight: 200, maxHeight: 240)
+            }
         }
     }
 }
