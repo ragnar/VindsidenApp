@@ -113,7 +113,7 @@ struct SwiftUIPlotGraph: View {
                     .fixedSize()
                 HStack(alignment: .top, spacing: 20) {
                     VStack(alignment: .center, spacing: 0) {
-                        Text("\(plot.windMax, format: .number.precision(.fractionLength(1)))")
+                        Text(plot.windMax, format: .number.precision(.fractionLength(1)))
                             .font(.title2.bold())
                             .foregroundStyle(.accent.gradient)
 
@@ -123,13 +123,13 @@ struct SwiftUIPlotGraph: View {
                     }
 
                     VStack(alignment: .center, spacing: 0) {
-                        Text("\(plot.windAvg, format: .number.precision(.fractionLength(1)))")
+                        Text(plot.windAvg, format: .number.precision(.fractionLength(1)))
                             .font(.title2.bold())
                             .foregroundStyle(.accent.gradient)
                     }
 
                     VStack(alignment: .center, spacing: 0) {
-                        Text("\(plot.windMin, format: .number.precision(.fractionLength(1)))")
+                        Text(plot.windMin, format: .number.precision(.fractionLength(1)))
                             .font(.title2.bold())
                             .foregroundStyle(.accent.gradient)
 
