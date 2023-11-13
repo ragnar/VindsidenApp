@@ -9,6 +9,12 @@
 import Foundation
 import OSLog
 
+extension URLSession {
+    static let stations: URLSession = {
+        return URLSession(configuration: .ephemeral)
+    }()
+}
+
 public class StationFetcher : NSObject {
     var characters: String = ""
     var result = [[String: String]]()
@@ -19,7 +25,7 @@ public class StationFetcher : NSObject {
 
         Logger.fetcher.debug("Fetching from: \(request)")
         
-        let (data, _) = try await URLSession.vindsiden.data(for: request)
+        let (data, _) = try await URLSession.stations.data(for: request)
         let parser = XMLParser(data: data)
         parser.delegate = self
         parser.parse()

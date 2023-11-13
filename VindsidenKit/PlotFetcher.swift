@@ -10,7 +10,7 @@ import Foundation
 import OSLog
 
 extension URLSession {
-    static let vindsiden: URLSession = {
+    static let plots: URLSession = {
         return URLSession(configuration: .ephemeral)
     }()
 }
@@ -25,7 +25,7 @@ public final class PlotFetcher: NSObject {
 
         Logger.fetcher.debug("Fetching from: \(request)")
 
-        let (data, _) = try await URLSession.vindsiden.data(for: request)
+        let (data, _) = try await URLSession.plots.data(for: request)
         let parser = XMLParser(data: data)
         parser.delegate = self
         parser.parse()

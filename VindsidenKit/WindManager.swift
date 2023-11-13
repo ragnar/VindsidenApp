@@ -61,7 +61,7 @@ public actor WindManager {
                 returning: Void.self
             ) { group in
                 for station in stations {
-                    group.addTask {
+                    group.addTask(priority: .high) {
                         await self.update(stationId: station.0, name: station.1, hours: hours)
                     }
                 }
@@ -87,23 +87,7 @@ public actor WindManager {
     public func fetchHours() -> Int {
         let maxHours = Int(AppConfig.Global.plotHistory)
 
-        guard let lastFetched else {
-            return maxHours
-        }
-
-        let components = Calendar.current.dateComponents([.hour], from: lastFetched, to: Date())
-
-        guard let hours = components.hour else {
-            return maxHours
-        }
-
-        if hours >= maxHours {
-            return maxHours
-        } else if hours <= 2 {
-            return 3
-        }
-
-        return hours
+        return maxHours
     }
 
     @Sendable
