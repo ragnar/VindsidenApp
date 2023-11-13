@@ -19,16 +19,12 @@ public struct PersistentContainer {
 
     @MainActor
     public var container: ModelContainer {
-        guard let appGroupContainer = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: AppConfig.ApplicationGroups.primary) else {
-            fatalError("Shared file container could not be created.")
-        }
-
-        let url = appGroupContainer.appendingPathComponent(AppConfig.CoreData.sqliteName)
         let schema = Schema([Station.self, Plot.self])
-        let configuration = ModelConfiguration(url: url)
+        let configuration = ModelConfiguration("Vindsiden", groupContainer: .identifier(AppConfig.ApplicationGroups.primary))
 
         do {
-            return try ModelContainer(for: schema, configurations: configuration)
+            let container = try ModelContainer(for: schema, configurations: configuration)
+            return container
         } catch {
             fatalError("Unable to create model container: \(error)")
         }

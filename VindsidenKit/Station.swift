@@ -155,7 +155,8 @@ extension Station {
 
 extension Station {
     @MainActor
-    public class func updateWithFetchedContent(_ content: [[String: String]], in modelContext: ModelContext) -> Bool {
+    public class func updateWithFetchedContent(_ content: [[String: String]]) -> Bool {
+        let modelContext = ModelContext(PersistentContainer.shared.container)
         let stationIds = content.map { return Int($0["StationID"]!)! }
 
         Station.removeStaleStations(stationIds, in: modelContext)

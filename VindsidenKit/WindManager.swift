@@ -22,8 +22,7 @@ public actor WindManager {
         do {
             let stations = try await StationFetcher().fetch()
             let inserted = await Task { @MainActor in
-                return Station.updateWithFetchedContent(stations,
-                                                        in: PersistentContainer.shared.container.mainContext)
+                return Station.updateWithFetchedContent(stations)
             }.value
 
             return inserted
@@ -112,7 +111,7 @@ public actor WindManager {
     private func update(stationId: Int, name: String, hours: Int) async {
         do {
             let plots = try await PlotFetcher().fetchForStationId(stationId, hours: hours)
-            let num = try await Plot.updatePlots(plots, in: PersistentContainer.shared.container.mainContext)
+            let num = try await Plot.updatePlots(plots)
 
             Logger.windManager.debug("Finished with \(num) new plots for \(name).")
         } catch {

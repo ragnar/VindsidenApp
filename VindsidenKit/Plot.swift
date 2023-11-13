@@ -60,20 +60,9 @@ extension Plot: Plottable {
 
 extension Plot {
     @MainActor
-    public static func existing(for dataId: Int, with stationId: Int, in modelContext: ModelContext) -> Plot? {
-        var fetchDescriptor = FetchDescriptor(sortBy: [SortDescriptor(\Plot.dataId, order: .forward)])
-        fetchDescriptor.predicate = #Predicate { $0.dataId == dataId && $0.station?.stationId == stationId }
-        fetchDescriptor.fetchLimit = 1
+    public class func updatePlots(_ plots: [[String: String]]) async throws -> Int {
+        let modelContext = ModelContext(PersistentContainer.shared.container)
 
-        guard let plots = try? modelContext.fetch(fetchDescriptor) else {
-            return nil
-        }
-
-        return plots.first
-    }
-
-    @MainActor
-    public class func updatePlots(_ plots: [[String: String]], in modelContext: ModelContext) async throws -> Int {
         guard
             let stationPlot = plots.first,
             let stationString = stationPlot["StationID"],
@@ -111,7 +100,20 @@ extension Plot {
         return numInserted
     }
 
-    func updateWithContent( _ content: [String: String] ) {
+    @MainActor
+    private static func existing(for dataId: Int, with stationId: Int, in modelContext: ModelContext) -> Plot? {
+        var fetchDescriptor = FetchDescriptor(sortBy: [SortDescriptor(\Plot.dataId, order: .forward)])
+        fetchDescriptor.predicate = #Predicate { $0.dataId == dataId && $0.station?.stationId == stationId }
+        fetchDescriptor.fetchLimit = 1
+
+        guard let plots = try? modelContext.fetch(fetchDescriptor) else {
+            return nil
+        }
+
+        return plots.first
+    }
+
+    private func updateWithContent( _ content: [String: String] ) {
         if let unwrapped = content["Time"] {
             self.plotTime = DataManager.shared.dateFromString(unwrapped)
         }
