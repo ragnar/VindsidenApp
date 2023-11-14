@@ -51,28 +51,19 @@ struct StationDetailView: View {
                 .minimumScaleFactor(0.5)
                 .lineLimit(1)
 
-            Text(plots.first?.plotTime ?? station.lastUpdated, style: .relative)
+            Text(station.lastUpdated, style: .relative)
                 .padding(.bottom, 16)
 
             LazyVGrid(columns: [
                 GridItem(.flexible()),
                 GridItem(.flexible()),
             ], alignment: .leading, spacing: 8, content: {
-                if let plot = plots.first {
-                    InfoView(label: "Wind Speed", value: station.units.wind.formatted(value: plot.windMin.fromUnit(.metersPerSecond).toUnit(station.units.wind)))
-                    InfoView(label: "Average", value: station.units.wind.formatted(value: plot.windAvg.fromUnit(.metersPerSecond).toUnit(station.units.wind)))
-                    InfoView(label: "Wind Gust", value: station.units.wind.formatted(value: plot.windMax.fromUnit(.metersPerSecond).toUnit(station.units.wind)))
-                    InfoView(label: "Wind Beaufort", value: plot.windAvg.fromUnit(.metersPerSecond).toUnit(.knots).toUnit(.beaufort).formatted())
-                    InfoView(label: "Wind Direction", value: "\(plot.windDir.formatted(.number.precision(.fractionLength(0))))° (\(station.units.windDirection.symbol))")
-                    InfoView(label: "Temp Air", value: station.units.temp.formatted(value: Optional(plot.tempAir)))
-                } else {
-                    InfoView(label: "Wind Speed", value: "-.- \(station.units.wind.symbol)")
-                    InfoView(label: "Average", value: "-.- \(station.units.wind.symbol)")
-                    InfoView(label: "Wind Gust", value: "-.- \(station.units.wind.symbol)")
-                    InfoView(label: "Wind Beaufort", value: "-")
-                    InfoView(label: "Wind Direction", value: "-")
-                    InfoView(label: "Temp Air", value: "-.- \(station.units.temp.symbol)")
-                }
+                InfoView(label: "Wind", value: station.units.wind.formatted(value: station.windAverage))
+                InfoView(label: "Wind Lull", value: station.units.wind.formatted(value: station.windSpeed))
+                InfoView(label: "Wind Gust", value: station.units.wind.formatted(value: station.windGust))
+                InfoView(label: "Wind Beaufort", value: "1")
+                InfoView(label: "Wind Direction", value: "\(station.windAngle.formatted(.number.precision(.fractionLength(0))))° (\(station.units.windDirection.symbol))")
+                InfoView(label: "Temp Air", value: station.units.temp.formatted(value: station.temp))
             })
 
             Spacer()
