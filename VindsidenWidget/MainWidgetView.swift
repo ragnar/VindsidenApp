@@ -9,7 +9,6 @@
 import WidgetKit
 import SwiftUI
 import WeatherBoxView
-import WindArrow
 
 #if os(watchOS)
 import VindsidenWatchKit
