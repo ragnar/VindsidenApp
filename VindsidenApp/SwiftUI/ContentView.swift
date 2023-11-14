@@ -28,6 +28,8 @@ struct ContentView: View {
     @Environment(\.dismiss) private var dismiss
     @Environment(\.modelContext) private var modelContext
     @Environment(\.openURL) private var openURL
+    @Environment(\.displayScale) var displayScale
+
     @Environment(UserObservable.self) private var settings
     @Environment(NavigationModel.self) private var navigationModel
     
@@ -39,6 +41,7 @@ struct ContentView: View {
     @State private var selectedStationId: String?
     @State private var selected: WidgetData? 
     @State private var stationInfoChanged: Bool = false
+    @State private var shareImage: Image = Image(uiImage: UIImage())
 
     var body: some View {
         NavigationSplitView(columnVisibility: $visibility) {
@@ -131,6 +134,18 @@ struct ContentView: View {
     @MainActor
     func toolbarContent() -> some ToolbarContent {
         ToolbarItemGroup(placement: .bottomBar) {
+            ShareLink(
+                item: shareImage,
+                preview: SharePreview(
+                    $selected.wrappedValue?.name ?? "",
+                    image: shareImage
+                )
+            ) {
+                Image(systemName: "square.and.arrow.up")
+                    .foregroundStyle(.primary)
+            }
+            .disabled($selected.wrappedValue == nil)
+
             Button {
                 activeSheet = .selectedInfo
             } label: {
@@ -183,6 +198,43 @@ struct ContentView: View {
             Label("Hide", systemImage: "eye.slash.circle")
         }
     }
+
+    @MainActor
+    func renderShareImage(_ info: WidgetData) -> Image {
+        struct RenderView: View {
+            var info: WidgetData
+            var body: some View {
+                ZStack {
+                    RoundedRectangle(
+                        cornerRadius: 12
+                    )
+                    .foregroundStyle(.accent.gradient)
+                    .ignoresSafeArea()
+
+                    WeatherBoxView(
+                        data: info,
+                        customDateStyle: Date.FormatStyle(date: .abbreviated, time: .complete, capitalizationContext: .standalone),
+                        titleStyle: Color.primary.gradient
+                    )
+                    .foregroundStyle(.secondary)
+                    .frame(minWidth: 160)
+                    .padding()
+                }
+                .environment(\.colorScheme, .light)
+            }
+        }
+
+        let view = RenderView(info: info)
+        let renderer = ImageRenderer(content: view)
+
+        renderer.scale = displayScale
+
+        if let uiImage = renderer.uiImage {
+            return Image(uiImage: uiImage)
+        }
+
+        return Image(uiImage: UIImage())
+    }
 }
 
 extension ContentView {
@@ -214,23 +266,23 @@ extension ContentView {
         setSelected(overrideIdentifier: identifier)
     }
 
+    @MainActor
     func handleDataValueChange(_ oldValue: [WidgetData], _ newValue: [WidgetData]) {
         stationInfoChanged = true
         Logger.debugging.debug("Station info changed.")
         setSelected()
         updateGaugeMaxValue()
+
+        if let newValue = $selected.wrappedValue {
+            shareImage = renderShareImage(newValue)
+        }
     }
 
+    @MainActor
     func handleSelectedChange(_ oldValue: WidgetData?, _ newValue: WidgetData?) {
         Logger.debugging.debug("Station change: old: \(oldValue?.name ?? "not set"), new: \(newValue?.name ?? "not set")")
 
-        if oldValue == nil {
-            selectedStationId = newValue?.customIdentifier
-            settings.selectedStationId = newValue?.customIdentifier
-            return
-        }
-
-        if stationInfoChanged {
+        if oldValue != nil && stationInfoChanged {
             setSelected()
             Logger.debugging.debug("Ignore station change")
             stationInfoChanged = false
@@ -240,6 +292,10 @@ extension ContentView {
         Logger.debugging.debug("Selected updated")
         selectedStationId = newValue?.customIdentifier
         settings.selectedStationId = newValue?.customIdentifier
+
+        if let newValue {
+            shareImage = renderShareImage(newValue)
+        }
     }
 
     @MainActor 
@@ -310,6 +366,7 @@ extension ContentView {
             let stationId = overrideIdentifier ?? selectedStationId,
             let station = findStation(withIdentifier: stationId)
         else {
+            selected = nil
             return
         }
 
