@@ -18,22 +18,6 @@
         }
       }
     },
-    "Average" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Average"
-          }
-        },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Gjennomsnitt"
-          }
-        }
-      }
-    },
     "Beaufort" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -325,7 +309,7 @@
         "nb" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Lull"
+            "value" : "Stille"
           }
         }
       }
@@ -901,6 +885,22 @@
         }
       }
     },
+    "Wind" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wind"
+          }
+        },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vind"
+          }
+        }
+      }
+    },
     "Wind at %@" : {
       "localizations" : {
         "en" : {
@@ -965,18 +965,18 @@
         }
       }
     },
-    "Wind Speed" : {
+    "Wind Lull" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Wind Speed"
+            "value" : "Wind Lull"
           }
         },
         "nb" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Vindhastighet"
+            "value" : "Vindstille"
           }
         }
       }
