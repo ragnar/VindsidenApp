@@ -84,26 +84,7 @@ struct ContentView: View {
             }
             .tabViewStyle(.page(indexDisplayMode: .never))
             .toolbar {
-                ToolbarItemGroup(placement: .bottomBar) {
-                    Button {
-                        activeSheet = .selectedInfo
-                    } label: {
-                        Image(systemName: "info.circle")
-                    }
-                    Spacer()
-                    PageControl(selection: $selected, listOfItems: $data.value)
-                        .frame(maxWidth: .infinity)
-                    Spacer()
-                    Button {
-                        settings.selectedStationId = nil
-                        selectedStationId = nil
-                        selected = nil
-                    } label: {
-                        Image(systemName: "list.bullet")
-
-                    }
-                    .opacity(UIDevice.current.userInterfaceIdiom == .pad ? 0 : 1)
-                }
+                toolbarContent()
             }
         }
         .sheet(item: $activeSheet, onDismiss: {
@@ -145,6 +126,35 @@ struct ContentView: View {
         .onReceive(NotificationCenter.default.publisher(for: UIApplication.willEnterForegroundNotification), perform: handleNotificationForeground)
         .refreshable(action: handleRefreshable)
         .task(handleRestore)
+    }
+
+    @MainActor
+    func toolbarContent() -> some ToolbarContent {
+        ToolbarItemGroup(placement: .bottomBar) {
+            Button {
+                activeSheet = .selectedInfo
+            } label: {
+                Image(systemName: "info.circle")
+            }
+            .contextMenu {
+                if let name = $selected.wrappedValue?.name {
+                    contextMenuBuilder(name: name)
+                }
+            }
+            Spacer()
+            PageControl(selection: $selected, listOfItems: $data.value)
+                .frame(maxWidth: .infinity)
+            Spacer()
+            Button {
+                settings.selectedStationId = nil
+                selectedStationId = nil
+                selected = nil
+            } label: {
+                Image(systemName: "list.bullet")
+
+            }
+            .opacity(UIDevice.current.userInterfaceIdiom == .pad ? 0 : 1)
+        }
     }
 
     @MainActor
