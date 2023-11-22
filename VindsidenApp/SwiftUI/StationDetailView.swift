@@ -77,14 +77,17 @@ struct StationDetailView: View {
 
             Spacer()
 
-            if plots.count > 0 {
-                SwiftUIPlotGraph(station: station, plots: plots)
-                    .frame(minHeight: 200, maxHeight: 240)
-            } else {
-                HStack(alignment: .center) {
-                    ProgressView()
+            if plots.isEmpty {
+                ContentUnavailableView {
+                    Label("Graph",
+                          systemImage: "chart.xyaxis.line")
+                } description: {
+                    Text("Not enough data points to show graph.")
                 }
                 .frame(maxWidth: .infinity, minHeight: 200, maxHeight: 240)
+            } else {
+                SwiftUIPlotGraph(station: station, plots: plots)
+                    .frame(minHeight: 200, maxHeight: 240)
             }
         }
     }

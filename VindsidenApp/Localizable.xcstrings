@@ -165,6 +165,22 @@
         }
       }
     },
+    "Graph" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Graph"
+          }
+        },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Graf"
+          }
+        }
+      }
+    },
     "Gust" : {
       "localizations" : {
         "en" : {
@@ -394,6 +410,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Navn"
+          }
+        }
+      }
+    },
+    "Not enough data points to show graph." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Not enough data points to show graph"
+          }
+        },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Ikke nok datapunkter til å vise graf"
           }
         }
       }
