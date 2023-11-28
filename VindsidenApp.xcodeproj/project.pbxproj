@@ -86,6 +86,10 @@
 		ADB97FBF2AD92F8900CE7B01 /* InfoPlist.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = ADB97FBE2AD92F8900CE7B01 /* InfoPlist.xcstrings */; };
 		ADB97FC32AD9306700CE7B01 /* InfoPlist.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = ADB97FC22AD9306700CE7B01 /* InfoPlist.xcstrings */; };
 		ADB97FC52AD9309B00CE7B01 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = ADB97FC42AD9309B00CE7B01 /* Localizable.xcstrings */; };
+		ADC578A92B15C85A004871BD /* StationModelActor.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADC578A82B15C85A004871BD /* StationModelActor.swift */; };
+		ADC578AA2B15CBC4004871BD /* StationModelActor.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADC578A82B15C85A004871BD /* StationModelActor.swift */; };
+		ADC578AC2B15CD40004871BD /* PlotModelActor.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADC578AB2B15CD40004871BD /* PlotModelActor.swift */; };
+		ADC578AD2B15CE7B004871BD /* PlotModelActor.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADC578AB2B15CD40004871BD /* PlotModelActor.swift */; };
 		ADDE47F82AE15152001187F6 /* AppShortcuts.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADDE47F72AE15152001187F6 /* AppShortcuts.swift */; };
 		ADDE47FC2AE67802001187F6 /* MainWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADDE47FB2AE67802001187F6 /* MainWidgetView.swift */; };
 		ADDE47FE2AE6783D001187F6 /* VindsidenWidgetEntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADDE47FD2AE6783D001187F6 /* VindsidenWidgetEntryView.swift */; };
@@ -333,6 +337,8 @@
 		ADB97FBE2AD92F8900CE7B01 /* InfoPlist.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = InfoPlist.xcstrings; sourceTree = "<group>"; };
 		ADB97FC22AD9306700CE7B01 /* InfoPlist.xcstrings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json.xcstrings; path = InfoPlist.xcstrings; sourceTree = "<group>"; };
 		ADB97FC42AD9309B00CE7B01 /* Localizable.xcstrings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
+		ADC578A82B15C85A004871BD /* StationModelActor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationModelActor.swift; sourceTree = "<group>"; };
+		ADC578AB2B15CD40004871BD /* PlotModelActor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlotModelActor.swift; sourceTree = "<group>"; };
 		ADDE47F72AE15152001187F6 /* AppShortcuts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppShortcuts.swift; sourceTree = "<group>"; };
 		ADDE47FB2AE67802001187F6 /* MainWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainWidgetView.swift; sourceTree = "<group>"; };
 		ADDE47FD2AE6783D001187F6 /* VindsidenWidgetEntryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VindsidenWidgetEntryView.swift; sourceTree = "<group>"; };
@@ -696,7 +702,9 @@
 				AD9685A92AD7CA2000608FB3 /* PersistentContainer.swift */,
 				ADEC5BC52ADD038F00A65057 /* PreviewSampleData.swift */,
 				AD96859F2AD6ACE900608FB3 /* Plot.swift */,
+				ADC578AB2B15CD40004871BD /* PlotModelActor.swift */,
 				AD9685A42AD6B8A300608FB3 /* Station.swift */,
+				ADC578A82B15C85A004871BD /* StationModelActor.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -1159,10 +1167,12 @@
 				AD9E40741B8D9BCD00FABCF5 /* PlotFetcher.swift in Sources */,
 				AD5025282AE6D8C0007DDF1F /* UserObservable.swift in Sources */,
 				AD50252B2AE6D8FF007DDF1F /* Plot.swift in Sources */,
+				ADC578AD2B15CE7B004871BD /* PlotModelActor.swift in Sources */,
 				AD50252A2AE6D8FB007DDF1F /* Station.swift in Sources */,
 				AD303C321B282FB100C4B999 /* AppConfig.swift in Sources */,
 				AD5025292AE6D8EA007DDF1F /* PersistentContainer.swift in Sources */,
 				AD303C331B282FB100C4B999 /* WindManager.swift in Sources */,
+				ADC578AA2B15CBC4004871BD /* StationModelActor.swift in Sources */,
 				AD303C301B282FB100C4B999 /* Datamanager.swift in Sources */,
 				AD303C311B282FB100C4B999 /* Logger.swift in Sources */,
 			);
@@ -1202,8 +1212,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ADC578AC2B15CD40004871BD /* PlotModelActor.swift in Sources */,
 				AD7BBB471A3F53F400883770 /* Logger.swift in Sources */,
 				ADB97FAF2AD9154D00CE7B01 /* UserObservable.swift in Sources */,
+				ADC578A92B15C85A004871BD /* StationModelActor.swift in Sources */,
 				AD7BBB491A3F55A100883770 /* AppConfig.swift in Sources */,
 				ADE9C4081AAB32840089EB19 /* WindManager.swift in Sources */,
 				AD9E40731B8D9BCD00FABCF5 /* PlotFetcher.swift in Sources */,

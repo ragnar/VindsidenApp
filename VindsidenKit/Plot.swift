@@ -59,49 +59,7 @@ extension Plot: Plottable {
 }
 
 extension Plot {
-    @MainActor
-    public class func updatePlots(_ plots: [[String: String]]) async throws -> Int {
-        let modelContext = ModelContext(PersistentContainer.shared.container)
-
-        guard
-            let stationPlot = plots.first,
-            let stationString = stationPlot["StationID"],
-            let stationId = Int(stationString),
-            let station = Station.existing(for: stationId, in: modelContext)
-        else {
-            return 0
-        }
-
-        for plotContent in plots {
-            guard
-                let unwrapped = plotContent["DataID"],
-                let dataId = Int(unwrapped),
-                Plot.existing(for: dataId, with: stationId, in: modelContext) == nil
-            else {
-                continue
-            }
-
-            let plot = Plot()
-
-            plot.updateWithContent(plotContent)
-            plot.station = station
-
-            modelContext.insert(plot)
-        }
-
-        let numInserted = modelContext.insertedModelsArray.count
-
-        do {
-            try modelContext.save()
-        } catch {
-            Logger.persistence.error("Save plot failed: \(error.localizedDescription)")
-        }
-
-        return numInserted
-    }
-
-    @MainActor
-    private static func existing(for dataId: Int, with stationId: Int, in modelContext: ModelContext) -> Plot? {
+    static func existing(for dataId: Int, with stationId: Int, in modelContext: ModelContext) -> Plot? {
         var fetchDescriptor = FetchDescriptor(sortBy: [SortDescriptor(\Plot.dataId, order: .forward)])
         fetchDescriptor.predicate = #Predicate { $0.dataId == dataId && $0.station?.stationId == stationId }
         fetchDescriptor.fetchLimit = 1
@@ -113,7 +71,7 @@ extension Plot {
         return plots.first
     }
 
-    private func updateWithContent( _ content: [String: String] ) {
+    func updateWithContent( _ content: [String: String] ) {
         if let unwrapped = content["Time"] {
             self.plotTime = DataManager.shared.dateFromString(unwrapped)
         }

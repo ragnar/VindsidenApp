@@ -106,7 +106,6 @@ extension Station {
         return stations
     }
 
-    @MainActor
     public static func existing(for stationId: Int, in modelContext: ModelContext) -> Station? {
         let station32 = Int(stationId)
         var fetchDescriptor = FetchDescriptor(sortBy: [SortDescriptor(\Station.order, order: .forward)])
@@ -153,105 +152,8 @@ extension Station {
     }
 }
 
+
 extension Station {
-    @MainActor
-    public class func updateWithFetchedContent(_ content: [[String: String]]) -> Bool {
-        let modelContext = ModelContext(PersistentContainer.shared.container)
-        let stationIds = content.map { return Int($0["StationID"]!)! }
-
-        Station.removeStaleStations(stationIds, in: modelContext)
-
-        var inserted = false
-        var order = Station.maxOrder(in: modelContext) ?? 200
-
-        for stationContent in content {
-            guard 
-                let stationIdString = stationContent["StationID"],
-                let stationId = Int(stationIdString)
-            else {
-                Logger.persistence.debug("No stationId")
-                continue
-            }
-
-            let station: Station
-
-            if let existing = Station.existing(for: stationId, in: modelContext) {
-                station = existing
-            } else {
-                inserted = true
-                station = Station()
-
-                if stationId == 60 {
-                    station.order = 101
-                    station.isHidden = false
-                } else {
-                    order += 1
-                    station.order = order
-                }
-
-                modelContext.insert(station)
-            }
-
-            station.updateWithContent(stationContent, stationId: stationId)
-        }
-
-        do {
-            try modelContext.save()
-        } catch {
-            Logger.persistence.error("Save failed: \(error.localizedDescription)")
-        }
-
-        return inserted
-    }
-
-    @MainActor
-    public class func updateWithWatchContent(_ content: [[String: AnyObject]], in modelContext: ModelContext) async {
-        let stationIds = content.map { return $0["stationId"] as! Int }
-
-        Station.removeStaleStations(stationIds, in: modelContext)
-
-        for stationContent in content {
-            guard let stationId = stationContent["stationId"] as? Int else {
-                Logger.persistence.debug("No stationId")
-                continue
-            }
-
-            let station: Station
-
-            if let existing = Station.existing(for: stationId, in: modelContext) {
-                station = existing
-            } else {
-                station = Station()
-                modelContext.insert(station)
-            }
-
-            station.updateWithWatchContent(stationContent)
-        }
-
-        do {
-            try modelContext.save()
-        } catch {
-            Logger.persistence.error("Save failed: \(error.localizedDescription)")
-        }
-    }
-
-    @MainActor
-    public class func removeStaleStations(_ stations: [Int], in modelContext: ModelContext) {
-        do {
-            let predicate = #Predicate<Station> { station in
-                stations.contains(station.stationId) == false
-            }
-
-            try modelContext.delete(model: Station.self, where: predicate)
-
-            Logger.persistence.debug("Deleted \(modelContext.deletedModelsArray.count) stations")
-
-            try modelContext.save()
-        } catch {
-            Logger.persistence.error("Deleting failed: \(error.localizedDescription)")
-        }
-    }
-
     func updateWithContent(_ content: [String: String], stationId: Int) {
         self.stationId = stationId
 

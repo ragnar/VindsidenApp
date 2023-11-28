@@ -20,9 +20,11 @@ public actor WindManager {
 
     public func updateStations() async -> Bool {
         do {
-            let stations = try await StationFetcher().fetch()
-            let inserted = await Task { @MainActor in
-                return Station.updateWithFetchedContent(stations)
+            let inserted = try await Task {
+                let stations = try await StationFetcher().fetch()
+                let actor = await StationModelActor(modelContainer: PersistentContainer.shared.container)
+
+                return await actor.updateWithFetchedContent(stations)
             }.value
 
             return inserted
@@ -60,9 +62,11 @@ public actor WindManager {
                 of: Void.self,
                 returning: Void.self
             ) { group in
+                let modelActor = await PlotModelActor(modelContainer: PersistentContainer.shared.container)
+
                 for station in stations {
                     group.addTask(priority: .high) {
-                        await self.update(stationId: station.0, name: station.1, hours: hours)
+                        await self.fetchAndUpdatePlots(for: station.0, name: station.1, hours: hours, modelActor: modelActor)
                     }
                 }
 
@@ -90,12 +94,10 @@ public actor WindManager {
         return maxHours
     }
 
-    @Sendable
-    @MainActor
-    private func update(stationId: Int, name: String, hours: Int) async {
+    private func fetchAndUpdatePlots(for stationId: Int, name: String, hours: Int, modelActor: PlotModelActor) async {
         do {
             let plots = try await PlotFetcher().fetchForStationId(stationId, hours: hours)
-            let num = try await Plot.updatePlots(plots)
+            let num = try await modelActor.updatePlots(plots)
 
             Logger.windManager.debug("Finished with \(num) new plots for \(name).")
         } catch {

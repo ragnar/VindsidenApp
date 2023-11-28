@@ -80,7 +80,8 @@ class WCFetcher: NSObject, WCSessionDelegate {
 
         if let stations = applicationContext["activeStations"] as? [[String:AnyObject]] {
             Task { @MainActor in
-                _ = await Station.updateWithWatchContent(stations, in: PersistentContainer.shared.container.mainContext)
+                let actor = StationModelActor(modelContainer: PersistentContainer.shared.container)
+                _ = await actor.updateWithWatchContent(stations)
                 WidgetCenter.shared.invalidateConfigurationRecommendations()
                 NotificationCenter.default.post( name: Notification.Name.ReceivedStations, object: nil)
             }
