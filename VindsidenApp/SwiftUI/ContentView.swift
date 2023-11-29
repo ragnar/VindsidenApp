@@ -86,9 +86,7 @@ struct ContentView: View {
                 }
             }
             .tabViewStyle(.page(indexDisplayMode: .never))
-            .toolbar {
-                toolbarContent()
-            }
+            .toolbar(content: toolbar)
         }
         .sheet(item: $activeSheet, onDismiss: {
             Task {
@@ -132,8 +130,9 @@ struct ContentView: View {
     }
 
     @MainActor
-    func toolbarContent() -> some ToolbarContent {
-        ToolbarItemGroup(placement: .bottomBar) {
+    @ToolbarContentBuilder
+    func toolbar() -> some ToolbarContent {
+        ToolbarItem(placement: .bottomBar) {
             ShareLink(
                 item: shareImage,
                 preview: SharePreview(
@@ -145,7 +144,9 @@ struct ContentView: View {
                     .foregroundStyle(.primary)
             }
             .disabled($selected.wrappedValue == nil)
+        }
 
+        ToolbarItem(placement: .bottomBar) {
             Button {
                 activeSheet = .selectedInfo
             } label: {
@@ -156,10 +157,16 @@ struct ContentView: View {
                     contextMenuBuilder(name: name)
                 }
             }
+        }
+
+        ToolbarItemGroup(placement: .bottomBar) {
             Spacer()
             PageControl(selection: $selected, listOfItems: $data.value)
                 .frame(maxWidth: .infinity)
             Spacer()
+        }
+
+        ToolbarItem(placement: .bottomBar) {
             Button {
                 settings.selectedStationId = nil
                 selectedStationId = nil
