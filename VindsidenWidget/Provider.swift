@@ -9,6 +9,7 @@
 import WidgetKit
 import SwiftData
 import WeatherBoxView
+import OSLog
 
 #if os(watchOS)
 import VindsidenWatchKit
@@ -49,7 +50,7 @@ struct Provider: AppIntentTimelineProvider  {
 
             let modelContainer: ModelContainer = PersistentContainer.shared.container
             let gregorian = NSCalendar(identifier: .gregorian)!
-            let inDate = Date().addingTimeInterval(-1*AppConfig.Global.plotHistory*3600)
+            let inDate = Date.now.addingTimeInterval(-1*AppConfig.Global.plotHistory*3600)
             let inputComponents = gregorian.components([.year, .month, .day, .hour], from: inDate)
             let outDate = gregorian.date(from: inputComponents) ?? Date()
 
@@ -58,7 +59,7 @@ struct Provider: AppIntentTimelineProvider  {
             fetchDescriptor.fetchLimit = 20
 
             if let plots = try? modelContainer.mainContext.fetch(fetchDescriptor), let plot = plots.first {
-                print("plot", plot.dataId, plot.plotTime, plot.station?.stationName ?? "kk", "plots:", plots.count)
+                Logger.debugging.debug("plot \(plot.dataId), \(plot.plotTime), \(plot.station?.stationName ?? "kk"), plots:, \(plots.count)")
                 return [
                     SimpleEntry(date: plot.plotTime, 
                                 configuration: configuration,
