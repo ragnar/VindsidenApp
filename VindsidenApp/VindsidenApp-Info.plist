@@ -2,6 +2,10 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>BGTaskSchedulerPermittedIdentifiers</key>
+	<array>
+		<string>VindsidenRefreshTask</string>
+	</array>
 	<key>CFBundleIcons</key>
 	<dict>
 		<key>CFBundlePrimaryIcon</key>
@@ -59,6 +63,11 @@
 	<key>NSUserActivityTypes</key>
 	<array>
 		<string>org.juniks.${PRODUCT_NAME:rfc1034identifier}</string>
+	</array>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>fetch</string>
+		<string>processing</string>
 	</array>
 	<key>UIPrerenderedIcon</key>
 	<true/>
