@@ -9,21 +9,22 @@
 import SwiftUI
 import AppIntents
 import SwiftData
+import BackgroundTasks
+import OSLog
 import VindsidenKit
 
 @main
 struct VindsidenApp: App {
-    @State var userSettings: UserObservable
-    @State var navigationModel: NavigationModel
+    @Environment(\.scenePhase) private var scenePhase
+
+    @State var userSettings: UserObservable = UserObservable()
+    @State var navigationModel: NavigationModel?
 
     var session = Connectivity.shared
 
     init() {
-        let userSettings = UserObservable()
-        self.userSettings = userSettings
-
         let navigationModel = NavigationModel(pendingSelectedStationId: nil)
-        self.navigationModel = navigationModel
+        self._navigationModel = .init(initialValue: navigationModel)
 
         AppDependencyManager.shared.add(dependency: navigationModel)
         AppShortcuts.updateAppShortcutParameters()
@@ -38,6 +39,36 @@ struct VindsidenApp: App {
                 .modelContainer(PersistentContainer.shared.container)
                 .environment(userSettings)
                 .environment(navigationModel)
+        }
+        .onChange(of: scenePhase) { _, newPhase in
+            switch newPhase {
+            case .background:
+                scheduleAppRefresh()
+            default:
+                break
+            }
+        }
+        .backgroundTask(.appRefresh("VindsidenRefreshTask")) { task in
+            Logger.debugging.debug("Performing app refresh.")
+
+            do {
+                try await WindManager.shared.fetch()
+            } catch {
+                Logger.debugging.error("Performing app refresh failed: \(error)")
+            }
+        }
+    }
+
+    private func scheduleAppRefresh() {
+        Logger.debugging.debug("Scheduling app refresh.")
+
+        let request = BGAppRefreshTaskRequest(identifier: "VindsidenRefreshTask")
+        request.earliestBeginDate = Date.now.addingTimeInterval(60 * 15)
+
+        do {
+            try BGTaskScheduler.shared.submit(request)
+        } catch {
+            Logger.debugging.error("Submitting background task failed: \(error)")
         }
     }
 }
