@@ -13,17 +13,26 @@ import OSLog
 public struct PersistentContainer {
     public static let shared = PersistentContainer()
 
+    private static var privateContainer: ModelContainer?
+
     private init() {
         Logger.debugging.error("Model container created")
+
     }
 
     @MainActor
     public var container: ModelContainer {
+        if let container = Self.privateContainer {
+            return container
+        }
+
         let schema = Schema([Station.self, Plot.self])
         let configuration = ModelConfiguration("Vindsiden", groupContainer: .identifier(AppConfig.ApplicationGroups.primary))
 
         do {
             let container = try ModelContainer(for: schema, configurations: configuration)
+            Self.privateContainer = container
+
             return container
         } catch {
             fatalError("Unable to create model container: \(error)")
