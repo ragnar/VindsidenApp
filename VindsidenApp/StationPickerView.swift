@@ -10,10 +10,19 @@ import SwiftUI
 import SwiftData
 import VindsidenKit
 
+private struct IdentifiableString: Identifiable {
+    var id: String {
+        return string
+    }
+
+    let string: String
+}
 
 struct StationPickerView: View {
     @Environment(\.modelContext) private var modelContext
     @Environment(\.editMode) private var editMode
+
+    @State private var activeSheetName: IdentifiableString? = nil
 
     @Query(sort: [SortDescriptor(\Station.order), SortDescriptor(\Station.stationName)])
     private var stations: [Station]
@@ -42,6 +51,11 @@ struct StationPickerView: View {
                     Spacer()
                     Text(verbatim: station.city!)
                         .foregroundStyle(.secondary)
+                    Button(action: {
+                        activeSheetName = IdentifiableString(string: station.stationName!)
+                    }, label: {
+                        Image(systemName: "info.circle")
+                    })
                 }
             }
             .onMove(perform: moveStations)
@@ -51,6 +65,9 @@ struct StationPickerView: View {
         }
         .navigationTitle("Stations")
         .navigationBarTitleDisplayMode(.inline)
+        .sheet(item: $activeSheetName) { name in
+            StationDetailsView(stationName: name.string)
+        }
     }
 
     func moveStations(_ indexes: IndexSet, _ i: Int) {
