@@ -23,12 +23,22 @@ struct Provider: AppIntentTimelineProvider  {
 
         configuration.station = IntentStation(id: -1, name: "Larkollen")
 
-        return SimpleEntry(date: Date(), configuration: configuration, plots: [])
+        return SimpleEntry(
+            date: Date(),
+            lastDate: Date(),
+            configuration: configuration,
+            plots: []
+        )
     }
 
     func snapshot(for configuration: ConfigurationAppIntent, in context: Context) async -> SimpleEntry {
         guard context.isPreview else {
-            return SimpleEntry(date: Date(), configuration: configuration, plots: [])
+            return SimpleEntry(
+                date: Date(),
+                lastDate: Date(),
+                configuration: configuration,
+                plots: []
+            )
         }
 
         let plots = await Task { @MainActor in
@@ -40,7 +50,12 @@ struct Provider: AppIntentTimelineProvider  {
 
         configuration.station = IntentStation(id: -1, name: "Larkollen")
 
-        return SimpleEntry(date: Date(), configuration: configuration, plots: plots)
+        return SimpleEntry(
+            date: Date(),
+            lastDate: Date(),
+            configuration: configuration,
+            plots: plots
+        )
     }
 
     func timeline(for configuration: ConfigurationAppIntent, in context: Context) async -> Timeline<SimpleEntry> {
@@ -61,7 +76,8 @@ struct Provider: AppIntentTimelineProvider  {
             if let plots = try? modelContainer.mainContext.fetch(fetchDescriptor), let plot = plots.first {
                 Logger.debugging.debug("plot \(plot.dataId), \(plot.plotTime), \(plot.station?.stationName ?? "kk"), plots:, \(plots.count)")
                 return [
-                    SimpleEntry(date: plot.plotTime, 
+                    SimpleEntry(date: Date(), 
+                                lastDate: plot.plotTime,
                                 configuration: configuration,
                                 plots: plots.filter { $0.plotTime >= outDate }.reversed()
                                )

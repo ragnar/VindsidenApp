@@ -23,7 +23,7 @@ struct VindsidenWidgetEntryView : View {
                 .foregroundStyle(Color("AccentColor"))
                 .widgetAccentable()
 
-            Text(entry.date, style: .relative)
+            Text(entry.lastDate, style: .relative)
                 .font(.caption)
             Chart {
                 ForEach(entry.plots, id: \.plotTime) { value in

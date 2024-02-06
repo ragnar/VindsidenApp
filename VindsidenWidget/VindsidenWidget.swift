@@ -18,6 +18,7 @@ import VindsidenKit
 
 struct SimpleEntry: TimelineEntry {
     let date: Date
+    let lastDate: Date
     let configuration: ConfigurationAppIntent
     let plots: [Plot]
 }
