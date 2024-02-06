@@ -29,6 +29,6 @@ struct InfoView: View {
 }
 
 #Preview {
-    InfoView(label: "Wind max", value: "13,2 m/s")
+    InfoView(label: "Wind Gust", value: "13,2 m/s")
         .frame(width: 220)
 }
