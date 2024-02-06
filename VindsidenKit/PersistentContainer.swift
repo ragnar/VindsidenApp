@@ -31,6 +31,7 @@ public struct PersistentContainer {
 
         do {
             let container = try ModelContainer(for: schema, configurations: configuration)
+            container.mainContext.autosaveEnabled = true
             Self.privateContainer = container
 
             return container

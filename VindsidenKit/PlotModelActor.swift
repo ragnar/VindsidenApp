@@ -22,6 +22,8 @@ public actor PlotModelActor {
             return 0
         }
 
+        modelContext.autosaveEnabled = true
+
         for plotContent in plots {
             guard
                 let unwrapped = plotContent["DataID"],

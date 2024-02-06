@@ -73,6 +73,10 @@ public actor WindManager {
                 await group.waitForAll()
             }
 
+            Task { @MainActor in
+                try? PersistentContainer.shared.container.mainContext.save()
+            }
+
             lastFetched = Date()
         }
 
