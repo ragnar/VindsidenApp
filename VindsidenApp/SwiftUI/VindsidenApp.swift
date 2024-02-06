@@ -52,7 +52,9 @@ struct VindsidenApp: App {
             Logger.debugging.debug("Performing app refresh.")
 
             do {
-                try await WindManager.shared.fetch()
+                for try await name in await WindManager.shared.streamFetch() {
+                    Logger.resource.debug("Finished with: \(name)")
+                }
             } catch {
                 Logger.debugging.error("Performing app refresh failed: \(error)")
             }

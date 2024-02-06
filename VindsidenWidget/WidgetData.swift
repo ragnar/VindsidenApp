@@ -19,8 +19,8 @@ import VindsidenKit
 
 extension WidgetData {
     @MainActor
-    static func loadData(for stationId: Int) async throws -> WidgetData? {
-        try? await WindManager.shared.fetch(stationId: stationId)
+    static func loadData(for stationId: Int, stationName: String) async throws -> WidgetData? {
+        try? await WindManager.shared.fetch(station: (stationId, stationName))
 
         let modelContainer: ModelContainer = PersistentContainer.shared.container
 
@@ -35,7 +35,6 @@ extension WidgetData {
             return nil
         }
 
-        let name = plot.station?.stationName ?? "Unknown"
         let stationId: String? = "\(stationId)"
 
         let temp: TempUnit = UserSettings.shared.selectedTempUnit
@@ -43,7 +42,7 @@ extension WidgetData {
         let direction = DirectionUnit(rawValue: Double(plot.windDir)) ?? .unknown
         let units = WidgetData.Units(wind: wind, rain: .mm, temp: temp, baro: .hPa, windDirection: direction)
         let data = WidgetData(customIdentifier: stationId,
-                              name: name,
+                              name: stationName,
                               windAngle: Double(plot.windDir),
                               windSpeed: Double(plot.windMin).fromUnit(.metersPerSecond).toUnit(wind),
                               windAverage: Double(plot.windAvg).fromUnit(.metersPerSecond).toUnit(wind),

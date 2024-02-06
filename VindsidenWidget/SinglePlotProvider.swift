@@ -55,7 +55,7 @@ struct SinglePlotProvider: AppIntentTimelineProvider  {
 
     func snapshot(for configuration: ConfigurationAppIntent, in context: Context) async -> SinglePlotEntry {
         do {
-            guard let widgetData = try await WidgetData.loadData(for: configuration.station.id) else {
+            guard let widgetData = try await WidgetData.loadData(for: configuration.station.id, stationName: configuration.station.name) else {
                 return SinglePlotEntry(date: Date(), configuration: configuration, widgetData: WidgetData(customIdentifier: "\(configuration.station.id)", name: configuration.station.name))
             }
 

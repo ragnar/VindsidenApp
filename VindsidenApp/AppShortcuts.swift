@@ -71,7 +71,7 @@ struct ShowWindStatus: AppIntent {
 
     @MainActor
     func perform() async throws -> some IntentResult & ShowsSnippetView {
-        try? await WindManager.shared.fetch(stationId: station.id)
+        try? await WindManager.shared.fetch(station: (station.id, station.name))
 
         let stationId = station.id
         var fetchDescriptor = FetchDescriptor(sortBy: [SortDescriptor(\Plot.plotTime, order: .reverse)])

@@ -33,10 +33,28 @@ public actor WindManager {
         }
     }
 
-    public func fetch(stationId: Int? = nil) async throws {
-        let taskId = "\(stationId ?? -9999)"
+    public func streamFetch() -> AsyncThrowingStream<String, Error> {
+        return AsyncThrowingStream { continuation in
+            continuation.onTermination = { @Sendable status in
+                Logger.windManager.debug("StreamFetch terminated with status \(String(describing: status))")
+            }
 
-        Logger.windManager.debug("Start refreshing for \(taskId)")
+            Task {
+                for station in await activeStations() {
+                    try await fetch(station: station)
+                    continuation.yield(station.1)
+                }
+
+                lastFetched = Date()
+                continuation.finish()
+            }
+        }
+    }
+
+    public func fetch(station: (Int, String)) async throws {
+        let taskId = "\(station.0)"
+
+        Logger.windManager.debug("Start refreshing for \(station.1)")
 
         if let refreshTask = refreshTasks[taskId] {
             Logger.windManager.debug("Already refreshing for \(taskId)")
@@ -46,38 +64,17 @@ public actor WindManager {
         let task = Task { () throws -> Void in
             defer {
                 refreshTasks[taskId] = nil
-                Logger.windManager.debug("Finished refreshing for \(taskId)")
+                Logger.windManager.debug("Finished refreshing for \(station.1)")
             }
 
             let hours = fetchHours()
-            let stations: [(Int, String)]
-
-            if let stationId {
-                stations = [(stationId, "Widget loading")]
-            } else {
-                stations = await activeStations()
-            }
-
-            await withTaskGroup(
-                of: Void.self,
-                returning: Void.self
-            ) { group in
-                let modelActor = await PlotModelActor(modelContainer: PersistentContainer.shared.container)
-
-                for station in stations {
-                    group.addTask(priority: .high) {
-                        await self.fetchAndUpdatePlots(for: station.0, name: station.1, hours: hours, modelActor: modelActor)
-                    }
-                }
-
-                await group.waitForAll()
-            }
+            let modelActor = await PlotModelActor(modelContainer: PersistentContainer.shared.container)
+            
+            await self.fetchAndUpdatePlots(for: station.0, name: station.1, hours: hours, modelActor: modelActor)
 
             Task { @MainActor in
                 try? PersistentContainer.shared.container.mainContext.save()
             }
-
-            lastFetched = Date()
         }
 
         refreshTasks[taskId] = task

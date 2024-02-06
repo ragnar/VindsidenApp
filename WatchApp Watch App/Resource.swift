@@ -70,9 +70,11 @@ final public class Resource<T: ResourceProtocol> {
             refreshing = true
             updateText = updateUpdateText()
 
-            try? await WindManager.shared.fetch()
-            await updateContent()
-            
+            for try await name in await WindManager.shared.streamFetch() {
+                Logger.resource.debug("Finished with: \(name)")
+                await updateContent()
+            }
+
             refreshing = false
             lastUpdated = Date.now
             updateText = updateUpdateText()

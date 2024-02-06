@@ -60,8 +60,9 @@ struct Provider: AppIntentTimelineProvider  {
 
     func timeline(for configuration: ConfigurationAppIntent, in context: Context) async -> Timeline<SimpleEntry> {
         let stationId = configuration.station.id
+        let stationName = configuration.station.name
         let entries: [SimpleEntry] = await Task { @MainActor in
-            try? await WindManager.shared.fetch(stationId: stationId)
+            try? await WindManager.shared.fetch(station: (stationId, stationName))
 
             let modelContainer: ModelContainer = PersistentContainer.shared.container
             let gregorian = NSCalendar(identifier: .gregorian)!
