@@ -40,9 +40,24 @@ public actor WindManager {
             }
 
             Task {
-                for station in await activeStations() {
-                    try await fetch(station: station)
-                    continuation.yield(station.1)
+                let stations = await activeStations()
+
+                try await withThrowingTaskGroup(
+                    of: Void.self,
+                    returning: Void.self
+                ) { group in
+                    for station in stations {
+                        group.addTask(priority: .high) { [weak self] in
+                            guard let self else {
+                                return
+                            }
+
+                            try await fetch(station: station)
+                            continuation.yield(station.1)
+                        }
+                    }
+
+                    try await group.waitForAll()
                 }
 
                 lastFetched = Date()
@@ -53,6 +68,7 @@ public actor WindManager {
 
     public func fetch(station: (Int, String)) async throws {
         let taskId = "\(station.0)"
+        let startTime = Date.now
 
         Logger.windManager.debug("Start refreshing for \(station.1)")
 
@@ -63,8 +79,9 @@ public actor WindManager {
 
         let task = Task { () throws -> Void in
             defer {
+                let endTime = Date.now
                 refreshTasks[taskId] = nil
-                Logger.windManager.debug("Finished refreshing for \(station.1)")
+                Logger.windManager.debug("Finished refreshing for \(station.1), time: \(endTime.timeIntervalSinceReferenceDate - startTime.timeIntervalSinceReferenceDate)")
             }
 
             let hours = fetchHours()
@@ -72,9 +89,9 @@ public actor WindManager {
             
             await self.fetchAndUpdatePlots(for: station.0, name: station.1, hours: hours, modelActor: modelActor)
 
-            Task { @MainActor in
+            await Task { @MainActor in
                 try? PersistentContainer.shared.container.mainContext.save()
-            }
+            }.value
         }
 
         refreshTasks[taskId] = task
@@ -100,7 +117,7 @@ public actor WindManager {
             let plots = try await PlotFetcher().fetchForStationId(stationId, hours: hours)
             let num = try await modelActor.updatePlots(plots)
 
-            Logger.windManager.debug("Finished with \(num) new plots for \(name).")
+            Logger.windManager.debug("Processed \(num) new plots for \(name).")
         } catch {
             Logger.windManager.debug("error: \(String(describing: error)) for \(name).")
         }
