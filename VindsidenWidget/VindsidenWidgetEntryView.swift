@@ -79,6 +79,8 @@ struct VindsidenWidgetEntryView : View {
             ])
             .chartLegend(.hidden)
         }
+        .containerBackground(.fill.tertiary, for: .widget)
+        .edgesIgnoringSafeArea([.horizontal, .bottom])
     }
 
     private func showXAxisValue(for index: Int) -> Bool {

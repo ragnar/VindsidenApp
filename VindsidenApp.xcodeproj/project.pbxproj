@@ -63,6 +63,7 @@
 		AD7BBB491A3F55A100883770 /* AppConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD7BBB481A3F55A100883770 /* AppConfig.swift */; };
 		AD8BF74D2AF3B11200A63A9B /* VindsidenKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD539C9D1947B5CA002644BD /* VindsidenKit.framework */; settings = {ATTRIBUTES = (Required, ); }; };
 		AD8BF74F2AF4EC1100A63A9B /* NavigationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD8BF74E2AF4EC1100A63A9B /* NavigationModel.swift */; };
+		AD8DA50B2B79F639005140AF /* PreviewSampleData.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADEC5BC52ADD038F00A65057 /* PreviewSampleData.swift */; };
 		AD9685832AD6883B00608FB3 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AD9685822AD6883B00608FB3 /* Launch Screen.storyboard */; };
 		AD96858A2AD6A40000608FB3 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD9685892AD6A40000608FB3 /* WidgetKit.framework */; };
 		AD96858C2AD6A40000608FB3 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD96858B2AD6A40000608FB3 /* SwiftUI.framework */; };
@@ -1166,6 +1167,7 @@
 				AD9E406D1B8D8A6900FABCF5 /* StationFetcher.swift in Sources */,
 				AD9E40741B8D9BCD00FABCF5 /* PlotFetcher.swift in Sources */,
 				AD5025282AE6D8C0007DDF1F /* UserObservable.swift in Sources */,
+				AD8DA50B2B79F639005140AF /* PreviewSampleData.swift in Sources */,
 				AD50252B2AE6D8FF007DDF1F /* Plot.swift in Sources */,
 				ADC578AD2B15CE7B004871BD /* PlotModelActor.swift in Sources */,
 				AD50252A2AE6D8FB007DDF1F /* Station.swift in Sources */,

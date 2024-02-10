@@ -9,6 +9,8 @@
 import Foundation
 import SwiftData
 import OSLog
+import WeatherBoxView
+import Units
 
 @ModelActor
 public actor PlotModelActor {
@@ -16,13 +18,10 @@ public actor PlotModelActor {
         guard
             let stationPlot = plots.first,
             let stationString = stationPlot["StationID"],
-            let stationId = Int(stationString),
-            let station = Station.existing(for: stationId, in: modelContext)
+            let stationId = Int(stationString)
         else {
             return 0
         }
-
-        modelContext.autosaveEnabled = true
 
         for plotContent in plots {
             guard
@@ -36,7 +35,6 @@ public actor PlotModelActor {
             let plot = Plot()
 
             plot.updateWithContent(plotContent)
-            plot.station = station
 
             modelContext.insert(plot)
         }
@@ -50,5 +48,36 @@ public actor PlotModelActor {
         }
 
         return numInserted
+    }
+
+    public func widgetData(for stationId: Int, stationName: String) async throws -> WidgetData? {
+        var fetchDescriptor = FetchDescriptor(sortBy: [SortDescriptor(\Plot.plotTime, order: .reverse)])
+        fetchDescriptor.predicate = #Predicate { $0.stationId == stationId }
+        fetchDescriptor.fetchLimit = 1
+
+        let plots = try modelContext.fetch(fetchDescriptor)
+
+        guard let plot = plots.first else {
+            return nil
+        }
+
+        let stationId: String? = "\(stationId)"
+
+        let temp: TempUnit = UserSettings.shared.selectedTempUnit
+        let wind: WindUnit = UserSettings.shared.selectedWindUnit
+        let direction = DirectionUnit(rawValue: Double(plot.windDir)) ?? .unknown
+        let units = WidgetData.Units(wind: wind, rain: .mm, temp: temp, baro: .hPa, windDirection: direction)
+        let data = WidgetData(customIdentifier: stationId,
+                              name: stationName,
+                              windAngle: Double(plot.windDir),
+                              windSpeed: Double(plot.windMin).fromUnit(.metersPerSecond).toUnit(wind),
+                              windAverage: Double(plot.windAvg).fromUnit(.metersPerSecond).toUnit(wind),
+                              windAverageMS: Double(plot.windAvg),
+                              windGust: Double(plot.windMax).fromUnit(.metersPerSecond).toUnit(wind),
+                              units: units,
+                              lastUpdated: plot.plotTime
+        )
+
+        return data
     }
 }

@@ -11,6 +11,7 @@ import AppIntents
 import SwiftData
 import BackgroundTasks
 import OSLog
+import WidgetKit
 import VindsidenKit
 
 @main
@@ -55,6 +56,8 @@ struct VindsidenApp: App {
                 for try await name in await WindManager.shared.streamFetch() {
                     Logger.resource.debug("Finished with: \(name)")
                 }
+
+                WidgetCenter.shared.reloadAllTimelines()
             } catch {
                 Logger.debugging.error("Performing app refresh failed: \(error)")
             }

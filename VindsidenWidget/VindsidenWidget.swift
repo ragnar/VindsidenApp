@@ -25,6 +25,7 @@ struct SimpleEntry: TimelineEntry {
 
 struct SinglePlotEntry: TimelineEntry {
     let date: Date
+    let lastDate: Date
     let configuration: ConfigurationAppIntent
     let widgetData: WidgetData
 }

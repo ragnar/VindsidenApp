@@ -60,6 +60,8 @@ struct MainWidget: Widget {
             provider: SinglePlotProvider()
         ) { entry in
             MainWidgetView(entry: entry)
+                .containerBackground(.fill.tertiary, for: .widget)
+
         }
         .configurationDisplayName("Weather station")
         .description("Display your favorite spot on your home screen")

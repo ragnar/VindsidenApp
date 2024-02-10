@@ -15,6 +15,7 @@ import OSLog
 @Model 
 public final class Plot {
     public var dataId: Int = 0
+    public var stationId: Int = 0
     public var plotTime: Date = Date(timeIntervalSince1970: 0)
     public var tempAir: Double = -999
     public var tempWater: Double = -999
@@ -23,11 +24,9 @@ public final class Plot {
     public var windMax: Double = 0
     public var windMin: Double = 0
 
-    @Relationship(inverse: \Station.plots)
-    public var station: Station?
-
-    internal init(dataId: Int, plotTime: Date, tempAir: Double, tempWater: Double, windAvg: Double, windDir: Double, windMax: Double, windMin: Double) {
+    internal init(dataId: Int, stationId: Int, plotTime: Date, tempAir: Double, tempWater: Double, windAvg: Double, windDir: Double, windMax: Double, windMin: Double) {
         self.dataId = dataId
+        self.stationId = stationId
         self.plotTime = plotTime
         self.tempAir = tempAir
         self.tempWater = tempWater
@@ -61,7 +60,7 @@ extension Plot: Plottable {
 extension Plot {
     static func existing(for dataId: Int, with stationId: Int, in modelContext: ModelContext) -> Plot? {
         var fetchDescriptor = FetchDescriptor(sortBy: [SortDescriptor(\Plot.dataId, order: .forward)])
-        fetchDescriptor.predicate = #Predicate { $0.dataId == dataId && $0.station?.stationId == stationId }
+        fetchDescriptor.predicate = #Predicate { $0.dataId == dataId && $0.stationId == stationId }
         fetchDescriptor.fetchLimit = 1
 
         guard let plots = try? modelContext.fetch(fetchDescriptor) else {
@@ -72,6 +71,10 @@ extension Plot {
     }
 
     func updateWithContent( _ content: [String: String] ) {
+        if let stationString = content["StationID"], let stationId = Int(stationString) {
+            self.stationId = stationId
+        }
+
         if let unwrapped = content["Time"] {
             self.plotTime = DataManager.shared.dateFromString(unwrapped)
         }

@@ -89,9 +89,9 @@ public actor WindManager {
             
             await self.fetchAndUpdatePlots(for: station.0, name: station.1, hours: hours, modelActor: modelActor)
 
-            await Task { @MainActor in
-                try? PersistentContainer.shared.container.mainContext.save()
-            }.value
+//            await Task { @MainActor in
+//                try? PersistentContainer.shared.container.mainContext.save()
+//            }.value
         }
 
         refreshTasks[taskId] = task

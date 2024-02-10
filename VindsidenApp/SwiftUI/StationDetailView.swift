@@ -33,10 +33,10 @@ struct StationDetailView: View {
     init(station: WidgetData) {
         self.station = station
 
-        let identifier = Int(station.customIdentifier ?? "-1")
+        let identifier = Int(station.customIdentifier ?? "-1") ?? -1
         let interval =  Int(-1 * AppConfig.Global.plotHistory)
         let date = Calendar.current.date(byAdding: .hour, value: interval, to: Date())!
-        var fetchDescriptor = FetchDescriptor<VindsidenKit.Plot>(predicate: #Predicate<VindsidenKit.Plot> { $0.station?.stationId == identifier && $0.plotTime > date },
+        var fetchDescriptor = FetchDescriptor<VindsidenKit.Plot>(predicate: #Predicate<VindsidenKit.Plot> { $0.stationId == identifier && $0.plotTime > date },
                                                                  sortBy: [SortDescriptor<VindsidenKit.Plot>(\.dataId, order: .reverse) ])
         fetchDescriptor.fetchLimit = maxPlotCount
 

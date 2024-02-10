@@ -32,11 +32,11 @@ struct StationChartView: View {
     let station: WidgetData
 
     init(station: WidgetData) {
-        let name = station.name
+        let stationId = Int(station.customIdentifier ?? "") ?? -1
         let date = Calendar.current.date(byAdding: .hour, value: -4, to: Date())!
 
         self.station = station
-        self._plots = Query(filter: #Predicate<VindsidenWatchKit.Plot> { $0.station?.stationName == name && $0.plotTime > date },
+        self._plots = Query(filter: #Predicate<VindsidenWatchKit.Plot> { $0.stationId == stationId && $0.plotTime > date },
                             sort: \.dataId,
                             order: .reverse
         )

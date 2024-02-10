@@ -43,16 +43,25 @@ public final class Station {
     public var webCamText: String?
     public var webCamURL: String?
     public var yrURL: String?
-    @Relationship(deleteRule: .cascade) 
-    public var plots: [Plot]?
 
     public init() { }
 }
 
 extension Station {
+    public var plots: [Plot] {
+        var fetchDescriptor = FetchDescriptor(sortBy: [SortDescriptor(\Plot.dataId, order: .forward)])
+        fetchDescriptor.predicate = #Predicate { $0.stationId == stationId }
+
+        guard let plots = try? modelContext?.fetch(fetchDescriptor) else {
+            return []
+        }
+
+        return plots
+    }
+
     @MainActor
     public func lastPlot() -> Plot? {
-        return plots?.sorted(by: { $0.dataId > $1.dataId } ).first
+        return plots.sorted(by: { $0.dataId > $1.dataId } ).first
     }
 
     @MainActor
@@ -61,7 +70,6 @@ extension Station {
         let name = stationName ?? "Unknown"
 
         guard
-            let plots,
             let plot = plots.sorted(by: { $0.dataId > $1.dataId } ).first
         else {
             return WidgetData(customIdentifier: stationId, name: name)

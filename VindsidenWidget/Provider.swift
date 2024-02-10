@@ -71,11 +71,11 @@ struct Provider: AppIntentTimelineProvider  {
             let outDate = gregorian.date(from: inputComponents) ?? Date()
 
             var fetchDescriptor = FetchDescriptor(sortBy: [SortDescriptor(\Plot.plotTime, order: .reverse)])
-            fetchDescriptor.predicate = #Predicate { $0.station?.stationId == stationId }
+            fetchDescriptor.predicate = #Predicate { $0.stationId == stationId }
             fetchDescriptor.fetchLimit = 20
 
             if let plots = try? modelContainer.mainContext.fetch(fetchDescriptor), let plot = plots.first {
-                Logger.debugging.debug("plot \(plot.dataId), \(plot.plotTime), \(plot.station?.stationName ?? "kk"), plots:, \(plots.count)")
+                Logger.debugging.debug("plot \(plot.dataId), \(plot.plotTime), plots:, \(plots.count)")
                 return [
                     SimpleEntry(date: Date(), 
                                 lastDate: plot.plotTime,

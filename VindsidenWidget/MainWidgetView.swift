@@ -54,7 +54,6 @@ struct MainWidgetView : View {
 
         default:
             WeatherBoxView(data: entry.widgetData, timeStyle: .relative, useBaro: false)
-                .containerBackground(.fill.tertiary, for: .widget)
                 .edgesIgnoringSafeArea([.horizontal, .bottom])
         }
     }

@@ -343,12 +343,16 @@ extension ContentView {
             setSelected(overrideIdentifier: stationId)
         }
 
-        if await WindManager.shared.updateStations() {
-            Logger.debugging.debug("Got new stations.")
-            await data.updateContent()
-        }
+        Task {
+            if await WindManager.shared.updateStations() {
+                Logger.debugging.debug("Got new stations.")
+                await data.updateContent()
+            }
 
-        await fetch()
+            try await Task.sleep(nanoseconds: 1_000_000)
+
+            await fetch()
+        }
     }
 }
 

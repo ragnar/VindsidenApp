@@ -75,7 +75,7 @@ struct ShowWindStatus: AppIntent {
 
         let stationId = station.id
         var fetchDescriptor = FetchDescriptor(sortBy: [SortDescriptor(\Plot.plotTime, order: .reverse)])
-        fetchDescriptor.predicate = #Predicate { $0.station?.stationId == stationId }
+        fetchDescriptor.predicate = #Predicate { $0.stationId == stationId }
         fetchDescriptor.fetchLimit = 1
 
         if let plots = try? PersistentContainer.shared.container.mainContext.fetch(fetchDescriptor), let plot = plots.first {
