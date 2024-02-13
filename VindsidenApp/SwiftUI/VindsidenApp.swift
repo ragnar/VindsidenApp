@@ -16,6 +16,8 @@ import VindsidenKit
 
 @main
 struct VindsidenApp: App {
+    private static let bgAppIdentifier = "VindsidenRefreshTask"
+
     @Environment(\.scenePhase) private var scenePhase
 
     @State var userSettings: UserObservable = UserObservable()
@@ -49,8 +51,9 @@ struct VindsidenApp: App {
                 break
             }
         }
-        .backgroundTask(.appRefresh("VindsidenRefreshTask")) { task in
+        .backgroundTask(.appRefresh(Self.bgAppIdentifier)) {
             Logger.debugging.debug("Performing app refresh.")
+            scheduleAppRefresh()
 
             do {
                 for try await name in await WindManager.shared.streamFetch() {
@@ -61,14 +64,15 @@ struct VindsidenApp: App {
             } catch {
                 Logger.debugging.error("Performing app refresh failed: \(error)")
             }
+
+            Logger.debugging.debug("Finished performing app refresh.")
         }
     }
 
     private func scheduleAppRefresh() {
         Logger.debugging.debug("Scheduling app refresh.")
 
-        let request = BGAppRefreshTaskRequest(identifier: "VindsidenRefreshTask")
-        request.earliestBeginDate = Date.now.addingTimeInterval(60 * 15)
+        let request = BGProcessingTaskRequest(identifier: Self.bgAppIdentifier)
 
         do {
             try BGTaskScheduler.shared.submit(request)
