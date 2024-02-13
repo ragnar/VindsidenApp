@@ -69,49 +69,46 @@ struct SinglePlotProvider: AppIntentTimelineProvider  {
             )
         }
 
-        let plots = await Task { @MainActor in
-            let fetchDescriptor = FetchDescriptor(sortBy: [SortDescriptor(\Plot.plotTime, order: .reverse)])
-            let plots = try? PreviewSampleData.container.mainContext.fetch(fetchDescriptor)
-
-            return plots ?? []
-        }.value
-
         configuration.station = IntentStation(id: -1, name: "Larkollen")
 
-        if let plot = plots.first {
-            let temp: TempUnit = UserSettings.shared.selectedTempUnit
-            let wind: WindUnit = UserSettings.shared.selectedWindUnit
-            let direction = DirectionUnit(rawValue: Double(plot.windDir)) ?? .unknown
-            let units = WidgetData.Units(wind: wind, rain: .mm, temp: temp, baro: .hPa, windDirection: direction)
-            let data = WidgetData(customIdentifier: "-1",
-                                  name: configuration.station.name,
-                                  windAngle: Double(plot.windDir),
-                                  windSpeed: Double(plot.windMin).fromUnit(.metersPerSecond).toUnit(wind),
-                                  windAverage: Double(plot.windAvg).fromUnit(.metersPerSecond).toUnit(wind),
-                                  windAverageMS: Double(plot.windAvg),
-                                  windGust: Double(plot.windMax).fromUnit(.metersPerSecond).toUnit(wind),
-                                  units: units,
-                                  lastUpdated: plot.plotTime
-            )
+        return await Task { @MainActor in
+            let fetchDescriptor = FetchDescriptor(sortBy: [SortDescriptor(\Plot.plotTime, order: .reverse)])
 
-            return SinglePlotEntry(
-                date: Date(),
-                lastDate: Date(),
-                configuration: configuration,
-                widgetData: data
-            )
-        } else {
-            return SinglePlotEntry(
-                date: Date(),
-                lastDate: Date(),
-                configuration: configuration,
-                widgetData: WidgetData(customIdentifier: "-1", name: "Larkollen")
-            )
-        }
+            if let plot = try? PreviewSampleData.container.mainContext.fetch(fetchDescriptor).first {
+                let temp: TempUnit = UserSettings.shared.selectedTempUnit
+                let wind: WindUnit = UserSettings.shared.selectedWindUnit
+                let direction = DirectionUnit(rawValue: Double(plot.windDir)) ?? .unknown
+                let units = WidgetData.Units(wind: wind, rain: .mm, temp: temp, baro: .hPa, windDirection: direction)
+                let data = WidgetData(customIdentifier: "-1",
+                                      name: configuration.station.name,
+                                      windAngle: Double(plot.windDir),
+                                      windSpeed: Double(plot.windMin).fromUnit(.metersPerSecond).toUnit(wind),
+                                      windAverage: Double(plot.windAvg).fromUnit(.metersPerSecond).toUnit(wind),
+                                      windAverageMS: Double(plot.windAvg),
+                                      windGust: Double(plot.windMax).fromUnit(.metersPerSecond).toUnit(wind),
+                                      units: units,
+                                      lastUpdated: plot.plotTime
+                )
+
+                return SinglePlotEntry(
+                    date: Date(),
+                    lastDate: Date(),
+                    configuration: configuration,
+                    widgetData: data
+                )
+            } else {
+                return SinglePlotEntry(
+                    date: Date(),
+                    lastDate: Date(),
+                    configuration: configuration,
+                    widgetData: WidgetData(customIdentifier: "-1", name: "Larkollen")
+                )
+            }
+        }.value
     }
 
     func timeline(for configuration: ConfigurationAppIntent, in context: Context) async -> Timeline<SinglePlotEntry> {
-        let entry: SinglePlotEntry = await Task { @MainActor in
+        let entry: SinglePlotEntry = await Task {
             do {
                 guard let widgetData = try await WidgetData.loadData(for: configuration.station.id, stationName: configuration.station.name) else {
                     return SinglePlotEntry(

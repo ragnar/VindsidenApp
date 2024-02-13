@@ -41,21 +41,20 @@ struct Provider: AppIntentTimelineProvider  {
             )
         }
 
-        let plots = await Task { @MainActor in
-            let fetchDescriptor = FetchDescriptor(sortBy: [SortDescriptor(\Plot.plotTime, order: .reverse)])
-            let plots = try? PreviewSampleData.container.mainContext.fetch(fetchDescriptor)
-
-            return plots ?? []
-        }.value
 
         configuration.station = IntentStation(id: -1, name: "Larkollen")
 
-        return SimpleEntry(
-            date: Date(),
-            lastDate: Date(),
-            configuration: configuration,
-            plots: plots
-        )
+        return await Task { @MainActor in
+            let fetchDescriptor = FetchDescriptor(sortBy: [SortDescriptor(\Plot.plotTime, order: .reverse)])
+            let plots = try? PreviewSampleData.container.mainContext.fetch(fetchDescriptor)
+
+            return SimpleEntry(
+                date: Date(),
+                lastDate: Date(),
+                configuration: configuration,
+                plots: plots ?? []
+            )
+        }.value
     }
 
     func timeline(for configuration: ConfigurationAppIntent, in context: Context) async -> Timeline<SimpleEntry> {
@@ -84,6 +83,7 @@ struct Provider: AppIntentTimelineProvider  {
                                )
                 ]
             }
+
             return []
         }.value
 
