@@ -64,7 +64,7 @@ public final class UserSettings {
     @UserSetting(defaultValue: nil, storageKey: "selectedStationId")
     public var selectedStationId: String?
 
-    public static var shared = UserSettings()
+    public static let shared = UserSettings()
 
     private init() { }
 }
