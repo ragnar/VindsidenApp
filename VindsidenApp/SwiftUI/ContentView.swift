@@ -333,7 +333,7 @@ extension ContentView {
 
     func handleNotificationForeground(_ output: NotificationCenter.Publisher.Output) {
         Task {
-            try? await Task.sleep(nanoseconds:500)
+            try? await Task.sleep(nanoseconds: 2_000_000_000)
             await fetch()
         }
     }
@@ -360,12 +360,7 @@ extension ContentView {
         }
 
         Task {
-            if await WindManager.shared.updateStations() {
-                Logger.debugging.debug("Got new stations.")
-                await data.updateContent()
-            }
-
-            try await Task.sleep(nanoseconds: 1_000_000)
+            try await Task.sleep(nanoseconds: 2_000_000_000)
 
             await fetch()
         }
@@ -375,7 +370,13 @@ extension ContentView {
 extension ContentView {
     func fetch() async {
         try? await data.reload()
+      
         setSelected()
+
+        if await WindManager.shared.updateStations() {
+            Logger.debugging.debug("Got new stations.")
+            await data.updateContent()
+        }
     }
 
     func updateGaugeMaxValue() {

@@ -52,7 +52,7 @@ final public class Resource<T: ResourceProtocol> {
 
     @MainActor
     func reload() async throws {
-        Logger.resource.debug("Resource started refreshing")
+        Logger.resource.debug("Resource started refreshing \(String(describing: self.refreshTask))")
 
         if let refreshTask {
             Logger.resource.debug("Resource already refreshing")
