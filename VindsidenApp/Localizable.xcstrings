@@ -414,6 +414,22 @@
         }
       }
     },
+    "No stations to show. Please select one or more stations in settings." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No stations to show. Please select one or more stations in settings."
+          }
+        },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ingen stasjoner å vise. Vennligst velg en eller flere stasjoner i innstillinger"
+          }
+        }
+      }
+    },
     "Not enough data points to show graph." : {
       "localizations" : {
         "en" : {
@@ -424,7 +440,7 @@
         },
         "nb" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Ikke nok datapunkter til å vise graf"
           }
         }

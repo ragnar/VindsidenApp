@@ -55,6 +55,22 @@ struct ContentView: View {
                     }
                 }
             }
+            .overlay {
+                if data.value.isEmpty {
+                    ContentUnavailableView {
+                        Label("Stations",
+                              systemImage: "list.dash")
+                    } description: {
+                        Text("No stations to show. Please select one or more stations in settings.")
+                    }  actions: {
+                        Button {
+                            activeSheet = .settings
+                        } label: {
+                            Label("Settings", systemImage: "gearshape")
+                        }
+                    }
+                }
+            }
             .toolbar(.visible, for: .navigationBar)
             .navigationTitle("Stations")
             .navigationBarTitleDisplayMode(.large)
