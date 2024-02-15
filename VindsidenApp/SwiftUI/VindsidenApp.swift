@@ -72,7 +72,7 @@ struct VindsidenApp: App {
     private func scheduleAppRefresh() {
         Logger.debugging.debug("Scheduling app refresh.")
 
-        let request = BGProcessingTaskRequest(identifier: Self.bgAppIdentifier)
+        let request = BGAppRefreshTaskRequest(identifier: Self.bgAppIdentifier)
 
         do {
             try BGTaskScheduler.shared.submit(request)

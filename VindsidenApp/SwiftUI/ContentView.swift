@@ -333,6 +333,8 @@ extension ContentView {
 
     func handleNotificationForeground(_ output: NotificationCenter.Publisher.Output) {
         Task {
+            await data.updateContent()
+
             try? await Task.sleep(nanoseconds: 2_000_000_000)
             await fetch()
         }
