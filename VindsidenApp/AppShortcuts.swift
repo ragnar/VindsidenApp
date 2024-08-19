@@ -105,8 +105,12 @@ struct IntentWindView: View {
     var info: WidgetData
 
     var body: some View {
-        WeatherBoxView(data: info, timeStyle: .relative, useBaro: false)
-            .frame(maxWidth: 200)
-            .scenePadding()
+        WeatherBoxView(
+            data: info,
+            customDateStyle: .relative(presentation: .named),
+            useBaro: false
+        )
+        .frame(maxWidth: 200)
+        .scenePadding()
     }
 }

@@ -1,12 +1,13 @@
 {
+  "originHash" : "300f4dc6d46cb8059ddf2a3e8746457ea9c5f499166bee2a0aa3f1de54e7dbda",
   "pins" : [
     {
       "identity" : "units",
       "kind" : "remoteSourceControl",
       "location" : "git@github.com:ragnar/Units.git",
       "state" : {
-        "branch" : "main",
-        "revision" : "4a3b1802a0cb86716e8679fda765f018123a4071"
+        "revision" : "04f33c5c3ca8fa367ebb18d87697d72b6a453ca1",
+        "version" : "1.0.0"
       }
     },
     {
@@ -15,9 +16,9 @@
       "location" : "git@github.com:ragnar/WeatherBoxView.git",
       "state" : {
         "branch" : "main",
-        "revision" : "4ffb9cdcd18eb60dc0c8c581f83760e4ec13c707"
+        "revision" : "9f07844aa6522e08f060b84db15983e2fa56947a"
       }
     }
   ],
-  "version" : 2
+  "version" : 3
 }

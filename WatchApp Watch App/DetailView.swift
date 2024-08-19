@@ -16,7 +16,7 @@ struct DetailView: View {
 
     var body: some View {
         WeatherBoxView(data: station,
-                       timeStyle: .relative,
+                       customDateStyle: .relative(presentation: .named),
                        useBaro: false
         )
         .toolbar {

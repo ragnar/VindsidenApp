@@ -53,8 +53,12 @@ struct MainWidgetView : View {
             }
 
         default:
-            WeatherBoxView(data: entry.widgetData, timeStyle: .relative, useBaro: false)
-                .edgesIgnoringSafeArea([.horizontal, .bottom])
+            WeatherBoxView(
+                data: entry.widgetData,
+                customDateStyle: .relative(presentation: .named),
+                useBaro: false
+            )
+            .edgesIgnoringSafeArea([.horizontal, .bottom])
         }
     }
 }
