@@ -17,7 +17,7 @@ struct SwiftUIPlotGraph: View {
     @Environment(UserObservable.self) private var settings
 
     let station: WidgetData
-    let plots: [VindsidenKit.Plot]
+    let plots: [SendablePlot]
 
     @State private var rawSelectedDate: Date?
 
@@ -31,7 +31,7 @@ struct SwiftUIPlotGraph: View {
 
     var body: some View {
         Chart {
-            ForEach(plots.latest, id: \.plotTime) { value in
+            ForEach(plots, id: \.plotTime) { value in
                 AreaMark(
                     x: .value("Time", value.plotTime, unit: .minute),
                     yStart: .value("Lull", convertedWind(value.windMin)),
@@ -80,7 +80,7 @@ struct SwiftUIPlotGraph: View {
             .interpolationMethod(.catmullRom)
         }
         .chartXAxis {
-            AxisMarks(values: plots.latest) { value in
+            AxisMarks(values: plots) { value in
                 AxisGridLine()
                 AxisTick()
                 

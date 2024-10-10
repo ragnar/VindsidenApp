@@ -22,7 +22,7 @@ public typealias ResourceProtocol = Decodable & Identifiable
 typealias RefreshMethodHandler = () -> Void
 
 @Observable
-final public class Resource<T: ResourceProtocol> {
+final public class Resource<T: ResourceProtocol>: @unchecked Sendable {
     public var value: [WidgetData]
     public var updateText: LocalizedStringResource
 

@@ -20,13 +20,16 @@ struct IntentStation: AppEntity, Hashable {
     var id: Int
     var name: String
 
-    static var typeDisplayRepresentation: TypeDisplayRepresentation = .init(stringLiteral: "Station")
+    static let typeDisplayRepresentation: TypeDisplayRepresentation = .init(stringLiteral: "Station")
 
     var displayRepresentation: DisplayRepresentation {
         return DisplayRepresentation(stringLiteral: name)
     }
 
-    static var defaultQuery = StationQuery()
+    // FIXME: Why do I need to use default value some times?
+    static let defaultQuery = StationQuery(useDefaultValue: false)
+
+    static let templateStation = IntentStation(id: 4700, name: "Tønsvika")
 }
 
 struct StationQuery: EntityQuery {

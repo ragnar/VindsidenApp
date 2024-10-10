@@ -17,7 +17,7 @@ public extension Notification.Name {
     static let ReceivedStations = Notification.Name("ReceivedStations")
 }
 
-class WCFetcher: NSObject, WCSessionDelegate {
+final class WCFetcher: NSObject, WCSessionDelegate, @unchecked Sendable {
     static let sharedInstance = WCFetcher()
 
     private var session: WCSession = WCSession.default
@@ -60,8 +60,8 @@ class WCFetcher: NSObject, WCSessionDelegate {
 
     func session(_ session: WCSession, didReceiveApplicationContext applicationContext: [String : Any]) {
         if let unit = applicationContext["unit"] as? Int {
-            AppConfig.sharedConfiguration.applicationUserDefaults.set(unit, forKey: "selectedUnit")
-            AppConfig.sharedConfiguration.applicationUserDefaults.synchronize()
+            AppConfig.shared.applicationUserDefaults.set(unit, forKey: "selectedUnit")
+            AppConfig.shared.applicationUserDefaults.synchronize()
         }
 
         if let units = applicationContext["units"] as? [String: Int] {
@@ -78,7 +78,7 @@ class WCFetcher: NSObject, WCSessionDelegate {
             }
         }
 
-        if let stations = applicationContext["activeStations"] as? [[String:AnyObject]] {
+        if let stations = applicationContext["activeStations"] as? [[String: AnyObject & Sendable]] {
             Task { @MainActor in
                 let actor = StationModelActor(modelContainer: PersistentContainer.shared.container)
                 _ = await actor.updateWithWatchContent(stations)

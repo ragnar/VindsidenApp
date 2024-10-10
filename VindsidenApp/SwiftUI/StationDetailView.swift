@@ -86,7 +86,7 @@ struct StationDetailView: View {
                 }
                 .frame(maxWidth: .infinity, minHeight: 200, maxHeight: 240)
             } else {
-                SwiftUIPlotGraph(station: station, plots: plots)
+                SwiftUIPlotGraph(station: station, plots: plots.latest.map { SendablePlot(from: $0)})
                     .frame(minHeight: 200, maxHeight: 240)
             }
         }

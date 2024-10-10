@@ -70,11 +70,14 @@ struct ContentView: View {
             }
         }
         .onContinueUserActivity("ConfigurationAppIntent") { activity in
-            guard let intent = activity.widgetConfigurationIntent(of: ConfigurationAppIntent.self) else {
+            guard
+                let intent = activity.widgetConfigurationIntent(of: ConfigurationAppIntent.self),
+                let stationId = intent.station?.id
+            else {
                 return
             }
 
-            setSelected(overrideIdentifier: "\(intent.station.id)")
+            setSelected(overrideIdentifier: "\(stationId)")
         }
     }
 }

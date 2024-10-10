@@ -10,7 +10,8 @@ import Foundation
 import SwiftData
 import OSLog
 
-public struct PersistentContainer {
+@MainActor
+public struct PersistentContainer: Sendable {
     public static let shared = PersistentContainer()
 
     private static var privateContainer: ModelContainer?
@@ -20,7 +21,6 @@ public struct PersistentContainer {
 
     }
 
-    @MainActor
     public var container: ModelContainer {
         if let container = Self.privateContainer {
             return container

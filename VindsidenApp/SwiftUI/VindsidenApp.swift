@@ -39,6 +39,7 @@ struct VindsidenApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .tint(.accent)
                 .modelContainer(PersistentContainer.shared.container)
                 .environment(userSettings)
                 .environment(navigationModel)
@@ -53,7 +54,7 @@ struct VindsidenApp: App {
         }
         .backgroundTask(.appRefresh(Self.bgAppIdentifier)) {
             Logger.debugging.debug("Performing app refresh.")
-            scheduleAppRefresh()
+            await scheduleAppRefresh()
 
             do {
                 for try await name in await WindManager.shared.streamFetch() {

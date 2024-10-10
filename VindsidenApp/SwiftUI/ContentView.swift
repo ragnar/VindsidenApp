@@ -274,11 +274,14 @@ extension ContentView {
     }
 
     func handleIntent(userActivity: NSUserActivity) {
-        guard let intent = userActivity.widgetConfigurationIntent(of: ConfigurationAppIntent.self) else {
+        guard
+            let intent = userActivity.widgetConfigurationIntent(of: ConfigurationAppIntent.self),
+            let stationId = intent.station?.id
+        else {
             return
         }
 
-        setSelected(overrideIdentifier: "\(intent.station.id)")
+        setSelected(overrideIdentifier: "\(stationId)")
     }
 
     func handleOpenURL(url: URL) {

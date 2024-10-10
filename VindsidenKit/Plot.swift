@@ -12,7 +12,61 @@ import Charts
 import Observation
 import OSLog
 
-@Model 
+public struct SendablePlot: Sendable {
+    public let dataId: Int
+    public let stationId: Int
+    public let plotTime: Date
+    public let tempAir: Double
+    public let tempWater: Double
+    public let windAvg: Double
+    public let windDir: Double
+    public let windMax: Double
+    public let windMin: Double
+
+    public init(dataId: Int, stationId: Int, plotTime: Date, tempAir: Double, tempWater: Double, windAvg: Double, windDir: Double, windMax: Double, windMin: Double) {
+        self.dataId = dataId
+        self.stationId = stationId
+        self.plotTime = plotTime
+        self.tempAir = tempAir
+        self.tempWater = tempWater
+        self.windAvg = windAvg
+        self.windDir = windDir
+        self.windMax = windMax
+        self.windMin = windMin
+    }
+
+    public init(from plot: Plot) {
+        self.dataId = plot.dataId
+        self.stationId = plot.stationId
+        self.plotTime = plot.plotTime
+        self.tempAir = plot.tempAir
+        self.tempWater = plot.tempWater
+        self.windAvg = plot.windAvg
+        self.windDir = plot.windDir
+        self.windMax = plot.windMax
+        self.windMin = plot.windMin
+    }
+}
+
+extension SendablePlot: Plottable {
+    public typealias PrimitivePlottable = Date
+
+    public var primitivePlottable: Date {
+        return plotTime
+    }
+
+    public init?(primitivePlottable: Date) {
+        nil
+    }
+}
+
+extension Array where Element == SendablePlot {
+    public subscript(id: Date?) -> SendablePlot? {
+        return first { $0.plotTime == id }
+    }
+}
+
+@Model
 public final class Plot {
     public var dataId: Int = 0
     public var stationId: Int = 0
@@ -39,23 +93,23 @@ public final class Plot {
     public init() { }
 }
 
-extension Array where Element: Plot {
-    public subscript(id: Date?) -> Plot? {
-        return first { $0.plotTime == id }
-    }
-}
+//extension Array where Element: Plot {
+//    public subscript(id: Date?) -> Plot? {
+//        return first { $0.plotTime == id }
+//    }
+//}
 
-extension Plot: Plottable {
-    public typealias PrimitivePlottable = Date
-
-    public var primitivePlottable: Date {
-        return plotTime
-    }
-
-    public convenience init?(primitivePlottable: Date) {
-        nil
-    }
-}
+//extension Plot: Plottable {
+//    public typealias PrimitivePlottable = Date
+//
+//    public var primitivePlottable: Date {
+//        return plotTime
+//    }
+//
+//    public convenience init?(primitivePlottable: Date) {
+//        nil
+//    }
+//}
 
 extension Plot {
     static func existing(for dataId: Int, with stationId: Int, in modelContext: ModelContext) -> Plot? {

@@ -17,7 +17,7 @@ import VindsidenWatchKit
 import VindsidenKit
 #endif
 
-struct SinglePlotProvider: AppIntentTimelineProvider  {
+struct SinglePlotProvider: @preconcurrency AppIntentTimelineProvider  {
     @MainActor
     func recommendations() -> [AppIntentRecommendation<ConfigurationAppIntent>] {
         var fetchDescriptor = FetchDescriptor(sortBy: [
@@ -48,28 +48,31 @@ struct SinglePlotProvider: AppIntentTimelineProvider  {
 
     func placeholder(in context: Context) -> SinglePlotEntry {
         let configuration = ConfigurationAppIntent()
+        let station = IntentStation.templateStation
 
-        configuration.station = IntentStation(id: -1, name: "Larkollen")
+        configuration.station = station
 
         return SinglePlotEntry(
             date: Date(),
             lastDate: Date(),
             configuration: configuration,
-            widgetData: WidgetData(customIdentifier: "-1", name: "Larkollen")
+            widgetData: WidgetData(customIdentifier: "\(station.id)", name: station.name)
         )
     }
 
     func snapshot(for configuration: ConfigurationAppIntent, in context: Context) async -> SinglePlotEntry {
+        let station = IntentStation.templateStation
+
         guard context.isPreview else {
             return SinglePlotEntry(
                 date: Date(),
                 lastDate: Date(),
                 configuration: configuration,
-                widgetData: WidgetData(customIdentifier: "-1", name: "Larkollen")
+                widgetData: WidgetData(customIdentifier: "\(station.id)", name: station.name)
             )
         }
 
-        configuration.station = IntentStation(id: -1, name: "Larkollen")
+        configuration.station = station
 
         return await Task { @MainActor in
             let fetchDescriptor = FetchDescriptor(sortBy: [SortDescriptor(\Plot.plotTime, order: .reverse)])
@@ -79,8 +82,8 @@ struct SinglePlotProvider: AppIntentTimelineProvider  {
                 let wind: WindUnit = UserSettings.shared.selectedWindUnit
                 let direction = DirectionUnit(rawValue: Double(plot.windDir)) ?? .unknown
                 let units = WidgetData.Units(wind: wind, rain: .mm, temp: temp, baro: .hPa, windDirection: direction)
-                let data = WidgetData(customIdentifier: "-1",
-                                      name: configuration.station.name,
+                let data = WidgetData(customIdentifier: "\(station.id)",
+                                      name: station.name,
                                       windAngle: Double(plot.windDir),
                                       windSpeed: Double(plot.windMin).fromUnit(.metersPerSecond).toUnit(wind),
                                       windAverage: Double(plot.windAvg).fromUnit(.metersPerSecond).toUnit(wind),
@@ -101,21 +104,23 @@ struct SinglePlotProvider: AppIntentTimelineProvider  {
                     date: Date(),
                     lastDate: Date(),
                     configuration: configuration,
-                    widgetData: WidgetData(customIdentifier: "-1", name: "Larkollen")
+                    widgetData: WidgetData(customIdentifier: "\(station.id)", name: station.name)
                 )
             }
         }.value
     }
 
     func timeline(for configuration: ConfigurationAppIntent, in context: Context) async -> Timeline<SinglePlotEntry> {
+        let station: IntentStation = configuration.station ?? .templateStation
+
         let entry: SinglePlotEntry = await Task {
             do {
-                guard let widgetData = try await WidgetData.loadData(for: configuration.station.id, stationName: configuration.station.name) else {
+                guard let widgetData = try await WidgetData.loadData(for: station.id, stationName: station.name) else {
                     return SinglePlotEntry(
                         date: Date(),
                         lastDate: Date(),
                         configuration: configuration,
-                        widgetData: WidgetData(customIdentifier: "\(configuration.station.id)", name: configuration.station.name)
+                        widgetData: WidgetData(customIdentifier: "\(station.id)", name: station.name)
                     )
                 }
 
@@ -130,7 +135,7 @@ struct SinglePlotProvider: AppIntentTimelineProvider  {
                     date: Date(),
                     lastDate: Date(),
                     configuration: configuration,
-                    widgetData: WidgetData(customIdentifier: "\(configuration.station.id)", name: configuration.station.name)
+                    widgetData: WidgetData(customIdentifier: "\(station.id)", name: station.name)
                 )
             }
         }.value

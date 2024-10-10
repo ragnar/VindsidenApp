@@ -29,8 +29,8 @@ extension Station {
     static var preview: Station {
         let station = Station()
         station.city = "Oslo"
-        station.stationId = 1
-        station.stationName = "Larkollen"
+        station.stationId = 4700
+        station.stationName = "Tønsvika"
 
         return station
     }

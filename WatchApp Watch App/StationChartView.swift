@@ -13,14 +13,14 @@ import VindsidenWatchKit
 import WeatherBoxView
 
 extension Array where Element: VindsidenWatchKit.Plot {
-    var latest: Self {
+    var latest: [SendablePlot] {
         if isEmpty {
             return []
         }
 
         let maxPlotCount = 20
 
-        return Array(self[..<Swift.min(count, maxPlotCount)])
+        return Array(self[..<Swift.min(count, maxPlotCount)]).map { SendablePlot(from: $0)}
     }
 }
 
@@ -78,7 +78,7 @@ struct StationChartView: View {
         }
         .chartXAxis {
             AxisMarks(values: plots.latest) { value in
-                if showXAxisValue(for: value.index), let windDir = plots[value.as(Date.self)]?.windDir {
+                if showXAxisValue(for: value.index), let windDir = plots.latest[value.as(Date.self)]?.windDir {
                     AxisGridLine()
                     AxisTick()
                     AxisValueLabel {

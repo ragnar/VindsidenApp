@@ -51,6 +51,7 @@ struct PageControl<SelectionValue> : View where SelectionValue: Hashable {
     }
 }
 
+@MainActor
 struct PageControlView<T: FixedWidthInteger>: UIViewRepresentable {
     @Binding var currentPage: T
     @Binding var numberOfPages: Int
@@ -76,7 +77,7 @@ struct PageControlView<T: FixedWidthInteger>: UIViewRepresentable {
 }
 
 extension PageControlView {
-    final class Coordinator: NSObject {
+    final class Coordinator: NSObject, @unchecked Sendable {
         var parent: PageControlView
 
         init(_ parent: PageControlView) {
@@ -84,8 +85,10 @@ extension PageControlView {
         }
 
         @objc func valueChanged(sender: UIPageControl) {
-            withAnimation {
-                parent.currentPage = sender.currentPage as! T
+            Task { @MainActor in
+                withAnimation {
+                    parent.currentPage = sender.currentPage as! T
+                }
             }
         }
     }

@@ -14,8 +14,7 @@ import MobileCoreServices
 import CoreSpotlight
 #endif
 
-@objc
-public class DataManager: NSObject {
+public final class DataManager: NSObject, @unchecked Sendable {
     @objc public static let shared = DataManager()
 
     private lazy var dateFormatter: DateFormatter = {
@@ -66,7 +65,7 @@ extension DataManager {
 
 #if os(iOS)
     @objc public func indexVisibleStations() {
-        guard AppConfig.sharedConfiguration.shouldIndexForFirstTime() else {
+        guard AppConfig.shared.shouldIndexForFirstTime() else {
             return
         }
 

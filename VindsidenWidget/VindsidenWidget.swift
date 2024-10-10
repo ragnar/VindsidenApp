@@ -16,11 +16,11 @@ import VindsidenWatchKit
 import VindsidenKit
 #endif
 
-struct SimpleEntry: TimelineEntry {
+struct SimpleEntry: TimelineEntry, Sendable {
     let date: Date
     let lastDate: Date
     let configuration: ConfigurationAppIntent
-    let plots: [Plot]
+    let plots: [SendablePlot]
 }
 
 struct SinglePlotEntry: TimelineEntry {

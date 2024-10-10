@@ -14,8 +14,8 @@ import StoreKit
 #endif
 
 
-@objc(AppConfig)
-open class AppConfig : NSObject {
+//@objc(AppConfig)
+public final class AppConfig : NSObject, @unchecked Sendable {
     fileprivate struct Defaults {
         static let firstLaunchKey = "Defaults.firstLaunchKey"
         fileprivate static let spotlightIndexed = "Defaults.spotlightIndexed"
@@ -28,7 +28,7 @@ open class AppConfig : NSObject {
     }
 
     public struct Bundle {
-        static var prefix = "org.juniks" // Could be done automatic by reading info.plist
+        static let prefix = "org.juniks" // Could be done automatic by reading info.plist
         static let appName = "VindsidenApp" // Could be done automatic by reading info.plist
         static let todayName = "VindsidenToday"
         static let watchName = "Watch"
@@ -61,27 +61,18 @@ open class AppConfig : NSObject {
         public static let domain = "\(Bundle.prefix).\(Bundle.appName)"
     }
 
-    
-    @objc open class var sharedConfiguration: AppConfig {
-        struct Singleton {
-            static let sharedAppConfiguration = AppConfig()
-        }
+    public static let shared = AppConfig()
 
-        return Singleton.sharedAppConfiguration
-    }
-
-
-    @objc open var applicationUserDefaults: UserDefaults {
+    @objc public var applicationUserDefaults: UserDefaults {
         return UserDefaults(suiteName: ApplicationGroups.primary)!
     }
 
 
-    open lazy var frameworkBundle: Foundation.Bundle = {
+    public lazy var frameworkBundle: Foundation.Bundle = {
         return Foundation.Bundle(identifier: Bundle.frameworkBundleIdentifier)!
     }()
 
-
-    open lazy var applicationDocumentsDirectory: URL? = {
+    public lazy var applicationDocumentsDirectory: URL? = {
         let urlOrNil = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: ApplicationGroups.primary)
         if let url = urlOrNil {
             return url as URL
@@ -90,8 +81,7 @@ open class AppConfig : NSObject {
         }
     }()
 
-
-    open fileprivate(set) var isFirstLaunch: Bool {
+    public fileprivate(set) var isFirstLaunch: Bool {
         get {
             registerDefaults()
             return applicationUserDefaults.bool(forKey: Defaults.firstLaunchKey)
@@ -101,8 +91,7 @@ open class AppConfig : NSObject {
         }
     }
 
-
-    open fileprivate(set) var isSpotlightIndexed: Int {
+    public fileprivate(set) var isSpotlightIndexed: Int {
         get {
             return applicationUserDefaults.integer(forKey: Defaults.spotlightIndexed)
         }
@@ -110,7 +99,6 @@ open class AppConfig : NSObject {
             applicationUserDefaults.set(newValue, forKey: Defaults.spotlightIndexed)
         }
     }
-
 
     fileprivate func registerDefaults() {
         #if os(watchOS)
@@ -130,8 +118,7 @@ open class AppConfig : NSObject {
         applicationUserDefaults.register(defaults: defaultOptions)
     }
 
-
-    open func runHandlerOnFirstLaunch(_ firstLaunchHandler: () -> Void) {
+    public func runHandlerOnFirstLaunch(_ firstLaunchHandler: () -> Void) {
         if isFirstLaunch {
             isFirstLaunch = false
 
@@ -139,8 +126,7 @@ open class AppConfig : NSObject {
         }
     }
 
-
-    open func shouldIndexForFirstTime() -> Bool {
+    public func shouldIndexForFirstTime() -> Bool {
         if isSpotlightIndexed < 2 {
             isSpotlightIndexed = 2
             return true
@@ -152,7 +138,7 @@ open class AppConfig : NSObject {
     // MARK: - Review
 
 #if os(iOS)
-    open func presentReviewControllerIfCriteriaIsMet(in scene: UIWindowScene) {
+    public func presentReviewControllerIfCriteriaIsMet(in scene: UIWindowScene) {
         defer {
             applicationUserDefaults.synchronize()
         }

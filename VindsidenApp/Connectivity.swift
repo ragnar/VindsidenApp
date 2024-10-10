@@ -10,7 +10,7 @@ import WatchConnectivity
 import OSLog
 import VindsidenKit
 
-class Connectivity: NSObject, WCSessionDelegate {
+final class Connectivity: NSObject, WCSessionDelegate, @unchecked Sendable {
     static let shared = Connectivity()
 
     private var session: WCSession = WCSession.default
@@ -102,7 +102,7 @@ class Connectivity: NSObject, WCSessionDelegate {
         let context: [String: Any] = [
             "activeStations": stations,
             "units": transferUnits(),
-            "unit": AppConfig.sharedConfiguration.applicationUserDefaults.integer(forKey: "selectedUnit"),
+            "unit": AppConfig.shared.applicationUserDefaults.integer(forKey: "selectedUnit"),
             "forcerIOS": Date.now.timeIntervalSinceReferenceDate,
         ]
 

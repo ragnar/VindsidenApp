@@ -21,7 +21,7 @@ struct Provider: AppIntentTimelineProvider  {
     func placeholder(in context: Context) -> SimpleEntry {
         let configuration = ConfigurationAppIntent()
 
-        configuration.station = IntentStation(id: -1, name: "Larkollen")
+        configuration.station = .templateStation
 
         return SimpleEntry(
             date: Date(),
@@ -42,24 +42,29 @@ struct Provider: AppIntentTimelineProvider  {
         }
 
 
-        configuration.station = IntentStation(id: -1, name: "Larkollen")
+        configuration.station = .templateStation
 
         return await Task { @MainActor in
             let fetchDescriptor = FetchDescriptor(sortBy: [SortDescriptor(\Plot.plotTime, order: .reverse)])
-            let plots = try? PreviewSampleData.container.mainContext.fetch(fetchDescriptor)
+            let plots = (try? PreviewSampleData.container.mainContext.fetch(fetchDescriptor)) ?? []
+            let sendablePlots = plots.map { plot in
+                SendablePlot(from: plot)
+            }
 
             return SimpleEntry(
                 date: Date(),
                 lastDate: Date(),
                 configuration: configuration,
-                plots: plots ?? []
+                plots: sendablePlots
             )
         }.value
     }
 
     func timeline(for configuration: ConfigurationAppIntent, in context: Context) async -> Timeline<SimpleEntry> {
-        let stationId = configuration.station.id
-        let stationName = configuration.station.name
+        let station: IntentStation = configuration.station ?? .templateStation
+
+        let stationId = station.id
+        let stationName = station.name
         let entries: [SimpleEntry] = await Task { @MainActor in
             try? await WindManager.shared.fetch(station: (stationId, stationName))
 
@@ -73,13 +78,18 @@ struct Provider: AppIntentTimelineProvider  {
             fetchDescriptor.predicate = #Predicate { $0.stationId == stationId }
             fetchDescriptor.fetchLimit = 20
 
-            if let plots = try? modelContainer.mainContext.fetch(fetchDescriptor), let plot = plots.first {
+            let plots = (try? modelContainer.mainContext.fetch(fetchDescriptor)) ?? []
+            let sendablePlots = plots.map { plot in
+                SendablePlot(from: plot)
+            }
+
+            if let plot = sendablePlots.first {
                 Logger.debugging.debug("plot \(plot.dataId), \(plot.plotTime), plots:, \(plots.count)")
                 return [
                     SimpleEntry(date: Date(), 
                                 lastDate: plot.plotTime,
                                 configuration: configuration,
-                                plots: plots.filter { $0.plotTime >= outDate }.reversed()
+                                plots: sendablePlots.filter { $0.plotTime >= outDate }.reversed()
                                )
                 ]
             }

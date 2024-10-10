@@ -6,45 +6,52 @@
 //  Copyright © 2016 RHC. All rights reserved.
 //
 
-import CoreSpotlight
+@preconcurrency import CoreSpotlight
 import VindsidenKit
 import OSLog
 
-@MainActor
-class IndexRequestHandler: CSIndexExtensionRequestHandler {
-    override func searchableIndex(_ searchableIndex: CSSearchableIndex, reindexAllSearchableItemsWithAcknowledgementHandler acknowledgementHandler: @escaping () -> Void) {
-        let stations = Station.visible(in: PersistentContainer.shared.container.mainContext)
+final class IndexRequestHandler: CSIndexExtensionRequestHandler {
+    override func searchableIndex(_ searchableIndex: CSSearchableIndex, reindexAllSearchableItemsWithAcknowledgementHandler acknowledgementHandler: @escaping @Sendable () -> Void) {
+        Task.detached { @MainActor in
+            let context = PersistentContainer.shared.container.mainContext
+            let stations = Station.visible(in: context)
 
-        for station in stations {
-            DataManager.shared.addStationToIndex(station, index: searchableIndex)
+
+            for station in stations {
+                DataManager.shared.addStationToIndex(station, index: searchableIndex)
+            }
+
+            acknowledgementHandler()
         }
-
-        acknowledgementHandler()
     }
 
 
-    override func searchableIndex(_ searchableIndex: CSSearchableIndex, reindexSearchableItemsWithIdentifiers identifiers: [String], acknowledgementHandler: @escaping () -> Void) {
-        let context = PersistentContainer.shared.container.mainContext
+    override func searchableIndex(_ searchableIndex: CSSearchableIndex, reindexSearchableItemsWithIdentifiers identifiers: [String], acknowledgementHandler: @escaping @Sendable () -> Void) {
+        Task { @MainActor in
+            let context =  PersistentContainer.shared.container.mainContext
 
-        for identifier in identifiers {
-            let stationIDString = (identifier as NSString).lastPathComponent
+            for identifier in identifiers {
+                let stationIDString = (identifier as NSString).lastPathComponent
 
-            if let stationID = Int(stationIDString) {
-                guard let station = Station.existing(for: stationID, in: context) else {
-                    searchableIndex.deleteSearchableItems(withIdentifiers: [identifier], completionHandler: { (error) in
-                        Logger.debugging.debug("Error: \(String(describing: error))")
-                    })
-                    continue
-                }
+                if let stationID = Int(stationIDString) {
+                    guard let station = Station.existing(for: stationID, in: context) else {
+                        do {
+                            try await searchableIndex.deleteSearchableItems(withIdentifiers: [identifier])
+                        } catch {
+                            Logger.debugging.debug("Error: \(error)")
+                        }
+                        continue
+                    }
 
-                if station.isHidden {
-                    DataManager.shared.removeStationFromIndex(station, index: searchableIndex)
-                } else {
-                    DataManager.shared.addStationToIndex(station, index: searchableIndex)
+                    if station.isHidden {
+                        DataManager.shared.removeStationFromIndex(station, index: searchableIndex)
+                    } else {
+                        DataManager.shared.addStationToIndex(station, index: searchableIndex)
+                    }
                 }
             }
-        }
 
-        acknowledgementHandler()
+            acknowledgementHandler()
+        }
     }
 }

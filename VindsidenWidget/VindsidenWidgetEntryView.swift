@@ -16,10 +16,12 @@ struct VindsidenWidgetEntryView : View {
     @Environment(UserObservable.self) var settings
 
     var entry: Provider.Entry
-
+    var station: IntentStation {
+        return entry.configuration.station ?? .templateStation
+    }
     var body: some View {
         VStack(alignment: .leading) {
-            Text(entry.configuration.station.name)
+            Text(station.name)
                 .foregroundStyle(Color("AccentColor"))
                 .widgetAccentable()
 

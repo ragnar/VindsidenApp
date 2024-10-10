@@ -10,7 +10,7 @@ import SwiftUI
 import Units
 
 @Observable
-public class UserObservable {
+public final class UserObservable {
     public var windUnit: WindUnit {
         didSet {
             UserSettings.shared.selectedWindUnit = windUnit
@@ -42,19 +42,21 @@ public class UserObservable {
     }
 
     public func updateFromApplicationContext(_ context: [String: Any]) {
-        DispatchQueue.main.async {
-            if let value = context[CodingUserInfoKey.windUnit.rawValue] as? Int, let unit = WindUnit(rawValue: value) {
+        let intContext = context.compactMapValues { $0 as? Int }
+
+//        DispatchQueue.main.async {
+            if let value = intContext[CodingUserInfoKey.windUnit.rawValue], let unit = WindUnit(rawValue: value) {
                 self.windUnit = unit
             }
 
-            if let value = context[CodingUserInfoKey.tempUnit.rawValue] as? Int, let unit = TempUnit(rawValue: value) {
+            if let value = intContext[CodingUserInfoKey.tempUnit.rawValue], let unit = TempUnit(rawValue: value) {
                 self.tempUnit = unit
             }
-        }
+//        }
     }
 }
 
-public final class UserSettings {
+public final class UserSettings: @unchecked Sendable {
     @UserSetting(defaultValue: .metersPerSecond, storageKey: "selectedWindUnit")
     public var selectedWindUnit: WindUnit
 
