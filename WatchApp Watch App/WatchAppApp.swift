@@ -7,7 +7,6 @@
 //
 
 import SwiftUI
-import UserNotifications
 import SwiftData
 import OSLog
 import VindsidenWatchKit
@@ -22,13 +21,6 @@ struct WatchApp_Watch_AppApp: App {
 
         WCFetcher.sharedInstance.settings = userSettings
         WCFetcher.sharedInstance.activate()
-        UNUserNotificationCenter.current().requestAuthorization(options: [.provisional, .alert, .sound]) { (success, error) in
-            if success{
-                Logger.debugging.debug("All set")
-            } else if let error = error {
-                Logger.debugging.debug("\(error.localizedDescription)")
-            }
-        }
     }
 
     var body: some Scene {
