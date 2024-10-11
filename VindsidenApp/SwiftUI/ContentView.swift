@@ -116,6 +116,7 @@ struct ContentView: View {
             switch item {
             case .settings:
                 SettingsView()
+                    .environment(settings)
 
             case .selectedInfo:
                 if let selected {
