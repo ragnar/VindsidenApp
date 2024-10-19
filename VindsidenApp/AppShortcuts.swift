@@ -39,13 +39,13 @@ struct AppShortcuts: AppShortcutsProvider {
     static let shortcutTileColor: ShortcutTileColor = .teal
 }
 
-struct OpenWindStationIntent: AppIntent, WidgetConfigurationIntent {
+struct OpenWindStationIntent: AppIntent {
     static let title: LocalizedStringResource = "Open Station"
     static let description = IntentDescription("Open the application at chosen wind station")
     static let openAppWhenRun: Bool = true
 
     @Parameter(title: "Select station")
-    var station: IntentStation?
+    var station: IntentStation
 
     @Dependency
     private var navigationModel: NavigationModel
@@ -57,7 +57,7 @@ struct OpenWindStationIntent: AppIntent, WidgetConfigurationIntent {
 
     @MainActor
     func perform() async throws -> some IntentResult {
-        navigationModel.pendingSelectedStationId = station?.id
+        navigationModel.pendingSelectedStationId = station.id
 
         return .result()
     }
