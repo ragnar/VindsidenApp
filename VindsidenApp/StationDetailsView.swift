@@ -62,7 +62,7 @@ struct StationDetailsView: View {
             .listStyle(.insetGrouped)
             .toolbar {
                 ToolbarItemGroup(placement: .topBarLeading) {
-                    Button("Close") {
+                    Button("Close", systemImage: "xmark") {
                         dismiss()
                     }
                 }

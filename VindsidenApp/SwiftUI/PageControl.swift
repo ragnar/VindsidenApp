@@ -62,10 +62,11 @@ struct PageControlView<T: FixedWidthInteger>: UIViewRepresentable {
 
     func makeUIView(context: Context) -> UIPageControl {
         let uiView = UIPageControl()
-        uiView.backgroundStyle = .prominent
+        uiView.backgroundStyle = .minimal
         uiView.numberOfPages = numberOfPages
         uiView.currentPage = Int(currentPage)
         uiView.currentPageIndicatorTintColor = .accent
+        uiView.pageIndicatorTintColor = .tertiaryLabel
         uiView.addTarget(context.coordinator, action: #selector(Coordinator.valueChanged), for: .valueChanged)
         return uiView
     }

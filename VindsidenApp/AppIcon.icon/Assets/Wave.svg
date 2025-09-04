@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="713px" height="478px" viewBox="0 0 713 478" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Wave</title>
+    <g id="Icon-symbol" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
+        <g id="Wave" transform="translate(28, 29)" stroke="#FA6400" stroke-width="58">
+            <g id="Symbol-Bottom" transform="translate(1, 337.6156)">
+                <path d="M0,7.38440357 C8.77532765,4.62901504 89.0512929,-14.4499647 151,22.3844033 C188,44.3844043 237.516017,73.0060296 261,77.3844014 C300.333333,84.7177381 333.333333,83.7177398 360,74.3844065" id="Path-1"></path>
+            </g>
+            <g id="Symbol-Middle" transform="translate(149, 168.6156)">
+                <path d="M0,7.38440357 C8.77532765,4.62901504 89.0512929,-14.4499647 151,22.3844033 C188,44.3844043 237.516017,73.0060296 261,77.3844014 C300.333333,84.7177381 333.333333,83.7177398 360,74.3844065" id="Path-1"></path>
+            </g>
+            <g id="Symbol-Top" transform="translate(296, 0.6156)">
+                <path d="M0,7.38440357 C8.77532765,4.62901504 89.0512929,-14.4499647 151,22.3844033 C188,44.3844043 237.516017,73.0060296 261,77.3844014 C300.333333,84.7177381 333.333333,83.7177398 360,74.3844065" id="Path-1"></path>
+            </g>
+        </g>
+    </g>
+</svg>

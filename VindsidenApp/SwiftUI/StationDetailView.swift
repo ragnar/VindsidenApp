@@ -90,6 +90,7 @@ struct StationDetailView: View {
                     .frame(minHeight: 200, maxHeight: 240)
             }
         }
+        .navigationBarTitleDisplayMode(.inline)
     }
 }
 

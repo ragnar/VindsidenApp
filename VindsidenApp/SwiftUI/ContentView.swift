@@ -82,12 +82,13 @@ struct ContentView: View {
                         Image(systemName: "gearshape")
                     }
                 }
-                ToolbarItemGroup(placement: .bottomBar) {
-                    Spacer()
+
+                ToolbarItem(placement: .status) {
                     Text(data.updateText)
+                        .padding(.horizontal)
                         .font(.footnote)
                         .foregroundStyle(.secondary)
-                    Spacer()
+                        .fixedSize()
                 }
 
             }
@@ -149,7 +150,14 @@ struct ContentView: View {
     @MainActor
     @ToolbarContentBuilder
     func toolbar() -> some ToolbarContent {
-        ToolbarItem(placement: .bottomBar) {
+        ToolbarItem(placement: .status) {
+            PageControl(selection: $selected, listOfItems: $data.value)
+                .padding(.horizontal)
+                .fixedSize()
+        }
+
+
+        ToolbarItemGroup(placement: .bottomBar) {
             ShareLink(
                 item: shareImage,
                 preview: SharePreview(
@@ -161,9 +169,7 @@ struct ContentView: View {
                     .foregroundStyle(.primary)
             }
             .disabled($selected.wrappedValue == nil)
-        }
 
-        ToolbarItem(placement: .bottomBar) {
             Button {
                 activeSheet = .selectedInfo
             } label: {
@@ -174,13 +180,6 @@ struct ContentView: View {
                     contextMenuBuilder(name: name)
                 }
             }
-        }
-
-        ToolbarItemGroup(placement: .bottomBar) {
-            Spacer()
-            PageControl(selection: $selected, listOfItems: $data.value)
-                .frame(maxWidth: .infinity)
-            Spacer()
         }
 
         ToolbarItem(placement: .bottomBar) {
@@ -366,8 +365,7 @@ extension ContentView {
         }
 
         Task {
-            try await Task.sleep(nanoseconds: 2_000_000_000)
-
+//            try await Task.sleep(nanoseconds: 2_000_000_000)
             await fetch()
         }
     }
