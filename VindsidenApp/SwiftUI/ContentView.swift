@@ -72,8 +72,12 @@ struct ContentView: View {
                 }
             }
             .toolbar(.visible, for: .navigationBar)
-            .navigationTitle("Stations")
-            .navigationBarTitleDisplayMode(.large)
+            .modifier(
+                SubtitleModifier(
+                    title: "Stations",
+                    subtitle: data.updateText
+                )
+            )
             .toolbar {
                 ToolbarItem(placement: .primaryAction) {
                     Button {
@@ -83,14 +87,15 @@ struct ContentView: View {
                     }
                 }
 
-                ToolbarItem(placement: .status) {
-                    Text(data.updateText)
-                        .padding(.horizontal)
-                        .font(.footnote)
-                        .foregroundStyle(.secondary)
-                        .fixedSize()
+                if #unavailable(iOS 26) {
+                    ToolbarItem(placement: .status) {
+                        Text(data.updateText)
+                            .padding(.horizontal)
+                            .font(.footnote)
+                            .foregroundStyle(.secondary)
+                            .fixedSize()
+                    }
                 }
-
             }
         } detail: {
             TabView(selection: $selected) {
@@ -99,7 +104,7 @@ struct ContentView: View {
                         .environment(settings)
                         .tag(Optional(station.wrappedValue))
                         .padding([.leading, .trailing])
-                        .navigationBarBackButtonHidden(true)
+                        .toolbar(.hidden)
                 }
             }
             .tabViewStyle(.page(indexDisplayMode: .never))
