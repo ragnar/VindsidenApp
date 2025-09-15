@@ -55,6 +55,7 @@ struct ContentView: View {
                     }
                 }
             }
+            .listStyle(.sidebar)
             .overlay {
                 if data.value.isEmpty {
                     ContentUnavailableView {
@@ -104,7 +105,6 @@ struct ContentView: View {
                         .environment(settings)
                         .tag(Optional(station.wrappedValue))
                         .padding([.leading, .trailing])
-                        .toolbar(.hidden)
                 }
             }
             .tabViewStyle(.page(indexDisplayMode: .never))
@@ -185,18 +185,6 @@ struct ContentView: View {
                     contextMenuBuilder(name: name)
                 }
             }
-        }
-
-        ToolbarItem(placement: .bottomBar) {
-            Button {
-                settings.selectedStationId = nil
-                selectedStationId = nil
-                selected = nil
-            } label: {
-                Image(systemName: "list.bullet")
-
-            }
-            .opacity(UIDevice.current.userInterfaceIdiom == .pad ? 0 : 1)
         }
     }
 
